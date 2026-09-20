@@ -1,0 +1,1262 @@
+<!DOCTYPE html>
+<html lang="vi" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TroFinder — Bảng Chìa Khóa Phòng Trọ Của Bạn</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      fontFamily: {
+        display: ['"Space Grotesk"', 'sans-serif'],
+        sans: ['"IBM Plex Sans"', 'sans-serif'],
+        mono: ['"IBM Plex Mono"', 'monospace'],
+      },
+      colors: {
+        paper: { 50:'#FBF9F2', 100:'#F4EFDF', 200:'#EEE7D2', 300:'#E2D8B9' },
+        ink:   { 900:'#1C2620', 700:'#33402F', 500:'#5B6357', 300:'#8B927F' },
+        pine:  { 50:'#EAF1EA', 100:'#D2E2D3', 300:'#7FA184', 500:'#2F5233', 600:'#26422A', 700:'#1F3823', 900:'#132818' },
+        brass: { 100:'#F3E3BC', 300:'#E8C77A', 500:'#BE8A2A', 600:'#A87620', 700:'#8C6119' },
+        rust:  { 500:'#A83A2C', 600:'#8B2F23' },
+      },
+      boxShadow: {
+        card: '0 2px 0 0 rgba(28,38,32,0.06), 0 10px 24px -12px rgba(28,38,32,0.25)',
+      }
+    }
+  }
+}
+</script>
+<style>
+  :root{ --paper:#F4EFDF; }
+  body{ background-color:#F4EFDF; }
+  .bg-noise{
+    background-image: radial-gradient(rgba(28,38,32,0.05) 1px, transparent 1px);
+    background-size: 3px 3px;
+  }
+  /* Ticket / scalloped edges for cards & the receipt panel */
+  .ticket-top, .ticket-bottom{ position:relative; }
+  .ticket-top::before, .ticket-bottom::after{
+    content:""; position:absolute; left:0; right:0; height:14px; z-index:2;
+    background-image: radial-gradient(circle at 9px 0px, transparent 8px, var(--paper) 8.5px);
+    background-size: 18px 14px; background-repeat: repeat-x;
+  }
+  .ticket-top::before{ top:-1px; }
+  .ticket-bottom::after{ bottom:-1px; transform: rotate(180deg); }
+  .ticket-top-dark::before{ background-image: radial-gradient(circle at 9px 0px, transparent 8px, #1C2620 8.5px); }
+
+  /* Perforation divider */
+  .perf{ border-top: 2px dashed rgba(28,38,32,0.18); }
+
+  /* Key board */
+  .key-board{
+    background: linear-gradient(180deg, #1F3823 0%, #16281A 100%);
+    border-radius: 18px;
+    box-shadow: inset 0 0 0 1px rgba(232,199,122,0.12), 0 30px 60px -20px rgba(19,40,24,0.55);
+  }
+  .key-peg{ display:flex; flex-direction:column; align-items:center; }
+  .hook{
+    width:10px; height:10px; border-radius:9999px;
+    background: radial-gradient(circle at 35% 30%, #E8C77A, #8C6119);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.4);
+  }
+  .key-tag{
+    margin-top:2px; width:40px; height:52px;
+    display:flex; align-items:center; justify-content:center;
+    transform-origin: top center;
+    animation: swing 5s ease-in-out infinite;
+  }
+  .key-peg:nth-child(2n) .key-tag{ animation-delay: -1.1s; }
+  .key-peg:nth-child(3n) .key-tag{ animation-delay: -2.4s; }
+  .key-peg:nth-child(5n) .key-tag{ animation-delay: -3.2s; }
+  @keyframes swing{
+    0%,100%{ transform: rotate(-3deg); }
+    50%{ transform: rotate(3deg); }
+  }
+  .tag-shape{
+    width:34px; height:44px; border-radius:6px 6px 16px 16px;
+    display:flex; align-items:center; justify-content:center;
+    font-family:'IBM Plex Mono', monospace; font-weight:600; font-size:10px;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.35);
+    position:relative;
+  }
+  .tag-shape::before{
+    content:""; position:absolute; top:5px; width:5px; height:5px; border-radius:9999px;
+    background:#16281A; box-shadow: inset 0 1px 2px rgba(0,0,0,0.5);
+  }
+  .tag-available .tag-shape{ background:#D2E2D3; color:#1F3823; }
+  .tag-hot .tag-shape{ background:#E8C77A; color:#1C2620; }
+  .tag-rented{ opacity:0.9; }
+  .tag-rented .tag-shape{ background:transparent; box-shadow:none; color:#7FA184; font-size:9px; }
+  .tag-rented .tag-shape::before{ display:none; }
+
+  @media (prefers-reduced-motion: reduce){
+    .key-tag{ animation:none; }
+  }
+
+  /* Stamp */
+  .stamp{
+    border:2px dashed rgba(168,58,44,0.55); color:#A83A2C;
+    transform: rotate(-6deg);
+  }
+
+  .cat-btn.is-active{ background:#2F5233; color:#F4EFDF; box-shadow: 0 2px 0 0 #132818; }
+  .cat-btn:not(.is-active){ background:#F4EFDF; color:#33402F; border:1px solid #E2D8B9; }
+
+  input[type="range"]{ accent-color:#2F5233; }
+
+  ::selection{ background:#E8C77A; color:#1C2620; }
+</style>
+</head>
+<body class="text-ink-900 font-sans antialiased overflow-x-hidden">
+
+<!-- Navigation -->
+<nav class="fixed top-0 left-0 right-0 z-50 bg-paper-50/95 backdrop-blur border-b border-paper-300">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-[72px]">
+      <div class="flex items-center gap-2.5">
+        <div class="w-9 h-9 rounded-md bg-pine-600 rotate-3 flex items-center justify-center text-brass-300 font-mono font-semibold text-xs relative shadow-card">
+          <span class="absolute w-1.5 h-1.5 rounded-full bg-paper-50/70 top-1 left-1"></span>
+          TF
+        </div>
+        <span class="text-xl font-display font-bold tracking-tight text-ink-900">TroFinder</span>
+      </div>
+
+      <div class="hidden md:flex items-center gap-7 font-medium text-sm text-ink-700">
+        <a href="#home" class="hover:text-pine-600 transition-colors">Trang chủ</a>
+        <a href="#features" class="hover:text-pine-600 transition-colors">Tiện ích</a>
+        <a href="#rooms" class="hover:text-pine-600 transition-colors">Bảng phòng trống</a>
+        <a href="#calculator" class="hover:text-pine-600 transition-colors">Tính chi phí</a>
+        <a href="#faq" class="hover:text-pine-600 transition-colors">Hỏi đáp</a>
+      </div>
+
+      <div class="hidden md:flex items-center gap-4">
+        <span id="nav-available-count" class="font-mono text-xs text-pine-700 bg-pine-50 border border-pine-100 px-2.5 py-1 rounded">-- phòng trống</span>
+        <a href="#contact" class="px-5 py-2.5 bg-pine-600 hover:bg-pine-700 text-paper-50 font-semibold text-sm rounded-md shadow-card transition-all hover:-translate-y-0.5">
+          Liên hệ đặt phòng
+        </a>
+      </div>
+
+      <div class="md:hidden">
+        <button id="mobile-menu-btn" onclick="toggleMenu()" class="p-2 rounded-md text-ink-700 hover:bg-paper-100">
+          <i class="fa-solid fa-bars text-xl" id="menu-icon"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div id="mobile-menu" class="hidden md:hidden bg-paper-50 border-t border-paper-300 px-4 pt-4 pb-6 space-y-1">
+    <a href="#home" class="block px-3 py-2.5 rounded-md hover:bg-paper-100 text-ink-700 font-medium" onclick="toggleMenu()">Trang chủ</a>
+    <a href="#features" class="block px-3 py-2.5 rounded-md hover:bg-paper-100 text-ink-700 font-medium" onclick="toggleMenu()">Tiện ích</a>
+    <a href="#rooms" class="block px-3 py-2.5 rounded-md hover:bg-paper-100 text-ink-700 font-medium" onclick="toggleMenu()">Bảng phòng trống</a>
+    <a href="#calculator" class="block px-3 py-2.5 rounded-md hover:bg-paper-100 text-ink-700 font-medium" onclick="toggleMenu()">Tính chi phí</a>
+    <a href="#faq" class="block px-3 py-2.5 rounded-md hover:bg-paper-100 text-ink-700 font-medium" onclick="toggleMenu()">Hỏi đáp</a>
+    <a href="#contact" class="block text-center bg-pine-600 text-paper-50 py-3 rounded-md font-semibold mt-2" onclick="toggleMenu()">Liên hệ đặt phòng</a>
+  </div>
+</nav>
+
+<!-- Hero -->
+<header id="home" class="relative pt-28 pb-20 md:pt-36 md:pb-28 bg-paper-100 bg-noise">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-14 items-center">
+
+      <div class="lg:col-span-6 space-y-7 text-center lg:text-left">
+        <div class="inline-flex items-center gap-2 border border-pine-300 text-pine-700 px-3 py-1 rounded text-xs font-mono font-medium tracking-wide bg-pine-50">
+          <i class="fa-solid fa-key text-brass-600"></i> CẬP NHẬT BẢNG PHÒNG MỖI SÁNG
+        </div>
+
+        <h1 class="text-4xl sm:text-5xl md:text-[3.4rem] font-display font-bold tracking-tight text-ink-900 leading-[1.1]">
+          Mỗi chiếc chìa khóa,<br>
+          một mái nhà đang<br>
+          <span class="text-pine-600">chờ bạn tới ở.</span>
+        </h1>
+
+        <p class="text-lg text-ink-700 max-w-xl mx-auto lg:mx-0">
+          TroFinder giữ một bảng chìa khóa thật — mỗi phòng trọ, căn hộ mini hay studio dịch vụ đều có một móc treo riêng. Còn treo là còn trống. Không trung gian, không phụ phí ẩn.
+        </p>
+
+        <div class="grid grid-cols-3 gap-4 pt-5 max-w-md mx-auto lg:mx-0 border-t border-paper-300">
+          <div>
+            <div class="text-2xl font-display font-bold text-pine-600">98%</div>
+            <div class="text-xs font-mono text-ink-500 mt-0.5">khách hài lòng</div>
+          </div>
+          <div>
+            <div class="text-2xl font-display font-bold text-ink-900">100%</div>
+            <div class="text-xs font-mono text-ink-500 mt-0.5">chính chủ</div>
+          </div>
+          <div>
+            <div class="text-2xl font-display font-bold text-ink-900">0đ</div>
+            <div class="text-xs font-mono text-ink-500 mt-0.5">phí môi giới</div>
+          </div>
+        </div>
+
+        <div class="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start pt-2">
+          <a href="#rooms" class="px-7 py-3.5 bg-pine-600 hover:bg-pine-700 text-paper-50 font-semibold rounded-md shadow-card transition-all hover:-translate-y-0.5 text-center">
+            <i class="fa-solid fa-magnifying-glass mr-2"></i>Xem bảng phòng trống
+          </a>
+          <a href="#calculator" class="px-7 py-3.5 bg-transparent hover:bg-paper-200 text-ink-900 font-semibold rounded-md border-2 border-ink-900 transition-all hover:-translate-y-0.5 text-center">
+            <i class="fa-solid fa-calculator mr-2"></i>Tính chi phí ở thử
+          </a>
+        </div>
+      </div>
+
+      <!-- Signature: the key board -->
+      <div class="lg:col-span-6">
+        <div class="key-board p-6 md:p-8">
+          <div class="flex items-center justify-between mb-5 px-1">
+            <span class="font-mono text-[11px] uppercase tracking-widest text-brass-300">Bảng chìa khóa TroFinder</span>
+            <span class="font-mono text-[11px] text-pine-100/70" id="board-updated">cập nhật hôm nay</span>
+          </div>
+          <div id="key-board-grid" class="grid grid-cols-6 gap-x-2 gap-y-5"></div>
+          <div class="mt-6 pt-4 border-t border-pine-100/10 flex items-center gap-5 text-[11px] font-mono text-pine-100/70 px-1">
+            <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-sm bg-pine-100"></span> Còn trống</span>
+            <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-sm bg-brass-300"></span> Mới đăng</span>
+            <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full border border-pine-100/40"></span> Đã cho thuê</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</header>
+
+<!-- Quick Search -->
+<section class="relative z-20 -mt-10 max-w-5xl mx-auto px-4">
+  <div class="bg-paper-50 rounded-lg shadow-card border border-paper-300 p-6 md:p-8 ticket-top ticket-bottom">
+    <h3 class="text-xs font-mono font-semibold text-ink-500 uppercase tracking-wider mb-4"><i class="fa-solid fa-sliders text-brass-600 mr-1.5"></i> Phiếu tra cứu nhanh</h3>
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+      <div>
+        <label class="block text-xs font-semibold text-ink-500 mb-1.5">Khu vực Quận / Huyện</label>
+        <select id="quick-location" class="block w-full px-3 py-3 text-ink-900 bg-paper-100 border border-paper-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pine-500 text-sm font-medium">
+          <option value="all">Tất cả khu vực</option>
+          <option value="q1">Quận 1 / Quận 3</option>
+          <option value="qtb">Quận Tân Bình</option>
+          <option value="q10">Quận 10 / Quận 11</option>
+          <option value="q7">Quận 7</option>
+        </select>
+      </div>
+      <div>
+        <label class="block text-xs font-semibold text-ink-500 mb-1.5">Mức giá thuê</label>
+        <select id="quick-price" class="block w-full px-3 py-3 text-ink-900 bg-paper-100 border border-paper-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pine-500 text-sm font-medium">
+          <option value="all">Mọi mức giá</option>
+          <option value="low">Dưới 3.000.000đ</option>
+          <option value="mid">3.000.000đ - 5.000.000đ</option>
+          <option value="high">Trên 5.000.000đ</option>
+        </select>
+      </div>
+      <div>
+        <label class="block text-xs font-semibold text-ink-500 mb-1.5">Kiểu phòng</label>
+        <select id="quick-type" class="block w-full px-3 py-3 text-ink-900 bg-paper-100 border border-paper-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pine-500 text-sm font-medium">
+          <option value="all">Tất cả kiểu loại</option>
+          <option value="sinhvien">Phòng trọ giá rẻ</option>
+          <option value="studio">Căn hộ Studio</option>
+          <option value="gaclung">Phòng có gác lửng</option>
+        </select>
+      </div>
+      <div class="flex items-end">
+        <button onclick="applyQuickFilters()" class="w-full py-3 bg-ink-900 hover:bg-pine-700 text-paper-50 font-semibold rounded-md shadow-card transition-all">
+          Dò bảng ngay
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Features -->
+<section id="features" class="py-24 bg-paper-100">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center max-w-2xl mx-auto mb-16">
+      <h2 class="text-sm font-mono font-semibold tracking-wider text-pine-600 uppercase">Vì sao chọn TroFinder</h2>
+      <p class="mt-2 text-3xl sm:text-4xl font-display font-bold text-ink-900 tracking-tight">Ba cam kết đi kèm mỗi chiếc chìa khóa</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="p-8 rounded-lg bg-paper-50 border border-paper-300 hover:-translate-y-1 hover:shadow-card transition-all">
+        <div class="w-12 h-12 rounded-md bg-pine-600 text-paper-50 flex items-center justify-center text-lg">
+          <i class="fa-solid fa-lock"></i>
+        </div>
+        <span class="block font-mono text-xs text-brass-600 mt-5 mb-1">01 — AN NINH</span>
+        <h3 class="text-lg font-display font-bold text-ink-900">Khóa vân tay, camera 24/7</h3>
+        <p class="mt-2.5 text-ink-500 leading-relaxed text-[15px]">
+          Cửa chính lắp khóa vân tay hoặc khuôn mặt, camera phủ toàn bộ lối đi chung. Giờ giấc tự do, không giới nghiêm.
+        </p>
+      </div>
+
+      <div class="p-8 rounded-lg bg-paper-50 border border-paper-300 hover:-translate-y-1 hover:shadow-card transition-all">
+        <div class="w-12 h-12 rounded-md bg-brass-600 text-paper-50 flex items-center justify-center text-lg">
+          <i class="fa-solid fa-file-invoice-dollar"></i>
+        </div>
+        <span class="block font-mono text-xs text-brass-600 mt-5 mb-1">02 — CHI PHÍ</span>
+        <h3 class="text-lg font-display font-bold text-ink-900">Hợp đồng minh bạch từng dòng</h3>
+        <p class="mt-2.5 text-ink-500 leading-relaxed text-[15px]">
+          Không phụ thu phát sinh. Điện nước tính theo công tơ riêng từng phòng, rõ số trên hóa đơn mỗi tháng.
+        </p>
+      </div>
+
+      <div class="p-8 rounded-lg bg-paper-50 border border-paper-300 hover:-translate-y-1 hover:shadow-card transition-all">
+        <div class="w-12 h-12 rounded-md bg-ink-900 text-paper-50 flex items-center justify-center text-lg">
+          <i class="fa-solid fa-screwdriver-wrench"></i>
+        </div>
+        <span class="block font-mono text-xs text-brass-600 mt-5 mb-1">03 — HỖ TRỢ</span>
+        <h3 class="text-lg font-display font-bold text-ink-900">Kỹ thuật có mặt trong ngày</h3>
+        <p class="mt-2.5 text-ink-500 leading-relaxed text-[15px]">
+          Sự cố điện, nước, internet được xử lý miễn phí trong ngày, suốt thời hạn hợp đồng thuê phòng.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Room Catalog -->
+<section id="rooms" class="py-24 bg-paper-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-6">
+      <div>
+        <h2 class="text-sm font-mono font-semibold tracking-wider text-pine-600 uppercase">Bảng phòng trống</h2>
+        <p class="mt-2 text-3xl sm:text-4xl font-display font-bold text-ink-900 tracking-tight">Chìa khóa đang chờ trên bảng</p>
+      </div>
+      <div class="flex flex-wrap gap-2">
+        <button onclick="filterCatalog('all')" id="btn-cat-all" class="cat-btn is-active px-4 py-2 rounded-md font-semibold text-sm transition-all">
+          Tất cả phòng
+        </button>
+        <button onclick="filterCatalog('sinhvien')" id="btn-cat-sinhvien" class="cat-btn px-4 py-2 rounded-md font-semibold text-sm transition-all">
+          Giá rẻ sinh viên
+        </button>
+        <button onclick="filterCatalog('gaclung')" id="btn-cat-gaclung" class="cat-btn px-4 py-2 rounded-md font-semibold text-sm transition-all">
+          Có gác lửng
+        </button>
+        <button onclick="filterCatalog('studio')" id="btn-cat-studio" class="cat-btn px-4 py-2 rounded-md font-semibold text-sm transition-all">
+          Căn hộ Studio
+        </button>
+      </div>
+    </div>
+
+    <div id="room-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
+
+      <div class="room-card bg-paper-50 rounded-lg overflow-hidden border border-paper-300 shadow-card hover:-translate-y-1 transition-all duration-300" data-category="studio" data-location="q1" data-price="5500000">
+        <div class="relative overflow-hidden group h-56">
+          <span class="absolute top-4 left-4 z-10 bg-brass-500 text-ink-900 font-mono font-bold text-[11px] px-2.5 py-1 rounded">SỐ 204 · HOT</span>
+          <img src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=600&q=80" alt="Phòng Studio Cao Cấp" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" onerror="this.onerror=null; this.src='https://placehold.co/600x400/2F5233/F4EFDF?text=Studio';">
+        </div>
+        <div class="p-6">
+          <div class="flex items-center justify-between gap-2 mb-2.5">
+            <span class="text-xs font-mono font-semibold text-pine-600 uppercase">Studio</span>
+            <span class="text-xs text-ink-500"><i class="fa-solid fa-location-dot mr-1"></i>Quận 1, TP.HCM</span>
+          </div>
+          <h3 class="text-lg font-display font-bold text-ink-900 line-clamp-1">Studio Cao Cấp Gần Hồ Con Rùa</h3>
+          <p class="mt-2 text-ink-500 text-sm line-clamp-2">Đầy đủ tủ lạnh, máy lạnh, giường nệm cao cấp, bếp riêng thông thoáng, bảo vệ tòa nhà 24/24.</p>
+          <div class="flex items-center gap-4 py-3.5 my-3.5 perf text-xs text-ink-500">
+            <span><i class="fa-solid fa-snowflake text-pine-500 mr-1"></i>Máy lạnh</span>
+            <span><i class="fa-solid fa-couch text-brass-600 mr-1"></i>Full nội thất</span>
+            <span><i class="fa-solid fa-elevator text-ink-700 mr-1"></i>Thang máy</span>
+          </div>
+          <div class="flex items-center justify-between">
+            <div><span class="text-xl font-display font-bold text-pine-600">5.5 Tr</span><span class="text-xs text-ink-500 font-medium"> /tháng</span></div>
+            <button onclick="openBookingModal('Studio Cao Cấp Quận 1', '5.5 Triệu/tháng')" class="px-4 py-2 bg-ink-900 hover:bg-pine-600 text-paper-50 font-semibold text-sm rounded-md transition-all">Giữ chìa khóa</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="room-card bg-paper-50 rounded-lg overflow-hidden border border-paper-300 shadow-card hover:-translate-y-1 transition-all duration-300" data-category="gaclung" data-location="qtb" data-price="4200000">
+        <div class="relative overflow-hidden group h-56">
+          <span class="absolute top-4 left-4 z-10 bg-pine-600 text-paper-50 font-mono font-bold text-[11px] px-2.5 py-1 rounded">SỐ 117</span>
+          <img src="https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=600&q=80" alt="Phòng Gác Lửng Hiện Đại" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" onerror="this.onerror=null; this.src='https://placehold.co/600x400/1F3823/F4EFDF?text=Gac+Lung';">
+        </div>
+        <div class="p-6">
+          <div class="flex items-center justify-between gap-2 mb-2.5">
+            <span class="text-xs font-mono font-semibold text-pine-600 uppercase">Gác lửng</span>
+            <span class="text-xs text-ink-500"><i class="fa-solid fa-location-dot mr-1"></i>Tân Bình, TP.HCM</span>
+          </div>
+          <h3 class="text-lg font-display font-bold text-ink-900 line-clamp-1">Phòng Gác Lửng Đường Cộng Hòa</h3>
+          <p class="mt-2 text-ink-500 text-sm line-clamp-2">Mới xây 100%, gác lửng cao thoáng không đụng đầu, bếp riêng tách biệt không ám mùi phòng ngủ.</p>
+          <div class="flex items-center gap-4 py-3.5 my-3.5 perf text-xs text-ink-500">
+            <span><i class="fa-solid fa-snowflake text-pine-500 mr-1"></i>Máy lạnh</span>
+            <span><i class="fa-solid fa-motorcycle text-brass-600 mr-1"></i>Chỗ để xe</span>
+            <span><i class="fa-solid fa-fingerprint text-ink-700 mr-1"></i>Khóa vân tay</span>
+          </div>
+          <div class="flex items-center justify-between">
+            <div><span class="text-xl font-display font-bold text-pine-600">4.2 Tr</span><span class="text-xs text-ink-500 font-medium"> /tháng</span></div>
+            <button onclick="openBookingModal('Phòng Gác Lửng Cộng Hòa', '4.2 Triệu/tháng')" class="px-4 py-2 bg-ink-900 hover:bg-pine-600 text-paper-50 font-semibold text-sm rounded-md transition-all">Giữ chìa khóa</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="room-card bg-paper-50 rounded-lg overflow-hidden border border-paper-300 shadow-card hover:-translate-y-1 transition-all duration-300" data-category="sinhvien" data-location="q10" data-price="2800000">
+        <div class="relative overflow-hidden group h-56">
+          <span class="absolute top-4 left-4 z-10 bg-brass-500 text-ink-900 font-mono font-bold text-[11px] px-2.5 py-1 rounded">SỐ 305 · GIÁ TỐT</span>
+          <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=600&q=80" alt="Phòng Trọ Giá Rẻ" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" onerror="this.onerror=null; this.src='https://placehold.co/600x400/A87620/F4EFDF?text=Gia+Re';">
+        </div>
+        <div class="p-6">
+          <div class="flex items-center justify-between gap-2 mb-2.5">
+            <span class="text-xs font-mono font-semibold text-pine-600 uppercase">Giá rẻ</span>
+            <span class="text-xs text-ink-500"><i class="fa-solid fa-location-dot mr-1"></i>Quận 10, TP.HCM</span>
+          </div>
+          <h3 class="text-lg font-display font-bold text-ink-900 line-clamp-1">Phòng Giá Rẻ Đường Ba Tháng Hai</h3>
+          <p class="mt-2 text-ink-500 text-sm line-clamp-2">Hợp cho 1-2 sinh viên tiết kiệm chi phí, gần ĐH Bách Khoa và ĐH Y Phạm Ngọc Thạch.</p>
+          <div class="flex items-center gap-4 py-3.5 my-3.5 perf text-xs text-ink-500">
+            <span><i class="fa-solid fa-wifi text-pine-500 mr-1"></i>Wifi 100M</span>
+            <span><i class="fa-solid fa-user-shield text-brass-600 mr-1"></i>Camera</span>
+            <span><i class="fa-solid fa-toilet text-ink-700 mr-1"></i>WC khép kín</span>
+          </div>
+          <div class="flex items-center justify-between">
+            <div><span class="text-xl font-display font-bold text-pine-600">2.8 Tr</span><span class="text-xs text-ink-500 font-medium"> /tháng</span></div>
+            <button onclick="openBookingModal('Phòng Giá Rẻ Quận 10', '2.8 Triệu/tháng')" class="px-4 py-2 bg-ink-900 hover:bg-pine-600 text-paper-50 font-semibold text-sm rounded-md transition-all">Giữ chìa khóa</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="room-card bg-paper-50 rounded-lg overflow-hidden border border-paper-300 shadow-card hover:-translate-y-1 transition-all duration-300" data-category="studio" data-location="q7" data-price="6200000">
+        <div class="relative overflow-hidden group h-56">
+          <span class="absolute top-4 left-4 z-10 bg-pine-600 text-paper-50 font-mono font-bold text-[11px] px-2.5 py-1 rounded">SỐ 402</span>
+          <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=600&q=80" alt="Căn Hộ Mini Quận 7" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" onerror="this.onerror=null; this.src='https://placehold.co/600x400/2F5233/F4EFDF?text=Studio+Q7';">
+        </div>
+        <div class="p-6">
+          <div class="flex items-center justify-between gap-2 mb-2.5">
+            <span class="text-xs font-mono font-semibold text-pine-600 uppercase">Studio</span>
+            <span class="text-xs text-ink-500"><i class="fa-solid fa-location-dot mr-1"></i>Quận 7, TP.HCM</span>
+          </div>
+          <h3 class="text-lg font-display font-bold text-ink-900 line-clamp-1">Căn Hộ Ban Công View Sông Quận 7</h3>
+          <p class="mt-2 text-ink-500 text-sm line-clamp-2">Cửa sổ lớn ngập ánh sáng tự nhiên, ban công phơi đồ rộng, có sẵn máy giặt riêng.</p>
+          <div class="flex items-center gap-4 py-3.5 my-3.5 perf text-xs text-ink-500">
+            <span><i class="fa-solid fa-tv text-pine-500 mr-1"></i>TV Smart</span>
+            <span><i class="fa-solid fa-shirt text-brass-600 mr-1"></i>Máy giặt riêng</span>
+            <span><i class="fa-solid fa-wind text-ink-700 mr-1"></i>Ban công rộng</span>
+          </div>
+          <div class="flex items-center justify-between">
+            <div><span class="text-xl font-display font-bold text-pine-600">6.2 Tr</span><span class="text-xs text-ink-500 font-medium"> /tháng</span></div>
+            <button onclick="openBookingModal('Studio Ban Công Quận 7', '6.2 Triệu/tháng')" class="px-4 py-2 bg-ink-900 hover:bg-pine-600 text-paper-50 font-semibold text-sm rounded-md transition-all">Giữ chìa khóa</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="room-card bg-paper-50 rounded-lg overflow-hidden border border-paper-300 shadow-card hover:-translate-y-1 transition-all duration-300" data-category="gaclung" data-location="q10" data-price="4500000">
+        <div class="relative overflow-hidden group h-56">
+          <span class="absolute top-4 left-4 z-10 bg-brass-500 text-ink-900 font-mono font-bold text-[11px] px-2.5 py-1 rounded">SỐ 210 · HOT</span>
+          <img src="https://images.unsplash.com/photo-1554995207-c18c203602cb?auto=format&fit=crop&w=600&q=80" alt="Phòng Gác Lửng Q10" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" onerror="this.onerror=null; this.src='https://placehold.co/600x400/1F3823/F4EFDF?text=Gac+Lung+Q10';">
+        </div>
+        <div class="p-6">
+          <div class="flex items-center justify-between gap-2 mb-2.5">
+            <span class="text-xs font-mono font-semibold text-pine-600 uppercase">Gác lửng</span>
+            <span class="text-xs text-ink-500"><i class="fa-solid fa-location-dot mr-1"></i>Quận 10, TP.HCM</span>
+          </div>
+          <h3 class="text-lg font-display font-bold text-ink-900 line-clamp-1">Gác Lửng Khép Kín Tô Hiến Thành</h3>
+          <p class="mt-2 text-ink-500 text-sm line-clamp-2">Tủ bếp gỗ cao cấp, gác lửng có nệm sẵn, giếng trời đón gió tự nhiên.</p>
+          <div class="flex items-center gap-4 py-3.5 my-3.5 perf text-xs text-ink-500">
+            <span><i class="fa-solid fa-kitchen-set text-pine-500 mr-1"></i>Bếp gỗ</span>
+            <span><i class="fa-solid fa-shield-halved text-brass-600 mr-1"></i>Vân tay</span>
+            <span><i class="fa-solid fa-cloud-sun text-ink-700 mr-1"></i>Giếng trời</span>
+          </div>
+          <div class="flex items-center justify-between">
+            <div><span class="text-xl font-display font-bold text-pine-600">4.5 Tr</span><span class="text-xs text-ink-500 font-medium"> /tháng</span></div>
+            <button onclick="openBookingModal('Gác Lửng Tô Hiến Thành', '4.5 Triệu/tháng')" class="px-4 py-2 bg-ink-900 hover:bg-pine-600 text-paper-50 font-semibold text-sm rounded-md transition-all">Giữ chìa khóa</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="room-card bg-paper-50 rounded-lg overflow-hidden border border-paper-300 shadow-card hover:-translate-y-1 transition-all duration-300" data-category="sinhvien" data-location="qtb" data-price="2500000">
+        <div class="relative overflow-hidden group h-56">
+          <span class="absolute top-4 left-4 z-10 bg-pine-600 text-paper-50 font-mono font-bold text-[11px] px-2.5 py-1 rounded">SỐ 108</span>
+          <img src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=600&q=80" alt="Phòng Trọ Bình Dân" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" onerror="this.onerror=null; this.src='https://placehold.co/600x400/A87620/F4EFDF?text=Binh+Dan';">
+        </div>
+        <div class="p-6">
+          <div class="flex items-center justify-between gap-2 mb-2.5">
+            <span class="text-xs font-mono font-semibold text-pine-600 uppercase">Giá rẻ</span>
+            <span class="text-xs text-ink-500"><i class="fa-solid fa-location-dot mr-1"></i>Tân Bình, TP.HCM</span>
+          </div>
+          <h3 class="text-lg font-display font-bold text-ink-900 line-clamp-1">Phòng Nhỏ Gọn Gần CV Hoàng Văn Thụ</h3>
+          <p class="mt-2 text-ink-500 text-sm line-clamp-2">An ninh tốt, giờ giấc tự do, sân để xe rộng rãi sạch sẽ, có bảo vệ trực đêm.</p>
+          <div class="flex items-center gap-4 py-3.5 my-3.5 perf text-xs text-ink-500">
+            <span><i class="fa-solid fa-lock text-pine-500 mr-1"></i>An ninh cao</span>
+            <span><i class="fa-solid fa-clock text-brass-600 mr-1"></i>Tự do 24/7</span>
+            <span><i class="fa-solid fa-wifi text-ink-700 mr-1"></i>Wifi Free</span>
+          </div>
+          <div class="flex items-center justify-between">
+            <div><span class="text-xl font-display font-bold text-pine-600">2.5 Tr</span><span class="text-xs text-ink-500 font-medium"> /tháng</span></div>
+            <button onclick="openBookingModal('Phòng Giá Rẻ Hoàng Văn Thụ', '2.5 Triệu/tháng')" class="px-4 py-2 bg-ink-900 hover:bg-pine-600 text-paper-50 font-semibold text-sm rounded-md transition-all">Giữ chìa khóa</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="empty-state" class="hidden text-center py-16 bg-paper-100 rounded-lg border-2 border-dashed border-paper-300 mt-7">
+      <div class="w-14 h-14 bg-paper-50 text-ink-500 rounded-full flex items-center justify-center mx-auto mb-4 text-xl border border-paper-300">
+        <i class="fa-regular fa-folder-open"></i>
+      </div>
+      <h3 class="text-lg font-display font-bold text-ink-900">Bảng chìa khóa chưa có phòng phù hợp</h3>
+      <p class="text-ink-500 mt-2 max-w-sm mx-auto">Thử đổi lại bộ lọc phía trên để xem thêm phòng khác nhé.</p>
+      <button onclick="resetFilters()" class="mt-4 px-5 py-2.5 bg-paper-50 hover:bg-paper-200 text-ink-700 font-semibold text-sm rounded-md border border-paper-300 transition-all">
+        Đặt lại bộ lọc
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- Calculator (receipt style) -->
+<section id="calculator" class="py-24 bg-paper-100">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6">
+    <div class="text-center max-w-2xl mx-auto mb-16">
+      <span class="px-2.5 py-1 bg-brass-100 text-brass-700 text-xs font-mono font-semibold rounded uppercase tracking-wider"><i class="fa-solid fa-receipt mr-1"></i> Công cụ hữu ích</span>
+      <h2 class="mt-3 text-3xl sm:text-4xl font-display font-bold text-ink-900">Ước tính hóa đơn tháng đầu</h2>
+      <p class="mt-4 text-ink-500">Kéo các thanh trượt để xem hóa đơn cập nhật ngay bên phải, như một tờ biên nhận thật.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+
+      <div class="md:col-span-7 space-y-7 bg-paper-50 rounded-lg border border-paper-300 p-6 md:p-8 shadow-card">
+        <div>
+          <div class="flex justify-between font-semibold mb-2">
+            <span class="text-ink-700 text-sm">Tiền thuê phòng</span>
+            <span class="text-pine-600 font-mono font-bold text-base" id="calc-rent-val">4.500.000đ</span>
+          </div>
+          <input type="range" id="calc-rent" min="2000000" max="10000000" step="100000" value="4500000" class="w-full h-1.5 bg-paper-300 rounded-lg appearance-none cursor-pointer" oninput="calculateTotal()">
+          <div class="flex justify-between text-[11px] font-mono text-ink-500 mt-1"><span>2 Tr</span><span>10 Tr</span></div>
+        </div>
+
+        <div>
+          <div class="flex justify-between font-semibold mb-2">
+            <span class="text-ink-700 text-sm">Điện năng tiêu thụ</span>
+            <span class="text-brass-600 font-mono font-bold text-base" id="calc-elec-val">100 Kwh</span>
+          </div>
+          <input type="range" id="calc-elec" min="0" max="500" step="10" value="100" class="w-full h-1.5 bg-paper-300 rounded-lg appearance-none cursor-pointer" oninput="calculateTotal()">
+          <div class="flex justify-between text-[11px] font-mono text-ink-500 mt-1"><span>0 Kwh</span><span>500 Kwh/tháng</span></div>
+        </div>
+
+        <div>
+          <div class="flex justify-between font-semibold mb-2">
+            <span class="text-ink-700 text-sm">Tiền nước sinh hoạt</span>
+            <span class="text-ink-700 font-mono font-bold text-base" id="calc-water-val">100.000đ/người</span>
+          </div>
+          <div class="flex gap-3">
+            <label class="flex items-center gap-2 cursor-pointer bg-paper-100 border border-paper-300 px-4 py-3 rounded-md w-1/2 justify-center">
+              <input type="radio" name="water-option" value="person" checked onchange="toggleWaterMethod()">
+              <span class="text-sm font-semibold text-ink-700">Theo người</span>
+            </label>
+            <label class="flex items-center gap-2 cursor-pointer bg-paper-100 border border-paper-300 px-4 py-3 rounded-md w-1/2 justify-center">
+              <input type="radio" name="water-option" value="block" onchange="toggleWaterMethod()">
+              <span class="text-sm font-semibold text-ink-700">Theo khối (m³)</span>
+            </label>
+          </div>
+          <div class="mt-3">
+            <div class="flex justify-between text-xs font-mono text-ink-500 mb-1" id="water-sub-label">Số người: 1 người</div>
+            <input type="range" id="calc-water-sub" min="1" max="4" step="1" value="1" class="w-full h-1.5 bg-paper-300 rounded-lg appearance-none cursor-pointer" oninput="calculateTotal()">
+          </div>
+        </div>
+
+        <div class="space-y-1 pt-4 perf">
+          <label class="flex items-center justify-between cursor-pointer p-2 hover:bg-paper-100 rounded-md transition-colors">
+            <div class="flex items-center gap-3">
+              <span class="w-8 h-8 rounded-md bg-pine-50 text-pine-600 flex items-center justify-center text-sm"><i class="fa-solid fa-wifi"></i></span>
+              <span class="text-sm font-medium text-ink-700">Phí mạng Wifi trọn gói</span>
+            </div>
+            <input type="checkbox" id="calc-wifi" checked class="w-5 h-5 accent-pine-600 cursor-pointer" onchange="calculateTotal()">
+          </label>
+          <label class="flex items-center justify-between cursor-pointer p-2 hover:bg-paper-100 rounded-md transition-colors">
+            <div class="flex items-center gap-3">
+              <span class="w-8 h-8 rounded-md bg-paper-200 text-ink-700 flex items-center justify-center text-sm"><i class="fa-solid fa-motorcycle"></i></span>
+              <span class="text-sm font-medium text-ink-700">Gửi xe máy (1 chiếc)</span>
+            </div>
+            <input type="checkbox" id="calc-bike" checked class="w-5 h-5 accent-pine-600 cursor-pointer" onchange="calculateTotal()">
+          </label>
+        </div>
+      </div>
+
+      <!-- Receipt -->
+      <div class="md:col-span-5">
+        <div class="bg-ink-900 text-paper-100 rounded-lg font-mono relative ticket-top ticket-bottom shadow-card" style="--paper:#1C2620">
+          <div class="p-6 md:p-7 pt-8">
+            <h4 class="text-[11px] uppercase tracking-widest text-brass-300 font-semibold mb-1 text-center">— Biên Nhận Ước Tính —</h4>
+            <div class="text-3xl font-bold text-paper-50 tracking-tight text-center my-3" id="calc-total-display">5.130.000đ</div>
+            <div class="border-t border-dashed border-pine-100/20 my-4"></div>
+
+            <div class="space-y-2.5 text-xs">
+              <div class="flex justify-between"><span class="text-pine-100/60">Tiền thuê phòng</span><span class="font-semibold" id="receipt-rent">4.500.000đ</span></div>
+              <div class="flex justify-between"><span class="text-pine-100/60">Tiền điện ước tính</span><span class="font-semibold" id="receipt-elec">380.000đ</span></div>
+              <div class="flex justify-between"><span class="text-pine-100/60">Tiền nước</span><span class="font-semibold" id="receipt-water">100.000đ</span></div>
+              <div class="flex justify-between"><span class="text-pine-100/60">Phí bổ sung (Wifi, xe...)</span><span class="font-semibold" id="receipt-extra">150.000đ</span></div>
+            </div>
+
+            <div class="border-t border-dashed border-pine-100/20 my-4"></div>
+            <p class="text-[10px] text-pine-100/50 text-center leading-relaxed">Số liệu tham khảo theo mặt bằng chung tại TP.HCM</p>
+          </div>
+        </div>
+        <button onclick="goToFormWithBudget()" class="w-full mt-4 py-3.5 bg-brass-500 hover:bg-brass-600 text-ink-900 font-bold rounded-md transition-all flex items-center justify-center gap-2 shadow-card">
+          Gửi ngân sách này vào phiếu đăng ký <i class="fa-solid fa-arrow-right text-xs"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials -->
+<section class="py-24 bg-paper-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center max-w-2xl mx-auto mb-16">
+      <h2 class="text-sm font-mono font-semibold tracking-wider text-pine-600 uppercase">Khách nói gì</h2>
+      <p class="mt-2 text-3xl sm:text-4xl font-display font-bold text-ink-900 tracking-tight">Những người đã nhận chìa khóa</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-7">
+      <div class="bg-paper-100 p-7 rounded-lg border border-paper-300 relative flex flex-col justify-between">
+        <div>
+          <div class="flex text-brass-500 gap-1 mb-4 text-sm">
+            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          </div>
+          <p class="text-ink-700 text-sm leading-relaxed">Mình là sinh viên năm nhất dọn lên TP.HCM rất bỡ ngỡ. Tư vấn viên TroFinder rất nhiệt tình dắt đi xem phòng, phòng mới và đẹp như hình chụp.</p>
+        </div>
+        <div class="flex items-center gap-3 mt-7 pt-5 border-t border-paper-300">
+          <div class="w-10 h-10 rounded-full overflow-hidden border border-paper-300">
+            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80" alt="Avatar" class="w-full h-full object-cover">
+          </div>
+          <div>
+            <h4 class="font-display font-bold text-ink-900 text-sm">Nguyễn Phương Thảo</h4>
+            <p class="text-xs text-ink-500">SV Đại học Ngoại Thương</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-paper-100 p-7 rounded-lg border border-paper-300 relative flex flex-col justify-between">
+        <div>
+          <div class="flex text-brass-500 gap-1 mb-4 text-sm">
+            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          </div>
+          <p class="text-ink-700 text-sm leading-relaxed">Điểm mình thích nhất là khóa vân tay cực kỳ yên tâm. Đi làm về muộn thoải mái không phiền ai. Phòng sạch, thiết kế tối giản dễ chịu.</p>
+        </div>
+        <div class="flex items-center gap-3 mt-7 pt-5 border-t border-paper-300">
+          <div class="w-10 h-10 rounded-full overflow-hidden border border-paper-300">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80" alt="Avatar" class="w-full h-full object-cover">
+          </div>
+          <div>
+            <h4 class="font-display font-bold text-ink-900 text-sm">Trần Hoàng Minh</h4>
+            <p class="text-xs text-ink-500">Kỹ sư phần mềm — FPT Software</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-paper-100 p-7 rounded-lg border border-paper-300 relative flex flex-col justify-between">
+        <div>
+          <div class="flex text-brass-500 gap-1 mb-4 text-sm">
+            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          </div>
+          <p class="text-ink-700 text-sm leading-relaxed">Chi phí minh bạch, tính bằng công cụ trên web thế nào thì thanh toán thực tế đúng thế đó. Đội kỹ thuật sửa vòi sen cho mình rất nhanh.</p>
+        </div>
+        <div class="flex items-center gap-3 mt-7 pt-5 border-t border-paper-300">
+          <div class="w-10 h-10 rounded-full overflow-hidden border border-paper-300">
+            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&q=80" alt="Avatar" class="w-full h-full object-cover">
+          </div>
+          <div>
+            <h4 class="font-display font-bold text-ink-900 text-sm">Lê Thị Thanh Mai</h4>
+            <p class="text-xs text-ink-500">Nhân viên văn phòng — Quận 1</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" class="py-24 bg-paper-100">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6">
+    <div class="text-center max-w-2xl mx-auto mb-14">
+      <h2 class="text-sm font-mono font-semibold tracking-wider text-pine-600 uppercase">Hỏi & Đáp</h2>
+      <p class="mt-2 text-3xl sm:text-4xl font-display font-bold text-ink-900 tracking-tight">Giải đáp trước khi bạn nhận chìa khóa</p>
+    </div>
+
+    <div class="space-y-3">
+      <div class="bg-paper-50 rounded-lg border border-paper-300 overflow-hidden">
+        <button class="w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none" onclick="toggleFaq(1)">
+          <span class="font-display font-bold text-ink-900 text-base">Tiền cọc phòng là bao nhiêu, có hoàn trả không?</span>
+          <span class="w-8 h-8 rounded-md bg-paper-100 flex items-center justify-center text-ink-500 transition-transform duration-300 shrink-0 ml-4" id="faq-icon-1"><i class="fa-solid fa-chevron-down"></i></span>
+        </button>
+        <div class="px-6 pb-5 hidden text-ink-700 text-[15px] leading-relaxed border-t border-paper-300 pt-4" id="faq-answer-1">
+          Tiền đặt cọc thông thường là 01 tháng tiền phòng, được nêu rõ trong hợp đồng và hoàn trả 100% khi kết thúc hợp đồng đúng thời hạn cam kết.
+        </div>
+      </div>
+
+      <div class="bg-paper-50 rounded-lg border border-paper-300 overflow-hidden">
+        <button class="w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none" onclick="toggleFaq(2)">
+          <span class="font-display font-bold text-ink-900 text-base">Phòng có quy định giờ giấc giới nghiêm không?</span>
+          <span class="w-8 h-8 rounded-md bg-paper-100 flex items-center justify-center text-ink-500 transition-transform duration-300 shrink-0 ml-4" id="faq-icon-2"><i class="fa-solid fa-chevron-down"></i></span>
+        </button>
+        <div class="px-6 pb-5 hidden text-ink-700 text-[15px] leading-relaxed border-t border-paper-300 pt-4" id="faq-answer-2">
+          Không. Mọi phòng đều lắp khóa vân tay ở cổng chính, khách thuê ra vào chủ động 24/24 giờ mà không lo giới nghiêm.
+        </div>
+      </div>
+
+      <div class="bg-paper-50 rounded-lg border border-paper-300 overflow-hidden">
+        <button class="w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none" onclick="toggleFaq(3)">
+          <span class="font-display font-bold text-ink-900 text-base">Đồ đạc điện nước hư hỏng thì ai chịu chi phí sửa chữa?</span>
+          <span class="w-8 h-8 rounded-md bg-paper-100 flex items-center justify-center text-ink-500 transition-transform duration-300 shrink-0 ml-4" id="faq-icon-3"><i class="fa-solid fa-chevron-down"></i></span>
+        </button>
+        <div class="px-6 pb-5 hidden text-ink-700 text-[15px] leading-relaxed border-t border-paper-300 pt-4" id="faq-answer-3">
+          Sự cố tự nhiên (máy lạnh hỏng lốc, cháy bóng đèn, tắc đường nước...) được đội kỹ thuật TroFinder sửa hoàn toàn miễn phí. Hư hại do cố ý sẽ đền bù theo hợp đồng.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact -->
+<section id="contact" class="py-24 bg-ink-900 text-paper-100 relative overflow-hidden">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+
+      <div class="lg:col-span-5 space-y-8">
+        <div>
+          <span class="px-2.5 py-1 bg-brass-500/20 text-brass-300 text-xs font-mono font-semibold rounded uppercase tracking-wider">Hỗ trợ 24/7</span>
+          <h2 class="mt-4 text-3xl sm:text-4xl font-display font-bold tracking-tight">Đặt lịch xem phòng trực tiếp</h2>
+          <p class="mt-4 text-pine-100/70 leading-relaxed">Điền phiếu bên dưới, tư vấn viên TroFinder liên hệ dẫn xem phòng thực tế chỉ sau 15 phút.</p>
+        </div>
+
+        <div class="space-y-5">
+          <div class="flex items-center gap-4">
+            <div class="w-11 h-11 rounded-md bg-pine-600/30 text-pine-200 flex items-center justify-center text-lg"><i class="fa-solid fa-phone"></i></div>
+            <div><h4 class="text-[11px] text-pine-100/50 uppercase tracking-wider font-mono">Hotline tư vấn</h4><p class="text-lg font-semibold">1900.8198 (08:00–21:00)</p></div>
+          </div>
+          <div class="flex items-center gap-4">
+            <div class="w-11 h-11 rounded-md bg-brass-500/20 text-brass-300 flex items-center justify-center text-lg"><i class="fa-solid fa-envelope"></i></div>
+            <div><h4 class="text-[11px] text-pine-100/50 uppercase tracking-wider font-mono">Email hỗ trợ</h4><p class="text-lg font-semibold">lienhe@trofinder.vn</p></div>
+          </div>
+          <div class="flex items-center gap-4">
+            <div class="w-11 h-11 rounded-md bg-pine-600/30 text-pine-200 flex items-center justify-center text-lg"><i class="fa-solid fa-map-location-dot"></i></div>
+            <div><h4 class="text-[11px] text-pine-100/50 uppercase tracking-wider font-mono">Văn phòng chính</h4><p class="text-sm font-semibold">120 Cộng Hòa, P.4, Q. Tân Bình, TP.HCM</p></div>
+          </div>
+        </div>
+
+        <div class="stamp inline-flex flex-col items-center justify-center w-24 h-24 rounded-full text-center px-2 font-display font-bold text-xs uppercase tracking-wider">
+          <span>ĐÃ XÁC THỰC</span>
+          <span class="text-[8px] font-mono mt-0.5">Chính Chủ</span>
+        </div>
+      </div> <!-- Close Left Column lg:col-span-5 -->
+
+      <!-- Booking Form -->
+      <div class="lg:col-span-7 bg-paper-50 rounded-lg p-6 md:p-8 border border-paper-300 text-ink-900 shadow-card">
+        <h3 class="text-xl font-display font-bold mb-6 text-ink-900 border-b border-paper-300 pb-3">
+          <i class="fa-solid fa-file-pen text-pine-600 mr-2"></i> Phiếu đăng ký xem phòng
+        </h3>
+        <form id="booking-form" onsubmit="submitBookingForm(event)" class="space-y-5">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-semibold text-ink-700 mb-1.5" for="form-name">Họ và tên của bạn</label>
+              <input type="text" id="form-name" required class="block w-full px-4 py-3 text-sm text-ink-900 bg-paper-100 border border-paper-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pine-500 font-medium" placeholder="Nguyễn Văn A">
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-ink-700 mb-1.5" for="form-phone">Số điện thoại liên hệ</label>
+              <input type="tel" id="form-phone" required class="block w-full px-4 py-3 text-sm text-ink-900 bg-paper-100 border border-paper-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pine-500 font-mono font-medium" placeholder="0901234567">
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-semibold text-ink-700 mb-1.5" for="form-room">Chọn phòng bạn quan tâm</label>
+              <select id="form-room" class="block w-full px-4 py-3 text-sm text-ink-900 bg-paper-100 border border-paper-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pine-500 font-medium">
+                <option value="none">-- Chưa chọn phòng --</option>
+                <option value="SỐ 204">SỐ 204 - Studio Quận 1 (5.5Tr)</option>
+                <option value="SỐ 117">SỐ 117 - Gác lửng Cộng Hòa (4.2Tr)</option>
+                <option value="SỐ 305">SỐ 305 - Phòng giá rẻ Quận 10 (2.8Tr)</option>
+                <option value="SỐ 402">SỐ 402 - Studio Quận 7 (6.2Tr)</option>
+                <option value="SỐ 210">SỐ 210 - Gác lửng Tô Hiến Thành (4.5Tr)</option>
+                <option value="SỐ 108">SỐ 108 - Phòng nhỏ Hoàng Văn Thụ (2.5Tr)</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-ink-700 mb-1.5" for="form-date">Ngày dự kiến xem phòng</label>
+              <input type="date" id="form-date" class="block w-full px-4 py-3 text-sm text-ink-900 bg-paper-100 border border-paper-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pine-500 font-mono font-medium">
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold text-ink-700 mb-1.5" for="form-message">Ghi chú hoặc Ngân sách ước tính</label>
+            <textarea id="form-message" rows="3" class="block w-full px-4 py-3 text-sm text-ink-900 bg-paper-100 border border-paper-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pine-500 font-medium" placeholder="Ví dụ: ở 2 người, có xe máy..."></textarea>
+          </div>
+
+          <button type="submit" class="w-full py-4 bg-pine-600 hover:bg-pine-700 text-paper-50 font-bold rounded-md shadow-card transition-all flex items-center justify-center gap-2 text-base">
+            <i class="fa-solid fa-paper-plane"></i> Gửi phiếu đăng ký giữ chìa khóa
+          </button>
+        </form>
+      </div> <!-- Close Right Column lg:col-span-7 -->
+
+    </div> <!-- Close grid-cols-12 -->
+  </div> <!-- Close max-w-6xl -->
+</section> <!-- Close Contact Section -->
+
+<!-- Footer -->
+<footer class="bg-pine-900 text-pine-100 border-t border-pine-700 py-16">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-10">
+      
+      <!-- Brand column -->
+      <div class="md:col-span-5 space-y-5">
+        <div class="flex items-center gap-2.5">
+          <div class="w-9 h-9 rounded-md bg-paper-50 rotate-3 flex items-center justify-center text-pine-900 font-mono font-semibold text-xs relative shadow-card">
+            <span class="absolute w-1.5 h-1.5 rounded-full bg-pine-600/30 top-1 left-1"></span>
+            TF
+          </div>
+          <span class="text-xl font-display font-bold tracking-tight text-paper-50">TroFinder</span>
+        </div>
+        <p class="text-xs text-pine-300 leading-relaxed max-w-sm">
+          Hệ thống bảng chìa khóa phòng trọ và căn hộ dịch vụ tự quản hàng đầu Việt Nam. Mang lại không gian sống văn minh, an toàn, minh bạch chi phí cho người thuê phòng trọ.
+        </p>
+        <div class="flex items-center gap-3 text-pine-300 text-sm">
+          <a href="#" class="w-8 h-8 rounded-full bg-pine-800 hover:bg-brass-500 hover:text-ink-900 flex items-center justify-center transition-colors"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#" class="w-8 h-8 rounded-full bg-pine-800 hover:bg-brass-500 hover:text-ink-900 flex items-center justify-center transition-colors"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" class="w-8 h-8 rounded-full bg-pine-800 hover:bg-brass-500 hover:text-ink-900 flex items-center justify-center transition-colors"><i class="fa-brands fa-youtube"></i></a>
+          <a href="#" class="w-8 h-8 rounded-full bg-pine-800 hover:bg-brass-500 hover:text-ink-900 flex items-center justify-center transition-colors"><i class="fa-brands fa-tiktok"></i></a>
+        </div>
+      </div>
+
+      <!-- Links Column 1 -->
+      <div class="md:col-span-3 space-y-4">
+        <h4 class="font-mono text-xs font-semibold tracking-wider text-brass-300 uppercase">Liên kết nhanh</h4>
+        <ul class="space-y-2.5 text-xs text-pine-300">
+          <li><a href="#home" class="hover:text-brass-300 transition-colors">Trang chủ</a></li>
+          <li><a href="#features" class="hover:text-brass-300 transition-colors">Tiện ích an ninh</a></li>
+          <li><a href="#rooms" class="hover:text-brass-300 transition-colors">Bảng phòng trống</a></li>
+          <li><a href="#calculator" class="hover:text-brass-300 transition-colors">Tính chi phí ở thử</a></li>
+          <li><a href="#faq" class="hover:text-brass-300 transition-colors">Hỏi đáp thường gặp</a></li>
+        </ul>
+      </div>
+
+      <!-- Links Column 2 -->
+      <div class="md:col-span-4 space-y-4">
+        <h4 class="font-mono text-xs font-semibold tracking-wider text-brass-300 uppercase">Hỗ trợ khu vực</h4>
+        <p class="text-xs text-pine-300 leading-relaxed">
+          Hiện tại TroFinder cung cấp phòng trọ tại các khu vực: Quận 1, Quận 3, Quận 10, Quận 11, Quận Tân Bình và Quận 7, TP. Hồ Chí Minh.
+        </p>
+        <span class="inline-block text-xs font-mono text-brass-300 bg-pine-800 px-3 py-1 rounded border border-pine-700">
+          <i class="fa-solid fa-map-pin mr-1.5"></i> TP. Hồ Chí Minh
+        </span>
+      </div>
+
+    </div>
+
+    <!-- Copyright and Perforation -->
+    <div class="mt-12 pt-8 border-t border-pine-800 flex flex-col sm:flex-row items-center justify-between text-xs text-pine-400 gap-4">
+      <span>© 2026 TroFinder. Thiết kế bởi WebLanding.vn. Bảo lưu mọi quyền.</span>
+      <div class="flex gap-4">
+        <a href="#" class="hover:text-brass-300 transition-colors">Điều khoản dịch vụ</a>
+        <a href="#" class="hover:text-brass-300 transition-colors">Chính sách bảo mật</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Success Booking Modal -->
+<div id="success-modal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 bg-ink-900/60 backdrop-blur-sm">
+  <div class="bg-paper-50 rounded-lg p-8 border border-paper-300 max-w-md w-full shadow-card text-center transform scale-95 opacity-0 transition-all duration-300 relative ticket-top ticket-bottom">
+    <div class="w-16 h-16 bg-pine-50 rounded-full flex items-center justify-center mx-auto mb-4 border border-pine-100 text-pine-600 text-2xl">
+      <i class="fa-solid fa-check"></i>
+    </div>
+    
+    <h3 class="text-xl font-display font-bold text-ink-900 mb-2">Đăng ký giữ chìa khóa thành công!</h3>
+    <p class="text-sm text-ink-700 leading-relaxed mb-6">
+      Cảm ơn bạn! Thông tin đăng ký của bạn đã được ghi nhận trên hệ thống. Tư vấn viên TroFinder sẽ liên hệ qua điện thoại/Zalo để dẫn bạn đi xem phòng trực tiếp trong 15 phút tới.
+    </p>
+
+    <div id="modal-receipt-summary" class="bg-paper-100 p-4 rounded border border-paper-300 text-left font-mono text-xs text-ink-700 mb-6 space-y-1.5">
+      <div class="text-center font-bold border-b border-dashed border-paper-300 pb-1.5 uppercase text-brass-600">— Chi tiết giữ chỗ —</div>
+      <div class="flex justify-between"><span>Họ tên:</span><span id="modal-name" class="font-semibold text-ink-900">...</span></div>
+      <div class="flex justify-between"><span>Phòng đã chọn:</span><span id="modal-room" class="font-semibold text-pine-600">...</span></div>
+      <div class="flex justify-between"><span>Xem ngày:</span><span id="modal-date" class="font-semibold text-ink-900">...</span></div>
+    </div>
+    
+    <button onclick="closeSuccessModal()" class="w-full py-3 bg-pine-600 hover:bg-pine-700 text-paper-50 font-semibold rounded-md shadow-card transition-all">
+      Tuyệt vời, tôi đã rõ
+    </button>
+  </div>
+</div>
+
+<script>
+  // --- Data ---
+  const roomsData = [
+    { code: "101", name: "Phòng trọ 101", category: "sinhvien", location: "q10", price: 2400000, status: "rented" },
+    { code: "108", name: "Phòng Nhỏ Gần CV Hoàng Văn Thụ", category: "sinhvien", location: "qtb", price: 2500000, status: "available" },
+    { code: "112", name: "Phòng trọ 112", category: "sinhvien", location: "qtb", price: 2300000, status: "rented" },
+    { code: "117", name: "Phòng Gác Lửng Đường Cộng Hòa", category: "gaclung", location: "qtb", price: 4200000, status: "available" },
+    { code: "201", name: "Phòng trọ 201", category: "gaclung", location: "q10", price: 3900000, status: "rented" },
+    { code: "204", name: "Studio Cao Cấp Gần Hồ Con Rùa", category: "studio", location: "q1", price: 5500000, status: "hot" },
+    { code: "210", name: "Gác Lửng Khép Kín Tô Hiến Thành", category: "gaclung", location: "q10", price: 4500000, status: "hot" },
+    { code: "302", name: "Phòng trọ 302", category: "studio", location: "qtb", price: 5100000, status: "rented" },
+    { code: "305", name: "Phòng Giá Rẻ Đường Ba Tháng Hai", category: "sinhvien", location: "q10", price: 2800000, status: "hot" },
+    { code: "401", name: "Phòng trọ 401", category: "studio", location: "q7", price: 5800000, status: "rented" },
+    { code: "402", name: "Căn Hộ Ban Công View Sông Quận 7", category: "studio", location: "q7", price: 6200000, status: "available" },
+    { code: "408", name: "Phòng trọ 408", category: "gaclung", location: "q7", price: 4300000, status: "rented" }
+  ];
+
+  // --- Key Board Rendering ---
+  function renderKeyBoard() {
+    const grid = document.getElementById("key-board-grid");
+    if (!grid) return;
+    grid.innerHTML = "";
+
+    roomsData.forEach(room => {
+      const peg = document.createElement("div");
+      peg.className = "key-peg cursor-pointer";
+      
+      const hook = document.createElement("div");
+      hook.className = "hook";
+      peg.appendChild(hook);
+
+      const tagContainer = document.createElement("div");
+      tagContainer.className = `key-tag tag-${room.status}`;
+      
+      const tagShape = document.createElement("div");
+      tagShape.className = "tag-shape";
+      tagShape.textContent = room.code;
+      tagContainer.appendChild(tagShape);
+      peg.appendChild(tagContainer);
+
+      // Add click behavior to scroll and highlight room card
+      if (room.status !== "rented") {
+        peg.addEventListener("click", () => {
+          scrollToAndHighlightRoom(room.code);
+        });
+      } else {
+        peg.title = `Phòng ${room.code} đã cho thuê`;
+      }
+
+      grid.appendChild(peg);
+    });
+
+    // Update count of available rooms
+    const countSpan = document.getElementById("nav-available-count");
+    if (countSpan) {
+      const availableCount = roomsData.filter(r => r.status !== "rented").length;
+      countSpan.textContent = `${availableCount} phòng trống`;
+    }
+  }
+
+  function scrollToAndHighlightRoom(code) {
+    const cards = document.querySelectorAll(".room-card");
+    let targetCard = null;
+
+    cards.forEach(card => {
+      // Find room cards that match the code text
+      const heading = card.querySelector("h3");
+      const badge = card.querySelector(".absolute");
+      if ((heading && heading.textContent.includes(code)) || (badge && badge.textContent.includes(code))) {
+        targetCard = card;
+      }
+    });
+
+    if (targetCard) {
+      targetCard.scrollIntoView({ behavior: "smooth", block: "center" });
+      
+      // Visual feedback: pulsing ring and clean scale-up
+      targetCard.classList.add("ring-4", "ring-pine-500", "scale-[1.02]");
+      setTimeout(() => {
+        targetCard.classList.remove("ring-4", "ring-pine-500", "scale-[1.02]");
+      }, 2000);
+    }
+  }
+
+  // --- Mobile Menu ---
+  function toggleMenu() {
+    const menu = document.getElementById("mobile-menu");
+    const icon = document.getElementById("menu-icon");
+    if (!menu || !icon) return;
+
+    menu.classList.toggle("hidden");
+    if (menu.classList.contains("hidden")) {
+      icon.className = "fa-solid fa-bars text-xl";
+    } else {
+      icon.className = "fa-solid fa-xmark text-xl";
+    }
+  }
+
+  // --- FAQ Accordion ---
+  function toggleFaq(id) {
+    const answer = document.getElementById(`faq-answer-${id}`);
+    const icon = document.getElementById(`faq-icon-${id}`);
+    if (!answer || !icon) return;
+
+    const isHidden = answer.classList.contains("hidden");
+    
+    // Close other FAQ answers
+    document.querySelectorAll('[id^="faq-answer-"]').forEach(el => el.classList.add("hidden"));
+    document.querySelectorAll('[id^="faq-icon-"]').forEach(el => {
+      el.classList.remove("rotate-180");
+      el.classList.add("text-ink-500");
+    });
+
+    if (isHidden) {
+      answer.classList.remove("hidden");
+      icon.classList.add("rotate-180");
+      icon.classList.remove("text-ink-500");
+      icon.classList.add("text-pine-600");
+    }
+  }
+
+  // --- Catalog Category Filtering ---
+  function filterCatalog(category) {
+    const cards = document.querySelectorAll(".room-card");
+    const emptyState = document.getElementById("empty-state");
+    let visibleCount = 0;
+
+    // Toggle active category button styling
+    document.querySelectorAll(".cat-btn").forEach(btn => {
+      btn.classList.remove("is-active");
+      btn.classList.add("bg-paper-50", "text-ink-700", "border-paper-300");
+    });
+    const activeBtn = document.getElementById(`btn-cat-${category}`);
+    if (activeBtn) {
+      activeBtn.classList.add("is-active");
+      activeBtn.classList.remove("bg-paper-50", "text-ink-700", "border-paper-300");
+    }
+
+    cards.forEach(card => {
+      const cardCategory = card.getAttribute("data-category");
+      if (category === "all" || cardCategory === category) {
+        card.style.display = "block";
+        visibleCount++;
+      } else {
+        card.style.display = "none";
+      }
+    });
+
+    if (emptyState) {
+      if (visibleCount === 0) {
+        emptyState.classList.remove("hidden");
+      } else {
+        emptyState.classList.add("hidden");
+      }
+    }
+  }
+
+  // --- Quick Search Filters ---
+  function applyQuickFilters() {
+    const locationVal = document.getElementById("quick-location").value;
+    const priceVal = document.getElementById("quick-price").value;
+    const typeVal = document.getElementById("quick-type").value;
+
+    const cards = document.querySelectorAll(".room-card");
+    const emptyState = document.getElementById("empty-state");
+    let visibleCount = 0;
+
+    // Reset standard category buttons
+    document.querySelectorAll(".cat-btn").forEach(btn => {
+      btn.classList.remove("is-active");
+    });
+    const allBtn = document.getElementById("btn-cat-all");
+    if (allBtn) allBtn.classList.add("is-active");
+
+    cards.forEach(card => {
+      const cardLoc = card.getAttribute("data-location");
+      const cardPrice = parseInt(card.getAttribute("data-price"), 10);
+      const cardCat = card.getAttribute("data-category");
+
+      // Check Location filter
+      const matchesLoc = (locationVal === "all" || cardLoc === locationVal);
+
+      // Check Category / Type filter
+      const matchesType = (typeVal === "all" || cardCat === typeVal);
+
+      // Check Price filter
+      let matchesPrice = false;
+      if (priceVal === "all") {
+        matchesPrice = true;
+      } else if (priceVal === "low") {
+        matchesPrice = (cardPrice < 3000000);
+      } else if (priceVal === "mid") {
+        matchesPrice = (cardPrice >= 3000000 && cardPrice <= 5000000);
+      } else if (priceVal === "high") {
+        matchesPrice = (cardPrice > 5000000);
+      }
+
+      if (matchesLoc && matchesType && matchesPrice) {
+        card.style.display = "block";
+        visibleCount++;
+      } else {
+        card.style.display = "none";
+      }
+    });
+
+    if (emptyState) {
+      if (visibleCount === 0) {
+        emptyState.classList.remove("hidden");
+      } else {
+        emptyState.classList.add("hidden");
+      }
+    }
+    
+    // Smooth scroll to catalog section
+    document.getElementById("rooms").scrollIntoView({ behavior: "smooth" });
+  }
+
+  function resetFilters() {
+    document.getElementById("quick-location").value = "all";
+    document.getElementById("quick-price").value = "all";
+    document.getElementById("quick-type").value = "all";
+    filterCatalog("all");
+  }
+
+  // --- Calculator ---
+  function toggleWaterMethod() {
+    const waterOption = document.querySelector('input[name="water-option"]:checked').value;
+    const subLabel = document.getElementById("water-sub-label");
+    const subSlider = document.getElementById("calc-water-sub");
+
+    if (waterOption === "person") {
+      subLabel.textContent = "Số người: 1 người";
+      subSlider.min = "1";
+      subSlider.max = "4";
+      subSlider.value = "1";
+    } else {
+      subLabel.textContent = "Khối nước tiêu thụ: 5 m³";
+      subSlider.min = "1";
+      subSlider.max = "20";
+      subSlider.value = "5";
+    }
+    calculateTotal();
+  }
+
+  function calculateTotal() {
+    const rentInput = document.getElementById("calc-rent");
+    const elecInput = document.getElementById("calc-elec");
+    const waterSubInput = document.getElementById("calc-water-sub");
+    
+    const rentVal = parseInt(rentInput.value, 10);
+    const elecVal = parseInt(elecInput.value, 10);
+    const waterVal = parseInt(waterSubInput.value, 10);
+
+    // Update Slider Labels
+    document.getElementById("calc-rent-val").textContent = rentVal.toLocaleString("vi-VN") + "đ";
+    document.getElementById("calc-elec-val").textContent = elecVal + " Kwh";
+
+    const waterOption = document.querySelector('input[name="water-option"]:checked').value;
+    const waterSubLabel = document.getElementById("water-sub-label");
+    
+    let waterCost = 0;
+    if (waterOption === "person") {
+      waterSubLabel.textContent = `Số người: ${waterVal} người`;
+      document.getElementById("calc-water-val").textContent = "100.000đ/người";
+      waterCost = waterVal * 100000;
+    } else {
+      waterSubLabel.textContent = `Khối nước tiêu thụ: ${waterVal} m³`;
+      document.getElementById("calc-water-val").textContent = "18.000đ/m³";
+      waterCost = waterVal * 18000;
+    }
+
+    const electricityCost = elecVal * 3800;
+    
+    const wifiChecked = document.getElementById("calc-wifi").checked;
+    const bikeChecked = document.getElementById("calc-bike").checked;
+    
+    const wifiCost = wifiChecked ? 50000 : 0;
+    const bikeCost = bikeChecked ? 100000 : 0;
+    const extraCost = wifiCost + bikeCost;
+
+    const totalBill = rentVal + electricityCost + waterCost + extraCost;
+
+    // Update Receipt Display
+    document.getElementById("calc-total-display").textContent = totalBill.toLocaleString("vi-VN") + "đ";
+    document.getElementById("receipt-rent").textContent = rentVal.toLocaleString("vi-VN") + "đ";
+    document.getElementById("receipt-elec").textContent = electricityCost.toLocaleString("vi-VN") + "đ";
+    document.getElementById("receipt-water").textContent = waterCost.toLocaleString("vi-VN") + "đ";
+    document.getElementById("receipt-extra").textContent = extraCost.toLocaleString("vi-VN") + "đ";
+  }
+
+  function goToFormWithBudget() {
+    const rent = document.getElementById("calc-rent").value;
+    const elec = document.getElementById("calc-elec").value;
+    const water = document.getElementById("calc-water-sub").value;
+    const waterOption = document.querySelector('input[name="water-option"]:checked').value;
+    const total = document.getElementById("calc-total-display").textContent;
+
+    const waterUnit = waterOption === "person" ? "người" : "m³";
+    const budgetMsg = `Tôi muốn đặt lịch xem phòng với bảng ước tính chi phí: \n- Tiền thuê: ${parseInt(rent, 10).toLocaleString("vi-VN")}đ/tháng\n- Điện năng: ${elec} Kwh\n- Nước sinh hoạt: ${water} ${waterUnit}\n- Tổng hóa đơn tháng đầu dự tính: ${total}`;
+
+    const formMsg = document.getElementById("form-message");
+    if (formMsg) {
+      formMsg.value = budgetMsg;
+    }
+
+    // Scroll to contact form
+    const contactSection = document.getElementById("contact");
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: "smooth" });
+      setTimeout(() => {
+        document.getElementById("form-name").focus();
+      }, 600);
+    }
+  }
+
+  // --- Booking Actions ---
+  function openBookingModal(roomName, price) {
+    const formRoom = document.getElementById("form-room");
+    if (formRoom) {
+      // Find matching option in select
+      for (let i = 0; i < formRoom.options.length; i++) {
+        if (formRoom.options[i].text.includes(roomName) || formRoom.options[i].value.includes(roomName)) {
+          formRoom.selectedIndex = i;
+          break;
+        }
+      }
+    }
+
+    const formMsg = document.getElementById("form-message");
+    if (formMsg) {
+      formMsg.value = `Tôi muốn đặt lịch hẹn giữ chìa khóa cho phòng: ${roomName} (${price}).`;
+    }
+
+    const contactSection = document.getElementById("contact");
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: "smooth" });
+      setTimeout(() => {
+        document.getElementById("form-name").focus();
+      }, 600);
+    }
+  }
+
+  // --- Booking Form Submit ---
+  function submitBookingForm(e) {
+    e.preventDefault();
+    const name = document.getElementById("form-name").value;
+    const phone = document.getElementById("form-phone").value;
+    const room = document.getElementById("form-room").value;
+    const date = document.getElementById("form-date").value || "Hôm nay";
+
+    // Set modal summary
+    document.getElementById("modal-name").textContent = name;
+    document.getElementById("modal-room").textContent = room === "none" ? "Tư vấn chọn phòng" : room;
+    document.getElementById("modal-date").textContent = date;
+
+    // Show modal
+    const modal = document.getElementById("success-modal");
+    const modalContent = modal.querySelector(".transform");
+    
+    modal.classList.remove("hidden");
+    modal.classList.add("flex");
+    
+    setTimeout(() => {
+      modalContent.classList.remove("scale-95", "opacity-0");
+      modalContent.classList.add("scale-100", "opacity-100");
+    }, 10);
+  }
+
+  function closeSuccessModal() {
+    const modal = document.getElementById("success-modal");
+    const modalContent = modal.querySelector(".transform");
+    
+    modalContent.classList.remove("scale-100", "opacity-100");
+    modalContent.classList.add("scale-95", "opacity-0");
+    
+    setTimeout(() => {
+      modal.classList.add("hidden");
+      modal.classList.remove("flex");
+      document.getElementById("booking-form").reset();
+    }, 300);
+  }
+
+  // --- Initialize ---
+  document.addEventListener("DOMContentLoaded", () => {
+    renderKeyBoard();
+    calculateTotal();
+  });
+</script>
+</body>
+</html>

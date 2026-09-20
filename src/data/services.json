@@ -1,0 +1,508 @@
+[
+ {
+  "slug": "thiet-ke-website",
+  "eyebrow": "DỊCH VỤ THIẾT KẾ WEBSITE",
+  "shortLabel": "Website theo yêu cầu",
+  "image": "/custom-coding-service.png",
+  "imageAlt": "Minh họa dịch vụ thiết kế và lập trình website theo yêu cầu",
+  "title": "Thiết kế website chuyên nghiệp theo mục tiêu kinh doanh",
+  "metaTitle": "Thiết Kế Website Chuyên Nghiệp, Chuẩn SEO | WebLanding",
+  "description": "Dịch vụ thiết kế website theo yêu cầu, tối ưu trải nghiệm, tốc độ, SEO kỹ thuật và khả năng chuyển đổi. Nhận tư vấn giải pháp phù hợp.",
+  "lead": "WebLanding xây dựng website theo nhu cầu thực tế của doanh nghiệp: cấu trúc rõ ràng, giao diện nhất quán với thương hiệu, dễ quản trị và sẵn sàng mở rộng.",
+  "audience": [
+   "Doanh nghiệp cần website giới thiệu dịch vụ",
+   "Cửa hàng muốn xây kênh bán hàng sở hữu riêng",
+   "Thương hiệu cần làm mới website cũ",
+   "Đội ngũ cần hệ thống nội dung dễ quản trị"
+  ],
+  "outcomes": [
+   "Truyền tải rõ năng lực và điểm khác biệt",
+   "Tạo hành trình từ tìm kiếm đến liên hệ",
+   "Nền tảng kỹ thuật thuận lợi cho SEO dài hạn",
+   "Hiển thị tốt trên máy tính và thiết bị di động"
+  ],
+  "deliverables": [
+   "Phân tích mục tiêu và cấu trúc thông tin",
+   "Thiết kế giao diện responsive",
+   "Lập trình các trang và chức năng theo phạm vi",
+   "Thiết lập metadata, sitemap và dữ liệu có cấu trúc phù hợp",
+   "Kiểm thử, hướng dẫn vận hành và bàn giao"
+  ],
+  "process": [
+   {
+    "title": "Khảo sát",
+    "text": "Làm rõ khách hàng mục tiêu, chức năng, nội dung và tiêu chí nghiệm thu."
+   },
+   {
+    "title": "Cấu trúc",
+    "text": "Lập sitemap, wireframe và luồng chuyển đổi trước khi thiết kế chi tiết."
+   },
+   {
+    "title": "Thiết kế & lập trình",
+    "text": "Triển khai giao diện và chức năng theo phạm vi đã thống nhất."
+   },
+   {
+    "title": "Kiểm thử & bàn giao",
+    "text": "Kiểm tra responsive, biểu mẫu, tốc độ và hướng dẫn quản trị."
+   }
+  ],
+  "faqs": [
+   {
+    "question": "Chi phí thiết kế website được tính như thế nào?",
+    "answer": "Chi phí phụ thuộc số lượng trang, mức độ tùy biến giao diện, chức năng và nội dung cần triển khai. WebLanding xác nhận phạm vi và báo giá trước khi thực hiện."
+   },
+   {
+    "question": "Website có thể tự cập nhật nội dung không?",
+    "answer": "Có. Với dự án cần quản trị, website có thể được xây dựng kèm khu vực quản lý bài viết, dự án hoặc sản phẩm theo phạm vi đã thống nhất."
+   },
+   {
+    "question": "Website có được tối ưu SEO không?",
+    "answer": "Website được triển khai các nền tảng SEO kỹ thuật và on-page như cấu trúc heading, metadata, canonical, sitemap, khả năng thu thập dữ liệu và hiệu năng. Thứ hạng còn phụ thuộc nội dung, cạnh tranh và uy tín tên miền."
+   }
+  ],
+  "supportingLinks": [
+   {
+    "href": "/tin-tuc/10-yeu-to-cot-loi-thiet-ke-website-chuan-seo-nam-2026",
+    "label": "10 yếu tố cốt lõi của website chuẩn SEO"
+   },
+   {
+    "href": "/tin-tuc/quy-trinh-thiet-ke-website-chuyen-nghiep-cho-doanh-nghiep",
+    "label": "Quy trình thiết kế website chuyên nghiệp"
+   },
+   {
+    "href": "/tin-tuc/cach-lua-chon-don-vi-thiet-ke-website-uy-tin-tranh-bay",
+    "label": "Cách chọn đơn vị thiết kế website"
+   }
+  ],
+  "sidebarPhrase": "thiết kế website chuyên nghiệp"
+ },
+ {
+  "slug": "thiet-ke-landing-page",
+  "eyebrow": "DỊCH VỤ LANDING PAGE",
+  "shortLabel": "Landing Page chuyển đổi",
+  "image": "/landing-page-cro.png",
+  "imageAlt": "Minh họa Landing Page tối ưu chuyển đổi và hiệu suất",
+  "title": "Thiết kế Landing Page tập trung vào chuyển đổi",
+  "metaTitle": "Thiết Kế Landing Page Tối Ưu Chuyển Đổi | WebLanding",
+  "description": "Thiết kế Landing Page theo yêu cầu cho quảng cáo và chiến dịch bán hàng, tối ưu thông điệp, CTA, biểu mẫu, hiển thị di động và tốc độ.",
+  "lead": "Mỗi Landing Page được xây quanh một mục tiêu chuyển đổi cụ thể như nhận tư vấn, thu lead, đặt hàng hoặc đăng ký sự kiện — không chỉ là một trang giao diện đẹp.",
+  "audience": [
+   "Chiến dịch Google Ads, Facebook Ads hoặc TikTok Ads",
+   "Sản phẩm cần trang bán hàng tập trung",
+   "Dịch vụ cần thu thập khách hàng tiềm năng",
+   "Sự kiện, khóa học hoặc chương trình ra mắt"
+  ],
+  "outcomes": [
+   "Thông điệp và CTA nhất quán với quảng cáo",
+   "Giảm điểm gây phân tâm trên hành trình chuyển đổi",
+   "Biểu mẫu và nút liên hệ dễ sử dụng",
+   "Nền tảng sẵn sàng cho đo lường và thử nghiệm"
+  ],
+  "deliverables": [
+   "Phân tích offer và chân dung khách hàng",
+   "Sắp xếp cấu trúc nội dung theo hành trình thuyết phục",
+   "Thiết kế responsive và lập trình Landing Page",
+   "Tích hợp biểu mẫu, hotline hoặc Zalo theo nhu cầu",
+   "Thiết lập SEO cơ bản và hướng dẫn đo lường"
+  ],
+  "process": [
+   {
+    "title": "Xác định mục tiêu",
+    "text": "Chọn một hành động chuyển đổi chính và nguồn truy cập dự kiến."
+   },
+   {
+    "title": "Xây thông điệp",
+    "text": "Sắp xếp lợi ích, bằng chứng, xử lý phản đối và lời kêu gọi hành động."
+   },
+   {
+    "title": "Thiết kế",
+    "text": "Tạo giao diện ưu tiên di động, khả năng đọc và điểm chạm chuyển đổi."
+   },
+   {
+    "title": "Đo lường",
+    "text": "Kiểm tra biểu mẫu và chuẩn bị nền tảng cho Analytics hoặc Pixel khi có yêu cầu."
+   }
+  ],
+  "faqs": [
+   {
+    "question": "Landing Page khác website nhiều trang như thế nào?",
+    "answer": "Landing Page thường tập trung vào một chiến dịch và một hành động chuyển đổi. Website nhiều trang phù hợp hơn khi cần trình bày nhiều nhóm dịch vụ, nội dung và xây dựng hiện diện tìm kiếm dài hạn."
+   },
+   {
+    "question": "Thời gian thiết kế Landing Page là bao lâu?",
+    "answer": "Thời gian phụ thuộc mức độ sẵn sàng của nội dung, số section, hiệu ứng và tích hợp. Gói cơ bản hiện được công bố với thời gian tham khảo 3–5 ngày."
+   },
+   {
+    "question": "Có thể dùng Landing Page để chạy quảng cáo không?",
+    "answer": "Có. Trang có thể được tối ưu thông điệp, tốc độ, biểu mẫu và CTA theo nguồn quảng cáo. Việc theo dõi chuyển đổi được tích hợp khi nằm trong phạm vi dự án."
+   }
+  ],
+  "supportingLinks": [
+   {
+    "href": "/tin-tuc/website-landing-la-gi-bi-quyet-thiet-ke-chuyen-doi-cao",
+    "label": "Website Landing là gì?"
+   },
+   {
+    "href": "/tin-tuc/cac-yeu-to-cau-thanh-landing-page-ty-le-chuyen-doi-cao",
+    "label": "Các yếu tố của Landing Page chuyển đổi cao"
+   },
+   {
+    "href": "/tin-tuc/bang-gia-thiet-ke-landing-page-chi-phi-tron-goi",
+    "label": "Chi phí thiết kế Landing Page"
+   }
+  ],
+  "relatedProjects": [
+   {
+    "href": "/du-an/du-an-web-o-khoa-thong-minh-convetek",
+    "label": "Landing Page khóa thông minh Convetek"
+   },
+   {
+    "href": "/du-an/du-an-web-tim-phong-tro-trofinder",
+    "label": "Landing Page ứng dụng TroFinder"
+   }
+  ],
+  "sidebarPhrase": "thiết kế Landing Page"
+ },
+ {
+  "slug": "thiet-ke-website-ban-hang",
+  "eyebrow": "WEBSITE BÁN HÀNG",
+  "shortLabel": "Website bán hàng",
+  "image": "/fashion-ecommerce-website.png",
+  "imageAlt": "Giao diện website bán hàng hiển thị trên máy tính và điện thoại",
+  "title": "Thiết kế website bán hàng dễ quản lý, thuận tiện đặt mua",
+  "metaTitle": "Thiết Kế Website Bán Hàng Theo Yêu Cầu | WebLanding",
+  "description": "Thiết kế website bán hàng theo yêu cầu với danh mục sản phẩm, giỏ hàng, đặt hàng và quản trị phù hợp quy trình kinh doanh thực tế.",
+  "lead": "Website bán hàng được thiết kế từ quy trình chọn sản phẩm đến đặt mua, đồng thời giúp doanh nghiệp chủ động dữ liệu, nội dung và trải nghiệm thương hiệu.",
+  "audience": [
+   "Cửa hàng muốn có kênh bán hàng riêng",
+   "Thương hiệu đang phụ thuộc mạng xã hội hoặc sàn",
+   "Doanh nghiệp cần quản lý danh mục và đơn hàng",
+   "Mô hình cần tích hợp quy trình đặt hàng riêng"
+  ],
+  "outcomes": [
+   "Danh mục và sản phẩm dễ tìm kiếm",
+   "Quy trình đặt mua rõ ràng trên di động",
+   "Chủ động nội dung và dữ liệu khách hàng",
+   "Có nền tảng phát triển SEO cho nhóm sản phẩm"
+  ],
+  "deliverables": [
+   "Kiến trúc danh mục và trang sản phẩm",
+   "Giao diện giỏ hàng và đặt hàng",
+   "Khu vực quản trị sản phẩm, nội dung theo phạm vi",
+   "Tích hợp phương thức liên hệ hoặc thanh toán theo yêu cầu",
+   "SEO kỹ thuật và kiểm thử luồng mua hàng"
+  ],
+  "process": [
+   {
+    "title": "Phân tích vận hành",
+    "text": "Làm rõ sản phẩm, tồn kho, đơn hàng và quy trình xử lý thực tế."
+   },
+   {
+    "title": "Thiết kế hành trình mua",
+    "text": "Tổ chức danh mục, bộ lọc, trang sản phẩm và bước đặt hàng."
+   },
+   {
+    "title": "Phát triển",
+    "text": "Lập trình chức năng và trang quản trị theo phạm vi."
+   },
+   {
+    "title": "Kiểm thử",
+    "text": "Chạy thử các tình huống đặt hàng trên máy tính và di động trước bàn giao."
+   }
+  ],
+  "faqs": [
+   {
+    "question": "Website bán hàng có bắt buộc thanh toán trực tuyến không?",
+    "answer": "Không. Tùy mô hình, website có thể nhận đơn qua biểu mẫu, Zalo, chuyển khoản hoặc tích hợp cổng thanh toán khi cần."
+   },
+   {
+    "question": "Có quản lý được sản phẩm và đơn hàng không?",
+    "answer": "Có thể. Các chức năng quản trị sẽ được xác định theo gói và quy trình vận hành của doanh nghiệp."
+   },
+   {
+    "question": "Website có thay thế hoàn toàn sàn thương mại điện tử không?",
+    "answer": "Hai kênh có vai trò khác nhau. Website giúp chủ động thương hiệu và dữ liệu; sàn có sẵn lưu lượng. Nhiều doanh nghiệp nên vận hành song song theo mục tiêu."
+   }
+  ],
+  "supportingLinks": [
+   {
+    "href": "/tin-tuc/tam-quan-trong-trai-nghiem-nguoi-dung-ux-ui-website-ban-hang",
+    "label": "UX/UI cho website bán hàng"
+   },
+   {
+    "href": "/tin-tuc/bi-quyet-bien-website-thanh-nhan-vien-ban-hang-247",
+    "label": "Biến website thành kênh bán hàng 24/7"
+   },
+   {
+    "href": "/tin-tuc/thiet-ke-website-ban-quan-ao-thoi-trang",
+    "label": "Thiết kế website bán quần áo"
+   }
+  ],
+  "relatedProjects": [
+   {
+    "href": "/du-an/du-an-web-ban-chan-ga-sa-tac-co-ba",
+    "label": "Website đặt hàng Chân Gà Cô Ba"
+   },
+   {
+    "href": "/du-an/du-an-web-dat-hang-nong-san-mua-vu",
+    "label": "Website đặt hàng nông sản Mùa Vụ"
+   }
+  ],
+  "sidebarPhrase": "thiết kế website bán hàng"
+ },
+ {
+  "slug": "thiet-ke-website-doanh-nghiep",
+  "eyebrow": "WEBSITE DOANH NGHIỆP",
+  "shortLabel": "Website doanh nghiệp",
+  "image": "/corporate-portfolio-website.png",
+  "imageAlt": "Giao diện website doanh nghiệp chuyên nghiệp trên nhiều thiết bị",
+  "title": "Thiết kế website doanh nghiệp thể hiện rõ năng lực thương hiệu",
+  "metaTitle": "Thiết Kế Website Doanh Nghiệp Chuyên Nghiệp | WebLanding",
+  "description": "Thiết kế website doanh nghiệp theo nhận diện thương hiệu, trình bày năng lực, dịch vụ, dự án và tạo hành trình liên hệ rõ ràng.",
+  "lead": "Một website doanh nghiệp hiệu quả cần giúp khách hàng nhanh chóng hiểu doanh nghiệp là ai, giải quyết vấn đề gì và vì sao nên liên hệ.",
+  "audience": [
+   "Doanh nghiệp mới cần hiện diện số chính thức",
+   "Công ty muốn làm mới hình ảnh thương hiệu",
+   "Đơn vị B2B cần giới thiệu năng lực và dự án",
+   "Doanh nghiệp cần nền tảng nội dung để phát triển SEO"
+  ],
+  "outcomes": [
+   "Hồ sơ năng lực trực tuyến nhất quán",
+   "Dịch vụ và dự án được trình bày có hệ thống",
+   "Tăng độ tin cậy trước khi khách hàng liên hệ",
+   "Dễ mở rộng tin tức, tuyển dụng hoặc tài liệu"
+  ],
+  "deliverables": [
+   "Sitemap theo nhóm người dùng",
+   "Giao diện theo nhận diện thương hiệu",
+   "Trang giới thiệu, dịch vụ, dự án và liên hệ",
+   "Hệ thống quản trị nội dung khi có nhu cầu",
+   "Metadata, schema và nền tảng SEO kỹ thuật"
+  ],
+  "process": [
+   {
+    "title": "Thu thập tài liệu",
+    "text": "Tổng hợp nhận diện, hồ sơ năng lực, dịch vụ và dự án tiêu biểu."
+   },
+   {
+    "title": "Kiến trúc nội dung",
+    "text": "Sắp xếp thông tin theo nhu cầu của khách hàng và mục tiêu kinh doanh."
+   },
+   {
+    "title": "Thiết kế & phát triển",
+    "text": "Triển khai giao diện, nội dung và chức năng đã thống nhất."
+   },
+   {
+    "title": "Bàn giao",
+    "text": "Kiểm thử, hướng dẫn cập nhật và bàn giao tài khoản, mã nguồn theo hợp đồng."
+   }
+  ],
+  "faqs": [
+   {
+    "question": "Website doanh nghiệp nên có những trang nào?",
+    "answer": "Thông thường gồm trang chủ, giới thiệu, dịch vụ, dự án hoặc năng lực, tin tức và liên hệ. Cấu trúc cuối cùng cần dựa trên hành trình khách hàng thực tế."
+   },
+   {
+    "question": "Có thể thiết kế theo bộ nhận diện sẵn có không?",
+    "answer": "Có. Màu sắc, typography, hình ảnh và thành phần giao diện có thể phát triển từ logo và bộ nhận diện hiện có."
+   },
+   {
+    "question": "Sau bàn giao có thể thêm nội dung không?",
+    "answer": "Có nếu dự án bao gồm hệ thống quản trị. WebLanding sẽ hướng dẫn quy trình cập nhật các loại nội dung đã thống nhất."
+   }
+  ],
+  "supportingLinks": [
+   {
+    "href": "/tin-tuc/thiet-ke-website-gioi-thieu-cong-ty",
+    "label": "Thiết kế website giới thiệu công ty"
+   },
+   {
+    "href": "/tin-tuc/quy-trinh-thiet-ke-website-chuyen-nghiep-cho-doanh-nghiep",
+    "label": "Quy trình thiết kế website cho doanh nghiệp"
+   },
+   {
+    "href": "/tin-tuc/cam-nang-bao-mat-website-doanh-nghiep",
+    "label": "Cẩm nang bảo mật website doanh nghiệp"
+   }
+  ],
+  "relatedProjects": [
+   {
+    "href": "/du-an/du-an-website-thiet-ke-xay-dung-viet-vu",
+    "label": "Website Thiết kế & Xây dựng Việt Vũ"
+   },
+   {
+    "href": "/du-an/du-an-web-thiet-ke-noi-that-sen-viet",
+    "label": "Website Nội thất Sen Việt"
+   }
+  ],
+  "sidebarPhrase": "thiết kế website doanh nghiệp"
+ },
+ {
+  "slug": "thiet-ke-website-nha-hang",
+  "eyebrow": "WEBSITE NHÀ HÀNG",
+  "shortLabel": "Website nhà hàng",
+  "image": "/bunboxao-homepage.png",
+  "imageAlt": "Dự án website nhà hàng Bún Bò Xào với hình ảnh món ăn nổi bật",
+  "imagePosition": "top center",
+  "title": "Thiết kế website nhà hàng hấp dẫn và thuận tiện đặt bàn",
+  "metaTitle": "Thiết Kế Website Nhà Hàng, Quán Ăn | WebLanding",
+  "description": "Thiết kế website nhà hàng, quán ăn với menu trực quan, hình ảnh thương hiệu, thông tin địa điểm và hành động đặt bàn hoặc liên hệ rõ ràng.",
+  "lead": "Website nhà hàng cần truyền tải được phong cách ẩm thực, giúp thực khách xem menu, tìm địa chỉ và thực hiện hành động đặt bàn trên điện thoại thật thuận tiện.",
+  "audience": [
+   "Nhà hàng và chuỗi ẩm thực",
+   "Quán cà phê hoặc mô hình đồ uống",
+   "Thương hiệu món ăn đặc sản",
+   "Dịch vụ catering và đặt món"
+  ],
+  "outcomes": [
+   "Menu dễ xem trên thiết bị di động",
+   "Hình ảnh và câu chuyện thương hiệu nhất quán",
+   "Đặt bàn, gọi điện và chỉ đường thuận tiện",
+   "Nền tảng cho SEO thương hiệu và địa phương"
+  ],
+  "deliverables": [
+   "Cấu trúc menu, không gian và chi nhánh",
+   "Thiết kế giao diện phù hợp phong cách ẩm thực",
+   "Tích hợp đặt bàn hoặc liên hệ theo nhu cầu",
+   "Hiển thị bản đồ và thông tin hoạt động",
+   "Tối ưu hình ảnh, metadata và dữ liệu cấu trúc phù hợp"
+  ],
+  "process": [
+   {
+    "title": "Định vị",
+    "text": "Làm rõ phong cách, phân khúc thực khách và hành động cần ưu tiên."
+   },
+   {
+    "title": "Chuẩn bị nội dung",
+    "text": "Tổ chức menu, hình ảnh món ăn, không gian và thông tin chi nhánh."
+   },
+   {
+    "title": "Thiết kế & lập trình",
+    "text": "Triển khai giao diện ưu tiên trải nghiệm di động và tốc độ."
+   },
+   {
+    "title": "Hoàn thiện",
+    "text": "Kiểm tra thông tin liên hệ, bản đồ và luồng đặt bàn trước khi xuất bản."
+   }
+  ],
+  "faqs": [
+   {
+    "question": "Website nhà hàng có tích hợp đặt bàn được không?",
+    "answer": "Có. Hình thức có thể là biểu mẫu, hotline, Zalo hoặc kết nối hệ thống đặt bàn tùy phạm vi kỹ thuật."
+   },
+   {
+    "question": "Menu có thể tự cập nhật không?",
+    "answer": "Có thể xây khu vực quản trị để cập nhật món, giá và danh mục khi nhu cầu này được xác định trong phạm vi dự án."
+   },
+   {
+    "question": "Website có hỗ trợ nhiều chi nhánh không?",
+    "answer": "Có. Mỗi chi nhánh có thể hiển thị địa chỉ, giờ mở cửa, bản đồ và phương thức liên hệ riêng."
+   }
+  ],
+  "supportingLinks": [
+   {
+    "href": "/tin-tuc/thiet-ke-website-am-thuc-chuan-seo-quoc-te-bun-bo-xao-tasteatlas-81",
+    "label": "Case study website ẩm thực Bún Bò Xào"
+   },
+   {
+    "href": "/tin-tuc/huong-dan-toi-uu-hinh-anh-chuan-seo-website-tai-sieu-toc",
+    "label": "Tối ưu hình ảnh cho website"
+   }
+  ],
+  "relatedProjects": [
+   {
+    "href": "/du-an/du-an-website-am-thuc-bun-bo-xao-viet-nam-tasteatlas-81",
+    "label": "Website ẩm thực Bún Bò Xào"
+   },
+   {
+    "href": "/du-an/du-an-web-ca-phe-ritual-coffee",
+    "label": "Website Ritual Coffee"
+   }
+  ],
+  "sidebarPhrase": "thiết kế website nhà hàng"
+ },
+ {
+  "slug": "thiet-ke-website-tiem-nail",
+  "eyebrow": "WEBSITE TIỆM NAIL",
+  "shortLabel": "Website tiệm nail",
+  "image": "/1millionnailgorey-homepage.png",
+  "imageAlt": "Dự án website tiệm nail với thư viện mẫu móng chuyên nghiệp",
+  "imagePosition": "top center",
+  "title": "Thiết kế website tiệm nail và salon làm đẹp chuyên nghiệp",
+  "metaTitle": "Thiết Kế Website Tiệm Nail, Salon Làm Đẹp | WebLanding",
+  "description": "Thiết kế website tiệm nail và salon với bảng dịch vụ, thư viện hình ảnh, thông tin địa điểm, liên hệ và đặt lịch thuận tiện.",
+  "lead": "Website giúp tiệm nail giới thiệu phong cách, dịch vụ và không gian một cách nhất quán, đồng thời rút ngắn hành trình từ tìm hiểu đến đặt lịch.",
+  "audience": [
+   "Tiệm nail độc lập",
+   "Salon hoặc beauty lounge",
+   "Spa có nhiều nhóm dịch vụ",
+   "Thương hiệu làm đẹp phục vụ khách địa phương"
+  ],
+  "outcomes": [
+   "Bảng dịch vụ và mức giá dễ theo dõi",
+   "Hình ảnh tay nghề và không gian được trình bày đẹp",
+   "Đặt lịch và chỉ đường thuận tiện",
+   "Hỗ trợ hiện diện tìm kiếm theo thương hiệu, khu vực"
+  ],
+  "deliverables": [
+   "Trang dịch vụ và bảng giá",
+   "Thư viện hình ảnh tối ưu responsive",
+   "Tích hợp đặt lịch hoặc liên kết nền tảng booking",
+   "Thông tin chi nhánh, bản đồ và giờ làm việc",
+   "Metadata và nền tảng SEO địa phương"
+  ],
+  "process": [
+   {
+    "title": "Khảo sát thương hiệu",
+    "text": "Xác định phong cách, dịch vụ chủ lực, khách hàng và khu vực phục vụ."
+   },
+   {
+    "title": "Tổ chức dịch vụ",
+    "text": "Sắp xếp nhóm dịch vụ, bảng giá, hình ảnh và chính sách đặt lịch."
+   },
+   {
+    "title": "Thiết kế & tích hợp",
+    "text": "Triển khai giao diện và kết nối kênh đặt lịch phù hợp."
+   },
+   {
+    "title": "Kiểm thử",
+    "text": "Kiểm tra trải nghiệm đặt lịch, gọi điện và tìm đường trên thiết bị di động."
+   }
+  ],
+  "faqs": [
+   {
+    "question": "Website tiệm nail có kết nối hệ thống booking không?",
+    "answer": "Có thể kết nối bằng liên kết hoặc tích hợp kỹ thuật tùy nền tảng booking mà tiệm đang sử dụng."
+   },
+   {
+    "question": "Có thể hiển thị nhiều bảng giá dịch vụ không?",
+    "answer": "Có. Dịch vụ có thể được chia theo nhóm như nail, pedicure, brow, lash hoặc spa để khách dễ tra cứu."
+   },
+   {
+    "question": "Website có phù hợp cho tiệm ở nước ngoài không?",
+    "answer": "Có. Website có thể triển khai nội dung và thông tin địa phương theo thị trường mục tiêu; yêu cầu đa ngôn ngữ sẽ được xác định riêng."
+   }
+  ],
+  "supportingLinks": [
+   {
+    "href": "/tin-tuc/thiet-ke-website-tiem-nail-spa-dang-cap-quoc-te-1million-nail-gorey",
+    "label": "Case study website tiệm nail tại Ireland"
+   },
+   {
+    "href": "/tin-tuc/toi-uu-seo-google-maps-tiep-can-khach-hang-dia-phuong",
+    "label": "Tối ưu hiện diện tìm kiếm địa phương"
+   }
+  ],
+  "relatedProjects": [
+   {
+    "href": "/du-an/du-an-website-1-million-nail-gorey-beauty-salon-ireland",
+    "label": "Website 1 MILLION Nail Gorey"
+   },
+   {
+    "href": "/du-an/du-an-website-4men-spa-danh-cho-nam-gioi",
+    "label": "Website 4MEN SPA"
+   }
+  ],
+  "sidebarPhrase": "thiết kế website tiệm nail và salon"
+ }
+]

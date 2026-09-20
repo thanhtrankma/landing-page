@@ -1,0 +1,1102 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="vi">
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Nông Sản Mùa Vụ — Trái Cây &amp; Nông Sản Sạch Chín Cây Tự Nhiên</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,600;0,700;1,500&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- FontAwesome icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+
+    <script id="tailwind-config">
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        display: ['"Baloo 2"', 'sans-serif'],
+                        sans: ['"Be Vietnam Pro"', 'sans-serif'],
+                        mono: ['"JetBrains Mono"', 'monospace'],
+                    },
+                    colors: {
+                        paper: { 50: '#FFFCF7', 100: '#FAF4EB', 200: '#F2E8D5', 300: '#E6D7BD' },
+                        ink:   { 900: '#1F120B', 700: '#3D281C', 500: '#664C3B', 300: '#997E6E' },
+                        chili: { 50: '#FDF1EE', 100: '#FADED6', 500: '#16a34a', 600: '#B71C1C', 700: '#8E1C1C' },
+                        leaf:  { 50: '#F1F6EF', 100: '#E1EDDB', 500: '#2E7D32', 600: '#1B5E20' },
+                        gold:  { 300: '#F9D788', 500: '#E65100', 600: '#E65100' },
+                    },
+                    boxShadow: {
+                        soft: '0 8px 30px rgb(31 18 11 / 4%)',
+                        softMd: '0 12px 40px rgb(31 18 11 / 6%)',
+                        softLg: '0 20px 50px rgb(31 18 11 / 8%)',
+                        softXl: '0 32px 64px rgb(31 18 11 / 10%)',
+                    },
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { background-color: #FAF4EB; }
+        .bg-grain { 
+            background-image: radial-gradient(rgba(31,18,11,0.03) 1px, transparent 1px); 
+            background-size: 6px 6px; 
+        }
+
+        .price-tag { font-family: 'JetBrains Mono', monospace; }
+
+        details > summary { list-style: none; cursor: pointer; }
+        details > summary::-webkit-details-marker { display: none; }
+        details[open] .faq-icon { transform: rotate(45deg); }
+
+        .marquee-track { animation: marquee 25s linear infinite; }
+        @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+        ::selection { background: #16a34a; color: #FFFCF7; }
+
+        /* Glowing Hotspot */
+        .hotspot-pulse::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            border-radius: 9999px;
+            border: 2px solid currentColor;
+            animation: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+        }
+
+        input[type="range"] {
+            accent-color: #16a34a;
+        }
+    </style>
+</head>
+<body class="text-ink-900 font-sans antialiased overflow-x-hidden bg-grain">
+
+<!-- ===================== NAVIGATION ===================== -->
+<nav class="fixed top-0 left-0 right-0 z-50 bg-paper-50/90 backdrop-blur-md border-b border-paper-200">
+    <div class="max-w-7xl mx-auto px-5 lg:px-8">
+        <div class="flex items-center justify-between h-[72px]">
+            <!-- Brand Logo -->
+            <a class="flex items-center gap-3 hover:opacity-90 transition-opacity" href="#home">
+                <img src="/images/logo.png" alt="Logo Nông Sản Mùa Vụ" class="w-10 h-10 rounded-full object-cover shadow-sm border border-paper-200">
+                <span class="font-display text-xl font-bold text-leaf-600">Nông Sản Mùa Vụ</span>
+            </a>
+
+            <!-- Desktop Links -->
+            <div class="hidden md:flex items-center gap-8 font-bold text-xs tracking-wider uppercase text-ink-700">
+                <a href="#menu" class="hover:text-leaf-600 transition-colors">Thực đơn</a>
+                <a href="#cam-ket" class="hover:text-leaf-600 transition-colors">Cam kết</a>
+                <a href="#bi-quyet" class="hover:text-leaf-600 transition-colors">Bí quyết</a>
+                <a href="#danh-gia" class="hover:text-leaf-600 transition-colors">Đánh giá</a>
+                <a href="#faq" class="hover:text-leaf-600 transition-colors">Hỏi đáp</a>
+            </div>
+
+            <!-- Action buttons -->
+            <div class="flex items-center gap-4">
+                <a href="tel:0901234567" class="hidden lg:flex items-center gap-2 text-xs font-bold text-ink-700 hover:text-leaf-600">
+                    <i class="fa-solid fa-phone-volume text-leaf-600"></i> 0901.234.567
+                </a>
+                <button onclick="toggleCartDrawer(true)" class="w-10 h-10 bg-white border border-paper-200 flex items-center justify-center rounded-xl hover:bg-paper-50 transition-colors relative shadow-sm" aria-label="Giỏ hàng">
+                    <i class="fa-solid fa-basket-shopping text-ink-700"></i>
+                    <span id="cart-badge" class="absolute -top-1 -right-1 bg-leaf-600 text-white text-[9px] w-5 h-5 rounded-full flex items-center justify-center font-bold border border-white scale-0 transition-transform duration-300">0</span>
+                </button>
+                <a href="#menu" class="hidden sm:inline-flex px-5 py-2.5 bg-leaf-600 hover:bg-leaf-700 text-white font-bold text-xs tracking-wider uppercase rounded-xl transition-all shadow-md shadow-leaf-600/10 hover:shadow-leaf-600/20">
+                    Đặt giao ngay
+                </a>
+                <button onclick="toggleMobileMenu(true)" class="md:hidden w-10 h-10 bg-white border border-paper-200 flex items-center justify-center rounded-xl shadow-sm">
+                    <i class="fa-solid fa-bars text-ink-700"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- Mobile Links Overlay -->
+<div id="mobile-menu" class="fixed inset-0 bg-paper-50 z-50 translate-x-full transition-transform duration-300 flex flex-col p-8">
+    <div class="flex justify-between items-center mb-8">
+        <span class="font-display text-xl font-bold text-leaf-600">Nông Sản Mùa Vụ</span>
+        <button onclick="toggleMobileMenu(false)" class="w-10 h-10 bg-white border border-paper-200 flex items-center justify-center rounded-xl"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="flex flex-col gap-6 text-base font-bold text-ink-700">
+        <a onclick="toggleMobileMenu(false)" href="#menu">Thực đơn</a>
+        <a onclick="toggleMobileMenu(false)" href="#cam-ket">Cam kết</a>
+        <a onclick="toggleMobileMenu(false)" href="#bi-quyet">Bí quyết</a>
+        <a onclick="toggleMobileMenu(false)" href="#danh-gia">Đánh giá</a>
+        <a onclick="toggleMobileMenu(false)" href="#faq">Hỏi đáp</a>
+    </div>
+    <div class="mt-auto pt-6 border-t border-paper-200 flex flex-col gap-3">
+        <a onclick="toggleMobileMenu(false)" href="#menu" class="w-full text-center py-3.5 bg-leaf-600 text-white font-bold rounded-xl shadow-md text-xs tracking-wider uppercase">Đặt hàng ngay</a>
+        <a href="tel:0901234567" class="w-full text-center py-3.5 border border-paper-200 text-ink-700 font-bold rounded-xl text-xs tracking-wider uppercase bg-white">Gọi điện: 0901.234.567</a>
+    </div>
+</div>
+
+<!-- Cart Drawer -->
+<div id="cart-backdrop" class="fixed inset-0 bg-black/30 z-50 opacity-0 pointer-events-none transition-opacity duration-300" onclick="toggleCartDrawer(false)"></div>
+<div id="cart-drawer" class="fixed top-0 right-0 h-full w-full max-w-md bg-paper-50 z-50 shadow-softXl border-l border-paper-200 translate-x-full transition-transform duration-300 flex flex-col">
+    <div class="p-5 border-b border-paper-200 flex justify-between items-center bg-white">
+        <h3 class="font-display text-xl font-bold text-leaf-600">Giỏ hàng của bạn</h3>
+        <button onclick="toggleCartDrawer(false)" class="w-9 h-9 bg-paper-50 border border-paper-200 flex items-center justify-center rounded-lg shadow-sm"><i class="fa-solid fa-xmark text-ink-700"></i></button>
+    </div>
+
+    <div id="cart-items" class="flex-1 overflow-y-auto p-5 space-y-3">
+        <!-- Dyn. Items -->
+    </div>
+
+    <div id="cart-empty" class="flex-1 flex flex-col items-center justify-center p-6 text-center space-y-4">
+        <i class="fa-solid fa-basket-shopping text-4xl text-paper-300"></i>
+        <p class="font-display text-lg font-bold text-leaf-600">Chưa chọn nông sản</p>
+        <p class="text-xs max-w-xs leading-relaxed text-ink-500">Hãy thêm trái cây và nông sản tươi sạch vào giỏ bạn nhé!</p>
+        <button onclick="toggleCartDrawer(false)" class="px-6 py-2.5 bg-leaf-600 text-white font-bold rounded-xl text-xs tracking-wider uppercase">Chọn món ngay</button>
+    </div>
+
+    <div id="cart-summary" class="p-5 border-t border-paper-200 bg-white space-y-3 hidden">
+        <div class="flex justify-between items-center text-xs text-ink-550 font-medium">
+            <span>Phí vận chuyển 2h</span><span class="text-leaf-600 font-bold">Miễn phí</span>
+        </div>
+        <div class="flex justify-between items-center font-bold text-ink-900 text-lg pt-2 border-t border-dashed border-paper-200">
+            <span>Tổng số tiền:</span>
+            <span id="cart-subtotal" class="price-tag text-xl text-leaf-600">0đ</span>
+        </div>
+        <button onclick="openOrderModal()" class="w-full py-3.5 bg-leaf-600 hover:bg-leaf-700 text-white font-bold rounded-xl shadow-md transition-all text-xs tracking-wider uppercase flex items-center justify-center gap-2">
+            Giao tận nơi ngay <i class="fa-solid fa-arrow-right"></i>
+        </button>
+    </div>
+</div>
+
+<!-- Checkout Modal -->
+<div id="order-modal" class="fixed inset-0 bg-black/50 z-[60] hidden items-center justify-center p-4">
+    <div class="bg-paper-50 rounded-2xl w-full max-w-lg shadow-softXl border border-paper-200 overflow-hidden max-h-[92vh] overflow-y-auto">
+        <div class="p-5 border-b border-paper-200 flex justify-between items-center bg-white sticky top-0 z-10">
+            <h3 class="font-display text-lg font-bold text-leaf-600">Xác nhận giao hàng</h3>
+            <button onclick="closeOrderModal()" class="w-8 h-8 border border-paper-200 bg-white flex items-center justify-center rounded-lg"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <form id="checkout-form" onsubmit="submitOrder(event)" class="p-6 space-y-4">
+            <div>
+                <label class="block text-xs font-bold text-ink-700 mb-1.5">Tên người nhận *</label>
+                <input required type="text" id="cust-name" placeholder="Nguyễn Văn A" class="w-full rounded-lg border-paper-200 bg-white focus:border-leaf-600 focus:ring-leaf-600 text-sm font-medium">
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-xs font-bold text-ink-700 mb-1.5">Số điện thoại liên lạc *</label>
+                    <input required type="tel" id="cust-phone" placeholder="0901234567" class="w-full rounded-lg border-paper-200 bg-white focus:border-leaf-600 focus:ring-leaf-600 text-sm font-medium">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-ink-700 mb-1.5">Phương thức nhận hàng *</label>
+                    <select id="delivery-method" class="w-full rounded-lg border-paper-200 bg-white focus:border-leaf-600 focus:ring-leaf-600 text-sm font-medium">
+                        <option value="delivery">Ship hỏa tốc tận nhà (2 giờ)</option>
+                        <option value="pickup">Tự ghé cửa hàng lấy món</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <label class="block text-xs font-bold text-ink-700 mb-1.5">Địa chỉ giao hàng (số nhà, ngõ/đường, phường) *</label>
+                <input required type="text" id="cust-address" placeholder="185 Nguyễn Gia Trí, Quận Bình Thạnh" class="w-full rounded-lg border-paper-200 bg-white focus:border-leaf-600 focus:ring-leaf-600 text-sm font-medium">
+            </div>
+            <div>
+                <label class="block text-xs font-bold text-ink-700 mb-1.5">Ghi chú đặc biệt</label>
+                <textarea rows="2" id="cust-note" placeholder="Ví dụ: Chọn quả chín vừa, chia làm hai túi..." class="w-full rounded-lg border-paper-200 bg-white focus:border-leaf-500 focus:ring-leaf-500 text-sm font-medium"></textarea>
+            </div>
+            <div class="flex justify-between items-center bg-white border border-paper-200 rounded-lg px-4 py-3">
+                <span class="text-xs font-bold text-ink-700">Tổng tiền thanh toán (COD):</span>
+                <span id="modal-subtotal" class="price-tag font-bold text-xl text-leaf-600">0đ</span>
+            </div>
+            <button type="submit" class="w-full py-3.5 bg-leaf-600 hover:bg-leaf-700 text-white font-bold rounded-xl shadow-md text-xs tracking-wider uppercase">
+                Xác nhận gửi đơn
+            </button>
+        </form>
+    </div>
+</div>
+
+<!-- Success Modal -->
+<div id="success-modal" class="fixed inset-0 bg-black/50 z-[60] hidden items-center justify-center p-4">
+    <div class="bg-white rounded-2xl w-full max-w-md shadow-softXl p-8 text-center space-y-4 border border-paper-200">
+        <div class="w-16 h-16 bg-leaf-50 text-leaf-500 rounded-full flex items-center justify-center mx-auto">
+            <i class="fa-solid fa-circle-check text-3xl"></i>
+        </div>
+        <h3 class="font-display text-2xl font-bold text-ink-900">Đặt hàng thành công!</h3>
+        <p class="text-ink-700 text-xs leading-relaxed">Hệ thống đã tiếp nhận đơn hàng của bạn. Chúng tôi sẽ gọi điện thoại xác nhận đơn sau 5 phút. Nông sản sạch sẽ được giao hỏa tốc đến bạn!</p>
+        <button onclick="closeSuccessModal()" class="w-full py-3 bg-leaf-600 text-white font-bold rounded-xl text-xs tracking-wider uppercase">Đã hiểu</button>
+    </div>
+</div>
+
+<!-- ===================== HERO SECTION ===================== -->
+<header id="home" class="relative pt-24 pb-14 md:pt-32 md:pb-24 border-b border-paper-200 overflow-hidden bg-cover bg-right md:bg-center" class="relative pt-24 pb-14 md:pt-32 md:pb-24 border-b border-paper-200 overflow-hidden bg-gradient-to-br from-leaf-50 via-paper-50/40 to-white">
+    <!-- Soft, gorgeous horizontal gradient overlay for perfect readability on the left, exposing background food details on the right -->
+    <div class="absolute inset-0 bg-gradient-to-r from-paper-50 via-paper-50/95 to-paper-50/20 md:to-transparent z-0"></div>
+    
+    <div class="max-w-7xl mx-auto px-5 lg:px-8 relative z-10">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            
+            <!-- Hero Left Side Info - Fully Redesigned for Unique App-Style Agriculture Web layout -->
+            <div class="lg:col-span-6 space-y-7 text-left">
+                <!-- Top Badges Row instead of bottom metrics -->
+                <div class="flex flex-wrap gap-2.5 justify-start">
+                    <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-leaf-50 border border-leaf-100 text-leaf-700 text-[10px] font-bold uppercase tracking-wider rounded-lg shadow-sm">
+                        <i class="fa-solid fa-bolt text-amber-500"></i> Giao siêu tốc 2H
+                    </span>
+                    <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-leaf-50 border border-leaf-100 text-leaf-700 text-[10px] font-bold uppercase tracking-wider rounded-lg shadow-sm">
+                        <i class="fa-solid fa-leaf text-emerald-500"></i> Hữu cơ & VietGAP
+                    </span>
+                    <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-leaf-50 border border-leaf-100 text-leaf-700 text-[10px] font-bold uppercase tracking-wider rounded-lg shadow-sm">
+                        <i class="fa-solid fa-truck text-sky-500"></i> Freeship từ 150k
+                    </span>
+                </div>
+
+                <!-- Bold Premium Gradient H1 -->
+                <h1 class="text-4.5xl sm:text-5xl md:text-[3.25rem] font-display font-black text-ink-900 leading-[1.12] tracking-tight">
+                    Nông sản chín cây,<br>
+                    tươi ngon thanh mát<br>
+                    <span class="bg-gradient-to-r from-leaf-600 via-emerald-600 to-teal-600 bg-clip-text text-transparent">thu hoạch tại vườn.</span>
+                </h1>
+
+                <p class="text-sm md:text-[15px] text-ink-700 leading-relaxed max-w-xl">
+                    Trái cây và nông sản hữu cơ được hái chín tự nhiên tại vườn. Chúng tôi vận chuyển bảo quản lạnh trong ngày, cam kết bao bù 1 đổi 1 nếu sượng hỏng.
+                </p>
+
+                <!-- Customer Avatars & Stars row -->
+                <div class="flex items-center gap-4 bg-white/60 border border-paper-250 p-3 rounded-2xl w-fit shadow-sm">
+                    <div class="flex -space-x-2">
+                        <img class="w-8 h-8 rounded-full border-2 border-white object-cover" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=80&q=80" alt="Avatar 1">
+                        <img class="w-8 h-8 rounded-full border-2 border-white object-cover" src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=80&q=80" alt="Avatar 2">
+                        <img class="w-8 h-8 rounded-full border-2 border-white object-cover" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=80&q=80" alt="Avatar 3">
+                    </div>
+                    <div class="text-[11px] font-bold text-ink-750">
+                        <div class="flex text-amber-500 text-[10px] gap-0.5"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                        <span class="text-ink-900 font-black">4.9/5</span> (3,100+ đánh giá thực tế)
+                    </div>
+                </div>
+
+                <!-- Custom Interactive Tags Search simulation -->
+                <div class="space-y-2 pt-2">
+                    <p class="text-[10px] font-mono tracking-widest text-ink-500 uppercase font-bold">Gợi ý hôm nay:</p>
+                    <div class="flex flex-wrap gap-1.5">
+                        <a href="#menu" class="px-3.5 py-1.5 bg-white hover:bg-leaf-50 border border-paper-250 hover:border-leaf-300 text-ink-700 text-xs font-bold rounded-xl transition-all shadow-sm">Sầu riêng Ri6</a>
+                        <a href="#menu" class="px-3.5 py-1.5 bg-white hover:bg-leaf-50 border border-paper-250 hover:border-leaf-300 text-ink-700 text-xs font-bold rounded-xl transition-all shadow-sm">Măng cụt Lái Thiêu</a>
+                        <a href="#menu" class="px-3.5 py-1.5 bg-white hover:bg-leaf-50 border border-paper-250 hover:border-leaf-300 text-ink-700 text-xs font-bold rounded-xl transition-all shadow-sm">Bơ sáp Đắk Lắk</a>
+                    </div>
+                </div>
+
+                <!-- Primary CTA Action Button -->
+                <div class="flex flex-col sm:flex-row gap-4 pt-4 items-center">
+                    <a href="#menu" class="w-full sm:w-auto px-8 py-3.5 bg-leaf-600 hover:bg-leaf-700 text-white font-bold rounded-xl transition-all shadow-md shadow-leaf-600/10 hover:shadow-leaf-600/20 text-xs tracking-wider uppercase text-center flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-circle-chevron-down text-sm"></i> Khám Phá Nông Sản Hôm Nay
+                    </a>
+                    <a href="tel:0901234567" class="text-leaf-600 hover:text-leaf-700 font-bold text-xs tracking-wider uppercase flex items-center gap-2 transition-colors">
+                        <i class="fa-solid fa-phone"></i> Hotline hỗ trợ: 0901.234.567
+                    </a>
+                </div>
+            </div>
+
+            <!-- Hero Right Side Asymmetric Collage -->
+            <div class="lg:col-span-6 flex justify-center relative">
+                <div class="relative w-full max-w-md h-[400px]">
+                    <!-- Main Large Image Card -->
+                    <div class="absolute left-4 top-4 w-[75%] aspect-[3/4] rounded-3xl overflow-hidden shadow-softLg hover:shadow-softXl hover:-translate-y-1 transition-all duration-500 border border-paper-200 z-10">
+                        <img src="/assets-muavu/hero-main.jpg" alt="Trái Cây Hữu Cơ" class="w-full h-full object-cover">
+                    </div>
+                    <!-- Secondary Small Overlapping Image Card -->
+                    <div class="absolute right-4 bottom-4 w-[50%] aspect-square rounded-3xl overflow-hidden shadow-softXl hover:shadow-soft2Xl hover:-translate-y-2 transition-all duration-500 border-4 border-white z-20">
+                        <img src="/assets-muavu/hero-detail.jpg" alt="Mùa Vụ Farm" class="w-full h-full object-cover">
+                    </div>
+                    <!-- Floating Glassmorphic Badge -->
+                    <div class="absolute left-0 bottom-12 bg-white/80 backdrop-blur-md px-5 py-3.5 rounded-2xl border border-white/40 shadow-softMd z-30 flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-full bg-leaf-100 text-leaf-600 flex items-center justify-center">
+                            <i class="fa-solid fa-certificate text-sm"></i>
+                        </div>
+                        <div>
+                            <p class="text-[10px] font-bold text-ink-550 uppercase tracking-wider">Tiêu chuẩn sạch</p>
+                            <p class="text-xs font-bold text-ink-900">VietGAP &amp; Hữu Cơ</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Video Overlay -->
+                <div id="video-overlay" class="fixed inset-0 bg-black/80 z-50 hidden flex items-center justify-center p-4" onclick="closeVideoPlayer()">
+                    <div class="relative w-full max-w-3xl aspect-video bg-black rounded-2xl overflow-hidden shadow-2xl" onclick="event.stopPropagation()">
+                        <iframe id="video-iframe" class="w-full h-full" src="" title="Video Chân Gà Cô Ba" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                        <button onclick="closeVideoPlayer()" class="absolute top-4 right-4 bg-white/20 hover:bg-white/40 text-white rounded-full p-2 transition-colors">
+                            <i class="fa-solid fa-xmark text-lg"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</header>
+
+<!-- ===================== TRUST MARQUEE ===================== -->
+<div class="bg-leaf-600 text-white py-3 overflow-hidden select-none border-b border-leaf-700">
+    <div class="flex whitespace-nowrap marquee-track w-max text-[11px] font-bold tracking-wider uppercase">
+        <div class="flex items-center gap-10 pr-10">
+            <span><i class="fa-solid fa-check text-gold-300 mr-2"></i>Nông sản sạch thu hoạch tận vườn trong ngày</span>
+            <span><i class="fa-solid fa-check text-gold-300 mr-2"></i>Tuyệt đối không hóa chất bảo quản, không chín ép</span>
+            <span><i class="fa-solid fa-check text-gold-300 mr-2"></i>Đạt chuẩn VietGAP và hữu cơ tự nhiên</span>
+            <span><i class="fa-solid fa-check text-gold-300 mr-2"></i>Giao hỏa tốc lạnh giữ tươi trong 2 giờ</span>
+            <span><i class="fa-solid fa-check text-gold-300 mr-2"></i>Đổi trả miễn phí 100% nếu không tươi ngon</span>
+        </div>
+        <div class="flex items-center gap-10 pr-10" aria-hidden="true">
+            <span><i class="fa-solid fa-check text-gold-300 mr-2"></i>Nông sản sạch thu hoạch tận vườn trong ngày</span>
+            <span><i class="fa-solid fa-check text-gold-300 mr-2"></i>Tuyệt đối không hóa chất bảo quản, không chín ép</span>
+            <span><i class="fa-solid fa-check text-gold-300 mr-2"></i>Đạt chuẩn VietGAP và hữu cơ tự nhiên</span>
+            <span><i class="fa-solid fa-check text-gold-300 mr-2"></i>Giao hỏa tốc lạnh giữ tươi trong 2 giờ</span>
+            <span><i class="fa-solid fa-check text-gold-300 mr-2"></i>Đổi trả miễn phí 100% nếu không tươi ngon</span>
+        </div>
+    </div>
+</div>
+
+<!-- ===================== CAM KẾT CHẤT LƯỢNG ===================== -->
+<section id="cam-ket" class="py-20 bg-paper-100 border-b border-paper-200">
+    <div class="max-w-7xl mx-auto px-5 lg:px-8">
+        <div class="text-center max-w-2xl mx-auto mb-16 space-y-2">
+            <span class="text-xs font-mono font-bold tracking-widest text-leaf-600 uppercase">Vì sao chọn Nông Sản Mùa Vụ</span>
+            <h2 class="text-3xl font-display font-black text-ink-900 tracking-tight">Ba tiêu chí vàng tạo nên chất lượng</h2>
+            <div class="w-12 h-0.5 bg-leaf-600 mx-auto mt-2"></div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Box 1 -->
+            <div class="p-6 bg-white rounded-2xl shadow-soft hover:shadow-softMd hover:-translate-y-0.5 transition-all duration-300 flex flex-col justify-between border border-paper-200">
+                <div>
+                    <img src="/assets-muavu/cam-ket-1.jpg" alt="Trái Cây Chín Tự Nhiên" class="w-full h-40 object-cover rounded-xl border border-paper-100 mb-4">
+                    <h3 class="text-lg font-display font-bold text-ink-900">Nông Sản Chín Cây Tự Nhiên</h3>
+                    <p class="mt-2 text-[13px] text-ink-700 leading-relaxed font-medium">
+                        Nhập trực tiếp nông sản thu hoạch chín tự nhiên tại vườn VietGAP mỗi sáng sớm. Tuyệt đối nói không với hóa chất chín ép độc hại gây hại sức khỏe.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Box 2 -->
+            <div class="p-6 bg-white rounded-2xl shadow-soft hover:shadow-softMd hover:-translate-y-0.5 transition-all duration-300 flex flex-col justify-between border border-paper-200">
+                <div>
+                    <img src="/assets-muavu/cam-ket-2.jpg" alt="Đạt Chuẩn Hữu Cơ" class="w-full h-40 object-cover rounded-xl border border-paper-100 mb-4">
+                    <h3 class="text-lg font-display font-bold text-ink-900">Đạt Chuẩn Hữu Cơ 100%</h3>
+                    <p class="mt-2 text-[13px] text-ink-700 leading-relaxed font-medium">
+                        Quy trình canh tác hoàn toàn tự nhiên, không sử dụng phân bón hóa chất hay thuốc trừ sâu hóa học độc hại. Mang lại nguồn nông sản an lành tinh khiết nhất.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Box 3 -->
+            <div class="p-6 bg-white rounded-2xl shadow-soft hover:shadow-softMd hover:-translate-y-0.5 transition-all duration-300 flex flex-col justify-between border border-paper-200">
+                <div>
+                    <img src="/assets-muavu/cam-ket-3.jpg" alt="Đóng Gói Bảo Quản Sạch" class="w-full h-40 object-cover rounded-xl border border-paper-100 mb-4">
+                    <h3 class="text-lg font-display font-bold text-ink-900">Cam Kết Sạch An Toàn</h3>
+                    <p class="mt-2 text-[13px] text-ink-700 leading-relaxed font-medium">
+                        Nông sản sau thu hoạch được phân loại nghiêm ngặt, đóng gói hộp sinh học bảo vệ môi trường và giao hỏa tốc giữ lạnh để duy trì độ tươi ngon mát mát.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===================== THỰC ĐƠN ĐẶC SẢN ===================== -->
+<section id="menu" class="py-20 bg-white border-b border-paper-200">
+    <div class="max-w-7xl mx-auto px-5 lg:px-8">
+        <div class="text-center max-w-2xl mx-auto mb-16 space-y-2">
+            <span class="text-xs font-mono font-bold tracking-widest text-leaf-600 uppercase">DANH MỤC SẢN PHẨM</span>
+            <h2 class="text-3xl font-display font-black text-ink-900">Nông sản sạch thu hoạch hôm nay</h2>
+            <div class="w-12 h-0.5 bg-leaf-600 mx-auto mt-2"></div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+            
+            <!-- Large Card (Best Seller) -->
+            <div class="lg:col-span-5 bg-paper-50 border border-paper-200 rounded-2xl shadow-soft flex flex-col justify-between overflow-hidden hover:shadow-softMd transition-shadow duration-300">
+                <div class="relative aspect-[4/3] overflow-hidden bg-paper-100">
+                    <img src="/assets-muavu/product-durian.jpg" alt="Sầu Riêng Ri6 Chín Cây" class="w-full h-full object-cover">
+                    <span class="absolute top-4 left-4 bg-leaf-600 text-white font-mono text-[9px] font-bold px-3 py-1.5 rounded shadow">BÁN CHẠY NHẤT</span>
+                </div>
+                <div class="p-6 flex-1 flex flex-col justify-between space-y-6 bg-white">
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-baseline gap-3">
+                            <h3 class="font-display text-2xl font-bold text-ink-900">Sầu Riêng Ri6 Chín Cây</h3>
+                            <span class="price-tag font-bold text-xl text-leaf-600">120.000đ</span>
+                        </div>
+                        <p class="text-[13px] text-ink-700 leading-relaxed font-medium">
+                            Sầu riêng Ri6 cơm vàng hạt lép dẻo béo đậm đà, được hái chín tự nhiên từ vườn Đắk Lắk. Tách múi sẵn đóng hộp giấy kraft sạch sẽ vệ sinh bảo quản lạnh tối ưu.
+                        </p>
+                    </div>
+                    <button onclick="addToCart('Sầu Riêng Ri6 Chín Cây', 120000, '/assets-muavu/product-durian.jpg')" class="w-full py-3.5 bg-leaf-600 hover:bg-leaf-700 text-white font-bold rounded-xl transition-all text-xs tracking-wider uppercase flex items-center justify-center gap-2 shadow-sm shadow-leaf-600/10">
+                        <i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ hàng
+                    </button>
+                </div>
+            </div>
+
+            <!-- Right list of 3 items -->
+            <div class="lg:col-span-7 flex flex-col gap-6">
+                <!-- Combo Thập Cẩm -->
+                <div class="bg-white border border-paper-200 rounded-2xl p-5 flex flex-col sm:flex-row gap-5 items-center hover:border-paper-300 transition-colors shadow-soft">
+                    <img src="/assets-muavu/product-basket.jpg" alt="Giỏ Trái Cây Mùa Vụ" class="w-28 h-28 object-cover rounded-xl border border-paper-100 flex-shrink-0">
+                    <div class="flex-1 flex flex-col justify-between space-y-4 w-full">
+                        <div class="flex justify-between items-start gap-3">
+                            <div>
+                                <span class="bg-leaf-50 text-leaf-600 text-[9px] font-bold px-2 py-0.5 rounded tracking-wide font-mono">COMBO GIA ĐÌNH</span>
+                                <h3 class="font-display text-lg font-bold text-ink-900 mt-1">Giỏ Trái Cây Mùa Vụ (Thập Cẩm)</h3>
+                            </div>
+                            <span class="price-tag font-bold text-lg text-ink-900">150.000đ</span>
+                        </div>
+                        <p class="text-xs text-ink-700 font-medium leading-relaxed">Combo giỏ hoa quả tươi chuẩn hữu cơ cực sang xịn mịn: gồm măng cụt ngọt thanh, bơ sáp chín mềm bùi, sầu riêng cơm dẻo và cam sành mọng nước.</p>
+                        <div class="flex justify-between items-center pt-1">
+                            <span class="text-[10px] text-ink-500 font-bold uppercase">Giỏ lớn 1.5kg &middot; Đủ cho 3-4 người ăn</span>
+                            <button onclick="addToCart('Giỏ Trái Cây Mùa Vụ (Thập Cẩm)', 150000, '/assets-muavu/product-basket.jpg')" class="px-4 py-2 bg-leaf-600 hover:bg-leaf-700 text-white font-bold rounded-xl text-xs transition-colors">
+                                + Thêm
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 2 & 3 side by side grid -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <!-- Product 2: Bơ Sáp -->
+                    <div class="bg-white border border-paper-200 rounded-2xl p-5 flex flex-col justify-between space-y-4 hover:border-paper-300 transition-colors shadow-soft">
+                        <div class="rounded-xl overflow-hidden h-32 border border-paper-100">
+                            <img src="/assets-muavu/product-avocado.jpg" alt="Bơ Sáp Đắk Lắk" class="w-full h-full object-cover">
+                        </div>
+                        <div class="space-y-1">
+                            <div class="flex justify-between items-baseline gap-2">
+                                <h3 class="font-display font-bold text-ink-900 text-base">Bơ Sáp Đắk Lắk Dẻo Bùi</h3>
+                                <span class="price-tag font-bold text-sm text-leaf-600">45.000đ</span>
+                            </div>
+                            <p class="text-[11px] text-ink-700 leading-relaxed font-medium">Bơ sáp loại 1 quả to tròn, cơm bơ dày vàng ươm, dẻo bùi cực ngậy đậm đà. Phù hợp dầm sữa đá hoặc làm sinh tố bổ dưỡng.</p>
+                        </div>
+                        <button onclick="addToCart('Bơ Sáp Đắk Lắk Dẻo Bùi', 45000, '/assets-muavu/product-avocado.jpg')" class="w-full py-2 bg-leaf-600 hover:bg-leaf-700 text-white font-bold rounded-xl text-xs transition-colors">
+                            + Thêm vào giỏ
+                        </button>
+                    </div>
+
+                    <!-- Product 3: Măng Cụt -->
+                    <div class="bg-white border border-paper-200 rounded-2xl p-5 flex flex-col justify-between space-y-4 hover:border-paper-300 transition-colors shadow-soft">
+                        <div class="rounded-xl overflow-hidden h-32 border border-paper-100">
+                            <img src="/assets-muavu/product-mangosteen.jpg" alt="Măng Cụt Lái Thiêu" class="w-full h-full object-cover">
+                        </div>
+                        <div class="space-y-1">
+                            <div class="flex justify-between items-baseline gap-2">
+                                <h3 class="font-display font-bold text-ink-900 text-base">Măng Cụt Lái Thiêu Cấp 1</h3>
+                                <span class="price-tag font-bold text-sm text-leaf-600">85.000đ</span>
+                            </div>
+                            <p class="text-[11px] text-ink-700 leading-relaxed font-medium">Nữ hoàng trái cây mọng nước, vị ngọt thanh mát, cùi trắng ngần nhiều múi dày. Cam kết hái tươi chín tự nhiên không hóa chất chích ép chín nhanh.</p>
+                        </div>
+                        <button onclick="addToCart('Măng Cụt Lái Thiêu Cấp 1', 85000, '/assets-muavu/product-mangosteen.jpg')" class="w-full py-2 bg-leaf-600 hover:bg-leaf-700 text-white font-bold rounded-xl text-xs transition-colors">
+                            + Thêm vào giỏ
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===================== INTERACTIVE LAI RAI CALCULATOR ===================== -->
+<section class="py-20 bg-paper-100 border-b border-paper-200">
+    <div class="max-w-7xl mx-auto px-5 lg:px-8 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        <!-- Text intro -->
+        <div class="lg:col-span-6 space-y-6">
+            <span class="text-xs font-mono font-bold tracking-widest text-leaf-600 uppercase">TIỆN ÍCH CHO BẠN</span>
+            <h2 class="text-3xl sm:text-4xl font-display font-black text-ink-900">Tính toán định lượng nông sản chuẩn nhất</h2>
+            <div class="w-12 h-0.5 bg-leaf-600"></div>
+            <p class="text-sm text-ink-700 leading-relaxed font-medium">
+                Bạn phân vân chưa biết nhóm gia đình hay văn phòng bao nhiêu người thì nên đặt mua bao nhiêu kg trái cây/nông sản cho vừa miệng và chuẩn ngân sách nhất? 
+            </p>
+            <p class="text-sm text-ink-700 leading-relaxed font-medium">
+                Dùng thanh kéo trượt dưới để chọn số lượng người ăn thử, hệ thống lập tức định lượng combo tối ưu kèm giá tiền giao tận nhà để bạn chốt đơn dễ dàng nhất.
+            </p>
+        </div>
+
+        <!-- Calculator Card Box -->
+        <div class="lg:col-span-6">
+            <div class="bg-white rounded-2xl p-6 shadow-softLg max-w-md mx-auto space-y-5 border border-paper-200">
+                <h3 class="font-display text-xl font-bold text-leaf-600 flex items-center gap-2 border-b border-paper-100 pb-3">
+                    <i class="fa-solid fa-calculator"></i> Phiếu định lượng Mùa Vụ
+                </h3>
+                <div class="space-y-4">
+                    <div>
+                        <div class="flex justify-between items-center text-xs font-bold text-ink-700 uppercase mb-2">
+                            <span>Số lượng người ăn:</span>
+                            <span id="calc-people-val" class="font-mono text-leaf-600 text-sm">2 người ăn</span>
+                        </div>
+                        <input type="range" id="calc-people" min="1" max="8" value="2" oninput="updateCalculator()" class="w-full h-2 bg-paper-100 rounded-lg appearance-none cursor-pointer">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-ink-700 uppercase tracking-wider mb-2">Loại nông sản ưa thích</label>
+                        <select id="calc-dish" onchange="updateCalculator()" class="w-full rounded-xl border-paper-200 bg-white focus:border-leaf-500 focus:ring-leaf-500 text-sm font-medium">
+                            <option value="120000">Sầu Riêng Ri6 Chín Cây (120k/hộp)</option>
+                            <option value="150000">Giỏ Trái Cây Mùa Vụ (Thập Cẩm) (150k/giỏ)</option>
+                            <option value="45000">Bơ Sáp Đắk Lắk Dẻo Bùi (45k/kg)</option>
+                            <option value="85000">Măng Cụt Lái Thiêu Cấp 1 (85k/kg)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="border-t border-dashed border-paper-200 pt-4">
+                        <div class="bg-paper-50 rounded-xl p-4 space-y-2 border border-paper-100">
+                            <p class="text-[10px] font-bold text-ink-400 uppercase tracking-wider">Nông sản Mùa Vụ đề xuất:</p>
+                            <p id="calc-recommendation" class="text-xs text-ink-900 font-bold leading-relaxed">1 Hộp Sầu Riêng Ri6 Chín Cây thơm ngon ngọt ngậy</p>
+                            <div class="flex justify-between items-baseline pt-2 border-t border-dashed border-paper-200">
+                                <span class="text-xs font-bold text-ink-700">Tổng chi phí dự tính:</span>
+                                <span id="calc-total" class="price-tag font-bold text-lg text-leaf-600">120.000đ</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button onclick="addCalculatorToCart()" class="w-full py-3 bg-leaf-600 hover:bg-leaf-700 text-white font-bold rounded-xl text-xs tracking-wider uppercase flex items-center justify-center gap-2 transition-all shadow-md shadow-leaf-600/10">
+                        <i class="fa-solid fa-basket-shopping"></i> Thêm combo này vào giỏ mua hàng
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===================== BÍ QUYẾT NƯỚC SỐT ===================== -->
+<section id="bi-quyet" class="py-20 bg-white border-b border-paper-200">
+    <div class="max-w-7xl mx-auto px-5 lg:px-8 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        
+        <!-- Left Text info -->
+        <div class="lg:col-span-5 space-y-5">
+            <span class="text-xs font-mono font-bold tracking-widest text-leaf-600 uppercase">Bí quyết hương vị</span>
+            <h2 class="text-3xl sm:text-4xl font-display font-black text-ink-900 leading-tight">
+                Xuất xứ nông sản<br>
+                <span class="text-leaf-600 italic">vườn chuẩn VietGAP</span>
+            </h2>
+            <div class="w-12 h-0.5 bg-leaf-600 mt-2"></div>
+            <p class="text-[13px] text-ink-700 leading-relaxed font-medium">
+                Vị ngọt lành tự nhiên nguyên bản từ nông sản hái chín cây trực tiếp tại vườn sạch liên kết vùng, đóng gói hộp thân thiện môi trường và vận chuyển bảo quản ở nhiệt độ mát mẻ.
+            </p>
+            <p class="text-[13px] text-ink-700 leading-relaxed font-medium">
+                Di chuột qua các vòng tròn phát sáng trên đĩa trái cây hoặc nhấn danh sách dưới để khám phá nguồn gốc vùng cung cấp.
+            </p>
+            <div class="bg-paper-50 p-3 rounded-2xl overflow-hidden max-w-sm hidden sm:block border border-paper-200">
+                <img src="/assets-muavu/cam-ket-2.jpg" alt="Nông sản thu hoạch bảo quản lạnh" class="w-full h-32 object-cover rounded-xl">
+                <div class="pt-2 text-center text-[10px] font-mono text-ink-500 font-semibold">Giỏ trái cây vừa được đóng gói hoàn tất</div>
+            </div>
+        </div>
+
+        <!-- Right Hotspot Graphic layout -->
+        <div class="lg:col-span-7 flex flex-col items-center justify-center relative select-none">
+            <!-- Central circular dish with hotspots positioned relative -->
+            <div class="relative w-80 h-80 rounded-full bg-white shadow-softLg p-3 flex items-center justify-center border border-paper-100">
+                <img src="/assets-muavu/product-durian.jpg" alt="Chân gà trộn sả tắc" class="w-full h-full object-cover rounded-full">
+                
+                <!-- Hotspot 1: Durian -->
+                <button onmouseover="revealIngredientById('durian-btn', 'Sầu Riêng Đắk Lắk', 'Đắk Lắk - Vùng đất nổi tiếng trồng sầu riêng Ri6 hạt lép thơm béo chuẩn vị nhất.')" class="absolute top-[28%] left-[32%] w-8 h-8 rounded-full bg-leaf-500 text-white flex items-center justify-center shadow-md hotspot-pulse ing-hotspot" id="durian-btn">
+                    <i class="fa-solid fa-leaf text-xs"></i>
+                </button>
+                <!-- Hotspot 2: Mangosteen -->
+                <button onmouseover="revealIngredientById('lime-btn', 'Măng Cụt Lái Thiêu', 'Lái Thiêu - Nơi hội tụ các vườn măng cụt lâu năm cho quả ngọt thanh thanh ngọt mọng nước.')" class="absolute bottom-[28%] right-[32%] w-8 h-8 rounded-full bg-leaf-500 text-white flex items-center justify-center shadow-md hotspot-pulse ing-hotspot" id="lime-btn">
+                    <i class="fa-solid fa-circle text-[6px]"></i>
+                </button>
+                <!-- Hotspot 3: Cam -->
+                <button onmouseover="revealIngredientById('garlic-btn', 'Cam Sành Hàm Yên', 'Hàm Yên - Thung lũng cam sành trĩu quả cho nước cam đậm đà ngọt mát tự nhiên.')" class="absolute top-[28%] right-[28%] w-8 h-8 rounded-full bg-leaf-500 text-white flex items-center justify-center shadow-md hotspot-pulse ing-hotspot" id="garlic-btn">
+                    <i class="fa-solid fa-seedling text-xs"></i>
+                </button>
+                <!-- Hotspot 4: Bo -->
+                <button onmouseover="revealIngredientById('lemongrass-btn', 'Bơ Sáp Đắk Nông', 'Đắk Nông - Cao nguyên đất đỏ thích hợp trồng giống bơ sáp béo ngậy dẻo thơm.')" class="absolute bottom-[28%] left-[28%] w-8 h-8 rounded-full bg-leaf-500 text-white flex items-center justify-center shadow-md hotspot-pulse ing-hotspot" id="lemongrass-btn">
+                    <i class="fa-solid fa-tree text-xs"></i>
+                </button>
+            </div>
+
+            <!-- List select buttons -->
+            <div class="flex flex-wrap justify-center gap-2.5 mt-8 w-full">
+                <button onclick="revealIngredient(this,'Sầu Riêng Đắk Lắk', 'Đắk Lắk - Vùng đất đỏ nổi tiếng trồng sầu riêng Ri6 hạt lép thơm béo chuẩn vị nhất.')" class="ing-btn px-4 py-2 bg-leaf-600 text-white rounded-xl border border-paper-250 font-bold text-xs tracking-wide transition-all shadow-sm">Sầu Riêng Đắk Lắk</button>
+                <button onclick="revealIngredient(this,'Măng Cụt Lái Thiêu', 'Lái Thiêu - Nơi hội tụ các vườn măng cụt lâu năm cho quả ngọt thanh thanh ngọt mọng nước.')" class="ing-btn px-4 py-2 bg-white hover:bg-leaf-600 hover:text-white rounded-xl border border-paper-200 font-bold text-xs text-ink-700 transition-all shadow-sm">Măng Cụt Lái Thiêu</button>
+                <button onclick="revealIngredient(this,'Cam Sành Hàm Yên', 'Hàm Yên - Thung lũng cam sành trĩu quả cho nước cam đậm đà ngọt mát tự nhiên.')" class="ing-btn px-4 py-2 bg-white hover:bg-leaf-600 hover:text-white rounded-xl border border-paper-200 font-bold text-xs text-ink-700 transition-all shadow-sm">Cam Sành Hàm Yên</button>
+                <button onclick="revealIngredient(this,'Bơ Sáp Đắk Nông', 'Đắk Nông - Cao nguyên đất đỏ thích hợp trồng giống bơ sáp béo ngậy dẻo thơm.')" class="ing-btn px-4 py-2 bg-white hover:bg-leaf-600 hover:text-white rounded-xl border border-paper-200 font-bold text-xs text-ink-700 transition-all shadow-sm">Bơ Sáp Đắk Nông</button>
+            </div>
+
+            <!-- Details label card -->
+            <div class="mt-8 bg-paper-50 rounded-2xl p-6 w-full max-w-md shadow-soft border border-paper-200 select-text">
+                <h4 id="ing-title" class="font-display font-bold text-sm text-leaf-600 mb-1.5 border-b border-paper-100 pb-1.5">Ớt Chỉ Thiên Đỏ</h4>
+                <p id="ing-desc" class="text-xs text-ink-700 leading-relaxed font-medium">Ớt hiểm chín cây, phơi tự nhiên rồi giã tay — giữ vị cay gắt, ấm bụng chứ không cay gắt cổ họng.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===================== QUY TRÌNH THU HOẠCH ===================== -->
+<section id="process" class="py-20 bg-ink-900 text-paper-100">
+    <div class="max-w-7xl mx-auto px-5 lg:px-8">
+        <div class="text-center max-w-2xl mx-auto mb-16 space-y-2">
+            <span class="text-xs font-mono font-bold tracking-widest text-gold-300 uppercase">Quy trình chuyên nghiệp</span>
+            <h2 class="text-3xl font-display font-bold text-white">Quy trình 4 bước từ vườn tới bàn ăn</h2>
+            <div class="w-12 h-0.5 bg-gold-300 mx-auto mt-2"></div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            <!-- Step 1 -->
+            <div class="space-y-4 text-center group">
+                <div class="w-24 h-24 rounded-full mx-auto p-1 bg-white/5 border border-white/10 shadow-md relative overflow-hidden transition-transform duration-300 group-hover:scale-105">
+                    <img src="https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&fit=crop&w=150&q=80" alt="Thu hoạch" class="w-full h-full object-cover rounded-full">
+                    <span class="absolute top-0 left-0 w-7 h-7 bg-leaf-600 text-white rounded-full flex items-center justify-center font-bold text-xs shadow">1</span>
+                </div>
+                <h3 class="font-display font-bold text-gold-300 text-base">Hái Chín Tại Vườn</h3>
+                <p class="text-[11px] text-white/50 leading-relaxed max-w-[180px] mx-auto">Hoa quả được thu hoạch đúng độ chín tự nhiên trên cây vào sáng sớm.</p>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="space-y-4 text-center group">
+                <div class="w-24 h-24 rounded-full mx-auto p-1 bg-white/5 border border-white/10 shadow-md relative overflow-hidden transition-transform duration-300 group-hover:scale-105">
+                    <img src="/assets-muavu/ingredients-flatlay.jpg" alt="Phân loại" class="w-full h-full object-cover rounded-full">
+                    <span class="absolute top-0 left-0 w-7 h-7 bg-leaf-600 text-white rounded-full flex items-center justify-center font-bold text-xs shadow">2</span>
+                </div>
+                <h3 class="font-display font-bold text-gold-300 text-base">Phân Loại Kiểm Định</h3>
+                <p class="text-[11px] text-white/50 leading-relaxed max-w-[180px] mx-auto">Loại bỏ những quả lỗi hỏng, đạt chuẩn kích thước VietGAP hữu cơ.</p>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="space-y-4 text-center group">
+                <div class="w-24 h-24 rounded-full mx-auto p-1 bg-white/5 border border-white/10 shadow-md relative overflow-hidden transition-transform duration-300 group-hover:scale-105">
+                    <img src="/assets-muavu/product-durian.jpg" alt="Khử trùng" class="w-full h-full object-cover rounded-full">
+                    <span class="absolute top-0 left-0 w-7 h-7 bg-leaf-600 text-white rounded-full flex items-center justify-center font-bold text-xs shadow">3</span>
+                </div>
+                <h3 class="font-display font-bold text-gold-300 text-base">Sát Khuẩn Vệ Sinh</h3>
+                <p class="text-[11px] text-white/50 leading-relaxed max-w-[180px] mx-auto">Rửa bằng nước ngâm ozone khử khuẩn, làm khô bằng khí mát sạch.</p>
+            </div>
+
+            <!-- Step 4 -->
+            <div class="space-y-4 text-center group">
+                <div class="w-24 h-24 rounded-full mx-auto p-1 bg-white/5 border border-white/10 shadow-md relative overflow-hidden transition-transform duration-300 group-hover:scale-105">
+                    <img src="/assets-muavu/cam-ket-3.jpg" alt="Đóng gói lạnh" class="w-full h-full object-cover rounded-full">
+                    <span class="absolute top-0 left-0 w-7 h-7 bg-leaf-600 text-white rounded-full flex items-center justify-center font-bold text-xs shadow">4</span>
+                </div>
+                <h3 class="font-display font-bold text-gold-300 text-base">Đóng Gói Bảo Quản Lạnh</h3>
+                <p class="text-[11px] text-white/50 leading-relaxed max-w-[180px] mx-auto">Đóng hộp sinh học tự hủy và bảo quản lạnh ở nhiệt độ chuẩn 8-12°C.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===================== ĐÁNH GIÁ KHÁCH HÀNG ===================== -->
+<section id="danh-gia" class="py-20 bg-paper-100 border-b border-paper-200">
+    <div class="max-w-7xl mx-auto px-5 lg:px-8">
+        <div class="text-center max-w-2xl mx-auto mb-16 space-y-2">
+            <span class="text-xs font-mono font-bold tracking-widest text-leaf-600 uppercase">CỘNG ĐỒNG TIN DÙNG</span>
+            <h2 class="text-3xl font-display font-black text-ink-900">Được yêu thích bởi người tiêu dùng</h2>
+            <div class="flex items-center justify-center gap-1.5 text-amber-500 pt-1 text-xs font-bold">
+                <div class="flex gap-0.5"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i></div>
+                <span class="text-ink-700 ml-1">4.9/5 trên 860+ phản hồi khách hàng</span>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Review 1 -->
+            <div class="bg-white rounded-2xl overflow-hidden flex flex-col justify-between shadow-soft hover:shadow-softMd transition-shadow border border-paper-250">
+                <img src="https://images.unsplash.com/photo-1543007630-9710e4a00a20?auto=format&fit=crop&w=400&q=80" alt="Trái cây gia đình ăn" class="w-full h-40 object-cover border-b border-paper-100">
+                <div class="p-5 flex-1 flex flex-col justify-between">
+                    <div>
+                        <div class="flex text-amber-500 text-xs mb-2.5"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                        <p class="text-[12px] text-ink-700 leading-relaxed italic">
+                            "Nhà mình cực kỳ kỹ tính chuyện mua quả chích thuốc chín ép hại dạ dày trẻ nhỏ. Mua sầu riêng và măng cụt ở Mùa Vụ thấy chín tự nhiên, múi thơm lừng và ngọt bùi nguyên bản. Rất yên tâm!"
+                        </p>
+                    </div>
+                    <div class="border-t border-paper-100 pt-3 mt-4 flex items-center gap-3">
+                        <div class="w-7 h-7 rounded-full bg-leaf-50 text-leaf-600 flex items-center justify-center font-display font-bold text-xs">H</div>
+                        <span class="font-display font-bold text-xs text-ink-900">Chị Khánh Hà &middot; Quận 10</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Review 2 -->
+            <div class="bg-white rounded-2xl overflow-hidden flex flex-col justify-between shadow-soft hover:shadow-softMd transition-shadow border border-paper-250">
+                <img src="https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&w=400&q=80" alt="Ăn quả tại văn phòng" class="w-full h-40 object-cover border-b border-paper-100">
+                <div class="p-5 flex-1 flex flex-col justify-between">
+                    <div>
+                        <div class="flex text-amber-500 text-xs mb-2.5"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                        <p class="text-[12px] text-ink-700 leading-relaxed italic">
+                            "Giờ chiều thèm ăn hoa quả giải nhiệt đặt combo giỏ thập cẩm, đúng 2 tiếng ship hỏa tốc tươi giòn mát lạnh giao tới phòng làm việc luôn. Hộp sinh học đóng gói lịch sự và sạch sẽ."
+                        </p>
+                    </div>
+                    <div class="border-t border-paper-100 pt-3 mt-4 flex items-center gap-3">
+                        <div class="w-7 h-7 rounded-full bg-leaf-50 text-leaf-600 flex items-center justify-center font-display font-bold text-xs">T</div>
+                        <span class="font-display font-bold text-xs text-ink-900">Thùy Trang &middot; Quận Bình Thạnh</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Review 3 -->
+            <div class="bg-white rounded-2xl overflow-hidden flex flex-col justify-between shadow-soft hover:shadow-softMd transition-shadow border border-paper-250">
+                <img src="https://images.unsplash.com/photo-1581092921461-eab62e97a780?auto=format&fit=crop&w=400&q=80" alt="Mẹt hoa quả tươi" class="w-full h-40 object-cover border-b border-paper-100">
+                <div class="p-5 flex-1 flex flex-col justify-between">
+                    <div>
+                        <div class="flex text-amber-500 text-xs mb-2.5"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i></div>
+                        <p class="text-[12px] text-ink-700 leading-relaxed italic">
+                            "Cuối tuần nhà tụ họp gọi 1 mẹt hoa quả thập cẩm lớn. Các loại cam, bơ sáp và măng cụt chín đều rất ngọt thơm. Giao hàng hỏa tốc đóng gói chống dập nát rất cẩn thận."
+                        </p>
+                    </div>
+                    <div class="border-t border-paper-100 pt-3 mt-4 flex items-center gap-3">
+                        <div class="w-7 h-7 rounded-full bg-amber-50 text-amber-600 flex items-center justify-center font-display font-bold text-xs">M</div>
+                        <span class="font-display font-bold text-xs text-ink-900">Minh Hoàng &middot; Quận 1</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===================== HỎI ĐÁP FAQ ===================== -->
+<section id="faq" class="py-20 bg-white border-b border-paper-200">
+    <div class="max-w-3xl mx-auto px-5 lg:px-8">
+        <div class="text-center mb-12 space-y-2">
+            <span class="text-xs font-mono font-bold tracking-widest text-leaf-600 uppercase">HỎI ĐÁP THƯỜNG GẶP</span>
+            <h2 class="text-3xl font-display font-black text-ink-900">Giải đáp thắc mắc khách hàng</h2>
+        </div>
+        <div class="space-y-3">
+            <details class="bg-paper-50 border border-paper-200 rounded-xl p-5 group" open>
+                <summary class="flex justify-between items-center font-bold text-sm text-ink-900 select-none">
+                    Làm sao để đảm bảo trái cây không chứa chất bảo quản?
+                    <i class="fa-solid fa-plus faq-icon transition-transform text-leaf-600"></i>
+                </summary>
+                <p class="text-[13px] text-ink-700 leading-relaxed mt-3 font-medium">
+                    Tất cả sản phẩm nông sản Mùa Vụ đều thu hoạch tại vườn liên kết tiêu chuẩn hữu cơ và VietGAP, vận chuyển lạnh trực tiếp trong ngày mà không qua bất kỳ khâu xử lý hay tẩm ướp hóa chất bảo quản nào.
+                </p>
+            </details>
+            <details class="bg-paper-50 border border-paper-200 rounded-xl p-5 group">
+                <summary class="flex justify-between items-center font-bold text-sm text-ink-900 select-none">
+                    Tôi có thể yêu cầu chọn độ chín của sầu riêng hay bơ sáp được không?
+                    <i class="fa-solid fa-plus faq-icon transition-transform text-leaf-600"></i>
+                </summary>
+                <p class="text-[13px] text-ink-700 leading-relaxed mt-3 font-medium">
+                    Hoàn toàn được! Khi điền thông tin đơn hàng, tại mục "Ghi chú đặc biệt", bạn hãy ghi rõ yêu cầu như "Ăn ngay", "Chín sau 1-2 ngày" hay "Chọn quả chín héo cơm dẻo", nhân viên lựa hàng tại kho sẽ chọn đúng ý bạn.
+                </p>
+            </details>
+            <details class="bg-paper-50 border border-paper-200 rounded-xl p-5 group">
+                <summary class="flex justify-between items-center font-bold text-sm text-ink-900 select-none">
+                    Chính sách đổi trả hàng không đạt độ tươi ngon như thế nào?
+                    <i class="fa-solid fa-plus faq-icon transition-transform text-leaf-600"></i>
+                </summary>
+                <p class="text-[13px] text-ink-700 leading-relaxed mt-3 font-medium">
+                    Nông Sản Mùa Vụ cam kết bao bù 1 đổi 1 miễn phí hoàn toàn hoặc hoàn tiền 100% trong vòng 24 giờ nếu nông sản bị sượng, dập nát, thối hỏng do quá trình thu hoạch hay vận chuyển không đạt chuẩn chất lượng.
+                </p>
+            </details>
+        </div>
+    </div>
+</section>
+
+<!-- ===================== ĐẶT HÀNG NGAY CTA ===================== -->
+<section class="bg-leaf-600 py-16 text-white text-center">
+    <div class="max-w-4xl mx-auto px-5 space-y-5">
+        <h2 class="font-display text-3xl sm:text-4.5xl font-black leading-tight">
+            Thèm hương vị chín cây tự nhiên thanh ngọt?<br>
+            <span class="text-gold-300 font-normal italic">Mùa Vụ giao hỏa tốc giữ tươi lạnh trong 2 giờ.</span>
+        </h2>
+        <p class="text-xs font-mono tracking-widest text-leaf-100 uppercase">ĐẶT TRƯỚC 11H ĐỂ ĐẢM BẢO CÓ HOA QUẢ THU HOẠCH MỚI TRONG NGÀY</p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center pt-2">
+            <a href="#menu" class="px-8 py-3.5 bg-white text-leaf-700 font-bold rounded-xl shadow-md text-xs tracking-wider uppercase">
+                Xem nông sản hôm nay
+            </a>
+            <a href="tel:0901234567" class="px-8 py-3.5 border border-white hover:bg-white/10 text-white font-bold rounded-xl text-xs tracking-wider uppercase">
+                GỌI ĐẶT: 0901.234.567
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="bg-ink-900 text-paper-100 py-16 pb-24 md:pb-16">
+    <div class="max-w-7xl mx-auto px-5 lg:px-8 grid grid-cols-1 md:grid-cols-12 gap-10">
+        <div class="md:col-span-4 space-y-4">
+            <div class="flex items-center gap-3">
+                <img src="/images/logo.png" alt="Logo Nông Sản Mùa Vụ" class="w-10 h-10 rounded-full object-cover shadow-sm border border-white/10">
+                <span class="text-lg font-display font-bold text-white">Nông Sản Mùa Vụ</span>
+            </div>
+            <p class="text-[11px] text-paper-300/60 leading-relaxed max-w-sm font-medium">
+                Nông sản sạch thu hoạch chín cây tự nhiên tại vườn. Quy trình canh tác hữu cơ chuẩn VietGAP đảm bảo an toàn và bổ dưỡng tối ưu.
+            </p>
+        </div>
+
+        <div class="md:col-span-4 space-y-4">
+            <h4 class="font-display font-bold text-sm text-gold-300 tracking-wide">Danh mục nhanh</h4>
+            <div class="grid grid-cols-2 gap-2 text-xs text-paper-300/50 font-bold uppercase tracking-wider">
+                <a class="hover:text-leaf-500" href="#menu">Thực đơn</a>
+                <a class="hover:text-leaf-500" href="#cam-ket">Cam kết</a>
+                <a class="hover:text-leaf-500" href="#bi-quyet">Xuất xứ</a>
+                <a class="hover:text-leaf-500" href="#danh-gia">Đánh giá</a>
+                <a class="hover:text-leaf-500" href="#faq">Hỏi đáp</a>
+            </div>
+        </div>
+
+        <div class="md:col-span-4 space-y-4">
+            <h4 class="font-display font-bold text-sm text-gold-300 tracking-wide">Trạm giao hàng</h4>
+            <p class="text-[11px] text-paper-300/60 leading-relaxed font-semibold">
+                Địa chỉ: 185 Nguyễn Gia Trí, Phường 25, Quận Bình Thạnh, TP. HCM <br>
+                Hotline giao nhận: 0901.234.567 &middot; Phục vụ từ 9:00 – 21:00 hàng ngày
+            </p>
+        </div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-5 lg:px-8 mt-12 pt-6 border-t border-white/5 flex flex-col sm:flex-row justify-between items-center text-[9px] text-paper-300/30 font-mono tracking-widest uppercase gap-3">
+        <span>&copy; 2026 Nông Sản Mùa Vụ. Bản quyền thuộc Mùa Vụ Farm.</span>
+        <div class="flex gap-4 font-bold">
+            <a href="#" class="hover:underline">Bảo mật thông tin</a>
+            <a href="#" class="hover:underline">Chính sách vận chuyển</a>
+        </div>
+    </div>
+</footer>
+
+<!-- Mobile sticky order bar -->
+<div id="sticky-bar" class="fixed bottom-0 left-0 right-0 z-40 md:hidden bg-white border-t border-paper-200 px-4 py-3 flex items-center justify-between shadow-[0_-4px_12px_rgba(0,0,0,0.06)] translate-y-full transition-transform duration-300">
+    <div>
+        <p class="text-[10px] text-ink-550 font-bold uppercase" id="sticky-count">0 món</p>
+        <p class="price-tag font-bold text-leaf-600" id="sticky-total">0đ</p>
+    </div>
+    <button onclick="toggleCartDrawer(true)" class="px-5 py-2.5 bg-leaf-600 text-white font-bold rounded-xl shadow-md text-xs uppercase tracking-wide">Xem giỏ hàng</button>
+</div>
+
+<!-- ===================== INTERACTIVE SCRIPTS ===================== -->
+<script>
+    let cart = [];
+
+    // Toggle Cart Side Drawer
+    function toggleCartDrawer(isOpen) {
+        const drawer = document.getElementById('cart-drawer');
+        const backdrop = document.getElementById('cart-backdrop');
+        if (isOpen) {
+            drawer.classList.remove('translate-x-full');
+            backdrop.classList.remove('pointer-events-none', 'opacity-0');
+            renderCart();
+        } else {
+            drawer.classList.add('translate-x-full');
+            backdrop.classList.add('pointer-events-none', 'opacity-0');
+        }
+    }
+
+    // Toggle Mobile Burger Menu
+    function toggleMobileMenu(isOpen) {
+        document.getElementById('mobile-menu').classList.toggle('translate-x-full', !isOpen);
+    }
+
+    // Add product item to Cart Array
+    function addToCart(name, price, img) {
+        const existing = cart.find(i => i.name === name);
+        existing ? existing.quantity++ : cart.push({ name, price, img, quantity: 1 });
+
+        // Trigger visual scale bounce effect on cart icon
+        const badge = document.getElementById('cart-badge');
+        badge.classList.remove('scale-0');
+        badge.classList.add('scale-110');
+        setTimeout(() => badge.classList.remove('scale-110'), 250);
+
+        updateCartUI();
+        toggleCartDrawer(true);
+    }
+
+    // Update quantities directly in Cart
+    function updateQuantity(name, amount) {
+        const idx = cart.findIndex(i => i.name === name);
+        if (idx > -1) {
+            cart[idx].quantity += amount;
+            if (cart[idx].quantity <= 0) cart.splice(idx, 1);
+        }
+        updateCartUI();
+        renderCart();
+    }
+
+    // Remove item completely
+    function removeItem(name) {
+        cart = cart.filter(i => i.name !== name);
+        updateCartUI();
+        renderCart();
+    }
+
+    // Update Nav bar Badge counters
+    function updateCartUI() {
+        const totalItems = cart.reduce((s, i) => s + i.quantity, 0);
+        const totalPrice = cart.reduce((s, i) => s + i.quantity * i.price, 0);
+        const badge = document.getElementById('cart-badge');
+        badge.innerText = totalItems;
+        badge.classList.toggle('scale-0', totalItems === 0);
+
+        // Update mobile sticky order bar
+        const stickyBar = document.getElementById('sticky-bar');
+        stickyBar.classList.toggle('translate-y-full', totalItems === 0);
+        document.getElementById('sticky-count').innerText = totalItems + (totalItems === 1 ? ' món' : ' món');
+        document.getElementById('sticky-total').innerText = totalPrice.toLocaleString('vi-VN') + 'đ';
+    }
+
+    // Render cart items HTML dynamically
+    function renderCart() {
+        const itemsDiv = document.getElementById('cart-items');
+        const emptyDiv = document.getElementById('cart-empty');
+        const summaryDiv = document.getElementById('cart-summary');
+
+        if (cart.length === 0) {
+            itemsDiv.innerHTML = '';
+            emptyDiv.classList.remove('hidden');
+            summaryDiv.classList.add('hidden');
+            return;
+        }
+        emptyDiv.classList.add('hidden');
+        summaryDiv.classList.remove('hidden');
+
+        let subtotal = 0;
+        itemsDiv.innerHTML = cart.map(item => {
+            const itemTotal = item.price * item.quantity;
+            subtotal += itemTotal;
+            return `
+                <div class="flex items-center gap-3 bg-white p-3 rounded-xl border border-paper-200 shadow-soft">
+                    <img src="${item.img}" alt="${item.name}" class="w-12 h-12 object-cover rounded-lg border border-paper-100 flex-shrink-0">
+                    <div class="flex-1 min-w-0">
+                        <h4 class="font-display font-bold text-xs text-ink-900 truncate">${item.name}</h4>
+                        <span class="price-tag text-xs font-bold text-leaf-600">${item.price.toLocaleString('vi-VN')}đ</span>
+                        <div class="flex items-center gap-2 mt-1.5">
+                            <button onclick="updateQuantity('${item.name}', -1)" class="w-5.5 h-5.5 rounded-full bg-paper-50 border border-paper-200 flex items-center justify-center text-[10px] font-bold hover:bg-leaf-600 hover:text-white transition-colors">-</button>
+                            <span class="text-xs font-bold w-4 text-center">${item.quantity}</span>
+                            <button onclick="updateQuantity('${item.name}', 1)" class="w-5.5 h-5.5 rounded-full bg-paper-50 border border-paper-200 flex items-center justify-center text-[10px] font-bold hover:bg-leaf-600 hover:text-white transition-colors">+</button>
+                        </div>
+                    </div>
+                    <div class="text-right flex flex-col items-end gap-1.5 flex-shrink-0">
+                        <span class="price-tag font-bold text-xs text-ink-900">${itemTotal.toLocaleString('vi-VN')}đ</span>
+                        <button onclick="removeItem('${item.name}')" class="text-[10px] text-leaf-600 hover:underline">Xóa</button>
+                    </div>
+                </div>`;
+        }).join('');
+
+        document.getElementById('cart-subtotal').innerText = subtotal.toLocaleString('vi-VN') + 'đ';
+    }
+
+    // Ingredient selection reveal text
+    function revealIngredient(btn, title, desc) {
+        document.getElementById('ing-title').innerText = title;
+        document.getElementById('ing-desc').innerText = desc;
+        
+        // Remove styling from other buttons
+        document.querySelectorAll('.ing-btn').forEach(b => {
+            b.classList.remove('bg-leaf-600', 'text-white');
+            b.classList.add('bg-white', 'text-ink-700');
+        });
+        // Remove styling from hotspots
+        document.querySelectorAll('.ing-hotspot').forEach(h => {
+            h.classList.remove('ring-4', 'ring-ink-900/10');
+        });
+
+        // Add styling to selected button
+        if (btn) {
+            btn.classList.remove('bg-white', 'text-ink-700');
+            btn.classList.add('bg-leaf-600', 'text-white');
+        }
+    }
+
+    // Reveal ingredient via Hotspot Hover/Click
+    function revealIngredientById(id, title, desc) {
+        // Style hotspots
+        document.querySelectorAll('.ing-hotspot').forEach(h => {
+            h.classList.remove('ring-4', 'ring-ink-900/10');
+        });
+        const activeHotspot = document.getElementById(id);
+        if (activeHotspot) {
+            activeHotspot.classList.add('ring-4', 'ring-ink-900/10');
+        }
+
+        // Trigger text reveal
+        revealIngredient(null, title, desc);
+    }
+
+    // Order checkout modal triggers
+    function openOrderModal() {
+        toggleCartDrawer(false);
+        const subtotal = cart.reduce((s, i) => s + i.quantity * i.price, 0);
+        document.getElementById('modal-subtotal').innerText = subtotal.toLocaleString('vi-VN') + 'đ';
+        document.getElementById('order-modal').classList.remove('hidden');
+        document.getElementById('order-modal').classList.add('flex');
+    }
+    function closeOrderModal() {
+        document.getElementById('order-modal').classList.add('hidden');
+        document.getElementById('order-modal').classList.remove('flex');
+    }
+    function closeSuccessModal() {
+        document.getElementById('success-modal').classList.add('hidden');
+        document.getElementById('success-modal').classList.remove('flex');
+    }
+
+    function submitOrder(e) {
+        e.preventDefault();
+        cart = [];
+        updateCartUI();
+        renderCart();
+        closeOrderModal();
+        document.getElementById('success-modal').classList.remove('hidden');
+        document.getElementById('success-modal').classList.add('flex');
+    }
+
+    // Youtube Video Player overlay
+    function openVideoPlayer() {
+        const overlay = document.getElementById('video-overlay');
+        const iframe = document.getElementById('video-iframe');
+        iframe.src = "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1"; 
+        overlay.classList.remove('hidden');
+    }
+    function closeVideoPlayer() {
+        const overlay = document.getElementById('video-overlay');
+        const iframe = document.getElementById('video-iframe');
+        iframe.src = "";
+        overlay.classList.add('hidden');
+    }
+
+    // Dynamic Lai Rai Combo Calculator
+    function updateCalculator() {
+        const peopleCount = parseInt(document.getElementById('calc-people').value);
+        const dishPrice = parseInt(document.getElementById('calc-dish').value);
+        const dishSelect = document.getElementById('calc-dish');
+        const dishName = dishSelect.options[dishSelect.selectedIndex].text.split(' (')[0];
+
+        // Update display text of people
+        document.getElementById('calc-people-val').innerText = peopleCount + " người ăn";
+
+        // Logic to calculate recommendation & total
+        let recommendText = "";
+        let totalVal = 0;
+
+        if (peopleCount <= 2) {
+            recommendText = `1 Hộp ${dishName} tươi ngon`;
+            totalVal = dishPrice;
+        } else if (peopleCount <= 4) {
+            recommendText = `2 Hộp ${dishName} thơm béo dẻo ngọt`;
+            totalVal = dishPrice * 2;
+        } else if (peopleCount <= 6) {
+            recommendText = `3 Hộp ${dishName} + 1 Hộp Bơ Sáp Đắk Lắk dẻo bùi`;
+            totalVal = dishPrice * 3 + 45000;
+        } else {
+            recommendText = `4 Hộp ${dishName} + 1 Giỏ Trái Cây Mùa Vụ đặc biệt`;
+            totalVal = (dishPrice * 4) + 150000;
+        }
+
+        document.getElementById('calc-recommendation').innerText = recommendText;
+        document.getElementById('calc-total').innerText = totalVal.toLocaleString('vi-VN') + 'đ';
+
+        // Keep computed values on global window for adding to cart
+        window.calcRecommendedDish = dishName;
+        window.calcRecommendedPrice = dishPrice;
+        window.calcRecommendedQty = peopleCount <= 2 ? 1 : (peopleCount <= 4 ? 2 : (peopleCount <= 6 ? 3 : 4));
+        window.calcRecommendedImg = dishPrice === 150000 ? '/assets-muavu/product-basket.jpg' : (dishPrice === 45000 ? '/assets-muavu/product-avocado.jpg' : (dishPrice === 85000 ? '/assets-muavu/product-mangosteen.jpg' : '/assets-muavu/product-durian.jpg'));
+    }
+
+    // Add recommended combo to cart
+    function addCalculatorToCart() {
+        const name = window.calcRecommendedDish || "Sầu Riêng Ri6 Chín Cây";
+        const price = window.calcRecommendedPrice || 120000;
+        const qty = window.calcRecommendedQty || 1;
+        const img = window.calcRecommendedImg || "/assets-muavu/product-durian.jpg";
+
+        // Add correct quantity
+        for (let i = 0; i < qty; i++) {
+            addToCart(name, price, img);
+        }
+    }
+
+    // Run calculator logic on startup
+    window.onload = function() {
+        updateCalculator();
+    };
+</script>
+</body>
+</html>

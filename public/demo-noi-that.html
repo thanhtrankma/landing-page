@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html class="light" lang="vi" style="width: 100%; min-height: 100%; overflow-x: hidden; position: relative;">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Nội Thất Sen Việt - Khơi Nguồn Cảm Hứng Không Gian (Demo)</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600;700&amp;family=Hanken+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-surface": "#1a1c1c",
+                        "surface-container-high": "#e8e8e8",
+                        "surface-container-lowest": "#ffffff",
+                        "inverse-on-surface": "#f1f1f1",
+                        "on-background": "#1a1c1c",
+                        "on-tertiary-container": "#848480",
+                        "outline": "#747878",
+                        "primary": "#000000",
+                        "inverse-surface": "#2f3131",
+                        "on-error": "#ffffff",
+                        "secondary-container": "#fdc796",
+                        "surface-variant": "#e2e2e2",
+                        "on-primary-fixed-variant": "#474746",
+                        "surface-container-low": "#f3f3f3",
+                        "on-error-container": "#93000a",
+                        "surface-tint": "#5f5e5e",
+                        "inverse-primary": "#c8c6c5",
+                        "tertiary-fixed-dim": "#c8c6c2",
+                        "primary-fixed-dim": "#c8c6c5",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-fixed": "#e4e2dd",
+                        "on-surface-variant": "#444748",
+                        "on-secondary": "#ffffff",
+                        "surface-container-highest": "#e2e2e2",
+                        "background": "#f9f9f9",
+                        "on-tertiary-fixed": "#1b1c19",
+                        "secondary": "#7e562e",
+                        "surface-container": "#eeeeee",
+                        "tertiary": "#000000",
+                        "on-secondary-fixed": "#2d1600",
+                        "surface-dim": "#dadada",
+                        "on-primary-fixed": "#1c1b1b",
+                        "on-primary-container": "#858383",
+                        "surface": "#f9f9f9",
+                        "error-container": "#ffdad6",
+                        "secondary-fixed-dim": "#f1bc8c",
+                        "on-secondary-fixed-variant": "#633f19",
+                        "on-primary": "#ffffff",
+                        "outline-variant": "#c4c7c7",
+                        "surface-bright": "#f9f9f9",
+                        "on-tertiary-fixed-variant": "#474744",
+                        "primary-container": "#1c1b1b",
+                        "tertiary-container": "#1b1c19",
+                        "on-secondary-container": "#79512a",
+                        "error": "#ba1a1a",
+                        "primary-fixed": "#e5e2e1",
+                        "secondary-fixed": "#ffdcbf"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "container-max": "1280px",
+                        "margin-desktop": "64px",
+                        "base": "8px",
+                        "gutter": "24px",
+                        "margin-mobile": "20px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["EB Garamond"],
+                        "body-md": ["Hanken Grotesk"],
+                        "display-lg-mobile": ["EB Garamond"],
+                        "body-lg": ["Hanken Grotesk"],
+                        "display-lg": ["EB Garamond"],
+                        "label-caps": ["Hanken Grotesk"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "500"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "display-lg-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "500"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "500"}],
+                        "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .hero-gradient {
+            background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2));
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md overflow-x-hidden">
+
+<!-- Top Navigation Bar -->
+<header class="bg-background dark:bg-on-background border-b border-outline-variant dark:border-outline fixed top-0 w-full z-50 transition-all duration-300">
+    <div class="flex flex-col w-full max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-3 md:py-4">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-3 md:gap-gutter">
+            <div class="flex items-center justify-between w-full md:w-auto gap-4">
+                <div class="font-headline-md text-headline-md font-bold text-primary dark:text-inverse-primary shrink-0">
+                    Nội Thất Sen Việt
+                </div>
+                <div class="flex items-center gap-4 md:hidden">
+                    <button class="flex items-center gap-2 text-on-surface hover:text-primary transition-colors">
+                        <span class="material-symbols-outlined" data-icon="person">person</span>
+                    </button>
+                </div>
+            </div>
+            <div class="w-full md:flex-1 md:max-w-xl relative">
+                <input class="w-full bg-surface-container-low border-none rounded-full py-2 pl-10 pr-4 text-body-md focus:ring-1 focus:ring-primary transition-all" placeholder="Tìm kiếm sản phẩm..." type="text">
+                <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+            </div>
+            <div class="hidden md:flex items-center gap-6">
+                <button class="flex items-center gap-2 text-on-surface hover:text-primary transition-colors"></button>
+                <button class="flex items-center gap-2 text-on-surface hover:text-primary transition-colors">
+                    <span class="material-symbols-outlined" data-icon="person">person</span>
+                    <span class="text-label-caps font-label-caps">WebLanding<br></span>
+                    <span class="material-symbols-outlined text-sm">expand_more</span>
+                </button>
+            </div>
+        </div>
+        <nav class="w-full flex items-center justify-between mt-3 md:mt-4 gap-4">
+            <div class="flex gap-6 md:gap-8 overflow-x-auto no-scrollbar whitespace-nowrap flex-1">
+                <a class="font-body-md text-body-md text-primary dark:text-inverse-primary border-b-2 border-primary pb-1" href="#">Phòng Khách</a>
+                <a class="font-body-md text-body-md text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors" href="#">Phòng Ngủ</a>
+                <a class="font-body-md text-body-md text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors" href="#">Phòng Ăn</a>
+                <a class="font-body-md text-body-md text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors" href="#">Đồ Trang Trí</a>
+                <a class="font-body-md text-body-md text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors" href="#">Tin Tức</a>
+                <a class="font-body-md text-body-md text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors" href="#">Khuyến Mãi</a>
+            </div>
+            <div class="hidden sm:flex items-center gap-2 text-secondary font-label-caps text-xs shrink-0">
+                <span class="material-symbols-outlined text-sm">local_offer</span>
+                <span class="">ƯU ĐÃI THÁNG 9</span>
+            </div>
+        </nav>
+    </div>
+</header>
+z
+<main class="mt-[170px] md:mt-[130px]">
+    <!-- Hero Section -->
+    <section class="relative w-full h-[500px] md:h-[600px] overflow-hidden">
+        <div class="absolute inset-0 hero-gradient z-10"></div>
+        <img alt="Interior living room" class="w-full h-full object-cover" src="/assets-interior/img-1.jpg">
+        <div class="absolute inset-0 z-20 flex flex-col items-center justify-center text-center text-white px-margin-mobile">
+            <h1 class="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg mb-4 tracking-tight">KHÔNG GIAN CẢM HỨNG</h1>
+            <p class="font-body-md md:font-body-lg text-body-md md:text-body-lg max-w-2xl opacity-90 mb-8 px-4">Khám phá phong cách sống của bạn qua từng món nội thất tinh tế và hiện đại.</p>
+            <button class="bg-white text-primary px-8 md:px-10 py-3 font-label-caps tracking-widest hover:bg-opacity-90 transition-all text-sm">KHÁM PHÁ NGAY</button>
+        </div>
+    </section>
+
+    <!-- Featured Product & Grid Section -->
+    <section class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-12 md:py-20">
+        <div class="grid grid-cols-12 gap-6 md:gap-gutter">
+            <!-- Main Featured: Sofa Milo -->
+            <div class="col-span-12 lg:col-span-6 group cursor-pointer">
+                <div class="relative aspect-[4/3] overflow-hidden bg-surface-container mb-6">
+                    <img alt="Sofa Milo" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="/assets-interior/img-2.jpg">
+                </div>
+                <div class="flex flex-col gap-2">
+                    <h3 class="font-headline-md text-headline-md uppercase tracking-tight">SOFA MILO</h3>
+                    <div class="flex items-end gap-3">
+                        <span class="text-xl font-bold text-primary">22.000.000đ</span>
+                        <span class="text-body-md text-on-surface-variant line-through">32.000.000đ</span>
+                    </div>
+                    <p class="text-on-surface-variant max-w-md">Thiết kế tối giản, chất liệu cao cấp mang lại sự sang trọng và thoải mái cho phòng khách của bạn.</p>
+                    <button class="mt-4 border border-primary px-8 py-3 w-fit font-label-caps hover:bg-primary hover:text-white transition-all">THÊM VÀO GIỎ</button>
+                </div>
+            </div>
+            <!-- Product Grid -->
+            <div class="col-span-12 lg:col-span-6 grid grid-cols-2 gap-gutter">
+                <div class="flex flex-col gap-3 group cursor-pointer">
+                    <div class="aspect-square bg-surface-container overflow-hidden">
+                        <img alt="Đèn Bàn Decor" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="/assets-interior/img-3.jpg">
+                    </div>
+                    <div>
+                        <p class="font-label-caps text-on-surface-variant">PHÒNG KHÁCH</p>
+                        <h4 class="font-body-md font-bold">Đèn Bàn Decor</h4>
+                        <p class="text-primary font-bold">1.500.000đ</p>
+                    </div>
+                </div>
+                <div class="flex flex-col gap-3 group cursor-pointer">
+                    <div class="aspect-square bg-surface-container overflow-hidden">
+                        <img alt="Tủ TV Scandi" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="/assets-interior/img-4.jpg">
+                    </div>
+                    <div>
+                        <p class="font-label-caps text-on-surface-variant">ĐỒ NỘI THẤT</p>
+                        <h4 class="font-body-md font-bold">Tủ TV Scandi</h4>
+                        <p class="text-primary font-bold">8.000.000đ</p>
+                    </div>
+                </div>
+                <div class="flex flex-col gap-3 group cursor-pointer">
+                    <div class="aspect-square bg-surface-container overflow-hidden">
+                        <img alt="Ghế Bành Thật" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="/assets-interior/img-5.jpg">
+                    </div>
+                    <div>
+                        <p class="font-label-caps text-on-surface-variant">ĐỒ NỘI THẤT</p>
+                        <h4 class="font-body-md font-bold">Ghế Bành Thật</h4>
+                        <p class="text-primary font-bold">1.200.000đ</p>
+                    </div>
+                </div>
+                <div class="flex flex-col gap-3 group cursor-pointer">
+                    <div class="aspect-square bg-surface-container overflow-hidden">
+                        <img alt="Bình Hoa Thủy Tinh" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="/assets-interior/img-6.jpg">
+                    </div>
+                    <div>
+                        <p class="font-label-caps text-on-surface-variant">ĐỒ TRANG TRÍ</p>
+                        <h4 class="font-body-md font-bold">Bình Hoa Thủy Tinh</h4>
+                        <p class="text-primary font-bold">450.000đ</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEW SECTION: Bộ Sưu Tập Mới -->
+    <section class="bg-surface-container-low py-16 md:py-24 border-y border-outline-variant/30">
+        <div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+            <div class="text-center mb-12 md:mb-16">
+                <span class="text-secondary font-label-caps tracking-[0.2em] mb-3 md:mb-4 block uppercase">Cảm Hứng Mùa Thu</span>
+                <h2 class="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg mb-3 md:mb-4">Bộ Sưu Tập Mới</h2>
+                <div class="w-20 md:w-24 h-px bg-primary mx-auto mb-4 md:mb-6"></div>
+                <p class="font-body-md md:font-body-lg text-on-surface-variant max-w-2xl mx-auto">Sự giao thoa giữa nét cổ điển và hơi thở hiện đại, lấy cảm hứng từ những sắc màu trầm ấm của thiên nhiên.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-12 items-center">
+                <div class="relative group overflow-hidden">
+                    <img alt="New Collection Visual" class="w-full aspect-[3/4] object-cover" src="/assets-interior/img-7.jpg">
+                    <div class="absolute inset-0 bg-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                </div>
+                <div class="flex flex-col gap-8 md:pl-12">
+                    <div class="border-l-2 border-secondary pl-8">
+                        <h4 class="font-headline-md mb-2">Heritage Hearth Living</h4>
+                        <p class="text-on-surface-variant italic">"Nơi thời gian ngưng đọng trong từng đường nét gỗ tự nhiên."</p>
+                    </div>
+                    <p class="font-body-lg leading-relaxed">Bộ sưu tập Heritage Hearth mang đến những món đồ nội thất bằng gỗ sồi cao cấp, được xử lý thủ công để giữ trọn vẹn vân gỗ tự nhiên. Mỗi sản phẩm là một tác phẩm nghệ thuật, kiến tạo nên không gian sống ấm cúng và đầy tính di sản.</p>
+                    <div class="grid grid-cols-2 gap-6">
+                        <img alt="Detail 1" class="w-full aspect-square object-cover" src="/assets-interior/img-8.jpg">
+                        <img alt="Heritage Hearth Dining Area" class="w-full aspect-square object-cover" src="/assets-interior/img-9.jpg">
+                    </div>
+                    <button class="bg-primary text-white px-10 py-4 font-label-caps tracking-widest hover:bg-secondary transition-all w-fit">KHÁM PHÁ BỘ SƯU TẬP</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Story Section -->
+    <section class="bg-on-surface text-surface py-16 md:py-24 overflow-hidden">
+        <div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+            <div class="grid grid-cols-12 items-center gap-10 md:gap-16">
+                <div class="col-span-12 md:col-span-5 order-2 md:order-1">
+                    <span class="text-secondary font-label-caps tracking-[0.2em] mb-3 md:mb-4 block">CHUYÊN ĐỀ NỔI BẬT</span>
+                    <h2 class="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg mb-4 md:mb-6 leading-tight">Phỏng vấn nhà thiết kế nội thất danh tiếng</h2>
+                    <p class="font-body-md md:font-body-lg text-surface-variant mb-6 md:mb-8 opacity-80">Khám phá triết lý thiết kế và cách tạo nên không gian sống đầy tính nghệ thuật qua cuộc trò chuyện độc quyền cùng các chuyên gia hàng đầu trong ngành.</p>
+                    <button class="border border-surface-variant text-surface px-10 py-3 font-label-caps hover:bg-surface hover:text-primary transition-all">ĐỌC BÀI VIẾT</button>
+                </div>
+                <div class="col-span-12 md:col-span-7 order-1 md:order-2">
+                    <div class="relative h-[500px] w-full bg-surface-container-high overflow-hidden">
+                        <img alt="Interior Designer" class="w-full h-full object-cover" src="/assets-interior/img-10.jpg">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEW SECTION: Quy Trình Chế Tác -->
+    <section class="bg-background py-16 md:py-24">
+        <div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+            <div class="text-center mb-12 md:mb-16">
+                <span class="text-secondary font-label-caps tracking-[0.2em] mb-3 md:mb-4 block uppercase">Nghệ Thuật Chế Tác</span>
+                <h2 class="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg mb-3 md:mb-4">Quy Trình Chế Tác</h2>
+                <p class="font-body-md md:font-body-lg text-on-surface-variant max-w-2xl mx-auto">Tận tâm trong từng chi tiết, từ khâu lựa chọn nguyên liệu đến hoàn thiện cuối cùng.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-12">
+                <div class="flex flex-col items-center text-center gap-6">
+                    <div class="relative w-full aspect-square mb-2 overflow-hidden bg-surface-container">
+                        <img alt="Selection" class="w-full h-full object-cover" src="/assets-interior/img-11.jpg">
+                        <div class="absolute bottom-0 left-0 bg-primary text-white font-display-lg w-12 h-12 flex items-center justify-center">01</div>
+                    </div>
+                    <h4 class="font-headline-md">Lựa Chọn Nguyên Liệu</h4>
+                    <p class="text-on-surface-variant">Chúng tôi chỉ sử dụng gỗ đạt chuẩn FSC và các loại vải cao cấp nhập khẩu, đảm bảo độ bền và tính bền vững.</p>
+                </div>
+                <div class="flex flex-col items-center text-center gap-6">
+                    <div class="relative w-full aspect-square mb-2 overflow-hidden bg-surface-container">
+                        <img alt="Crafting" class="w-full h-full object-cover" src="/assets-interior/img-10.jpg">
+                        <div class="absolute bottom-0 left-0 bg-primary text-white font-display-lg w-12 h-12 flex items-center justify-center">02</div>
+                    </div>
+                    <h4 class="font-headline-md">Chế Tác Thủ Công</h4>
+                    <p class="text-on-surface-variant">Mỗi nghệ nhân dành hàng trăm giờ để đẽo gọt và lắp ráp, kết hợp kỹ thuật mộc truyền thống với công nghệ hiện đại.</p>
+                </div>
+                <div class="flex flex-col items-center text-center gap-6">
+                    <div class="relative w-full aspect-square mb-2 overflow-hidden bg-surface-container">
+                        <img alt="Finishing" class="w-full h-full object-cover" src="/assets-interior/img-12.jpg">
+                        <div class="absolute bottom-0 left-0 bg-primary text-white font-display-lg w-12 h-12 flex items-center justify-center">03</div>
+                    </div>
+                    <h4 class="font-headline-md">Hoàn Thiện Tinh Xảo</h4>
+                    <p class="text-on-surface-variant">Lớp sơn phủ an toàn và công đoạn kiểm soát chất lượng nghiêm ngặt trước khi sản phẩm được bàn giao tới gia đình bạn.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEW SECTION: Đánh Giá Từ Khách Hàng -->
+    <section class="bg-surface-container-highest py-16 md:py-24">
+        <div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 md:mb-16 gap-4 md:gap-6">
+                <div>
+                    <span class="text-secondary font-label-caps tracking-[0.2em] mb-3 md:mb-4 block uppercase">Không Gian Hạnh Phúc</span>
+                    <h2 class="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg">Đánh Giá Từ Khách Hàng</h2>
+                </div>
+                <div class="flex items-center gap-4">
+                    <div class="flex text-secondary">
+                        <span class="material-symbols-outlined fill-1">star</span>
+                        <span class="material-symbols-outlined fill-1">star</span>
+                        <span class="material-symbols-outlined fill-1">star</span>
+                        <span class="material-symbols-outlined fill-1">star</span>
+                        <span class="material-symbols-outlined fill-1">star</span>
+                    </div>
+                    <span class="font-bold">4.9/5 (2,500+ đánh giá)</span>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="bg-white p-8 flex flex-col gap-6 shadow-sm">
+                    <div class="aspect-video overflow-hidden">
+                        <img alt="Customer home" class="w-full h-full object-cover" src="/assets-interior/img-13.jpg">
+                    </div>
+                    <div class="flex text-secondary text-sm">
+                        <span class="material-symbols-outlined scale-75">star</span>
+                        <span class="material-symbols-outlined scale-75">star</span>
+                        <span class="material-symbols-outlined scale-75">star</span>
+                        <span class="material-symbols-outlined scale-75">star</span>
+                        <span class="material-symbols-outlined scale-75">star</span>
+                    </div>
+                    <p class="font-body-md italic text-on-surface-variant">"Chiếc sofa Milo thực sự làm thay đổi không gian phòng khách nhà mình. Chất lượng vải sờ vào rất thích, dịch vụ giao hàng cũng rất chuyên nghiệp."</p>
+                    <div class="flex items-center gap-4 mt-auto pt-4 border-t border-outline-variant">
+                        <img src="/assets-interior/img-14.jpg" alt="Chị Minh Anh" class="w-12 h-12 rounded-full object-cover shadow-sm">
+                        <div>
+                            <p class="font-bold text-sm">Chị Minh Anh</p>
+                            <p class="text-xs text-on-surface-variant">Hà Nội</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Testimonial 2 -->
+                <div class="bg-white p-8 flex flex-col gap-6 shadow-sm">
+                    <div class="aspect-video overflow-hidden">
+                        <img alt="Customer home" class="w-full h-full object-cover" src="/assets-interior/img-15.jpg">
+                    </div>
+                    <div class="flex text-secondary text-sm">
+                        <span class="material-symbols-outlined scale-75">star</span>
+                        <span class="material-symbols-outlined scale-75">star</span>
+                        <span class="material-symbols-outlined scale-75">star</span>
+                        <span class="material-symbols-outlined scale-75">star</span>
+                        <span class="material-symbols-outlined scale-75">star</span>
+                    </div>
+                    <p class="font-body-md italic text-on-surface-variant">"Tôi rất ấn tượng với chiếc tủ Scandi. Thiết kế tinh giản đúng ý tôi muốn cho căn hộ studio. Gỗ cầm chắc chắn, màu sắc trang nhã."</p>
+                    <div class="flex items-center gap-4 mt-auto pt-4 border-t border-outline-variant">
+                        <img src="/assets-interior/img-16.jpg" alt="Anh Tuấn Trần" class="w-10 h-10 rounded-full object-cover shadow-sm">
+                        <div>
+                            <p class="font-bold text-sm">Anh Tuấn Trần</p>
+                            <p class="text-xs text-on-surface-variant">TP. Hồ Chí Minh</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Testimonial 3 -->
+                <div class="bg-white p-8 flex flex-col gap-6 shadow-sm">
+                    <div class="aspect-video overflow-hidden">
+                        <img alt="Customer home" class="w-full h-full object-cover" src="/assets-interior/img-17.jpg">
+                    </div>
+                    <div class="flex text-secondary text-sm">
+                        <span class="material-symbols-outlined scale-75">star</span>
+                        <span class="material-symbols-outlined scale-75">star</span>
+                        <span class="material-symbols-outlined scale-75">star</span>
+                        <span class="material-symbols-outlined scale-75">star</span>
+                        <span class="material-symbols-outlined scale-75">star</span>
+                    </div>
+                    <p class="font-body-md italic text-on-surface-variant">"Sen Việt luôn là lựa chọn hàng đầu của gia đình tôi khi trang trí nhà. Từ những món nhỏ nhất như bình hoa đến bàn trà đều mang nét riêng."</p>
+                    <div class="flex items-center gap-4 mt-auto pt-4 border-t border-outline-variant">
+                        <img src="/assets-interior/img-18.jpg" alt="Cô Lan Hương" class="w-10 h-10 rounded-full object-cover shadow-sm">
+                        <div>
+                            <p class="font-bold text-sm">Cô Lan Hương</p>
+                            <p class="text-xs text-on-surface-variant">Đà Nẵng</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEW SECTION: Dịch Vụ Thiết Kế Trọn Gói -->
+    <section class="relative py-16 md:py-24 overflow-hidden">
+        <div class="absolute inset-0 bg-primary/5 -z-10"></div>
+        <div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-center">
+            <div class="flex flex-col gap-6 md:gap-8">
+                <span class="text-secondary font-label-caps tracking-[0.2em] uppercase text-xs">Dịch Vụ Chuyên Nghiệp</span>
+                <h2 class="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg leading-tight">Dịch Vụ Thiết Kế <br>Nội Thất Trọn Gói</h2>
+                <p class="font-body-md md:font-body-lg text-on-surface-variant">Chúng tôi không chỉ bán nội thất, chúng tôi cùng bạn xây dựng tổ ấm. Đội ngũ kiến trúc sư giàu kinh nghiệm của Sen Việt sẽ hiện thực hóa mọi ý tưởng không gian của bạn.</p>
+                <ul class="flex flex-col gap-4">
+                    <li class="flex items-center gap-3">
+                        <span class="material-symbols-outlined text-secondary">check_circle</span>
+                        <span class="">Khảo sát &amp; Tư vấn miễn phí tại công trình.</span>
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <span class="material-symbols-outlined text-secondary">check_circle</span>
+                        <span class="">Thiết kế 3D cá nhân hóa theo phong cách riêng.</span>
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <span class="material-symbols-outlined text-secondary">check_circle</span>
+                        <span class="">Sản xuất &amp; Thi công trọn gói, cam kết đúng tiến độ.</span>
+                    </li>
+                </ul>
+                <div class="flex gap-4 mt-4">
+                    <button class="bg-primary text-white px-10 py-4 font-label-caps tracking-widest hover:bg-secondary transition-all">ĐĂNG KÝ TƯ VẤN</button>
+                    <button class="border border-primary px-10 py-4 font-label-caps tracking-widest hover:bg-primary hover:text-white transition-all">XEM CÔNG TRÌNH MẪU</button>
+                </div>
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+                <div class="flex flex-col gap-4 mt-12">
+                    <img alt="Design Portfolio 1" class="w-full aspect-[3/4] object-cover" src="/assets-interior/img-19.jpg">
+                    <img alt="Design Portfolio 2" class="w-full aspect-square object-cover" src="/assets-interior/img-20.jpg">
+                </div>
+                <div class="flex flex-col gap-4">
+                    <img alt="Design Portfolio 3" class="w-full aspect-square object-cover" src="/assets-interior/img-21.jpg">
+                    <img alt="Design Portfolio 4" class="w-full aspect-[3/4] object-cover" src="/assets-interior/img-22.jpg">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEW SECTION: Virtual Showroom - Không Gian Sống Thực Tế -->
+    <section class="bg-surface-container-lowest py-16 md:py-24 border-t border-outline-variant/30">
+        <div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+            <div class="text-center mb-12 md:mb-16">
+                <span class="text-secondary font-label-caps tracking-[0.2em] mb-3 md:mb-4 block uppercase">Phòng Trưng Bày Ảo</span>
+                <h2 class="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg mb-3 md:mb-4">Không Gian Sống Thực Tế</h2>
+                <div class="w-20 md:w-24 h-px bg-primary mx-auto mb-4 md:mb-6"></div>
+                <p class="font-body-md md:font-body-lg text-on-surface-variant max-w-2xl mx-auto">Mỗi dự án thiết kế là một câu chuyện riêng biệt về phong cách và cá tính của gia chủ. Khám phá các phòng trưng bày ảo chân thực dưới đây.</p>
+            </div>
+            
+            <!-- Interactive Space Grid -->
+            <div class="grid grid-cols-12 gap-4 md:gap-gutter">
+                <!-- Living Space Card (Large) -->
+                <div class="col-span-12 md:col-span-8 group relative overflow-hidden aspect-[4/3] md:aspect-[16/9] cursor-pointer rounded-xl">
+                    <img alt="Modern Living Room Space" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="/assets-interior/img-1.jpg">
+                    <div class="absolute inset-0 bg-black/30 group-hover:bg-black/45 transition-colors duration-300"></div>
+                    <!-- Glassmorphic Tag -->
+                    <div class="absolute bottom-4 left-4 right-4 md:bottom-6 md:left-6 md:right-auto md:w-80 bg-white/80 dark:bg-black/80 backdrop-blur-md p-4 md:p-6 border border-white/20 shadow-lg translate-y-2 group-hover:translate-y-0 transition-transform duration-500 rounded-xl">
+                        <span class="text-secondary font-label-caps text-[10px] md:text-xs tracking-wider block mb-1">01 / PHÒNG KHÁCH</span>
+                        <h3 class="font-headline-md text-lg md:text-xl mb-1 md:mb-3 text-on-surface">Phòng Khách Ấm Cúng</h3>
+                        <p class="hidden sm:block text-sm text-on-surface-variant mb-4 font-body-md">Sự phối hợp tinh tế giữa sofa da, thảm nỉ cao cấp và bàn trà gỗ sồi mộc mạc.</p>
+                        <div class="flex items-center justify-between mt-2 sm:mt-0">
+                            <span class="text-xs font-bold border-b border-primary pb-0.5 hover:text-secondary hover:border-secondary transition-colors">KHÁM PHÁ CÁC MÓN ĐỒ</span>
+                            <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Dining Space Card (Small) -->
+                <div class="col-span-12 md:col-span-4 group relative overflow-hidden aspect-[1/1] md:aspect-[4/5] cursor-pointer rounded-xl">
+                    <img alt="Elegant Dining Area Space" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="/assets-interior/img-9.jpg">
+                    <div class="absolute inset-0 bg-black/30 group-hover:bg-black/45 transition-colors duration-300"></div>
+                    <!-- Glassmorphic Tag -->
+                    <div class="absolute bottom-4 left-4 right-4 md:bottom-6 md:left-6 md:right-6 bg-white/80 dark:bg-black/80 backdrop-blur-md p-4 md:p-6 border border-white/20 shadow-lg translate-y-2 group-hover:translate-y-0 transition-transform duration-500 rounded-xl">
+                        <span class="text-secondary font-label-caps text-[10px] md:text-xs tracking-wider block mb-1">02 / PHÒNG ĂN</span>
+                        <h3 class="font-headline-md text-lg md:text-xl mb-1 md:mb-3 text-on-surface">Phòng Ăn Scandi</h3>
+                        <p class="hidden sm:block text-sm text-on-surface-variant mb-4 font-body-md">Ánh sáng tự nhiên kết hợp gỗ tần bì tạo nên bầu không khí bữa tối sum vầy.</p>
+                        <div class="flex items-center justify-between mt-2 sm:mt-0">
+                            <span class="text-xs font-bold border-b border-primary pb-0.5 hover:text-secondary hover:border-secondary transition-colors">KHÁM PHÁ CÁC MÓN ĐỒ</span>
+                            <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bedroom Space Card (Small) -->
+                <div class="col-span-12 md:col-span-4 group relative overflow-hidden aspect-[1/1] md:aspect-[4/5] cursor-pointer rounded-xl">
+                    <img alt="Cozy Bedroom Space" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="/assets-interior/img-13.jpg">
+                    <div class="absolute inset-0 bg-black/30 group-hover:bg-black/45 transition-colors duration-300"></div>
+                    <!-- Glassmorphic Tag -->
+                    <div class="absolute bottom-4 left-4 right-4 md:bottom-6 md:left-6 md:right-6 bg-white/80 dark:bg-black/80 backdrop-blur-md p-4 md:p-6 border border-white/20 shadow-lg translate-y-2 group-hover:translate-y-0 transition-transform duration-500 rounded-xl">
+                        <span class="text-secondary font-label-caps text-[10px] md:text-xs tracking-wider block mb-1">03 / PHÒNG NGỦ</span>
+                        <h3 class="font-headline-md text-lg md:text-xl mb-1 md:mb-3 text-on-surface">Phòng Ngủ Tĩnh Lặng</h3>
+                        <p class="hidden sm:block text-sm text-on-surface-variant mb-4 font-body-md">Tông màu trầm ấm, giường nệm êm ái xua tan mệt mỏi sau ngày dài.</p>
+                        <div class="flex items-center justify-between mt-2 sm:mt-0">
+                            <span class="text-xs font-bold border-b border-primary pb-0.5 hover:text-secondary hover:border-secondary transition-colors">KHÁM PHÁ CÁC MÓN ĐỒ</span>
+                            <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Reading/Study Space Card (Large) -->
+                <div class="col-span-12 md:col-span-8 group relative overflow-hidden aspect-[4/3] md:aspect-[16/9] cursor-pointer rounded-xl">
+                    <img alt="Reading Room Space" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="/assets-interior/img-7.jpg">
+                    <div class="absolute inset-0 bg-black/30 group-hover:bg-black/45 transition-colors duration-300"></div>
+                    <!-- Glassmorphic Tag -->
+                    <div class="absolute bottom-4 left-4 right-4 md:bottom-6 md:left-6 md:right-auto md:w-80 bg-white/80 dark:bg-black/80 backdrop-blur-md p-4 md:p-6 border border-white/20 shadow-lg translate-y-2 group-hover:translate-y-0 transition-transform duration-500 rounded-xl">
+                        <span class="text-secondary font-label-caps text-[10px] md:text-xs tracking-wider block mb-1">04 / PHÒNG ĐỌC SÁCH</span>
+                        <h3 class="font-headline-md text-lg md:text-xl mb-1 md:mb-3 text-on-surface">Góc Đọc Sách Thư Thái</h3>
+                        <p class="hidden sm:block text-sm text-on-surface-variant mb-4 font-body-md">Góc làm việc tĩnh lặng tràn ngập cảm hứng bên cửa sổ gỗ sồi.</p>
+                        <div class="flex items-center justify-between mt-2 sm:mt-0">
+                            <span class="text-xs font-bold border-b border-primary pb-0.5 hover:text-secondary hover:border-secondary transition-colors">KHÁM PHÁ CÁC MÓN ĐỒ</span>
+                            <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Promotions Section -->
+    <section class="bg-surface py-20">
+        <div class="max-w-container-max mx-auto px-margin-desktop">
+            <div class="flex items-end justify-between mb-12">
+                <div>
+                    <h2 class="font-headline-md text-headline-md font-bold">Ưu đãi &amp; giảm giá</h2>
+                    <p class="text-on-surface-variant">Những sản phẩm được yêu thích nhất với mức giá hấp dẫn.</p>
+                </div>
+                <a class="text-label-caps border-b border-primary pb-1 hover:text-secondary hover:border-secondary transition-colors" href="#">XEM TẤT CẢ</a>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+                <!-- Promo 1 -->
+                <div class="flex bg-surface-container-lowest border border-outline-variant p-8 items-center gap-8 group hover:shadow-lg transition-all duration-300">
+                    <div class="w-48 h-48 bg-surface flex-shrink-0">
+                        <img alt="Bàn Trà Tròn" class="w-full h-full object-contain mix-blend-multiply" src="/assets-interior/img-23.jpg">
+                    </div>
+                    <div class="flex flex-col gap-2">
+                        <h4 class="font-headline-md">Bàn Trà Tròn</h4>
+                        <div class="flex items-center gap-2">
+                            <span class="font-bold text-primary">3.000.000đ</span>
+                            <span class="text-sm line-through text-on-surface-variant">5.200.000đ</span>
+                        </div>
+                        <button class="mt-4 bg-primary text-white py-2 px-6 font-label-caps hover:bg-opacity-80 transition-all">THÊM VÀO GIỎ</button>
+                    </div>
+                </div>
+                <!-- Promo 2 -->
+                <div class="flex bg-surface-container-lowest border border-outline-variant p-8 items-center gap-8 group hover:shadow-lg transition-all duration-300">
+                    <div class="w-48 h-48 bg-surface flex-shrink-0">
+                        <img alt="Set Thảm Trải Sàn" class="w-full h-full object-contain mix-blend-multiply" src="/assets-interior/img-24.jpg">
+                    </div>
+                    <div class="flex flex-col gap-2">
+                        <h4 class="font-headline-md">Set Thảm Trải Sàn</h4>
+                        <div class="flex items-center gap-2">
+                            <span class="font-bold text-primary">1.200.000đ</span>
+                            <span class="text-sm line-through text-on-surface-variant">1.800.000đ</span>
+                        </div>
+                        <button class="mt-4 bg-primary text-white py-2 px-6 font-label-caps hover:bg-opacity-80 transition-all">THÊM VÀO GIỎ</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- News & Insights -->
+    <section class="bg-background py-20">
+        <div class="max-w-container-max mx-auto px-margin-desktop">
+            <div class="flex items-end justify-between mb-12">
+                <div>
+                    <h2 class="font-headline-md text-headline-md font-bold">Tin tức &amp; Kiến thức</h2>
+                    <p class="text-on-surface-variant">Cập nhật xu hướng nội thất và mẹo trang trí nhà cửa.</p>
+                </div>
+                <a class="text-label-caps border-b border-primary pb-1 hover:text-secondary hover:border-secondary transition-colors" href="#">XEM TẤT CẢ</a>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-gutter">
+                <div class="flex flex-col gap-4 group cursor-pointer">
+                    <div class="aspect-[4/3] overflow-hidden bg-surface-container relative">
+                        <img alt="News 1" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="/assets-interior/img-25.jpg">
+                        <div class="absolute top-4 left-4 bg-white px-3 py-1 font-label-caps text-[10px]">MẸO THIẾT KẾ</div>
+                    </div>
+                    <div>
+                        <h4 class="font-body-md font-bold line-clamp-2">5 Cách phối màu cho phòng khách mang phong cách hiện đại</h4>
+                        <p class="text-sm text-on-surface-variant mt-2">15/09/2023 • Bởi Admin</p>
+                    </div>
+                </div>
+                <div class="flex flex-col gap-4 group cursor-pointer">
+                    <div class="aspect-[4/3] overflow-hidden bg-surface-container relative">
+                        <img alt="News 2" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="/assets-interior/img-26.jpg">
+                        <div class="absolute top-4 left-4 bg-white px-3 py-1 font-label-caps text-[10px]">HƯỚNG DẪN</div>
+                    </div>
+                    <div>
+                        <h4 class="font-body-md font-bold line-clamp-2">Cẩm nang chọn thảm trải sàn phù hợp với mọi không gian</h4>
+                        <p class="text-sm text-on-surface-variant mt-2">10/08/2023 • Bởi Nội Thất Sen Việt</p>
+                    </div>
+                </div>
+                <div class="flex flex-col gap-4 group cursor-pointer">
+                    <div class="aspect-[4/3] overflow-hidden bg-surface-container relative">
+                        <img alt="News 3" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="/assets-interior/img-27.jpg">
+                        <div class="absolute top-4 left-4 bg-white px-3 py-1 font-label-caps text-[10px]">PHONG CÁCH SỐNG</div>
+                    </div>
+                    <div>
+                        <h4 class="font-body-md font-bold line-clamp-2">Bí quyết tối ưu hóa không gian cho căn hộ nhỏ</h4>
+                        <p class="text-sm text-on-surface-variant mt-2">22/07/2023 • Bởi Team Sen Việt</p>
+                    </div>
+                </div>
+                <div class="flex flex-col gap-4 group cursor-pointer">
+                    <div class="aspect-[4/3] overflow-hidden bg-surface-container relative">
+                        <img alt="News 4" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="/assets-interior/img-28.jpg">
+                        <div class="absolute top-4 left-4 bg-white px-3 py-1 font-label-caps text-[10px]">XU HƯỚNG</div>
+                    </div>
+                    <div>
+                        <h4 class="font-body-md font-bold line-clamp-2">Xu hướng đèn trang trí năm 2024 có gì mới?</h4>
+                        <p class="text-sm text-on-surface-variant mt-2">05/06/2023 • Bởi Chuyên gia</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Service Highlights -->
+    <section class="border-t border-outline-variant py-12">
+        <div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
+            <div class="flex items-center gap-4">
+                <span class="material-symbols-outlined text-3xl text-secondary">verified</span>
+                <div>
+                    <p class="font-bold">Sản phẩm chính hãng</p>
+                    <p class="text-xs text-on-surface-variant">100% Phân phối từ hãng</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-4">
+                <span class="material-symbols-outlined text-3xl text-secondary">public</span>
+                <div>
+                    <p class="font-bold">Giao hàng toàn quốc</p>
+                    <p class="text-xs text-on-surface-variant">Nhanh chóng, an toàn</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-4">
+                <span class="material-symbols-outlined text-3xl text-secondary">security</span>
+                <div>
+                    <p class="font-bold">Bảo hành uy tín</p>
+                    <p class="text-xs text-on-surface-variant">Lên đến 24 tháng tận nơi</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-4">
+                <span class="material-symbols-outlined text-3xl text-secondary">headset_mic</span>
+                <div>
+                    <p class="font-bold">Hỗ trợ 24/7</p>
+                    <p class="text-xs text-on-surface-variant">Tư vấn tận tâm, chu đáo</p>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<!-- Footer -->
+<footer class="bg-on-surface dark:bg-surface-container-lowest text-surface dark:text-on-surface pt-16 md:pt-20 pb-8">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-gutter w-full max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-12">
+        <div class="col-span-1 flex flex-col gap-6">
+            <div class="font-headline-md text-headline-md text-surface dark:text-on-surface font-bold">Nội Thất Sen Việt</div>
+            <p class="text-surface-variant opacity-80 text-sm">Mang đến những giải pháp nội thất tinh tế, nâng tầm giá trị không gian sống của người Việt.</p>
+            <div class="flex gap-4">
+                <a class="w-10 h-10 rounded-full border border-surface-variant flex items-center justify-center hover:bg-surface hover:text-primary transition-all" href="#">
+                    <span class="material-symbols-outlined text-sm">face_nod</span>
+                </a>
+                <a class="w-10 h-10 rounded-full border border-surface-variant flex items-center justify-center hover:bg-surface hover:text-primary transition-all" href="#">
+                    <span class="material-symbols-outlined text-sm">photo_camera</span>
+                </a>
+                <a class="w-10 h-10 rounded-full border border-surface-variant flex items-center justify-center hover:bg-surface hover:text-primary transition-all" href="#">
+                    <span class="material-symbols-outlined text-sm">play_circle</span>
+                </a>
+            </div>
+        </div>
+        <div class="col-span-1">
+            <h5 class="font-label-caps text-label-caps text-secondary mb-6">SẢN PHẨM</h5>
+            <ul class="flex flex-col gap-4 text-surface-variant text-sm">
+                <li class=""><a class="hover:text-surface transition-colors" href="#">Nội thất phòng khách</a></li>
+                <li class=""><a class="hover:text-surface transition-colors" href="#">Nội thất phòng ngủ</a></li>
+                <li class=""><a class="hover:text-surface transition-colors" href="#">Trang trí &amp; Phụ kiện</a></li>
+                <li class=""><a class="hover:text-surface transition-colors" href="#">Ưu đãi đặc biệt</a></li>
+            </ul>
+        </div>
+        <div class="col-span-1">
+            <h5 class="font-label-caps text-label-caps text-secondary mb-6">CHÍNH SÁCH</h5>
+            <ul class="flex flex-col gap-4 text-surface-variant text-sm">
+                <li class=""><a class="hover:text-surface transition-colors" href="#">Vận chuyển &amp; Giao hàng</a></li>
+                <li class=""><a class="hover:text-surface transition-colors" href="#">Đổi trả &amp; Hoàn tiền</a></li>
+                <li class=""><a class="hover:text-surface transition-colors" href="#">Bảo mật thông tin</a></li>
+                <li class=""><a class="hover:text-surface transition-colors" href="#">Điều khoản dịch vụ</a></li>
+            </ul>
+        </div>
+        <div class="col-span-1">
+            <h5 class="font-label-caps text-label-caps text-secondary mb-6">LIÊN HỆ</h5>
+            <ul class="flex flex-col gap-4 text-surface-variant text-sm">
+                <li class="flex items-center gap-3">
+                    <span class="material-symbols-outlined text-lg">call</span>
+                    <span class="">1900 1234</span>
+                </li>
+                <li class="flex items-center gap-3">
+                    <span class="material-symbols-outlined text-lg">mail</span>
+                    <span class="">contact@senviet.com</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="material-symbols-outlined text-lg">location_on</span>
+                    <span class="">123 Đường Decor, Quận 1, TP. Hồ Chí Minh</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="border-t border-outline-variant/20 mt-12 pt-8 text-center">
+        <p class="font-label-caps text-label-caps opacity-60 text-surface">© 2024 NỘI THẤT SEN VIỆT. ALL RIGHTS RESERVED.</p>
+    </div>
+</footer>
+
+<script>
+    // Simple interaction for Header on scroll
+    window.onscroll = function() {
+        const header = document.querySelector('header');
+        if (window.pageYOffset > 50) {
+            header.classList.add('shadow-md');
+            header.classList.add('py-2');
+        } else {
+            header.classList.remove('shadow-md');
+            header.classList.remove('py-2');
+        }
+    };
+</script>
+
+</body>
+</html>
