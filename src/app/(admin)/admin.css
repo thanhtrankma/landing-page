@@ -37,7 +37,7 @@
 .side nav .t-short { display: none; }
 .side nav .count { margin-left: auto; background: var(--danger); color: #fff; font-size: 11px; font-weight: 700; min-width: 20px; height: 20px; padding: 0 6px; border-radius: 999px; display: grid; place-items: center; }
 .side .foot { margin-top: auto; display: flex; flex-direction: column; gap: 8px; padding-top: 14px; border-top: 1px solid var(--line); }
-.main { padding: 32px 36px 90px; max-width: 1240px; width: 100%; }
+.main { padding: 32px 36px 90px; max-width: 1240px; width: 100%; margin-inline: auto; }
 .page-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 14px; flex-wrap: wrap; margin-bottom: 24px; }
 .page-head p { margin: 6px 0 0; color: var(--muted); }
 
