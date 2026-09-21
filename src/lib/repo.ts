@@ -4,7 +4,8 @@ import { db } from "./db";
 import type { Filter, Row } from "./db/types";
 import { TABLES } from "./db/types";
 import { defaultSettings } from "./site-data";
-import { postFromRow, postToRow, projectFromRow, projectToRow, type StoredContact, type StoredFaq, type StoredSocials } from "./models";
+import { legalDefaults } from "@/data/legal";
+import { pageFromRow, pageToRow, type SitePage, postFromRow, postToRow, projectFromRow, projectToRow, type StoredContact, type StoredFaq, type StoredSocials } from "./models";
 import { derivePhone } from "./models";
 
 // Admin-side data access (writes and unfiltered reads). Every caller must already have passed requireAdmin().
@@ -157,6 +158,41 @@ export async function writeSetting(key: "contact" | "socials" | "pricing" | "faq
   await db.upsert("settings", { key, value, updated_at: new Date().toISOString() }, "key");
 }
 
+// ---------------- legal pages ----------------
+/** All legal pages for the admin: saved rows plus any default that has not been imported yet (id undefined). */
+export async function adminListPages(): Promise<SitePage[]> {
+  const { rows } = await db.select<Row>("pages", {});
+  const stored = new Map(rows.map((r) => [String(r.slug), pageFromRow(r)]));
+  return legalDefaults.map((d) => stored.get(d.slug) ?? { slug: d.slug, title: d.title, description: d.description, content: d.content, published: true, updatedAt: "", id: undefined });
+}
+
+export async function adminGetPage(slug: string): Promise<SitePage | null> {
+  try {
+    return (await adminListPages()).find((p) => p.slug === slug) ?? null;
+  } catch {
+    // Table missing (schema not updated yet): still let the admin see the original text; saving will explain what to run.
+    const d = legalDefaults.find((x) => x.slug === slug);
+    return d ? { slug, title: d.title, description: d.description, content: d.content, published: true, updatedAt: "" } : null;
+  }
+}
+
+/** Creates or updates a legal page by slug. */
+export async function savePage(slug: string, input: Partial<SitePage>): Promise<void> {
+  const row = { ...pageToRow(input), updated_at: new Date().toISOString() };
+  const out = await db.update<Row>("pages", [{ col: "slug", op: "eq", val: slug }], row);
+  if (out.length) return;
+  const d = legalDefaults.find((x) => x.slug === slug);
+  if (!d) throw new Error("Trang không tồn tại.");
+  await db.insert("pages", { slug, title: d.title, description: d.description, content: d.content, published: true, ...row });
+}
+
+/** Puts the original text back. */
+export const resetPage = (slug: string) => {
+  const d = legalDefaults.find((x) => x.slug === slug);
+  if (!d) throw new Error("Trang không tồn tại.");
+  return savePage(slug, { title: d.title, description: d.description, content: d.content });
+};
+
 // ---------------- import of the bundled content ----------------
 export async function seedFromStatic() {
   const existingPosts = new Set((await db.select<Row>("posts", { columns: "slug" })).rows.map((r) => String(r.slug)));
@@ -170,6 +206,10 @@ export async function seedFromStatic() {
     .map((p, i) => projectToRow({ ...p, homeOrder: i, published: true }));
   for (let i = 0; i < newProjects.length; i += 30) await db.insert("projects", newProjects.slice(i, i + 30));
 
+  const existingPages = new Set((await db.select<Row>("pages", { columns: "slug" })).rows.map((r) => String(r.slug)));
+  const newPages = legalDefaults.filter((p) => !existingPages.has(p.slug));
+  if (newPages.length) await db.insert("pages", newPages.map((p) => ({ slug: p.slug, title: p.title, description: p.description, content: p.content, published: true })));
+
   const stored = await readSettingsRaw();
   const d = defaultSettings();
   const wrote: string[] = [];
@@ -180,7 +220,7 @@ export async function seedFromStatic() {
   if (!stored.socials) { await writeSetting("socials", socials); wrote.push("socials"); }
   if (!stored.pricing) { await writeSetting("pricing", d.pricingPlans); wrote.push("pricing"); }
   if (!stored.faqs) { await writeSetting("faqs", faqs); wrote.push("faqs"); }
-  return { posts: newPosts.length, projects: newProjects.length, settings: wrote };
+  return { posts: newPosts.length, projects: newProjects.length, pages: newPages.length, settings: wrote };
 }
 
 // ---------------- health ----------------

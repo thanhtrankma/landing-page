@@ -2,6 +2,7 @@
 
 import { usePathname } from "next/navigation";
 import { useEffect } from "react";
+import { useConsent } from "@/lib/consent";
 
 type Ev = Record<string, string | undefined> & { type: "view" | "click"; path: string };
 
@@ -41,12 +42,16 @@ function send(events: Ev[]) {
 /** Sends one page view per route change and one event per click on a contact / demo / CTA link. */
 export default function Tracker() {
   const pathname = usePathname();
+  const { consent } = useConsent();
+  const allowed = consent?.analytics === true; // opt-in: nothing is sent or stored until the visitor agrees
 
   useEffect(() => {
+    if (!allowed) return;
     send([{ type: "view", path: pathname, visitor: visitorId(), device: deviceOf(), referrer: document.referrer ? new URL(document.referrer).hostname : undefined }]);
-  }, [pathname]);
+  }, [pathname, allowed]);
 
   useEffect(() => {
+    if (!allowed) return;
     const onClick = (e: MouseEvent) => {
       const a = (e.target as Element | null)?.closest?.("a[href]") as HTMLAnchorElement | null;
       if (!a) return;
@@ -67,7 +72,7 @@ export default function Tracker() {
     };
     document.addEventListener("click", onClick, { capture: true });
     return () => document.removeEventListener("click", onClick, { capture: true });
-  }, []);
+  }, [allowed]);
 
   return null;
 }

@@ -49,6 +49,7 @@ const defaults: Record<string, () => Row> = {
   leads: () => ({ status: "new", note: "" }),
   posts: () => ({ published: true }),
   projects: () => ({ published: true, sample: false }),
+  pages: () => ({ published: true, updated_at: new Date().toISOString() }),
 };
 const prepare = (table: string, r: Row): Row => ({
   ...(["settings"].includes(table) ? {} : { id: randomUUID() }),

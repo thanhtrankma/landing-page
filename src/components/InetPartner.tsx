@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useConsent } from "@/lib/consent";
 import Glyph, { type GlyphName } from "./Glyph";
 import { Heading } from "./ui";
 
@@ -61,6 +62,7 @@ const dot = (background: string) =>
 
 export default function InetPartner() {
   const [activeId, setActiveId] = useState("domain");
+  const { ready, consent, save } = useConsent();
   const active = partners.find((p) => p.id === activeId) ?? partners[0];
 
   return (
@@ -229,13 +231,29 @@ export default function InetPartner() {
             </div>
           </div>
           <div style={{ width: "100%", height: "600px", background: "#f8fafc", position: "relative" }}>
-            <iframe
-              src={active.link}
-              width="100%"
-              height="600"
-              style={{ border: "none", width: "100%", height: "600px" }}
-              title={`iNET ${active.title}`}
-            />
+            {consent?.thirdParty ? (
+              <iframe
+                src={active.link}
+                width="100%"
+                height="600"
+                style={{ border: "none", width: "100%", height: "600px" }}
+                title={`iNET ${active.title}`}
+              />
+            ) : (
+              <div className="embed-gate">
+                <p>
+                  Khung này tải nội dung từ <b>inet.vn</b> (bên thứ ba). Khi tải, iNET có thể nhận địa chỉ IP của bạn và đặt cookie riêng.
+                </p>
+                <div className="embed-gate-actions">
+                  <button type="button" disabled={!ready} onClick={() => save({ analytics: consent?.analytics ?? false, thirdParty: true })}>
+                    Cho phép và tải nội dung
+                  </button>
+                  <a href={active.link} target="_blank" rel="noopener noreferrer">
+                    Hoặc mở trực tiếp trên inet.vn ↗
+                  </a>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>

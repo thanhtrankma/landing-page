@@ -1,7 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { facebookPath } from "@/data/site";
-import { getSettings } from "@/lib/site-data";
+import { getPublishedPages, getSettings } from "@/lib/site-data";
+import { CookieSettingsButton } from "./CookieBanner";
 import { Brand } from "./ui";
 
 const tiktokPath =
@@ -13,7 +14,7 @@ const instagramPath =
 const external = { target: "_blank", rel: "noopener noreferrer" } as const;
 
 export default async function Footer() {
-  const site = await getSettings();
+  const [site, legal] = await Promise.all([getSettings(), getPublishedPages()]);
   return (
     <footer>
       <div className="gv-wrap footer-grid">
@@ -90,7 +91,16 @@ export default async function Footer() {
       </div>
       <div className="gv-wrap footer-bottom">
         <span>© 2026 SuperLanding. All rights reserved.</span>
-        <span>Chính sách bảo mật · Điều khoản dịch vụ</span>
+        <span>
+          {legal.map((p, i) => (
+            <span key={p.slug}>
+              {i > 0 && " · "}
+              <Link href={`/${p.slug}`}>{p.title}</Link>
+            </span>
+          ))}
+          {" · "}
+          <CookieSettingsButton className="footer-linkbtn" />
+        </span>
       </div>
     </footer>
   );

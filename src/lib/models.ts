@@ -106,3 +106,24 @@ export function derivePhone(raw: string) {
   const intl = d.startsWith("0") ? `+84${d.slice(1)}` : `+${d}`;
   return { phone: d, phoneDisplay: display, phoneDotted: dotted, phoneIntl: intl };
 }
+
+// ---- legal pages ----
+export type SitePage = { id?: string; slug: string; title: string; description: string; content: string; published: boolean; updatedAt: string };
+
+export const pageFromRow = (r: Row): SitePage => ({
+  id: String(r.id),
+  slug: String(r.slug),
+  title: String(r.title ?? ""),
+  description: String(r.description ?? ""),
+  content: String(r.content ?? ""),
+  published: r.published !== false,
+  updatedAt: String(r.updated_at ?? r.created_at ?? new Date().toISOString()),
+});
+
+export const pageToRow = (p: Partial<SitePage>): Row => ({
+  ...(p.slug !== undefined && { slug: p.slug }),
+  ...(p.title !== undefined && { title: p.title }),
+  ...(p.description !== undefined && { description: p.description }),
+  ...(p.content !== undefined && { content: p.content }),
+  ...(p.published !== undefined && { published: p.published }),
+});

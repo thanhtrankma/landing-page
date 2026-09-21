@@ -2,13 +2,14 @@ import "server-only";
 import { EMAIL, ADDRESS, PHONE, FACEBOOK_URL, INSTAGRAM_URL, TIKTOK_URL, SHOW_SOCIALS, faqs as staticFaqs, pricingPlans as staticPlans } from "@/data/site";
 import { posts as staticPosts, projectList as staticProjects, type Post, type ProjectRecord } from "./content";
 import { db } from "./db";
-import { derivePhone, postFromRow, projectFromRow, type SiteSettings, type StoredContact, type StoredFaq, type StoredSocials } from "./models";
+import { legalDefaults } from "@/data/legal";
+import { derivePhone, pageFromRow, postFromRow, projectFromRow, type SitePage, type SiteSettings, type StoredContact, type StoredFaq, type StoredSocials } from "./models";
 import type { Row } from "./db/types";
 import type { PricingPlan } from "@/data/site";
 
 // Public reads. Content comes from the database when it has rows, otherwise from the bundled JSON so the site
 // never goes blank (e.g. before the first import). Tags let the admin refresh pages on demand.
-export const TAGS = { posts: "posts", projects: "projects", settings: "settings" } as const;
+export const TAGS = { posts: "posts", projects: "projects", settings: "settings", pages: "pages" } as const;
 const cache = (tag: string) => ({ tags: [tag], revalidate: 3600 });
 
 const POST_LIST_COLUMNS = "id,slug,title,category,img,summary,meta_title,meta_description,meta_keywords,service,published,created_at";
@@ -110,4 +111,46 @@ export async function getSettings(): Promise<SiteSettings> {
     const { rows } = await db.select<Row>("settings", {}, cache(TAGS.settings));
     return mergeSettings(Object.fromEntries(rows.map((r) => [String(r.key), r.value])));
   }, defaultSettings());
+}
+
+
+// ---------- legal pages ----------
+const defaultPage = (slug: string): SitePage | undefined => {
+  const d = legalDefaults.find((p) => p.slug === slug);
+  return d && { slug: d.slug, title: d.title, description: d.description, content: d.content, published: true, updatedAt: "2026-09-21T00:00:00.000Z" };
+};
+
+/** Published legal page, or undefined when it does not exist / is hidden. Falls back to the bundled text until it is saved in the database. */
+export async function getPage(slug: string): Promise<SitePage | undefined> {
+  return safe(async () => {
+    const { rows } = await db.select<Row>("pages", { filters: [{ col: "slug", op: "eq", val: slug }], limit: 1 }, cache(TAGS.pages));
+    if (rows.length) {
+      const p = pageFromRow(rows[0]);
+      return p.published ? p : undefined;
+    }
+    return defaultPage(slug);
+  }, defaultPage(slug));
+}
+
+/** Legal pages currently visible to visitors (for footer links and the sitemap). */
+export async function getPublishedPages(): Promise<{ slug: string; title: string }[]> {
+  const fallback = legalDefaults.map(({ slug, title }) => ({ slug, title }));
+  return safe(async () => {
+    const { rows } = await db.select<Row>("pages", { columns: "slug,title,published" }, cache(TAGS.pages));
+    if (!rows.length) return fallback;
+    const stored = new Map(rows.map((r) => [String(r.slug), r]));
+    // A default page that has no row yet still counts as visible.
+    return legalDefaults.flatMap((d) => {
+      const r = stored.get(d.slug);
+      return !r ? [{ slug: d.slug, title: d.title }] : r.published !== false ? [{ slug: d.slug, title: String(r.title || d.title) }] : [];
+    });
+  }, fallback);
+}
+
+const dateVN = new Intl.DateTimeFormat("vi-VN", { day: "2-digit", month: "2-digit", year: "numeric", timeZone: "Asia/Ho_Chi_Minh" });
+
+/** Replaces {{phone}}, {{email}}, {{address}}, {{updated}} so contact details always match Settings. */
+export function fillTokens(content: string, settings: SiteSettings, updatedAt: string): string {
+  const values: Record<string, string> = { phone: settings.phoneDisplay, phoneLink: settings.phone, email: settings.email, address: settings.address, updated: dateVN.format(new Date(updatedAt)) };
+  return content.replace(/\{\{\s*(phone|phoneLink|email|address|updated)\s*\}\}/g, (_, k: string) => values[k]);
 }

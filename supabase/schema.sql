@@ -83,6 +83,19 @@ create table if not exists public.events (
 create index if not exists events_created_idx on public.events (created_at desc);
 create index if not exists events_type_idx on public.events (type, created_at desc);
 
+-- Editable legal pages (privacy policy, terms of service)
+create table if not exists public.pages (
+  id           uuid primary key default gen_random_uuid(),
+  slug         text not null unique,
+  title        text not null,
+  description  text,
+  content      text not null default '',
+  published    boolean not null default true,
+  created_at   timestamptz not null default now(),
+  updated_at   timestamptz not null default now()
+);
+alter table public.pages enable row level security;
+
 alter table public.leads    enable row level security;
 alter table public.posts    enable row level security;
 alter table public.projects enable row level security;

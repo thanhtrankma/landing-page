@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Be_Vietnam_Pro, Inter, Outfit, Plus_Jakarta_Sans } from "next/font/google";
 import AnimatedBackground from "@/components/AnimatedBackground";
 import SkyCursor from "@/components/SkyCursor";
+import CookieBanner from "@/components/CookieBanner";
 import Tracker from "@/components/Tracker";
 import Footer from "@/components/Footer";
 import { MobileBottomNav, ScrollToTop, ZaloFloat } from "@/components/FloatingUi";
@@ -140,6 +141,7 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
             <ScrollReveal />
             <SkyCursor />
             <Tracker />
+            <CookieBanner />
             <Header />
             {children}
             <ScrollToTop />

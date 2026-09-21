@@ -10,6 +10,7 @@ const items: { href: string; label: string; short: string; icon: IconName; exact
   { href: "/admin/analytics", label: "Lượt xem & click", short: "Thống kê", icon: "chart" },
   { href: "/admin/posts", label: "Tin tức", short: "Tin tức", icon: "news" },
   { href: "/admin/projects", label: "Dự án & mẫu", short: "Dự án", icon: "folder" },
+  { href: "/admin/pages", label: "Chính sách & điều khoản", short: "Pháp lý", icon: "shield" },
   { href: "/admin/settings", label: "Cài đặt", short: "Cài đặt", icon: "settings" },
 ];
 

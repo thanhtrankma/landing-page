@@ -82,8 +82,8 @@ export async function importAction(): Promise<FormState> {
   await requireAdmin();
   try {
     const r = await seedFromStatic();
-    refreshSite("posts", "projects", "settings");
-    return { ok: true, message: `Đã nhập ${r.posts} bài viết, ${r.projects} dự án${r.settings.length ? `, cài đặt: ${r.settings.join(", ")}` : ""}. Dữ liệu đã có được giữ nguyên.` };
+    refreshSite("posts", "projects", "settings", "pages");
+    return { ok: true, message: `Đã nhập ${r.posts} bài viết, ${r.projects} dự án, ${r.pages} trang pháp lý${r.settings.length ? `, cài đặt: ${r.settings.join(", ")}` : ""}. Dữ liệu đã có được giữ nguyên.` };
   } catch (e) {
     return { error: `Nhập dữ liệu thất bại: ${(e as Error).message}` };
   }

@@ -26,5 +26,5 @@ export interface Db {
   remove(table: string, filters: Filter[]): Promise<number>;
 }
 
-export const TABLES = ["leads", "posts", "projects", "settings", "events"] as const;
+export const TABLES = ["leads", "posts", "projects", "settings", "events", "pages"] as const;
 export type Table = (typeof TABLES)[number];
