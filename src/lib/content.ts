@@ -30,6 +30,8 @@ export type ProjectRecord = {
   metaDescription: string | null;
   metaKeywords: string | null;
   hubOrder: number;
+  /** Fictional demo site (shown as "Mẫu Web") rather than a delivered client project. */
+  sample?: boolean;
 };
 
 export type ServicePageData = {

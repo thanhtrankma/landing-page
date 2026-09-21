@@ -8,12 +8,12 @@ import { servicePages } from "@/lib/content";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
-  title: "Dịch Vụ Website & Landing Page | WebLanding",
+  title: "Dịch Vụ Website & Landing Page | SuperLanding",
   description:
     "Tổng hợp dịch vụ thiết kế Website, Landing Page, website bán hàng, doanh nghiệp, nhà hàng và tiệm nail theo yêu cầu, chuẩn SEO và tối ưu chuyển đổi.",
-  ogDescription: "Khám phá các nhóm dịch vụ Website và Landing Page theo mục tiêu kinh doanh tại WebLanding.",
+  ogDescription: "Khám phá các nhóm dịch vụ Website và Landing Page theo mục tiêu kinh doanh tại SuperLanding.",
   path: "/dich-vu",
-  ogImageAlt: "Dịch vụ Thiết kế Website & Landing Page Chuẩn SEO — WebLanding",
+  ogImageAlt: "Dịch vụ Thiết kế Website & Landing Page Chuẩn SEO — SuperLanding",
 });
 
 const commitments: [IconName, string, string][] = [

@@ -70,7 +70,7 @@ function Carousel() {
           <Image
             key={src}
             src={src}
-            alt={`Dịch vụ thiết kế Website và Landing Page chuẩn SEO WebLanding — Banner ${i + 1}`}
+            alt={`Dịch vụ thiết kế Website và Landing Page chuẩn SEO SuperLanding — Banner ${i + 1}`}
             fill
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 450px"
             preload={i === 0}
@@ -107,7 +107,7 @@ export default function Hero() {
       <div className="hero-glow" />
       <div className="gv-wrap hero-layout">
         <div className="hero-copy fade-in-left">
-          <span className="hero-label">✦ DỊCH VỤ WEBSITE &amp; LANDING PAGE CHUYÊN NGHIỆP</span>
+          <span className="hero-label">✦ THIẾT KẾ WEBSITE &amp; LANDING PAGE CHO DOANH NGHIỆP</span>
           <h1 style={{ minHeight: "3.3em" }}>
             Thiết kế Website &amp;
             <span className="typewriter-container" style={{ display: "block", minHeight: "2.2em" }}>
@@ -115,13 +115,14 @@ export default function Hero() {
             </span>
           </h1>
           <p>
-            Thiết kế Landing Page / Website chuyên nghiệp cho cá nhân, cửa hàng bán hàng, doanh nghiệp và dịch vụ kinh
-            doanh. Tối ưu tỷ lệ chuyển đổi và tối ưu hóa tìm kiếm giúp thương hiệu của bạn tỏa sáng.
+            SuperLanding thiết kế website và landing page riêng cho từng thương hiệu: giao diện tinh gọn, tốc độ nhanh,
+            chuẩn SEO và xây dựng để biến lượt truy cập thành khách hàng. Từ cá nhân kinh doanh đến doanh nghiệp, chúng
+            tôi đồng hành từ ý tưởng đến khi website vận hành ổn định.
           </p>
           <div className="hero-actions">
             <Button href="/lien-he">Tư vấn miễn phí</Button>
             <Button href="#portfolio" light>
-              Xem dự án
+              Khám phá dự án
             </Button>
           </div>
         </div>
@@ -137,7 +138,7 @@ export default function Hero() {
             </span>
             <div className="badge-content">
               <strong>SEO</strong>
-              <span>Nền tảng kỹ thuật</span>
+              <span>Chuẩn kỹ thuật ngay từ đầu</span>
             </div>
           </div>
           <div className="hero-floating-badge bottom-right">
@@ -146,7 +147,7 @@ export default function Hero() {
             </span>
             <div className="badge-content">
               <strong>Tốc độ</strong>
-              <span>Ưu tiên tối ưu</span>
+              <span>Tải nhanh, mượt mà</span>
             </div>
           </div>
         </div>

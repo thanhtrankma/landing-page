@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>4MEN SPA – Massage trị liệu &amp; thư giãn dành cho nam giới tại Đà Nẵng</title>
+  <meta name="description" content="4MEN SPA – không gian massage trị liệu mô sâu, gội đầu dưỡng sinh, ngâm chân thảo dược và Reiki Energy dành riêng cho nam giới tại Đà Nẵng. Trang demo dựng lại phục vụ portfolio.">
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#2B1810">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&amp;family=Cormorant+Garamond:wght@500;600;700&amp;family=Great+Vibes&amp;display=swap">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a class="skip-link" href="#noi-dung">Bỏ qua và đến nội dung chính</a>
+
+  <!-- ============ SVG SPRITE (symbols + gradients) ============ -->
+  <svg class="sprite" width="0" height="0" aria-hidden="true" focusable="false">
+    <defs>
+      <linearGradient id="g-cream" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F4E8D6"/><stop offset="1" stop-color="#E8D3B0"/></linearGradient>
+      <linearGradient id="g-wall" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5A3320"/><stop offset="1" stop-color="#2B1810"/></linearGradient>
+      <linearGradient id="g-floor" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3B2214"/><stop offset="1" stop-color="#1E100A"/></linearGradient>
+      <linearGradient id="g-window" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FBE6BC"/><stop offset="1" stop-color="#D9A566"/></linearGradient>
+      <linearGradient id="g-bed" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8A5733"/><stop offset="1" stop-color="#4E2C1A"/></linearGradient>
+      <linearGradient id="g-day" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F9E9C9"/><stop offset="1" stop-color="#E4C48F"/></linearGradient>
+      <linearGradient id="g-night" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3A2013"/><stop offset="1" stop-color="#1C0F09"/></linearGradient>
+      <linearGradient id="g-gold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#E6C98F"/><stop offset="1" stop-color="#B98F4E"/></linearGradient>
+      <radialGradient id="g-glow"><stop offset="0" stop-color="#FFD58A" stop-opacity=".95"/><stop offset=".45" stop-color="#F2A64B" stop-opacity=".35"/><stop offset="1" stop-color="#F2A64B" stop-opacity="0"/></radialGradient>
+    </defs>
+
+    <!-- Logo mark: lotus + 4M -->
+    <symbol id="logo-mark" viewBox="0 0 64 64">
+      <circle cx="32" cy="32" r="30" fill="#2B1810" stroke="#C9A66B" stroke-width="2"/>
+      <g fill="none" stroke="#C9A66B" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round">
+        <path d="M32 9c6 5 8 11 0 21-8-10-6-16 0-21z" fill="#C9A66B" fill-opacity=".25"/>
+        <path d="M32 30c-2-8-9-11-16-11 0 8 5 13 16 11z"/>
+        <path d="M32 30c2-8 9-11 16-11 0 8-5 13-16 11z"/>
+        <path d="M32 30c-7-3-14-1-19 5 8 5 15 3 19-5z"/>
+        <path d="M32 30c7-3 14-1 19 5-8 5-15 3-19-5z"/>
+      </g>
+      <text x="32" y="53" text-anchor="middle" font-family="Cormorant Garamond, Georgia, serif" font-weight="700" font-size="19" fill="#E6C98F">4M</text>
+    </symbol>
+
+    <!-- Line icons -->
+    <symbol id="i-phone" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></g></symbol>
+    <symbol id="i-chat" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8z"/></g></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></g></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></g></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></g></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></g></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></g></symbol>
+    <symbol id="i-star" viewBox="0 0 24 24"><path fill="currentColor" d="m12 2 3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></symbol>
+    <symbol id="i-wave" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 7c3-3 5 3 8 0s5 3 8 0 3 1 4 1M2 13c3-3 5 3 8 0s5 3 8 0 3 1 4 1M2 19c3-3 5 3 8 0s5 3 8 0 3 1 4 1"/></g></symbol>
+    <symbol id="i-bubbles" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="15" r="5"/><circle cx="17" cy="8" r="3.5"/><circle cx="17.5" cy="18" r="2"/><path d="M6 4h.01"/></g></symbol>
+    <symbol id="i-drop" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.7s7 7.2 7 12a7 7 0 0 1-14 0c0-4.8 7-12 7-12z"/></g></symbol>
+    <symbol id="i-spark" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c1 5 4 8 9 9-5 1-8 4-9 9-1-5-4-8-9-9 5-1 8-4 9-9z"/><path d="M19 3v3M17.5 4.5h3"/></g></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></g></symbol>
+    <symbol id="i-leaf" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.5 19 2c1 2 2 4.2 2 8 0 5.5-4.8 10-10 10z"/><path d="M2 21c0-3 1.9-5.4 5.1-6C9.5 14.5 12 13 13 12"/></g></symbol>
+
+    <!-- Scene pieces -->
+    <symbol id="s-candle" viewBox="0 0 24 60">
+      <rect x="4" y="22" width="16" height="38" rx="3" fill="#F2E3C6"/>
+      <rect x="4" y="22" width="16" height="6" rx="3" fill="#E1CBA0"/>
+      <path d="M12 21v-4" stroke="#3A2013" stroke-width="1.6" stroke-linecap="round"/>
+      <path d="M12 3c5 6 6 10 0 15-6-5-5-9 0-15z" fill="#FFB63F"/>
+      <path d="M12 9c2.5 3 2.5 5 0 7-2.5-2-2.5-4 0-7z" fill="#FFF0BF"/>
+    </symbol>
+    <symbol id="s-plant" viewBox="0 0 120 160">
+      <path d="M60 110C52 80 22 66 6 30c34 4 56 30 54 80z" fill="#3F6B45"/>
+      <path d="M60 110C68 72 92 52 114 22c-38 8-58 38-54 88z" fill="#4E8055"/>
+      <path d="M60 112C50 90 44 60 60 12c16 48 10 78 0 100z" fill="#2F5637"/>
+      <path d="M60 112C36 108 14 96 4 72c26-2 48 12 56 40z" fill="#5C8F5F"/>
+      <path d="M60 112c24-4 42-16 54-40-26-2-46 12-54 40z" fill="#3F6B45"/>
+      <path d="M60 112V22M60 112 20 44M60 112 100 40" stroke="#1F3D26" stroke-width="1.2" fill="none" opacity=".5"/>
+      <path d="M34 110h52l-7 46H41z" fill="#8A5733"/>
+      <rect x="30" y="104" width="60" height="10" rx="4" fill="#A66E42"/>
+    </symbol>
+    <symbol id="s-lotus" viewBox="0 0 48 40">
+      <g fill="#C9A66B" stroke="#8A6A2F" stroke-width="1.2" stroke-linejoin="round">
+        <path d="M24 2c6 6 8 14 0 24-8-10-6-18 0-24z"/>
+        <path d="M24 26C22 15 14 10 5 11c1 11 8 17 19 15z" fill-opacity=".85"/>
+        <path d="M24 26c2-11 10-16 19-15-1 11-8 17-19 15z" fill-opacity=".85"/>
+      </g>
+      <path d="M8 32c10 6 22 6 32 0" stroke="#C9A66B" stroke-width="2" fill="none" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="s-avatar" viewBox="0 0 120 120">
+      <circle cx="60" cy="60" r="60" fill="var(--bg, #E8D3B0)"/>
+      <path d="M12 104c4-18 20-26 48-26s44 8 48 26a60 60 0 0 1-96 0z" fill="#5A3320"/>
+      <path d="M46 80l14 16 14-16" fill="none" stroke="#C9A66B" stroke-width="3" stroke-linejoin="round"/>
+      <rect x="51" y="62" width="18" height="20" rx="8" fill="var(--skin, #D9A377)"/>
+      <ellipse cx="60" cy="48" rx="20" ry="23" fill="var(--skin, #D9A377)"/>
+      <path d="M40 46c-3-20 12-30 26-27 12 2 17 12 14 27-3-9-8-14-16-14-10 0-19 3-24 14z" fill="var(--hair, #2A1A12)"/>
+      <path d="M42 58c2 14 9 20 18 20s16-6 18-20c-4 9-10 12-18 12s-14-3-18-12z" fill="var(--beard, none)"/>
+      <circle cx="52" cy="50" r="1.8" fill="#2A1A12"/><circle cx="68" cy="50" r="1.8" fill="#2A1A12"/>
+      <path d="M53 62c4 3 10 3 14 0" fill="none" stroke="#7A3F2A" stroke-width="2" stroke-linecap="round"/>
+    </symbol>
+  </svg>
+
+  <!-- ============ HEADER ============ -->
+  <header class="site-header" id="top">
+    <div class="container header-inner">
+      <a class="brand" href="#top" aria-label="4MEN SPA – về đầu trang">
+        <svg class="brand__mark" aria-hidden="true" focusable="false"><use href="#logo-mark"/></svg>
+        <span class="brand__text"><span class="brand__name">4MEN SPA</span><span class="brand__tag">Dành cho nam giới</span></span>
+      </a>
+      <nav class="main-nav" aria-label="Điều hướng chính">
+        <ul>
+          <li><a href="#top">Trang Chủ</a></li>
+          <li><a href="#gioi-thieu">Về Chúng Tôi</a></li>
+          <li><a href="#dich-vu">Dịch Vụ Spa</a></li>
+          <li><a href="#tin-tuc">Tin Tức &amp; Ưu Đãi</a></li>
+          <li><a href="#lien-he">Liên Hệ</a></li>
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <a class="icon-btn" href="tel:0900000456" aria-label="Gọi hotline 0900 000 456"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-phone"/></svg></a>
+        <a class="icon-btn icon-btn--chat" href="#dat-lich" aria-label="Nhắn tin đặt lịch"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-chat"/></svg></a>
+        <a class="btn btn--dark" href="#dat-lich">Đặt lịch ngay</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="noi-dung">
+
+    <!-- ============ 1. HERO ============ -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="container">
+        <div class="hero__plate">
+          <svg class="hero__plate-mark" aria-hidden="true" focusable="false"><use href="#logo-mark"/></svg>
+          <span><strong>4MEN SPA</strong> — Dành cho nam giới</span>
+        </div>
+
+        <div class="hero__grid">
+          <div class="hero__copy">
+            <h1 id="hero-title">
+              <span class="script">Ưu đãi Đặc biệt tại</span>
+              <span class="hero__big">4 MEN SPA</span>
+            </h1>
+            <p class="hero__sub">Thư giãn Sâu – Tái tạo Năng lượng Mỗi ngày</p>
+            <p class="hero__lead">Massage trị liệu mô sâu, gội đầu dưỡng sinh, ngâm chân thảo dược và Reiki Energy — trong không gian riêng tư, ấm áp, chỉ dành cho quý ông tại Đà Nẵng.</p>
+            <div class="hero__cta">
+              <a class="btn btn--dark btn--lg" href="#dat-lich">Đặt lịch ngay</a>
+              <a class="btn btn--ghost btn--lg" href="#dich-vu">Xem bảng giá</a>
+            </div>
+            <ul class="hero__badges">
+              <li><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-check"/></svg> Kỹ thuật viên nam</li>
+              <li><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-check"/></svg> Phòng riêng, kín đáo</li>
+              <li><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-check"/></svg> Đón &amp; trả khách miễn phí</li>
+            </ul>
+          </div>
+
+          <div class="hero__art">
+            <svg class="scene" viewBox="0 0 640 480" role="img" aria-label="Minh hoạ kỹ thuật viên mặc đồng phục nâu đang massage cho khách nằm trên giường trị liệu, trong căn phòng ấm ánh nến và cây xanh">
+              <rect width="640" height="480" fill="url(#g-wall)"/>
+              <path d="M80 0v380M160 0v380M240 0v380M320 0v380M400 0v380M480 0v380M560 0v380" stroke="#000" stroke-opacity=".12" stroke-width="2"/>
+              <!-- window -->
+              <path d="M40 350V150a70 70 0 0 1 140 0v200z" fill="url(#g-window)" stroke="#C9A66B" stroke-width="5"/>
+              <path d="M110 80v270M40 190h140" stroke="#C9A66B" stroke-width="3"/>
+              <path d="M52 350c10-30 30-46 50-50-12 14-14 30-10 50zM170 350c-10-26-24-40-40-44 8 12 10 26 6 44z" fill="#6E9A62" opacity=".55"/>
+              <circle class="glow" cx="530" cy="170" r="190" fill="url(#g-glow)" opacity=".55"/>
+              <!-- shelf with candles -->
+              <rect x="430" y="214" width="200" height="10" rx="3" fill="#8A5733"/>
+              <circle class="glow" cx="472" cy="176" r="46" fill="url(#g-glow)"/>
+              <circle class="glow glow--b" cx="548" cy="186" r="40" fill="url(#g-glow)"/>
+              <use href="#s-candle" x="460" y="164" width="24" height="52"/>
+              <use href="#s-candle" x="538" y="176" width="20" height="40"/>
+              <use href="#s-candle" x="580" y="184" width="18" height="32"/>
+              <use href="#s-lotus" x="500" y="176" width="34" height="36"/>
+              <!-- floor -->
+              <rect y="380" width="640" height="100" fill="url(#g-floor)"/>
+              <ellipse cx="330" cy="404" rx="270" ry="20" fill="#000" opacity=".35"/>
+              <!-- therapist (behind the bed) -->
+              <path d="M218 148c2-28 22-32 44-32s42 4 46 32l12 156H206z" fill="#6B3D22"/>
+              <path d="M238 118l24 34 24-34" fill="none" stroke="#C9A66B" stroke-width="4" stroke-linejoin="round"/>
+              <path d="M262 152v150" stroke="#4A2A1A" stroke-width="2"/>
+              <circle cx="262" cy="176" r="3" fill="#C9A66B"/><circle cx="262" cy="200" r="3" fill="#C9A66B"/>
+              <rect x="278" y="164" width="18" height="8" rx="2" fill="#C9A66B"/>
+              <rect x="254" y="104" width="16" height="20" rx="6" fill="#C48F63"/>
+              <circle cx="262" cy="86" r="28" fill="#E0AE83"/>
+              <path d="M234 84c-4-30 28-38 48-26 10 6 12 18 8 28-8-12-30-14-56-2z" fill="#2A1A12"/>
+              <circle cx="252" cy="90" r="2.2" fill="#2A1A12"/><circle cx="272" cy="90" r="2.2" fill="#2A1A12"/>
+              <path d="M254 102c5 4 12 4 17 0" fill="none" stroke="#8A4A32" stroke-width="2.2" stroke-linecap="round"/>
+              <path d="M226 154c-12 46-6 74 18 98" fill="none" stroke="#6B3D22" stroke-width="26" stroke-linecap="round"/>
+              <path d="M300 154c20 40 14 70-10 98" fill="none" stroke="#6B3D22" stroke-width="26" stroke-linecap="round"/>
+              <!-- bed -->
+              <rect x="112" y="312" width="448" height="70" rx="10" fill="url(#g-bed)"/>
+              <path d="M112 346h448" stroke="#C9A66B" stroke-width="2" opacity=".7"/>
+              <rect x="128" y="380" width="16" height="34" rx="4" fill="#2B1810"/>
+              <rect x="528" y="380" width="16" height="34" rx="4" fill="#2B1810"/>
+              <rect x="98" y="286" width="476" height="34" rx="16" fill="#EBD9BB"/>
+              <path d="M112 306h448" stroke="#D2B98C" stroke-width="2"/>
+              <!-- client lying face-down -->
+              <rect x="106" y="266" width="66" height="26" rx="12" fill="#F4E8D6"/>
+              <circle cx="146" cy="266" r="21" fill="#D9A377"/>
+              <path d="M126 262c-2-16 12-22 26-18 10 3 16 12 14 22-8-8-24-10-40-4z" fill="#2A1A12"/>
+              <path d="M172 290c4-32 26-40 66-40 60-2 100 2 112 16v24z" fill="#D9A377"/>
+              <ellipse cx="208" cy="276" rx="32" ry="9" fill="#C68F62"/>
+              <path d="M336 292c-2-40 34-46 76-42l110 14v28z" fill="#F6EDDC"/>
+              <path d="M370 254c2 12 2 24 0 38M430 258c2 12 2 22 0 34M488 264c2 10 2 18 0 28" stroke="#D9C7A4" stroke-width="2" fill="none"/>
+              <ellipse cx="538" cy="282" rx="16" ry="9" fill="#D9A377"/>
+              <!-- therapist hands over client's back -->
+              <circle cx="244" cy="256" r="12" fill="#E0AE83"/>
+              <circle cx="292" cy="256" r="12" fill="#E0AE83"/>
+              <!-- plants -->
+              <use href="#s-plant" x="-36" y="270" width="150" height="200"/>
+              <use href="#s-plant" x="548" y="290" width="120" height="180"/>
+              <!-- floor candles + oil -->
+              <circle class="glow glow--b" cx="150" cy="418" r="42" fill="url(#g-glow)"/>
+              <use href="#s-candle" x="138" y="410" width="24" height="52"/>
+              <rect x="176" y="434" width="18" height="30" rx="4" fill="#C98A2E"/>
+              <rect x="181" y="426" width="8" height="10" rx="2" fill="#8A5733"/>
+            </svg>
+          </div>
+        </div>
+
+        <ul class="hero-cards">
+          <li>
+            <a class="photo-card" href="#tin-tuc">
+              <svg viewBox="0 0 240 160" aria-hidden="true" focusable="false">
+                <rect width="240" height="160" fill="url(#g-day)"/>
+                <circle cx="180" cy="40" r="44" fill="url(#g-glow)" opacity=".7"/>
+                <path d="M46 78h116l-12 70H58z" fill="#9A6A3C"/>
+                <path d="M50 92h108M54 108h100M58 124h92M60 140h88" stroke="#6E4726" stroke-width="2.5" opacity=".7"/>
+                <path d="M84 78v70M104 78v70M124 78v70M144 78v70" stroke="#6E4726" stroke-width="2" opacity=".5"/>
+                <rect x="50" y="58" width="52" height="26" rx="13" fill="#FBF3E4"/>
+                <rect x="96" y="52" width="58" height="30" rx="15" fill="#F2E3C6"/>
+                <path d="M62 70h30M108 68h34" stroke="#D8C39A" stroke-width="2"/>
+                <rect x="176" y="90" width="20" height="44" rx="6" fill="#C98A2E"/><rect x="181" y="78" width="10" height="14" rx="3" fill="#6E4726"/>
+                <rect x="204" y="104" width="16" height="30" rx="5" fill="#9C6420"/><rect x="208" y="96" width="8" height="10" rx="2" fill="#6E4726"/>
+                <use href="#s-lotus" x="12" y="106" width="30" height="26"/>
+              </svg>
+              <span class="photo-card__label">Chi tiết Khuyến mãi</span>
+            </a>
+          </li>
+          <li>
+            <a class="photo-card" href="#lien-he">
+              <svg viewBox="0 0 240 160" aria-hidden="true" focusable="false">
+                <rect width="240" height="160" fill="url(#g-night)"/>
+                <circle cx="120" cy="80" r="100" fill="url(#g-glow)" opacity=".5"/>
+                <rect x="30" y="34" width="180" height="92" fill="#4A2A1A"/>
+                <path d="M26 34h188l-8 22H34z" fill="#C9A66B"/>
+                <path d="M46 34l-6 22M76 34l-4 22M106 34l-2 22M136 34l2 22M166 34l4 22M196 34l6 22" stroke="#8A5733" stroke-width="3"/>
+                <rect x="52" y="64" width="70" height="52" rx="4" fill="#FFD58A"/>
+                <rect x="132" y="64" width="46" height="62" rx="4" fill="#2B1810" stroke="#C9A66B" stroke-width="2"/>
+                <path d="M87 64v52M52 90h70" stroke="#8A5733" stroke-width="2"/>
+                <rect x="70" y="14" width="100" height="18" rx="4" fill="#2B1810" stroke="#C9A66B" stroke-width="1.5"/>
+                <text x="120" y="27.5" text-anchor="middle" font-family="Cormorant Garamond, Georgia, serif" font-weight="700" font-size="13" fill="#E6C98F">4MEN SPA</text>
+                <rect y="126" width="240" height="34" fill="#1C0F09"/>
+                <path d="M0 143h240" stroke="#5A3320" stroke-width="2" stroke-dasharray="14 10"/>
+                <rect x="150" y="134" width="70" height="20" rx="8" fill="#E6C98F"/>
+                <rect x="160" y="128" width="42" height="14" rx="6" fill="#C9A66B"/>
+                <circle cx="168" cy="154" r="6" fill="#2B1810" stroke="#8A6A2F" stroke-width="2"/><circle cx="204" cy="154" r="6" fill="#2B1810" stroke="#8A6A2F" stroke-width="2"/>
+              </svg>
+              <span class="photo-card__label">Đón &amp; Trả Khách Miễn phí</span>
+            </a>
+          </li>
+          <li>
+            <a class="photo-card" href="#dich-vu">
+              <svg viewBox="0 0 240 160" aria-hidden="true" focusable="false">
+                <rect width="240" height="160" fill="url(#g-wall)"/>
+                <circle cx="190" cy="70" r="70" fill="url(#g-glow)" opacity=".6"/>
+                <rect y="118" width="240" height="42" fill="url(#g-floor)"/>
+                <rect x="40" y="96" width="140" height="14" rx="7" fill="#EBD9BB"/>
+                <rect x="46" y="108" width="128" height="30" rx="5" fill="url(#g-bed)"/>
+                <rect x="54" y="136" width="8" height="14" fill="#2B1810"/><rect x="158" y="136" width="8" height="14" fill="#2B1810"/>
+                <path d="M92 96c4-14 22-16 44-14 18 2 26 8 30 14z" fill="#F6EDDC"/>
+                <ellipse cx="62" cy="90" rx="14" ry="9" fill="#F4E8D6"/>
+                <use href="#s-candle" x="188" y="92" width="16" height="36"/>
+                <use href="#s-candle" x="208" y="102" width="14" height="28"/>
+                <use href="#s-plant" x="-8" y="60" width="64" height="90"/>
+                <path d="M100 14v28" stroke="#C9A66B" stroke-width="2"/>
+                <path d="M86 42h28l-4 16H90z" fill="#FFD58A"/>
+              </svg>
+              <span class="photo-card__label">Dịch vụ của Chúng tôi</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ 2. ABOUT ============ -->
+    <section class="section section--ivory" id="gioi-thieu" aria-labelledby="about-title">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">Về chúng tôi</p>
+          <h2 id="about-title">Nơi quý ông được nghỉ ngơi đúng nghĩa</h2>
+          <p class="section-head__lead">Sau những ngày dài làm việc, cơ thể cần một nơi để chậm lại. 4MEN SPA ra đời với một mục tiêu giản dị: mang đến trải nghiệm trị liệu chuyên nghiệp, kín đáo và tôn trọng dành riêng cho nam giới.</p>
+        </div>
+
+        <div class="about-grid">
+          <div class="about-story">
+            <h3>Câu chuyện của 4MEN SPA</h3>
+            <p>Năm 2016, nhóm bốn người bạn — một kỹ thuật viên vật lý trị liệu, một chuyên gia thảo dược, một người làm dịch vụ khách sạn và một doanh nhân trẻ — cùng mở một cơ sở nhỏ ở Đà Nẵng. Họ nhận ra nam giới rất cần được chăm sóc nhưng hiếm khi tìm thấy nơi thật sự thoải mái để làm điều đó.</p>
+            <p>Chữ “4” trong tên gọi là bốn người sáng lập; chữ “M” là <em>Men</em> — khách hàng của chúng tôi. Bông sen trên biểu tượng nhắc rằng sự tĩnh tại luôn có thể nở ra từ một ngày bận rộn.</p>
+            <p>Đến nay, đội ngũ kỹ thuật viên được đào tạo bài bản về giải phẫu cơ, kỹ thuật mô sâu và kiến thức thảo dược, luôn lắng nghe để điều chỉnh lực tay và liệu trình cho từng người.</p>
+          </div>
+          <ul class="values">
+            <li class="value">
+              <span class="value__icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-shield"/></svg></span>
+              <div><h3>Riêng tư &amp; tôn trọng</h3><p>Phòng riêng, quy trình rõ ràng. Chúng tôi chỉ cung cấp massage trị liệu và thư giãn, không phục vụ bất kỳ dịch vụ nhạy cảm nào.</p></div>
+            </li>
+            <li class="value">
+              <span class="value__icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-leaf"/></svg></span>
+              <div><h3>Thảo dược tự nhiên</h3><p>Tinh dầu sả chanh, gừng, quế và lá thảo mộc sơ chế mỗi ngày, không hương liệu gắt.</p></div>
+            </li>
+            <li class="value">
+              <span class="value__icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-wave"/></svg></span>
+              <div><h3>Trị liệu đúng điểm</h3><p>Tư vấn trước buổi làm, tập trung vai gáy, lưng, cổ chân — những vùng nam giới hay mỏi nhất.</p></div>
+            </li>
+          </ul>
+        </div>
+
+        <dl class="stats">
+          <div class="stat"><dt>Năm hoạt động</dt><dd>9+</dd></div>
+          <div class="stat"><dt>Kỹ thuật viên</dt><dd>24</dd></div>
+          <div class="stat"><dt>Lượt khách hài lòng</dt><dd>60.000+</dd></div>
+          <div class="stat"><dt>Điểm đánh giá</dt><dd>4,9/5</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <!-- ============ 3. SERVICES ============ -->
+    <section class="section section--sand" id="dich-vu" aria-labelledby="services-title">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">Dịch vụ Spa &amp; bảng giá</p>
+          <h2 id="services-title">Thực đơn thư giãn</h2>
+          <p class="section-head__lead">Chọn một liệu trình đơn lẻ hoặc kết hợp thành combo. Giá đã gồm trà thảo mộc, khăn và tinh dầu; chưa gồm tiền tip.</p>
+        </div>
+
+        <div class="service-grid">
+          <article class="service-card">
+            <span class="service-card__icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-wave"/></svg></span>
+            <h3>Massage trị liệu mô sâu</h3>
+            <p>Kỹ thuật ấn sâu, kéo giãn giúp giải tỏa cơ vai gáy, thắt lưng và chân sau nhiều giờ ngồi làm việc.</p>
+            <ul class="price-list">
+              <li><span>60 phút</span><i class="dots" aria-hidden="true"></i><strong>350.000đ</strong></li>
+              <li><span>90 phút</span><i class="dots" aria-hidden="true"></i><strong>480.000đ</strong></li>
+              <li><span>120 phút</span><i class="dots" aria-hidden="true"></i><strong>620.000đ</strong></li>
+            </ul>
+            <a class="link-arrow" href="#dat-lich">Đặt dịch vụ này <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></a>
+          </article>
+
+          <article class="service-card">
+            <span class="service-card__icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-bubbles"/></svg></span>
+            <h3>Gội đầu dưỡng sinh</h3>
+            <p>Gội bằng nước ấm thảo dược, bấm huyệt đầu – cổ – vai giúp giảm căng thẳng và ngủ ngon hơn.</p>
+            <ul class="price-list">
+              <li><span>45 phút</span><i class="dots" aria-hidden="true"></i><strong>180.000đ</strong></li>
+              <li><span>60 phút</span><i class="dots" aria-hidden="true"></i><strong>240.000đ</strong></li>
+              <li><span>75 phút</span><i class="dots" aria-hidden="true"></i><strong>300.000đ</strong></li>
+            </ul>
+            <a class="link-arrow" href="#dat-lich">Đặt dịch vụ này <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></a>
+          </article>
+
+          <article class="service-card">
+            <span class="service-card__icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-drop"/></svg></span>
+            <h3>Ngâm chân thảo dược</h3>
+            <p>Ngâm chân với gừng, sả, lá ngải và muối khoáng, kèm bấm huyệt bàn chân để tuần hoàn nhẹ nhàng.</p>
+            <ul class="price-list">
+              <li><span>30 phút</span><i class="dots" aria-hidden="true"></i><strong>120.000đ</strong></li>
+              <li><span>45 phút</span><i class="dots" aria-hidden="true"></i><strong>160.000đ</strong></li>
+              <li><span>60 phút</span><i class="dots" aria-hidden="true"></i><strong>210.000đ</strong></li>
+            </ul>
+            <a class="link-arrow" href="#dat-lich">Đặt dịch vụ này <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></a>
+          </article>
+
+          <article class="service-card">
+            <span class="service-card__icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-spark"/></svg></span>
+            <h3>Reiki Energy</h3>
+            <p>Liệu pháp năng lượng nhẹ nhàng trong không gian yên tĩnh, giúp tinh thần cân bằng và phục hồi.</p>
+            <ul class="price-list">
+              <li><span>45 phút</span><i class="dots" aria-hidden="true"></i><strong>300.000đ</strong></li>
+              <li><span>60 phút</span><i class="dots" aria-hidden="true"></i><strong>380.000đ</strong></li>
+              <li><span>90 phút</span><i class="dots" aria-hidden="true"></i><strong>520.000đ</strong></li>
+            </ul>
+            <a class="link-arrow" href="#dat-lich">Đặt dịch vụ này <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></a>
+          </article>
+        </div>
+
+        <h3 class="table-title">Combo tiết kiệm</h3>
+        <div class="table-wrap" role="region" aria-label="Bảng giá combo, cuộn ngang để xem đủ" tabindex="0">
+          <table class="price-table">
+            <caption class="visually-hidden">Các combo dịch vụ của 4MEN SPA</caption>
+            <thead>
+              <tr><th scope="col">Combo</th><th scope="col">Bao gồm</th><th scope="col">Thời lượng</th><th scope="col">Giá</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">Thư giãn cơ bản</th><td>Ngâm chân thảo dược 30 phút + Massage mô sâu 60 phút</td><td>90 phút</td><td>420.000đ</td></tr>
+              <tr><th scope="row">Phục hồi vai gáy</th><td>Gội đầu dưỡng sinh 45 phút + Massage mô sâu 90 phút</td><td>135 phút</td><td>600.000đ</td></tr>
+              <tr><th scope="row">Cân bằng năng lượng</th><td>Ngâm chân 45 phút + Reiki Energy 60 phút</td><td>105 phút</td><td>490.000đ</td></tr>
+              <tr><th scope="row">Trọn vẹn 4MEN</th><td>Ngâm chân + Massage mô sâu 90 phút + Gội đầu 60 phút + Reiki 45 phút</td><td>240 phút</td><td>950.000đ</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 4. PROCESS ============ -->
+    <section class="section section--dark" id="quy-trinh" aria-labelledby="process-title">
+      <div class="container">
+        <div class="section-head section-head--light">
+          <p class="eyebrow">Quy trình</p>
+          <h2 id="process-title">Quy trình 5 bước thư giãn trọn vẹn</h2>
+          <p class="section-head__lead">Mỗi buổi trị liệu tại 4MEN SPA được sắp xếp theo trình tự để cơ thể chuyển dần từ căng thẳng sang thư thái.</p>
+        </div>
+        <ol class="steps">
+          <li class="step">
+            <span class="step__num" aria-hidden="true">1</span>
+            <h3>Đón tiếp &amp; tư vấn</h3>
+            <p>Trà thảo mộc ấm, trao đổi nhanh về sức khỏe, vùng đau mỏi và lực tay mong muốn.</p>
+            <span class="step__time">10 phút</span>
+          </li>
+          <li class="step">
+            <span class="step__num" aria-hidden="true">2</span>
+            <h3>Ngâm chân thảo dược</h3>
+            <p>Làm ấm cơ thể, thả lỏng cổ chân và bắp chân trước khi vào liệu trình chính.</p>
+            <span class="step__time">15–30 phút</span>
+          </li>
+          <li class="step">
+            <span class="step__num" aria-hidden="true">3</span>
+            <h3>Massage trị liệu</h3>
+            <p>Kỹ thuật viên áp dụng kỹ thuật mô sâu ở lưng, vai, cổ và chân theo đúng nhu cầu.</p>
+            <span class="step__time">60–120 phút</span>
+          </li>
+          <li class="step">
+            <span class="step__num" aria-hidden="true">4</span>
+            <h3>Gội đầu / Reiki</h3>
+            <p>Bấm huyệt đầu – cổ, hoặc liệu pháp Reiki giúp đầu óc nhẹ nhõm, dễ chìm vào giấc ngủ.</p>
+            <span class="step__time">45–60 phút</span>
+          </li>
+          <li class="step">
+            <span class="step__num" aria-hidden="true">5</span>
+            <h3>Nghỉ ngơi &amp; hoàn tất</h3>
+            <p>Thay đồ, dùng trà và bánh nhẹ, nhận lời khuyên chăm sóc tại nhà. Đón &amp; trả khách miễn phí nếu cần.</p>
+            <span class="step__time">10 phút</span>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ============ 5. GALLERY ============ -->
+    <section class="section section--ivory" id="khong-gian" aria-labelledby="gallery-title">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">Không gian</p>
+          <h2 id="gallery-title">Ánh nến, gỗ ấm và hương thảo mộc</h2>
+          <p class="section-head__lead">Mỗi khu vực được thiết kế để khách thấy yên tâm, kín đáo và dễ chịu ngay từ bước chân đầu tiên.</p>
+        </div>
+        <ul class="gallery">
+          <li class="tile">
+            <svg viewBox="0 0 320 220" role="img" aria-label="Minh hoạ sảnh đón tiếp với quầy gỗ, đèn thả và bông sen vàng trên tường">
+              <rect width="320" height="220" fill="url(#g-wall)"/>
+              <rect y="170" width="320" height="50" fill="url(#g-floor)"/>
+              <use href="#s-lotus" x="130" y="34" width="60" height="50"/>
+              <path d="M70 0v30M250 0v30" stroke="#C9A66B" stroke-width="2"/>
+              <circle cx="70" cy="44" r="40" fill="url(#g-glow)"/><path d="M56 30h28l4 20H52z" fill="#FFD58A"/>
+              <circle cx="250" cy="44" r="40" fill="url(#g-glow)"/><path d="M236 30h28l4 20h-36z" fill="#FFD58A"/>
+              <rect x="70" y="122" width="180" height="60" rx="4" fill="#8A5733"/>
+              <rect x="64" y="114" width="192" height="12" rx="4" fill="#C9A66B"/>
+              <path d="M100 126v52M140 126v52M180 126v52M220 126v52" stroke="#6E4726" stroke-width="2"/>
+              <use href="#s-plant" x="-10" y="110" width="70" height="98"/>
+              <use href="#s-candle" x="262" y="86" width="16" height="36"/>
+            </svg>
+            <span class="tile__cap">Sảnh đón tiếp</span>
+          </li>
+          <li class="tile">
+            <svg viewBox="0 0 320 220" role="img" aria-label="Minh hoạ phòng massage đơn với giường trị liệu, khăn cuộn và nến">
+              <rect width="320" height="220" fill="url(#g-wall)"/>
+              <circle cx="250" cy="90" r="90" fill="url(#g-glow)" opacity=".6"/>
+              <rect y="164" width="320" height="56" fill="url(#g-floor)"/>
+              <rect x="50" y="118" width="190" height="16" rx="8" fill="#EBD9BB"/>
+              <rect x="58" y="132" width="174" height="36" rx="6" fill="url(#g-bed)"/>
+              <rect x="70" y="166" width="10" height="22" fill="#2B1810"/><rect x="210" y="166" width="10" height="22" fill="#2B1810"/>
+              <rect x="60" y="102" width="34" height="18" rx="9" fill="#F4E8D6"/>
+              <rect x="148" y="104" width="70" height="16" rx="8" fill="#F6EDDC"/>
+              <use href="#s-candle" x="256" y="124" width="20" height="44"/>
+              <use href="#s-plant" x="-8" y="92" width="72" height="100"/>
+              <rect x="120" y="30" width="80" height="50" rx="4" fill="#4A2A1A" stroke="#C9A66B" stroke-width="2"/>
+              <path d="M130 66c12-24 24-8 34-20s18 6 26 10" fill="none" stroke="#C9A66B" stroke-width="2"/>
+            </svg>
+            <span class="tile__cap">Phòng massage đơn</span>
+          </li>
+          <li class="tile">
+            <svg viewBox="0 0 320 220" role="img" aria-label="Minh hoạ phòng đôi với hai giường trị liệu cạnh nhau và đèn lồng">
+              <rect width="320" height="220" fill="url(#g-wall)"/>
+              <rect y="164" width="320" height="56" fill="url(#g-floor)"/>
+              <circle cx="160" cy="54" r="50" fill="url(#g-glow)"/>
+              <path d="M160 0v22" stroke="#C9A66B" stroke-width="2"/><ellipse cx="160" cy="40" rx="16" ry="20" fill="#FFD58A" stroke="#C9A66B" stroke-width="2"/>
+              <rect x="18" y="122" width="132" height="14" rx="7" fill="#EBD9BB"/><rect x="24" y="134" width="120" height="32" rx="5" fill="url(#g-bed)"/>
+              <rect x="170" y="122" width="132" height="14" rx="7" fill="#EBD9BB"/><rect x="176" y="134" width="120" height="32" rx="5" fill="url(#g-bed)"/>
+              <rect x="24" y="108" width="28" height="16" rx="8" fill="#F4E8D6"/><rect x="268" y="108" width="28" height="16" rx="8" fill="#F4E8D6"/>
+              <rect x="78" y="112" width="60" height="14" rx="7" fill="#F6EDDC"/><rect x="180" y="112" width="60" height="14" rx="7" fill="#F6EDDC"/>
+              <use href="#s-candle" x="150" y="134" width="20" height="44"/>
+            </svg>
+            <span class="tile__cap">Phòng đôi</span>
+          </li>
+          <li class="tile">
+            <svg viewBox="0 0 320 220" role="img" aria-label="Minh hoạ khu ngâm chân thảo dược với hai ghế thư giãn và chậu gỗ">
+              <rect width="320" height="220" fill="url(#g-day)"/>
+              <rect y="168" width="320" height="52" fill="#B98F4E"/>
+              <path d="M0 168h320" stroke="#8A6A2F" stroke-width="3"/>
+              <rect x="30" y="86" width="100" height="50" rx="16" fill="#5A3320"/><rect x="30" y="126" width="110" height="18" rx="8" fill="#4A2A1A"/>
+              <rect x="186" y="86" width="100" height="50" rx="16" fill="#5A3320"/><rect x="176" y="126" width="110" height="18" rx="8" fill="#4A2A1A"/>
+              <path d="M52 168h64l-6 34H58z" fill="#8A5733"/><ellipse cx="84" cy="168" rx="32" ry="8" fill="#7BA07A"/>
+              <path d="M204 168h64l-6 34h-52z" fill="#8A5733"/><ellipse cx="236" cy="168" rx="32" ry="8" fill="#7BA07A"/>
+              <path d="M74 158c-4-10 6-14 2-22M96 158c-4-10 6-14 2-22M226 158c-4-10 6-14 2-22M248 158c-4-10 6-14 2-22" stroke="#FFF" stroke-opacity=".7" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+              <use href="#s-plant" x="140" y="70" width="46" height="70"/>
+            </svg>
+            <span class="tile__cap">Khu ngâm chân thảo dược</span>
+          </li>
+          <li class="tile">
+            <svg viewBox="0 0 320 220" role="img" aria-label="Minh hoạ khu trà thảo mộc với bàn thấp, ấm trà, chén và đệm ngồi">
+              <rect width="320" height="220" fill="url(#g-wall)"/>
+              <circle cx="80" cy="70" r="80" fill="url(#g-glow)" opacity=".6"/>
+              <rect y="170" width="320" height="50" fill="url(#g-floor)"/>
+              <rect x="70" y="130" width="180" height="14" rx="5" fill="#C9A66B"/>
+              <rect x="86" y="142" width="10" height="34" fill="#8A5733"/><rect x="224" y="142" width="10" height="34" fill="#8A5733"/>
+              <path d="M136 130c-2-24 8-34 24-34s26 10 24 34z" fill="#F2E3C6"/>
+              <path d="M184 112c14-2 16 10 4 14" fill="none" stroke="#F2E3C6" stroke-width="5"/>
+              <rect x="150" y="84" width="20" height="10" rx="4" fill="#D8C39A"/>
+              <path d="M96 130c0-12 6-14 12-14s12 2 12 14zM210 130c0-12 6-14 12-14s12 2 12 14z" fill="#E6C98F"/>
+              <ellipse cx="40" cy="176" rx="34" ry="14" fill="#7A3F2A"/><ellipse cx="282" cy="176" rx="34" ry="14" fill="#7A3F2A"/>
+              <use href="#s-candle" x="268" y="98" width="18" height="40"/>
+            </svg>
+            <span class="tile__cap">Góc trà thảo mộc</span>
+          </li>
+          <li class="tile">
+            <svg viewBox="0 0 320 220" role="img" aria-label="Minh hoạ khu tắm tráng và thay đồ với vách kính, giá khăn và tủ đồ gỗ">
+              <rect width="320" height="220" fill="url(#g-day)"/>
+              <rect y="176" width="320" height="44" fill="#B98F4E"/>
+              <rect x="22" y="30" width="96" height="146" rx="4" fill="#FFFFFF" fill-opacity=".45" stroke="#8A6A2F" stroke-width="3"/>
+              <path d="M70 30v146" stroke="#8A6A2F" stroke-width="2"/>
+              <path d="M96 14h26v18" stroke="#8A6A2F" stroke-width="4" fill="none"/><ellipse cx="86" cy="52" rx="22" ry="6" fill="#8A6A2F"/>
+              <path d="M78 64l-4 30M86 64v34M94 64l4 30" stroke="#5B8FA8" stroke-width="2" stroke-linecap="round"/>
+              <rect x="140" y="50" width="70" height="8" rx="3" fill="#8A5733"/>
+              <rect x="146" y="58" width="26" height="60" rx="4" fill="#FBF3E4"/><rect x="176" y="58" width="26" height="46" rx="4" fill="#F2E3C6"/>
+              <rect x="226" y="40" width="80" height="136" rx="4" fill="#6E4726"/>
+              <path d="M266 40v136M226 108h80" stroke="#4A2A1A" stroke-width="2"/>
+              <circle cx="258" cy="80" r="3" fill="#C9A66B"/><circle cx="274" cy="80" r="3" fill="#C9A66B"/><circle cx="258" cy="146" r="3" fill="#C9A66B"/><circle cx="274" cy="146" r="3" fill="#C9A66B"/>
+            </svg>
+            <span class="tile__cap">Khu tắm tráng &amp; thay đồ</span>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ 6. THERAPISTS ============ -->
+    <section class="section section--sand" id="ky-thuat-vien" aria-labelledby="team-title">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">Đội ngũ</p>
+          <h2 id="team-title">Những đôi tay được đào tạo bài bản</h2>
+          <p class="section-head__lead">Tất cả kỹ thuật viên của 4MEN SPA đều được đào tạo về giải phẫu cơ, kỹ thuật mô sâu và quy tắc ứng xử chuyên nghiệp.</p>
+        </div>
+        <ul class="team">
+          <li class="member">
+            <svg class="avatar av--1" role="img" aria-label="Ảnh minh hoạ kỹ thuật viên Minh Quân"><use href="#s-avatar"/></svg>
+            <h3>Minh Quân</h3>
+            <p class="member__role">Trưởng nhóm trị liệu</p>
+            <p>12 năm kinh nghiệm, chuyên mô sâu vùng lưng và thắt lưng.</p>
+          </li>
+          <li class="member">
+            <svg class="avatar av--2" role="img" aria-label="Ảnh minh hoạ kỹ thuật viên Hoàng Long"><use href="#s-avatar"/></svg>
+            <h3>Hoàng Long</h3>
+            <p class="member__role">Chuyên viên vai gáy</p>
+            <p>Kết hợp giãn cơ và bấm huyệt cho người làm văn phòng.</p>
+          </li>
+          <li class="member">
+            <svg class="avatar av--3" role="img" aria-label="Ảnh minh hoạ kỹ thuật viên Đức Anh"><use href="#s-avatar"/></svg>
+            <h3>Đức Anh</h3>
+            <p class="member__role">Bậc thầy Reiki</p>
+            <p>Chứng chỉ Reiki cấp II, dẫn dắt các buổi thư giãn năng lượng.</p>
+          </li>
+          <li class="member">
+            <svg class="avatar av--4" role="img" aria-label="Ảnh minh hoạ kỹ thuật viên Quốc Bảo"><use href="#s-avatar"/></svg>
+            <h3>Quốc Bảo</h3>
+            <p class="member__role">Chuyên gia gội đầu &amp; thảo dược</p>
+            <p>Phụ trách công thức nước thảo dược và liệu trình gội dưỡng sinh.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ 7. REVIEWS ============ -->
+    <section class="section section--dark" id="danh-gia" aria-labelledby="reviews-title">
+      <div class="container">
+        <div class="section-head section-head--light">
+          <p class="eyebrow">Khách hàng nói gì</p>
+          <h2 id="reviews-title">Được tin tưởng bởi hàng nghìn quý ông</h2>
+          <p class="rating-sum"><span class="stars" role="img" aria-label="Đánh giá trung bình 4,9 trên 5 sao"><svg aria-hidden="true" focusable="false"><use href="#i-star"/></svg><svg aria-hidden="true" focusable="false"><use href="#i-star"/></svg><svg aria-hidden="true" focusable="false"><use href="#i-star"/></svg><svg aria-hidden="true" focusable="false"><use href="#i-star"/></svg><svg aria-hidden="true" focusable="false"><use href="#i-star"/></svg></span> <strong>4,9/5</strong> từ hơn 1.200 đánh giá</p>
+        </div>
+        <ul class="reviews">
+          <li>
+            <figure class="review">
+              <span class="stars" role="img" aria-label="5 trên 5 sao"><svg aria-hidden="true" focusable="false"><use href="#i-star"/></svg><svg aria-hidden="true" focusable="false"><use href="#i-star"/></svg><svg aria-hidden="true" focusable="false"><use href="#i-star"/></svg><svg aria-hidden="true" focusable="false"><use href="#i-star"/></svg><svg aria-hidden="true" focusable="false"><use href="#i-star"/></svg></span>
+              <blockquote><p>Ngồi máy tính cả ngày nên vai gáy cứng đơ. Sau buổi mô sâu 90 phút với anh Quân, mình xoay cổ nhẹ hẳn. Không gian rất kín đáo, đúng chất dành cho nam.</p></blockquote>
+              <figcaption><strong>Anh Tuấn Kiệt</strong><span>Kỹ sư phần mềm</span></figcaption>
+            </figure>
+          </li>
+          <li>
+            <figure class="review">
+              <span class="stars" role="img" aria-label="5 trên 5 sao"><svg aria-hidden="true" focusable="false"><use href="#i-star"/></svg><svg aria-hidden="true" focusable="false"><use href="#i-star"/></svg><svg aria-hidden="true" focusable="false"><use href="#i-star"/></svg><svg aria-hidden="true" focusable="false"><use href="#i-star"/></svg><svg aria-hidden="true" focusable="false"><use href="#i-star"/></svg></span>
+              <blockquote><p>Combo ngâm chân và gội đầu dưỡng sinh rất đáng tiền. Nước thảo dược thơm dịu, nhân viên tư vấn kỹ, không chèo kéo. Xe đưa đón miễn phí cũng rất tiện.</p></blockquote>
+              <figcaption><strong>Anh Đình Phong</strong><span>Chủ doanh nghiệp</span></figcaption>
+            </figure>
+          </li>
+          <li>
+            <figure class="review">
+              <span class="stars" role="img" aria-label="5 trên 5 sao"><svg aria-hidden="true" focusable="false"><use href="#i-star"/></svg><svg aria-hidden="true" focusable="false"><use href="#i-star"/></svg><svg aria-hidden="true" focusable="false"><use href="#i-star"/></svg><svg aria-hidden="true" focusable="false"><use href="#i-star"/></svg><svg aria-hidden="true" focusable="false"><use href="#i-star"/></svg></span>
+              <blockquote><p>Lần đầu thử Reiki nên hơi ngại, nhưng bạn Đức Anh giải thích rất rõ. Mình ngủ thiếp đi lúc nào không biết, tỉnh dậy thấy đầu óc nhẹ nhõm hẳn.</p></blockquote>
+              <figcaption><strong>Anh Văn Thịnh</strong><span>Quản lý bán hàng</span></figcaption>
+            </figure>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ 8. NEWS ============ -->
+    <section class="section section--ivory" id="tin-tuc" aria-labelledby="news-title">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">Tin tức &amp; Ưu đãi</p>
+          <h2 id="news-title">Cập nhật mới từ 4MEN SPA</h2>
+        </div>
+
+        <div class="promo" role="group" aria-labelledby="promo-title">
+          <div class="promo__copy">
+            <p class="promo__tag">Ưu đãi tháng này</p>
+            <h3 id="promo-title">Combo “Trọn vẹn 4MEN” giảm 20%</h3>
+            <p>Áp dụng cho khách đặt lịch trước 24 giờ, từ thứ Hai đến thứ Năm. Tặng kèm một phần trà thảo mộc và bánh nhẹ.</p>
+            <a class="btn btn--gold" href="#dat-lich">Nhận ưu đãi</a>
+          </div>
+          <svg class="promo__art" viewBox="0 0 240 160" aria-hidden="true" focusable="false">
+            <circle cx="120" cy="80" r="90" fill="url(#g-glow)"/>
+            <circle cx="120" cy="80" r="58" fill="url(#g-gold)"/>
+            <circle cx="120" cy="80" r="50" fill="none" stroke="#2B1810" stroke-width="1.5" stroke-dasharray="3 4"/>
+            <text x="120" y="92" text-anchor="middle" font-family="Cormorant Garamond, Georgia, serif" font-weight="700" font-size="44" fill="#2B1810">-20%</text>
+            <use href="#s-candle" x="24" y="90" width="20" height="46"/>
+            <use href="#s-candle" x="200" y="100" width="18" height="38"/>
+          </svg>
+        </div>
+
+        <ul class="news">
+          <li>
+            <article class="news-card">
+              <svg viewBox="0 0 320 140" aria-hidden="true" focusable="false">
+                <rect width="320" height="140" fill="url(#g-day)"/>
+                <circle cx="240" cy="40" r="50" fill="url(#g-glow)" opacity=".8"/>
+                <path d="M60 110c-4-30 12-58 44-70 6 30-6 60-44 70z" fill="#5C8F5F"/>
+                <path d="M120 116c-6-30 6-52 36-64 8 28 0 54-36 64z" fill="#3F6B45"/>
+                <path d="M190 120c0-26 14-42 40-46 0 26-12 42-40 46z" fill="#4E8055"/>
+                <path d="M20 122h280" stroke="#8A6A2F" stroke-width="3"/>
+              </svg>
+              <div class="news-card__body">
+                <p class="news-card__meta"><time datetime="2026-09-12">12/09/2026</time> · Ưu đãi</p>
+                <h3>Khai trương khu ngâm chân thảo dược mới</h3>
+                <p>Thêm 8 vị trí ngâm chân với công thức gừng – sả – lá ngải, tặng 15 phút bấm huyệt cho khách trong tuần đầu.</p>
+              </div>
+            </article>
+          </li>
+          <li>
+            <article class="news-card">
+              <svg viewBox="0 0 320 140" aria-hidden="true" focusable="false">
+                <rect width="320" height="140" fill="url(#g-night)"/>
+                <circle cx="160" cy="70" r="80" fill="url(#g-glow)" opacity=".8"/>
+                <g fill="none" stroke="#C9A66B" stroke-width="2"><circle cx="160" cy="70" r="20"/><circle cx="160" cy="70" r="34" stroke-opacity=".7"/><circle cx="160" cy="70" r="48" stroke-opacity=".45"/></g>
+                <path d="M160 46c2 14 8 20 22 24-14 4-20 10-22 24-2-14-8-20-22-24 14-4 20-10 22-24z" fill="#E6C98F"/>
+              </svg>
+              <div class="news-card__body">
+                <p class="news-card__meta"><time datetime="2026-08-28">28/08/2026</time> · Sự kiện</p>
+                <h3>Buổi thư giãn Reiki cuối tuần dành cho nam giới</h3>
+                <p>Lớp trải nghiệm nhóm nhỏ 8 người, hướng dẫn thở và thiền nhẹ trước khi làm liệu pháp Reiki. Nhận đăng ký đến hết thứ Sáu.</p>
+              </div>
+            </article>
+          </li>
+          <li>
+            <article class="news-card">
+              <svg viewBox="0 0 320 140" aria-hidden="true" focusable="false">
+                <rect width="320" height="140" fill="url(#g-wall)"/>
+                <circle cx="90" cy="70" r="70" fill="url(#g-glow)" opacity=".7"/>
+                <rect x="40" y="84" width="150" height="14" rx="7" fill="#EBD9BB"/><rect x="46" y="96" width="138" height="24" rx="5" fill="url(#g-bed)"/>
+                <use href="#s-candle" x="210" y="60" width="22" height="50"/>
+                <use href="#s-lotus" x="246" y="70" width="44" height="38"/>
+              </svg>
+              <div class="news-card__body">
+                <p class="news-card__meta"><time datetime="2026-08-10">10/08/2026</time> · Kiến thức</p>
+                <h3>5 động tác giãn cơ cổ vai gáy cho dân văn phòng</h3>
+                <p>Các bài tập đơn giản chỉ mất 5 phút, bạn có thể làm ngay tại bàn làm việc để giảm đau mỏi giữa hai buổi trị liệu.</p>
+              </div>
+            </article>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ 9. BOOKING + LOCATION ============ -->
+    <section class="section section--sand" id="dat-lich" aria-labelledby="booking-title">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">Đặt lịch</p>
+          <h2 id="booking-title">Đặt lịch hẹn nhanh</h2>
+          <p class="section-head__lead">Điền thông tin, lễ tân sẽ gọi xác nhận trong 15 phút (trong giờ mở cửa). Đây là biểu mẫu minh hoạ nên chưa gửi dữ liệu đi đâu.</p>
+        </div>
+
+        <form class="booking" action="#" method="post">
+          <div class="field">
+            <label for="f-name">Họ và tên</label>
+            <input id="f-name" name="name" type="text" autocomplete="name" placeholder="Ví dụ: Nguyễn Văn An" required>
+          </div>
+          <div class="field">
+            <label for="f-phone">Số điện thoại</label>
+            <input id="f-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="0900 000 000" required>
+          </div>
+          <div class="field">
+            <label for="f-service">Dịch vụ</label>
+            <select id="f-service" name="service">
+              <option>Massage trị liệu mô sâu</option>
+              <option>Gội đầu dưỡng sinh</option>
+              <option>Ngâm chân thảo dược</option>
+              <option>Reiki Energy</option>
+              <option>Combo Trọn vẹn 4MEN</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="f-date">Ngày hẹn</label>
+            <input id="f-date" name="date" type="date">
+          </div>
+          <div class="field">
+            <label for="f-time">Giờ hẹn</label>
+            <input id="f-time" name="time" type="time" min="09:00" max="21:30">
+          </div>
+          <div class="field field--full">
+            <label for="f-note">Ghi chú</label>
+            <textarea id="f-note" name="note" rows="3" placeholder="Vùng cơ cần chú ý, lực tay mong muốn, cần đưa đón..."></textarea>
+          </div>
+          <div class="field field--full">
+            <button class="btn btn--dark btn--lg" type="submit">Gửi yêu cầu đặt lịch</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <section class="section section--ivory" id="lien-he" aria-labelledby="contact-title">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">Liên hệ</p>
+          <h2 id="contact-title">Ghé thăm 4MEN SPA</h2>
+        </div>
+        <div class="contact-grid">
+          <figure class="map">
+            <svg viewBox="0 0 480 320" role="img" aria-label="Bản đồ minh hoạ vị trí 4MEN SPA gần bờ sông Hàn, quận Hải Châu, Đà Nẵng">
+              <rect width="480" height="320" fill="#EFE2C8"/>
+              <path d="M360-10c-30 70 30 110-6 170s20 110-10 180h160V-10z" fill="#B9CFCB"/>
+              <path d="M352 0c-30 70 30 110-6 170s20 100-8 150" fill="none" stroke="#9DBBB6" stroke-width="3"/>
+              <ellipse cx="90" cy="250" rx="70" ry="38" fill="#B7CF9A"/>
+              <g fill="#E1CDA5"><rect x="20" y="20" width="90" height="60" rx="4"/><rect x="130" y="20" width="80" height="60" rx="4"/><rect x="230" y="20" width="90" height="60" rx="4"/><rect x="20" y="110" width="90" height="70" rx="4"/><rect x="230" y="200" width="90" height="70" rx="4"/><rect x="130" y="200" width="80" height="70" rx="4"/></g>
+              <g stroke="#FFFFFF" stroke-linecap="round" fill="none"><path d="M0 98h480" stroke-width="14"/><path d="M120 0v320" stroke-width="12"/><path d="M220 0v320" stroke-width="10"/><path d="M0 188h340" stroke-width="8"/><path d="M0 290 340 178" stroke-width="7"/></g>
+              <path d="M0 98h480M120 0v320" stroke="#D6C29A" stroke-width="1" stroke-dasharray="8 8" fill="none"/>
+              <g font-family="Be Vietnam Pro, Arial, sans-serif" font-size="12" fill="#5A4434"><text x="260" y="92">Đường Bạch Đằng</text><text x="380" y="140" fill="#3D6A66">Sông Hàn</text><text x="30" y="255">Công viên</text></g>
+              <ellipse cx="170" cy="150" rx="26" ry="9" fill="#000" opacity=".2"/>
+              <path d="M170 150c-16-22-30-34-30-52a30 30 0 0 1 60 0c0 18-14 30-30 52z" fill="#2B1810" stroke="#C9A66B" stroke-width="3"/>
+              <circle cx="170" cy="98" r="14" fill="#C9A66B"/>
+              <use href="#s-lotus" x="158" y="88" width="24" height="20"/>
+              <rect x="128" y="158" width="84" height="22" rx="6" fill="#2B1810"/>
+              <text x="170" y="173" text-anchor="middle" font-family="Be Vietnam Pro, Arial, sans-serif" font-size="12" font-weight="700" fill="#F4E8D6">4MEN SPA</text>
+              <g transform="translate(436 40)"><circle r="18" fill="#FBF5EA" stroke="#8A6A2F" stroke-width="1.5"/><path d="M0-12 5 2H-5z" fill="#2B1810"/><text y="14" text-anchor="middle" font-size="9" font-family="Be Vietnam Pro, Arial, sans-serif" font-weight="700" fill="#5A4434">B</text></g>
+            </svg>
+            <figcaption>Bản đồ minh hoạ – vị trí mang tính tượng trưng.</figcaption>
+          </figure>
+
+          <div class="contact-info">
+            <h3>Thông tin liên hệ</h3>
+            <ul class="contact-list">
+              <li><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-pin"/></svg><span><strong>Địa chỉ</strong><br>Số 00 Đường Mẫu, quận Hải Châu, Đà Nẵng</span></li>
+              <li><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-phone"/></svg><span><strong>Hotline</strong><br><a href="tel:0900000456">0900 000 456</a></span></li>
+              <li><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-mail"/></svg><span><strong>Email</strong><br><a href="mailto:xinchao@4menspa.example.vn">xinchao@4menspa.example.vn</a></span></li>
+              <li><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg><span><strong>Giờ mở cửa</strong><br>Hằng ngày 09:00 – 23:00 (khách cuối 21:30)</span></li>
+            </ul>
+            <div class="contact-btns">
+              <a class="btn btn--dark" href="tel:0900000456">Gọi Hotline</a>
+              <a class="btn btn--ghost" href="#dat-lich">Nhắn Zalo</a>
+              <a class="btn btn--ghost" href="tel:0900000456">WhatsApp</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 10. FAQ ============ -->
+    <section class="section section--sand" id="hoi-dap" aria-labelledby="faq-title">
+      <div class="container container--narrow">
+        <div class="section-head">
+          <p class="eyebrow">Hỏi đáp</p>
+          <h2 id="faq-title">Câu hỏi thường gặp</h2>
+        </div>
+        <div class="faq">
+          <details>
+            <summary>4MEN SPA có phục vụ dịch vụ nhạy cảm không?</summary>
+            <p>Không. Chúng tôi chỉ cung cấp massage trị liệu và thư giãn theo đúng chuyên môn. Mọi liệu trình đều thực hiện trong phòng riêng với quy trình rõ ràng, tôn trọng khách hàng và kỹ thuật viên.</p>
+          </details>
+          <details>
+            <summary>Tôi cần đặt lịch trước bao lâu?</summary>
+            <p>Bạn nên đặt trước ít nhất 2 giờ, và trước 24 giờ nếu đi vào cuối tuần hoặc muốn dùng combo. Khách vãng lai vẫn được đón nếu còn phòng trống.</p>
+          </details>
+          <details>
+            <summary>Lần đầu massage mô sâu có đau không?</summary>
+            <p>Lực tay được điều chỉnh theo ngưỡng chịu đựng của bạn. Hãy cho kỹ thuật viên biết ngay nếu thấy quá mạnh hoặc quá nhẹ, chúng tôi sẽ thay đổi ngay trong buổi làm.</p>
+          </details>
+          <details>
+            <summary>Dịch vụ đón &amp; trả khách miễn phí áp dụng thế nào?</summary>
+            <p>Áp dụng cho khách đặt combo từ 90 phút trở lên trong bán kính khoảng 5 km quanh trung tâm Đà Nẵng. Vui lòng báo khi đặt lịch để bố trí xe.</p>
+          </details>
+          <details>
+            <summary>Ai không nên dùng dịch vụ mô sâu hoặc ngâm chân?</summary>
+            <p>Người đang chấn thương cấp, có bệnh tim mạch nặng, huyết áp cao chưa kiểm soát hoặc vết thương hở nên tham khảo ý kiến bác sĩ trước. Hãy thông báo tình trạng sức khỏe để chúng tôi tư vấn liệu trình phù hợp.</p>
+          </details>
+          <details>
+            <summary>Tôi có thể huỷ hoặc đổi lịch không?</summary>
+            <p>Được. Bạn chỉ cần báo trước ít nhất 2 giờ qua hotline hoặc Zalo. Chúng tôi không thu phí huỷ lịch.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ 11. FOOTER ============ -->
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="#top" aria-label="4MEN SPA – về đầu trang">
+          <svg class="brand__mark" aria-hidden="true" focusable="false"><use href="#logo-mark"/></svg>
+          <span class="brand__text"><span class="brand__name">4MEN SPA</span><span class="brand__tag">Dành cho nam giới</span></span>
+        </a>
+        <p>Massage trị liệu, gội đầu dưỡng sinh, ngâm chân thảo dược và Reiki Energy tại Đà Nẵng.</p>
+      </div>
+      <nav aria-label="Liên kết chân trang">
+        <h2 class="footer-title">Khám phá</h2>
+        <ul>
+          <li><a href="#gioi-thieu">Về chúng tôi</a></li>
+          <li><a href="#dich-vu">Dịch vụ &amp; bảng giá</a></li>
+          <li><a href="#quy-trinh">Quy trình 5 bước</a></li>
+          <li><a href="#tin-tuc">Tin tức &amp; Ưu đãi</a></li>
+          <li><a href="#hoi-dap">Hỏi đáp</a></li>
+        </ul>
+      </nav>
+      <div>
+        <h2 class="footer-title">Liên hệ</h2>
+        <ul>
+          <li><a href="tel:0900000456">Hotline: 0900 000 456</a></li>
+          <li><a href="mailto:xinchao@4menspa.example.vn">xinchao@4menspa.example.vn</a></li>
+          <li>Số 00 Đường Mẫu, Hải Châu, Đà Nẵng</li>
+          <li>Mở cửa 09:00 – 23:00 hằng ngày</li>
+        </ul>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <p>© 2026 4MEN SPA. Trang dựng lại để minh hoạ; thông tin liên hệ mang tính giả định.</p>
+      <p><a href="/">Trang demo do SuperLanding thiết kế</a></p>
+    </div>
+  </footer>
+
+  <!-- Floating contact buttons -->
+  <div class="float-btns">
+    <a class="float-btn float-btn--zalo" href="#lien-he" aria-label="Liên hệ qua Zalo">
+      <svg viewBox="0 0 48 48" aria-hidden="true" focusable="false"><circle cx="24" cy="24" r="24" fill="#0068FF"/><text x="24" y="29" text-anchor="middle" font-family="Be Vietnam Pro, Arial, sans-serif" font-weight="700" font-size="13" fill="#FFFFFF">Zalo</text></svg>
+    </a>
+    <a class="float-btn float-btn--wa" href="tel:0900000456" aria-label="Gọi hoặc nhắn WhatsApp 0900 000 456">
+      <svg viewBox="0 0 48 48" aria-hidden="true" focusable="false"><circle cx="24" cy="24" r="24" fill="#128C7E"/><path d="M24 10a14 14 0 0 0-12 21l-2 7 7.2-1.9A14 14 0 1 0 24 10z" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linejoin="round"/><g transform="translate(15.5 15.5) scale(.7)" color="#FFFFFF"><use href="#i-phone" width="24" height="24"/></g></svg>
+    </a>
+  </div>
+</body>
+</html>

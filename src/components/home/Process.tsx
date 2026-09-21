@@ -11,8 +11,8 @@ export default function Process() {
           <Heading
             center
             eyebrow="QUY TRÌNH"
-            title="Rõ ràng ở từng điểm chạm"
-            text="Quy trình linh hoạt giúp dự án đi nhanh nhưng không đánh đổi chất lượng."
+            title="Quy trình minh bạch, dự án đi đúng tiến độ"
+            text="Bốn bước rõ ràng giúp dự án tiến nhanh mà vẫn giữ trọn chất lượng ở từng chi tiết."
           />
         </div>
         <div className="process-layout">

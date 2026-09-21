@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Vitalis Health – Thực phẩm bảo vệ sức khỏe, minh bạch thành phần</title>
+  <meta name="description" content="Vitalis Health: thương hiệu thực phẩm bảo vệ sức khỏe với thành phần công bố rõ ràng, quy trình chất lượng minh bạch và đội ngũ tư vấn thân thiện. Trang demo minh họa.">
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="data:,">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<svg class="sprite" width="0" height="0" aria-hidden="true" focusable="false">
+  <defs>
+    <linearGradient id="shine" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#000" stop-opacity=".22"/>
+      <stop offset=".12" stop-color="#fff" stop-opacity=".05"/>
+      <stop offset=".3" stop-color="#fff" stop-opacity=".42"/>
+      <stop offset=".46" stop-color="#fff" stop-opacity="0"/>
+      <stop offset=".85" stop-color="#000" stop-opacity=".06"/>
+      <stop offset="1" stop-color="#000" stop-opacity=".3"/>
+    </linearGradient>
+    <linearGradient id="g-mark" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#7C7CEB"/>
+      <stop offset="1" stop-color="#0B2545"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Icon nét -->
+  <symbol id="i-leaf" viewBox="0 0 24 24"><path d="M5 19c-1-8 3-14 15-14 0 10-5 15-12 14.2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/><path d="M5 19c3-4 6-6.5 10-8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
+  <symbol id="i-gear" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M12 3v2.600M12 18.400V21M3 12h2.600M18.400 12H21M5.600 5.600l1.900 1.900M16.500 16.500l1.900 1.900M5.600 18.400l1.900-1.900M16.500 7.500l1.900-1.900" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
+  <symbol id="i-flask" viewBox="0 0 24 24"><path d="M9.500 3h5M10.500 3v6L5 18.500A1.800 1.800 0 0 0 6.600 21h10.800a1.800 1.800 0 0 0 1.600-2.500L13.500 9V3" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/><path d="M7.500 15h9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
+  <symbol id="i-box" viewBox="0 0 24 24"><path d="M3.500 7.500 12 3l8.500 4.500v9L12 21l-8.500-4.500z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M3.500 7.500 12 12l8.500-4.500M12 12v9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3 5 6v5.500c0 4.300 2.900 7.700 7 9.500 4.100-1.800 7-5.200 7-9.500V6z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="m8.800 12 2.300 2.300 4.200-4.600" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-list" viewBox="0 0 24 24"><path d="M9 6h11M9 12h11M9 18h11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="4.800" cy="6" r="1.300" fill="currentColor"/><circle cx="4.800" cy="12" r="1.300" fill="currentColor"/><circle cx="4.800" cy="18" r="1.300" fill="currentColor"/></symbol>
+  <symbol id="i-truck" viewBox="0 0 24 24"><path d="M2.500 6.500h10v9h-10zM12.500 9.500h4.300l3.200 3.200v2.800h-7.500z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="7" cy="17.500" r="1.800" fill="#fff" stroke="currentColor" stroke-width="1.600"/><circle cx="16.500" cy="17.500" r="1.800" fill="#fff" stroke="currentColor" stroke-width="1.600"/></symbol>
+  <symbol id="i-star" viewBox="0 0 24 24"><path d="m12 2.800 2.800 5.800 6.300.9-4.600 4.400 1.100 6.300L12 17.200l-5.600 3 1.100-6.300L2.900 9.500l6.300-.9z" fill="currentColor"/></symbol>
+  <symbol id="i-cart" viewBox="0 0 24 24"><path d="M3 4h2.400l2.200 10.200a1.500 1.500 0 0 0 1.500 1.200h8.300a1.500 1.500 0 0 0 1.400-1L20.500 8H6.200" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9.500" cy="19.300" r="1.400" fill="currentColor"/><circle cx="17" cy="19.300" r="1.400" fill="currentColor"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="m4 7 8 6 8-6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></symbol>
+  <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M12 11v5.500" stroke="currentColor" stroke-width="1.800" stroke-linecap="round"/><circle cx="12" cy="7.800" r="1.200" fill="currentColor"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14m-5-5.500L19.500 12 14 17.500" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12.500 4.500 4.500L19 7.500" fill="none" stroke="currentColor" stroke-width="2.200" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+
+  <!-- Logo -->
+  <symbol id="logo-mark" viewBox="0 0 40 40">
+    <rect x="1" y="1" width="38" height="38" rx="13" fill="url(#g-mark)"/>
+    <path d="M9 12h5l6 15 6-15h5l-8.500 20h-5z" fill="#fff"/>
+    <circle cx="30.500" cy="10" r="3.200" fill="#86EFAC"/>
+  </symbol>
+
+  <!-- Bao bì: chai, hũ, lọ trụ. viewBox 160x220 -->
+  <symbol id="pk-bottle" viewBox="0 0 160 220">
+    <ellipse cx="80" cy="212" rx="50" ry="6" fill="#0B2545" fill-opacity=".2"/>
+    <rect x="50" y="6" width="60" height="34" rx="7" class="pk-cap"/>
+    <path d="M60 10v28M70 10v28M80 10v28M90 10v28M100 10v28" stroke="#fff" stroke-opacity=".18" stroke-width="2"/>
+    <rect x="50" y="6" width="60" height="10" rx="5" fill="#fff" fill-opacity=".28"/>
+    <rect x="58" y="38" width="44" height="12" class="pk-body"/>
+    <path d="M38 64Q38 48 58 48H102Q122 48 122 64V198Q122 210 110 210H50Q38 210 38 198Z" class="pk-body"/>
+    <path d="M38 64Q38 48 58 48H102Q122 48 122 64V198Q122 210 110 210H50Q38 210 38 198Z" fill="url(#shine)"/>
+    <rect x="38" y="84" width="84" height="94" class="pk-label"/>
+    <rect x="38" y="84" width="84" height="94" fill="url(#shine)" fill-opacity=".55"/>
+  </symbol>
+  <symbol id="pk-jar" viewBox="0 0 160 220">
+    <ellipse cx="80" cy="212" rx="62" ry="6" fill="#0B2545" fill-opacity=".2"/>
+    <rect x="24" y="22" width="112" height="40" rx="9" class="pk-cap"/>
+    <path d="M38 26v32M50 26v32M62 26v32M74 26v32M86 26v32M98 26v32M110 26v32M122 26v32" stroke="#fff" stroke-opacity=".15" stroke-width="2"/>
+    <rect x="24" y="22" width="112" height="10" rx="5" fill="#fff" fill-opacity=".28"/>
+    <path d="M20 74Q20 62 34 62H126Q140 62 140 74V194Q140 210 124 210H36Q20 210 20 194Z" class="pk-body"/>
+    <path d="M20 74Q20 62 34 62H126Q140 62 140 74V194Q140 210 124 210H36Q20 210 20 194Z" fill="url(#shine)"/>
+    <rect x="20" y="92" width="120" height="86" class="pk-label"/>
+    <rect x="20" y="92" width="120" height="86" fill="url(#shine)" fill-opacity=".55"/>
+  </symbol>
+  <symbol id="pk-tub" viewBox="0 0 160 220">
+    <ellipse cx="80" cy="212" rx="56" ry="6" fill="#0B2545" fill-opacity=".2"/>
+    <rect x="32" y="10" width="96" height="36" rx="8" class="pk-cap"/>
+    <rect x="32" y="10" width="96" height="9" rx="4.500" fill="#fff" fill-opacity=".3"/>
+    <rect x="36" y="46" width="88" height="8" class="pk-cap"/>
+    <rect x="36" y="46" width="88" height="8" fill="#000" fill-opacity=".18"/>
+    <path d="M34 54H126Q134 54 134 62V198Q134 210 122 210H38Q26 210 26 198V62Q26 54 34 54Z" class="pk-body"/>
+    <path d="M34 54H126Q134 54 134 62V198Q134 210 122 210H38Q26 210 26 198V62Q26 54 34 54Z" fill="url(#shine)"/>
+    <rect x="26" y="76" width="108" height="112" class="pk-label"/>
+    <rect x="26" y="76" width="108" height="112" fill="url(#shine)" fill-opacity=".55"/>
+  </symbol>
+</svg>
+
+<a class="skip-link" href="#noi-dung">Bỏ qua, đến nội dung chính</a>
+
+<header class="site-header">
+  <div class="header-pill">
+    <a class="brand" href="#top" id="top">
+      <svg aria-hidden="true" width="38" height="38"><use href="#logo-mark"/></svg>
+      <span>Vitalis <em>Health</em></span>
+    </a>
+    <nav class="nav" aria-label="Điều hướng chính">
+      <ul>
+        <li><a href="#san-pham">Sản phẩm</a></li>
+        <li><a href="#thanh-phan">Thành phần</a></li>
+        <li><a href="#quy-trinh">Quy trình</a></li>
+        <li><a href="#tu-van">Tư vấn</a></li>
+        <li><a href="#combo">Combo</a></li>
+        <li><a href="#hoi-dap">Hỏi đáp</a></li>
+      </ul>
+    </nav>
+    <a class="btn btn-dark btn-sm" href="#san-pham"><svg class="ico" aria-hidden="true"><use href="#i-cart"/></svg> Cửa hàng</a>
+  </div>
+</header>
+
+<main id="noi-dung">
+
+  <!-- 1. HERO -->
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <p class="kicker"><span class="dot" aria-hidden="true"></span> Thực phẩm bảo vệ sức khỏe · Minh bạch từng thành phần</p>
+        <h1 id="hero-title">Bổ sung dinh dưỡng, <em>rõ ràng</em> từ nhãn đến hộp.</h1>
+        <p class="lead">Vitalis Health xây dựng dòng sản phẩm bổ sung vitamin và khoáng chất với bảng thành phần công khai, thông tin dễ đọc và đội ngũ sẵn sàng giải đáp thắc mắc.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#san-pham">Xem sản phẩm <svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          <a class="btn btn-ghost" href="#thanh-phan">Đọc bảng thành phần</a>
+        </div>
+        <p class="hero-note"><svg class="ico" aria-hidden="true"><use href="#i-info"/></svg> Sản phẩm này không phải là thuốc và không có tác dụng thay thế thuốc chữa bệnh.</p>
+      </div>
+
+      <div class="hero-stage">
+        <svg class="stage-art" viewBox="0 0 640 540" role="img" aria-label="Ba sản phẩm Vitalis: chai vitamin C, hộp canxi D3 và hũ omega-3 đặt trước vòng tròn màu tím xanh">
+          <defs>
+            <radialGradient id="hv-disc" cx=".35" cy=".25" r=".95">
+              <stop offset="0" stop-color="#9A9AF2"/>
+              <stop offset=".55" stop-color="#5B5BD6"/>
+              <stop offset="1" stop-color="#2A3A8F"/>
+            </radialGradient>
+            <radialGradient id="hv-glow" cx=".5" cy=".5" r=".5">
+              <stop offset="0" stop-color="#FDE68A" stop-opacity=".95"/>
+              <stop offset="1" stop-color="#FDE68A" stop-opacity="0"/>
+            </radialGradient>
+            <linearGradient id="hv-floor" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#0B2545" stop-opacity=".22"/>
+              <stop offset="1" stop-color="#0B2545" stop-opacity="0"/>
+            </linearGradient>
+          </defs>
+          <circle cx="500" cy="90" r="120" fill="url(#hv-glow)"/>
+          <circle cx="320" cy="270" r="236" fill="url(#hv-disc)"/>
+          <circle cx="320" cy="270" r="262" fill="none" stroke="#5B5BD6" stroke-opacity=".28" stroke-width="2" stroke-dasharray="3 9" stroke-linecap="round"/>
+          <path d="M120 100c26-6 46 2 58 20-24 8-46 2-58-20z" fill="#16A34A" fill-opacity=".85"/>
+          <path d="M536 380c24-10 48-4 62 12-26 12-50 8-62-12z" fill="#16A34A" fill-opacity=".85"/>
+          <ellipse cx="330" cy="482" rx="290" ry="22" fill="url(#hv-floor)"/>
+
+          <!-- Hũ trụ tím: Canxi + D3 (ở giữa) -->
+          <g class="pk pk-violet" transform="translate(216 70) scale(1.72)">
+            <use href="#pk-tub" width="160" height="220"/>
+            <text x="80" y="98" text-anchor="middle" class="pk-brand">VITALIS</text>
+            <circle cx="80" cy="128" r="16" fill="#5B5BD6"/>
+            <path d="M80 116v24M68 128h24" stroke="#fff" stroke-width="4" stroke-linecap="round"/>
+            <text x="80" y="164" text-anchor="middle" class="pk-name">CANXI + D3</text>
+            <text x="80" y="176" text-anchor="middle" class="pk-sub">90 viên</text>
+          </g>
+          <!-- Chai cam: Vitamin C (bên trái) -->
+          <g class="pk pk-amber" transform="translate(38 214) rotate(-7) scale(1.2)">
+            <use href="#pk-bottle" width="160" height="220"/>
+            <text x="80" y="102" text-anchor="middle" class="pk-brand">VITALIS</text>
+            <circle cx="80" cy="130" r="15" fill="#F59E0B"/>
+            <circle cx="80" cy="130" r="9" fill="#FEF3C7"/>
+            <path d="M80 108v6M80 146v6M58 130h6M96 130h6M64 114l4 4M92 142l4 4M96 114l-4 4M68 142l-4 4" stroke="#F59E0B" stroke-width="2.500" stroke-linecap="round"/>
+            <text x="80" y="164" text-anchor="middle" class="pk-name">VITAMIN C</text>
+            <text x="80" y="175" text-anchor="middle" class="pk-sub">60 viên</text>
+          </g>
+          <!-- Hũ xanh biển: Omega-3 (bên phải) -->
+          <g class="pk pk-ocean" transform="translate(436 232) rotate(6) scale(1.12)">
+            <use href="#pk-jar" width="160" height="220"/>
+            <text x="80" y="110" text-anchor="middle" class="pk-brand">VITALIS</text>
+            <path d="M44 132q9-12 18 0t18 0 18 0 18 0" fill="none" stroke="#0E7490" stroke-width="4" stroke-linecap="round"/>
+            <path d="M44 144q9-12 18 0t18 0 18 0 18 0" fill="none" stroke="#67C7DA" stroke-width="4" stroke-linecap="round"/>
+            <text x="80" y="164" text-anchor="middle" class="pk-name">OMEGA-3</text>
+            <text x="80" y="174" text-anchor="middle" class="pk-sub">60 viên nang</text>
+          </g>
+        </svg>
+        <ul class="chips">
+          <li class="chip"><svg class="ico" aria-hidden="true"><use href="#i-list"/></svg> Thành phần công bố đầy đủ</li>
+          <li class="chip"><svg class="ico" aria-hidden="true"><use href="#i-shield"/></svg> Số lô in trên bao bì</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. CAM KẾT -->
+  <section class="values" aria-labelledby="values-title">
+    <div class="wrap">
+      <h2 id="values-title" class="sr-only">Cam kết của Vitalis</h2>
+      <ul class="values-grid">
+        <li><svg class="ico-lg" aria-hidden="true"><use href="#i-list"/></svg><p><strong>Thành phần rõ ràng</strong><span>Hoạt chất và hàm lượng được nêu đầy đủ.</span></p></li>
+        <li><svg class="ico-lg" aria-hidden="true"><use href="#i-flask"/></svg><p><strong>Kiểm soát theo lô</strong><span>Mỗi lô có mã truy xuất trên nhãn.</span></p></li>
+        <li><svg class="ico-lg" aria-hidden="true"><use href="#i-leaf"/></svg><p><strong>Công thức tối giản</strong><span>Hạn chế thành phần không cần thiết.</span></p></li>
+        <li><svg class="ico-lg" aria-hidden="true"><use href="#i-truck"/></svg><p><strong>Giao hàng cẩn thận</strong><span>Đóng gói chắc chắn, có theo dõi đơn.</span></p></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 3. SẢN PHẨM -->
+  <section class="section" id="san-pham" aria-labelledby="prod-title">
+    <div class="wrap">
+      <header class="sec-head">
+        <p class="kicker"><span class="dot" aria-hidden="true"></span> Dòng sản phẩm</p>
+        <h2 id="prod-title">Sáu sản phẩm bổ sung, một triết lý: đơn giản và minh bạch</h2>
+      </header>
+
+      <div class="prod-grid">
+        <article class="prod" data-tone="amber">
+          <div class="prod-art">
+            <svg viewBox="0 0 160 220" role="img" aria-label="Chai Vitamin C Vitalis nhãn trắng, vòng tròn cam ở giữa">
+              <g class="pk pk-amber">
+                <use href="#pk-bottle" width="160" height="220"/>
+                <text x="80" y="102" text-anchor="middle" class="pk-brand">VITALIS</text>
+                <circle cx="80" cy="130" r="15" fill="#F59E0B"/><circle cx="80" cy="130" r="9" fill="#FEF3C7"/>
+                <path d="M80 108v6M80 146v6M58 130h6M96 130h6M64 114l4 4M92 142l4 4M96 114l-4 4M68 142l-4 4" stroke="#F59E0B" stroke-width="2.500" stroke-linecap="round"/>
+                <text x="80" y="164" text-anchor="middle" class="pk-name">VITAMIN C</text>
+                <text x="80" y="175" text-anchor="middle" class="pk-sub">60 viên</text>
+              </g>
+            </svg>
+          </div>
+          <div class="prod-body">
+            <p class="tag">Thực phẩm bảo vệ sức khỏe</p>
+            <h3>Vitamin C Daily</h3>
+            <p class="desc">Bổ sung vitamin C cho chế độ ăn hằng ngày. Hộp 60 viên.</p>
+            <p class="price"><strong>195.000đ</strong> <span>/ hộp</span></p>
+            <button class="btn btn-primary btn-block" type="button">Thêm vào giỏ</button>
+          </div>
+        </article>
+
+        <article class="prod" data-tone="ocean">
+          <div class="prod-art">
+            <svg viewBox="0 0 160 220" role="img" aria-label="Hũ Omega-3 Vitalis nhãn trắng với hai đường sóng xanh">
+              <g class="pk pk-ocean">
+                <use href="#pk-jar" width="160" height="220"/>
+                <text x="80" y="110" text-anchor="middle" class="pk-brand">VITALIS</text>
+                <path d="M44 132q9-12 18 0t18 0 18 0 18 0" fill="none" stroke="#0E7490" stroke-width="4" stroke-linecap="round"/>
+                <path d="M44 144q9-12 18 0t18 0 18 0 18 0" fill="none" stroke="#67C7DA" stroke-width="4" stroke-linecap="round"/>
+                <text x="80" y="164" text-anchor="middle" class="pk-name">OMEGA-3</text>
+                <text x="80" y="174" text-anchor="middle" class="pk-sub">60 viên nang</text>
+              </g>
+            </svg>
+          </div>
+          <div class="prod-body">
+            <p class="tag">Thực phẩm bảo vệ sức khỏe</p>
+            <h3>Omega-3 Pure</h3>
+            <p class="desc">Dầu cá tinh chế dạng viên nang mềm. Hộp 60 viên.</p>
+            <p class="price"><strong>320.000đ</strong> <span>/ hộp</span></p>
+            <button class="btn btn-primary btn-block" type="button">Thêm vào giỏ</button>
+          </div>
+        </article>
+
+        <article class="prod" data-tone="violet">
+          <div class="prod-art">
+            <svg viewBox="0 0 160 220" role="img" aria-label="Hũ Canxi cộng D3 Vitalis nhãn trắng với dấu cộng màu tím">
+              <g class="pk pk-violet">
+                <use href="#pk-tub" width="160" height="220"/>
+                <text x="80" y="98" text-anchor="middle" class="pk-brand">VITALIS</text>
+                <circle cx="80" cy="128" r="16" fill="#5B5BD6"/>
+                <path d="M80 116v24M68 128h24" stroke="#fff" stroke-width="4" stroke-linecap="round"/>
+                <text x="80" y="164" text-anchor="middle" class="pk-name">CANXI + D3</text>
+                <text x="80" y="176" text-anchor="middle" class="pk-sub">90 viên</text>
+              </g>
+            </svg>
+          </div>
+          <div class="prod-body">
+            <p class="tag">Thực phẩm bảo vệ sức khỏe</p>
+            <h3>Canxi + D3</h3>
+            <p class="desc">Bổ sung canxi và vitamin D3 trong chế độ dinh dưỡng. Hộp 90 viên.</p>
+            <p class="price"><strong>265.000đ</strong> <span>/ hộp</span></p>
+            <button class="btn btn-primary btn-block" type="button">Thêm vào giỏ</button>
+          </div>
+        </article>
+
+        <article class="prod" data-tone="navy">
+          <div class="prod-art">
+            <svg viewBox="0 0 160 220" role="img" aria-label="Chai Magie Vitalis màu xanh navy, nhãn trắng với hình lục giác">
+              <g class="pk pk-navy">
+                <use href="#pk-bottle" width="160" height="220"/>
+                <text x="80" y="102" text-anchor="middle" class="pk-brand">VITALIS</text>
+                <path d="M80 114l14 8v16l-14 8-14-8v-16z" fill="#0B2545"/>
+                <path d="M80 122l7 4v8l-7 4-7-4v-8z" fill="#86EFAC"/>
+                <text x="80" y="166" text-anchor="middle" class="pk-name">MAGIE</text>
+                <text x="80" y="176" text-anchor="middle" class="pk-sub">60 viên</text>
+              </g>
+            </svg>
+          </div>
+          <div class="prod-body">
+            <p class="tag">Thực phẩm bảo vệ sức khỏe</p>
+            <h3>Magie Balance</h3>
+            <p class="desc">Bổ sung magie cho chế độ ăn uống hằng ngày. Hộp 60 viên.</p>
+            <p class="price"><strong>210.000đ</strong> <span>/ hộp</span></p>
+            <button class="btn btn-primary btn-block" type="button">Thêm vào giỏ</button>
+          </div>
+        </article>
+
+        <article class="prod" data-tone="green">
+          <div class="prod-art">
+            <svg viewBox="0 0 160 220" role="img" aria-label="Hũ men vi sinh Vitalis màu xanh lá, nhãn trắng với các chấm tròn">
+              <g class="pk pk-green">
+                <use href="#pk-jar" width="160" height="220"/>
+                <text x="80" y="110" text-anchor="middle" class="pk-brand">VITALIS</text>
+                <circle cx="56" cy="134" r="7" fill="#16A34A"/><circle cx="76" cy="126" r="5" fill="#86EFAC"/><circle cx="96" cy="136" r="8" fill="#16A34A"/><circle cx="114" cy="126" r="4.500" fill="#86EFAC"/><circle cx="86" cy="146" r="4" fill="#16A34A"/>
+                <text x="80" y="164" text-anchor="middle" class="pk-name">MEN VI SINH</text>
+                <text x="80" y="174" text-anchor="middle" class="pk-sub">30 gói</text>
+              </g>
+            </svg>
+          </div>
+          <div class="prod-body">
+            <p class="tag">Thực phẩm bảo vệ sức khỏe</p>
+            <h3>Men vi sinh Gut Care</h3>
+            <p class="desc">Bổ sung lợi khuẩn dạng gói bột tiện dùng. Hộp 30 gói.</p>
+            <p class="price"><strong>285.000đ</strong> <span>/ hộp</span></p>
+            <button class="btn btn-primary btn-block" type="button">Thêm vào giỏ</button>
+          </div>
+        </article>
+
+        <article class="prod" data-tone="rose">
+          <div class="prod-art">
+            <svg viewBox="0 0 160 220" role="img" aria-label="Hũ Collagen Vitalis màu hồng, nhãn trắng với giọt nước">
+              <g class="pk pk-rose">
+                <use href="#pk-tub" width="160" height="220"/>
+                <text x="80" y="98" text-anchor="middle" class="pk-brand">VITALIS</text>
+                <path d="M80 110c9 10 14 16 14 22a14 14 0 0 1-28 0c0-6 5-12 14-22z" fill="#D9668F"/>
+                <path d="M74 134a6 6 0 0 0 5 6" fill="none" stroke="#fff" stroke-width="2.500" stroke-linecap="round"/>
+                <text x="80" y="164" text-anchor="middle" class="pk-name">COLLAGEN</text>
+                <text x="80" y="176" text-anchor="middle" class="pk-sub">30 gói</text>
+              </g>
+            </svg>
+          </div>
+          <div class="prod-body">
+            <p class="tag">Thực phẩm bảo vệ sức khỏe</p>
+            <h3>Collagen Peptide</h3>
+            <p class="desc">Bột collagen thủy phân pha uống, vị dịu nhẹ. Hộp 30 gói.</p>
+            <p class="price"><strong>390.000đ</strong> <span>/ hộp</span></p>
+            <button class="btn btn-primary btn-block" type="button">Thêm vào giỏ</button>
+          </div>
+        </article>
+      </div>
+
+      <p class="reg-note" role="note"><svg class="ico" aria-hidden="true"><use href="#i-info"/></svg> Không phải là thuốc, không có tác dụng thay thế thuốc chữa bệnh. Hình ảnh, giá và thông tin sản phẩm chỉ mang tính minh họa.</p>
+    </div>
+  </section>
+
+  <!-- 4. THÀNH PHẦN -->
+  <section class="section ing" id="thanh-phan" aria-labelledby="ing-title">
+    <div class="wrap ing-grid">
+      <div class="ing-intro">
+        <p class="kicker"><span class="dot" aria-hidden="true"></span> Minh bạch thành phần</p>
+        <h2 id="ing-title">Xem trước những gì có trong mỗi viên</h2>
+        <p class="lead">Chúng tôi công bố từng hoạt chất, hàm lượng và lý do có mặt trong công thức. Dưới đây là bảng thành phần minh họa của sản phẩm Canxi + D3.</p>
+        <p class="ing-tip"><svg class="ico" aria-hidden="true"><use href="#i-info"/></svg> Trên điện thoại, bạn có thể vuốt ngang để xem hết bảng.</p>
+      </div>
+
+      <div class="ing-card">
+        <div class="table-scroll" tabindex="0" role="region" aria-labelledby="ing-cap">
+          <table>
+            <caption id="ing-cap">Thành phần trong mỗi viên Canxi + D3 (số liệu minh họa)</caption>
+            <thead>
+              <tr>
+                <th scope="col">Hoạt chất</th>
+                <th scope="col">Hàm lượng mỗi viên</th>
+                <th scope="col">Mục đích thành phần</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Canxi (từ canxi carbonat)</th>
+                <td>500 mg</td>
+                <td>Bổ sung khoáng chất canxi cho chế độ ăn</td>
+              </tr>
+              <tr>
+                <th scope="row">Vitamin D3 (cholecalciferol)</th>
+                <td>400 IU</td>
+                <td>Bổ sung vitamin D3 cùng canxi</td>
+              </tr>
+              <tr>
+                <th scope="row">Vitamin K2 (MK-7)</th>
+                <td>45 mcg</td>
+                <td>Bổ sung vitamin K2 trong công thức</td>
+              </tr>
+              <tr>
+                <th scope="row">Magie (magie oxit)</th>
+                <td>100 mg</td>
+                <td>Bổ sung khoáng chất magie</td>
+              </tr>
+              <tr>
+                <th scope="row">Cellulose vi tinh thể</th>
+                <td>Vừa đủ</td>
+                <td>Tá dược giúp ổn định viên</td>
+              </tr>
+              <tr>
+                <th scope="row">Magie stearat</th>
+                <td>Vừa đủ</td>
+                <td>Tá dược hỗ trợ quá trình dập viên</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="ing-foot">Vui lòng đọc nhãn sản phẩm để biết thông tin về chất gây dị ứng, đối tượng chưa nên dùng và cách bảo quản.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. QUY TRÌNH -->
+  <section class="section" id="quy-trinh" aria-labelledby="proc-title">
+    <div class="wrap">
+      <header class="sec-head sec-head-center">
+        <p class="kicker"><span class="dot" aria-hidden="true"></span> Quy trình chất lượng</p>
+        <h2 id="proc-title">Bốn bước cẩn trọng trước khi đến tay bạn</h2>
+        <p class="lead">Mỗi lô sản phẩm đi qua các bước kiểm soát nội bộ được ghi chép và lưu hồ sơ.</p>
+      </header>
+      <ol class="timeline">
+        <li>
+          <span class="t-icon"><svg aria-hidden="true"><use href="#i-leaf"/></svg></span>
+          <span class="t-num">Bước 01</span>
+          <h3>Nguyên liệu</h3>
+          <p>Lựa chọn nhà cung cấp, đối chiếu hồ sơ nguồn gốc và phiếu phân tích của từng lô nguyên liệu.</p>
+        </li>
+        <li>
+          <span class="t-icon"><svg aria-hidden="true"><use href="#i-gear"/></svg></span>
+          <span class="t-num">Bước 02</span>
+          <h3>Sản xuất</h3>
+          <p>Sản xuất tại cơ sở đáp ứng yêu cầu vệ sinh, có quy trình thao tác chuẩn và nhật ký theo lô.</p>
+        </li>
+        <li>
+          <span class="t-icon"><svg aria-hidden="true"><use href="#i-flask"/></svg></span>
+          <span class="t-num">Bước 03</span>
+          <h3>Kiểm nghiệm</h3>
+          <p>Lấy mẫu kiểm tra chất lượng theo tiêu chí nội bộ và lưu mẫu đối chứng cho mỗi lô.</p>
+        </li>
+        <li>
+          <span class="t-icon"><svg aria-hidden="true"><use href="#i-box"/></svg></span>
+          <span class="t-num">Bước 04</span>
+          <h3>Đóng gói</h3>
+          <p>Đóng kín, dán nhãn có số lô, ngày sản xuất, hạn dùng và thông tin bảo quản rõ ràng.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- 6. TƯ VẤN -->
+  <section class="section advise" id="tu-van" aria-labelledby="adv-title">
+    <div class="wrap">
+      <header class="sec-head">
+        <p class="kicker kicker-light"><span class="dot" aria-hidden="true"></span> Đội ngũ đồng hành</p>
+        <h2 id="adv-title">Hỏi đáp cùng chuyên gia dinh dưỡng và dược sĩ</h2>
+        <p class="lead">Đội ngũ tư vấn giúp bạn hiểu thông tin trên nhãn. Nội dung chỉ mang tính tham khảo chung, không thay thế thăm khám hay chỉ định của bác sĩ.</p>
+      </header>
+      <div class="adv-grid">
+        <article class="adv">
+          <svg class="avatar" viewBox="0 0 80 80" role="img" aria-label="Ảnh minh họa dược sĩ nữ tóc dài">
+            <defs><linearGradient id="av1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#C7C7F7"/><stop offset="1" stop-color="#7C7CEB"/></linearGradient></defs>
+            <circle cx="40" cy="40" r="40" fill="url(#av1)"/>
+            <path d="M12 80c0-18 12-28 28-28s28 10 28 28z" fill="#fff"/>
+            <path d="M32 55l8 12 8-12z" fill="#5B5BD6"/>
+            <path d="M28 34c-4-18 8-22 14-21 12 1 15 12 10 26l-4-8c-6 0-13 0-20 3z" fill="#2D1B12"/>
+            <ellipse cx="40" cy="36" rx="11" ry="13" fill="#F3C9A5"/>
+            <path d="M29 34c0-12 6-15 12-15s11 4 10 13c-5-3-14-3-22 2z" fill="#2D1B12"/>
+          </svg>
+          <h3>DS. Thảo Nguyên</h3>
+          <p class="role">Dược sĩ tư vấn · nhân vật minh họa</p>
+          <p>Giúp bạn đọc hiểu nhãn, hạn dùng và cách bảo quản sản phẩm cho đúng.</p>
+        </article>
+        <article class="adv">
+          <svg class="avatar" viewBox="0 0 80 80" role="img" aria-label="Ảnh minh họa bác sĩ nam đeo kính">
+            <defs><linearGradient id="av2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#BBF7D0"/><stop offset="1" stop-color="#16A34A"/></linearGradient></defs>
+            <circle cx="40" cy="40" r="40" fill="url(#av2)"/>
+            <path d="M12 80c0-18 12-28 28-28s28 10 28 28z" fill="#fff"/>
+            <path d="M32 55l8 12 8-12z" fill="#0B2545"/>
+            <ellipse cx="40" cy="36" rx="11" ry="13" fill="#E9B98F"/>
+            <path d="M29 33c-1-11 6-16 12-16s12 5 10 16c-3-5-6-7-11-7s-8 2-11 7z" fill="#1F2937"/>
+            <rect x="31" y="34" width="8" height="6" rx="2.500" fill="none" stroke="#0B2545" stroke-width="1.600"/>
+            <rect x="41" y="34" width="8" height="6" rx="2.500" fill="none" stroke="#0B2545" stroke-width="1.600"/>
+          </svg>
+          <h3>BS. Anh Khoa</h3>
+          <p class="role">Cố vấn chuyên môn · nhân vật minh họa</p>
+          <p>Chia sẻ kiến thức dinh dưỡng phổ thông và nhắc bạn hỏi ý kiến bác sĩ khi cần.</p>
+        </article>
+        <article class="adv">
+          <svg class="avatar" viewBox="0 0 80 80" role="img" aria-label="Ảnh minh họa chuyên viên dinh dưỡng tóc ngắn">
+            <defs><linearGradient id="av3" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FEF3C7"/><stop offset="1" stop-color="#F59E0B"/></linearGradient></defs>
+            <circle cx="40" cy="40" r="40" fill="url(#av3)"/>
+            <path d="M12 80c0-18 12-28 28-28s28 10 28 28z" fill="#fff"/>
+            <path d="M32 55l8 12 8-12z" fill="#16A34A"/>
+            <ellipse cx="40" cy="36" rx="11" ry="13" fill="#F0C29B"/>
+            <path d="M28 36c-3-14 5-20 13-19 9 1 13 8 11 19-1-7-5-11-12-11-6 0-10 4-12 11z" fill="#7A4A2A"/>
+          </svg>
+          <h3>CV. Bảo Châu</h3>
+          <p class="role">Chuyên viên dinh dưỡng · nhân vật minh họa</p>
+          <p>Gợi ý cách xây dựng bữa ăn cân đối và cách phối hợp sản phẩm bổ sung an toàn.</p>
+        </article>
+      </div>
+      <p class="adv-cta"><a class="btn btn-light" href="#ban-tin">Đăng ký nhận tư vấn qua email <svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></a></p>
+    </div>
+  </section>
+
+  <!-- 7. COMBO -->
+  <section class="section" id="combo" aria-labelledby="combo-title">
+    <div class="wrap">
+      <header class="sec-head">
+        <p class="kicker"><span class="dot" aria-hidden="true"></span> Combo gợi ý</p>
+        <h2 id="combo-title">Kết hợp sản phẩm tiện lợi, giá combo ưu đãi</h2>
+      </header>
+      <div class="bundle-grid">
+        <article class="bundle">
+          <h3>Combo Khởi đầu</h3>
+          <p class="b-items">Vitamin C Daily + Magie Balance</p>
+          <svg class="b-art" viewBox="0 0 160 80" role="img" aria-label="Hai sản phẩm trong combo Khởi đầu">
+            <g class="pk pk-amber" transform="translate(28 4) scale(.32)"><use href="#pk-bottle" width="160" height="220"/></g>
+            <g class="pk pk-navy" transform="translate(84 4) scale(.32)"><use href="#pk-bottle" width="160" height="220"/></g>
+          </svg>
+          <p class="b-price"><strong>385.000đ</strong> <s>405.000đ</s></p>
+          <a class="btn btn-outline btn-block" href="#san-pham">Chọn combo</a>
+        </article>
+        <article class="bundle bundle-featured">
+          <p class="b-flag">Được chọn nhiều</p>
+          <h3>Combo Cân bằng hằng ngày</h3>
+          <p class="b-items">Canxi + D3, Omega-3 Pure và Men vi sinh Gut Care</p>
+          <svg class="b-art" viewBox="0 0 160 80" role="img" aria-label="Ba sản phẩm trong combo Cân bằng hằng ngày">
+            <g class="pk pk-violet" transform="translate(12 6) scale(.32)"><use href="#pk-tub" width="160" height="220"/></g>
+            <g class="pk pk-ocean" transform="translate(56 6) scale(.32)"><use href="#pk-jar" width="160" height="220"/></g>
+            <g class="pk pk-green" transform="translate(100 6) scale(.32)"><use href="#pk-jar" width="160" height="220"/></g>
+          </svg>
+          <p class="b-price"><strong>820.000đ</strong> <s>870.000đ</s></p>
+          <a class="btn btn-light btn-block" href="#san-pham">Chọn combo</a>
+        </article>
+        <article class="bundle">
+          <h3>Combo Gia đình</h3>
+          <p class="b-items">Vitamin C Daily x2 + Canxi + D3</p>
+          <svg class="b-art" viewBox="0 0 160 80" role="img" aria-label="Ba sản phẩm trong combo Gia đình">
+            <g class="pk pk-amber" transform="translate(18 6) scale(.32)"><use href="#pk-bottle" width="160" height="220"/></g>
+            <g class="pk pk-amber" transform="translate(58 6) scale(.32)"><use href="#pk-bottle" width="160" height="220"/></g>
+            <g class="pk pk-violet" transform="translate(98 6) scale(.32)"><use href="#pk-tub" width="160" height="220"/></g>
+          </svg>
+          <p class="b-price"><strong>640.000đ</strong> <s>655.000đ</s></p>
+          <a class="btn btn-outline btn-block" href="#san-pham">Chọn combo</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. ĐÁNH GIÁ -->
+  <section class="section reviews" id="danh-gia" aria-labelledby="rev-title">
+    <div class="wrap">
+      <header class="sec-head">
+        <p class="kicker"><span class="dot" aria-hidden="true"></span> Khách hàng chia sẻ</p>
+        <h2 id="rev-title">Điều khách hàng nói về trải nghiệm mua sắm</h2>
+      </header>
+      <div class="rev-grid">
+        <figure class="rev">
+          <svg class="stars" viewBox="0 0 100 20" role="img" aria-label="Đánh giá 5 trên 5 sao"><use href="#i-star" x="0" width="20" height="20"/><use href="#i-star" x="20" width="20" height="20"/><use href="#i-star" x="40" width="20" height="20"/><use href="#i-star" x="60" width="20" height="20"/><use href="#i-star" x="80" width="20" height="20"/></svg>
+          <blockquote><p>Mình thích việc trang web cho xem bảng thành phần trước khi mua. Nhãn in rõ ràng, hộp đóng gói rất cẩn thận.</p></blockquote>
+          <figcaption><strong>Phương Linh</strong><span>Khách hàng tại TP. Hồ Chí Minh</span></figcaption>
+        </figure>
+        <figure class="rev">
+          <svg class="stars" viewBox="0 0 100 20" role="img" aria-label="Đánh giá 5 trên 5 sao"><use href="#i-star" x="0" width="20" height="20"/><use href="#i-star" x="20" width="20" height="20"/><use href="#i-star" x="40" width="20" height="20"/><use href="#i-star" x="60" width="20" height="20"/><use href="#i-star" x="80" width="20" height="20"/></svg>
+          <blockquote><p>Đội ngũ tư vấn trả lời nhanh và nhắc mình đọc kỹ nhãn. Giao hàng đúng hẹn, có số lô và hạn dùng đầy đủ.</p></blockquote>
+          <figcaption><strong>Quốc Bảo</strong><span>Khách hàng tại Hà Nội</span></figcaption>
+        </figure>
+        <figure class="rev">
+          <svg class="stars" viewBox="0 0 100 20" role="img" aria-label="Đánh giá 4 trên 5 sao"><use href="#i-star" x="0" width="20" height="20"/><use href="#i-star" x="20" width="20" height="20"/><use href="#i-star" x="40" width="20" height="20"/><use href="#i-star" x="60" width="20" height="20"/><use class="star-off" href="#i-star" x="80" width="20" height="20"/></svg>
+          <blockquote><p>Thiết kế bao bì đẹp, thông tin dễ hiểu. Mong shop bổ sung thêm nhiều hình thức thanh toán trong thời gian tới.</p></blockquote>
+          <figcaption><strong>Thu Hà</strong><span>Khách hàng tại Đà Nẵng</span></figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. HỎI ĐÁP -->
+  <section class="section" id="hoi-dap" aria-labelledby="faq-title">
+    <div class="wrap faq-grid">
+      <header class="sec-head">
+        <p class="kicker"><span class="dot" aria-hidden="true"></span> Hỏi đáp</p>
+        <h2 id="faq-title">Câu hỏi thường gặp</h2>
+        <p class="lead">Không tìm thấy điều bạn cần? Hãy gửi email cho chúng tôi tại <a href="mailto:hello@vitalis.example.vn">hello@vitalis.example.vn</a>.</p>
+      </header>
+      <div class="faq-list">
+        <details>
+          <summary>Sản phẩm của Vitalis có phải là thuốc không?</summary>
+          <p>Không. Đây là thực phẩm bảo vệ sức khỏe, không phải là thuốc và không có tác dụng thay thế thuốc chữa bệnh.</p>
+        </details>
+        <details>
+          <summary>Ai nên hỏi ý kiến bác sĩ trước khi dùng?</summary>
+          <p>Phụ nữ đang mang thai hoặc cho con bú, trẻ em, người đang dùng thuốc theo đơn hoặc có bệnh lý nền nên tham khảo ý kiến bác sĩ hoặc dược sĩ trước khi sử dụng sản phẩm bổ sung.</p>
+        </details>
+        <details>
+          <summary>Tôi có thể xem thành phần đầy đủ ở đâu?</summary>
+          <p>Bảng thành phần có trong trang từng sản phẩm và in trên bao bì. Bạn cũng có thể gửi email để được cung cấp thêm thông tin.</p>
+        </details>
+        <details>
+          <summary>Sản phẩm được bảo quản như thế nào?</summary>
+          <p>Nên để nơi khô ráo, thoáng mát, tránh ánh nắng trực tiếp, đậy kín nắp sau khi dùng và để xa tầm tay trẻ em. Hướng dẫn chi tiết in trên nhãn.</p>
+        </details>
+        <details>
+          <summary>Chính sách đổi trả ra sao?</summary>
+          <p>Bạn có thể yêu cầu đổi trả trong 7 ngày nếu sản phẩm bị lỗi do vận chuyển hoặc giao sai mặt hàng, còn nguyên niêm phong và có hình ảnh xác nhận.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10. BẢN TIN -->
+  <section class="news" id="ban-tin" aria-labelledby="news-title">
+    <div class="wrap">
+      <div class="news-card">
+        <div class="news-text">
+          <h2 id="news-title">Nhận bản tin dinh dưỡng mỗi tháng</h2>
+          <p>Kiến thức phổ thông về dinh dưỡng, thông tin sản phẩm mới và ưu đãi combo gửi thẳng đến email của bạn.</p>
+        </div>
+        <form class="news-form" action="#" method="post">
+          <div class="field">
+            <label for="nl-ten">Tên của bạn</label>
+            <input id="nl-ten" name="ten" type="text" autocomplete="name" placeholder="Nguyễn Minh Anh">
+          </div>
+          <div class="field">
+            <label for="nl-mail">Địa chỉ email</label>
+            <input id="nl-mail" name="email" type="email" autocomplete="email" placeholder="ban@example.vn">
+          </div>
+          <div class="check">
+            <input id="nl-ok" name="dong-y" type="checkbox">
+            <label for="nl-ok">Tôi đồng ý nhận email từ Vitalis Health và có thể hủy đăng ký bất cứ lúc nào.</label>
+          </div>
+          <button class="btn btn-primary btn-block" type="submit"><svg class="ico" aria-hidden="true"><use href="#i-mail"/></svg> Đăng ký nhận bản tin</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <div>
+      <a class="brand brand-light" href="#top">
+        <svg aria-hidden="true" width="38" height="38"><use href="#logo-mark"/></svg>
+        <span>Vitalis <em>Health</em></span>
+      </a>
+      <p class="foot-about">Thương hiệu thực phẩm bảo vệ sức khỏe (hư cấu) với thông tin sản phẩm minh bạch và dễ hiểu.</p>
+    </div>
+    <div>
+      <h2>Liên hệ</h2>
+      <ul class="foot-list">
+        <li>Hotline: <a href="tel:0900000123">0900 000 123</a></li>
+        <li>Email: <a href="mailto:hello@vitalis.example.vn">hello@vitalis.example.vn</a></li>
+        <li>Giờ làm việc: 8:00 – 20:00, thứ Hai – thứ Bảy</li>
+      </ul>
+    </div>
+    <div>
+      <h2>Khám phá</h2>
+      <ul class="foot-list">
+        <li><a href="#san-pham">Sản phẩm</a></li>
+        <li><a href="#thanh-phan">Bảng thành phần</a></li>
+        <li><a href="#quy-trinh">Quy trình chất lượng</a></li>
+        <li><a href="#hoi-dap">Câu hỏi thường gặp</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap">
+    <p class="disclaimer" role="note"><strong>Sản phẩm này không phải là thuốc và không có tác dụng thay thế thuốc chữa bệnh.</strong> Thông tin trên trang chỉ mang tính tham khảo, không thay thế tư vấn của bác sĩ/dược sĩ. Đọc kỹ hướng dẫn sử dụng trước khi dùng.</p>
+    <p class="copy">© 2026 Vitalis Health (tên và dữ liệu hư cấu). · <a href="/">Trang demo do SuperLanding thiết kế</a></p>
+  </div>
+</footer>
+
+</body>
+</html>

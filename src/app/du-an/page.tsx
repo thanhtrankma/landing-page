@@ -4,10 +4,10 @@ import { projectList } from "@/lib/content";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
-  title: "Dự Án Thiết Kế Website & Landing Page | WebLanding",
+  title: "Dự Án Thiết Kế Website & Landing Page | SuperLanding",
   description:
-    "Xem các dự án website, Landing Page và mẫu giao diện WebLanding đã triển khai cho doanh nghiệp, bán hàng, nhà hàng, nội thất và bất động sản.",
-  ogDescription: "Các dự án website và Landing Page tiêu biểu do WebLanding thiết kế, lập trình và tối ưu.",
+    "Xem các dự án website, Landing Page và mẫu giao diện SuperLanding đã triển khai cho doanh nghiệp, bán hàng, nhà hàng, nội thất và bất động sản.",
+  ogDescription: "Các dự án website và Landing Page tiêu biểu do SuperLanding thiết kế, lập trình và tối ưu.",
   path: "/du-an",
   ogImageSize: false,
 });
@@ -24,7 +24,7 @@ export default function ProjectsPage() {
           <span>PORTFOLIO / CASE STUDY</span>
           <h1 style={{ fontSize: "clamp(34px, 5vw, 52px)", marginBottom: "16px" }}>Dự án Website &amp; Landing Page</h1>
           <p style={{ maxWidth: "760px", marginInline: "auto" }}>
-            Khám phá các website, Landing Page và mẫu giao diện WebLanding đã triển khai. Mỗi trang dự án trình bày bối
+            Khám phá các website, Landing Page và mẫu giao diện SuperLanding đã triển khai. Mỗi trang dự án trình bày bối
             cảnh, giải pháp và những hạng mục nổi bật.
           </p>
         </header>

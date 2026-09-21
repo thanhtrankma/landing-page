@@ -84,10 +84,10 @@ export function Brand() {
           justifyContent: "center",
         }}
       >
-        <Image src="/images/logo.png" alt="WebLanding" width={36} height={36} style={{ objectFit: "cover" }} />
+        <Image src="/images/logo.png" alt="SuperLanding" width={36} height={36} style={{ objectFit: "cover" }} />
       </span>
       <span>
-        Web<b>Landing</b>
+        Super<b>Landing</b>
       </span>
     </Link>
   );

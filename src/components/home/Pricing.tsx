@@ -15,7 +15,7 @@ export function PricingCards({ tilt = true }: { tilt?: boolean }) {
             <article className={plan.hot ? "price-card hot" : "price-card"} style={{ width: "100%", height: "100%" }}>
               {plan.duration && <div className={inner ? `duration-badge ${inner}` : "duration-badge"}>{plan.duration}</div>}
               {plan.hot && <i className={inner}>PHỔ BIẾN NHẤT</i>}
-              <small className={inner}>WEBLANDING / {plan.name.toUpperCase()}</small>
+              <small className={inner}>SUPERLANDING / {plan.name.toUpperCase()}</small>
               <h2 className={inner}>{plan.name}</h2>
               <p>{plan.desc}</p>
               <strong className={deep}>
@@ -59,8 +59,8 @@ export default function Pricing() {
           <Heading
             center
             eyebrow="BẢNG GIÁ DỊCH VỤ"
-            title="Giải pháp & Bảng giá"
-            text="Lựa chọn gói dịch vụ tối ưu nhất cho hoạt động kinh doanh và thương hiệu của bạn."
+            title="Bảng giá rõ ràng, chọn gói đúng nhu cầu"
+            text="Chi phí minh bạch theo từng quy mô dự án, được thống nhất rõ ràng trước khi triển khai."
           />
         </div>
         <PricingCards />

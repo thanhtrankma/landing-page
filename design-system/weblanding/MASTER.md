@@ -1,4 +1,4 @@
-# WebLanding — Design System (Master)
+# SuperLanding — Design System (Master)
 
 Direction: **Airy Sky** — light-only, white surfaces washed with sky blue. Built with the `ui-ux-pro-max` skill
 (design-system search + UX rules); the palette is fixed by the brand brief: **#BBE4F6 + white**.

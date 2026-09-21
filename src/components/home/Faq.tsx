@@ -21,8 +21,8 @@ export default function Faq({
         <div className="animate-on-scroll faq-sidebar">
           <Heading
             eyebrow="CÂU HỎI THƯỜNG GẶP"
-            title="Câu hỏi thường gặp"
-            text="Giải đáp nhanh các thắc mắc phổ biến của khách hàng khi hợp tác thiết kế website tại WebLanding."
+            title="Giải đáp trước khi bạn bắt đầu"
+            text="Những câu hỏi khách hàng thường đặt ra khi hợp tác thiết kế website cùng SuperLanding."
           />
           <div className="faq-images">
             {images.map((img) => (

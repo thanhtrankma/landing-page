@@ -4,11 +4,11 @@ import { categoryLabel, formatDate, postCategories, posts } from "@/lib/content"
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
-  title: "Tin Tức & Kiến Thức Website, SEO, CRO | WebLanding",
+  title: "Tin Tức & Kiến Thức Website, SEO, CRO | SuperLanding",
   description:
-    "Bài viết chuyên sâu về thiết kế website, Landing Page, SEO kỹ thuật, trải nghiệm người dùng và tối ưu chuyển đổi từ WebLanding.",
+    "Bài viết chuyên sâu về thiết kế website, Landing Page, SEO kỹ thuật, trải nghiệm người dùng và tối ưu chuyển đổi từ SuperLanding.",
   path: "/tin-tuc",
-  ogImageAlt: "Tin tức WebLanding",
+  ogImageAlt: "Tin tức SuperLanding",
 });
 
 const PAGE_SIZE = 9;

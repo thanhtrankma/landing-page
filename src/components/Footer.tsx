@@ -1,6 +1,17 @@
 import Image from "next/image";
 import Link from "next/link";
-import { FACEBOOK_URL, INSTAGRAM_URL, TIKTOK_URL, ZALO_URL, facebookPath } from "@/data/site";
+import {
+  ADDRESS,
+  EMAIL,
+  FACEBOOK_URL,
+  INSTAGRAM_URL,
+  PHONE,
+  PHONE_DISPLAY,
+  SHOW_SOCIALS,
+  TIKTOK_URL,
+  ZALO_URL,
+  facebookPath,
+} from "@/data/site";
 import { Brand } from "./ui";
 
 const tiktokPath =
@@ -18,28 +29,39 @@ export default function Footer() {
         <div>
           <Brand />
           <p>
-            Thiết kế Landing Page và Website chuyên nghiệp, tối ưu tìm kiếm và tỷ lệ chuyển đổi cho cá nhân, doanh
-            nghiệp.
+            SuperLanding thiết kế website và landing page tối ưu SEO, tốc độ và
+            tỷ lệ chuyển đổi cho cá nhân và doanh nghiệp.
           </p>
           <div className="footer-socials">
-            <a href={FACEBOOK_URL} {...external} aria-label="Facebook">
-              <svg viewBox="0 0 24 24" fill="currentColor">
-                <path d={facebookPath} />
-              </svg>
-            </a>
+            {SHOW_SOCIALS && (
+              <a href={FACEBOOK_URL} {...external} aria-label="Facebook">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path d={facebookPath} />
+                </svg>
+              </a>
+            )}
             <a href={ZALO_URL} {...external} aria-label="Zalo">
-              <Image src="/images/zalo-icon.png" alt="Tư vấn Zalo thiết kế website WebLanding" width={24} height={24} />
+              <Image
+                src="/images/zalo-icon.png"
+                alt="Tư vấn Zalo thiết kế website SuperLanding"
+                width={24}
+                height={24}
+              />
             </a>
-            <a href={TIKTOK_URL} {...external} aria-label="TikTok">
-              <svg viewBox="0 0 24 24" fill="currentColor">
-                <path d={tiktokPath} />
-              </svg>
-            </a>
-            <a href={INSTAGRAM_URL} {...external} aria-label="Instagram">
-              <svg viewBox="0 0 24 24" fill="currentColor">
-                <path d={instagramPath} />
-              </svg>
-            </a>
+            {SHOW_SOCIALS && (
+              <>
+                <a href={TIKTOK_URL} {...external} aria-label="TikTok">
+                  <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d={tiktokPath} />
+                  </svg>
+                </a>
+                <a href={INSTAGRAM_URL} {...external} aria-label="Instagram">
+                  <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d={instagramPath} />
+                  </svg>
+                </a>
+              </>
+            )}
           </div>
         </div>
         <div>
@@ -54,17 +76,29 @@ export default function Footer() {
         </div>
         <div>
           <b>Liên hệ</b>
-          <a href="mailto:nhuy04625@gmail.com">nhuy04625@gmail.com</a>
-          <a href="tel:0971424792">Hotline: 0971 424 792</a>
-          <a href={ZALO_URL} {...external}>Zalo: 0971 424 792</a>
-          <a href={FACEBOOK_URL} {...external}>Facebook cá nhân</a>
-          <a href={TIKTOK_URL} {...external}>TikTok: @thietkeweblandingpage</a>
-          <a href={INSTAGRAM_URL} {...external}>Instagram: weblandingthietke</a>
-          <a>Hà Nội, Việt Nam</a>
+          <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
+          <a href={`tel:${PHONE}`}>Hotline: {PHONE_DISPLAY}</a>
+          <a href={ZALO_URL} {...external}>
+            Zalo: {PHONE_DISPLAY}
+          </a>
+          {SHOW_SOCIALS && (
+            <>
+              <a href={FACEBOOK_URL} {...external}>
+                Facebook cá nhân
+              </a>
+              <a href={TIKTOK_URL} {...external}>
+                TikTok: @thietkeweblandingpage
+              </a>
+              <a href={INSTAGRAM_URL} {...external}>
+                Instagram: weblandingthietke
+              </a>
+            </>
+          )}
+          <a>{ADDRESS}</a>
         </div>
       </div>
       <div className="gv-wrap footer-bottom">
-        <span>© 2026 WebLanding. All rights reserved.</span>
+        <span>© 2026 SuperLanding. All rights reserved.</span>
         <span>Chính sách bảo mật · Điều khoản dịch vụ</span>
       </div>
     </footer>

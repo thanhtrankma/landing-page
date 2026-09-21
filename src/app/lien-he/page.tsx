@@ -1,19 +1,19 @@
 import ContactForm from "@/components/ContactForm";
 import { Icon } from "@/components/ui";
-import { ZALO_URL, type IconName } from "@/data/site";
+import { EMAIL, PHONE, PHONE_DISPLAY, ZALO_URL, type IconName } from "@/data/site";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
-  title: "Liên Hệ Tư Vấn Thiết Kế Website & Landing Page | WebLanding",
+  title: "Liên Hệ Tư Vấn Thiết Kế Website & Landing Page | SuperLanding",
   description:
-    "Liên hệ ngay với WebLanding để nhận tư vấn miễn phí 1-1 giải pháp thiết kế Website & Landing Page tối ưu tỷ lệ chuyển đổi, chuẩn SEO. Phản hồi nhanh trong 5 phút.",
+    "Liên hệ ngay với SuperLanding để nhận tư vấn miễn phí 1-1 giải pháp thiết kế Website & Landing Page tối ưu tỷ lệ chuyển đổi, chuẩn SEO. Phản hồi nhanh trong 5 phút.",
   path: "/lien-he",
-  ogImageAlt: "Liên Hệ Tư Vấn Thiết Kế Website — WebLanding",
+  ogImageAlt: "Liên Hệ Tư Vấn Thiết Kế Website — SuperLanding",
 });
 
 const methods: { icon: IconName; label: string; value: string; note: string; href: string }[] = [
-  { icon: "phone", label: "Hotline", value: "0971 424 792", note: "Thứ 2 – Thứ 7, 08:00 – 21:00", href: "tel:0971424792" },
-  { icon: "mail", label: "Email", value: "nhuy04625@gmail.com", note: "Phản hồi trong vòng 24 giờ", href: "mailto:nhuy04625@gmail.com" },
+  { icon: "phone", label: "Hotline", value: PHONE_DISPLAY, note: "Thứ 2 – Thứ 7, 08:00 – 21:00", href: `tel:${PHONE}` },
+  { icon: "mail", label: "Email", value: EMAIL, note: "Phản hồi trong vòng 24 giờ", href: `mailto:${EMAIL}` },
 ];
 
 export default function ContactPage() {
@@ -32,7 +32,7 @@ export default function ContactPage() {
             thành <em>sản phẩm.</em>
           </h1>
           <p className="contact-lead">
-            Kể chúng tôi nghe về dự án của bạn. WebLanding sẽ cùng bạn làm rõ mục tiêu, đề xuất giải pháp phù hợp và gửi
+            Kể chúng tôi nghe về dự án của bạn. SuperLanding sẽ cùng bạn làm rõ mục tiêu, đề xuất giải pháp phù hợp và gửi
             báo giá minh bạch.
           </p>
           <div className="contact-methods">

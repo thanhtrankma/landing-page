@@ -21,7 +21,7 @@ export async function generateMetadata({ params }: PageProps<"/du-an/[slug]">) {
   const p = find(slug);
   if (!p) return {};
   return pageMetadata({
-    title: p.metaTitle ?? `${p.title} | WebLanding`,
+    title: p.metaTitle ?? `${p.title} | SuperLanding`,
     description: p.metaDescription ?? p.description,
     keywords: p.metaKeywords ?? undefined,
     path: `/du-an/${p.slug}`,
@@ -245,7 +245,7 @@ export default async function ProjectPage({ params }: PageProps<"/du-an/[slug]">
             </Link>{" "}
             hoặc{" "}
             <Link style={{ color: "var(--primary)", fontWeight: 700 }} href="/lien-he">
-              trao đổi trực tiếp với WebLanding
+              trao đổi trực tiếp với SuperLanding
             </Link>
             .
           </p>

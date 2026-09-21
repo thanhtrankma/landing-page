@@ -6,8 +6,8 @@ import { Heading, Icon } from "../ui";
 
 export default function Services({
   eyebrow = "NĂNG LỰC CỐT LÕI",
-  title = "Dịch vụ chuyên sâu",
-  text = "Thiết kế tinh tế, tối ưu trải nghiệm và công nghệ vững chắc mang lại kết quả vượt trội.",
+  title = "Giải pháp trọn gói, đúng nhu cầu kinh doanh",
+  text = "Từ thiết kế giao diện đến vận hành sau bàn giao, mỗi hạng mục đều hướng tới một mục tiêu: giúp bạn thu hút và giữ chân khách hàng.",
   large = false,
 }: {
   eyebrow?: string;

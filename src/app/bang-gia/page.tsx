@@ -7,11 +7,11 @@ import { faqs } from "@/data/site";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
-  title: "Bảng Giá Thiết Kế Website & Landing Page Trọn Gói | WebLanding",
+  title: "Bảng Giá Thiết Kế Website & Landing Page Trọn Gói | SuperLanding",
   description:
     "Bảng giá dịch vụ thiết kế Website và Landing Page minh bạch, không chi phí ẩn. Đa dạng gói Cơ Bản, Tiêu Chuẩn, Cao Cấp và Theo Yêu Cầu cho mọi quy mô.",
   path: "/bang-gia",
-  ogImageAlt: "Bảng Giá Thiết Kế Website & Landing Page — WebLanding",
+  ogImageAlt: "Bảng Giá Thiết Kế Website & Landing Page — SuperLanding",
 });
 
 const faqJsonLd = {
@@ -44,7 +44,7 @@ export default function PricingPage() {
       <InetPartner />
       <Faq
         images={[
-          { src: "/images/faq-illustration.png", alt: "Giải đáp thắc mắc dịch vụ thiết kế website và landing page WebLanding", width: 280, height: 200 },
+          { src: "/images/faq-illustration.png", alt: "Giải đáp thắc mắc dịch vụ thiết kế website và landing page SuperLanding", width: 280, height: 200 },
           { src: "/images/faq-support.png", alt: "Đội ngũ hỗ trợ tư vấn thiết kế website chuẩn SEO 24/7", width: 280, height: 200 },
         ]}
       />

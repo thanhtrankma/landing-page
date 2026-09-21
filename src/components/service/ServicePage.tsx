@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import JsonLd from "@/components/JsonLd";
+import { PHONE_DISPLAY, PHONE_INTL } from "@/data/site";
 import { servicePages, type ServicePageData } from "@/lib/content";
 import { SITE_URL, breadcrumbJsonLd, graph } from "@/lib/seo";
 
@@ -241,7 +242,7 @@ export default function ServicePage({ service }: { service: ServicePageData }) {
           <aside>
             <span className="service-page-eyebrow">CÂU HỎI THƯỜNG GẶP</span>
             <h2>Thông tin cần biết trước khi triển khai</h2>
-            <p>Không thấy câu trả lời bạn cần? Gửi nhu cầu để WebLanding tư vấn phạm vi phù hợp.</p>
+            <p>Không thấy câu trả lời bạn cần? Gửi nhu cầu để SuperLanding tư vấn phạm vi phù hợp.</p>
             <Link href="/lien-he">Đặt câu hỏi {arrow}</Link>
           </aside>
           <div className="service-faq-list">
@@ -299,8 +300,8 @@ export default function ServicePage({ service }: { service: ServicePageData }) {
             <Link className="service-primary-action" href="/lien-he">
               Nhận tư vấn miễn phí {arrow}
             </Link>
-            <a className="service-cta-phone" href="tel:+84971424792">
-              Gọi 0971 424 792
+            <a className="service-cta-phone" href={`tel:${PHONE_INTL}`}>
+              Gọi {PHONE_DISPLAY}
             </a>
           </div>
         </div>

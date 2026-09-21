@@ -32,9 +32,9 @@ export default function Portfolio() {
       <div className="gv-wrap">
         <div className="animate-on-scroll">
           <h2>
-            Kho web mẫu và <span>dự án triển khai</span>
+            Dự án tiêu biểu và <span>kho giao diện mẫu</span>
           </h2>
-          <p className="subtitle">Chọn ngành để tư vấn mẫu phù hợp – bấm vào sẽ kết nối Zalo ngay</p>
+          <p className="subtitle">Chọn ngành bạn quan tâm, chuyên viên sẽ tư vấn mẫu phù hợp qua Zalo</p>
         </div>
         <div className="template-tabs animate-on-scroll">
           {categories.map((c) => (
@@ -68,7 +68,7 @@ export default function Portfolio() {
                             className="template-img"
                             style={{ objectFit: "cover" }}
                           />
-                          <div className="template-badge">Dự Án Thực Tế</div>
+                          <div className="template-badge">{p.sample ? "Mẫu Web" : "Dự Án Thực Tế"}</div>
                           <div className="demo-overlay">
                             <span className="demo-btn-primary">Xem Live Demo</span>
                           </div>

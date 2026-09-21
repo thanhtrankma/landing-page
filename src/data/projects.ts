@@ -4,6 +4,7 @@ export type Project = {
   img: string;
   code: string;
   demoUrl?: string;
+  sample?: boolean;
 };
 
 export const categories = [
@@ -29,4 +30,5 @@ export const projects: Project[] = projectList.map((p) => ({
   img: p.img,
   code: p.code,
   ...(p.demoUrl ? { demoUrl: p.demoUrl } : {}),
+  ...(p.sample ? { sample: true } : {}),
 }));

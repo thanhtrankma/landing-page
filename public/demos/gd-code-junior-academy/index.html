@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CodeJunior Academy | Học lập trình cho bé 8-16 tuổi</title>
+  <meta name="description" content="CodeJunior Academy: trung tâm lập trình cho trẻ 8-16 tuổi với Scratch, Python, web và robotics. Lớp nhỏ tối đa 8 bé, học qua dự án, học thử miễn phí.">
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="data:,">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a class="skip-link" href="#noi-dung">Bỏ qua, đến nội dung chính</a>
+
+  <!-- SVG sprite: symbols dùng lại nhiều lần -->
+  <svg class="sprite" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="g-violet" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#8B5CF6"/><stop offset="1" stop-color="#5B21B6"/>
+      </linearGradient>
+      <linearGradient id="g-teal" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#2DD4BF"/><stop offset="1" stop-color="#0F766E"/>
+      </linearGradient>
+      <linearGradient id="g-sky" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#C4B5FD"/><stop offset="1" stop-color="#EDE9FE"/>
+      </linearGradient>
+      <linearGradient id="g-night" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#312E81"/><stop offset="1" stop-color="#6D28D9"/>
+      </linearGradient>
+    </defs>
+
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+    <symbol id="i-blocks" viewBox="0 0 24 24"><rect x="3" y="3" width="10" height="6" rx="1.5"/><rect x="8" y="10" width="13" height="6" rx="1.5"/><rect x="3" y="17" width="10" height="4" rx="1.5"/></symbol>
+    <symbol id="i-code" viewBox="0 0 24 24"><path d="M8 4c-2 0-3 1-3 3v2c0 1-1 3-2 3 1 0 2 2 2 3v2c0 2 1 3 3 3M16 4c2 0 3 1 3 3v2c0 1 1 3 2 3-1 0-2 2-2 3v2c0 2-1 3-3 3"/></symbol>
+    <symbol id="i-web" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></symbol>
+    <symbol id="i-chip" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4"/></symbol>
+    <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 3l2 6 6 2-6 2-2 6-2-6-6-2 6-2z"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+    <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c0-4 3-6 6.5-6s6.5 2 6.5 6"/><circle cx="17" cy="9" r="2.5"/><path d="M17 14c3 0 4.5 2 4.5 5"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s7-6 7-11a7 7 0 10-14 0c0 5 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></symbol>
+    <symbol id="i-building" viewBox="0 0 24 24"><path d="M4 21V5l8-3 8 3v16M9 21v-5h6v5M8 9h2M14 9h2M8 13h2M14 13h2"/></symbol>
+    <symbol id="i-laptop" viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="11" rx="1.5"/><path d="M2 20h20"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M5 19l2-2M17 7l2-2"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A15 15 0 013 6a2 2 0 012-2z"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></symbol>
+    <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4 6.1 20.5l1.2-6.5L2.5 9.4l6.6-.9z" fill="currentColor" stroke="none"/></symbol>
+
+    <symbol id="robot" viewBox="0 0 120 132">
+      <rect x="57" y="8" width="6" height="16" fill="#1E1B4B"/>
+      <circle cx="60" cy="8" r="7" fill="#FBBF24"/>
+      <circle cx="58" cy="6" r="2" fill="#FEF3C7"/>
+      <rect x="9" y="42" width="12" height="24" rx="5" fill="#14B8A6"/>
+      <rect x="99" y="42" width="12" height="24" rx="5" fill="#14B8A6"/>
+      <rect x="18" y="22" width="84" height="62" rx="16" fill="url(#g-violet)"/>
+      <rect x="27" y="32" width="66" height="42" rx="9" fill="#1E1B4B"/>
+      <rect x="38" y="44" width="14" height="14" rx="3" fill="#5EEAD4"/>
+      <rect x="68" y="44" width="14" height="14" rx="3" fill="#5EEAD4"/>
+      <rect x="41" y="47" width="4" height="4" fill="#fff"/>
+      <rect x="71" y="47" width="4" height="4" fill="#fff"/>
+      <rect x="48" y="63" width="6" height="4" fill="#FBBF24"/>
+      <rect x="54" y="66" width="12" height="4" fill="#FBBF24"/>
+      <rect x="66" y="63" width="6" height="4" fill="#FBBF24"/>
+      <rect x="30" y="88" width="60" height="34" rx="10" fill="#8B5CF6"/>
+      <rect x="43" y="96" width="34" height="18" rx="4" fill="#1E1B4B"/>
+      <rect x="49" y="101" width="6" height="6" fill="#FBBF24"/>
+      <rect x="59" y="101" width="6" height="6" fill="#5EEAD4"/>
+      <rect x="67" y="105" width="4" height="4" fill="#F0ABFC"/>
+      <rect x="14" y="90" width="13" height="26" rx="6" fill="#14B8A6"/>
+      <rect x="93" y="90" width="13" height="26" rx="6" fill="#14B8A6"/>
+      <rect x="36" y="120" width="18" height="10" rx="4" fill="#1E1B4B"/>
+      <rect x="66" y="120" width="18" height="10" rx="4" fill="#1E1B4B"/>
+    </symbol>
+
+    <symbol id="avatar" viewBox="0 0 96 96">
+      <rect width="96" height="96" rx="20" class="av-bg"/>
+      <path d="M14 96c0-20 15-30 34-30s34 10 34 30z" class="av-shirt"/>
+      <rect x="41" y="54" width="14" height="14" rx="5" class="av-skin"/>
+      <circle cx="48" cy="40" r="19" class="av-skin"/>
+      <path d="M28 40c-2-16 8-24 20-24s23 8 20 24c-3-7-8-11-14-12-8 4-18 4-26 12z" class="av-hair"/>
+      <circle cx="41" cy="42" r="2.4" fill="#1E1B4B"/>
+      <circle cx="55" cy="42" r="2.4" fill="#1E1B4B"/>
+      <path d="M42 50c3 3 9 3 12 0" fill="none" stroke="#1E1B4B" stroke-width="2.4" stroke-linecap="round"/>
+    </symbol>
+  </svg>
+
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="#top" aria-label="CodeJunior Academy, về đầu trang">
+        <svg class="brand-mark" viewBox="0 0 40 40" aria-hidden="true"><rect width="40" height="40" rx="11" fill="#6D28D9"/><path d="M15 12l-8 8 8 8M25 12l8 8-8 8" fill="none" stroke="#FBBF24" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span class="brand-text">CodeJunior<small>Academy</small></span>
+      </a>
+      <nav class="nav" aria-label="Điều hướng chính">
+        <ul>
+          <li><a href="#lo-trinh">Lộ trình</a></li>
+          <li><a href="#khoa-hoc">Khóa học</a></li>
+          <li><a href="#du-an">Dự án</a></li>
+          <li><a href="#hoc-phi">Học phí</a></li>
+          <li><a href="#hoi-dap">Hỏi đáp</a></li>
+        </ul>
+        <a class="btn btn-sun btn-sm" href="#hoc-thu">Học thử miễn phí</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="noi-dung">
+    <!-- 1. HERO -->
+    <section class="hero" id="top" aria-labelledby="hero-title">
+      <div class="wrap hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow mono">// lập trình cho bé 8 - 16 tuổi</p>
+          <h1 id="hero-title">Bé không chỉ chơi game.<br><span class="hl">Bé tự tạo ra game.</span></h1>
+          <p class="lead">Từ những khối lệnh Scratch đầu tiên đến Python, web và robot thật. Lớp tối đa 8 bé, học bằng dự án, cuối mỗi khóa bé mang về một sản phẩm của riêng mình.</p>
+          <div class="cta-row">
+            <a class="btn btn-primary" href="#hoc-thu">Đăng ký học thử miễn phí <svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+            <a class="btn btn-ghost" href="#lo-trinh">Xem lộ trình 4 chặng</a>
+          </div>
+          <ul class="stat-row">
+            <li><strong class="mono">1.200+</strong><span>học viên đã theo học</span></li>
+            <li><strong class="mono">8 bé</strong><span>sĩ số tối đa mỗi lớp</span></li>
+            <li><strong class="mono">4.8/5</strong><span>điểm phụ huynh đánh giá</span></li>
+          </ul>
+        </div>
+
+        <div class="hero-art">
+          <figure class="editor" aria-label="Minh họa cửa sổ soạn mã Python">
+            <div class="editor-bar" aria-hidden="true">
+              <span class="dot d1"></span><span class="dot d2"></span><span class="dot d3"></span>
+              <span class="tab mono">bibo_nhay.py</span>
+            </div>
+            <ol class="code mono">
+              <li><span class="kw">from</span> robot <span class="kw">import</span> <span class="fn">Bot</span></li>
+              <li></li>
+              <li>ten = <span class="str">"Minh Khôi"</span></li>
+              <li>bot = <span class="fn">Bot</span>(name=<span class="str">"Bi-Bo"</span>)</li>
+              <li></li>
+              <li><span class="kw">def</span> <span class="fn">chao</span>(ban):</li>
+              <li>&nbsp;&nbsp;<span class="fn">print</span>(<span class="str">f"Xin chào, {ban}!"</span>)</li>
+              <li></li>
+              <li><span class="kw">for</span> i <span class="kw">in</span> <span class="fn">range</span>(<span class="num">3</span>):</li>
+              <li>&nbsp;&nbsp;bot.<span class="fn">nhay</span>()&nbsp;<span class="com"># nhảy 3 lần</span></li>
+              <li><span class="fn">chao</span>(ten)</li>
+            </ol>
+            <div class="console mono">
+              <span class="prompt">&gt;&gt;&gt;</span> Xin chào, Minh Khôi!
+              <span class="run-ok">Chạy xong: 0 lỗi</span>
+            </div>
+          </figure>
+          <div class="mascot">
+            <p class="bubble">Xin chào! Mình là Bi-Bo, cùng code nhé?</p>
+            <svg class="mascot-svg" viewBox="0 0 120 132" role="img" aria-label="Robot Bi-Bo, linh vật của CodeJunior"><use href="#robot"/></svg>
+          </div>
+          <span class="float-chip chip-1 mono" aria-hidden="true">if ban_thich: code()</span>
+          <span class="float-chip chip-2 mono" aria-hidden="true">while True: hoc()</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. LỘ TRÌNH -->
+    <section class="section" id="lo-trinh" aria-labelledby="lotrinh-title">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow mono">// lo_trinh</p>
+          <h2 id="lotrinh-title">Lộ trình 4 chặng, mỗi chặng một sản phẩm thật</h2>
+          <p>Bé đi từng bước, chặng nào cũng có dự án cụ thể để khoe với bạn bè và gia đình.</p>
+        </div>
+        <ol class="roadmap">
+          <li class="stage s1">
+            <span class="stage-badge mono" aria-hidden="true">01</span>
+            <article class="stage-card">
+              <p class="stage-meta mono">Chặng 1 · 8-10 tuổi · 12 buổi</p>
+              <h3>Khám phá với Scratch</h3>
+              <p>Ghép khối lệnh, làm quen tư duy thuật toán: tuần tự, lặp, điều kiện.</p>
+              <p class="outcome"><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg><span><strong>Sản phẩm:</strong> game "Mèo bắt bóng" có tính điểm</span></p>
+            </article>
+          </li>
+          <li class="stage s2">
+            <span class="stage-badge mono" aria-hidden="true">02</span>
+            <article class="stage-card">
+              <p class="stage-meta mono">Chặng 2 · 10-12 tuổi · 16 buổi</p>
+              <h3>Nền tảng với Python</h3>
+              <p>Biến, vòng lặp, hàm, danh sách. Bé viết dòng mã đầu tiên và tự sửa lỗi.</p>
+              <p class="outcome"><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg><span><strong>Sản phẩm:</strong> trò chơi đoán số và chatbot hỏi đáp</span></p>
+            </article>
+          </li>
+          <li class="stage s3">
+            <span class="stage-badge mono" aria-hidden="true">03</span>
+            <article class="stage-card">
+              <p class="stage-meta mono">Chặng 3 · 11-14 tuổi · 20 buổi</p>
+              <h3>Sáng tạo web và game</h3>
+              <p>HTML, CSS, JavaScript cơ bản và thiết kế giao diện; làm game 2D nhiều màn.</p>
+              <p class="outcome"><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg><span><strong>Sản phẩm:</strong> website cá nhân và game platformer 3 màn</span></p>
+            </article>
+          </li>
+          <li class="stage s4">
+            <span class="stage-badge mono" aria-hidden="true">04</span>
+            <article class="stage-card">
+              <p class="stage-meta mono">Chặng 4 · 12-16 tuổi · 24 buổi</p>
+              <h3>Chế tạo robot và AI mini</h3>
+              <p>Vi điều khiển, cảm biến, động cơ; huấn luyện mô hình nhận diện đơn giản.</p>
+              <p class="outcome"><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg><span><strong>Sản phẩm:</strong> robot dò line, trình bày tại Demo Day</span></p>
+            </article>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- 3. KHÓA HỌC -->
+    <section class="section section-tint" id="khoa-hoc" aria-labelledby="khoahoc-title">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow mono">// khoa_hoc</p>
+          <h2 id="khoahoc-title">Khóa học theo độ tuổi</h2>
+          <p>Chọn khóa phù hợp với lứa tuổi và kinh nghiệm của bé. Không chắc? Học thử miễn phí, giáo viên sẽ tư vấn.</p>
+        </div>
+        <div class="course-grid">
+          <article class="course c-violet">
+            <span class="age-chip mono">8-10 tuổi</span>
+            <svg class="course-ic" aria-hidden="true"><use href="#i-blocks"/></svg>
+            <h3>Scratch Sáng Tạo</h3>
+            <p>Làm hoạt hình, truyện tương tác và game đơn giản bằng khối lệnh.</p>
+            <ul class="meta mono"><li>12 buổi</li><li>90 phút</li><li>Cấp độ: mới bắt đầu</li></ul>
+            <p class="level" aria-hidden="true"><i></i><i class="off"></i><i class="off"></i></p>
+          </article>
+          <article class="course c-teal">
+            <span class="age-chip mono">10-12 tuổi</span>
+            <svg class="course-ic" aria-hidden="true"><use href="#i-code"/></svg>
+            <h3>Python Nhập Môn</h3>
+            <p>Viết mã thật đầu tiên: trò chơi văn bản, vẽ hình với turtle, chatbot.</p>
+            <ul class="meta mono"><li>16 buổi</li><li>90 phút</li><li>Cấp độ: cơ bản</li></ul>
+            <p class="level" aria-hidden="true"><i></i><i></i><i class="off"></i></p>
+          </article>
+          <article class="course c-sun">
+            <span class="age-chip mono">11-14 tuổi</span>
+            <svg class="course-ic" aria-hidden="true"><use href="#i-web"/></svg>
+            <h3>Web Maker</h3>
+            <p>Thiết kế và xây website đầu tiên với HTML, CSS và một chút JavaScript.</p>
+            <ul class="meta mono"><li>20 buổi</li><li>120 phút</li><li>Cấp độ: cơ bản</li></ul>
+            <p class="level" aria-hidden="true"><i></i><i></i><i class="off"></i></p>
+          </article>
+          <article class="course c-violet">
+            <span class="age-chip mono">12-16 tuổi</span>
+            <svg class="course-ic" aria-hidden="true"><use href="#i-chip"/></svg>
+            <h3>Robotics và Arduino</h3>
+            <p>Lắp ráp, đấu nối cảm biến, lập trình robot tránh vật cản và dò line.</p>
+            <ul class="meta mono"><li>24 buổi</li><li>120 phút</li><li>Cấp độ: nâng cao</li></ul>
+            <p class="level" aria-hidden="true"><i></i><i></i><i></i></p>
+          </article>
+          <article class="course c-teal">
+            <span class="age-chip mono">13-16 tuổi</span>
+            <svg class="course-ic" aria-hidden="true"><use href="#i-spark"/></svg>
+            <h3>Python và AI Mini</h3>
+            <p>Xử lý dữ liệu, thư viện Python, huấn luyện mô hình nhận diện ảnh cỡ nhỏ.</p>
+            <ul class="meta mono"><li>20 buổi</li><li>120 phút</li><li>Cấp độ: nâng cao</li></ul>
+            <p class="level" aria-hidden="true"><i></i><i></i><i></i></p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. DỰ ÁN -->
+    <section class="section" id="du-an" aria-labelledby="duan-title">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow mono">// du_an_hoc_vien</p>
+          <h2 id="duan-title">Sản phẩm do chính các bé tạo ra</h2>
+          <p>Game, robot, website, ứng dụng: mỗi dự án đều do học viên tự thiết kế và lập trình với sự hướng dẫn của giáo viên.</p>
+        </div>
+        <div class="project-grid">
+          <figure class="project">
+            <svg viewBox="0 0 320 200" role="img" aria-label="Màn hình game platformer pixel với nhân vật vàng, đồng xu và cờ đích">
+              <rect width="320" height="200" fill="url(#g-night)"/>
+              <circle cx="262" cy="42" r="20" fill="#FDE68A"/>
+              <circle cx="270" cy="36" r="17" fill="#312E81" opacity=".55"/>
+              <g fill="#fff" opacity=".8"><rect x="30" y="24" width="4" height="4"/><rect x="90" y="46" width="4" height="4"/><rect x="150" y="20" width="4" height="4"/><rect x="200" y="60" width="4" height="4"/><rect x="60" y="80" width="4" height="4"/></g>
+              <rect x="0" y="160" width="320" height="40" fill="#0F766E"/>
+              <rect x="0" y="160" width="320" height="8" fill="#2DD4BF"/>
+              <rect x="70" y="122" width="70" height="14" fill="#14B8A6"/><rect x="70" y="122" width="70" height="4" fill="#5EEAD4"/>
+              <rect x="170" y="92" width="64" height="14" fill="#14B8A6"/><rect x="170" y="92" width="64" height="4" fill="#5EEAD4"/>
+              <rect x="86" y="96" width="24" height="26" fill="#FBBF24"/>
+              <rect x="92" y="104" width="4" height="6" fill="#1E1B4B"/><rect x="102" y="104" width="4" height="6" fill="#1E1B4B"/>
+              <rect x="86" y="96" width="24" height="5" fill="#FDE68A"/>
+              <g fill="#FBBF24" stroke="#B45309" stroke-width="2"><circle cx="190" cy="76" r="8"/><circle cx="214" cy="76" r="8"/><circle cx="120" cy="106" r="0"/></g>
+              <rect x="280" y="112" width="4" height="48" fill="#E5E7EB"/><path d="M284 112l22 8-22 8z" fill="#F43F5E"/>
+              <rect x="220" y="140" width="22" height="20" fill="#F43F5E"/><rect x="226" y="146" width="4" height="4" fill="#fff"/><rect x="234" y="146" width="4" height="4" fill="#fff"/>
+              <text x="14" y="22" font-family="JetBrains Mono, monospace" font-size="12" fill="#fff" font-weight="500">SCORE 0120</text>
+              <text x="230" y="22" font-family="JetBrains Mono, monospace" font-size="12" fill="#FDE68A">LV 2</text>
+            </svg>
+            <figcaption><span class="tag mono">Game</span><strong>Mèo Nhảy Sao Đêm</strong><small>Gia Hân, 11 tuổi · Python + Pygame Zero</small></figcaption>
+          </figure>
+
+          <figure class="project">
+            <svg viewBox="0 0 320 200" role="img" aria-label="Robot dò line bốn bánh chạy trên đường kẻ đen cong">
+              <rect width="320" height="200" fill="#CCFBF1"/>
+              <path d="M0 40h320M0 80h320M0 120h320M0 160h320M40 0v200M80 0v200M120 0v200M160 0v200M200 0v200M240 0v200M280 0v200" stroke="#99F6E4" stroke-width="1"/>
+              <path d="M-10 150C50 150 60 70 130 70S200 140 250 130 320 60 340 60" fill="none" stroke="#1E1B4B" stroke-width="12" stroke-linecap="round"/>
+              <path d="M-10 150C50 150 60 70 130 70S200 140 250 130 320 60 340 60" fill="none" stroke="#FBBF24" stroke-width="2" stroke-dasharray="8 10"/>
+              <g transform="translate(92 62) rotate(-14 30 20)">
+                <ellipse cx="30" cy="46" rx="34" ry="5" fill="#1E1B4B" opacity=".2"/>
+                <rect x="0" y="4" width="60" height="34" rx="9" fill="url(#g-violet)"/>
+                <rect x="8" y="10" width="30" height="16" rx="4" fill="#1E1B4B"/>
+                <rect x="13" y="15" width="5" height="5" fill="#5EEAD4"/><rect x="22" y="15" width="5" height="5" fill="#FBBF24"/>
+                <rect x="44" y="12" width="10" height="8" rx="2" fill="#FBBF24"/>
+                <circle cx="12" cy="40" r="8" fill="#1E1B4B"/><circle cx="12" cy="40" r="3" fill="#94A3B8"/>
+                <circle cx="48" cy="40" r="8" fill="#1E1B4B"/><circle cx="48" cy="40" r="3" fill="#94A3B8"/>
+                <rect x="58" y="22" width="8" height="6" rx="2" fill="#F43F5E"/>
+              </g>
+              <text x="14" y="188" font-family="JetBrains Mono, monospace" font-size="11" fill="#0F766E" font-weight="500">cam_bien_line = 1 | toc_do = 60%</text>
+            </svg>
+            <figcaption><span class="tag mono">Robot</span><strong>Xe Dò Line "Tia Chớp"</strong><small>Đức Anh, 14 tuổi · Arduino + cảm biến hồng ngoại</small></figcaption>
+          </figure>
+
+          <figure class="project">
+            <svg viewBox="0 0 320 200" role="img" aria-label="Trang web cá nhân giới thiệu sở thích, hiển thị trong cửa sổ trình duyệt">
+              <rect width="320" height="200" fill="#FEF3C7"/>
+              <rect x="30" y="22" width="260" height="160" rx="10" fill="#fff" stroke="#1E1B4B" stroke-width="3"/>
+              <path d="M30 32a10 10 0 0110-10h240a10 10 0 0110 10v14H30z" fill="#1E1B4B"/>
+              <circle cx="46" cy="34" r="4" fill="#F43F5E"/><circle cx="60" cy="34" r="4" fill="#FBBF24"/><circle cx="74" cy="34" r="4" fill="#2DD4BF"/>
+              <rect x="92" y="28" width="150" height="12" rx="6" fill="#4C4A7A"/>
+              <rect x="42" y="56" width="236" height="10" rx="5" fill="#EDE9FE"/>
+              <rect x="42" y="74" width="120" height="52" rx="8" fill="url(#g-violet)"/>
+              <rect x="52" y="84" width="72" height="8" rx="4" fill="#fff"/>
+              <rect x="52" y="98" width="90" height="5" rx="2.5" fill="#DDD6FE"/>
+              <rect x="52" y="108" width="56" height="10" rx="5" fill="#FBBF24"/>
+              <circle cx="222" cy="100" r="26" fill="#FBBF24"/><circle cx="222" cy="94" r="9" fill="#1E1B4B"/><path d="M204 124c2-14 34-14 36 0z" fill="#1E1B4B"/>
+              <rect x="42" y="136" width="70" height="36" rx="6" fill="#CCFBF1"/><rect x="125" y="136" width="70" height="36" rx="6" fill="#EDE9FE"/><rect x="208" y="136" width="70" height="36" rx="6" fill="#FEF3C7" stroke="#FBBF24"/>
+              <rect x="50" y="146" width="40" height="5" rx="2.5" fill="#0F766E"/><rect x="133" y="146" width="40" height="5" rx="2.5" fill="#6D28D9"/><rect x="216" y="146" width="40" height="5" rx="2.5" fill="#B45309"/>
+            </svg>
+            <figcaption><span class="tag mono">Website</span><strong>Thế Giới Khủng Long của Bảo</strong><small>Bảo Nam, 12 tuổi · HTML + CSS + JavaScript</small></figcaption>
+          </figure>
+
+          <figure class="project">
+            <svg viewBox="0 0 320 200" role="img" aria-label="Ứng dụng trên điện thoại hiển thị danh sách nhiệm vụ học tập có đánh dấu hoàn thành">
+              <rect width="320" height="200" fill="url(#g-sky)"/>
+              <circle cx="60" cy="40" r="30" fill="#fff" opacity=".35"/><circle cx="270" cy="160" r="40" fill="#fff" opacity=".35"/>
+              <rect x="110" y="10" width="100" height="196" rx="18" fill="#1E1B4B"/>
+              <rect x="116" y="20" width="88" height="176" rx="12" fill="#fff"/>
+              <rect x="146" y="14" width="28" height="5" rx="2.5" fill="#4C4A7A"/>
+              <rect x="116" y="20" width="88" height="34" rx="12" fill="url(#g-violet)"/>
+              <rect x="124" y="30" width="46" height="6" rx="3" fill="#fff"/><rect x="124" y="41" width="30" height="4" rx="2" fill="#DDD6FE"/>
+              <g>
+                <rect x="124" y="62" width="72" height="24" rx="7" fill="#CCFBF1"/><circle cx="138" cy="74" r="6" fill="#14B8A6"/><path d="M135 74l2 2 4-4" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/><rect x="150" y="71" width="38" height="5" rx="2.5" fill="#0F766E"/>
+                <rect x="124" y="92" width="72" height="24" rx="7" fill="#CCFBF1"/><circle cx="138" cy="104" r="6" fill="#14B8A6"/><path d="M135 104l2 2 4-4" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/><rect x="150" y="101" width="30" height="5" rx="2.5" fill="#0F766E"/>
+                <rect x="124" y="122" width="72" height="24" rx="7" fill="#F5F3FF" stroke="#C4B5FD"/><circle cx="138" cy="134" r="6" fill="none" stroke="#8B5CF6" stroke-width="1.8"/><rect x="150" y="131" width="34" height="5" rx="2.5" fill="#6D28D9"/>
+              </g>
+              <rect x="124" y="156" width="72" height="26" rx="13" fill="#FBBF24"/><rect x="141" y="166" width="38" height="6" rx="3" fill="#1E1B4B"/>
+              <path d="M240 60l4 10 10 4-10 4-4 10-4-10-10-4 10-4z" fill="#FBBF24"/><path d="M70 130l3 7 7 3-7 3-3 7-3-7-7-3 7-3z" fill="#6D28D9"/>
+            </svg>
+            <figcaption><span class="tag mono">Ứng dụng</span><strong>Nhắc Việc Cho Bé "Tick Tick"</strong><small>Phương Vy, 13 tuổi · Python + giao diện Kivy</small></figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. GIÁO VIÊN -->
+    <section class="section section-tint" id="giao-vien" aria-labelledby="gv-title">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow mono">// doi_ngu</p>
+          <h2 id="gv-title">Đội ngũ giáo viên trẻ, giỏi nghề, biết cách dạy trẻ</h2>
+          <p>Giáo viên là kỹ sư phần mềm hoặc giảng viên đã qua khóa đào tạo sư phạm nội bộ, luôn có trợ giảng hỗ trợ trong lớp.</p>
+        </div>
+        <div class="teacher-grid">
+          <article class="teacher">
+            <svg class="avatar t1" viewBox="0 0 96 96" role="img" aria-label="Ảnh minh họa thầy Lê Quang Huy"><use href="#avatar"/></svg>
+            <h3>Thầy Quang Huy</h3>
+            <p class="role mono">Trưởng bộ môn Python</p>
+            <p>8 năm làm kỹ sư phần mềm, 5 năm dạy lập trình cho trẻ. Thích biến lỗi thành trò chơi tìm kho báu.</p>
+          </article>
+          <article class="teacher">
+            <svg class="avatar t2" viewBox="0 0 96 96" role="img" aria-label="Ảnh minh họa cô Ngọc Mai"><use href="#avatar"/></svg>
+            <h3>Cô Ngọc Mai</h3>
+            <p class="role mono">Giáo viên Scratch và Web</p>
+            <p>Cử nhân Sư phạm Tin học, kiên nhẫn và vui tính; các bé nhỏ tuổi rất quý cô.</p>
+          </article>
+          <article class="teacher">
+            <svg class="avatar t3" viewBox="0 0 96 96" role="img" aria-label="Ảnh minh họa thầy Minh Trí"><use href="#avatar"/></svg>
+            <h3>Thầy Minh Trí</h3>
+            <p class="role mono">Giáo viên Robotics</p>
+            <p>Kỹ sư điện tử, từng huấn luyện đội robot thi đấu cấp thành phố. Tin rằng robot sinh ra để nghịch.</p>
+          </article>
+          <article class="teacher">
+            <svg class="avatar t4" viewBox="0 0 96 96" role="img" aria-label="Ảnh minh họa cô Thu Hà"><use href="#avatar"/></svg>
+            <h3>Cô Thu Hà</h3>
+            <p class="role mono">Giáo viên AI Mini</p>
+            <p>Thạc sĩ khoa học dữ liệu, chuyên biến các khái niệm khó thành ví dụ gần gũi với lứa tuổi teen.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. HÌNH THỨC -->
+    <section class="section" id="hinh-thuc" aria-labelledby="ht-title">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow mono">// hinh_thuc_lop</p>
+          <h2 id="ht-title">Chọn hình thức học phù hợp với gia đình</h2>
+          <p>Ba hình thức, cùng một giáo trình và cùng chất lượng giáo viên.</p>
+        </div>
+        <div class="table-scroll" tabindex="0" role="region" aria-label="Bảng so sánh các hình thức lớp học">
+          <table class="compare">
+            <caption class="sr-only">So sánh lớp tại trung tâm, lớp trực tuyến và trại hè</caption>
+            <thead>
+              <tr>
+                <th scope="col">Tiêu chí</th>
+                <th scope="col"><svg class="ic" aria-hidden="true"><use href="#i-building"/></svg> Tại trung tâm</th>
+                <th scope="col"><svg class="ic" aria-hidden="true"><use href="#i-laptop"/></svg> Trực tuyến</th>
+                <th scope="col"><svg class="ic" aria-hidden="true"><use href="#i-sun"/></svg> Trại hè</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">Sĩ số</th><td>Tối đa 8 bé</td><td>Tối đa 6 bé</td><td>Tối đa 12 bé</td></tr>
+              <tr><th scope="row">Thời lượng</th><td>90-120 phút/buổi</td><td>75-90 phút/buổi</td><td>4 tuần, 5 buổi/tuần</td></tr>
+              <tr><th scope="row">Thiết bị</th><td>Trung tâm trang bị máy và bộ robot</td><td>Máy tính của gia đình, có hướng dẫn cài đặt</td><td>Trung tâm trang bị đầy đủ</td></tr>
+              <tr><th scope="row">Phù hợp với</th><td>Bé cần môi trường tập trung, thích làm nhóm</td><td>Gia đình ở xa hoặc lịch bận</td><td>Bé muốn trải nghiệm nhanh trong kỳ nghỉ hè</td></tr>
+              <tr><th scope="row">Hỗ trợ</th><td>Trợ giảng ngay tại lớp</td><td>Giáo viên xem màn hình và sửa lỗi trực tiếp</td><td>Giáo viên và 2 trợ giảng</td></tr>
+              <tr><th scope="row">Học phí tham khảo</th><td>1.200.000 đ/tháng</td><td>990.000 đ/tháng</td><td>3.900.000 đ/khóa</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. LỊCH HỌC -->
+    <section class="section section-tint" id="lich-hoc" aria-labelledby="lich-title">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow mono">// lich_hoc</p>
+          <h2 id="lich-title">Lịch học tuần này</h2>
+          <p>Lịch khai giảng minh họa cho học kỳ tới. Giờ học có thể điều chỉnh theo nhóm đăng ký.</p>
+        </div>
+        <div class="table-scroll" tabindex="0" role="region" aria-label="Bảng lịch học trong tuần">
+          <table class="schedule">
+            <caption class="sr-only">Lịch học các lớp theo ngày và khung giờ</caption>
+            <thead>
+              <tr><th scope="col">Khung giờ</th><th scope="col">Thứ 2</th><th scope="col">Thứ 4</th><th scope="col">Thứ 6</th><th scope="col">Thứ 7</th><th scope="col">Chủ nhật</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row" class="mono">08:30 - 10:00</th>
+                <td class="empty">Nghỉ</td><td class="empty">Nghỉ</td><td class="empty">Nghỉ</td>
+                <td><span class="slot s-violet">Scratch 8-10</span></td>
+                <td><span class="slot s-teal">Python 10-12</span></td>
+              </tr>
+              <tr>
+                <th scope="row" class="mono">14:00 - 15:30</th>
+                <td><span class="slot s-sun">Web Maker</span></td>
+                <td><span class="slot s-sun">Web Maker</span></td>
+                <td class="empty">Nghỉ</td>
+                <td><span class="slot s-teal">Python 10-12</span></td>
+                <td><span class="slot s-violet">Robotics</span></td>
+              </tr>
+              <tr>
+                <th scope="row" class="mono">18:00 - 19:30</th>
+                <td><span class="slot s-violet">Robotics</span></td>
+                <td><span class="slot s-teal">AI Mini</span></td>
+                <td><span class="slot s-violet">Scratch 8-10</span></td>
+                <td class="empty">Nghỉ</td>
+                <td class="empty">Nghỉ</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. DEMO DAY -->
+    <section class="demo-day" id="demo-day" aria-labelledby="demo-title">
+      <div class="bunting" aria-hidden="true"></div>
+      <div class="wrap demo-grid">
+        <div>
+          <p class="eyebrow mono eyebrow-light">// demo_day</p>
+          <h2 id="demo-title">Demo Day: ngày các bé lên sân khấu</h2>
+          <p class="lead-light">Cuối mỗi học kỳ, mỗi bé trình bày sản phẩm trước phụ huynh, bạn bè và ban giám khảo là các anh chị làm nghề công nghệ. Bé học cách tự tin nói về ý tưởng của mình.</p>
+          <ul class="demo-facts">
+            <li><svg class="ic" aria-hidden="true"><use href="#i-clock"/></svg><span>Chủ nhật đầu tiên của tháng 12, 09:00 - 12:00</span></li>
+            <li><svg class="ic" aria-hidden="true"><use href="#i-pin"/></svg><span>Hội trường CodeJunior, 25 Đường Số 7, TP. Thủ Đức</span></li>
+            <li><svg class="ic" aria-hidden="true"><use href="#i-users"/></svg><span>Miễn phí cho phụ huynh, có quà và chứng nhận cho mọi bé</span></li>
+          </ul>
+        </div>
+        <ol class="demo-steps">
+          <li><span class="mono">01</span><div><h3>Trưng bày</h3><p>Bàn triển lãm dự án, khách tự do trải nghiệm.</p></div></li>
+          <li><span class="mono">02</span><div><h3>Thuyết trình 3 phút</h3><p>Mỗi bé giới thiệu ý tưởng và chạy thử sản phẩm.</p></div></li>
+          <li><span class="mono">03</span><div><h3>Hỏi đáp cùng giám khảo</h3><p>Các anh chị đặt câu hỏi khích lệ, không chấm điểm.</p></div></li>
+          <li><span class="mono">04</span><div><h3>Trao chứng nhận</h3><p>Huy hiệu theo từng chặng và ảnh kỷ niệm.</p></div></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- 9. CẢM NHẬN -->
+    <section class="section" id="cam-nhan" aria-labelledby="cn-title">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow mono">// phan_hoi</p>
+          <h2 id="cn-title">Phụ huynh và các bé nói gì</h2>
+        </div>
+        <div class="quote-grid">
+          <blockquote class="quote">
+            <p class="stars" role="img" aria-label="5 trên 5 sao"><svg class="ic-star" aria-hidden="true"><use href="#i-star"/></svg><svg class="ic-star" aria-hidden="true"><use href="#i-star"/></svg><svg class="ic-star" aria-hidden="true"><use href="#i-star"/></svg><svg class="ic-star" aria-hidden="true"><use href="#i-star"/></svg><svg class="ic-star" aria-hidden="true"><use href="#i-star"/></svg></p>
+            <p>Con mình trước chỉ mê xem video, giờ tối nào cũng hỏi "mẹ ơi con sửa lỗi này được rồi". Cách các cô thầy khen từng bước nhỏ rất hiệu quả.</p>
+            <footer><strong>Chị Lan Anh</strong> · mẹ của bé Bảo Nam, 12 tuổi</footer>
+          </blockquote>
+          <blockquote class="quote">
+            <p class="stars" role="img" aria-label="5 trên 5 sao"><svg class="ic-star" aria-hidden="true"><use href="#i-star"/></svg><svg class="ic-star" aria-hidden="true"><use href="#i-star"/></svg><svg class="ic-star" aria-hidden="true"><use href="#i-star"/></svg><svg class="ic-star" aria-hidden="true"><use href="#i-star"/></svg><svg class="ic-star" aria-hidden="true"><use href="#i-star"/></svg></p>
+            <p>Lớp ít bạn nên thầy kèm được từng bé. Con gái mình ngại nói nhưng sau Demo Day đã dám giơ tay phát biểu ở trường.</p>
+            <footer><strong>Anh Tuấn Kiệt</strong> · ba của bé Gia Hân, 11 tuổi</footer>
+          </blockquote>
+          <blockquote class="quote">
+            <p class="stars" role="img" aria-label="4 trên 5 sao"><svg class="ic-star" aria-hidden="true"><use href="#i-star"/></svg><svg class="ic-star" aria-hidden="true"><use href="#i-star"/></svg><svg class="ic-star" aria-hidden="true"><use href="#i-star"/></svg><svg class="ic-star" aria-hidden="true"><use href="#i-star"/></svg><svg class="ic-star off" aria-hidden="true"><use href="#i-star"/></svg></p>
+            <p>Em thích nhất buổi lắp robot vì được tự nối dây và thấy nó chạy. Lúc đầu bị lỗi hoài nhưng thầy bảo lỗi là bước đầu của việc học.</p>
+            <footer><strong>Đức Anh</strong> · học viên, 14 tuổi</footer>
+          </blockquote>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10. HỌC PHÍ -->
+    <section class="section section-tint" id="hoc-phi" aria-labelledby="hp-title">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow mono">// hoc_phi</p>
+          <h2 id="hp-title">Gói học rõ ràng, không phụ phí ẩn</h2>
+          <p>Mức phí minh họa cho lớp tại trung tâm. Đã bao gồm giáo trình, thiết bị thực hành và chứng nhận.</p>
+        </div>
+        <div class="price-grid">
+          <article class="price">
+            <h3>Gói Khám Phá</h3>
+            <p class="amount"><strong class="mono">1.200.000 đ</strong><span>/ tháng</span></p>
+            <ul class="ticks">
+              <li><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg>8 buổi mỗi tháng</li>
+              <li><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg>Học bất kỳ khóa nào</li>
+              <li><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg>Báo cáo tiến độ hàng tháng</li>
+            </ul>
+            <a class="btn btn-ghost" href="#hoc-thu">Chọn gói này</a>
+          </article>
+          <article class="price price-hot">
+            <p class="ribbon mono">Được chọn nhiều nhất</p>
+            <h3>Gói Lộ Trình</h3>
+            <p class="amount"><strong class="mono">3.300.000 đ</strong><span>/ quý</span></p>
+            <ul class="ticks">
+              <li><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg>24 buổi, tiết kiệm 8%</li>
+              <li><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg>1 dự án cuối khóa có nhận xét riêng</li>
+              <li><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg>Tham gia Demo Day</li>
+              <li><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg>Học bù miễn phí khi nghỉ</li>
+            </ul>
+            <a class="btn btn-sun" href="#hoc-thu">Đăng ký gói này</a>
+          </article>
+          <article class="price">
+            <h3>Gói Năm Học</h3>
+            <p class="amount"><strong class="mono">11.900.000 đ</strong><span>/ năm</span></p>
+            <ul class="ticks">
+              <li><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg>96 buổi, tiết kiệm 15%</li>
+              <li><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg>Bộ robot mini mang về nhà</li>
+              <li><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg>Buổi tư vấn định hướng 1-1</li>
+            </ul>
+            <a class="btn btn-ghost" href="#hoc-thu">Chọn gói này</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 11. FAQ -->
+    <section class="section" id="hoi-dap" aria-labelledby="faq-title">
+      <div class="wrap wrap-narrow">
+        <div class="section-head">
+          <p class="eyebrow mono">// faq</p>
+          <h2 id="faq-title">Câu hỏi thường gặp</h2>
+        </div>
+        <div class="faq">
+          <details>
+            <summary>Bé chưa biết gì về máy tính có học được không?</summary>
+            <p>Được. Khóa Scratch dành cho bé mới bắt đầu, chỉ cần biết dùng chuột. Giáo viên sẽ hướng dẫn từng thao tác cơ bản trong buổi đầu tiên.</p>
+          </details>
+          <details>
+            <summary>Lớp học thử kéo dài bao lâu và có phải trả phí không?</summary>
+            <p>Buổi học thử kéo dài 60 phút, hoàn toàn miễn phí và không bắt buộc đăng ký. Bé sẽ tự làm một sản phẩm nhỏ và nhận nhận xét từ giáo viên.</p>
+          </details>
+          <details>
+            <summary>Bé cần chuẩn bị máy tính riêng không?</summary>
+            <p>Lớp tại trung tâm và trại hè: không cần, trung tâm trang bị sẵn. Lớp trực tuyến: cần một máy tính có camera và kết nối mạng ổn định, chúng tôi hỗ trợ cài đặt miễn phí.</p>
+          </details>
+          <details>
+            <summary>Nếu bé nghỉ buổi học thì sao?</summary>
+            <p>Phụ huynh báo trước ít nhất 4 giờ để được xếp học bù trong tuần. Mỗi khóa có tối đa 2 buổi học bù miễn phí.</p>
+          </details>
+          <details>
+            <summary>Sau khóa học bé có thể làm được gì?</summary>
+            <p>Mỗi chặng đều có một sản phẩm cụ thể. Bé cũng nhận báo cáo năng lực và gợi ý khóa tiếp theo phù hợp, thay vì cam kết kết quả chung chung.</p>
+          </details>
+          <details>
+            <summary>Phụ huynh có theo dõi được tiến độ của con không?</summary>
+            <p>Có. Sau mỗi buổi giáo viên gửi ảnh sản phẩm và nhận xét ngắn, cuối tháng có báo cáo chi tiết kèm định hướng cho tháng tiếp theo.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- 12. FORM -->
+    <section class="section trial" id="hoc-thu" aria-labelledby="trial-title">
+      <div class="wrap trial-grid">
+        <div class="trial-copy">
+          <p class="eyebrow mono">// hoc_thu_mien_phi</p>
+          <h2 id="trial-title">Đăng ký học thử miễn phí cho bé</h2>
+          <p>Điền thông tin, tư vấn viên sẽ gọi lại trong 24 giờ để chọn khung giờ phù hợp. Buổi thử 60 phút, bé tự tay làm một sản phẩm nhỏ.</p>
+          <svg class="trial-robot" viewBox="0 0 120 132" role="img" aria-label="Robot Bi-Bo vẫy tay chào"><use href="#robot"/></svg>
+        </div>
+        <form class="form" action="#" method="post">
+          <div class="field">
+            <label for="f-ph">Họ tên phụ huynh</label>
+            <input id="f-ph" name="phu_huynh" type="text" autocomplete="name" placeholder="Nguyễn Lan Anh">
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label for="f-sdt">Số điện thoại</label>
+              <input id="f-sdt" name="dien_thoai" type="tel" autocomplete="tel" placeholder="0900 000 123">
+            </div>
+            <div class="field">
+              <label for="f-mail">Email</label>
+              <input id="f-mail" name="email" type="email" autocomplete="email" placeholder="ten@example.vn">
+            </div>
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label for="f-be">Tên của bé</label>
+              <input id="f-be" name="ten_be" type="text" placeholder="Bảo Nam">
+            </div>
+            <div class="field">
+              <label for="f-tuoi">Tuổi của bé</label>
+              <select id="f-tuoi" name="tuoi">
+                <option>8 - 10 tuổi</option>
+                <option>10 - 12 tuổi</option>
+                <option>12 - 14 tuổi</option>
+                <option>14 - 16 tuổi</option>
+              </select>
+            </div>
+          </div>
+          <div class="field">
+            <label for="f-khoa">Khóa học quan tâm</label>
+            <select id="f-khoa" name="khoa">
+              <option>Scratch Sáng Tạo</option>
+              <option>Python Nhập Môn</option>
+              <option>Web Maker</option>
+              <option>Robotics và Arduino</option>
+              <option>Python và AI Mini</option>
+              <option>Chưa rõ, cần tư vấn</option>
+            </select>
+          </div>
+          <fieldset class="field radios">
+            <legend>Hình thức mong muốn</legend>
+            <label><input type="radio" name="hinh_thuc" value="offline" checked> Tại trung tâm</label>
+            <label><input type="radio" name="hinh_thuc" value="online"> Trực tuyến</label>
+            <label><input type="radio" name="hinh_thuc" value="he"> Trại hè</label>
+          </fieldset>
+          <div class="field">
+            <label for="f-ghichu">Ghi chú thêm</label>
+            <textarea id="f-ghichu" name="ghi_chu" rows="3" placeholder="Bé đã từng học gì, khung giờ nào thuận tiện..."></textarea>
+          </div>
+          <button class="btn btn-primary btn-block" type="submit">Gửi đăng ký học thử</button>
+          <p class="form-note">Đây là trang demo, biểu mẫu không gửi dữ liệu đi đâu cả.</p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-grid">
+      <div>
+        <p class="brand brand-footer"><svg class="brand-mark" viewBox="0 0 40 40" aria-hidden="true"><rect width="40" height="40" rx="11" fill="#FBBF24"/><path d="M15 12l-8 8 8 8M25 12l8 8-8 8" fill="none" stroke="#1E1B4B" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="brand-text">CodeJunior<small>Academy</small></span></p>
+        <p class="foot-note">Học lập trình vui, hiểu sâu, làm ra sản phẩm thật.</p>
+      </div>
+      <div>
+        <h2 class="foot-title">Liên hệ</h2>
+        <ul class="foot-list">
+          <li><svg class="ic" aria-hidden="true"><use href="#i-phone"/></svg>0900 000 123</li>
+          <li><svg class="ic" aria-hidden="true"><use href="#i-mail"/></svg>hello@codejunior.example.vn</li>
+          <li><svg class="ic" aria-hidden="true"><use href="#i-pin"/></svg>25 Đường Số 7, TP. Thủ Đức</li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="foot-title">Khám phá</h2>
+        <ul class="foot-links">
+          <li><a href="#lo-trinh">Lộ trình</a></li>
+          <li><a href="#khoa-hoc">Khóa học</a></li>
+          <li><a href="#lich-hoc">Lịch học</a></li>
+          <li><a href="#hoc-phi">Học phí</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="wrap footer-bottom">
+      <p>Nội dung và số liệu trong trang là hư cấu, chỉ nhằm minh họa.</p>
+      <p><a href="/">Trang demo do SuperLanding thiết kế</a></p>
+    </div>
+  </footer>
+</body>
+</html>

@@ -3,12 +3,12 @@
   "slug": "thiet-ke-website",
   "eyebrow": "DỊCH VỤ THIẾT KẾ WEBSITE",
   "shortLabel": "Website theo yêu cầu",
-  "image": "/custom-coding-service.png",
+  "image": "/images/custom-coding-service-sky.png",
   "imageAlt": "Minh họa dịch vụ thiết kế và lập trình website theo yêu cầu",
   "title": "Thiết kế website chuyên nghiệp theo mục tiêu kinh doanh",
-  "metaTitle": "Thiết Kế Website Chuyên Nghiệp, Chuẩn SEO | WebLanding",
+  "metaTitle": "Thiết Kế Website Chuyên Nghiệp, Chuẩn SEO | SuperLanding",
   "description": "Dịch vụ thiết kế website theo yêu cầu, tối ưu trải nghiệm, tốc độ, SEO kỹ thuật và khả năng chuyển đổi. Nhận tư vấn giải pháp phù hợp.",
-  "lead": "WebLanding xây dựng website theo nhu cầu thực tế của doanh nghiệp: cấu trúc rõ ràng, giao diện nhất quán với thương hiệu, dễ quản trị và sẵn sàng mở rộng.",
+  "lead": "SuperLanding xây dựng website theo nhu cầu thực tế của doanh nghiệp: cấu trúc rõ ràng, giao diện nhất quán với thương hiệu, dễ quản trị và sẵn sàng mở rộng.",
   "audience": [
    "Doanh nghiệp cần website giới thiệu dịch vụ",
    "Cửa hàng muốn xây kênh bán hàng sở hữu riêng",
@@ -49,7 +49,7 @@
   "faqs": [
    {
     "question": "Chi phí thiết kế website được tính như thế nào?",
-    "answer": "Chi phí phụ thuộc số lượng trang, mức độ tùy biến giao diện, chức năng và nội dung cần triển khai. WebLanding xác nhận phạm vi và báo giá trước khi thực hiện."
+    "answer": "Chi phí phụ thuộc số lượng trang, mức độ tùy biến giao diện, chức năng và nội dung cần triển khai. SuperLanding xác nhận phạm vi và báo giá trước khi thực hiện."
    },
    {
     "question": "Website có thể tự cập nhật nội dung không?",
@@ -80,10 +80,10 @@
   "slug": "thiet-ke-landing-page",
   "eyebrow": "DỊCH VỤ LANDING PAGE",
   "shortLabel": "Landing Page chuyển đổi",
-  "image": "/landing-page-cro.png",
+  "image": "/images/landing-page-cro-sky.png",
   "imageAlt": "Minh họa Landing Page tối ưu chuyển đổi và hiệu suất",
   "title": "Thiết kế Landing Page tập trung vào chuyển đổi",
-  "metaTitle": "Thiết Kế Landing Page Tối Ưu Chuyển Đổi | WebLanding",
+  "metaTitle": "Thiết Kế Landing Page Tối Ưu Chuyển Đổi | SuperLanding",
   "description": "Thiết kế Landing Page theo yêu cầu cho quảng cáo và chiến dịch bán hàng, tối ưu thông điệp, CTA, biểu mẫu, hiển thị di động và tốc độ.",
   "lead": "Mỗi Landing Page được xây quanh một mục tiêu chuyển đổi cụ thể như nhận tư vấn, thu lead, đặt hàng hoặc đăng ký sự kiện — không chỉ là một trang giao diện đẹp.",
   "audience": [
@@ -167,10 +167,10 @@
   "slug": "thiet-ke-website-ban-hang",
   "eyebrow": "WEBSITE BÁN HÀNG",
   "shortLabel": "Website bán hàng",
-  "image": "/fashion-ecommerce-website.png",
+  "image": "/images/fashion-ecommerce-website-sky.png",
   "imageAlt": "Giao diện website bán hàng hiển thị trên máy tính và điện thoại",
   "title": "Thiết kế website bán hàng dễ quản lý, thuận tiện đặt mua",
-  "metaTitle": "Thiết Kế Website Bán Hàng Theo Yêu Cầu | WebLanding",
+  "metaTitle": "Thiết Kế Website Bán Hàng Theo Yêu Cầu | SuperLanding",
   "description": "Thiết kế website bán hàng theo yêu cầu với danh mục sản phẩm, giỏ hàng, đặt hàng và quản trị phù hợp quy trình kinh doanh thực tế.",
   "lead": "Website bán hàng được thiết kế từ quy trình chọn sản phẩm đến đặt mua, đồng thời giúp doanh nghiệp chủ động dữ liệu, nội dung và trải nghiệm thương hiệu.",
   "audience": [
@@ -254,10 +254,10 @@
   "slug": "thiet-ke-website-doanh-nghiep",
   "eyebrow": "WEBSITE DOANH NGHIỆP",
   "shortLabel": "Website doanh nghiệp",
-  "image": "/corporate-portfolio-website.png",
+  "image": "/images/corporate-portfolio-website-sky.png",
   "imageAlt": "Giao diện website doanh nghiệp chuyên nghiệp trên nhiều thiết bị",
   "title": "Thiết kế website doanh nghiệp thể hiện rõ năng lực thương hiệu",
-  "metaTitle": "Thiết Kế Website Doanh Nghiệp Chuyên Nghiệp | WebLanding",
+  "metaTitle": "Thiết Kế Website Doanh Nghiệp Chuyên Nghiệp | SuperLanding",
   "description": "Thiết kế website doanh nghiệp theo nhận diện thương hiệu, trình bày năng lực, dịch vụ, dự án và tạo hành trình liên hệ rõ ràng.",
   "lead": "Một website doanh nghiệp hiệu quả cần giúp khách hàng nhanh chóng hiểu doanh nghiệp là ai, giải quyết vấn đề gì và vì sao nên liên hệ.",
   "audience": [
@@ -308,7 +308,7 @@
    },
    {
     "question": "Sau bàn giao có thể thêm nội dung không?",
-    "answer": "Có nếu dự án bao gồm hệ thống quản trị. WebLanding sẽ hướng dẫn quy trình cập nhật các loại nội dung đã thống nhất."
+    "answer": "Có nếu dự án bao gồm hệ thống quản trị. SuperLanding sẽ hướng dẫn quy trình cập nhật các loại nội dung đã thống nhất."
    }
   ],
   "supportingLinks": [
@@ -341,11 +341,11 @@
   "slug": "thiet-ke-website-nha-hang",
   "eyebrow": "WEBSITE NHÀ HÀNG",
   "shortLabel": "Website nhà hàng",
-  "image": "/bunboxao-homepage.png",
+  "image": "/images/bunboxao-homepage.png",
   "imageAlt": "Dự án website nhà hàng Bún Bò Xào với hình ảnh món ăn nổi bật",
   "imagePosition": "top center",
   "title": "Thiết kế website nhà hàng hấp dẫn và thuận tiện đặt bàn",
-  "metaTitle": "Thiết Kế Website Nhà Hàng, Quán Ăn | WebLanding",
+  "metaTitle": "Thiết Kế Website Nhà Hàng, Quán Ăn | SuperLanding",
   "description": "Thiết kế website nhà hàng, quán ăn với menu trực quan, hình ảnh thương hiệu, thông tin địa điểm và hành động đặt bàn hoặc liên hệ rõ ràng.",
   "lead": "Website nhà hàng cần truyền tải được phong cách ẩm thực, giúp thực khách xem menu, tìm địa chỉ và thực hiện hành động đặt bàn trên điện thoại thật thuận tiện.",
   "audience": [
@@ -425,11 +425,11 @@
   "slug": "thiet-ke-website-tiem-nail",
   "eyebrow": "WEBSITE TIỆM NAIL",
   "shortLabel": "Website tiệm nail",
-  "image": "/1millionnailgorey-homepage.png",
+  "image": "/images/1millionnailgorey-homepage.png",
   "imageAlt": "Dự án website tiệm nail với thư viện mẫu móng chuyên nghiệp",
   "imagePosition": "top center",
   "title": "Thiết kế website tiệm nail và salon làm đẹp chuyên nghiệp",
-  "metaTitle": "Thiết Kế Website Tiệm Nail, Salon Làm Đẹp | WebLanding",
+  "metaTitle": "Thiết Kế Website Tiệm Nail, Salon Làm Đẹp | SuperLanding",
   "description": "Thiết kế website tiệm nail và salon với bảng dịch vụ, thư viện hình ảnh, thông tin địa điểm, liên hệ và đặt lịch thuận tiện.",
   "lead": "Website giúp tiệm nail giới thiệu phong cách, dịch vụ và không gian một cách nhất quán, đồng thời rút ngắn hành trình từ tìm hiểu đến đặt lịch.",
   "audience": [

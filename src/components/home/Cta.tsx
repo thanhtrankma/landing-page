@@ -1,6 +1,7 @@
+import { PHONE, PHONE_DOTTED } from "@/data/site";
 import { Button, Icon } from "../ui";
 
-const assurances = ["Phản hồi nhanh trong 15p", "Không ràng buộc hợp đồng", "Tư vấn giải pháp miễn phí"];
+const assurances = ["Phản hồi nhanh trong 15 phút", "Không ràng buộc hợp đồng", "Báo giá minh bạch, rõ ràng"];
 const circle = "M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831";
 
 export default function Cta() {
@@ -16,22 +17,22 @@ export default function Cta() {
               <i className="pulse-dot" /> SẴN SÀNG CHO BƯỚC TIẾP THEO?
             </span>
             <h2>
-              Bắt đầu thiết kế Website &amp;
+              Bắt đầu hành trình với
               <br />
-              <span className="gradient-text">Landing Page</span> của bạn ngay.
+              <span className="gradient-text">website xứng tầm</span> thương hiệu của bạn.
             </h2>
-            <p className="cta-desc">Nhận tư vấn giải pháp và báo giá chi tiết hoàn toàn miễn phí.</p>
+            <p className="cta-desc">Chia sẻ mục tiêu của bạn — SuperLanding sẽ tư vấn giải pháp phù hợp và gửi báo giá chi tiết, hoàn toàn miễn phí.</p>
             <div className="cta-action-group">
               <Button href="/lien-he" light>
-                Gửi yêu cầu ngay
+                Nhận tư vấn miễn phí
               </Button>
-              <a href="tel:0971424792" className="cta-phone-link">
+              <a href={`tel:${PHONE}`} className="cta-phone-link">
                 <span className="phone-icon-wrapper">
                   <Icon name="phone" size={16} />
                 </span>
                 <div className="phone-text">
                   <span className="phone-label">Gọi Hotline tư vấn</span>
-                  <span className="phone-num">0971.424.792</span>
+                  <span className="phone-num">{PHONE_DOTTED}</span>
                 </div>
               </a>
             </div>
@@ -53,7 +54,7 @@ export default function Cta() {
                   <span className="browser-dot dot-red" />
                   <span className="browser-dot dot-yellow" />
                   <span className="browser-dot dot-green" />
-                  <div className="browser-address">weblanding.vn/yeu-cau-thiet-ke</div>
+                  <div className="browser-address">superlanding.vn/yeu-cau-thiet-ke</div>
                 </div>
                 <div className="browser-content">
                   <div className="mockup-page-hero">

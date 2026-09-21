@@ -4,7 +4,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState, type ReactNode } from "react";
-import { FACEBOOK_URL, ZALO_URL, facebookPath } from "@/data/site";
+import {
+  FACEBOOK_URL,
+  SHOW_SOCIALS,
+  ZALO_URL,
+  facebookPath,
+} from "@/data/site";
 
 export function ScrollToTop() {
   const [progress, setProgress] = useState(0);
@@ -30,7 +35,11 @@ export function ScrollToTop() {
       onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
       aria-label="Lên đầu trang"
     >
-      <svg className="scroll-top-progress" viewBox="0 0 56 56" aria-hidden="true">
+      <svg
+        className="scroll-top-progress"
+        viewBox="0 0 56 56"
+        aria-hidden="true"
+      >
         <circle className="scroll-top-track" cx="28" cy="28" r="25" />
         <circle
           className="scroll-top-value"
@@ -49,9 +58,9 @@ export function ScrollToTop() {
 }
 
 const bubbleMessages = [
-  "👋 Xin chào! Bạn cần thiết kế Website hay Landing Page?",
-  "💬 Nhận ngay kho mẫu giao diện độc quyền & báo giá trong 5 phút!",
-  "🚀 Tối ưu SEO, tốc độ tải cực nhanh và bảo mật tuyệt đối!",
+  "👋 Xin chào! Bạn đang cần Website hay Landing Page cho dự án nào?",
+  "💬 Nhận tư vấn, kho giao diện mẫu và báo giá nhanh qua Zalo!",
+  "🚀 Website chuẩn SEO, tải nhanh, bảo mật — sẵn sàng để tăng trưởng.",
   "🎁 Đang có ưu đãi tặng Hosting & Tên miền miễn phí khi đăng ký ngay!",
 ];
 
@@ -92,15 +101,22 @@ export function ZaloFloat() {
 
   return (
     <div className="contact-float-group">
-      <div className="facebook-float-btn">
-        <a href={FACEBOOK_URL} target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-          <div className="icon-wrapper">
-            <svg viewBox="0 0 24 24" fill="currentColor">
-              <path d={facebookPath} />
-            </svg>
-          </div>
-        </a>
-      </div>
+      {SHOW_SOCIALS && (
+        <div className="facebook-float-btn">
+          <a
+            href={FACEBOOK_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Facebook"
+          >
+            <div className="icon-wrapper">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d={facebookPath} />
+              </svg>
+            </div>
+          </a>
+        </div>
+      )}
       <div className="zalo-float-btn">
         {!dismissed && bubble && (
           <div className="zalo-bubble">
@@ -129,10 +145,21 @@ export function ZaloFloat() {
             </div>
           </div>
         )}
-        <a href={ZALO_URL} target="_blank" rel="noopener noreferrer" aria-label="Chat Zalo">
+        <a
+          href={ZALO_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Chat Zalo"
+        >
           <span className="ping-glow" />
           <div className="icon-wrapper">
-            <Image src="/images/zalo-icon.png" alt="Chat Zalo" width={48} height={48} className="zalo-icon-img" />
+            <Image
+              src="/images/zalo-icon.png"
+              alt="Chat Zalo"
+              width={48}
+              height={48}
+              className="zalo-icon-img"
+            />
           </div>
           <div className="badge-count">1</div>
         </a>
@@ -141,7 +168,13 @@ export function ZaloFloat() {
   );
 }
 
-type NavItem = { id: string; label: string; href: string; icon: ReactNode; external?: boolean };
+type NavItem = {
+  id: string;
+  label: string;
+  href: string;
+  icon: ReactNode;
+  external?: boolean;
+};
 
 const mobileItems: NavItem[] = [
   {
@@ -231,12 +264,22 @@ export function MobileBottomNav() {
     <div className="mobile-bottom-nav">
       {mobileItems.map((item) =>
         item.external ? (
-          <a key={item.id} href={item.href} target="_blank" rel="noopener noreferrer" className="mobile-nav-item">
+          <a
+            key={item.id}
+            href={item.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mobile-nav-item"
+          >
             <div className="icon-wrapper">{item.icon}</div>
             <span className="nav-label">{item.label}</span>
           </a>
         ) : (
-          <Link key={item.id} href={item.href} className={`mobile-nav-item ${active === item.id ? "active" : ""}`}>
+          <Link
+            key={item.id}
+            href={item.href}
+            className={`mobile-nav-item ${active === item.id ? "active" : ""}`}
+          >
             <div className="icon-wrapper">
               {item.icon}
               {active === item.id && <span className="active-dot" />}

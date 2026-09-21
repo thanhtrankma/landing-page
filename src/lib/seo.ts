@@ -32,7 +32,7 @@ export function pageMetadata(m: PageMeta): Metadata {
       title: ogTitle,
       description: ogDescription,
       url,
-      siteName: "WebLanding",
+      siteName: "SuperLanding",
       locale: "vi_VN",
       type: m.type ?? "website",
       ...(m.publishedTime ? { publishedTime: m.publishedTime } : {}),
