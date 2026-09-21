@@ -22,13 +22,16 @@ export const categories = [
   { id: "landing-page", label: "Landing Page" },
 ];
 
-import { projectList } from "@/lib/content";
+import type { ProjectRecord } from "@/lib/content";
 
-export const projects: Project[] = projectList.map((p) => ({
-  title: p.title,
-  category: p.category,
-  img: p.img,
-  code: p.code,
-  ...(p.demoUrl ? { demoUrl: p.demoUrl } : {}),
-  ...(p.sample ? { sample: true } : {}),
-}));
+export const projectsToCards = (list: ProjectRecord[]): Project[] =>
+  [...list]
+    .sort((a, b) => (a.homeOrder ?? 0) - (b.homeOrder ?? 0))
+    .map((p) => ({
+      title: p.title,
+      category: p.category,
+      img: p.img,
+      code: p.code,
+      ...(p.demoUrl ? { demoUrl: p.demoUrl } : {}),
+      ...(p.sample ? { sample: true } : {}),
+    }));

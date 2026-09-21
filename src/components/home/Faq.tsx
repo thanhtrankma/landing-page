@@ -2,15 +2,16 @@
 
 import Image from "next/image";
 import { useState } from "react";
-import { faqs } from "@/data/site";
 import { Heading } from "../ui";
 
 export default function Faq({
+  faqs,
   images = [
     { src: "/images/faq-illustration.png", alt: "FAQ Illustration", width: 200, height: 200 },
     { src: "/images/faq-support.png", alt: "Support Illustration", width: 200, height: 200 },
   ],
 }: {
+  faqs: [question: string, answer: string][];
   images?: { src: string; alt: string; width: number; height: number }[];
 }) {
   const [open, setOpen] = useState(0);

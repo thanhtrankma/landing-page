@@ -1,10 +1,11 @@
-import { PHONE, PHONE_DOTTED } from "@/data/site";
+import { getSettings } from "@/lib/site-data";
 import { Button, Icon } from "../ui";
 
 const assurances = ["Phản hồi nhanh trong 15 phút", "Không ràng buộc hợp đồng", "Báo giá minh bạch, rõ ràng"];
 const circle = "M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831";
 
-export default function Cta() {
+export default async function Cta() {
+  const { phone: PHONE, phoneDotted: PHONE_DOTTED } = await getSettings();
   return (
     <section className="cta home-cta">
       <div className="cta-glow cta-glow-one" />

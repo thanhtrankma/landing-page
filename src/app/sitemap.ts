@@ -1,10 +1,12 @@
 import type { MetadataRoute } from "next";
-import { posts, projectList, servicePages } from "@/lib/content";
+import { servicePages } from "@/lib/content";
+import { getPosts, getProjects } from "@/lib/site-data";
 import { SITE_URL } from "@/lib/seo";
 
 type Entry = MetadataRoute.Sitemap[number];
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const [posts, projectList] = await Promise.all([getPosts(), getProjects()]);
   const page = (path: string, changeFrequency: Entry["changeFrequency"], priority: number, lastModified?: string): Entry => ({
     url: `${SITE_URL}${path}`,
     changeFrequency,

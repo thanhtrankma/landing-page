@@ -3,6 +3,8 @@ import projectRecords from "@/data/projects.json";
 import serviceRecords from "@/data/services.json";
 
 export type Post = {
+  id?: string;
+  published?: boolean;
   slug: string;
   title: string;
   category: string;
@@ -17,6 +19,9 @@ export type Post = {
 };
 
 export type ProjectRecord = {
+  id?: string;
+  published?: boolean;
+  homeOrder?: number;
   slug: string;
   title: string;
   category: string;

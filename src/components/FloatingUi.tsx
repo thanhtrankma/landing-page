@@ -4,12 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState, type ReactNode } from "react";
-import {
-  FACEBOOK_URL,
-  SHOW_SOCIALS,
-  ZALO_URL,
-  facebookPath,
-} from "@/data/site";
+import { facebookPath } from "@/data/site";
+import { useSettings } from "./SettingsProvider";
 
 export function ScrollToTop() {
   const [progress, setProgress] = useState(0);
@@ -65,6 +61,7 @@ const bubbleMessages = [
 ];
 
 export function ZaloFloat() {
+  const { zaloUrl, showSocials, facebookUrl } = useSettings();
   const [index, setIndex] = useState(0);
   const [bubble, setBubble] = useState(false);
   const [typing, setTyping] = useState(false);
@@ -101,10 +98,10 @@ export function ZaloFloat() {
 
   return (
     <div className="contact-float-group">
-      {SHOW_SOCIALS && (
+      {showSocials && (
         <div className="facebook-float-btn">
           <a
-            href={FACEBOOK_URL}
+            href={facebookUrl}
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Facebook"
@@ -146,7 +143,7 @@ export function ZaloFloat() {
           </div>
         )}
         <a
-          href={ZALO_URL}
+          href={zaloUrl}
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Chat Zalo"
@@ -226,7 +223,7 @@ const mobileItems: NavItem[] = [
   {
     id: "tu-van",
     label: "Tư vấn",
-    href: ZALO_URL,
+    href: "#",
     external: true,
     icon: (
       <svg viewBox="0 0 24 24" className="nav-icon">
@@ -237,6 +234,7 @@ const mobileItems: NavItem[] = [
 ];
 
 export function MobileBottomNav() {
+  const { zaloUrl } = useSettings();
   const pathname = usePathname();
   const [hash, setHash] = useState("");
 
@@ -266,7 +264,7 @@ export function MobileBottomNav() {
         item.external ? (
           <a
             key={item.id}
-            href={item.href}
+            href={zaloUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="mobile-nav-item"

@@ -2,15 +2,16 @@
 
 import Image from "next/image";
 import { useState } from "react";
-import { categories, projects } from "@/data/projects";
-import { ZALO_URL } from "@/data/site";
+import { categories, type Project } from "@/data/projects";
+import { useSettings } from "../SettingsProvider";
 import Tilt from "../Tilt";
 import { Icon } from "../ui";
 
 const PAGE_SIZE = 8;
 const external = { target: "_blank", rel: "noopener noreferrer" } as const;
 
-export default function Portfolio() {
+export default function Portfolio({ projects }: { projects: Project[] }) {
+  const { zaloUrl: ZALO_URL } = useSettings();
   const [category, setCategory] = useState("all");
   const [page, setPage] = useState(1);
 

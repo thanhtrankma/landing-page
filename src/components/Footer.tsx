@@ -1,17 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
-import {
-  ADDRESS,
-  EMAIL,
-  FACEBOOK_URL,
-  INSTAGRAM_URL,
-  PHONE,
-  PHONE_DISPLAY,
-  SHOW_SOCIALS,
-  TIKTOK_URL,
-  ZALO_URL,
-  facebookPath,
-} from "@/data/site";
+import { facebookPath } from "@/data/site";
+import { getSettings } from "@/lib/site-data";
 import { Brand } from "./ui";
 
 const tiktokPath =
@@ -22,7 +12,8 @@ const instagramPath =
 
 const external = { target: "_blank", rel: "noopener noreferrer" } as const;
 
-export default function Footer() {
+export default async function Footer() {
+  const site = await getSettings();
   return (
     <footer>
       <div className="gv-wrap footer-grid">
@@ -33,14 +24,14 @@ export default function Footer() {
             tỷ lệ chuyển đổi cho cá nhân và doanh nghiệp.
           </p>
           <div className="footer-socials">
-            {SHOW_SOCIALS && (
-              <a href={FACEBOOK_URL} {...external} aria-label="Facebook">
+            {site.showSocials && (
+              <a href={site.facebookUrl} {...external} aria-label="Facebook">
                 <svg viewBox="0 0 24 24" fill="currentColor">
                   <path d={facebookPath} />
                 </svg>
               </a>
             )}
-            <a href={ZALO_URL} {...external} aria-label="Zalo">
+            <a href={site.zaloUrl} {...external} aria-label="Zalo">
               <Image
                 src="/images/zalo-icon.png"
                 alt="Tư vấn Zalo thiết kế website SuperLanding"
@@ -48,14 +39,14 @@ export default function Footer() {
                 height={24}
               />
             </a>
-            {SHOW_SOCIALS && (
+            {site.showSocials && (
               <>
-                <a href={TIKTOK_URL} {...external} aria-label="TikTok">
+                <a href={site.tiktokUrl} {...external} aria-label="TikTok">
                   <svg viewBox="0 0 24 24" fill="currentColor">
                     <path d={tiktokPath} />
                   </svg>
                 </a>
-                <a href={INSTAGRAM_URL} {...external} aria-label="Instagram">
+                <a href={site.instagramUrl} {...external} aria-label="Instagram">
                   <svg viewBox="0 0 24 24" fill="currentColor">
                     <path d={instagramPath} />
                   </svg>
@@ -76,25 +67,25 @@ export default function Footer() {
         </div>
         <div>
           <b>Liên hệ</b>
-          <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
-          <a href={`tel:${PHONE}`}>Hotline: {PHONE_DISPLAY}</a>
-          <a href={ZALO_URL} {...external}>
-            Zalo: {PHONE_DISPLAY}
+          <a href={`mailto:${site.email}`}>{site.email}</a>
+          <a href={`tel:${site.phone}`}>Hotline: {site.phoneDisplay}</a>
+          <a href={site.zaloUrl} {...external}>
+            Zalo: {site.phoneDisplay}
           </a>
-          {SHOW_SOCIALS && (
+          {site.showSocials && (
             <>
-              <a href={FACEBOOK_URL} {...external}>
+              <a href={site.facebookUrl} {...external}>
                 Facebook cá nhân
               </a>
-              <a href={TIKTOK_URL} {...external}>
-                TikTok: @thietkeweblandingpage
+              <a href={site.tiktokUrl} {...external}>
+                TikTok
               </a>
-              <a href={INSTAGRAM_URL} {...external}>
-                Instagram: weblandingthietke
+              <a href={site.instagramUrl} {...external}>
+                Instagram
               </a>
             </>
           )}
-          <a>{ADDRESS}</a>
+          <a>{site.address}</a>
         </div>
       </div>
       <div className="gv-wrap footer-bottom">

@@ -1,9 +1,10 @@
-import { pricingPlans } from "@/data/site";
+import { getSettings } from "@/lib/site-data";
 import ScrollRow from "../ScrollRow";
 import Tilt from "../Tilt";
 import { Button, Heading, Icon } from "../ui";
 
-export function PricingCards({ tilt = true }: { tilt?: boolean }) {
+export async function PricingCards({ tilt = true }: { tilt?: boolean }) {
+  const { pricingPlans } = await getSettings();
   const inner = tilt ? "tilt-inner" : undefined;
   const deep = tilt ? "tilt-inner-deep" : undefined;
   return (

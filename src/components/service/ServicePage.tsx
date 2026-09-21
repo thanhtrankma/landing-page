@@ -1,14 +1,15 @@
 import Image from "next/image";
 import Link from "next/link";
 import JsonLd from "@/components/JsonLd";
-import { PHONE_DISPLAY, PHONE_INTL } from "@/data/site";
+import { getSettings } from "@/lib/site-data";
 import { servicePages, type ServicePageData } from "@/lib/content";
 import { SITE_URL, breadcrumbJsonLd, graph } from "@/lib/seo";
 
 const arrow = <span aria-hidden="true">→</span>;
 const external = <span aria-hidden="true">↗</span>;
 
-export default function ServicePage({ service }: { service: ServicePageData }) {
+export default async function ServicePage({ service }: { service: ServicePageData }) {
+  const { phoneDisplay: PHONE_DISPLAY, phoneIntl: PHONE_INTL } = await getSettings();
   const url = `${SITE_URL}/${service.slug}`;
   const related = servicePages.filter((s) => s.slug !== service.slug).slice(0, 3);
   const knowledge = service.supportingLinks;
