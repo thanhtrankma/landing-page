@@ -2,6 +2,7 @@ import Cta from "@/components/home/Cta";
 import Faq from "@/components/home/Faq";
 import Hero from "@/components/home/Hero";
 import Portfolio from "@/components/home/Portfolio";
+import PromoPopup from "@/components/PromoPopup";
 import Pricing from "@/components/home/Pricing";
 import Process from "@/components/home/Process";
 import Services from "@/components/home/Services";
@@ -29,6 +30,7 @@ export default async function Home() {
       <Pricing />
       <Faq faqs={faqs} />
       <Cta />
+      <PromoPopup />
     </main>
   );
 }
