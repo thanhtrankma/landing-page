@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8" />
+<title>SuperLanding posts</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@500;600;700;800;900&display=block" rel="stylesheet" />
+<style>
+  :root { --navy: #0b1b3f; --ink: #0b2a3c; --blue: #0a55ff; --cyan: #19c8f5; --muted: #4c6a80; --line: #d6ebf7; --grad: linear-gradient(100deg, #0a4bff 0%, #1592ff 55%, #19c8f5 100%); }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 1080px; height: 1350px; overflow: hidden; }
+  body { font-family: "Be Vietnam Pro", system-ui, sans-serif; color: var(--ink); -webkit-font-smoothing: antialiased; }
+  .post { position: relative; width: 1080px; height: 1350px; overflow: hidden; display: none; background: linear-gradient(180deg, #ffffff 0%, #eef8fd 55%, #dcf0fb 100%); }
+  .post.on { display: block; }
+  .abs { position: absolute; }
+  .dots { position: absolute; inset: 0; background-image: radial-gradient(rgba(11,111,164,.12) 2px, transparent 2px); background-size: 44px 44px; mask-image: linear-gradient(180deg, #000 0%, transparent 55%); }
+  .blob { position: absolute; border-radius: 50%; filter: blur(70px); opacity: .5; }
+  .grad-text { background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .center { left: 0; right: 0; text-align: center; }
+  .eyebrow { display: inline-flex; align-items: center; gap: 12px; padding: 12px 26px; border-radius: 999px; background: #fff; border: 2px solid var(--line); font-size: 26px; font-weight: 800; letter-spacing: .06em; color: #0b6fa4; }
+  .eyebrow i { width: 12px; height: 12px; border-radius: 50%; background: var(--cyan); }
+  h1 { font-weight: 900; letter-spacing: -.035em; line-height: 1.06; color: var(--navy); }
+  .sub { font-weight: 600; color: var(--muted); line-height: 1.45; }
+
+  /* shared footer */
+  .foot { position: absolute; left: 56px; right: 56px; bottom: 44px; display: flex; align-items: center; justify-content: space-between; }
+  .foot .brand { display: flex; align-items: center; gap: 14px; font-size: 34px; font-weight: 900; letter-spacing: -.03em; color: var(--navy); }
+  .foot .brand img { width: 54px; height: 54px; }
+  .foot .zl { display: flex; align-items: center; gap: 12px; padding: 12px 24px 12px 12px; border-radius: 999px; background: var(--navy); color: #fff; font-size: 28px; font-weight: 800; }
+  .foot .zl img { width: 44px; height: 44px; border-radius: 50%; background: #fff; }
+  .post.dark .foot .brand { color: #fff; }
+  .post.dark .foot .zl { background: #fff; color: var(--navy); }
+
+  /* device mockups */
+  .browser { border-radius: 22px; background: #fff; overflow: hidden; box-shadow: 0 40px 80px -34px rgba(11,42,80,.55); border: 2px solid #dbe9f3; }
+  .browser .bar { height: 42px; background: #eef4f9; display: flex; align-items: center; gap: 9px; padding: 0 18px; border-bottom: 1px solid #dbe9f3; }
+  .browser .bar i { width: 12px; height: 12px; border-radius: 50%; }
+  .browser .view { background-size: 100% auto; background-position: top center; background-repeat: no-repeat; }
+  .phone { border-radius: 52px; background: #0d1624; padding: 13px; box-shadow: 0 40px 80px -28px rgba(11,42,80,.6), 0 0 0 3px #2b3a52 inset; }
+  .phone .view { position: relative; width: 100%; height: 100%; border-radius: 40px; background-size: 100% auto; background-position: top center; background-repeat: no-repeat; }
+  .phone .view::before { content: ""; position: absolute; left: 50%; top: 18px; width: 90px; height: 26px; margin-left: -45px; border-radius: 20px; background: #0d1624; }
+
+  .chk { display: flex; align-items: center; gap: 18px; font-size: 32px; font-weight: 700; color: var(--navy); }
+  .chk b { width: 48px; height: 48px; flex-shrink: 0; border-radius: 50%; background: var(--grad); display: grid; place-items: center; }
+
+  /* 1 offer */
+  #p1 h1 { font-size: 84px; }
+  .sticker { width: 270px; height: 270px; border-radius: 50%; background: var(--grad); color: #fff; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; box-shadow: 0 30px 60px -20px rgba(10,85,255,.6); transform: rotate(-10deg); border: 8px solid #fff; }
+  .sticker small { font-size: 28px; font-weight: 700; opacity: .92; }
+  .sticker b { font-size: 64px; font-weight: 900; letter-spacing: -.03em; line-height: 1; }
+  .sticker em { font-style: normal; font-size: 26px; font-weight: 700; }
+
+  /* 2 grid */
+  .tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+  .tile { background: #fff; border-radius: 22px; padding: 10px; box-shadow: 0 24px 40px -26px rgba(11,42,80,.5); border: 2px solid #e4f0f8; }
+  .tile .img { height: 188px; border-radius: 14px; background-size: 100% auto; background-position: top center; }
+  .tile span { display: block; padding: 12px 6px 4px; font-size: 24px; font-weight: 800; color: var(--navy); }
+  .tile small { display: block; padding: 0 6px 6px; font-size: 20px; font-weight: 600; color: var(--muted); }
+
+  /* 4 pricing */
+  .plans { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+  .plan { position: relative; background: #fff; border-radius: 30px; padding: 30px 30px 26px; border: 2px solid #e1eff8; box-shadow: 0 30px 50px -34px rgba(11,42,80,.45); }
+  .plan.hot { background: var(--navy); border-color: var(--navy); color: #fff; }
+  .plan .n { font-size: 32px; font-weight: 800; color: var(--navy); }
+  .plan.hot .n, .plan.hot .d, .plan.hot li { color: #fff; }
+  .plan .d { font-size: 22px; font-weight: 700; color: #0b6fa4; margin-top: 4px; }
+  .plan .pr { margin-top: 14px; font-size: 54px; font-weight: 900; letter-spacing: -.03em; line-height: 1.05; }
+  .plan .pr small { display: block; font-size: 22px; font-weight: 700; letter-spacing: 0; opacity: .7; margin-bottom: 2px; }
+  .plan ul { list-style: none; margin-top: 16px; display: flex; flex-direction: column; gap: 9px; }
+  .plan li { font-size: 22px; font-weight: 600; color: var(--muted); display: flex; gap: 10px; line-height: 1.35; }
+  .plan li::before { content: "✓"; color: var(--cyan); font-weight: 900; }
+  .plan .tag { position: absolute; top: -18px; right: 24px; padding: 8px 18px; border-radius: 999px; background: var(--grad); color: #fff; font-size: 20px; font-weight: 800; letter-spacing: .04em; }
+
+  /* 5 process */
+  .steps { display: flex; flex-direction: column; gap: 22px; }
+  .step { display: flex; gap: 28px; align-items: center; background: #fff; border-radius: 30px; padding: 26px 32px; border: 2px solid #e1eff8; box-shadow: 0 26px 46px -32px rgba(11,42,80,.45); }
+  .step .no { width: 96px; height: 96px; flex-shrink: 0; border-radius: 28px; background: var(--grad); color: #fff; display: grid; place-items: center; font-size: 44px; font-weight: 900; }
+  .step b { display: block; font-size: 40px; font-weight: 800; color: var(--navy); }
+  .step span { display: block; margin-top: 4px; font-size: 27px; font-weight: 600; color: var(--muted); line-height: 1.4; }
+
+  /* 6 why */
+  .why { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+  .why div { background: #fff; border-radius: 30px; padding: 32px 30px; border: 2px solid #e1eff8; box-shadow: 0 26px 46px -32px rgba(11,42,80,.45); }
+  .why .ic { width: 76px; height: 76px; border-radius: 22px; background: var(--grad); color: #fff; display: grid; place-items: center; }
+  .why b { display: block; margin-top: 20px; font-size: 34px; font-weight: 800; color: var(--navy); line-height: 1.15; }
+  .why span { display: block; margin-top: 8px; font-size: 24px; font-weight: 600; color: var(--muted); line-height: 1.4; }
+
+  /* 7 cta */
+  .dark { background: radial-gradient(900px 700px at 85% 5%, #19c8f5 0%, transparent 60%), linear-gradient(160deg, #0a3fe0 0%, #0a55ff 45%, #0b1b3f 100%) !important; }
+  .dark h1 { color: #fff; }
+  .dark .sub { color: #cfe9ff; }
+  .zcard { display: flex; align-items: center; gap: 30px; padding: 34px 40px; border-radius: 40px; background: #fff; box-shadow: 0 40px 80px -30px rgba(0,0,0,.45); }
+  .zcard img { width: 104px; height: 104px; }
+  .zcard small { display: block; font-size: 30px; font-weight: 700; color: var(--muted); }
+  .zcard b { display: block; white-space: nowrap; font-size: 60px; font-weight: 900; letter-spacing: -.02em; color: var(--navy); line-height: 1.05; }
+  .wchk { display: flex; align-items: center; gap: 16px; font-size: 32px; font-weight: 700; color: #fff; }
+  .wchk b { width: 46px; height: 46px; border-radius: 50%; background: rgba(255,255,255,.18); border: 2px solid rgba(255,255,255,.55); display: grid; place-items: center; }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute"><defs>
+  <symbol id="ck" viewBox="0 0 24 24"><path d="m5 12 4.5 4.5L19 7" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</defs></svg>
+
+<!-- 1. Offer -->
+<section class="post" id="p1">
+  <div class="dots"></div>
+  <div class="blob" style="width:560px;height:560px;background:#8fd0ee;left:-200px;top:-160px"></div>
+  <div class="blob" style="width:520px;height:520px;background:#a9d8ff;right:-180px;top:640px"></div>
+  <div class="abs" style="left:56px;top:64px"><span class="eyebrow"><i></i>THIẾT KẾ WEBSITE &amp; LANDING PAGE</span></div>
+  <h1 class="abs" style="left:56px;top:150px;right:56px">Website đẹp,<br />chuẩn SEO<br /><span class="grad-text">bán hàng hiệu quả</span></h1>
+  <div class="abs sub" style="left:56px;top:476px;font-size:34px">Thiết kế riêng cho thương hiệu của bạn.</div>
+  <div class="abs browser" style="left:56px;top:560px;width:760px">
+    <div class="bar"><i style="background:#ff6159"></i><i style="background:#ffbd2e"></i><i style="background:#28c941"></i></div>
+    <div class="view" style="height:475px;background-image:url(desk/aurelia.jpg)"></div>
+  </div>
+  <div class="abs phone" style="left:700px;top:620px;width:270px;height:540px"><div class="view" style="background-image:url(mob/ielts.jpg)"></div></div>
+  <div class="abs sticker" style="left:800px;top:360px;width:240px;height:240px"><small>Chỉ từ</small><b>499K</b><em>/ dự án</em></div>
+  <div class="abs" style="left:56px;top:1100px;display:flex;flex-direction:column;gap:14px">
+    <div class="chk"><b><svg width="26" height="26"><use href="#ck"/></svg></b>Bàn giao 3–5 ngày</div>
+    <div class="chk"><b><svg width="26" height="26"><use href="#ck"/></svg></b>Bảo hành 4 tháng</div>
+  </div>
+  <div class="foot"><div class="brand"><img src="logo.png" alt="" /><span>Super<span class="grad-text">Landing</span></span></div><div class="zl"><img src="zalo-icon.png" alt="" />0365 614 597</div></div>
+</section>
+
+<!-- 2. Showcase grid -->
+<section class="post" id="p2">
+  <div class="dots"></div>
+  <div class="blob" style="width:560px;height:560px;background:#8fd0ee;right:-220px;top:-160px"></div>
+  <div class="abs center" style="top:60px"><span class="eyebrow"><i></i>KHO MẪU WEBSITE</span></div>
+  <h1 class="abs center" style="top:140px;font-size:76px">Mẫu đẹp cho<br /><span class="grad-text">mọi ngành nghề</span></h1>
+  <div class="abs tiles" style="left:56px;right:56px;top:360px">
+    <div class="tile"><div class="img" style="background-image:url(desk/aurelia.jpg)"></div><span>Bất động sản</span><small>Aurelia Residences</small></div>
+    <div class="tile"><div class="img" style="background-image:url(desk/ielts.jpg)"></div><span>Giáo dục</span><small>IELTS Elevate</small></div>
+    <div class="tile"><div class="img" style="background-image:url(desk/bunbo.jpg)"></div><span>Nhà hàng</span><small>Bún Bò Xào</small></div>
+    <div class="tile"><div class="img" style="background-image:url(desk/nail.jpg)"></div><span>Làm đẹp</span><small>1 MILLION Nail</small></div>
+    <div class="tile"><div class="img" style="background-image:url(desk/ritual.jpg)"></div><span>Cà phê</span><small>Ritual Coffee</small></div>
+    <div class="tile"><div class="img" style="background-image:url(desk/banh.jpg)"></div><span>Tiệm bánh</span><small>Maison Cacao</small></div>
+    <div class="tile"><div class="img" style="background-image:url(desk/organic.jpg)"></div><span>Thực phẩm sạch</span><small>Vườn Xanh Organic</small></div>
+    <div class="tile"><div class="img" style="background-image:url(desk/vietvu.jpg)"></div><span>Xây dựng</span><small>Việt Vũ</small></div>
+    <div class="tile"><div class="img" style="background-image:url(desk/codejr.jpg)"></div><span>Đào tạo</span><small>CodeJunior Academy</small></div>
+  </div>
+  <div class="foot"><div class="brand"><img src="logo.png" alt="" /><span>Super<span class="grad-text">Landing</span></span></div><div class="zl"><img src="zalo-icon.png" alt="" />0365 614 597</div></div>
+</section>
+
+<!-- 3. Responsive -->
+<section class="post" id="p3">
+  <div class="dots"></div>
+  <div class="blob" style="width:600px;height:600px;background:#8fd0ee;left:-220px;top:500px"></div>
+  <div class="abs" style="left:56px;top:64px"><span class="eyebrow"><i></i>RESPONSIVE 100%</span></div>
+  <h1 class="abs" style="left:56px;top:150px;font-size:80px">Đẹp trên máy tính.<br /><span class="grad-text">Chuẩn trên điện thoại.</span></h1>
+  <div class="abs sub" style="left:56px;top:350px;right:56px;font-size:32px">Mọi website đều được tối ưu hiển thị trên máy tính, máy tính bảng và điện thoại.</div>
+  <div class="abs browser" style="left:56px;top:490px;width:968px">
+    <div class="bar"><i style="background:#ff6159"></i><i style="background:#ffbd2e"></i><i style="background:#28c941"></i></div>
+    <div class="view" style="height:560px;background-image:url(desk/greenvilla.jpg)"></div>
+  </div>
+  <div class="abs phone" style="left:700px;top:720px;width:280px;height:540px;transform:rotate(4deg)"><div class="view" style="background-image:url(mob/greenvilla.jpg)"></div></div>
+  <div class="abs" style="left:56px;top:1110px;display:flex;gap:14px">
+    <span class="eyebrow" style="letter-spacing:0;font-size:24px">✓ Chuẩn SEO</span><span class="eyebrow" style="letter-spacing:0;font-size:24px">✓ Tải nhanh</span>
+  </div>
+  <div class="foot"><div class="brand"><img src="logo.png" alt="" /><span>Super<span class="grad-text">Landing</span></span></div><div class="zl"><img src="zalo-icon.png" alt="" />0365 614 597</div></div>
+</section>
+
+<!-- 4. Pricing -->
+<section class="post" id="p4">
+  <div class="dots"></div>
+  <div class="abs center" style="top:56px"><span class="eyebrow"><i></i>BẢNG GIÁ MINH BẠCH</span></div>
+  <h1 class="abs center" style="top:132px;font-size:70px">Chọn gói <span class="grad-text">đúng nhu cầu</span></h1>
+  <div class="abs sub center" style="top:226px;font-size:28px">Không phát sinh chi phí ẩn · Báo giá rõ ràng trước khi làm</div>
+  <div class="abs plans" style="left:56px;right:56px;top:310px">
+    <div class="plan"><div class="n">Cơ Bản</div><div class="d">3–5 ngày</div><div class="pr"><small>Từ</small>499.000đ</div>
+      <ul><li>01 trang Landing Page</li><li>Chuẩn hiển thị di động</li><li>Form đăng ký, nút CTA tối ưu</li><li>Bảo hành 4 tháng</li></ul></div>
+    <div class="plan hot"><span class="tag">PHỔ BIẾN NHẤT</span><div class="n">Tiêu Chuẩn</div><div class="d">7–15 ngày</div><div class="pr"><small>Từ</small>1.899.000đ</div>
+      <ul><li>Trang giới thiệu, dịch vụ</li><li>Hệ thống quản trị (Admin)</li><li>Quản lý dự án, bài viết</li><li>Bảo hành 12 tháng</li></ul></div>
+    <div class="plan"><div class="n">Cao Cấp</div><div class="d">Theo phạm vi</div><div class="pr"><small>Từ</small>6.000.000đ</div>
+      <ul><li>Quản lý sản phẩm, danh mục</li><li>Giỏ hàng, đặt hàng online</li><li>Quản lý đơn &amp; khách hàng</li><li>Bảo hành 12 tháng</li></ul></div>
+    <div class="plan"><div class="n">Theo Yêu Cầu</div><div class="d">Theo giai đoạn</div><div class="pr"><small>&nbsp;</small>Báo giá riêng</div>
+      <ul><li>Giải pháp nghiệp vụ riêng</li><li>Phân quyền tài khoản</li><li>Dashboard thống kê</li><li>Bảo hành 12 tháng</li></ul></div>
+  </div>
+  <div class="foot"><div class="brand"><img src="logo.png" alt="" /><span>Super<span class="grad-text">Landing</span></span></div><div class="zl"><img src="zalo-icon.png" alt="" />0365 614 597</div></div>
+</section>
+
+<!-- 5. Process -->
+<section class="post" id="p5">
+  <div class="dots"></div>
+  <div class="blob" style="width:560px;height:560px;background:#8fd0ee;right:-200px;top:-140px"></div>
+  <div class="abs" style="left:56px;top:64px"><span class="eyebrow"><i></i>QUY TRÌNH LÀM VIỆC</span></div>
+  <h1 class="abs" style="left:56px;top:150px;font-size:78px">4 bước để có<br /><span class="grad-text">website của riêng bạn</span></h1>
+  <div class="abs steps" style="left:56px;right:56px;top:372px">
+    <div class="step"><div class="no">1</div><div><b>Nghiên cứu</b><span>Lắng nghe nhu cầu, phân tích thị trường và đối thủ.</span></div></div>
+    <div class="step"><div class="no">2</div><div><b>Chiến lược</b><span>Xây dựng cấu trúc trang và luồng trải nghiệm người dùng.</span></div></div>
+    <div class="step"><div class="no">3</div><div><b>Thiết kế</b><span>Giao diện mang dấu ấn riêng, hiện đại và nhất quán.</span></div></div>
+    <div class="step"><div class="no">4</div><div><b>Bàn giao</b><span>Lập trình, kiểm thử kỹ lưỡng và bàn giao hoàn chỉnh.</span></div></div>
+  </div>
+  <div class="foot"><div class="brand"><img src="logo.png" alt="" /><span>Super<span class="grad-text">Landing</span></span></div><div class="zl"><img src="zalo-icon.png" alt="" />0365 614 597</div></div>
+</section>
+
+<!-- 6. Why us -->
+<section class="post" id="p6">
+  <div class="dots"></div>
+  <div class="abs center" style="top:56px"><span class="eyebrow"><i></i>VÌ SAO CHỌN CHÚNG TÔI</span></div>
+  <h1 class="abs center" style="top:132px;font-size:74px">6 lý do chọn <span class="grad-text">SuperLanding</span></h1>
+  <div class="abs why" style="left:56px;right:56px;top:260px">
+    <div><span class="ic"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r="1.5"/><circle cx="17.5" cy="10.5" r="1.5"/><circle cx="8.5" cy="7.5" r="1.5"/><circle cx="6.5" cy="12.5" r="1.5"/><path d="M12 2a10 10 0 0 0 0 20c1.1 0 2-.9 2-2 0-.5-.2-1-.5-1.3-.3-.4-.5-.8-.5-1.3 0-1.1.9-2 2-2h2.4A5.6 5.6 0 0 0 22 10c0-4.4-4.5-8-10-8Z"/></svg></span><b>Giao diện độc quyền</b><span>Thiết kế theo nhận diện thương hiệu của riêng bạn.</span></div>
+    <div><span class="ic"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m3 17 6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg></span><b>Chuẩn SEO</b><span>Cấu trúc chuẩn, thân thiện với Google ngay từ đầu.</span></div>
+    <div><span class="ic"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8Z"/></svg></span><b>Tải trang nhanh</b><span>Tối ưu tốc độ, giữ chân khách ngay giây đầu.</span></div>
+    <div><span class="ic"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2.5" width="10" height="19" rx="2.5"/><path d="M11 18.5h2"/></svg></span><b>Chuẩn di động</b><span>Hiển thị đẹp trên mọi kích thước màn hình.</span></div>
+    <div><span class="ic"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 9h10M7 13h6"/></svg></span><b>Báo giá minh bạch</b><span>Rõ phạm vi, không phát sinh chi phí ẩn.</span></div>
+    <div><span class="ic"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="m9 12 2 2 4-4"/></svg></span><b>Bảo hành tận tâm</b><span>Bảo hành 4–12 tháng, hỗ trợ nhanh qua Zalo.</span></div>
+  </div>
+  <div class="foot"><div class="brand"><img src="logo.png" alt="" /><span>Super<span class="grad-text">Landing</span></span></div><div class="zl"><img src="zalo-icon.png" alt="" />0365 614 597</div></div>
+</section>
+
+<!-- 7. CTA -->
+<section class="post dark" id="p7">
+  <div class="abs" style="left:56px;top:64px"><span class="eyebrow" style="background:rgba(255,255,255,.14);border-color:rgba(255,255,255,.35);color:#fff"><i></i>TƯ VẤN MIỄN PHÍ</span></div>
+  <h1 class="abs" style="left:56px;top:150px;font-size:92px">Bắt đầu<br />website của bạn<br />ngay hôm nay</h1>
+  <div class="abs sub" style="left:56px;top:470px;font-size:34px">Phản hồi nhanh trong 15 phút.</div>
+  <div class="abs" style="left:56px;top:570px;display:flex;flex-direction:column;gap:20px">
+    <div class="wchk"><b><svg width="24" height="24"><use href="#ck"/></svg></b>Không ràng buộc hợp đồng</div>
+    <div class="wchk"><b><svg width="24" height="24"><use href="#ck"/></svg></b>Báo giá rõ ràng, minh bạch</div>
+    <div class="wchk"><b><svg width="24" height="24"><use href="#ck"/></svg></b>Chỉ từ 499.000đ</div>
+  </div>
+  <div class="abs phone" style="left:700px;top:500px;width:300px;height:620px;transform:rotate(6deg)"><div class="view" style="background-image:url(mob/home.jpg)"></div></div>
+  <div class="abs zcard" style="left:56px;top:880px;width:620px"><img src="zalo-icon.png" alt="" /><div><small>Zalo / Hotline</small><b>0365 614 597</b></div></div>
+  <div class="foot"><div class="brand"><img src="logo.png" alt="" style="background:#fff;border-radius:14px" />SuperLanding</div><div class="zl"><img src="zalo-icon.png" alt="" />Nhắn Zalo ngay</div></div>
+</section>
+
+<script>
+  const id = new URLSearchParams(location.search).get("p") || "p1";
+  document.getElementById(id).classList.add("on");
+  window.ready = (async () => {
+    await document.fonts.ready;
+    const urls = [...document.querySelectorAll(`#${id} [style*="url("]`)].map((e) => e.style.backgroundImage.slice(5, -2));
+    await Promise.all([...urls.map((u) => new Promise((r) => { const i = new Image(); i.onload = i.onerror = r; i.src = u; })), ...[...document.images].map((i) => (i.complete ? 1 : new Promise((r) => (i.onload = i.onerror = r))))]);
+    return true;
+  })();
+</script>
+</body>
+</html>

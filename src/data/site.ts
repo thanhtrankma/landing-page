@@ -70,7 +70,7 @@ export const pricingPlans: PricingPlan[] = [
   {
     "name": "Cơ Bản",
     "desc": "Landing Page hoàn chỉnh cho cá nhân và cửa hàng nhỏ: hiển thị tốt trên di động, sẵn sàng thu hút khách hàng.",
-    "price": "449.000đ",
+    "price": "499.000đ",
     "duration": "3-5 ngày",
     "items": [
       "01 trang bán hàng (Landing Page)",

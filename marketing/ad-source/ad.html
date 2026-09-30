@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8" />
+<title>SuperLanding Ad</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@500;600;700;800;900&display=block" rel="stylesheet" />
+<style>
+  :root {
+    --navy: #0b1b3f; --ink: #0b2a3c; --blue: #0a55ff; --cyan: #19c8f5; --sky: #bbe4f6; --sky-soft: #e8f5fc; --muted: #4c6a80;
+    --grad: linear-gradient(100deg, #0a4bff 0%, #1592ff 55%, #19c8f5 100%);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 1080px; height: 1920px; overflow: hidden; background: #fff; }
+  body { font-family: "Be Vietnam Pro", system-ui, sans-serif; color: var(--ink); -webkit-font-smoothing: antialiased; }
+  #stage { position: relative; width: 1080px; height: 1920px; overflow: hidden; background: linear-gradient(180deg, #ffffff 0%, #eef8fd 55%, #dff1fb 100%); }
+  .abs { position: absolute; }
+  .scene { position: absolute; inset: 0; opacity: 0; will-change: opacity, transform; }
+  .blob { position: absolute; border-radius: 50%; filter: blur(60px); opacity: .55; }
+  .grad-text { background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .center { left: 0; right: 0; text-align: center; }
+  .dots { position: absolute; inset: 0; background-image: radial-gradient(rgba(11,111,164,.13) 2px, transparent 2px); background-size: 44px 44px; mask-image: linear-gradient(180deg, #000 0%, transparent 70%); }
+
+  /* scene 1 */
+  .s1-l { font-weight: 800; letter-spacing: -.02em; line-height: 1.08; }
+  #s1a { top: 610px; font-size: 76px; color: var(--muted); font-weight: 700; }
+  #s1b { top: 720px; font-size: 118px; color: var(--navy); }
+  #s1c { top: 860px; font-size: 150px; }
+  #s1u { top: 1045px; left: 250px; width: 580px; height: 22px; border-radius: 20px; background: var(--grad); transform-origin: left center; opacity: .9; }
+  #s1q { top: 1170px; left: 90px; right: 90px; font-size: 44px; line-height: 1.4; font-weight: 600; color: var(--muted); }
+
+  /* scene 2 */
+  #s2logo { left: 340px; top: 520px; width: 400px; height: 400px; }
+  #s2ring { left: 290px; top: 470px; width: 500px; height: 500px; border-radius: 120px; border: 8px solid #19c8f5; }
+  #s2word { top: 990px; font-size: 128px; font-weight: 900; letter-spacing: -.035em; color: var(--navy); }
+  #s2tag { top: 1165px; font-size: 46px; font-weight: 600; color: var(--muted); line-height: 1.35; }
+
+  /* scene 3 */
+  #s3title { top: 118px; font-size: 76px; font-weight: 800; letter-spacing: -.02em; line-height: 1.1; color: var(--navy); }
+  #phone { left: 230px; top: 400px; width: 620px; height: 1270px; border-radius: 90px; background: #0d1624; padding: 22px; box-shadow: 0 60px 120px -40px rgba(11,42,80,.55), 0 0 0 3px #2b3a52 inset; }
+  #screen { position: relative; width: 100%; height: 100%; border-radius: 70px; overflow: hidden; background: #fff; }
+  #screen img { position: absolute; left: 0; top: 0; width: 576px; opacity: 0; will-change: transform, opacity; }
+  #notch { position: absolute; left: 50%; top: 40px; width: 170px; height: 46px; margin-left: -85px; border-radius: 30px; background: #0d1624; z-index: 5; }
+  #chip { left: 0; right: 0; top: 1715px; display: flex; justify-content: center; }
+  #chip span { display: inline-flex; align-items: center; gap: 16px; padding: 22px 44px; border-radius: 999px; background: var(--navy); color: #fff; font-size: 44px; font-weight: 700; box-shadow: 0 20px 40px -18px rgba(11,27,63,.6); }
+  #chip i { width: 18px; height: 18px; border-radius: 50%; background: var(--cyan); display: inline-block; }
+  .badge { display: flex; align-items: center; gap: 16px; padding: 22px 30px; border-radius: 28px; background: #fff; font-size: 38px; font-weight: 700; color: var(--navy); box-shadow: 0 30px 60px -24px rgba(11,42,80,.35); border: 2px solid #e1eff8; white-space: nowrap; }
+  .badge .ic { width: 58px; height: 58px; border-radius: 18px; display: grid; place-items: center; background: var(--grad); color: #fff; }
+  #b1 { left: 40px; top: 620px; }
+  #b2 { right: 40px; top: 930px; }
+  #b3 { left: 50px; top: 1330px; }
+
+  /* scene 4 */
+  #s4bg { position: absolute; inset: 0; background: radial-gradient(1200px 900px at 80% 10%, #19c8f5 0%, transparent 60%), linear-gradient(160deg, #0a3fe0 0%, #0a55ff 45%, #0b1b3f 100%); }
+  #s4from { top: 470px; font-size: 64px; font-weight: 700; color: #cfe9ff; }
+  #s4price { top: 580px; font-size: 186px; font-weight: 900; letter-spacing: -.045em; color: #fff; text-shadow: 0 20px 60px rgba(0,0,0,.25); }
+  #s4sub { top: 845px; font-size: 42px; font-weight: 600; color: #cfe9ff; }
+  .perk { left: 150px; display: flex; align-items: center; gap: 30px; font-size: 52px; font-weight: 700; color: #fff; }
+  .perk .ck { width: 78px; height: 78px; border-radius: 50%; background: rgba(255,255,255,.16); border: 3px solid rgba(255,255,255,.5); display: grid; place-items: center; }
+  #p1 { top: 1060px; } #p2 { top: 1200px; } #p3 { top: 1340px; }
+
+  /* scene 5 */
+  #s5logo { left: 0; right: 0; top: 300px; display: flex; justify-content: center; align-items: center; gap: 26px; }
+  #s5logo img { width: 130px; height: 130px; }
+  #s5logo b { font-size: 84px; font-weight: 900; letter-spacing: -.035em; color: var(--navy); }
+  #s5h { top: 560px; font-size: 104px; font-weight: 800; letter-spacing: -.025em; line-height: 1.1; color: var(--navy); }
+  #s5sub { top: 830px; font-size: 46px; font-weight: 600; color: var(--muted); }
+  #card { left: 100px; right: 100px; top: 980px; padding: 44px 50px; border-radius: 48px; background: #fff; box-shadow: 0 40px 90px -40px rgba(11,42,80,.45); border: 2px solid #e1eff8; display: flex; align-items: center; gap: 40px; }
+  #card img { width: 130px; height: 130px; }
+  #card small { display: block; font-size: 38px; font-weight: 600; color: var(--muted); }
+  #card b { display: block; white-space: nowrap; font-size: 76px; font-weight: 900; letter-spacing: -.02em; color: var(--navy); line-height: 1.1; }
+  #cta { left: 0; right: 0; top: 1300px; display: flex; justify-content: center; }
+  #cta span { position: relative; display: inline-flex; align-items: center; gap: 22px; padding: 38px 76px; border-radius: 999px; background: var(--grad); color: #fff; font-size: 56px; font-weight: 800; box-shadow: 0 30px 60px -20px rgba(10,85,255,.6); }
+  #ctaRing { position: absolute; inset: -10px; border-radius: 999px; border: 6px solid #19c8f5; }
+  #s5url { top: 1640px; font-size: 44px; font-weight: 700; color: var(--blue); letter-spacing: .01em; }
+  #s5perks { top: 1510px; font-size: 36px; font-weight: 600; color: var(--muted); }
+
+  #mark { left: 50px; top: 50px; display: flex; align-items: center; gap: 14px; font-size: 38px; font-weight: 800; color: var(--navy); }
+  #mark img { width: 60px; height: 60px; }
+</style>
+</head>
+<body>
+<div id="stage">
+  <div class="dots"></div>
+  <div class="blob" id="blobA" style="width:620px;height:620px;background:#8fd0ee;left:-180px;top:-120px"></div>
+  <div class="blob" id="blobB" style="width:560px;height:560px;background:#bbe4f6;right:-160px;top:760px"></div>
+  <div class="blob" id="blobC" style="width:520px;height:520px;background:#a9d8ff;left:120px;bottom:-200px"></div>
+
+  <!-- 1. Hook -->
+  <section class="scene" id="s1">
+    <div class="abs center s1-l" id="s1a">Kinh doanh online</div>
+    <div class="abs center s1-l" id="s1b">nhưng chưa có</div>
+    <div class="abs center s1-l grad-text" id="s1c">website đẹp?</div>
+    <div class="abs" id="s1u"></div>
+    <div class="abs center" id="s1q">Khách hàng đang tìm bạn<br />trên Google mỗi ngày</div>
+  </section>
+
+  <!-- 2. Brand -->
+  <section class="scene" id="s2">
+    <div class="abs" id="s2ring"></div>
+    <img class="abs" id="s2logo" src="logo.png" alt="" />
+    <div class="abs center" id="s2word">Super<span class="grad-text">Landing</span></div>
+    <div class="abs center" id="s2tag">Thiết kế Website &amp; Landing Page<br />theo yêu cầu</div>
+  </section>
+
+  <!-- 3. Showcase -->
+  <section class="scene" id="s3">
+    <div class="abs center" id="s3title">Giao diện riêng<br /><span class="grad-text">cho mọi ngành nghề</span></div>
+    <div class="abs" id="phone"><div id="screen"><div id="notch"></div>
+      <img data-demo="0" src="shots/aurelia.jpg" alt="" />
+      <img data-demo="1" src="shots/ielts.jpg" alt="" />
+      <img data-demo="2" src="shots/ritual.jpg" alt="" />
+      <img data-demo="3" src="shots/vitalis.jpg" alt="" />
+      <img data-demo="4" src="shots/banh.jpg" alt="" />
+      <img data-demo="5" src="shots/spa.jpg" alt="" />
+    </div></div>
+    <div class="abs badge" id="b1"><span class="ic"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8Z"/></svg></span>Tải trang siêu nhanh</div>
+    <div class="abs badge" id="b2"><span class="ic"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m3 17 6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg></span>Chuẩn SEO</div>
+    <div class="abs badge" id="b3"><span class="ic"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2.5" width="10" height="19" rx="2.5"/><path d="M11 18.5h2"/></svg></span>Đẹp trên điện thoại</div>
+    <div class="abs" id="chip"><span><i></i><em id="chipText" style="font-style:normal">Bất động sản</em></span></div>
+  </section>
+
+  <!-- 4. Price -->
+  <section class="scene" id="s4">
+    <div id="s4bg"></div>
+    <div class="abs center" id="s4from">Sở hữu website chỉ từ</div>
+    <div class="abs center" id="s4price">499.000đ</div>
+    <div class="abs center" id="s4sub">Gói Landing Page hoàn chỉnh · chuẩn di động</div>
+    <div class="abs perk" id="p1"><span class="ck"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 4.5 4.5L19 7"/></svg></span>Bàn giao chỉ 3–5 ngày</div>
+    <div class="abs perk" id="p2"><span class="ck"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 4.5 4.5L19 7"/></svg></span>Bảo hành 4 tháng</div>
+    <div class="abs perk" id="p3"><span class="ck"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 4.5 4.5L19 7"/></svg></span>Báo giá rõ ràng, không phí ẩn</div>
+  </section>
+
+  <!-- 5. CTA -->
+  <section class="scene" id="s5">
+    <div class="abs" id="s5logo"><img src="logo.png" alt="" /><b>Super<span class="grad-text">Landing</span></b></div>
+    <div class="abs center" id="s5h">Nhận tư vấn<br /><span class="grad-text">miễn phí ngay</span></div>
+    <div class="abs center" id="s5sub">Phản hồi nhanh trong 15 phút</div>
+    <div class="abs" id="card"><img src="zalo-icon.png" alt="" /><div><small>Zalo / Hotline</small><b>0365 614 597</b></div></div>
+    <div class="abs" id="cta"><span><i id="ctaRing"></i>Nhắn Zalo ngay
+      <svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
+    <div class="abs center" id="s5perks">Không ràng buộc hợp đồng · Báo giá minh bạch</div>
+    <div class="abs center" id="s5url">SuperLanding</div>
+  </section>
+
+  <div class="abs" id="mark"><img src="logo.png" alt="" />SuperLanding</div>
+</div>
+
+<script>
+  const DURATION = 25;
+  const $ = (id) => document.getElementById(id);
+  const clamp = (x) => Math.max(0, Math.min(1, x));
+  const prog = (t, a, b) => clamp((t - a) / (b - a));
+  const eo = (x) => 1 - Math.pow(1 - x, 3);
+  const eio = (x) => (x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2);
+  const eback = (x) => { const c1 = 1.70158, c3 = c1 + 1; return 1 + c3 * Math.pow(x - 1, 3) + c1 * Math.pow(x - 1, 2); };
+  const set = (el, { o, x = 0, y = 0, s = 1, r = 0, sx }) => {
+    if (o !== undefined) el.style.opacity = o;
+    el.style.transform = `translate(${x}px, ${y}px) scale(${s})${sx !== undefined ? ` scaleX(${sx})` : ""} rotate(${r}deg)`;
+  };
+  /** Opacity of a scene visible between a and b, with short fades. */
+  const window_ = (t, a, b, fi = 0.3, fo = 0.3) => (t < a || t > b ? 0 : Math.min(prog(t, a, a + fi), 1 - prog(t, b - fo, b)));
+  /** Element entrance: fade + rise, starting at `a` for `d` seconds. */
+  const rise = (el, t, a, d = 0.5, dist = 60) => { const p = eo(prog(t, a, a + d)); set(el, { o: p, y: (1 - p) * dist }); };
+  const pop = (el, t, a, d = 0.55) => { const p = prog(t, a, a + d); set(el, { o: clamp(p * 2.5), s: 0.6 + 0.4 * eback(p) }); };
+
+  const demos = ["Bất động sản", "Giáo dục & Đào tạo", "Cà phê & Nhà hàng", "Dược phẩm & Sức khỏe", "Tiệm bánh", "Spa & Làm đẹp"];
+  const D0 = 6.6, DD = 1.45; // showcase: first demo start, seconds per demo
+  const imgs = [...document.querySelectorAll("#screen img")];
+
+  function seek(t) {
+    // drifting background blobs
+    set($("blobA"), { x: Math.sin(t * 0.5) * 60, y: Math.cos(t * 0.4) * 50 });
+    set($("blobB"), { x: Math.cos(t * 0.45) * 70, y: Math.sin(t * 0.35) * 60 });
+    set($("blobC"), { x: Math.sin(t * 0.3) * 80, y: Math.cos(t * 0.5) * 40 });
+
+    // 1. hook
+    const v1 = window_(t, 0, 3.25, 0.01, 0.35);
+    set($("s1"), { o: v1, y: -80 * prog(t, 2.9, 3.25) });
+    rise($("s1a"), t, 0.15, 0.5);
+    rise($("s1b"), t, 0.5, 0.5);
+    pop($("s1c"), t, 0.9, 0.6);
+    set($("s1u"), { o: prog(t, 1.35, 1.4) * 0.9, sx: eo(prog(t, 1.35, 1.9)) });
+    rise($("s1q"), t, 1.8, 0.5, 30);
+
+    // 2. brand reveal
+    set($("s2"), { o: window_(t, 3.1, 6.25, 0.2, 0.35), s: 1 - 0.08 * prog(t, 5.9, 6.25) });
+    { const p = prog(t, 3.2, 3.9); set($("s2logo"), { o: clamp(p * 3), s: 0.3 + 0.7 * eback(p), r: -14 * (1 - eo(p)) }); }
+    { const p = prog(t, 3.45, 4.5); set($("s2ring"), { o: (1 - p) * (p > 0 ? 0.8 : 0), s: 0.8 + 0.5 * eo(p) }); }
+    rise($("s2word"), t, 3.8, 0.55, 50);
+    rise($("s2tag"), t, 4.1, 0.55, 40);
+
+    // 3. showcase
+    set($("s3"), { o: window_(t, 6.05, 15.65, 0.3, 0.35) });
+    rise($("s3title"), t, 6.15, 0.55, 50);
+    { const p = eo(prog(t, 6.1, 6.9)); set($("phone"), { o: clamp(p * 2), y: (1 - p) * 500 }); }
+    const idx = Math.max(0, Math.min(demos.length - 1, Math.floor((t - D0) / DD)));
+    imgs.forEach((img, i) => {
+      const a = D0 + i * DD, b = a + DD;
+      const fadeIn = i === 0 ? 1 : prog(t, a - 0.12, a + 0.12);
+      const fadeOut = i === demos.length - 1 ? 1 : 1 - prog(t, b - 0.12, b + 0.12);
+      const first = i === 0, last = i === demos.length - 1;
+      const o = (!first && t < a - 0.12) || (!last && t > b + 0.12) ? 0 : Math.min(fadeIn, fadeOut);
+      const maxScroll = Math.min(img.naturalHeight * (576 / img.naturalWidth) - 1226, 1500);
+      const sp = eio(prog(t, a + 0.15, b));
+      img.style.opacity = o;
+      img.style.transform = `translateY(${-sp * maxScroll}px) scale(${1.04 - 0.04 * prog(t, a - 0.12, a + 0.3)})`;
+      img.style.transformOrigin = "top center";
+    });
+    $("chipText").textContent = demos[idx];
+    { const a = D0 + idx * DD; const p = prog(t, a, a + 0.35); set($("chip"), { o: prog(t, 6.6, 6.9), s: 0.9 + 0.1 * eback(p), y: 0 }); }
+    [["b1", 7.4], ["b2", 7.8], ["b3", 8.2]].forEach(([id, a], k) => {
+      const p = prog(t, a, a + 0.55);
+      set($(id), { o: clamp(p * 2.5), s: 0.5 + 0.5 * eback(p), y: Math.sin(t * 1.6 + k * 2) * 12 });
+    });
+
+    // 4. price
+    set($("s4"), { o: window_(t, 15.45, 20.65, 0.35, 0.35) });
+    rise($("s4from"), t, 15.7, 0.45, 40);
+    { const p = prog(t, 16.0, 17.1); const v = Math.round((499000 * eo(p)) / 1000) * 1000;
+      $("s4price").textContent = v.toLocaleString("vi-VN").replace(/,/g, ".") + "đ";
+      const bump = prog(t, 17.1, 17.45); set($("s4price"), { o: prog(t, 16.0, 16.2), s: 1 + 0.08 * Math.sin(bump * Math.PI) }); }
+    rise($("s4sub"), t, 17.2, 0.45, 30);
+    [["p1", 17.6], ["p2", 17.95], ["p3", 18.3]].forEach(([id, a]) => { const p = eo(prog(t, a, a + 0.5)); set($(id), { o: p, x: (1 - p) * -120 }); });
+
+    // 5. CTA
+    set($("s5"), { o: window_(t, 20.45, DURATION + 1, 0.35, 0.01) });
+    rise($("s5logo"), t, 20.6, 0.5, 40);
+    rise($("s5h"), t, 20.85, 0.55, 50);
+    rise($("s5sub"), t, 21.15, 0.5, 30);
+    pop($("card"), t, 21.45, 0.6);
+    pop($("cta"), t, 21.85, 0.6);
+    { const cycle = ((t - 22.4) % 1.3 + 1.3) % 1.3 / 1.3; set($("ctaRing"), { o: t < 22.4 ? 0 : (1 - cycle) * 0.9, s: 1 + cycle * 0.18 }); }
+    { const beat = t > 22.4 ? 1 + 0.03 * Math.sin((t - 22.4) * Math.PI * 2 / 1.3) : 1; if (t > 22.45) set($("cta"), { o: 1, s: beat }); }
+    rise($("s5perks"), t, 22.2, 0.5, 20);
+    rise($("s5url"), t, 22.4, 0.5, 20);
+
+    // corner mark during showcase + price (hidden when the full logo is on screen)
+    const m = Math.min(window_(t, 6.2, 20.5, 0.4, 0.3), 1);
+    set($("mark"), { o: m });
+    $("mark").style.color = t > 15.6 ? "#fff" : "var(--navy)";
+  }
+
+  window.DURATION = DURATION;
+  window.seek = seek;
+  window.ready = (async () => {
+    await document.fonts.ready;
+    await Promise.all([...document.images].map((i) => (i.complete ? i.decode().catch(() => {}) : new Promise((r) => { i.onload = i.onerror = r; }))));
+    seek(0);
+    return true;
+  })();
+  if (!navigator.webdriver && location.hash === "#play") { const t0 = performance.now(); const loop = () => { seek(((performance.now() - t0) / 1000) % DURATION); requestAnimationFrame(loop); }; loop(); }
+</script>
+</body>
+</html>

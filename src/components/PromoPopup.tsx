@@ -91,7 +91,7 @@ export default function PromoPopup() {
         <div className="promo-body">
           <span className="promo-eyebrow">✦ ƯU ĐÃI DÀNH CHO KHÁCH MỚI</span>
           <h2 id="promo-title">
-            Sở hữu website đẹp <span>chỉ từ 449.000đ</span>
+            Sở hữu website đẹp <span>chỉ từ 499.000đ</span>
           </h2>
           <p>
             Giao diện hiện đại, chuẩn SEO và tối ưu tốc độ — thiết kế riêng cho thương hiệu của bạn. Khám phá kho dự án thực tế và

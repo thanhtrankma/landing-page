@@ -70,7 +70,7 @@ export function PricingForm({ value }: { value: PricingPlan[] }) {
           <div className="repeat-head"><span className="n">{i + 1}</span><b>{p.name || "Gói mới"}</b>{p.hot && <span className="badge new">Nổi bật</span>}</div>
           <div className="grid c3">
             <div className="field"><label>Tên gói</label><input type="text" aria-label="Tên gói" value={p.name} onChange={(e) => set(i, { name: e.target.value })} /></div>
-            <div className="field"><label>Giá</label><input type="text" aria-label="Giá" value={p.price} onChange={(e) => set(i, { price: e.target.value })} placeholder="449.000đ hoặc Liên hệ" /></div>
+            <div className="field"><label>Giá</label><input type="text" aria-label="Giá" value={p.price} onChange={(e) => set(i, { price: e.target.value })} placeholder="499.000đ hoặc Liên hệ" /></div>
             <div className="field"><label>Thời gian</label><input type="text" value={p.duration} onChange={(e) => set(i, { duration: e.target.value })} placeholder="3-5 ngày" /></div>
           </div>
           <div className="field"><label>Mô tả</label><textarea rows={2} value={p.desc} onChange={(e) => set(i, { desc: e.target.value })} /></div>
