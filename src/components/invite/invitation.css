@@ -285,3 +285,15 @@
   .iv-families { grid-template-columns: 1fr; }
   .iv-trio .iv-photo b { font-size: 22px; }
 }
+
+/* Short screens (landscape phones, the small demo frames): keep the whole intro card visible. */
+@media (max-height: 620px) {
+  .iv-intro { overflow-y: auto; align-items: start; }
+  .iv-intro-card { padding: 22px 18px 20px; }
+  .iv-intro .iv-songhy { font-size: 48px !important; }
+  .iv-intro-heart { width: 36px; height: 36px; }
+  .iv-intro h1 { font-size: 30px; }
+  .iv-intro-guest { margin: 12px 0 14px; }
+  .iv-intro-guest b { font-size: 26px; }
+  .iv-intro button { padding: 11px 26px; }
+}

@@ -1,5 +1,5 @@
 import { lunarLabel } from "./lunar";
-import { emptyBank, type InviteData } from "./types";
+import { demoSlug, emptyBank, INVITE_THEMES, type InviteData, type InviteTheme } from "./types";
 
 // Starting content for a new invitation, and the public demo (/thiep/mau-song-hy).
 
@@ -16,10 +16,10 @@ const dayBefore = (iso: string) => {
   return t.toISOString().slice(0, 10);
 };
 
-export function defaultInvite(date = suggestedDate()): InviteData {
+export function defaultInvite(date = suggestedDate(), theme: InviteTheme = "song-hy"): InviteData {
   const eve = dayBefore(date);
   return {
-    theme: "song-hy",
+    theme,
     groomName: "Minh Anh",
     brideName: "Thu Hà",
     groomFullName: "Nguyễn Minh Anh",
@@ -28,10 +28,11 @@ export function defaultInvite(date = suggestedDate()): InviteData {
     cover: "",
     couplePhoto: "",
     highlights: ["", "", ""],
-    groomFamily: { title: "Nhà trai", parents: "Ông Nguyễn Văn Bình\nBà Lê Thị Hoa", address: "Phường Tân Định, TP. Hồ Chí Minh" },
-    brideFamily: { title: "Nhà gái", parents: "Ông Trần Văn Cường\nBà Phạm Thị Lan", address: "Phường Thảo Điền, TP. Hồ Chí Minh" },
+    groomFamily: { title: "Nhà trai", parents: "Bố: Nguyễn Văn Bình\nMẹ: Lê Thị Hoa", address: "Phường Tân Định, TP. Hồ Chí Minh" },
+    brideFamily: { title: "Nhà gái", parents: "Bố: Trần Văn Cường\nMẹ: Phạm Thị Lan", address: "Phường Thảo Điền, TP. Hồ Chí Minh" },
     inviteHeading: "Trân trọng kính mời",
     inviteLine: "Tham dự lễ cưới của chúng tôi",
+    quote: "Hôn nhân là chuyện cả đời,\nYêu người vừa ý, cưới người mình thương…",
     defaultGuest: "Quý khách",
     events: [
       { id: "vu-quy", title: "Lễ vu quy", time: "09:00", date: eve, lunar: lunarLabel(eve), venue: "Tư gia nhà gái", address: "", mapUrl: "" },
@@ -44,8 +45,13 @@ export function defaultInvite(date = suggestedDate()): InviteData {
     thanksPhoto: "",
     music: { src: "", title: "" },
     petals: true,
+    // Song Hỷ opens straight onto the card, like the printed original; the others start with the envelope.
+    // The LoveCard-style themes open straight onto the card, like the originals.
+    intro: !["song-hy", "vang-do", "do-do"].includes(theme),
   };
 }
 
-export const DEMO_SLUG = "mau-song-hy";
-export const demoInvite = (): InviteData => ({ ...defaultInvite("2026-12-12"), petals: true });
+export const DEMO_SLUG = demoSlug("song-hy");
+/** Theme demos live at /thiep/mau-<theme>, served from code. */
+export const demoThemeBySlug = (slug: string) => INVITE_THEMES.find((t) => demoSlug(t.id) === slug)?.id;
+export const demoInvite = (theme: InviteTheme = "song-hy"): InviteData => defaultInvite("2026-12-12", theme);

@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { I, Modal } from "@/components/cards/ui";
 import { lunarLabel } from "@/lib/invites/lunar";
-import { inviteTitle, type BankInfo, type Family, type InviteData } from "@/lib/invites/types";
+import { demoSlug, INVITE_THEMES, inviteTitle, type BankInfo, type Family, type InviteData } from "@/lib/invites/types";
 import { slugify } from "@/lib/validate";
 import { EventsField, GalleryField, ImageField, MusicField, Section, Text, Toggle } from "./fields";
 import { inviteFontVars } from "./fonts";
@@ -35,7 +35,7 @@ export default function InviteBuilder({ initial, invite: savedInvite }: Props) {
   const [slug, setSlug] = useState(savedInvite?.slug ?? slugify(`${initial.groomName}-${initial.brideName}`));
   const [slugTouched, setSlugTouched] = useState(Boolean(savedInvite));
   const [slugState, setSlugState] = useState<SlugState>({ checking: false, ok: true, reason: null });
-  const [open, setOpen] = useState<string>(savedInvite ? "" : "couple");
+  const [open, setOpen] = useState<string>(savedInvite ? "" : "theme");
   const [view, setView] = useState<"edit" | "preview">("edit");
   const [busy, setBusy] = useState<string | null>(null);
   const [toast, setToast] = useState<{ m: string; err?: boolean } | null>(null);
@@ -249,6 +249,35 @@ export default function InviteBuilder({ initial, invite: savedInvite }: Props) {
             </div>
           )}
 
+          <Section id="theme" title="Mẫu giao diện" hint={INVITE_THEMES.find((t) => t.id === data.theme)?.name} open={open === "theme"} onToggle={toggle}>
+            <div className="ib-themes" role="radiogroup" aria-label="Mẫu giao diện">
+              {INVITE_THEMES.map((t) => (
+                <button
+                  key={t.id}
+                  type="button"
+                  role="radio"
+                  aria-checked={data.theme === t.id}
+                  className={`ib-theme ${data.theme === t.id ? "on" : ""}`}
+                  onClick={() => update({ theme: t.id })}
+                >
+                  <span className="ib-theme-swatch" aria-hidden="true">
+                    {t.colors.map((c) => (
+                      <i key={c} style={{ background: c }} />
+                    ))}
+                  </span>
+                  <b>{t.name}</b>
+                  <small>{t.note}</small>
+                </button>
+              ))}
+            </div>
+            <small className="ib-muted">
+              Đổi mẫu không mất nội dung đã nhập.{" "}
+              <a href={`/thiep/${demoSlug(data.theme)}`} target="_blank" rel="noopener noreferrer">
+                Xem thiệp mẫu
+              </a>
+            </small>
+          </Section>
+
           <Section id="couple" title="Cô dâu & chú rể" hint={inviteTitle(data)} open={open === "couple"} onToggle={toggle}>
             <div className="ib-grid2">
               <Text label="Tên chú rể (ngắn)" value={data.groomName} onChange={(v) => update({ groomName: v })} placeholder="Minh Anh" max={60} />
@@ -304,6 +333,7 @@ export default function InviteBuilder({ initial, invite: savedInvite }: Props) {
             <Text label="Dòng mời" value={data.inviteHeading} onChange={(v) => update({ inviteHeading: v })} max={80} />
             <Text label="Tên khách mặc định" value={data.defaultGuest} onChange={(v) => update({ defaultGuest: v })} max={60} hint="Hiện khi link không kèm tên khách. Tạo link riêng cho từng người trong mục Chia sẻ." />
             <Text label="Dòng dưới tên khách" value={data.inviteLine} onChange={(v) => update({ inviteLine: v })} max={160} />
+            <Text label="Câu trích dẫn" value={data.quote} onChange={(v) => update({ quote: v })} multiline rows={2} max={200} hint="Hiện ở các mẫu Phong bì hồng, Tối giản, Hoa đồng nội. Bỏ trống để ẩn." />
             <Text label="Lời cảm ơn" value={data.thanks} onChange={(v) => update({ thanks: v })} multiline rows={4} max={600} />
           </Section>
 
@@ -325,7 +355,8 @@ export default function InviteBuilder({ initial, invite: savedInvite }: Props) {
 
           <Section id="music" title="Nhạc nền & hiệu ứng" hint={data.music.src ? data.music.title || "Có nhạc" : "Không có nhạc"} open={open === "music"} onToggle={toggle}>
             <MusicField value={data.music} onChange={(music) => update({ music })} {...busyProps} />
-            <Toggle label="Hiệu ứng hoa rơi" checked={data.petals} onChange={(v) => update({ petals: v })} />
+            <Toggle label="Hiệu ứng rơi" checked={data.petals} onChange={(v) => update({ petals: v })} hint={data.theme === "song-hy" ? "Tim đỏ và bông tuyết." : "Cánh hoa."} />
+            <Toggle label="Màn hình “Mở thiệp”" checked={data.intro} onChange={(v) => update({ intro: v })} hint="Khách bấm mở thiệp trước khi xem; nhạc phát ngay khi mở. Tắt thì nhạc phát ở lần chạm đầu tiên." />
           </Section>
 
           <Section id="rsvp" title="Lời chúc & xác nhận tham dự" hint={data.rsvp.enabled ? "Đang nhận" : "Đang tắt"} open={open === "rsvp"} onToggle={toggle}>

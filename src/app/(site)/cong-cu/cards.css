@@ -128,3 +128,13 @@
   .cards-hero-actions.left { justify-content: center; }
   .invite-checks { justify-content: center; }
 }
+
+.invite-themes { display: grid; grid-template-columns: repeat(4, 1fr); gap: 26px 20px; }
+.invite-theme { display: grid; justify-items: center; text-align: center; gap: 6px; }
+.invite-phone.small { width: 100%; max-width: 250px; border-radius: 34px; padding: 8px; }
+.invite-phone.small iframe { border-radius: 26px; }
+.invite-theme h3 { margin: 10px 0 0; font-size: 17px; color: var(--ink); }
+.invite-theme p { margin: 0; font-size: 13.5px; color: var(--secondary); }
+.invite-theme-actions { display: grid; justify-items: center; gap: 8px; margin-top: 8px; }
+@media (max-width: 1100px) { .invite-themes { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .invite-themes { grid-template-columns: 1fr; } .invite-phone.small { max-width: 280px; } }

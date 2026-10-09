@@ -19,8 +19,10 @@ export type InviteEvent = {
 export type Family = { title: string; parents: string; address: string };
 export type BankInfo = { bank: string; account: string; holder: string; qr: string };
 
+export type InviteTheme = "song-hy" | "phong-bi-hong" | "toi-gian" | "dong-noi" | "vang-do" | "do-do";
+
 export type InviteData = {
-  theme: "song-hy";
+  theme: InviteTheme;
   groomName: string;
   brideName: string;
   groomFullName: string;
@@ -35,6 +37,8 @@ export type InviteData = {
   brideFamily: Family;
   inviteHeading: string;
   inviteLine: string;
+  /** Short romantic line shown by some themes ("Hôn nhân là chuyện cả đời…"). */
+  quote: string;
   /** Used when the link has no ?khach=… */
   defaultGuest: string;
   events: InviteEvent[];
@@ -45,17 +49,30 @@ export type InviteData = {
   thanksPhoto: string;
   music: { src: string; title: string };
   petals: boolean;
+  /** Full-screen "Mở thiệp" envelope before the page (also what unlocks music autoplay). */
+  intro: boolean;
 };
 
 export type Wish = { id: string; createdAt: string; name: string; message: string; attend: "yes" | "no" | "maybe" | null; guests: number; hidden: boolean };
 export type PublicWish = Pick<Wish, "id" | "name" | "message" | "createdAt">;
 
-export const INVITE_THEMES = [{ id: "song-hy", name: "Song Hỷ đỏ – vàng" }] as const;
+export const INVITE_THEMES: { id: InviteTheme; name: string; note: string; colors: [string, string, string] }[] = [
+  { id: "song-hy", name: "Song Hỷ đỏ – vàng", note: "Truyền thống, chữ Hỷ, viền hoa văn", colors: ["#9b1b1f", "#c8a15a", "#fdf8ef"] },
+  { id: "phong-bi-hong", name: "Phong bì hồng", note: "Lãng mạn, ảnh polaroid trong phong bì", colors: ["#e89aa8", "#f7dfe3", "#8a5a63"] },
+  { id: "toi-gian", name: "Tối giản trắng", note: "Thanh lịch, chữ thư pháp, hoa màu nước", colors: ["#ffffff", "#1f1f1f", "#f2c9cf"] },
+  { id: "dong-noi", name: "Hoa đồng nội", note: "Ảnh tràn màn hình, hoa cỏ dại", colors: ["#f7f1e5", "#6f8a5e", "#c46b4e"] },
+  { id: "vang-do", name: "Đỏ rượu vang", note: "Ảnh bìa lớn, nền đỏ rượu, bản đồ địa điểm", colors: ["#8b1f2b", "#ffffff", "#e7c9a0"] },
+  { id: "do-do", name: "Đỏ đô polaroid", note: "Ảnh bìa mờ dần, chữ serif đỏ đô, ảnh polaroid trên nền giấy", colors: ["#6b1418", "#f2efec", "#3a4a35"] },
+];
+export const isTheme = (v: unknown): v is InviteTheme => INVITE_THEMES.some((t) => t.id === v);
+export const demoSlug = (theme: InviteTheme) => `mau-${theme}`;
 
 export const LIMITS = { events: 6, gallery: 24, highlights: 3, text: 600, short: 120 } as const;
 
 export const SLUG_RE = /^[a-z0-9](?:[a-z0-9-]{1,38}[a-z0-9])$/;
-export const RESERVED_SLUGS = new Set(["mau", "mau-song-hy", "demo", "admin", "api", "tao", "sua", "thiep", "superlanding"]);
+export const RESERVED_SLUGS = new Set(["mau", "demo", "admin", "api", "tao", "sua", "thiep", "superlanding"]);
+/** "mau-…" links are the theme demos. */
+export const isReservedSlug = (s: string) => RESERVED_SLUGS.has(s) || s.startsWith("mau-");
 
 export const emptyBank = (): BankInfo => ({ bank: "", account: "", holder: "", qr: "" });
 

@@ -2,6 +2,7 @@ import Link from "next/link";
 import JsonLd from "@/components/JsonLd";
 import { Button, Heading } from "@/components/ui";
 import { DEMO_SLUG } from "@/lib/invites/defaults";
+import { demoSlug, INVITE_THEMES } from "@/lib/invites/types";
 import { SITE_URL, breadcrumbJsonLd, graph, pageMetadata } from "@/lib/seo";
 import "../cards.css";
 
@@ -111,7 +112,32 @@ export default function WeddingInviteToolPage() {
         </div>
       </section>
 
-      <section className="surface">
+      <section className="surface" id="mau-thiep">
+        <div className="gv-wrap">
+          <Heading center eyebrow="KHO MẪU" title="Chọn mẫu thiệp bạn yêu thích" text="Cuộn thử ngay trong khung điện thoại. Đổi mẫu bất cứ lúc nào mà không mất nội dung đã nhập." />
+          <div className="invite-themes">
+            {INVITE_THEMES.map((t) => (
+              <article key={t.id} className="invite-theme">
+                <div className="invite-phone small">
+                  <iframe src={`/thiep/${demoSlug(t.id)}?khach=Bạn`} title={`Mẫu thiệp ${t.name}`} loading="lazy" />
+                </div>
+                <h3>{t.name}</h3>
+                <p>{t.note}</p>
+                <div className="invite-theme-actions">
+                  <Link href={`${CREATE}?mau=${t.id}`} className="gv-btn">
+                    Dùng mẫu này
+                  </Link>
+                  <Link href={`/thiep/${demoSlug(t.id)}`} target="_blank" className="invite-phone-link">
+                    Xem toàn màn hình ↗
+                  </Link>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section>
         <div className="gv-wrap">
           <Heading center eyebrow="TÍNH NĂNG" title="Mọi thứ khách mời cần, trong một đường link" />
           <div className="cards-features">

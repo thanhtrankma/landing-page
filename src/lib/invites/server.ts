@@ -3,8 +3,8 @@ import { createHash, randomBytes, timingSafeEqual } from "node:crypto";
 import { db } from "../db";
 import type { Row } from "../db/types";
 import { keyFromUrl, OBJECT_KEY_RE, publicUrlFor } from "../r2";
-import { defaultInvite, DEMO_SLUG, demoInvite } from "./defaults";
-import { LIMITS, RESERVED_SLUGS, SLUG_RE, type BankInfo, type Family, type InviteData, type InviteEvent, type PublicWish, type Wish } from "./types";
+import { defaultInvite, demoInvite, demoThemeBySlug } from "./defaults";
+import { isReservedSlug, isTheme, LIMITS, SLUG_RE, type BankInfo, type Family, type InviteData, type InviteEvent, type PublicWish, type Wish } from "./types";
 
 // Server side of the online invitation: input cleaning, URL ⇄ key rewriting and data access.
 
@@ -57,7 +57,7 @@ export function sanitizeInvite(input: unknown): InviteData {
   const gift = (o.gift ?? {}) as Any;
   const music = (o.music ?? {}) as Any;
   return {
-    theme: "song-hy",
+    theme: isTheme(o.theme) ? o.theme : "song-hy",
     groomName: str(o.groomName, 60),
     brideName: str(o.brideName, 60),
     groomFullName: str(o.groomFullName, 80),
@@ -70,6 +70,7 @@ export function sanitizeInvite(input: unknown): InviteData {
     brideFamily: family(o.brideFamily, "Nhà gái"),
     inviteHeading: str(o.inviteHeading, 80),
     inviteLine: str(o.inviteLine, 160),
+    quote: typeof o.quote === "string" ? str(o.quote, 200) : base.quote,
     defaultGuest: str(o.defaultGuest, 60) || "Quý khách",
     events,
     gallery: (Array.isArray(o.gallery) ? o.gallery : []).map(media).filter(Boolean).slice(0, LIMITS.gallery),
@@ -79,6 +80,7 @@ export function sanitizeInvite(input: unknown): InviteData {
     thanksPhoto: media(o.thanksPhoto),
     music: { src: media(music.src), title: str(music.title, 80) },
     petals: o.petals !== false,
+    intro: typeof o.intro === "boolean" ? o.intro : base.intro,
   };
 }
 
@@ -114,7 +116,7 @@ const fromRow = (r: Row): OwnedInvite => ({
 
 export function slugProblem(slug: string): string | null {
   if (!SLUG_RE.test(slug)) return "Đường dẫn chỉ gồm chữ thường không dấu, số và dấu gạch ngang (3–40 ký tự).";
-  if (RESERVED_SLUGS.has(slug)) return "Đường dẫn này đã được dành riêng, hãy chọn tên khác.";
+  if (isReservedSlug(slug)) return "Đường dẫn này đã được dành riêng, hãy chọn tên khác.";
   return null;
 }
 
@@ -165,7 +167,8 @@ export async function deleteInvite(id: string) {
 
 /** Public page data. The demo slug is served from code, without the database. */
 export async function getPublicInvite(slug: string): Promise<{ id: string | null; data: InviteData } | undefined> {
-  if (slug === DEMO_SLUG) return { id: null, data: demoInvite() };
+  const demo = demoThemeBySlug(slug);
+  if (demo) return { id: null, data: demoInvite(demo) };
   if (!SLUG_RE.test(slug)) return undefined;
   const { rows } = await db.select<Row>("invitations", { filters: [{ col: "slug", op: "eq", val: slug }], limit: 1 });
   const r = rows[0];
