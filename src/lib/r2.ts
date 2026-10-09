@@ -71,6 +71,18 @@ export function presign(opts: {
   return `${opts.url.origin}${encodePath(opts.url.pathname)}?${canonicalQuery}&X-Amz-Signature=${signature}`;
 }
 
+/** Public URL of a stored object (R2 custom domain, or public/uploads in local development). */
+export const publicUrlFor = (key: string) => (r2Configured() ? `${env.r2PublicUrl}/${key}` : `/uploads/${key}`);
+
+/** Inverse of publicUrlFor: the object key when `url` points at our storage, otherwise null. */
+export function keyFromUrl(url: string): string | null {
+  if (env.r2PublicUrl && url.startsWith(`${env.r2PublicUrl}/`)) return url.slice(env.r2PublicUrl.length + 1);
+  const local = /^(?:https?:\/\/[^/]+)?\/uploads\/(cards\/.+)$/.exec(url);
+  return local ? local[1] : null;
+}
+
+export const OBJECT_KEY_RE = /^cards\/(image|video|audio)s\/\d{4}-\d{2}\/[0-9a-f]{24}\.[a-z0-9]{2,4}$/;
+
 /** Object key like `cards/images/2026-10/3f9c…e1.webp`. Random and never reused, so it can be cached forever. */
 export function newObjectKey(kind: UploadKind, ext: string) {
   return `cards/${kind}s/${new Date().toISOString().slice(0, 7)}/${randomBytes(12).toString("hex")}.${ext}`;
@@ -112,7 +124,7 @@ const localTicket = (key: string, type: string, size: number, exp: number) =>
   createHmac("sha256", localSecret()).update(`${key}\n${type}\n${size}\n${exp}`).digest("hex");
 
 export function verifyLocalTicket(key: string, type: string, size: number, exp: number, sig: string) {
-  if (!/^cards\/(image|video)s\/\d{4}-\d{2}\/[0-9a-f]{24}\.[a-z0-9]{2,4}$/.test(key)) return false;
+  if (!OBJECT_KEY_RE.test(key)) return false;
   if (!Number.isFinite(exp) || exp < Date.now() / 1000) return false;
   const expected = Buffer.from(localTicket(key, type, size, exp));
   const given = Buffer.from(sig);

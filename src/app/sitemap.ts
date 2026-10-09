@@ -21,6 +21,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     page("/lien-he", "monthly", 0.8),
     page("/tin-tuc", "weekly", 0.9),
     page("/du-an", "monthly", 0.8),
+    page("/cong-cu/thiep-cuoi-online", "weekly", 0.8),
+    page("/cong-cu/anh-thiep-cuoi", "monthly", 0.6),
     ...legal.map((p) => page(`/${p.slug}`, "yearly", 0.3)),
     ...servicePages.map((s) => page(`/${s.slug}`, "monthly", 0.9)),
     ...posts.map((p) => page(`/tin-tuc/${p.slug}`, "weekly", 0.7, p.createdAt)),

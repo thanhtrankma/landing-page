@@ -12,7 +12,10 @@ const fail = (error: string, status = 400) => NextResponse.json({ error }, { sta
 const LIMITS: Record<UploadKind, [count: number, windowMs: number]> = {
   image: [40, 10 * 60_000],
   video: [6, 60 * 60_000],
+  audio: [10, 60 * 60_000],
 };
+const NOUN: Record<UploadKind, string> = { image: "Ảnh", video: "Video", audio: "File nhạc" };
+const FORMATS: Record<UploadKind, string> = { image: "ảnh WebP, JPG, PNG", video: "video MP4, WebM, MOV", audio: "nhạc MP3, M4A" };
 
 export async function POST(request: Request) {
   let body: Record<string, unknown>;
@@ -22,17 +25,17 @@ export async function POST(request: Request) {
     return fail("Dữ liệu không hợp lệ.");
   }
 
-  const kind = body.kind === "image" || body.kind === "video" ? body.kind : null;
+  const kind = body.kind === "image" || body.kind === "video" || body.kind === "audio" ? body.kind : null;
   if (!kind) return fail("Loại tệp không hợp lệ.");
   const rules = UPLOAD_RULES[kind];
   const type = typeof body.type === "string" ? body.type : "";
   const size = typeof body.size === "number" ? body.size : 0;
 
   if (!rules.types[type]) {
-    return fail(kind === "image" ? "Chỉ hỗ trợ ảnh WebP, JPG, PNG." : "Chỉ hỗ trợ video MP4, WebM, MOV.");
+    return fail(`Chỉ hỗ trợ ${FORMATS[kind]}.`);
   }
   if (!Number.isInteger(size) || size <= 0) return fail("Kích thước tệp không hợp lệ.");
-  if (size > rules.maxBytes) return fail(`${kind === "image" ? "Ảnh" : "Video"} tối đa ${MB(rules.maxBytes)}.`);
+  if (size > rules.maxBytes) return fail(`${NOUN[kind]} tối đa ${MB(rules.maxBytes)}.`);
 
   const [count, windowMs] = LIMITS[kind];
   const limit = rateLimit(`upload:${kind}:${clientIp(request.headers)}`, count, windowMs);

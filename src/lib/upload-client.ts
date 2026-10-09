@@ -106,6 +106,13 @@ function put(signed: SignedUpload, body: Blob, onProgress?: (ratio: number) => v
   });
 }
 
+/** Uploads an image the page generated itself (exports, previews): no re-compression. */
+export async function uploadBlob(blob: Blob, opts: { onProgress?: (ratio: number) => void; signal?: AbortSignal } = {}): Promise<UploadResult> {
+  const signed = await requestSignedUrl("image", blob.type, blob.size);
+  await put(signed, blob, opts.onProgress, opts.signal);
+  return { url: signed.publicUrl, key: signed.key };
+}
+
 /** Compresses (photos), checks (videos) and uploads one file. Returns its public URL. */
 export async function uploadFile(
   file: File,
@@ -117,6 +124,16 @@ export async function uploadFile(
     const signed = await requestSignedUrl("image", blob.type, blob.size);
     await put(signed, blob, opts.onProgress, opts.signal);
     return { url: signed.publicUrl, key: signed.key, width, height };
+  }
+  if (kind === "audio") {
+    const rules = UPLOAD_RULES.audio;
+    const type = rules.types[file.type] ? file.type : /\.mp3$/i.test(file.name) ? "audio/mpeg" : /\.m4a$/i.test(file.name) ? "audio/mp4" : "";
+    if (!type) throw new UploadError("Chỉ hỗ trợ file nhạc MP3 hoặc M4A.");
+    if (file.size > rules.maxBytes) throw new UploadError(`File nhạc tối đa ${MB(rules.maxBytes)}.`);
+    const body = type === file.type ? file : new Blob([file], { type });
+    const signed = await requestSignedUrl("audio", type, body.size);
+    await put(signed, body, opts.onProgress, opts.signal);
+    return { url: signed.publicUrl, key: signed.key };
   }
   const meta = await checkVideo(file);
   const signed = await requestSignedUrl("video", file.type, file.size);

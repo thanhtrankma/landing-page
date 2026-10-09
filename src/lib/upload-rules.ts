@@ -1,6 +1,6 @@
 // Upload limits shared by the browser (pre-checks, compression targets) and the server (enforcement).
 
-export type UploadKind = "image" | "video";
+export type UploadKind = "image" | "video" | "audio";
 
 export const UPLOAD_RULES = {
   image: {
@@ -17,6 +17,10 @@ export const UPLOAD_RULES = {
     types: { "video/mp4": "mp4", "video/webm": "webm", "video/quicktime": "mov" } as Record<string, string>,
     maxBytes: 50 * 1024 * 1024,
     maxSeconds: 90,
+  },
+  audio: {
+    types: { "audio/mpeg": "mp3", "audio/mp3": "mp3", "audio/mp4": "m4a", "audio/x-m4a": "m4a", "audio/aac": "aac" } as Record<string, string>,
+    maxBytes: 10 * 1024 * 1024,
   },
 } as const;
 

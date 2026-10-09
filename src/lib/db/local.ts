@@ -50,6 +50,10 @@ const defaults: Record<string, () => Row> = {
   posts: () => ({ published: true }),
   projects: () => ({ published: true, sample: false }),
   pages: () => ({ published: true, updated_at: new Date().toISOString() }),
+  card_templates: () => ({ published: false, updated_at: new Date().toISOString(), thumb_key: "", sort_order: 0, tags: [] }),
+  invitations: () => ({ updated_at: new Date().toISOString(), published: true, view_count: 0 }),
+  invitation_wishes: () => ({ hidden: false, guests: 1, attend: null }),
+  card_designs: () => ({ updated_at: new Date().toISOString(), share_slug: null, preview_key: "", meta: {}, view_count: 0 }),
 };
 const prepare = (table: string, r: Row): Row => ({
   ...(["settings"].includes(table) ? {} : { id: randomUUID() }),
