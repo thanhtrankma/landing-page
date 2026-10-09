@@ -1,0 +1,13 @@
+{
+  "rules": [
+    {
+      "allowed": {
+        "origins": ["https://superlanding.vn", "https://www.superlanding.vn", "http://localhost:3000", "http://localhost:3001"],
+        "methods": ["GET", "PUT", "HEAD"],
+        "headers": ["Content-Type", "Cache-Control"]
+      },
+      "exposeHeaders": ["ETag"],
+      "maxAgeSeconds": 86400
+    }
+  ]
+}

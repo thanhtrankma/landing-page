@@ -122,6 +122,97 @@ html {
 .nav-toggle {
   color: var(--ink);
 }
+
+/* "Công cụ" dropdown: opens on hover/focus on desktop, on tap everywhere. */
+.gv-nav-drop {
+  position: relative;
+}
+.gv-nav-drop > button {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  width: 100%;
+  padding: 10px 13px;
+  border-radius: 9px;
+  background: none;
+  color: var(--secondary);
+  font-family: var(--font-be-vietnam), "Be Vietnam Pro", sans-serif;
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.gv-nav-drop > button.active,
+.gv-nav-drop > button:hover,
+.gv-nav-drop.open > button {
+  color: var(--ink);
+  background: var(--sky-300);
+}
+.gv-nav-drop > button .gv-icon {
+  transition: transform 0.2s ease;
+}
+.gv-nav-drop.open > button .gv-icon {
+  transform: rotate(180deg);
+}
+.gv-nav-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  min-width: 220px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 8px;
+  background: #fff;
+  border: 1px solid var(--sky-200);
+  border-radius: 14px;
+  box-shadow: var(--shadow-soft);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-4px);
+  transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s;
+}
+/* Invisible bridge so the menu doesn't close while the pointer crosses the gap. */
+.gv-nav-menu::before {
+  content: "";
+  position: absolute;
+  inset: -10px 0 auto;
+  height: 10px;
+}
+.gv-nav-drop.open .gv-nav-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+}
+@media (min-width: 901px) and (hover: hover) {
+  .gv-nav-drop:hover .gv-nav-menu,
+  .gv-nav-drop:focus-within .gv-nav-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+  }
+}
+.gv-header nav .gv-nav-menu a {
+  white-space: nowrap;
+}
+@media (max-width: 900px) {
+  .gv-nav-drop > button {
+    justify-content: space-between;
+  }
+  .gv-nav-menu {
+    position: static;
+    display: none;
+    min-width: 0;
+    padding: 2px 0 2px 12px;
+    border: 0;
+    box-shadow: none;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+  }
+  .gv-nav-drop.open .gv-nav-menu {
+    display: flex;
+  }
+}
 .gv-brand b {
   color: var(--sky-700);
 }

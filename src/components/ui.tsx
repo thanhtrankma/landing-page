@@ -57,6 +57,7 @@ const iconPaths: Record<IconName, ReactNode> = {
     <path d="M7 3H4a1 1 0 0 0-1 1c0 9.4 7.6 17 17 17a1 1 0 0 0 1-1v-3l-4-2-2 2c-3.5-1.5-6.5-4.5-8-8l2-2Z" />
   ),
   menu: <path d="M4 7h16M4 12h16M4 17h16" />,
+  chevron: <path d="m6 9 6 6 6-6" />,
 };
 
 export function Icon({ name, size = 22 }: { name: IconName; size?: number }) {

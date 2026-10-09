@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-export const SITE_URL = "https://web-landing.com";
+export const SITE_URL = "https://www.superlanding.vn";
 export const OG_IMAGE = `${SITE_URL}/images/og-image.png`;
 
 type PageMeta = {

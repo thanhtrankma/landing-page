@@ -11,6 +11,7 @@ import ScrollReveal from "@/components/ScrollReveal";
 import { SettingsProvider } from "@/components/SettingsProvider";
 import { getSettings } from "@/lib/site-data";
 import type { SiteSettings } from "@/lib/models";
+import { SITE_URL } from "@/lib/seo";
 import "./globals.css";
 import "./theme.css";
 
@@ -31,7 +32,6 @@ const plusJakarta = Plus_Jakarta_Sans({
   weight: ["600", "700", "800"],
 });
 
-const SITE_URL = "https://web-landing.com";
 const TITLE = "SuperLanding — Thiết Kế Website & Landing Page Theo Yêu Cầu";
 const OG_DESCRIPTION = "Thiết kế Website và Landing Page theo yêu cầu, chú trọng trải nghiệm, tốc độ, SEO và chuyển đổi.";
 

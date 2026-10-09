@@ -17,7 +17,7 @@ export type PricingPlan = {
 
 export type IconName =
   | "arrow" | "check" | "building" | "rocket" | "palette" | "search" | "layout"
-  | "code" | "shield" | "chart" | "cloud" | "mail" | "phone" | "menu";
+  | "code" | "shield" | "chart" | "cloud" | "mail" | "phone" | "menu" | "chevron";
 
 export const services: Service[] = [
   {
@@ -171,6 +171,12 @@ export const navLinks: [href: string, label: string][] = [
   ["/bang-gia", "Bảng giá"],
   ["/tin-tuc", "Tin tức"],
   ["/lien-he", "Liên hệ"],
+];
+
+// Shown as the "Công cụ" dropdown in the header.
+export const toolLinks: [href: string, label: string][] = [
+  ["/cong-cu/thiep-cuoi-online", "Tạo thiệp cưới online"],
+  ["/cong-cu/luyen-viet-chu-han", "Luyện viết chữ Hán"],
 ];
 
 export const heroTexts = [

@@ -87,7 +87,7 @@ export default async function ServicePage({ service }: { service: ServicePageDat
                 <span />
                 <span />
                 <span />
-                <div>web-landing.com</div>
+                <div>superlanding.vn</div>
               </div>
               <div className="service-browser-image">
                 <Image
