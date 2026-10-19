@@ -1,9 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Modal } from "@/components/cards/ui";
 import type { Guest, GuestGroup, Rsvp, RsvpStats } from "@/lib/invites/guests";
+import { GUEST_FILE_ACCEPT, guestTemplateCsv, readGuestFile, type ImportRow } from "@/lib/invites/guest-import";
 import "./guests.css";
 
 // Guest list & RSVP dashboard for one invitation: groups, personal links, answers and totals.
@@ -22,6 +23,8 @@ export default function GuestManager({ inviteId, slug, status, title, questions 
   const [selected, setSelected] = useState<Set<string>>(new Set());
   const [name, setName] = useState("");
   const [bulk, setBulk] = useState<string | null>(null);
+  const [imported, setImported] = useState<{ file: string; rows: ImportRow[]; skipDupes: boolean } | null>(null);
+  const fileInput = useRef<HTMLInputElement>(null);
   const [editing, setEditing] = useState<Guest | null>(null);
   const [toast, setToast] = useState<{ m: string; err?: boolean } | null>(null);
   const [busy, setBusy] = useState(false);
@@ -95,6 +98,27 @@ export default function GuestManager({ inviteId, slug, status, title, questions 
     else void copy(url);
   };
 
+  const download = (blob: Blob, filename: string) => {
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = filename;
+    a.click();
+    setTimeout(() => URL.revokeObjectURL(a.href), 5000);
+  };
+
+  const onFile = async (file: File | undefined) => {
+    if (!file) return;
+    try {
+      const rows = await readGuestFile(file);
+      if (!rows.length) throw new Error("Không tìm thấy tên khách nào trong file.");
+      setImported({ file: file.name, rows: rows.slice(0, 500), skipDupes: true });
+    } catch (e) {
+      setToast({ m: (e as Error).message || "Không đọc được file.", err: true });
+    } finally {
+      if (fileInput.current) fileInput.current.value = "";
+    }
+  };
+
   const exportCsv = () => {
     if (!data) return;
     const groupName = (id: string | null) => data.groups.find((g) => g.id === id)?.name ?? "";
@@ -102,12 +126,7 @@ export default function GuestManager({ inviteId, slug, status, title, questions 
     const header = ["Tên khách", "Nhóm", "Trạng thái", "Số người", ...questions, "Link riêng", "Phản hồi lúc"];
     const rows = data.guests.map((g) => [g.name, groupName(g.groupId), g.rsvpStatus ? STATUS[g.rsvpStatus][0] : "Chưa trả lời", g.rsvpStatus === "yes" ? g.rsvpPeople ?? 1 : "", ...questions.map((q) => g.rsvpAnswers[q] ?? ""), linkOf(g), g.rsvpAt ? fmt.format(new Date(g.rsvpAt)) : ""]);
     const anon = data.rsvps.filter((r) => !r.guestId).map((r) => [r.name, "(Link chung)", STATUS[r.status][0], r.status === "yes" ? r.people : "", ...questions.map((q) => r.answers[q] ?? ""), "", fmt.format(new Date(r.createdAt))]);
-    const blob = new Blob(["﻿" + [header, ...rows, ...anon].map((r) => r.map(esc).join(",")).join("\n")], { type: "text/csv;charset=utf-8" });
-    const a = document.createElement("a");
-    a.href = URL.createObjectURL(blob);
-    a.download = "khach-moi.csv";
-    a.click();
-    setTimeout(() => URL.revokeObjectURL(a.href), 5000);
+    download(new Blob(["\uFEFF" + [header, ...rows, ...anon].map((r) => r.map(esc).join(",")).join("\n")], { type: "text/csv;charset=utf-8" }), "khach-moi.csv");
   };
 
   const toggleSel = (id: string) => setSelected((s) => {
@@ -184,6 +203,10 @@ export default function GuestManager({ inviteId, slug, status, title, questions 
             <button type="button" className="ce-btn" onClick={() => setBulk("")}>
               Thêm nhiều
             </button>
+            <button type="button" className="ce-btn" onClick={() => fileInput.current?.click()}>
+              Tải file danh sách
+            </button>
+            <input ref={fileInput} type="file" accept={GUEST_FILE_ACCEPT} hidden onChange={(e) => void onFile(e.target.files?.[0])} />
           </form>
 
           <div className="gm-groups">
@@ -276,7 +299,9 @@ export default function GuestManager({ inviteId, slug, status, title, questions 
                 <li key={g.id} className={selected.has(g.id) ? "sel" : ""}>
                   <input type="checkbox" checked={selected.has(g.id)} onChange={() => toggleSel(g.id)} aria-label={`Chọn ${g.name}`} />
                   <div className="gm-who">
-                    <b>{g.name}</b>
+                    <a className="gm-name" href={linkOf(g)} target="_blank" rel="noopener noreferrer" title="Mở thiệp của khách này">
+                      {g.name}
+                    </a>
                     <small>
                       {data.groups.find((x) => x.id === g.groupId)?.name ?? "Chưa có nhóm"}
                       {g.openedAt ? " · Đã mở thiệp" : ""}
@@ -329,9 +354,76 @@ export default function GuestManager({ inviteId, slug, status, title, questions 
         <p className="gm-empty">Chưa có ai xác nhận tham dự.</p>
       )}
 
+      {imported && (() => {
+        const existing = new Set(data.guests.map((g) => g.name.trim().toLowerCase()));
+        const dupes = imported.rows.filter((r) => existing.has(r.name.trim().toLowerCase())).length;
+        const rows = imported.skipDupes ? imported.rows.filter((r) => !existing.has(r.name.trim().toLowerCase())) : imported.rows;
+        const newGroups = [...new Set(rows.map((r) => r.group).filter(Boolean))].filter((n) => !data.groups.some((g) => g.name.trim().toLowerCase() === n.toLowerCase()));
+        return (
+          <Modal title="Thêm khách từ file" onClose={() => setImported(null)} wide>
+            <p>
+              Đọc được <b>{imported.rows.length}</b> khách từ <b>{imported.file}</b>. Mỗi người sẽ có một link thiệp riêng ghi đúng tên họ.
+              {newGroups.length > 0 && ` Sẽ tạo thêm ${newGroups.length} nhóm: ${newGroups.join(", ")}.`}
+            </p>
+            {dupes > 0 && (
+              <label className="gm-check">
+                <input type="checkbox" checked={imported.skipDupes} onChange={(e) => setImported({ ...imported, skipDupes: e.target.checked })} />
+                Bỏ qua {dupes} tên đã có trong danh sách
+              </label>
+            )}
+            <div className="gm-preview">
+              <table>
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Tên trên thiệp</th>
+                    <th>Nhóm</th>
+                    <th>Lời mời riêng</th>
+                    <th>Số người</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {rows.slice(0, 100).map((r, i) => (
+                    <tr key={i}>
+                      <td>{i + 1}</td>
+                      <td>{r.name}</td>
+                      <td>{r.group || (groupId ? data.groups.find((g) => g.id === groupId)?.name : "")}</td>
+                      <td>{r.greeting}</td>
+                      <td>{r.maxPeople ?? ""}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+              {rows.length > 100 && <p className="gm-more">… và {rows.length - 100} khách nữa</p>}
+            </div>
+            <div className="ce-row between">
+              <button type="button" className="ce-btn ghost" onClick={() => download(guestTemplateCsv(), "mau-danh-sach-khach.csv")}>
+                Tải file mẫu
+              </button>
+              <button
+                type="button"
+                className="ce-btn primary"
+                disabled={busy || !rows.length}
+                onClick={async () => {
+                  const guests = rows.map((r) => ({ name: r.name, groupId: r.group ? null : groupId, groupName: r.group, greeting: r.greeting, maxPeople: r.maxPeople }));
+                  if (await act({ action: "add", guests }, `Đã thêm ${rows.length} khách, mỗi người có link riêng.`)) setImported(null);
+                }}
+              >
+                Thêm {rows.length} khách
+              </button>
+            </div>
+          </Modal>
+        );
+      })()}
+
       {bulk !== null && (
         <Modal title="Thêm nhiều khách" onClose={() => setBulk(null)}>
-          <p>Mỗi dòng một khách (hoặc một nhà). Có thể dán từ Excel, Zalo…</p>
+          <p>
+            Mỗi dòng một khách (hoặc một nhà). Có thể dán từ Excel, Zalo… Có sẵn file Excel/CSV?{" "}
+            <button type="button" className="gm-linkbtn" onClick={() => { setBulk(null); fileInput.current?.click(); }}>
+              Tải file lên
+            </button>
+          </p>
           <textarea className="gm-textarea" rows={8} value={bulk} onChange={(e) => setBulk(e.target.value)} placeholder={"Anh Tuấn & Chị Hà\nGia đình chú Năm\nBạn Minh (lớp 12A1)"} />
           <button
             type="button"

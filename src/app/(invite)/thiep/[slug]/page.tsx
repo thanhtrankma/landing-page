@@ -6,10 +6,10 @@ import { getPublicInvite, listPublicWishes } from "@/lib/invites/server";
 import { inviteTitle, parseDate } from "@/lib/invites/types";
 
 // The shared invitation. ?k=<code> = a guest's personal link (name, greeting, RSVP tied to the guest);
-// ?khach=<tên> = a quick personalised greeting without a guest record.
+// ?khach=<tên> (or ?ten= / ?name= / ?guest=) = a quick personalised greeting without a guest record.
 
 const guestFrom = (sp: Record<string, string | string[] | undefined>) => {
-  const v = sp.khach ?? sp.to;
+  const v = sp.khach ?? sp.ten ?? sp.name ?? sp.guest ?? sp.to;
   return typeof v === "string" ? v.normalize("NFC").replace(/\s+/g, " ").trim().slice(0, 60) : "";
 };
 

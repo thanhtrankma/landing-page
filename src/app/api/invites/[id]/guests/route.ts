@@ -21,8 +21,16 @@ export async function POST(request: Request, ctx: RouteContext<"/api/invites/[id
   try {
     switch (b.action) {
       case "add": {
-        const list = Array.isArray(b.guests) ? b.guests : [];
-        const added = await addGuests(id, list.map((x: Record<string, unknown>) => ({ name: String(x.name ?? ""), groupId: (x.groupId as string) ?? null, greeting: String(x.greeting ?? ""), maxPeople: x.maxPeople == null ? null : Number(x.maxPeople) })));
+        const list: Record<string, unknown>[] = Array.isArray(b.guests) ? b.guests : [];
+        // An imported file names its groups ("groupName"): reuse a group with that name or create it.
+        const byName = new Map((await listGroups(id)).map((x) => [x.name.trim().toLowerCase(), x.id]));
+        for (const x of list) {
+          const n = typeof x.groupName === "string" ? x.groupName.trim().slice(0, 60) : "";
+          if (!n || x.groupId || byName.has(n.toLowerCase())) continue;
+          byName.set(n.toLowerCase(), (await createGroup(id, n)).id);
+        }
+        const groupOf = (x: Record<string, unknown>) => (x.groupId as string) || byName.get(String(x.groupName ?? "").trim().toLowerCase()) || null;
+        const added = await addGuests(id, list.map((x) => ({ name: String(x.name ?? ""), groupId: groupOf(x), greeting: String(x.greeting ?? ""), maxPeople: x.maxPeople == null ? null : Number(x.maxPeople) })));
         if (!added) return fail("Hãy nhập tên khách mời.");
         break;
       }

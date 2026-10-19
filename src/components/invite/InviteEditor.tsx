@@ -572,9 +572,10 @@ export default function InviteEditor({ initial, invite: initialInvite, user, aut
               <I name="link" size={16} /> Mở thiệp
             </a>
           </div>
+          <QuickGuestLink base={shareUrl} onCopy={copy} />
           <div className="ie-tip">
             <b>Gửi thiệp có tên từng khách?</b>
-            <span>Thêm khách trong trang Quản lý khách mời để mỗi người có link riêng, lời chào riêng và bạn biết ai đã xác nhận.</span>
+            <span>Thêm khách hoặc tải file Excel danh sách trong trang Quản lý khách mời: mỗi người có link riêng, lời chào riêng và bạn biết ai đã xác nhận.</span>
             <Link className="ce-btn sm primary" href={`${BASE}/khach-moi/${invite.id}`}>
               Quản lý khách mời
             </Link>
@@ -642,6 +643,25 @@ export default function InviteEditor({ initial, invite: initialInvite, user, aut
           )}
         </Modal>
       )}
+    </div>
+  );
+}
+
+/** "Link có tên khách": the shared link plus ?khach=<tên>, so the card greets that person instead of "Quý khách". */
+function QuickGuestLink({ base, onCopy }: { base: string; onCopy: (text: string) => void }) {
+  const [guest, setGuest] = useState("");
+  const name = guest.replace(/\s+/g, " ").trim();
+  const url = name ? `${base}?khach=${encodeURIComponent(name)}` : "";
+  return (
+    <div className="ie-quick">
+      <label htmlFor="ie-quick-name">Link có tên khách (thay chữ “Quý khách” trên thiệp):</label>
+      <div className="ce-copy">
+        <input id="ie-quick-name" type="text" maxLength={60} value={guest} onChange={(e) => setGuest(e.target.value)} placeholder="VD: Anh Trọng" />
+        <button type="button" className="ce-btn" disabled={!url} onClick={() => onCopy(url)}>
+          Sao chép link
+        </button>
+      </div>
+      {url && <small className="ie-quick-url">{decodeURIComponent(url)}</small>}
     </div>
   );
 }
