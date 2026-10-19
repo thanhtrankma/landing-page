@@ -10,12 +10,14 @@ const headers = (extra: Record<string, string> = {}) => ({
   ...extra,
 });
 
-// PostgREST filter values: quote anything with reserved characters.
+// PostgREST filter values. Double quotes only work inside lists — in.(…) and or=(…) — where reserved
+// characters would otherwise split the value; a plain `col=eq.value` takes the value verbatim, so quoting
+// it there would make the quotes part of the value (e.g. emails never matched).
 const val = (v: unknown) => {
   const s = String(v);
   return /[,()."\s*:]/.test(s) && !/^[A-Za-z0-9_-]+$/.test(s) ? `"${s.replace(/\\/g, "\\\\").replace(/"/g, '\\"')}"` : s;
 };
-const expr = (f: Filter): string => {
+const expr = (f: Filter, inList = false): string => {
   switch (f.op) {
     case "in":
       return `in.(${(f.val as unknown[]).map(val).join(",")})`;
@@ -24,14 +26,14 @@ const expr = (f: Filter): string => {
     case "ilike":
       return `ilike.*${String(f.val).replace(/[*]/g, "")}*`;
     default:
-      return `${f.op}.${val(f.val)}`;
+      return `${f.op}.${inList ? val(f.val) : String(f.val)}`;
   }
 };
 
 function params(q: Query = {}) {
   const p = new URLSearchParams();
   for (const f of q.filters ?? []) p.append(f.col, expr(f));
-  if (q.or?.length) p.append("or", `(${q.or.map((f) => `${f.col}.${expr(f)}`).join(",")})`);
+  if (q.or?.length) p.append("or", `(${q.or.map((f) => `${f.col}.${expr(f, true)}`).join(",")})`);
   if (q.order?.length) p.set("order", q.order.map((o) => `${o.col}.${o.asc ? "asc" : "desc"}`).join(","));
   if (q.limit != null) p.set("limit", String(q.limit));
   if (q.offset != null) p.set("offset", String(q.offset));
