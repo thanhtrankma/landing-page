@@ -1,0 +1,367 @@
+/* ════════════════════ REN THÊU ════════════════════
+   White lace and thread embroidery on deep silk. --c1 is the silk, --c2 the lace / thread. Every colour is one of
+   them, a neutral, or a color-mix() of them, so the variants in INVITE_THEMES recolour the whole card.
+   Selectors are scoped as .theme-ren-theu … (two classes) because this file loads before invitation.css. */
+
+.iv.theme-ren-theu {
+  --c1: #1c1c1c;
+  --c2: #f3eee6;
+  --rt-on: var(--c2);
+  --rt-soft: color-mix(in srgb, var(--c2) 70%, transparent);
+  --rt-faint: color-mix(in srgb, var(--c2) 46%, transparent);
+  --rt-line: color-mix(in srgb, var(--c2) 26%, transparent);
+  --rt-linen: color-mix(in srgb, var(--c2) 86%, #fff);
+  --rt-ink: color-mix(in srgb, var(--c1) 90%, #000);
+  --rt-ink-soft: color-mix(in srgb, var(--c1) 72%, #8a8580);
+  --rt-stitch: color-mix(in srgb, var(--c1) 38%, transparent);
+  --rt-scallop: url("data:image/svg+xml,%3Csvg xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg' viewBox%3D'0 0 100 100'%3E%3Cpath d%3D'M50 11.5A6.03 6.03 0 1 1 59.96 12.81A6.03 6.03 0 1 1 69.25 16.66A6.03 6.03 0 1 1 77.22 22.78A6.03 6.03 0 1 1 83.34 30.75A6.03 6.03 0 1 1 87.19 40.04A6.03 6.03 0 1 1 88.5 50A6.03 6.03 0 1 1 87.19 59.96A6.03 6.03 0 1 1 83.34 69.25A6.03 6.03 0 1 1 77.22 77.22A6.03 6.03 0 1 1 69.25 83.34A6.03 6.03 0 1 1 59.96 87.19A6.03 6.03 0 1 1 50 88.5A6.03 6.03 0 1 1 40.04 87.19A6.03 6.03 0 1 1 30.75 83.34A6.03 6.03 0 1 1 22.78 77.22A6.03 6.03 0 1 1 16.66 69.25A6.03 6.03 0 1 1 12.81 59.96A6.03 6.03 0 1 1 11.5 50A6.03 6.03 0 1 1 12.81 40.04A6.03 6.03 0 1 1 16.66 30.75A6.03 6.03 0 1 1 22.78 22.78A6.03 6.03 0 1 1 30.75 16.66A6.03 6.03 0 1 1 40.04 12.81A6.03 6.03 0 1 1 50 11.5Z'%2F%3E%3C%2Fsvg%3E");
+  --iv-red: var(--c1);
+  --iv-red-dark: color-mix(in srgb, var(--c1) 80%, #000);
+  --iv-gold: var(--c2);
+  --iv-gold-soft: color-mix(in srgb, var(--c2) 70%, transparent);
+  --iv-cream: var(--c2);
+  --iv-paper: var(--rt-linen);
+  --iv-ink: var(--rt-ink);
+  --iv-muted: var(--rt-ink-soft);
+  color: var(--rt-on);
+  background:
+    radial-gradient(70% 50% at 50% 0%, color-mix(in srgb, var(--c1) 80%, #fff 6%), transparent 70%),
+    color-mix(in srgb, var(--c1) 72%, #000);
+}
+
+/* draped silk: soft vertical folds (seamless from top to bottom) and a fine weave */
+.theme-ren-theu .iv-page {
+  color: var(--rt-on);
+  background:
+    repeating-linear-gradient(0deg, rgb(255 255 255 / 0.018) 0 1px, transparent 1px 3px),
+    linear-gradient(90deg,
+      color-mix(in srgb, #000 22%, transparent) 0%,
+      transparent 14%,
+      color-mix(in srgb, #fff 7%, transparent) 30%,
+      transparent 44%,
+      color-mix(in srgb, #000 10%, transparent) 56%,
+      color-mix(in srgb, #fff 5%, transparent) 72%,
+      transparent 84%,
+      color-mix(in srgb, #000 22%, transparent) 100%),
+    var(--c1);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--c2) 12%, transparent), 0 0 80px rgb(0 0 0 / 0.5);
+}
+
+/* ── shared pieces ── */
+.theme-ren-theu .rt-rule { display: block; width: 190px; height: 24px; margin: 0 auto; overflow: visible; }
+.theme-ren-theu .rt-title { display: grid; justify-items: center; font-weight: 400; margin: 0 0 24px; color: var(--rt-on); }
+.theme-ren-theu .rt-title > span { font-family: var(--iv-script), cursive; font-size: clamp(42px, 12vw, 52px); line-height: 1.1; }
+.theme-ren-theu .rt-title small { font-family: var(--iv-sans), sans-serif; font-size: 10.5px; font-weight: 500; letter-spacing: 0.42em; text-transform: uppercase; color: var(--rt-soft); margin-top: 4px; padding-left: 0.42em; }
+.theme-ren-theu .rt-title .iv-en { font-size: 12px; letter-spacing: 0.08em; color: var(--rt-soft); }
+.theme-ren-theu .rt-mono { display: block; width: 200px; height: auto; margin: 0 auto; overflow: visible; }
+
+/* scalloped edge on four sides: inner rectangle + a grid of discs (only the outer row shows past it) */
+.theme-ren-theu .rt-hanky,
+.theme-ren-theu .rt-frame,
+.theme-ren-theu .iv-g,
+.theme-ren-theu .iv-intro-card {
+  --r: 8px;
+  -webkit-mask:
+    linear-gradient(#000 0 0) center / calc(100% - 2 * var(--r)) calc(100% - 2 * var(--r)) no-repeat,
+    radial-gradient(closest-side, #000 96%, #0000) 0 0 / calc(2 * var(--r)) calc(2 * var(--r)) round;
+  mask:
+    linear-gradient(#000 0 0) center / calc(100% - 2 * var(--r)) calc(100% - 2 * var(--r)) no-repeat,
+    radial-gradient(closest-side, #000 96%, #0000) 0 0 / calc(2 * var(--r)) calc(2 * var(--r)) round;
+}
+
+/* linen handkerchief: scalloped edge, a ring of eyelets and a running stitch inside it */
+.theme-ren-theu .rt-panel { padding: 30px 16px; text-align: center; position: relative; }
+.theme-ren-theu .rt-hanky {
+  --r: 9px;
+  position: relative; max-width: 410px; margin: 0 auto; padding: 50px 28px 46px;
+  color: var(--rt-ink);
+  background:
+    radial-gradient(90% 60% at 50% 0%, rgb(255 255 255 / 0.7), transparent 70%),
+    repeating-linear-gradient(0deg, color-mix(in srgb, var(--c1) 4%, transparent) 0 1px, transparent 1px 3px),
+    repeating-linear-gradient(90deg, color-mix(in srgb, var(--c1) 3%, transparent) 0 1px, transparent 1px 3px),
+    var(--rt-linen);
+}
+.theme-ren-theu .rt-hanky::before,
+.theme-ren-theu .rt-hanky::after { content: ""; position: absolute; pointer-events: none; }
+.theme-ren-theu .rt-hanky::before { inset: calc(var(--r) + 6px); border: 2.5px dotted color-mix(in srgb, var(--c1) 30%, transparent); }
+.theme-ren-theu .rt-hanky::after { inset: calc(var(--r) + 13px); border: 1px dashed color-mix(in srgb, var(--c1) 26%, transparent); }
+.theme-ren-theu .rt-hanky .rt-title { color: var(--rt-ink); }
+.theme-ren-theu .rt-hanky .rt-title small, .theme-ren-theu .rt-hanky .rt-title .iv-en { color: var(--rt-ink-soft); }
+
+/* ── hero: lace valance, round doily around the cover photo ── */
+.theme-ren-theu .rt-hero { position: relative; overflow: hidden; text-align: center; padding: 0 22px 44px; }
+.theme-ren-theu .rt-hero::before {
+  content: ""; position: absolute; inset: -20% -60%; pointer-events: none;
+  background: linear-gradient(105deg, transparent 40%, color-mix(in srgb, #fff 9%, transparent) 50%, transparent 60%);
+}
+.theme-ren-theu .rt-hero > * { position: relative; }
+.theme-ren-theu .rt-valance { display: block; width: calc(100% + 44px); height: auto; margin: 0 -22px; filter: drop-shadow(0 3px 3px rgb(0 0 0 / 0.35)); }
+.theme-ren-theu .rt-kicker {
+  display: grid; justify-items: center; margin-top: 30px;
+  font-family: var(--iv-sans), sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 0.46em; padding-left: 0.46em; text-transform: uppercase; color: var(--rt-soft);
+}
+.theme-ren-theu .rt-kicker .iv-en { letter-spacing: 0.16em; }
+.theme-ren-theu .rt-doily { position: relative; width: min(92%, 360px); aspect-ratio: 1; margin: 22px auto 0; }
+.theme-ren-theu .rt-doily-photo { position: absolute; inset: 19.5%; border-radius: 50%; background: color-mix(in srgb, var(--c1) 70%, #fff); }
+.theme-ren-theu .rt-doily-photo img, .theme-ren-theu .rt-doily-photo .iv-ph { border-radius: 50%; }
+.theme-ren-theu .rt-doily-lace { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; filter: drop-shadow(0 6px 10px rgb(0 0 0 / 0.4)); }
+.theme-ren-theu .rt-names { display: grid; justify-items: center; margin: 26px 0 0; font-weight: 400; line-height: 1.05; }
+.theme-ren-theu .rt-names span { font-family: var(--iv-script), cursive; font-size: clamp(48px, 14.5vw, 66px); color: var(--rt-on); padding: 0 8px; text-shadow: 0 2px 14px rgb(0 0 0 / 0.35); }
+.theme-ren-theu .rt-names i { font-family: var(--iv-thin), cursive; font-style: normal; font-size: clamp(30px, 8.5vw, 38px); color: var(--rt-soft); margin: -4px 0 -8px; }
+.theme-ren-theu .rt-datebar { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 14px; max-width: 340px; margin: 28px auto 0; }
+.theme-ren-theu .rt-datebar span {
+  font-family: var(--iv-sans), sans-serif; font-size: clamp(10px, 2.8vw, 11.5px); font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--rt-on);
+  padding: 9px 0; border-top: 1px dashed var(--rt-faint); border-bottom: 1px dashed var(--rt-faint);
+}
+.theme-ren-theu .rt-datebar b { font-family: var(--iv-display), Georgia, serif; font-weight: 400; font-size: clamp(48px, 14vw, 60px); line-height: 1; color: var(--rt-on); }
+.theme-ren-theu .rt-lunar { font-family: var(--iv-serif), Georgia, serif; font-style: italic; font-size: 13px; color: var(--rt-soft); margin-top: 12px; }
+.theme-ren-theu .rt-hero-rule { margin-top: 30px; }
+
+/* ── families on a handkerchief with the embroidered monogram ── */
+.theme-ren-theu .rt-families { padding-top: 10px; }
+.theme-ren-theu .rt-hanky-mono { width: 210px; margin-top: -10px; }
+.theme-ren-theu .rt-families-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 14px; position: relative; }
+.theme-ren-theu .rt-families-grid::before { content: ""; position: absolute; left: 50%; top: 4px; bottom: 4px; border-left: 1px dashed var(--rt-stitch); }
+.theme-ren-theu .rt-family h2 { font-family: var(--iv-display), Georgia, serif; font-weight: 400; font-size: 13.5px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--rt-ink); margin-bottom: 10px; }
+.theme-ren-theu .rt-family h2 .iv-en { letter-spacing: 0.06em; color: var(--rt-ink-soft); }
+.theme-ren-theu .rt-parents { white-space: pre-line; font-family: var(--iv-serif), Georgia, serif; font-size: 15px; line-height: 1.7; color: var(--rt-ink); }
+.theme-ren-theu .rt-addr { margin-top: 8px; font-size: 12.5px; color: var(--rt-ink-soft); }
+
+/* ── couple: lace-edged portrait with quarter-doily corners ── */
+.theme-ren-theu .rt-couple { padding: 40px 26px 54px; }
+.theme-ren-theu .rt-announce { font-family: var(--iv-serif), Georgia, serif; font-style: italic; font-size: 15px; color: var(--rt-soft); max-width: 310px; margin: 0 auto 24px; }
+.theme-ren-theu .rt-frame {
+  --r: 7px;
+  position: relative; width: min(86%, 330px); margin: 0 auto; padding: 14px;
+  background:
+    radial-gradient(circle, color-mix(in srgb, var(--c1) 55%, transparent) 1.4px, transparent 1.9px) 0 0 / 9px 9px,
+    var(--rt-linen);
+  filter: drop-shadow(0 18px 26px rgb(0 0 0 / 0.45));
+}
+.theme-ren-theu .rt-frame-photo { aspect-ratio: 4 / 5; background: color-mix(in srgb, var(--c1) 70%, #fff); box-shadow: 0 0 0 3px var(--rt-linen), 0 0 0 4px var(--rt-stitch); }
+.theme-ren-theu .rt-corner { position: absolute; width: 23%; height: auto; pointer-events: none; filter: drop-shadow(0 1px 1.5px rgb(0 0 0 / 0.35)); }
+.theme-ren-theu .rt-frame .rt-corner { width: 26%; }
+.theme-ren-theu .rt-frame .rt-corner.tl { left: 14px; top: 14px; }
+.theme-ren-theu .rt-frame .rt-corner.tr { right: 14px; top: 14px; transform: scaleX(-1); }
+.theme-ren-theu .rt-frame .rt-corner.bl { left: 14px; bottom: 14px; transform: scaleY(-1); }
+.theme-ren-theu .rt-frame .rt-corner.br { right: 14px; bottom: 14px; transform: scale(-1, -1); }
+.theme-ren-theu .rt-pair { display: grid; justify-items: center; gap: 4px; margin-top: 40px; }
+.theme-ren-theu .rt-pair > div { display: grid; justify-items: center; }
+.theme-ren-theu .rt-pair em { font-family: var(--iv-sans), sans-serif; font-style: normal; font-size: 10.5px; font-weight: 500; letter-spacing: 0.4em; padding-left: 0.4em; text-transform: uppercase; color: var(--rt-soft); }
+.theme-ren-theu .rt-pair p { font-family: var(--iv-script), cursive; font-size: clamp(36px, 10.5vw, 46px); line-height: 1.2; color: var(--rt-on); }
+.theme-ren-theu .rt-pair .iv-person-title { color: var(--rt-faint); opacity: 1; font-size: 10px; }
+.theme-ren-theu .rt-amp {
+  display: grid; place-items: center; width: 54px; height: 54px; margin: 12px 0;
+  font-family: var(--iv-thin), cursive; font-size: 30px; line-height: 1; color: var(--rt-ink); padding-top: 4px;
+  background: radial-gradient(circle, transparent 54%, color-mix(in srgb, var(--c1) 40%, transparent) 55% 57%, transparent 58%), var(--rt-linen);
+  -webkit-mask: var(--rt-scallop) center / 100% 100% no-repeat; mask: var(--rt-scallop) center / 100% 100% no-repeat;
+  transform: scale(1.3);
+}
+
+/* ── invitation: guest name on linen, three cameo photos on the silk ── */
+.theme-ren-theu .rt-inv-heading { font-family: var(--iv-display), Georgia, serif; text-transform: uppercase; letter-spacing: 0.22em; font-size: 13px; color: var(--rt-ink-soft); }
+.theme-ren-theu .rt-guest { font-family: var(--iv-script), cursive; font-size: clamp(42px, 12.5vw, 56px); line-height: 1.2; color: var(--rt-ink); margin-top: 10px; overflow-wrap: anywhere; }
+.theme-ren-theu .rt-guest-rule { margin: 2px auto 14px; }
+.theme-ren-theu .rt-inv-line { font-family: var(--iv-display), Georgia, serif; text-transform: uppercase; letter-spacing: 0.14em; font-size: 12.5px; line-height: 1.85; color: var(--rt-ink); max-width: 300px; margin: 0 auto; }
+.theme-ren-theu .rt-trio { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 34px auto 0; max-width: 400px; }
+.theme-ren-theu .rt-trio figure { display: grid; justify-items: center; }
+.theme-ren-theu .rt-cameo {
+  position: relative; width: 100%; aspect-ratio: 1; padding: 10%;
+  background: var(--rt-linen);
+  -webkit-mask: var(--rt-scallop) center / 100% 100% no-repeat; mask: var(--rt-scallop) center / 100% 100% no-repeat;
+}
+.theme-ren-theu .rt-cameo::after { content: ""; position: absolute; inset: 14.5%; border-radius: 50%; border: 1.5px dotted color-mix(in srgb, var(--c1) 45%, transparent); pointer-events: none; }
+.theme-ren-theu .rt-cameo .iv-photo { width: 100%; height: 100%; border-radius: 50%; background: color-mix(in srgb, var(--c1) 70%, #fff); }
+.theme-ren-theu .rt-cameo .iv-ph i { font-size: 22px; }
+.theme-ren-theu .rt-trio b { font-family: var(--iv-display), Georgia, serif; font-weight: 400; font-size: clamp(22px, 6.4vw, 28px); color: var(--rt-on); margin-top: 6px; line-height: 1.1; }
+.theme-ren-theu .rt-trio small { font-size: 9.5px; letter-spacing: 0.32em; padding-left: 0.32em; text-transform: uppercase; color: var(--rt-soft); }
+.theme-ren-theu .rt-trio small .iv-en { letter-spacing: 0.1em; }
+.theme-ren-theu .rt-quote { font-family: var(--iv-thin), cursive; font-size: clamp(25px, 7vw, 29px); line-height: 1.35; color: var(--rt-on); margin: 34px auto 6px; max-width: 340px; }
+.theme-ren-theu .rt-quote .iv-en { font-size: 0.6em; color: var(--rt-soft); }
+
+/* ── events: silk cards edged with stitching and lace corners ── */
+.theme-ren-theu .rt-events { display: grid; gap: 24px; padding: 50px 18px 40px; }
+.theme-ren-theu .rt-events .rt-title { margin-bottom: 0; }
+.theme-ren-theu .iv-event.rt-event {
+  position: relative; border-radius: 2px; padding: 46px 22px 28px; color: var(--rt-on);
+  background:
+    radial-gradient(80% 50% at 50% 0%, color-mix(in srgb, #fff 8%, transparent), transparent 70%),
+    color-mix(in srgb, var(--c1) 88%, #fff);
+  box-shadow: inset 0 0 0 1px var(--rt-line), 0 24px 40px -26px rgb(0 0 0 / 0.75);
+}
+.theme-ren-theu .rt-event::after { content: ""; position: absolute; inset: 8px; border: 1px dashed var(--rt-faint); pointer-events: none; }
+.theme-ren-theu .rt-event .rt-corner { width: 64px; top: -1px; }
+.theme-ren-theu .rt-event .rt-corner.tl { left: -1px; }
+.theme-ren-theu .rt-event .rt-corner.tr { right: -1px; transform: scaleX(-1); }
+.theme-ren-theu .rt-event h3 { font-family: var(--iv-display), Georgia, serif; font-weight: 400; text-transform: uppercase; letter-spacing: 0.18em; font-size: 16.5px; color: var(--rt-on); padding: 0 46px; }
+.theme-ren-theu .rt-event-when { display: flex; justify-content: center; gap: 8px; margin-top: 12px; font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--rt-soft); }
+.theme-ren-theu .rt-event-when b { color: var(--rt-on); font-weight: 600; }
+.theme-ren-theu .rt-event-date { font-family: var(--iv-serif), Georgia, serif; font-weight: 400; font-size: clamp(34px, 10.5vw, 42px); letter-spacing: 0.04em; line-height: 1.25; color: var(--rt-on); }
+.theme-ren-theu .rt-event-date i { font-style: normal; color: var(--rt-faint); margin: 0 6px; font-weight: 300; }
+.theme-ren-theu .rt-event-lunar { font-family: var(--iv-serif), Georgia, serif; font-style: italic; font-size: 12.5px; color: var(--rt-soft); }
+.theme-ren-theu .rt-event .iv-event-sub span { background: transparent; border: 1px solid var(--rt-line); color: var(--rt-on); }
+.theme-ren-theu .rt-event-rule { width: 150px; margin: 16px auto 4px; }
+.theme-ren-theu .rt-event-venue { font-family: var(--iv-display), Georgia, serif; text-transform: uppercase; letter-spacing: 0.1em; font-size: 15px; color: var(--rt-on); }
+.theme-ren-theu .rt-event-address { font-size: 13px; color: var(--rt-soft); margin-top: 4px; }
+.theme-ren-theu .rt-event .iv-event-map { border-radius: 2px; border: 4px solid var(--rt-linen); height: 180px; position: relative; z-index: 1; }
+.theme-ren-theu .rt-event-actions { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; margin-top: 20px; position: relative; z-index: 1; }
+.theme-ren-theu .rt-event-actions a {
+  text-decoration: none; font-size: 11.5px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
+  padding: 10px 18px; border-radius: 999px; border: 1px solid var(--rt-soft); color: var(--rt-on); background: transparent;
+}
+.theme-ren-theu .rt-event-actions a:first-child { background: var(--rt-linen); border-color: var(--rt-linen); color: var(--rt-ink); }
+.theme-ren-theu .rt-event-actions .iv-en { display: none; }
+
+/* ── calendar on linen, countdown as lace medallions ── */
+.theme-ren-theu .rt-when { padding-top: 20px; padding-bottom: 40px; }
+.theme-ren-theu .rt-when .rt-hanky { padding: 44px 22px 34px; }
+.theme-ren-theu .rt-when .rt-hanky .rt-title { margin-bottom: 8px; }
+.theme-ren-theu .iv-calendar { background: transparent; border: 0; border-radius: 0; box-shadow: none; overflow: visible; position: relative; }
+.theme-ren-theu .iv-cal-head { display: none; }
+.theme-ren-theu .iv-cal-grid { padding: 6px 4px 4px; gap: 3px; }
+.theme-ren-theu .iv-cal-grid span { font-family: var(--iv-serif), Georgia, serif; font-size: 15px; color: var(--rt-ink); }
+.theme-ren-theu .iv-cal-grid .dow { font-family: var(--iv-sans), sans-serif; font-size: 10px; letter-spacing: 0.12em; color: var(--rt-ink-soft); border-bottom: 1px dashed var(--rt-stitch); margin-bottom: 6px; padding-bottom: 6px; }
+.theme-ren-theu .iv-cal-grid .on svg { fill: var(--c1); }
+.theme-ren-theu .iv-cal-grid .on b { color: var(--c2); font-family: var(--iv-sans), sans-serif; font-size: 12.5px; }
+.theme-ren-theu .rt-count { max-width: 410px; margin: 26px auto 0; }
+.theme-ren-theu .rt-count .rt-title { margin-bottom: 14px; }
+.theme-ren-theu .iv-countdown { gap: 8px; margin-top: 0; }
+.theme-ren-theu .iv-countdown div {
+  position: relative; aspect-ratio: 1; display: grid; place-content: center; padding: 0; border-radius: 0;
+  background: var(--rt-linen); color: var(--rt-ink); box-shadow: none;
+  -webkit-mask: var(--rt-scallop) center / 100% 100% no-repeat; mask: var(--rt-scallop) center / 100% 100% no-repeat;
+}
+.theme-ren-theu .iv-countdown div::before { content: ""; position: absolute; inset: 15%; border-radius: 50%; border: 1.5px dotted color-mix(in srgb, var(--c1) 40%, transparent); }
+.theme-ren-theu .iv-countdown b { font-family: var(--iv-display), Georgia, serif; font-weight: 400; font-size: clamp(20px, 5.8vw, 25px); line-height: 1.05; }
+.theme-ren-theu .iv-countdown span { font-size: 8.5px; letter-spacing: 0.16em; color: var(--rt-ink-soft); }
+.theme-ren-theu .iv-countdown .iv-en { display: none; }
+
+/* ── album: every photo on a scalloped linen mount ── */
+.theme-ren-theu .rt-album { padding: 48px 16px 40px; }
+.theme-ren-theu .iv-gallery { gap: 10px; }
+.theme-ren-theu .iv-g { --r: 5px; position: relative; padding: 9px; background: var(--rt-linen); }
+.theme-ren-theu .iv-g::after { content: ""; position: absolute; inset: 5px; border: 1px dashed color-mix(in srgb, var(--c1) 30%, transparent); pointer-events: none; }
+.theme-ren-theu .iv-g .iv-photo { border-radius: 0; background: color-mix(in srgb, var(--c1) 70%, #fff); }
+
+/* ── gift ── */
+.theme-ren-theu .rt-gift .rt-title { margin-bottom: 6px; }
+.theme-ren-theu .rt-gift-sub { color: var(--rt-ink-soft); font-size: 14px; margin: 0 0 22px; }
+.theme-ren-theu .iv-gift-btn {
+  background: var(--c1); color: var(--c2); font-family: var(--iv-sans), sans-serif; font-weight: 600; font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase;
+  padding: 13px 26px; border-radius: 999px; box-shadow: 0 0 0 3px var(--rt-linen), 0 0 0 4px var(--rt-stitch), 0 12px 22px -12px rgb(0 0 0 / 0.6);
+}
+.theme-ren-theu .iv-banks { margin-top: 20px; }
+.theme-ren-theu .iv-bank { background: #fff; border: 1px dashed var(--rt-stitch); border-radius: 2px; color: var(--rt-ink); }
+.theme-ren-theu .iv-bank h4 { color: var(--rt-ink); font-family: var(--iv-display), Georgia, serif; font-weight: 400; }
+.theme-ren-theu .iv-bank-acc { border-color: var(--rt-stitch); background: var(--rt-linen); color: var(--rt-ink); }
+.theme-ren-theu .iv-bank-holder, .theme-ren-theu .iv-bank-acc small { color: var(--rt-ink-soft); }
+
+/* ── thank you: photo under a lace valance, monogram in white thread ── */
+.theme-ren-theu .rt-thanks { min-height: 600px; }
+.theme-ren-theu .rt-thanks .iv-thanks-bg { background: color-mix(in srgb, var(--c1) 70%, #fff); }
+.theme-ren-theu .rt-thanks .iv-thanks-bg::after {
+  background: linear-gradient(180deg, color-mix(in srgb, var(--c1) 55%, transparent) 0%, color-mix(in srgb, var(--c1) 8%, transparent) 30%, color-mix(in srgb, var(--c1) 50%, transparent) 60%, color-mix(in srgb, var(--c1) 94%, #000) 100%);
+}
+.theme-ren-theu .rt-thanks .rt-valance { position: absolute; top: 0; left: 0; width: 100%; margin: 0; z-index: 1; }
+.theme-ren-theu .rt-thanks .iv-thanks-body { padding-top: 150px; padding-bottom: 54px; }
+.theme-ren-theu .rt-thanks-mono { width: 170px; margin-bottom: 4px; filter: drop-shadow(0 2px 6px rgb(0 0 0 / 0.4)); }
+.theme-ren-theu .rt-thanks h2 { font-family: var(--iv-script), cursive; font-weight: 400; font-size: clamp(56px, 16vw, 70px); color: var(--c2); text-shadow: 0 2px 18px rgb(0 0 0 / 0.35); }
+.theme-ren-theu .rt-thanks p { color: var(--c2); }
+
+/* ── shared sections in the wishes slot (all on the silk) ── */
+.theme-ren-theu .iv-block-title { font-family: var(--iv-script), cursive; font-weight: 400; text-transform: none; letter-spacing: 0; font-size: clamp(40px, 11.5vw, 48px); color: var(--rt-on); margin-bottom: 18px; }
+.theme-ren-theu .iv-block-title .iv-en { font-size: 12px; letter-spacing: 0.1em; color: var(--rt-soft); }
+.theme-ren-theu .iv-schedule, .theme-ren-theu .iv-dress { padding-top: 46px; padding-bottom: 46px; }
+.theme-ren-theu .iv-timeline::before { background: none; border-left: 1px dashed var(--rt-faint); width: 0; }
+.theme-ren-theu .iv-timeline li::before { background: var(--c1); border: 1.5px solid var(--c2); box-shadow: 0 0 0 3px var(--c1); }
+.theme-ren-theu .iv-timeline b { color: var(--rt-on); font-family: var(--iv-display), Georgia, serif; font-weight: 400; }
+.theme-ren-theu .iv-timeline span { color: var(--rt-soft); }
+.theme-ren-theu .iv-dress-note { color: var(--rt-soft); }
+.theme-ren-theu .iv-dress-colors span { box-shadow: 0 0 0 3px var(--c1), 0 0 0 4.5px var(--rt-faint), 0 8px 16px -8px rgb(0 0 0 / 0.6); }
+.theme-ren-theu .iv-rsvp-block, .theme-ren-theu .iv-rsvp { background: transparent; color: var(--rt-on); padding-top: 50px; padding-bottom: 50px; }
+.theme-ren-theu .iv-rsvp-block .iv-rsvp-sub, .theme-ren-theu .iv-rsvp-sub { color: var(--rt-soft); opacity: 1; }
+.theme-ren-theu .iv-rsvp .iv-script { color: var(--rt-on); font-size: clamp(40px, 11.5vw, 48px); }
+.theme-ren-theu .iv-rsvp-open {
+  background: var(--rt-linen); color: var(--rt-ink); font-size: 12px; letter-spacing: 0.18em;
+  box-shadow: 0 0 0 3px var(--c1), 0 0 0 4px var(--rt-faint), 0 14px 26px -14px rgb(0 0 0 / 0.7);
+}
+.theme-ren-theu .iv-form input, .theme-ren-theu .iv-form textarea, .theme-ren-theu .iv-form select {
+  background: var(--rt-linen); border: 1px solid transparent; border-radius: 2px; color: var(--rt-ink);
+  box-shadow: inset 0 0 0 3px var(--rt-linen), inset 0 0 0 4px color-mix(in srgb, var(--c1) 16%, transparent);
+}
+.theme-ren-theu .iv-form input::placeholder, .theme-ren-theu .iv-form textarea::placeholder { color: var(--rt-ink-soft); }
+.theme-ren-theu .iv-form input:focus, .theme-ren-theu .iv-form textarea:focus, .theme-ren-theu .iv-form select:focus { outline: 2px solid var(--rt-soft); outline-offset: 2px; }
+.theme-ren-theu .iv-form button[type="submit"] { background: var(--rt-linen); color: var(--rt-ink); border-radius: 999px; font-size: 12px; letter-spacing: 0.18em; }
+.theme-ren-theu .iv-form-note { color: var(--rt-soft); opacity: 1; }
+.theme-ren-theu .iv-form-err { color: color-mix(in srgb, var(--c2) 70%, #ff6b5e); }
+.theme-ren-theu .iv-field { color: var(--rt-on); }
+.theme-ren-theu .iv-rsvp-form .iv-rsvp-q { color: var(--rt-on); }
+.theme-ren-theu .iv-rsvp-choices button { background: transparent; border: 1px solid var(--rt-faint); color: var(--rt-on); border-radius: 2px; }
+.theme-ren-theu .iv-rsvp-choices button.on { background: var(--rt-linen); border-color: var(--rt-linen); color: var(--rt-ink); }
+.theme-ren-theu .iv-rsvp-done { background: transparent; border: 1px dashed var(--rt-faint); border-radius: 2px; color: var(--rt-on); }
+.theme-ren-theu .iv-rsvp-done button { color: var(--rt-on); border-color: var(--rt-soft); }
+.theme-ren-theu .iv-wishes figure { background: var(--rt-linen); color: var(--rt-ink); border-radius: 2px; box-shadow: inset 0 0 0 4px var(--rt-linen), inset 0 0 0 5px color-mix(in srgb, var(--c1) 18%, transparent); }
+.theme-ren-theu .iv-wishes figcaption { color: var(--rt-ink-soft); font-family: var(--iv-serif), Georgia, serif; font-style: italic; }
+/* RSVP modal: linen card, so the form switches to dark ink */
+.theme-ren-theu .iv-modal { background: color-mix(in srgb, var(--c1) 70%, transparent); }
+.theme-ren-theu .iv-modal-card { background: var(--rt-linen); color: var(--rt-ink); border-radius: 2px; box-shadow: inset 0 0 0 6px var(--rt-linen), inset 0 0 0 7px var(--rt-stitch), 0 30px 60px -20px rgb(0 0 0 / 0.7); }
+.theme-ren-theu .iv-modal-card h3 { color: var(--rt-ink); font-family: var(--iv-display), Georgia, serif; font-weight: 400; letter-spacing: 0.06em; }
+.theme-ren-theu .iv-modal-card .iv-field, .theme-ren-theu .iv-modal-card .iv-rsvp-q, .theme-ren-theu .iv-modal-card .iv-form-note { color: var(--rt-ink); }
+.theme-ren-theu .iv-modal-card .iv-form input, .theme-ren-theu .iv-modal-card .iv-form textarea, .theme-ren-theu .iv-modal-card .iv-form select { background: #fff; box-shadow: inset 0 0 0 1px var(--rt-stitch); }
+.theme-ren-theu .iv-modal-card .iv-rsvp-choices button { border-color: var(--rt-stitch); color: var(--rt-ink); }
+.theme-ren-theu .iv-modal-card .iv-rsvp-choices button.on, .theme-ren-theu .iv-modal-card .iv-form button[type="submit"] { background: var(--c1); border-color: var(--c1); color: var(--c2); }
+
+/* placeholders, footer, intro, music, petals */
+.theme-ren-theu .iv-ph {
+  background:
+    radial-gradient(circle at 30% 25%, rgb(255 255 255 / 0.3), transparent 60%),
+    linear-gradient(150deg, color-mix(in srgb, var(--c1) 55%, #fff), color-mix(in srgb, var(--c1) 80%, #fff));
+}
+.theme-ren-theu .iv-ph i { font-family: var(--iv-script), cursive; color: color-mix(in srgb, var(--c2) 75%, transparent); }
+.theme-ren-theu .iv-foot { background: color-mix(in srgb, var(--c1) 82%, #000); color: var(--rt-soft); border-top: 1px dashed var(--rt-line); }
+.theme-ren-theu .iv-foot a { color: var(--c2); }
+.theme-ren-theu .iv-intro {
+  background:
+    repeating-linear-gradient(0deg, rgb(255 255 255 / 0.02) 0 1px, transparent 1px 3px),
+    linear-gradient(90deg, color-mix(in srgb, #000 25%, transparent), transparent 25%, color-mix(in srgb, #fff 7%, transparent) 45%, transparent 65%, color-mix(in srgb, #000 25%, transparent)),
+    var(--c1);
+}
+.theme-ren-theu .iv-intro-card {
+  --r: 9px;
+  border-radius: 0; color: var(--rt-ink);
+  background:
+    radial-gradient(90% 60% at 50% 0%, rgb(255 255 255 / 0.7), transparent 70%),
+    var(--rt-linen);
+  box-shadow: inset 0 0 0 15px var(--rt-linen), inset 0 0 0 17px color-mix(in srgb, var(--c1) 22%, transparent), inset 0 0 0 22px var(--rt-linen), inset 0 0 0 23px color-mix(in srgb, var(--c1) 16%, transparent);
+}
+.theme-ren-theu .iv-intro .iv-script { color: var(--rt-ink); }
+.theme-ren-theu .iv-intro-kicker { color: var(--rt-ink-soft); }
+.theme-ren-theu .iv-intro-heart { width: 44px; height: 44px; fill: none; stroke: var(--c1); stroke-width: 1.2; stroke-dasharray: 2 1.4; }
+.theme-ren-theu .iv-intro-date { color: var(--rt-ink); }
+.theme-ren-theu .iv-intro-guest { color: var(--rt-ink-soft); }
+.theme-ren-theu .iv-intro-guest b { color: var(--rt-ink); }
+.theme-ren-theu .iv-intro button { background: var(--c1); color: var(--c2); font-size: 12px; letter-spacing: 0.22em; box-shadow: 0 0 0 3px var(--rt-linen), 0 0 0 4px var(--rt-stitch), 0 14px 26px -12px rgb(0 0 0 / 0.6); }
+.theme-ren-theu .iv-music { background: var(--rt-linen); box-shadow: 0 6px 16px -6px rgb(0 0 0 / 0.5), inset 0 0 0 3px var(--rt-linen), inset 0 0 0 4px var(--rt-stitch); }
+.theme-ren-theu .iv-music svg { stroke: var(--c1); }
+.theme-ren-theu .iv-music:not(.on)::after { background: var(--c1); }
+.theme-ren-theu .iv-petals span { background: radial-gradient(circle at 35% 35%, #fff, color-mix(in srgb, var(--c2) 80%, transparent)); opacity: 0.55; border-radius: 50%; }
+.theme-ren-theu .iv-petals span.h1 { border-radius: 150% 0 150% 0; opacity: 0.45; }
+.theme-ren-theu .iv-petals span.h2 { background: transparent; border: 1.5px dotted var(--c2); opacity: 0.6; }
+
+/* slow motion: the doily turns, light slides across the silk */
+@media (prefers-reduced-motion: no-preference) {
+  .theme-ren-theu .rt-doily-lace { animation: rt-turn 240s linear infinite; }
+  .theme-ren-theu .rt-hero::before { animation: rt-sheen 14s ease-in-out infinite; }
+}
+@keyframes rt-turn { to { transform: rotate(360deg); } }
+@keyframes rt-sheen { 0%, 100% { transform: translateX(-30%); } 50% { transform: translateX(30%); } }
+
+@media (max-width: 380px) {
+  .theme-ren-theu .rt-hanky { padding-left: 22px; padding-right: 22px; }
+  .theme-ren-theu .rt-families-grid { grid-template-columns: 1fr; gap: 24px; }
+  .theme-ren-theu .rt-families-grid::before { display: none; }
+  .theme-ren-theu .rt-datebar { gap: 10px; }
+  .theme-ren-theu .rt-event h3 { padding: 0 40px; }
+}
+.theme-ren-theu .iv-g .iv-ph i { font-size: 32px; }
+.theme-ren-theu .iv-g.wide .iv-ph i { font-size: 44px; }

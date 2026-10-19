@@ -20,6 +20,16 @@ import HoangKimTheme from "./themes/HoangKim";
 import BaroqueTheme from "./themes/Baroque";
 import MauNuocTheme from "./themes/MauNuoc";
 import CoPhucTheme from "./themes/CoPhuc";
+import SongHacTheme from "./themes/SongHac";
+import ToDuyenTheme from "./themes/ToDuyen";
+import VuonKinhTheme from "./themes/VuonKinh";
+import RenTheuTheme from "./themes/RenTheu";
+import LauDaiTheme from "./themes/LauDai";
+import ChibiTheme from "./themes/Chibi";
+import LienHoaTheme from "./themes/LienHoa";
+import BachSuTheme from "./themes/BachSu";
+import HoaKhoTheme from "./themes/HoaKho";
+import AnhDaoTheme from "./themes/AnhDao";
 import type { ThemeCtx } from "./themes/types";
 
 // The online wedding invitation: a mobile-first page shared by link. This shell owns the intro screen, music,
@@ -49,6 +59,16 @@ const THEMES: Record<InviteTheme, ComponentType<ThemeCtx>> = {
   baroque: BaroqueTheme,
   "mau-nuoc": MauNuocTheme,
   "co-phuc": CoPhucTheme,
+  "song-hac": SongHacTheme,
+  "to-duyen": ToDuyenTheme,
+  "vuon-kinh": VuonKinhTheme,
+  "ren-theu": RenTheuTheme,
+  "lau-dai": LauDaiTheme,
+  "chibi": ChibiTheme,
+  "lien-hoa": LienHoaTheme,
+  "bach-su": BachSuTheme,
+  "hoa-kho": HoaKhoTheme,
+  "anh-dao": AnhDaoTheme,
 };
 
 const Heart = () => (

@@ -1,0 +1,338 @@
+/* ════════════════════ HOA KHÔ ════════════════════
+   Boho dried flowers: kraft paper and linen, a rattan arch, a macramé hoop, kraft tags on twine.
+   Every colour is --c1, --c2, a neutral (creams, greiges) or a color-mix() of them, so the variants in
+   INVITE_THEMES recolour the whole card. Selectors are scoped .theme-hoa-kho … (two classes) to beat invitation.css. */
+
+.iv.theme-hoa-kho {
+  --c1: #c07a4e;
+  --c2: #8a8f6a;
+  --hk-accent: color-mix(in srgb, var(--c1) 76%, #2a201a);
+  --hk-deep: color-mix(in srgb, var(--c1) 62%, #241b15);
+  --hk-leaf: color-mix(in srgb, var(--c2) 68%, #2a2a22);
+  --hk-kraft: color-mix(in srgb, var(--c1) 13%, #e7dac6);
+  --hk-kraft-2: color-mix(in srgb, var(--c1) 18%, #dccbb2);
+  --hk-linen: #f8f3eb;
+  --hk-line: color-mix(in srgb, var(--c1) 26%, #d9cbb6);
+  --hk-twine: color-mix(in srgb, var(--c1) 26%, #b8a68e);
+  --iv-red: var(--hk-accent);
+  --iv-red-dark: var(--hk-deep);
+  --iv-gold: var(--c2);
+  --iv-gold-soft: color-mix(in srgb, var(--c2) 22%, #fff);
+  --iv-cream: #f5efe5;
+  --iv-paper: #fbf8f3;
+  --iv-ink: color-mix(in srgb, var(--c1) 12%, #3a3129);
+  --iv-muted: color-mix(in srgb, var(--c1) 18%, #7c7064);
+  --hk-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.45 0 0 0 0 0.38 0 0 0 0 0.3 0 0 0 0.07 0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E");
+  --hk-weave: repeating-linear-gradient(0deg, rgb(120 100 80 / 0.035) 0 1px, transparent 1px 3px), repeating-linear-gradient(90deg, rgb(120 100 80 / 0.035) 0 1px, transparent 1px 3px);
+  color: var(--iv-ink);
+  background:
+    radial-gradient(60% 40% at 0% 0%, color-mix(in srgb, var(--c1) 14%, transparent), transparent 70%),
+    radial-gradient(50% 40% at 100% 100%, color-mix(in srgb, var(--c2) 16%, transparent), transparent 70%),
+    #ebe3d6;
+}
+.theme-hoa-kho .iv-page { background: var(--hk-grain), var(--hk-weave), var(--iv-cream); box-shadow: 0 0 60px rgb(60 45 30 / 0.16); }
+
+/* shared bits */
+.theme-hoa-kho .hk-macrame { display: block; width: min(280px, 82%); height: auto; margin: 0 auto; overflow: visible; }
+.theme-hoa-kho .hk-title { position: relative; display: grid; justify-items: center; font-weight: 400; margin: 0 auto 26px; width: fit-content; max-width: 100%; }
+.theme-hoa-kho .hk-title small { font-family: var(--iv-thin), cursive; font-size: 24px; line-height: 1; color: var(--hk-leaf); transform: rotate(-4deg); margin-bottom: 2px; }
+.theme-hoa-kho .hk-title > span { font-family: var(--iv-script), cursive; font-size: clamp(40px, 11.5vw, 52px); line-height: 1.1; color: var(--hk-accent); padding: 0 8px; }
+.theme-hoa-kho .hk-title .iv-en { font-family: var(--iv-sans), sans-serif; font-size: 12px; letter-spacing: 0.1em; color: var(--iv-muted); }
+.theme-hoa-kho .hk-title-sprig { width: 92px; height: auto; margin-top: -4px; }
+.theme-hoa-kho .iv-announce { font-family: var(--iv-serif), Georgia, serif; font-style: italic; font-size: 15px; color: var(--iv-muted); max-width: 300px; margin: 0 auto 4px; }
+
+/* ── hero: rattan arch, dried bouquet spilling over it, a kraft tag on twine ── */
+.theme-hoa-kho .hk-hero { position: relative; overflow: hidden; padding: 38px 22px 46px; text-align: center; }
+.theme-hoa-kho .hk-kicker {
+  display: flex; align-items: center; gap: 12px; justify-content: flex-start; padding-left: 4%;
+  font-family: var(--iv-sans), sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 0.4em; text-transform: uppercase; color: var(--iv-muted);
+}
+.theme-hoa-kho .hk-kicker::after { content: ""; flex: 1; height: 1px; background: linear-gradient(90deg, var(--hk-line), transparent); }
+.theme-hoa-kho .hk-kicker .iv-en { letter-spacing: 0.14em; }
+.theme-hoa-kho .hk-stage { position: relative; margin-top: 30px; }
+.theme-hoa-kho .hk-arch { position: relative; width: 66%; aspect-ratio: 220 / 300; margin-left: 6%; z-index: 1; }
+.theme-hoa-kho .hk-arch-photo { position: absolute; left: 5.4%; right: 5.4%; top: 3.9%; bottom: 0; border-radius: 999px 999px 0 0; background: var(--hk-kraft); }
+.theme-hoa-kho .hk-arch-photo img, .theme-hoa-kho .hk-arch-photo .iv-ph { border-radius: 999px 999px 0 0; }
+.theme-hoa-kho .hk-arch-frame { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; filter: drop-shadow(0 6px 10px rgb(70 50 30 / 0.18)); }
+.theme-hoa-kho .hk-hero-bunch { position: absolute; z-index: 2; width: 88%; left: -27%; bottom: -15%; transform: rotate(8deg); transform-origin: 50% 94%; pointer-events: none; }
+.theme-hoa-kho .hk-hero-spray { position: absolute; z-index: 0; width: 50%; left: 48%; top: -9%; pointer-events: none; }
+.theme-hoa-kho .hk-hang { position: absolute; z-index: 3; right: 1%; top: 40%; width: 34%; transform: rotate(5deg); transform-origin: 30% 0; }
+.theme-hoa-kho .hk-hang-string { display: block; width: 26px; height: 40px; margin: 0 0 -7px 20%; overflow: visible; }
+.theme-hoa-kho .hk-tag {
+  position: relative; display: grid; justify-items: center; padding: 26px 8px 16px;
+  background: var(--hk-grain), linear-gradient(170deg, color-mix(in srgb, var(--hk-kraft) 70%, #fff), var(--hk-kraft-2));
+  clip-path: polygon(22% 0, 78% 0, 100% 16%, 100% 100%, 0 100%, 0 16%);
+  filter: drop-shadow(0 8px 10px rgb(60 40 25 / 0.2));
+}
+.theme-hoa-kho .hk-tag::before { content: ""; position: absolute; top: 9px; left: 50%; width: 9px; height: 9px; margin-left: -4.5px; border-radius: 50%; background: var(--iv-cream); box-shadow: inset 0 0 0 1.5px var(--hk-twine); }
+.theme-hoa-kho .hk-tag::after { content: ""; position: absolute; inset: 30px 6px 6px; border: 1px dashed color-mix(in srgb, var(--c1) 40%, transparent); border-top: 0; pointer-events: none; }
+.theme-hoa-kho .hk-tag small { font-family: var(--iv-thin), cursive; font-size: clamp(17px, 5vw, 21px); line-height: 1; color: var(--hk-leaf); }
+.theme-hoa-kho .hk-tag b { font-family: var(--iv-display), Georgia, serif; font-weight: 400; font-size: clamp(25px, 7.4vw, 32px); line-height: 1.15; color: var(--hk-accent); white-space: nowrap; }
+.theme-hoa-kho .hk-tag b i { font-style: normal; color: var(--c2); margin: 0 1px; }
+.theme-hoa-kho .hk-tag span { font-family: var(--iv-sans), sans-serif; font-size: 11px; letter-spacing: 0.34em; padding-left: 0.34em; color: var(--iv-ink); }
+
+.theme-hoa-kho .hk-names { display: grid; margin: 64px 0 0; font-weight: 400; line-height: 1; position: relative; z-index: 3; }
+.theme-hoa-kho .hk-names span { font-family: var(--iv-script), cursive; font-size: clamp(46px, 14vw, 62px); color: var(--hk-accent); padding: 0 6px; }
+.theme-hoa-kho .hk-names .hk-n1 { justify-self: start; text-align: left; padding-left: 4%; }
+.theme-hoa-kho .hk-names .hk-n2 { justify-self: end; text-align: right; padding-right: 4%; }
+.theme-hoa-kho .hk-names i { font-family: var(--iv-script), cursive; font-style: normal; font-size: clamp(34px, 9.5vw, 42px); line-height: 0.9; color: var(--hk-leaf); margin: -2px 0 -4px; }
+.theme-hoa-kho .hk-when {
+  display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 6px 12px; margin: 26px auto 0; max-width: 320px; padding: 10px 0;
+  border-top: 1px solid var(--hk-line); border-bottom: 1px solid var(--hk-line);
+  font-family: var(--iv-sans), sans-serif; font-size: clamp(10.5px, 3vw, 12px); font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--iv-ink);
+}
+.theme-hoa-kho .hk-when > * + *::before { content: "✦"; color: var(--c2); font-size: 8px; margin-right: 12px; vertical-align: 2px; }
+.theme-hoa-kho .hk-when b { font-weight: 600; color: var(--hk-accent); }
+.theme-hoa-kho .hk-lunar { font-family: var(--iv-serif), Georgia, serif; font-style: italic; font-size: 13px; color: var(--iv-muted); margin-top: 10px; }
+
+/* ── families: two kraft tags on a twine line ── */
+.theme-hoa-kho .hk-families { padding: 18px 18px 34px; }
+.theme-hoa-kho .hk-line { position: relative; margin-top: 18px; padding-top: 14px; }
+.theme-hoa-kho .hk-twine { position: absolute; left: -18px; right: -18px; top: 0; width: calc(100% + 36px); height: 40px; }
+.theme-hoa-kho .hk-families-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; align-items: start; }
+.theme-hoa-kho .hk-family {
+  position: relative; padding: 34px 12px 20px; margin-top: 18px;
+  background: var(--hk-grain), linear-gradient(175deg, var(--iv-paper), color-mix(in srgb, var(--hk-kraft) 60%, #fff));
+  border-radius: 3px; box-shadow: 0 14px 22px -18px rgb(60 40 25 / 0.55), inset 0 0 0 1px color-mix(in srgb, var(--c1) 14%, #fff);
+}
+.theme-hoa-kho .hk-family.l { transform: rotate(-2deg); }
+.theme-hoa-kho .hk-family.r { transform: rotate(2.2deg); margin-top: 28px; }
+.theme-hoa-kho .hk-family::before { content: ""; position: absolute; left: 50%; top: -22px; width: 1.4px; height: 32px; background: var(--hk-twine); }
+.theme-hoa-kho .hk-family::after { content: ""; position: absolute; left: 50%; top: 8px; width: 8px; height: 8px; margin-left: -3.3px; border-radius: 50%; background: var(--iv-cream); box-shadow: inset 0 0 0 1.4px var(--hk-twine); }
+.theme-hoa-kho .hk-family h2 { font-family: var(--iv-display), Georgia, serif; font-weight: 400; font-size: 13.5px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--hk-accent); margin-bottom: 10px; }
+.theme-hoa-kho .hk-family h2 .iv-en { letter-spacing: 0.05em; }
+.theme-hoa-kho .hk-parents { white-space: pre-line; font-size: 13.5px; font-weight: 500; line-height: 1.7; }
+.theme-hoa-kho .hk-addr { margin-top: 8px; font-size: 12px; color: var(--iv-muted); }
+
+/* ── couple: round photo in a macramé hoop ── */
+.theme-hoa-kho .hk-couple { padding: 30px 24px 52px; overflow: hidden; }
+.theme-hoa-kho .hk-hoop { position: relative; width: 74%; aspect-ratio: 200 / 230; margin: 18px auto 0; }
+.theme-hoa-kho .hk-hoop-photo { position: absolute; left: 9%; right: 9%; top: 15.6%; aspect-ratio: 1; border-radius: 50%; background: var(--hk-kraft); }
+.theme-hoa-kho .hk-hoop-photo img, .theme-hoa-kho .hk-hoop-photo .iv-ph { border-radius: 50%; }
+.theme-hoa-kho .hk-hoop-ring { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.theme-hoa-kho .hk-hoop-spray { position: absolute; width: 66%; right: -24%; bottom: -2%; transform: scaleX(-1) rotate(-6deg); pointer-events: none; }
+.theme-hoa-kho .hk-pair { display: grid; gap: 0; margin-top: 30px; }
+.theme-hoa-kho .hk-person { display: grid; }
+.theme-hoa-kho .hk-person.a { justify-items: start; text-align: left; padding-left: 4%; }
+.theme-hoa-kho .hk-person.b { justify-items: end; text-align: right; padding-right: 4%; }
+.theme-hoa-kho .hk-person em { font-family: var(--iv-thin), cursive; font-style: normal; font-size: 24px; color: var(--hk-leaf); line-height: 1.1; }
+.theme-hoa-kho .hk-person p { font-family: var(--iv-script), cursive; font-size: clamp(32px, 9.4vw, 40px); color: var(--hk-accent); line-height: 1.15; }
+.theme-hoa-kho .hk-pair > i { font-family: var(--iv-display), Georgia, serif; font-style: normal; font-size: 22px; color: var(--hk-twine); margin: 4px 0; }
+.theme-hoa-kho .hk-pair .iv-person-title { color: var(--iv-muted); opacity: 1; font-size: 10.5px; }
+
+/* ── invitation: a linen note held by tape ── */
+.theme-hoa-kho .hk-invite { padding: 44px 22px 50px; }
+.theme-hoa-kho .hk-note {
+  position: relative; padding: 38px 20px 34px; transform: rotate(-0.8deg);
+  background: var(--hk-weave), var(--iv-paper); border-radius: 2px;
+  box-shadow: 0 22px 34px -26px rgb(60 40 25 / 0.55), 0 0 0 1px color-mix(in srgb, var(--c1) 10%, #eee6da);
+}
+.theme-hoa-kho .hk-note::before, .theme-hoa-kho .hk-note::after {
+  content: ""; position: absolute; top: -11px; width: 86px; height: 24px;
+  background: color-mix(in srgb, var(--c1) 30%, rgb(243 234 220 / 0.7)); opacity: 0.85;
+  clip-path: polygon(0 8%, 6% 0, 12% 10%, 18% 0, 82% 0, 88% 10%, 94% 0, 100% 8%, 100% 92%, 94% 100%, 88% 90%, 82% 100%, 18% 100%, 12% 90%, 6% 100%, 0 92%);
+}
+.theme-hoa-kho .hk-note::before { left: -14px; transform: rotate(-32deg); }
+.theme-hoa-kho .hk-note::after { right: -14px; transform: rotate(28deg); background: color-mix(in srgb, var(--c2) 34%, rgb(243 234 220 / 0.7)); }
+.theme-hoa-kho .hk-inv-heading { font-family: var(--iv-display), Georgia, serif; text-transform: uppercase; letter-spacing: 0.2em; font-size: 13px; color: var(--hk-accent); }
+.theme-hoa-kho .hk-guest { margin: 12px 0 12px; }
+.theme-hoa-kho .hk-guest p { font-family: var(--iv-script), cursive; font-size: clamp(38px, 11.5vw, 52px); line-height: 1.2; color: var(--hk-accent); overflow-wrap: anywhere; }
+.theme-hoa-kho .hk-scribble { display: block; width: 200px; max-width: 80%; height: auto; margin: -6px auto 0; }
+.theme-hoa-kho .hk-inv-line { font-family: var(--iv-display), Georgia, serif; text-transform: uppercase; letter-spacing: 0.12em; font-size: 12.5px; line-height: 1.85; color: var(--iv-ink); max-width: 300px; margin: 0 auto; }
+.theme-hoa-kho .hk-trio { display: grid; grid-template-columns: 1fr 1.18fr 1fr; gap: 10px; align-items: end; margin-top: 34px; }
+.theme-hoa-kho .hk-trio .iv-photo { aspect-ratio: 3 / 4.3; border-radius: 999px 999px 4px 4px; box-shadow: 0 0 0 4px var(--iv-paper), 0 0 0 5px var(--hk-line), 0 14px 20px -14px rgb(60 40 25 / 0.5); }
+.theme-hoa-kho .hk-trio .iv-photo:nth-child(2) { aspect-ratio: 3 / 4.8; }
+.theme-hoa-kho .hk-trio .iv-photo::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 50%, color-mix(in srgb, var(--hk-deep) 70%, transparent)); pointer-events: none; }
+.theme-hoa-kho .hk-trio .iv-photo b { position: absolute; z-index: 1; left: 0; right: 0; bottom: 10px; font-family: var(--iv-display), Georgia, serif; font-weight: 400; font-size: clamp(20px, 6.2vw, 27px); color: #fff; text-shadow: 0 2px 10px rgb(0 0 0 / 0.3); }
+.theme-hoa-kho .hk-trio .iv-ph i { font-size: 22px; }
+.theme-hoa-kho .hk-quote { position: relative; margin: 34px auto 0; max-width: 340px; }
+.theme-hoa-kho .hk-quote-sprig { display: block; width: 120px; height: auto; margin: 0 auto 6px; }
+.theme-hoa-kho .hk-quote p { font-family: var(--iv-thin), cursive; font-size: clamp(24px, 7vw, 29px); line-height: 1.3; color: var(--hk-leaf); }
+.theme-hoa-kho .hk-quote .iv-en { font-size: 0.6em; }
+
+/* ── events: kraft cards with stitched edges and a dried palm fan ── */
+.theme-hoa-kho .hk-events { display: grid; gap: 24px; padding: 50px 20px 44px; }
+.theme-hoa-kho .hk-events .hk-title { margin-bottom: 0; }
+.theme-hoa-kho .hk-event {
+  position: relative; overflow: hidden; padding: 34px 22px 26px; border-radius: 4px; text-align: left;
+  background: var(--hk-grain), linear-gradient(165deg, color-mix(in srgb, var(--hk-kraft) 55%, #fff), var(--hk-kraft));
+  box-shadow: 0 22px 36px -28px rgb(60 40 25 / 0.6);
+  outline: 1.4px dashed color-mix(in srgb, var(--c1) 45%, transparent); outline-offset: -9px;
+}
+.theme-hoa-kho .hk-event > :not(.hk-event-fan) { position: relative; z-index: 1; }
+.theme-hoa-kho .hk-event-fan { position: absolute; width: 140px; right: -34px; top: -26px; opacity: 0.9; transform: rotate(200deg); }
+.theme-hoa-kho .hk-event.alt .hk-event-fan { right: auto; left: auto; right: -30px; transform: rotate(160deg); }
+.theme-hoa-kho .hk-event h3 { font-family: var(--iv-display), Georgia, serif; font-weight: 400; text-transform: uppercase; letter-spacing: 0.16em; font-size: 16px; color: var(--hk-accent); padding-right: 70px; }
+.theme-hoa-kho .hk-event-date { display: flex; align-items: center; gap: 14px; margin-top: 14px; }
+.theme-hoa-kho .hk-event-date b { font-family: var(--iv-display), Georgia, serif; font-weight: 400; font-size: clamp(54px, 16vw, 66px); line-height: 0.9; color: var(--iv-ink); }
+.theme-hoa-kho .hk-event-date div { display: grid; gap: 4px; padding-left: 14px; border-left: 1px solid var(--hk-twine); }
+.theme-hoa-kho .hk-event-date span { font-family: var(--iv-sans), sans-serif; font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--iv-muted); }
+.theme-hoa-kho .hk-event-date span:first-child { color: var(--iv-ink); font-weight: 600; }
+.theme-hoa-kho .hk-event-date em { font-style: normal; color: var(--hk-accent); font-weight: 600; }
+.theme-hoa-kho .hk-event-lunar { font-family: var(--iv-serif), Georgia, serif; font-style: italic; font-size: 12.5px; color: var(--iv-muted); margin-top: 8px; }
+.theme-hoa-kho .hk-event .iv-event-sub { justify-content: flex-start; gap: 8px; margin-top: 12px; }
+.theme-hoa-kho .hk-event .iv-event-sub span { background: rgb(255 255 255 / 0.6); color: var(--iv-ink); border: 1px solid var(--hk-line); }
+.theme-hoa-kho .hk-event-venue { margin-top: 16px; font-family: var(--iv-serif), Georgia, serif; font-size: 18px; font-weight: 600; color: var(--hk-accent); line-height: 1.3; }
+.theme-hoa-kho .hk-event-address { font-size: 13px; color: var(--iv-muted); margin-top: 3px; }
+.theme-hoa-kho .hk-event .iv-event-map { border-radius: 3px; border: 4px solid var(--iv-paper); height: 180px; box-shadow: 0 6px 14px -10px rgb(0 0 0 / 0.4); }
+.theme-hoa-kho .hk-event-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+.theme-hoa-kho .hk-event-actions a {
+  text-decoration: none; font-size: 12px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+  padding: 9px 16px; border-radius: 999px; border: 1px solid var(--hk-deep); color: var(--hk-deep); background: rgb(255 255 255 / 0.55);
+}
+.theme-hoa-kho .hk-event-actions a:first-child { background: var(--hk-deep); color: #fff; }
+.theme-hoa-kho .hk-event-actions .iv-en { color: inherit; }
+
+/* ── calendar + countdown ── */
+.theme-hoa-kho .hk-when-sec { padding: 48px 24px 50px; }
+.theme-hoa-kho .iv-calendar { background: var(--hk-weave), var(--iv-paper); border: 0; border-radius: 3px; box-shadow: 0 18px 30px -24px rgb(60 40 25 / 0.55), 0 0 0 1px var(--hk-line); }
+.theme-hoa-kho .iv-cal-head { display: none; }
+.theme-hoa-kho .iv-cal-grid { padding: 16px 12px 18px; }
+.theme-hoa-kho .iv-cal-grid span { font-family: var(--iv-serif), Georgia, serif; font-size: 15px; color: var(--iv-ink); }
+.theme-hoa-kho .iv-cal-grid .dow { font-family: var(--iv-sans), sans-serif; font-size: 10.5px; letter-spacing: 0.1em; color: var(--hk-leaf); border-bottom: 1px dashed var(--hk-line); margin-bottom: 4px; }
+.theme-hoa-kho .iv-cal-grid .on svg { display: none; }
+.theme-hoa-kho .iv-cal-grid .on::before {
+  content: ""; position: absolute; inset: -1px; border: 1.6px solid var(--c1); border-radius: 52% 46% 55% 44% / 48% 56% 44% 52%; transform: rotate(-8deg);
+  background: color-mix(in srgb, var(--c1) 16%, transparent);
+}
+.theme-hoa-kho .iv-cal-grid .on b { color: var(--hk-deep); font-family: var(--iv-serif), Georgia, serif; font-size: 16px; margin: 0; }
+.theme-hoa-kho .iv-countdown { gap: 8px; margin-top: 26px; }
+.theme-hoa-kho .iv-countdown div {
+  position: relative; padding: 22px 0 12px; border-radius: 3px;
+  background: var(--hk-grain), linear-gradient(175deg, color-mix(in srgb, var(--hk-kraft) 60%, #fff), var(--hk-kraft));
+  color: var(--hk-accent); box-shadow: 0 10px 18px -14px rgb(60 40 25 / 0.55);
+  clip-path: polygon(20% 0, 80% 0, 100% 14%, 100% 100%, 0 100%, 0 14%);
+}
+.theme-hoa-kho .iv-countdown div::before { content: ""; position: absolute; top: 7px; left: 50%; width: 7px; height: 7px; margin-left: -3.5px; border-radius: 50%; background: var(--iv-cream); box-shadow: inset 0 0 0 1.2px var(--hk-twine); }
+.theme-hoa-kho .iv-countdown div:nth-child(odd) { transform: rotate(-2deg); }
+.theme-hoa-kho .iv-countdown div:nth-child(even) { transform: rotate(2deg) translateY(4px); }
+.theme-hoa-kho .iv-countdown b { font-family: var(--iv-display), Georgia, serif; font-weight: 400; font-size: clamp(22px, 6.4vw, 28px); }
+.theme-hoa-kho .iv-countdown span { font-size: 9.5px; letter-spacing: 0.16em; color: var(--iv-muted); }
+.theme-hoa-kho .iv-countdown .iv-en { display: none; }
+
+/* ── album: taped prints ── */
+.theme-hoa-kho .hk-album { padding: 48px 18px 46px; }
+.theme-hoa-kho .iv-gallery { gap: 14px 12px; }
+.theme-hoa-kho .iv-g { position: relative; }
+.theme-hoa-kho .iv-g .iv-photo { border-radius: 2px; border: 5px solid #fff; box-shadow: 0 12px 22px -16px rgb(60 40 25 / 0.6); }
+.theme-hoa-kho .iv-g:nth-child(4n + 2) .iv-photo { transform: rotate(1.4deg); }
+.theme-hoa-kho .iv-g:nth-child(4n + 3) .iv-photo { transform: rotate(-1.2deg); }
+.theme-hoa-kho .iv-g::after {
+  content: ""; position: absolute; z-index: 1; top: -8px; left: 50%; width: 54px; height: 16px; margin-left: -27px; transform: rotate(-4deg);
+  background: color-mix(in srgb, var(--c1) 26%, rgb(243 234 220 / 0.75)); opacity: 0.85;
+}
+.theme-hoa-kho .iv-g:nth-child(even)::after { transform: rotate(5deg); background: color-mix(in srgb, var(--c2) 30%, rgb(243 234 220 / 0.75)); }
+
+/* ── mid-page macramé before the shared blocks ── */
+.theme-hoa-kho .hk-mid-macrame { margin: 6px auto -10px; }
+
+/* ── gift ── */
+.theme-hoa-kho .hk-gift { padding: 48px 24px 52px; }
+.theme-hoa-kho .hk-gift .hk-title { margin-bottom: 6px; }
+.theme-hoa-kho .hk-gift-sub { color: var(--iv-muted); font-size: 14px; margin: 0 0 20px; }
+.theme-hoa-kho .iv-gift-btn { background: var(--hk-deep); color: #fff; font-family: var(--iv-sans), sans-serif; font-weight: 600; font-size: 12.5px; letter-spacing: 0.16em; padding: 12px 26px; box-shadow: 0 0 0 4px var(--iv-cream), 0 0 0 5px var(--hk-twine), 0 12px 22px -12px rgb(40 25 15 / 0.6); }
+.theme-hoa-kho .iv-bank { background: var(--hk-weave), var(--iv-paper); border: 0; border-radius: 3px; box-shadow: 0 14px 24px -20px rgb(60 40 25 / 0.55), 0 0 0 1px var(--hk-line); }
+.theme-hoa-kho .iv-bank h4 { color: var(--hk-accent); font-family: var(--iv-display), Georgia, serif; font-weight: 400; }
+.theme-hoa-kho .iv-bank-acc { border: 1px dashed color-mix(in srgb, var(--c1) 55%, #fff); background: var(--hk-kraft); color: var(--iv-ink); }
+
+/* ── thank you ── */
+.theme-hoa-kho .hk-thanks { min-height: 560px; overflow: hidden; }
+.theme-hoa-kho .hk-thanks .iv-thanks-bg::after {
+  background: linear-gradient(180deg, var(--iv-cream) 0%, rgb(245 239 229 / 0) 30%, rgb(0 0 0 / 0) 46%, color-mix(in srgb, var(--hk-deep) 34%, rgb(30 22 15 / 0.74)) 100%);
+}
+.theme-hoa-kho .hk-thanks-hang { position: absolute; z-index: 1; right: 4%; top: 0; width: 46%; display: grid; justify-items: center; pointer-events: none; transform-origin: 50% 0; }
+.theme-hoa-kho .hk-thanks-string { width: 20px; height: 56px; }
+.theme-hoa-kho .hk-thanks-bunch { width: 100%; margin-top: -8%; transform: rotate(180deg); filter: drop-shadow(0 10px 12px rgb(40 25 15 / 0.18)); }
+.theme-hoa-kho .hk-thanks h2 { font-family: var(--iv-script), cursive; font-weight: 400; font-size: clamp(54px, 16vw, 68px); color: #fff; text-shadow: 0 2px 18px rgb(0 0 0 / 0.28); }
+.theme-hoa-kho .hk-thanks p { color: #fff; }
+
+/* ── shared sections in the wishes slot ── */
+.theme-hoa-kho .iv-block-title { font-family: var(--iv-script), cursive; font-weight: 400; text-transform: none; letter-spacing: 0; font-size: clamp(38px, 11vw, 46px); color: var(--hk-accent); }
+.theme-hoa-kho .iv-block-title .iv-en { font-size: 12px; letter-spacing: 0.1em; color: var(--iv-muted); }
+.theme-hoa-kho .iv-timeline::before { background: repeating-linear-gradient(180deg, var(--hk-twine) 0 4px, transparent 4px 8px); }
+.theme-hoa-kho .iv-timeline li::before { background: var(--c1); border-radius: 50% 40% 50% 40%; box-shadow: 0 0 0 3px var(--iv-cream); }
+.theme-hoa-kho .iv-timeline b { color: var(--hk-accent); font-weight: 400; font-family: var(--iv-display), Georgia, serif; }
+.theme-hoa-kho .iv-dress-note { color: var(--iv-muted); }
+.theme-hoa-kho .iv-dress-colors span { box-shadow: 0 0 0 3px var(--iv-paper), 0 0 0 4px var(--hk-twine), 0 8px 16px -8px rgb(0 0 0 / 0.35); }
+.theme-hoa-kho .iv-rsvp {
+  color: var(--iv-ink); padding-top: 54px; padding-bottom: 54px;
+  background: var(--hk-grain), linear-gradient(175deg, color-mix(in srgb, var(--hk-kraft) 45%, #fff), var(--hk-kraft));
+}
+.theme-hoa-kho .iv-rsvp .iv-script { color: var(--hk-accent); font-size: clamp(38px, 11vw, 46px); }
+.theme-hoa-kho .iv-rsvp-sub { color: var(--iv-muted); opacity: 1; }
+.theme-hoa-kho .iv-rsvp-block { background: var(--hk-weave), var(--iv-paper); }
+.theme-hoa-kho .iv-form input, .theme-hoa-kho .iv-form textarea, .theme-hoa-kho .iv-form select { background: #fff; border: 1px solid var(--hk-line); border-radius: 4px; color: var(--iv-ink); }
+.theme-hoa-kho .iv-form input:focus, .theme-hoa-kho .iv-form textarea:focus, .theme-hoa-kho .iv-form select:focus { outline: 2px solid color-mix(in srgb, var(--c1) 45%, transparent); outline-offset: 1px; }
+.theme-hoa-kho .iv-form button[type="submit"] { background: var(--hk-deep); color: #fff; border-radius: 999px; font-size: 12.5px; letter-spacing: 0.16em; }
+.theme-hoa-kho .iv-form-note { color: var(--iv-muted); opacity: 1; }
+.theme-hoa-kho .iv-form-err { color: color-mix(in srgb, var(--c1) 30%, #a3261e); }
+.theme-hoa-kho .iv-rsvp-open { background: var(--hk-deep); color: #fff; font-size: 12.5px; letter-spacing: 0.16em; box-shadow: 0 0 0 4px var(--iv-paper), 0 0 0 5px var(--hk-twine), 0 12px 22px -12px rgb(40 25 15 / 0.6); }
+.theme-hoa-kho .iv-rsvp-choices button { border-color: var(--hk-line); border-radius: 4px; }
+.theme-hoa-kho .iv-rsvp-choices button.on { background: var(--hk-deep); border-color: var(--hk-deep); color: #fff; }
+.theme-hoa-kho .iv-rsvp-done { background: var(--iv-paper); border: 1px dashed var(--hk-twine); color: var(--iv-ink); }
+.theme-hoa-kho .iv-rsvp-done button { color: var(--hk-deep); border-color: var(--hk-deep); }
+.theme-hoa-kho .iv-wishes figure { background: var(--iv-paper); border-left: 2px solid var(--c2); border-radius: 2px; box-shadow: 0 8px 18px -16px rgb(60 40 25 / 0.55); }
+.theme-hoa-kho .iv-wishes figcaption { color: var(--hk-accent); }
+.theme-hoa-kho .iv-modal { background: rgb(40 30 20 / 0.55); }
+.theme-hoa-kho .iv-modal-card { background: var(--hk-weave), var(--iv-paper); border-radius: 4px; box-shadow: inset 0 0 0 1px var(--hk-line); }
+.theme-hoa-kho .iv-modal-card h3 { color: var(--hk-accent); font-weight: 400; font-family: var(--iv-display), Georgia, serif; }
+
+/* placeholders, footer, intro, music, petals */
+.theme-hoa-kho .iv-ph {
+  background:
+    radial-gradient(circle at 30% 25%, rgb(255 255 255 / 0.6), transparent 55%),
+    linear-gradient(150deg, color-mix(in srgb, var(--c1) 14%, #f1e9dc), color-mix(in srgb, var(--c2) 22%, #e6dccb));
+}
+.theme-hoa-kho .iv-ph i { font-family: var(--iv-script), cursive; color: color-mix(in srgb, var(--c1) 60%, transparent); }
+.theme-hoa-kho .iv-foot { background: var(--hk-kraft); color: var(--iv-muted); border-top: 1px dashed var(--hk-twine); }
+.theme-hoa-kho .iv-foot a { color: var(--hk-accent); }
+.theme-hoa-kho .iv-intro {
+  background:
+    radial-gradient(55% 40% at 10% 8%, color-mix(in srgb, var(--c1) 22%, transparent), transparent 70%),
+    radial-gradient(55% 40% at 92% 92%, color-mix(in srgb, var(--c2) 24%, transparent), transparent 70%),
+    var(--hk-grain), #ece3d5;
+}
+.theme-hoa-kho .iv-intro-card {
+  position: relative; overflow: visible; border-radius: 3px;
+  background: var(--hk-weave), var(--iv-paper);
+  box-shadow: 0 30px 60px -30px rgb(60 40 25 / 0.5), inset 0 0 0 1px var(--hk-line), inset 0 0 0 10px var(--iv-paper);
+  outline: 1.2px dashed color-mix(in srgb, var(--c1) 40%, transparent); outline-offset: -12px;
+}
+.theme-hoa-kho .iv-intro-card::before, .theme-hoa-kho .iv-intro-card::after {
+  content: ""; position: absolute; top: -10px; width: 90px; height: 24px; opacity: 0.85;
+  background: color-mix(in srgb, var(--c1) 30%, rgb(243 234 220 / 0.75));
+}
+.theme-hoa-kho .iv-intro-card::before { left: -16px; transform: rotate(-30deg); }
+.theme-hoa-kho .iv-intro-card::after { right: -16px; transform: rotate(30deg); background: color-mix(in srgb, var(--c2) 34%, rgb(243 234 220 / 0.75)); }
+.theme-hoa-kho .iv-intro .iv-script { color: var(--hk-accent); }
+.theme-hoa-kho .iv-intro-heart { fill: var(--c1); opacity: 0.8; }
+.theme-hoa-kho .iv-intro-kicker { color: var(--iv-muted); }
+.theme-hoa-kho .iv-intro-date { color: var(--iv-ink); }
+.theme-hoa-kho .iv-intro-guest b { color: var(--hk-accent); }
+.theme-hoa-kho .iv-intro button { background: var(--hk-deep); color: #fff; font-size: 12.5px; letter-spacing: 0.2em; box-shadow: 0 0 0 4px var(--iv-paper), 0 0 0 5px var(--hk-twine), 0 12px 26px -12px rgb(40 25 15 / 0.6); }
+.theme-hoa-kho .iv-music { background: var(--iv-paper); box-shadow: 0 6px 16px -6px rgb(0 0 0 / 0.3), inset 0 0 0 1.5px var(--hk-twine); }
+.theme-hoa-kho .iv-music svg { stroke: var(--hk-accent); }
+.theme-hoa-kho .iv-music:not(.on)::after { background: var(--hk-accent); }
+/* falling bits of pampas fluff and dried petals */
+.theme-hoa-kho .iv-petals span { background: radial-gradient(circle at 40% 40%, #fbf6ee, color-mix(in srgb, var(--c1) 12%, #e7dccb)); border-radius: 50%; opacity: 0.75; filter: blur(0.3px); }
+.theme-hoa-kho .iv-petals span.h1 { background: linear-gradient(135deg, color-mix(in srgb, var(--c1) 40%, #f3e8da), var(--c1)); border-radius: 150% 0 150% 0; opacity: 0.6; }
+.theme-hoa-kho .iv-petals span.h2 { background: linear-gradient(135deg, color-mix(in srgb, var(--c2) 30%, #fff), var(--c2)); border-radius: 150% 0 150% 0; opacity: 0.55; transform: scale(0.7); }
+
+/* a breath of wind through the dried grasses */
+@media (prefers-reduced-motion: no-preference) {
+  .theme-hoa-kho .hk-hero-bunch { animation: hk-sway 10s ease-in-out infinite; }
+  .theme-hoa-kho .hk-hero-spray { animation: hk-sway-b 12s ease-in-out infinite; transform-origin: 6% 96%; }
+  .theme-hoa-kho .hk-hang { animation: hk-swing 7s ease-in-out infinite; }
+  .theme-hoa-kho .hk-thanks-hang { animation: hk-swing-c 9s ease-in-out infinite; }
+}
+@keyframes hk-sway { 0%, 100% { transform: rotate(8deg); } 50% { transform: rotate(6deg); } }
+@keyframes hk-sway-b { 0%, 100% { transform: rotate(0deg); } 50% { transform: rotate(-2.5deg); } }
+@keyframes hk-swing-c { 0%, 100% { transform: rotate(-1.5deg); } 50% { transform: rotate(1.5deg); } }
+@keyframes hk-swing { 0%, 100% { transform: rotate(5deg); } 50% { transform: rotate(2deg); } }
+
+@media (max-width: 360px) {
+  .theme-hoa-kho .hk-families-grid { grid-template-columns: 1fr; gap: 6px; }
+  .theme-hoa-kho .hk-twine { display: none; }
+  .theme-hoa-kho .hk-family.r { margin-top: 18px; }
+  .theme-hoa-kho .hk-event { padding-left: 18px; padding-right: 18px; }
+}

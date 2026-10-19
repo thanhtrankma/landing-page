@@ -1,0 +1,315 @@
+/* ════════════════════ LIÊN HOA ════════════════════
+   A still lotus pond in watercolour: blooms and buds (--c1), lotus leaves (--c2), ripples, reflections and
+   ink-wash brush strokes. Every colour is --c1, --c2, a neutral, or a color-mix() of them, so the variants in
+   INVITE_THEMES recolour the whole card. Selectors are scoped .theme-lien-hoa … (two classes) so they beat the base. */
+
+.iv.theme-lien-hoa {
+  --c1: #d27a8c;
+  --c2: #5f8f6f;
+  --lh-deep: color-mix(in srgb, var(--c1) 68%, #2a2326);
+  --lh-leaf: color-mix(in srgb, var(--c2) 64%, #262826);
+  --lh-line: color-mix(in srgb, var(--c2) 26%, #fff);
+  --lh-mist: color-mix(in srgb, var(--c2) 8%, #fbfaf6);
+  --lh-blush: color-mix(in srgb, var(--c1) 7%, #fff);
+  --iv-red: var(--lh-deep);
+  --iv-red-dark: color-mix(in srgb, var(--c1) 55%, #231d1f);
+  --iv-gold: var(--c2);
+  --iv-gold-soft: color-mix(in srgb, var(--c2) 22%, #fff);
+  --iv-cream: #fbfaf6;
+  --iv-paper: #fff;
+  --iv-ink: color-mix(in srgb, var(--c2) 10%, #2c2e2d);
+  --iv-muted: color-mix(in srgb, var(--c2) 18%, #74716d);
+  --lh-paper: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.4 0 0 0 0 0.4 0 0 0 0 0.38 0 0 0 0.045 0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E");
+  color: var(--iv-ink);
+  background:
+    radial-gradient(70% 45% at 0% 0%, color-mix(in srgb, var(--c1) 14%, transparent), transparent 70%),
+    radial-gradient(70% 45% at 100% 100%, color-mix(in srgb, var(--c2) 18%, transparent), transparent 70%),
+    #eff0ec;
+}
+.theme-lien-hoa .iv-page { background: var(--lh-paper), var(--iv-cream); box-shadow: 0 0 60px rgb(30 40 35 / 0.14); }
+
+/* ── shared pieces ── */
+.theme-lien-hoa .lh-rule { display: block; width: 200px; height: 34px; margin: 0 auto; overflow: visible; }
+.theme-lien-hoa .lh-title { display: grid; justify-items: center; font-weight: 400; margin: 0 0 26px; }
+.theme-lien-hoa .lh-title-mark { width: 46px; height: 26px; color: color-mix(in srgb, var(--c1) 80%, #fff); margin-bottom: 4px; }
+.theme-lien-hoa .lh-title span { font-family: var(--iv-script), cursive; font-size: clamp(40px, 11.5vw, 50px); line-height: 1.12; color: var(--lh-deep); }
+.theme-lien-hoa .lh-title span .iv-en { font-size: 12px; letter-spacing: 0.12em; color: var(--iv-muted); }
+.theme-lien-hoa .lh-title small {
+  font-family: var(--iv-sans), sans-serif; font-size: 10.5px; font-weight: 500; letter-spacing: 0.38em; text-transform: uppercase; color: var(--lh-leaf);
+  margin-top: 6px; padding: 0 0 0 0.38em;
+}
+.theme-lien-hoa .lh-title small .iv-en { letter-spacing: 0.12em; }
+.theme-lien-hoa .iv-announce { font-family: var(--iv-serif), Georgia, serif; font-style: italic; font-size: 15px; line-height: 1.6; color: var(--iv-muted); max-width: 300px; margin: 0 auto 26px; }
+
+/* ── cover ── */
+.theme-lien-hoa .lh-hero {
+  position: relative; overflow: hidden; text-align: center; padding: 48px 24px 46px;
+  background:
+    radial-gradient(90% 34% at 50% 72%, color-mix(in srgb, var(--c2) 14%, transparent), transparent 72%),
+    radial-gradient(70% 30% at 50% 0%, #fff, transparent 80%);
+}
+.theme-lien-hoa .lh-hero-fly { position: absolute; top: 18px; right: 14px; width: 62px; height: 62px; opacity: 0.9; }
+.theme-lien-hoa .lh-kicker {
+  display: inline-flex; flex-direction: column; align-items: center;
+  font-family: var(--iv-sans), sans-serif; font-size: 10.5px; font-weight: 500; letter-spacing: 0.46em; text-transform: uppercase; color: var(--lh-leaf);
+  padding-left: 0.46em;
+}
+.theme-lien-hoa .lh-kicker .iv-en { letter-spacing: 0.14em; }
+.theme-lien-hoa .lh-names { display: grid; justify-items: center; margin: 14px 0 0; font-weight: 400; line-height: 1; }
+.theme-lien-hoa .lh-names span { font-family: var(--iv-script), cursive; font-size: clamp(46px, 14.5vw, 64px); color: var(--lh-deep); padding: 0 8px; line-height: 1.12; }
+.theme-lien-hoa .lh-names i { font-family: var(--iv-thin), cursive; font-style: normal; font-size: clamp(30px, 8.5vw, 38px); color: var(--lh-leaf); margin: -4px 0 -2px; }
+.theme-lien-hoa .lh-leaf { position: relative; width: 80%; aspect-ratio: 1; margin: 28px auto 22%; }
+.theme-lien-hoa .lh-leaf-ring { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.theme-lien-hoa .lh-leaf-photo { position: absolute; inset: 8%; border-radius: 50%; box-shadow: 0 0 0 4px var(--iv-cream), 0 20px 40px -24px rgb(30 40 35 / 0.6); }
+.theme-lien-hoa .lh-leaf-photo img, .theme-lien-hoa .lh-leaf-photo .iv-ph { border-radius: 50%; }
+.theme-lien-hoa .lh-leaf-pond { position: absolute; width: 142%; left: -21%; bottom: -27%; overflow: visible; pointer-events: none; }
+.theme-lien-hoa .lh-date { display: grid; justify-items: center; gap: 4px; }
+.theme-lien-hoa .lh-date > span:first-child {
+  font-family: var(--iv-sans), sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 0.3em; text-transform: uppercase; color: var(--iv-muted); padding-left: 0.3em;
+}
+.theme-lien-hoa .lh-date b {
+  font-family: var(--iv-display), Georgia, serif; font-weight: 400; font-size: clamp(32px, 10vw, 42px); letter-spacing: 0.06em; line-height: 1.2; color: var(--iv-ink);
+  padding: 6px 18px; background: linear-gradient(90deg, transparent, var(--lh-line), transparent) bottom / 100% 1px no-repeat, linear-gradient(90deg, transparent, var(--lh-line), transparent) top / 100% 1px no-repeat;
+}
+.theme-lien-hoa .lh-date b i { font-style: normal; color: var(--c1); margin: 0 8px; font-size: 0.7em; vertical-align: 0.12em; }
+.theme-lien-hoa .lh-date-lunar { font-family: var(--iv-serif), Georgia, serif; font-style: italic; font-size: 13px; color: var(--iv-muted); }
+
+/* ── families: two houses either side of a lotus stem ── */
+.theme-lien-hoa .lh-families { padding: 28px 22px 34px; }
+.theme-lien-hoa .lh-fam-grid { display: grid; grid-template-columns: 1fr 30px 1fr; gap: 10px; margin-top: 24px; align-items: start; }
+.theme-lien-hoa .lh-fam.l { grid-column: 1; grid-row: 1; }
+.theme-lien-hoa .lh-fam.r { grid-column: 3; grid-row: 1; }
+.theme-lien-hoa .lh-fam-stem { grid-column: 2; grid-row: 1; width: 30px; height: 100%; min-height: 120px; overflow: visible; }
+.theme-lien-hoa .lh-fam h2 { font-family: var(--iv-display), Georgia, serif; font-weight: 400; font-size: 13.5px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--lh-deep); margin-bottom: 10px; }
+.theme-lien-hoa .lh-fam h2 .iv-en { letter-spacing: 0.06em; }
+.theme-lien-hoa .lh-parents { white-space: pre-line; font-size: 14px; font-weight: 500; line-height: 1.75; }
+.theme-lien-hoa .lh-addr { margin-top: 8px; font-size: 12.5px; color: var(--iv-muted); }
+
+/* ── couple: arch photo mirrored in the pond ── */
+.theme-lien-hoa .lh-couple { padding: 44px 26px 56px; background: linear-gradient(180deg, transparent, var(--lh-mist) 40%, var(--lh-mist) 70%, transparent); }
+.theme-lien-hoa .lh-mirror { position: relative; width: 68%; margin: 0 auto; }
+.theme-lien-hoa .lh-mirror-photo { aspect-ratio: 3 / 4; border-radius: 999px 999px 0 0; background: #eef0ec; }
+.theme-lien-hoa .lh-reflect {
+  position: relative; aspect-ratio: 3 / 1.5; overflow: hidden;
+  -webkit-mask-image: linear-gradient(180deg, rgb(0 0 0 / 0.75), transparent 92%); mask-image: linear-gradient(180deg, rgb(0 0 0 / 0.75), transparent 92%);
+}
+.theme-lien-hoa .lh-reflect-photo { position: absolute; left: 0; right: 0; top: 0; aspect-ratio: 3 / 4; transform: scaleY(-1); filter: blur(1.2px) saturate(0.8); opacity: 0.6; }
+.theme-lien-hoa .lh-reflect::after { content: ""; position: absolute; inset: 0; background: color-mix(in srgb, var(--c2) 22%, transparent); mix-blend-mode: multiply; }
+.theme-lien-hoa .lh-reflect-lines { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; }
+.theme-lien-hoa .lh-mirror-pads { position: absolute; left: -18%; width: 136%; top: 0; margin-top: 122%; overflow: visible; pointer-events: none; }
+.theme-lien-hoa .lh-pair { display: grid; justify-items: center; gap: 6px; margin-top: 18px; }
+.theme-lien-hoa .lh-person { display: grid; justify-items: center; }
+.theme-lien-hoa .lh-person em { font-family: var(--iv-sans), sans-serif; font-style: normal; font-size: 10.5px; font-weight: 500; letter-spacing: 0.34em; text-transform: uppercase; color: var(--lh-leaf); padding-left: 0.34em; }
+.theme-lien-hoa .lh-person p { font-family: var(--iv-script), cursive; font-size: clamp(34px, 10vw, 42px); color: var(--lh-deep); line-height: 1.2; }
+.theme-lien-hoa .lh-person .iv-person-title { color: var(--iv-muted); opacity: 1; font-size: 10.5px; }
+.theme-lien-hoa .lh-pair-mark { width: 52px; height: 30px; color: color-mix(in srgb, var(--c1) 75%, #fff); margin: 4px 0; }
+
+/* ── invitation + guest ── */
+.theme-lien-hoa .lh-invite { padding: 54px 24px 56px; background: #fff; box-shadow: 0 1px 0 var(--lh-line), 0 -1px 0 var(--lh-line); }
+.theme-lien-hoa .lh-inv-heading { font-family: var(--iv-display), Georgia, serif; text-transform: uppercase; letter-spacing: 0.22em; font-size: 13px; color: var(--lh-leaf); }
+.theme-lien-hoa .lh-inv-line { font-family: var(--iv-display), Georgia, serif; text-transform: uppercase; letter-spacing: 0.14em; font-size: 12.5px; line-height: 1.85; color: var(--iv-ink); max-width: 320px; margin: 0 auto; }
+.theme-lien-hoa .lh-guest { margin: 14px 0 16px; }
+.theme-lien-hoa .lh-guest p { font-family: var(--iv-script), cursive; font-size: clamp(40px, 12vw, 54px); line-height: 1.2; color: var(--lh-deep); position: relative; z-index: 1; }
+.theme-lien-hoa .lh-brush { display: block; width: 230px; max-width: 80%; height: 20px; margin: -12px auto 0; }
+.theme-lien-hoa .lh-trio { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 34px; align-items: start; }
+.theme-lien-hoa .lh-drop { display: grid; justify-items: center; gap: 10px; }
+.theme-lien-hoa .lh-drop .iv-photo {
+  width: 86%; aspect-ratio: 1; border-radius: 50%;
+  box-shadow: 0 0 0 3px #fff, 0 0 0 4px color-mix(in srgb, var(--c2) 40%, #fff), 0 0 0 9px #fff, 0 0 0 10px color-mix(in srgb, var(--c2) 18%, #fff);
+}
+.theme-lien-hoa .lh-drop .iv-photo img, .theme-lien-hoa .lh-drop .iv-ph { border-radius: 50%; }
+.theme-lien-hoa .lh-drop.d1 { margin-top: 30px; }
+.theme-lien-hoa .lh-drop.d1 .iv-photo { box-shadow: 0 0 0 3px #fff, 0 0 0 4px color-mix(in srgb, var(--c1) 45%, #fff), 0 0 0 9px #fff, 0 0 0 10px color-mix(in srgb, var(--c1) 20%, #fff); }
+.theme-lien-hoa .lh-drop b { font-family: var(--iv-display), Georgia, serif; font-weight: 400; font-size: clamp(20px, 6vw, 26px); color: var(--lh-deep); letter-spacing: 0.04em; margin-top: 4px; }
+.theme-lien-hoa .lh-drop .iv-ph i { font-size: 22px; }
+.theme-lien-hoa .lh-quote {
+  font-family: var(--iv-thin), cursive; font-size: clamp(24px, 7vw, 29px); line-height: 1.32; color: var(--lh-leaf);
+  margin: 40px auto 0; max-width: 340px; padding: 22px 18px;
+  background:
+    radial-gradient(50% 50% at 50% 50%, color-mix(in srgb, var(--c2) 9%, transparent), transparent 80%);
+}
+.theme-lien-hoa .lh-quote .iv-en { font-size: 0.58em; }
+
+/* ── events ── */
+.theme-lien-hoa .lh-events { display: grid; gap: 30px; padding: 54px 22px 46px; }
+.theme-lien-hoa .lh-events .lh-title { margin-bottom: 10px; }
+.theme-lien-hoa .iv-event.lh-event {
+  position: relative; margin-top: 30px; padding: 46px 20px 26px; border-radius: 28px; color: var(--iv-ink);
+  background:
+    radial-gradient(80% 40% at 50% 0%, var(--lh-blush), transparent 70%),
+    radial-gradient(70% 30% at 50% 100%, color-mix(in srgb, var(--c2) 10%, transparent), transparent 75%),
+    #fff;
+  box-shadow: 0 24px 44px -32px rgb(30 40 35 / 0.5), inset 0 0 0 1px color-mix(in srgb, var(--c1) 18%, #fff);
+}
+.theme-lien-hoa .iv-event.lh-event::after { content: ""; position: absolute; inset: 7px; border-radius: 22px; border: 1px solid var(--lh-line); pointer-events: none; }
+.theme-lien-hoa .lh-event > :not(.lh-event-crown) { position: relative; z-index: 1; }
+.theme-lien-hoa .lh-event-crown { position: absolute; width: 156px; height: auto; left: 50%; top: -50px; transform: translateX(-50%); overflow: visible; }
+.theme-lien-hoa .lh-event h3 { font-family: var(--iv-display), Georgia, serif; font-weight: 400; text-transform: uppercase; letter-spacing: 0.18em; font-size: 16px; color: var(--lh-deep); }
+.theme-lien-hoa .lh-event-when { display: flex; justify-content: center; align-items: center; gap: 10px; margin-top: 10px; font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--iv-muted); }
+.theme-lien-hoa .lh-event-when b { color: var(--iv-ink); font-weight: 600; }
+.theme-lien-hoa .lh-event-when i { width: 5px; height: 5px; border-radius: 50%; background: var(--c1); opacity: 0.7; }
+.theme-lien-hoa .lh-event-date { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 12px; margin: 14px 0 6px; }
+.theme-lien-hoa .lh-event-date span {
+  font-family: var(--iv-sans), sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--iv-ink);
+  padding: 8px 0; border-top: 1px solid var(--lh-line); border-bottom: 1px solid var(--lh-line);
+}
+.theme-lien-hoa .lh-event-date span .iv-en { display: none; }
+.theme-lien-hoa .lh-event-date b { font-family: var(--iv-display), Georgia, serif; font-weight: 400; font-size: clamp(44px, 13vw, 56px); line-height: 1; color: var(--lh-deep); }
+.theme-lien-hoa .lh-event .iv-event-lunar { font-family: var(--iv-serif), Georgia, serif; font-size: 12.5px; color: var(--iv-muted); opacity: 1; }
+.theme-lien-hoa .lh-event .iv-event-sub span { background: var(--lh-mist); color: var(--iv-ink); }
+.theme-lien-hoa .lh-event .iv-event-venue { margin-top: 18px; font-family: var(--iv-display), Georgia, serif; font-weight: 400; letter-spacing: 0.08em; font-size: 15.5px; color: var(--lh-leaf); }
+.theme-lien-hoa .lh-event .iv-event-address { font-size: 13px; color: var(--iv-muted); opacity: 1; }
+.theme-lien-hoa .lh-event .iv-event-map { border-radius: 16px; border: 1px solid var(--lh-line); height: 180px; }
+.theme-lien-hoa .lh-event .iv-event-actions a {
+  font-size: 11.5px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
+  padding: 10px 18px; border-radius: 999px; border: 1px solid var(--lh-deep); color: var(--lh-deep); background: #fff;
+}
+.theme-lien-hoa .lh-event .iv-event-actions a:first-child { background: var(--lh-deep); color: #fff; }
+.theme-lien-hoa .lh-event .iv-event-actions a:hover { background: var(--lh-blush); color: var(--lh-deep); }
+.theme-lien-hoa .lh-event .iv-event-actions .iv-en { display: inline; margin: 0 0 0 4px; font-size: 0.9em; }
+
+/* ── calendar + countdown ── */
+.theme-lien-hoa .lh-when { position: relative; padding: 52px 24px; overflow: hidden; background: var(--lh-mist); }
+.theme-lien-hoa .lh-when-fly { position: absolute; width: 56px; height: 56px; left: 18px; top: 26px; opacity: 0.85; }
+.theme-lien-hoa .iv-calendar { background: #fff; border: 1px solid var(--lh-line); border-radius: 22px; box-shadow: 0 18px 36px -30px rgb(30 40 35 / 0.5); }
+.theme-lien-hoa .iv-cal-head { display: none; }
+.theme-lien-hoa .iv-cal-grid { padding: 16px 12px 18px; }
+.theme-lien-hoa .iv-cal-grid span { font-family: var(--iv-serif), Georgia, serif; font-size: 15px; color: var(--iv-ink); }
+.theme-lien-hoa .iv-cal-grid .dow { font-family: var(--iv-sans), sans-serif; font-size: 10.5px; letter-spacing: 0.1em; color: var(--lh-leaf); }
+.theme-lien-hoa .iv-cal-grid .on svg { display: none; }
+.theme-lien-hoa .iv-cal-grid .on::before {
+  content: ""; position: absolute; inset: 3px; border-radius: 50%;
+  background: radial-gradient(circle at 40% 35%, color-mix(in srgb, var(--c1) 70%, #fff), var(--lh-deep));
+  box-shadow: 0 0 0 3px #fff, 0 0 0 4px color-mix(in srgb, var(--c2) 45%, #fff);
+}
+.theme-lien-hoa .iv-cal-grid .on::after { content: ""; position: absolute; inset: 3px; border-radius: 50%; border: 1px solid color-mix(in srgb, var(--c2) 60%, #fff); opacity: 0; }
+.theme-lien-hoa .iv-cal-grid .on b { color: #fff; font-family: var(--iv-sans), sans-serif; margin-top: 0; }
+.theme-lien-hoa .iv-countdown { gap: 12px; margin-top: 24px; }
+.theme-lien-hoa .iv-countdown div {
+  aspect-ratio: 1; display: grid; place-content: center; padding: 0; border-radius: 50%; color: var(--lh-deep);
+  background: radial-gradient(circle at 38% 32%, #fff, color-mix(in srgb, var(--c2) 10%, #fff));
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--c2) 40%, #fff), inset 0 0 0 4px rgb(255 255 255 / 0.8), inset 0 0 0 5px color-mix(in srgb, var(--c2) 18%, #fff);
+}
+.theme-lien-hoa .iv-countdown b { font-family: var(--iv-display), Georgia, serif; font-weight: 400; font-size: clamp(20px, 6vw, 26px); }
+.theme-lien-hoa .iv-countdown span { font-size: 9.5px; letter-spacing: 0.14em; color: var(--iv-muted); }
+.theme-lien-hoa .iv-countdown .iv-en { display: none; }
+
+/* ── album ── */
+.theme-lien-hoa .lh-album { padding: 54px 18px 46px; }
+.theme-lien-hoa .iv-gallery { gap: 10px; }
+.theme-lien-hoa .iv-g .iv-photo { border-radius: 18px; box-shadow: 0 0 0 4px #fff, 0 14px 26px -18px rgb(30 40 35 / 0.6); }
+.theme-lien-hoa .iv-g.wide .iv-photo { border-radius: 120px 120px 18px 18px; }
+
+/* ── gift ── */
+.theme-lien-hoa .lh-gift { padding: 54px 26px; background: linear-gradient(180deg, transparent, var(--lh-blush)); }
+.theme-lien-hoa .lh-gift .lh-title { margin-bottom: 8px; }
+.theme-lien-hoa .lh-gift-sub { color: var(--iv-muted); font-size: 14px; margin: 0 0 22px; }
+.theme-lien-hoa .iv-gift-btn { background: var(--lh-deep); color: #fff; font-family: var(--iv-sans), sans-serif; font-weight: 600; font-size: 12.5px; letter-spacing: 0.16em; text-transform: uppercase; padding: 13px 28px; border-radius: 999px; box-shadow: 0 14px 26px -14px color-mix(in srgb, var(--lh-deep) 80%, transparent); }
+.theme-lien-hoa .iv-bank { background: #fff; border: 1px solid var(--lh-line); border-radius: 20px; }
+.theme-lien-hoa .iv-bank h4 { color: var(--lh-deep); font-family: var(--iv-display), Georgia, serif; font-weight: 400; }
+.theme-lien-hoa .iv-bank-acc { border-color: color-mix(in srgb, var(--c2) 50%, #fff); background: var(--lh-mist); border-radius: 12px; }
+
+/* ── thank you: photo sinking into the pond ── */
+.theme-lien-hoa .lh-thanks { min-height: 620px; overflow: hidden; }
+.theme-lien-hoa .lh-thanks .iv-thanks-bg::after {
+  background: linear-gradient(180deg, var(--iv-cream) 0%, rgb(251 250 246 / 0) 20%, rgb(0 0 0 / 0.05) 32%, color-mix(in srgb, var(--c2) 30%, rgb(20 26 24 / 0.6)) 58%, color-mix(in srgb, var(--c2) 35%, rgb(20 26 24 / 0.82)) 100%);
+}
+.theme-lien-hoa .lh-thanks .iv-thanks-body { padding: 150px 30px 200px; z-index: 1; }
+.theme-lien-hoa .lh-thanks-mark { width: 58px; height: 34px; color: #fff; opacity: 0.9; }
+.theme-lien-hoa .lh-thanks h2 { font-family: var(--iv-script), cursive; font-weight: 400; font-size: clamp(54px, 16vw, 68px); color: #fff; text-shadow: 0 2px 18px rgb(0 0 0 / 0.25); line-height: 1.1; }
+.theme-lien-hoa .lh-thanks p { color: #fff; text-shadow: 0 1px 8px rgb(0 0 0 / 0.3); }
+.theme-lien-hoa .lh-thanks-pond { position: absolute; z-index: 1; left: -8%; width: 116%; bottom: -30px; pointer-events: none; }
+
+/* ── shared sections in the wishes slot ── */
+.theme-lien-hoa .iv-block-title { font-family: var(--iv-script), cursive; font-weight: 400; text-transform: none; letter-spacing: 0; font-size: clamp(38px, 11vw, 46px); line-height: 1.15; color: var(--lh-deep); }
+.theme-lien-hoa .iv-block-title .iv-en { font-size: 12px; letter-spacing: 0.12em; color: var(--iv-muted); }
+.theme-lien-hoa .iv-schedule { padding-top: 50px; padding-bottom: 46px; }
+.theme-lien-hoa .iv-timeline::before { background: linear-gradient(transparent, color-mix(in srgb, var(--c2) 55%, #fff) 12%, color-mix(in srgb, var(--c2) 55%, #fff) 88%, transparent); }
+.theme-lien-hoa .iv-timeline li::before { background: var(--c1); box-shadow: 0 0 0 3px var(--iv-cream), 0 0 0 4px color-mix(in srgb, var(--c2) 40%, #fff); }
+.theme-lien-hoa .iv-timeline b { color: var(--lh-deep); font-family: var(--iv-display), Georgia, serif; font-weight: 400; font-size: 16px; }
+.theme-lien-hoa .iv-timeline span { color: var(--iv-ink); }
+.theme-lien-hoa .iv-dress { background: var(--lh-mist); }
+.theme-lien-hoa .iv-dress-note { color: var(--iv-muted); }
+.theme-lien-hoa .iv-dress-colors span { box-shadow: 0 0 0 3px #fff, 0 0 0 4px color-mix(in srgb, var(--c2) 30%, #fff), 0 8px 16px -8px rgb(0 0 0 / 0.35); }
+.theme-lien-hoa .iv-rsvp {
+  color: var(--iv-ink); padding-top: 56px; padding-bottom: 56px;
+  background:
+    radial-gradient(60% 30% at 0% 0%, color-mix(in srgb, var(--c1) 12%, transparent), transparent 70%),
+    radial-gradient(70% 30% at 100% 100%, color-mix(in srgb, var(--c2) 16%, transparent), transparent 70%),
+    #fff;
+}
+.theme-lien-hoa .iv-rsvp .iv-script { color: var(--lh-deep); font-size: clamp(36px, 10.5vw, 44px); }
+.theme-lien-hoa .iv-rsvp-sub { color: var(--iv-muted); opacity: 1; }
+.theme-lien-hoa .iv-rsvp-block { background: #fff; }
+.theme-lien-hoa .iv-rsvp-block .iv-rsvp-sub { color: var(--iv-muted); }
+.theme-lien-hoa .iv-form input, .theme-lien-hoa .iv-form textarea, .theme-lien-hoa .iv-form select {
+  background: #fff; border: 1px solid color-mix(in srgb, var(--c2) 32%, #fff); border-radius: 14px; color: var(--iv-ink);
+}
+.theme-lien-hoa .iv-form input:focus, .theme-lien-hoa .iv-form textarea:focus, .theme-lien-hoa .iv-form select:focus { outline: 2px solid color-mix(in srgb, var(--c1) 45%, transparent); outline-offset: 1px; }
+.theme-lien-hoa .iv-form button[type="submit"] { background: var(--lh-deep); color: #fff; border-radius: 999px; font-size: 12.5px; letter-spacing: 0.16em; }
+.theme-lien-hoa .iv-field { color: var(--iv-ink); }
+.theme-lien-hoa .iv-form-note { color: var(--iv-muted); opacity: 1; }
+.theme-lien-hoa .iv-form-err { color: color-mix(in srgb, var(--c1) 25%, #b3261e); }
+.theme-lien-hoa .iv-rsvp-open { background: var(--lh-deep); color: #fff; font-size: 12.5px; letter-spacing: 0.16em; padding: 14px 34px; box-shadow: 0 14px 26px -14px color-mix(in srgb, var(--lh-deep) 80%, transparent); }
+.theme-lien-hoa .iv-rsvp-choices button { border-color: color-mix(in srgb, var(--c2) 40%, #fff); border-radius: 14px; }
+.theme-lien-hoa .iv-rsvp-choices button.on { background: var(--lh-deep); border-color: var(--lh-deep); color: #fff; }
+.theme-lien-hoa .iv-rsvp-done { background: #fff; border: 1px solid color-mix(in srgb, var(--c2) 40%, #fff); color: var(--iv-ink); border-radius: 18px; }
+.theme-lien-hoa .iv-rsvp-done button { color: var(--lh-deep); border-color: var(--lh-deep); }
+.theme-lien-hoa .iv-wishes figure { background: #fff; border-left: 2px solid var(--c1); border-radius: 12px; box-shadow: 0 8px 20px -18px rgb(30 40 35 / 0.5); }
+.theme-lien-hoa .iv-wishes figcaption { color: var(--lh-deep); }
+.theme-lien-hoa .iv-modal { background: color-mix(in srgb, var(--c2) 22%, rgb(15 20 18 / 0.6)); }
+.theme-lien-hoa .iv-modal-card { background: var(--iv-cream); border-radius: 22px; box-shadow: inset 0 0 0 1px var(--lh-line); }
+.theme-lien-hoa .iv-modal-card h3 { color: var(--lh-deep); font-weight: 400; font-family: var(--iv-display), Georgia, serif; }
+
+/* placeholders, footer, intro, music, petals */
+.theme-lien-hoa .iv-ph {
+  background:
+    radial-gradient(circle at 30% 25%, rgb(255 255 255 / 0.75), transparent 55%),
+    linear-gradient(150deg, color-mix(in srgb, var(--c1) 12%, #fff), color-mix(in srgb, var(--c2) 24%, #fff));
+}
+.theme-lien-hoa .iv-ph i { font-family: var(--iv-script), cursive; color: color-mix(in srgb, var(--c1) 60%, transparent); }
+.theme-lien-hoa .iv-foot { background: var(--lh-mist); color: var(--iv-muted); border-top: 1px solid var(--lh-line); }
+.theme-lien-hoa .iv-foot a { color: var(--lh-deep); }
+.theme-lien-hoa .iv-intro {
+  background:
+    radial-gradient(60% 40% at 15% 10%, color-mix(in srgb, var(--c1) 24%, transparent), transparent 70%),
+    radial-gradient(60% 40% at 88% 92%, color-mix(in srgb, var(--c2) 28%, transparent), transparent 70%),
+    var(--lh-paper), #f3f3ef;
+}
+.theme-lien-hoa .iv-intro-card {
+  background: radial-gradient(90% 50% at 50% 100%, color-mix(in srgb, var(--c2) 10%, transparent), transparent 70%), #fff;
+  border-radius: 200px 200px 24px 24px;
+  box-shadow: 0 30px 70px -34px rgb(30 40 35 / 0.45), inset 0 0 0 1px color-mix(in srgb, var(--c2) 30%, #fff), inset 0 0 0 8px #fff, inset 0 0 0 9px color-mix(in srgb, var(--c1) 30%, #fff);
+  padding-top: 52px;
+}
+.theme-lien-hoa .iv-intro-kicker { color: var(--lh-leaf); }
+.theme-lien-hoa .iv-intro .iv-script { color: var(--lh-deep); }
+.theme-lien-hoa .iv-intro-heart { fill: var(--c1); opacity: 0.85; }
+.theme-lien-hoa .iv-intro-date { color: var(--iv-ink); font-family: var(--iv-display), Georgia, serif; }
+.theme-lien-hoa .iv-intro-guest { color: var(--iv-muted); }
+.theme-lien-hoa .iv-intro-guest b { color: var(--lh-deep); }
+.theme-lien-hoa .iv-intro button { background: var(--lh-deep); color: #fff; font-size: 12.5px; letter-spacing: 0.2em; box-shadow: 0 12px 26px -12px color-mix(in srgb, var(--lh-deep) 80%, transparent); }
+.theme-lien-hoa .iv-music { background: #fff; box-shadow: 0 6px 16px -6px rgb(0 0 0 / 0.3), inset 0 0 0 1.5px color-mix(in srgb, var(--c1) 50%, #fff); }
+.theme-lien-hoa .iv-music svg { stroke: var(--lh-deep); }
+.theme-lien-hoa .iv-music:not(.on)::after { background: var(--lh-deep); }
+.theme-lien-hoa .iv-petals span { background: linear-gradient(160deg, #fff, color-mix(in srgb, var(--c1) 60%, #fff)); border-radius: 50% 50% 50% 50% / 80% 80% 20% 20%; opacity: 0.75; }
+.theme-lien-hoa .iv-petals span.h1 { background: linear-gradient(160deg, #fff, var(--c1)); }
+.theme-lien-hoa .iv-petals span.h2 { background: linear-gradient(135deg, color-mix(in srgb, var(--c2) 30%, #fff), color-mix(in srgb, var(--c2) 70%, #fff)); border-radius: 50%; opacity: 0.5; }
+
+/* gentle motion: the dragonfly hovers, the pond breathes, the date on the calendar sends out a ripple */
+@media (prefers-reduced-motion: no-preference) {
+  .theme-lien-hoa .lh-hero-fly { animation: lh-hover 7s ease-in-out infinite; }
+  .theme-lien-hoa .lh-when-fly { animation: lh-hover 9s ease-in-out infinite reverse; }
+  .theme-lien-hoa .lh-leaf-pond { animation: lh-bob 8s ease-in-out infinite; }
+  .theme-lien-hoa .iv-cal-grid .on::after { animation: lh-ripple 2.8s ease-out infinite; }
+}
+@keyframes lh-hover { 0%, 100% { transform: translate(0, 0) rotate(0deg); } 30% { transform: translate(-6px, 4px) rotate(-4deg); } 60% { transform: translate(3px, -3px) rotate(3deg); } }
+@keyframes lh-bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
+@keyframes lh-ripple { 0% { opacity: 0.9; transform: scale(1); } 100% { opacity: 0; transform: scale(1.7); } }
+
+@media (max-width: 360px) {
+  .theme-lien-hoa .lh-fam-grid { grid-template-columns: 1fr; gap: 22px; }
+  .theme-lien-hoa .lh-fam.l, .theme-lien-hoa .lh-fam.r { grid-column: 1; grid-row: auto; }
+  .theme-lien-hoa .lh-fam-stem { display: none; }
+  .theme-lien-hoa .lh-trio { gap: 10px; }
+}

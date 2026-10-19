@@ -52,7 +52,7 @@ export type ScheduleItem = { time: string; label: string };
 /** English versions of the couple's own texts, shown under the Vietnamese when the card is bilingual. */
 export type EnglishTexts = { inviteHeading: string; inviteLine: string; announcement: string; quote: string; thanks: string; groomFamily: string; brideFamily: string };
 
-export type InviteTheme = "song-hy" | "phong-bi-hong" | "toi-gian" | "dong-noi" | "vang-do" | "do-do" | "long-phung" | "hoang-kim" | "baroque" | "mau-nuoc" | "co-phuc";
+export type InviteTheme = "song-hy" | "phong-bi-hong" | "toi-gian" | "dong-noi" | "vang-do" | "do-do" | "long-phung" | "hoang-kim" | "baroque" | "mau-nuoc" | "co-phuc" | "song-hac" | "to-duyen" | "vuon-kinh" | "ren-theu" | "lau-dai" | "chibi" | "lien-hoa" | "bach-su" | "hoa-kho" | "anh-dao";
 
 export type InviteData = {
   theme: InviteTheme;
@@ -217,6 +217,96 @@ export const INVITE_THEMES: ThemeDef[] = [
       { id: "xanh", name: "Xanh ngọc", c1: "#2f4a3a", c2: "#8a2121" },
       { id: "lam", name: "Xanh lam", c1: "#22385e", c2: "#b8863a" },
       { id: "nau", name: "Nâu", c1: "#5a3a24", c2: "#8a2121" },
+    ],
+  },
+  {
+    id: "song-hac", name: "Song Hạc", note: "Đôi hạc bay giữa mây, viền hoa văn cổ", style: "Cổ điển", colors: ["#8a1c1c", "#c9a24a", "#ffffff"],
+    variants: [
+      { id: "do", name: "Đỏ", c1: "#8a1c1c", c2: "#c9a24a" },
+      { id: "xanh", name: "Xanh ngọc", c1: "#1f4a4a", c2: "#c9a24a" },
+      { id: "lam", name: "Xanh lam", c1: "#1e3360", c2: "#c9a24a" },
+      { id: "nau", name: "Nâu", c1: "#5a3a26", c2: "#c9a24a" },
+    ],
+  },
+  {
+    id: "to-duyen", name: "Tơ Duyên", note: "Nền lụa mềm, hoa rum thanh lịch", style: "Lụa", colors: ["#2f5d50", "#c9a96e", "#ffffff"],
+    variants: [
+      { id: "xanh", name: "Xanh", c1: "#2f5d50", c2: "#c9a96e" },
+      { id: "do", name: "Đỏ đậm", c1: "#7a1f2a", c2: "#d9b48a" },
+      { id: "hong", name: "Hồng", c1: "#b8657a", c2: "#e0c49c" },
+      { id: "lam", name: "Lam", c1: "#3b5a80", c2: "#d8c3a5" },
+    ],
+  },
+  {
+    id: "vuon-kinh", name: "Vườn Kính", note: "Nhà kính, cây xanh và hoa trong khung vòm sắt", style: "Vườn", colors: ["#c27a8a", "#7e9a78", "#ffffff"],
+    variants: [
+      { id: "hong", name: "Hồng", c1: "#c27a8a", c2: "#7e9a78" },
+      { id: "dao", name: "Đào", c1: "#d4876a", c2: "#6f9478" },
+      { id: "lam", name: "Lam", c1: "#6b8fb3", c2: "#7e9a78" },
+      { id: "tim", name: "Tím", c1: "#9a7ab0", c2: "#7e9a78" },
+    ],
+  },
+  {
+    id: "ren-theu", name: "Ren Thêu", note: "Ren thêu trắng trên nền lụa đậm", style: "Ren thêu", colors: ["#1c1c1c", "#f3eee6", "#ffffff"],
+    variants: [
+      { id: "den", name: "Lụa đen", c1: "#1c1c1c", c2: "#f3eee6" },
+      { id: "do", name: "Đỏ rượu", c1: "#5a1620", c2: "#f3eee6" },
+      { id: "xanh", name: "Xanh rêu", c1: "#1e3a33", c2: "#f3eee6" },
+      { id: "navy", name: "Navy", c1: "#1b2440", c2: "#f3eee6" },
+    ],
+  },
+  {
+    id: "lau-dai", name: "Lâu Đài", note: "Lâu đài châu Âu, cổng vòm và cờ hiệu", style: "Châu Âu", colors: ["#2e4a6b", "#c9a24a", "#ffffff"],
+    variants: [
+      { id: "xanh", name: "Xanh", c1: "#2e4a6b", c2: "#c9a24a" },
+      { id: "lam", name: "Lam đậm", c1: "#1f3b5c", c2: "#d8b46a" },
+      { id: "hong", name: "Hồng", c1: "#9a5b6b", c2: "#d8b46a" },
+      { id: "tim", name: "Tím", c1: "#4a3a6b", c2: "#d8b46a" },
+    ],
+  },
+  {
+    id: "chibi", name: "Chibi", note: "Cô dâu chú rể hoạt hình đáng yêu", style: "Dễ thương", colors: ["#d9474a", "#ffd36b", "#ffffff"],
+    variants: [
+      { id: "do", name: "Đỏ", c1: "#d9474a", c2: "#ffd36b" },
+      { id: "hong", name: "Hồng", c1: "#e2708a", c2: "#ffd36b" },
+      { id: "xanh", name: "Xanh lá", c1: "#3f9a7a", c2: "#ffcf70" },
+      { id: "lam", name: "Xanh lam", c1: "#4a7fd0", c2: "#ffcf70" },
+    ],
+  },
+  {
+    id: "lien-hoa", name: "Liên Hoa", note: "Sen màu nước, lá sen và mặt hồ", style: "Hoa sen", colors: ["#d27a8c", "#5f8f6f", "#ffffff"],
+    variants: [
+      { id: "hong", name: "Hồng", c1: "#d27a8c", c2: "#5f8f6f" },
+      { id: "trang", name: "Sen trắng", c1: "#a8949a", c2: "#5f8f6f" },
+      { id: "lam", name: "Lam", c1: "#5d82a8", c2: "#5f8f6f" },
+      { id: "tim", name: "Tím", c1: "#8a6fa8", c2: "#6f8f6a" },
+    ],
+  },
+  {
+    id: "bach-su", name: "Bạch Sứ", note: "Hoa văn gốm sứ trắng, viền men vẽ tay", style: "Gốm sứ", colors: ["#1f4e9a", "#c9a24a", "#ffffff"],
+    variants: [
+      { id: "lam", name: "Trắng lam", c1: "#1f4e9a", c2: "#c9a24a" },
+      { id: "do", name: "Trắng đỏ", c1: "#a8262b", c2: "#c9a24a" },
+      { id: "xanh", name: "Xanh ngọc", c1: "#2f6b5a", c2: "#c9a24a" },
+      { id: "nau", name: "Nâu kem", c1: "#7a5230", c2: "#c9a24a" },
+    ],
+  },
+  {
+    id: "hoa-kho", name: "Hoa Khô", note: "Hoa khô, cỏ lau, phong cách boho", style: "Boho", colors: ["#c07a4e", "#8a8f6a", "#ffffff"],
+    variants: [
+      { id: "cam", name: "Cam đất", c1: "#c07a4e", c2: "#8a8f6a" },
+      { id: "lam", name: "Lam", c1: "#6a88a0", c2: "#c9a07a" },
+      { id: "hong", name: "Hồng đất", c1: "#b97a7a", c2: "#8f9a78" },
+      { id: "nau", name: "Nâu", c1: "#8a6a4a", c2: "#b8a07a" },
+    ],
+  },
+  {
+    id: "anh-dao", name: "Anh Đào", note: "Cành anh đào nở, cánh hoa bay", style: "Lãng mạn", colors: ["#d98a9e", "#5a4a4a", "#ffffff"],
+    variants: [
+      { id: "hong", name: "Hồng", c1: "#d98a9e", c2: "#5a4a4a" },
+      { id: "do", name: "Đỏ", c1: "#b8404f", c2: "#3d3535" },
+      { id: "tim", name: "Tím", c1: "#9a7ab8", c2: "#4a4a5a" },
+      { id: "xanh", name: "Xanh", c1: "#6fa08f", c2: "#5a4a4a" },
     ],
   },
 ];

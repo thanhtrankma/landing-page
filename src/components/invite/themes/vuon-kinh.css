@@ -1,0 +1,380 @@
+/* ════════════════════ VƯỜN KÍNH ════════════════════
+   A Victorian glass greenhouse: arched wrought-iron windows, a Wardian case, climbing vines, potted ferns and
+   blooms in soft daylight. Colours are only --c1 (blooms, accents), --c2 (foliage), neutrals and color-mix()es,
+   so the variants in INVITE_THEMES recolour everything. Selectors are scoped .theme-vuon-kinh … (two classes)
+   because this file loads before invitation.css. */
+
+.iv.theme-vuon-kinh {
+  --c1: #c27a8a;
+  --c2: #7e9a78;
+  --vk-iron: color-mix(in srgb, var(--c1) 20%, #34312d);
+  --vk-accent: color-mix(in srgb, var(--c1) 70%, #2a2522);
+  --vk-deep: color-mix(in srgb, var(--c1) 52%, #24201d);
+  --vk-leaf: color-mix(in srgb, var(--c2) 62%, #2a2a24);
+  --vk-line: color-mix(in srgb, var(--c1) 26%, #fff);
+  --vk-glass: color-mix(in srgb, var(--c2) 9%, #fff);
+  --vk-pot: color-mix(in srgb, var(--c1) 30%, #cbbfb3);
+  --vk-pot-rim: color-mix(in srgb, var(--c1) 36%, #a89b8f);
+  --vk-stone: #f1ece4;
+  --vk-stone-dark: #ddd5ca;
+  --vk-tape: color-mix(in srgb, var(--c2) 26%, #f3eee5);
+  --vk-cream: #faf7f1;
+  --iv-red: var(--vk-accent);
+  --iv-red-dark: var(--vk-deep);
+  --iv-gold: var(--c2);
+  --iv-gold-soft: color-mix(in srgb, var(--c2) 22%, #fff);
+  --iv-cream: var(--vk-cream);
+  --iv-paper: #fff;
+  --iv-ink: color-mix(in srgb, var(--c1) 12%, #2d2a27);
+  --iv-muted: color-mix(in srgb, var(--c1) 14%, #77716b);
+  color: var(--iv-ink);
+  background:
+    radial-gradient(60% 40% at 0% 0%, color-mix(in srgb, var(--c2) 20%, transparent), transparent 70%),
+    radial-gradient(50% 40% at 100% 100%, color-mix(in srgb, var(--c1) 16%, transparent), transparent 70%),
+    #eeebe5;
+}
+/* the page is the greenhouse glass: a faint glazing grid in daylight */
+.theme-vuon-kinh .iv-page {
+  background:
+    radial-gradient(90% 26% at 50% 0%, #fff, transparent 80%),
+    linear-gradient(90deg, color-mix(in srgb, var(--c2) 8%, transparent) 1px, transparent 1px) 50% 0 / 92px 100%,
+    linear-gradient(180deg, color-mix(in srgb, var(--c2) 6%, transparent) 1px, transparent 1px) 0 0 / 100% 138px,
+    var(--vk-cream);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--c2) 14%, transparent), 0 0 70px rgb(40 36 30 / 0.14);
+}
+
+/* ── shared bits ── */
+.theme-vuon-kinh .vk-crest { display: block; height: auto; overflow: visible; }
+.theme-vuon-kinh .vk-sprig { display: block; width: 170px; height: auto; margin: 0 auto; overflow: visible; }
+.theme-vuon-kinh .vk-title { display: inline-grid; justify-items: center; position: relative; font-weight: 400; margin: 0 auto 24px; padding: 16px 26px 14px; min-width: 200px; max-width: 100%;
+  background: rgb(255 255 255 / 0.85);
+  box-shadow: inset 0 0 0 1px var(--vk-iron), inset 0 0 0 4px #fff, inset 0 0 0 5px var(--vk-line), 0 12px 26px -22px rgb(40 35 30 / 0.6);
+}
+.theme-vuon-kinh .vk-title::before, .theme-vuon-kinh .vk-title::after {
+  content: ""; position: absolute; top: 50%; width: 22px; height: 1px; background: var(--vk-iron);
+}
+.theme-vuon-kinh .vk-title::before { right: 100%; }
+.theme-vuon-kinh .vk-title::after { left: 100%; }
+.theme-vuon-kinh .vk-title small {
+  position: absolute; top: -9px; left: 50%; translate: -50% 0; padding: 0 8px; background: var(--vk-cream);
+  font-family: var(--iv-serif), Georgia, serif; font-style: italic; font-size: 12px; line-height: 18px; letter-spacing: 0.06em; color: var(--vk-leaf); white-space: nowrap;
+}
+.theme-vuon-kinh .vk-title span { font-family: var(--iv-display), Georgia, serif; font-size: clamp(17px, 5vw, 20px); letter-spacing: 0.18em; text-transform: uppercase; line-height: 1.3; color: var(--vk-accent); }
+.theme-vuon-kinh .vk-title span .iv-en { font-size: 11.5px; letter-spacing: 0.08em; color: var(--iv-muted); }
+.theme-vuon-kinh .vk-title em { font-family: var(--iv-thin), cursive; font-style: normal; font-size: 24px; line-height: 1.1; color: var(--vk-leaf); margin-top: 2px; }
+
+/* ── hero: crest, arched greenhouse window, names, botanical plate ── */
+.theme-vuon-kinh .vk-hero { position: relative; overflow: hidden; text-align: center; padding: 30px 22px 50px; }
+.theme-vuon-kinh .vk-sun {
+  position: absolute; left: 50%; top: -120px; width: 520px; height: 420px; translate: -50% 0; pointer-events: none;
+  background: radial-gradient(closest-side, rgb(255 255 255 / 0.95), color-mix(in srgb, var(--c2) 10%, transparent) 60%, transparent);
+}
+.theme-vuon-kinh .vk-hero > :not(.vk-sun) { position: relative; z-index: 1; }
+.theme-vuon-kinh .vk-crest-top { width: 74%; margin: 0 auto; }
+.theme-vuon-kinh .vk-kicker {
+  display: flex; flex-direction: column; align-items: center; margin-top: 12px;
+  font-family: var(--iv-sans), sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 0.42em; text-transform: uppercase; color: var(--iv-muted);
+}
+.theme-vuon-kinh .vk-kicker .iv-en { letter-spacing: 0.16em; }
+.theme-vuon-kinh .vk-window { position: relative; width: 84%; aspect-ratio: 300 / 470; margin: 20px auto 0; }
+.theme-vuon-kinh .vk-window-photo {
+  position: absolute; left: 6.667%; right: 6.667%; top: 12.766%; bottom: 6.383%;
+  border-radius: 50% 50% 0 0 / 34.21% 34.21% 0 0; background: var(--vk-glass);
+}
+.theme-vuon-kinh .vk-window-photo img, .theme-vuon-kinh .vk-window-photo .iv-ph { border-radius: inherit; }
+.theme-vuon-kinh .vk-window-art { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; filter: drop-shadow(0 16px 18px rgb(40 35 30 / 0.18)); }
+.theme-vuon-kinh .vk-names { display: grid; justify-items: center; margin: 30px 0 0; font-weight: 400; line-height: 1; }
+.theme-vuon-kinh .vk-names span { font-family: var(--iv-script), cursive; font-size: clamp(48px, 14vw, 64px); color: var(--vk-accent); padding: 0 8px; line-height: 1.12; }
+.theme-vuon-kinh .vk-names i { font-family: var(--iv-thin), cursive; font-style: normal; font-size: clamp(30px, 9vw, 38px); color: var(--vk-leaf); margin: -4px 0 -6px; }
+.theme-vuon-kinh .vk-plate {
+  display: inline-grid; justify-items: center; gap: 2px; margin-top: 26px; padding: 18px 34px 18px; min-width: 250px; position: relative;
+  background:
+    radial-gradient(circle at 9px 9px, var(--vk-iron) 1.8px, transparent 2.4px),
+    radial-gradient(circle at calc(100% - 9px) 9px, var(--vk-iron) 1.8px, transparent 2.4px),
+    radial-gradient(circle at 9px calc(100% - 9px), var(--vk-iron) 1.8px, transparent 2.4px),
+    radial-gradient(circle at calc(100% - 9px) calc(100% - 9px), var(--vk-iron) 1.8px, transparent 2.4px),
+    #fff;
+  box-shadow: inset 0 0 0 1px var(--vk-iron), inset 0 0 0 16px #fff, inset 0 0 0 17px var(--vk-line), 0 18px 34px -26px rgb(40 35 30 / 0.6);
+}
+.theme-vuon-kinh .vk-plate small { font-family: var(--iv-sans), sans-serif; font-size: 10.5px; font-weight: 500; letter-spacing: 0.34em; text-transform: uppercase; color: var(--iv-muted); }
+.theme-vuon-kinh .vk-plate small .iv-en { letter-spacing: 0.12em; }
+.theme-vuon-kinh .vk-plate-date { font-family: var(--iv-display), Georgia, serif; font-size: clamp(30px, 9vw, 38px); line-height: 1.2; letter-spacing: 0.04em; color: var(--iv-ink); }
+.theme-vuon-kinh .vk-plate-date i { font-style: normal; color: var(--c1); margin: 0 6px; }
+.theme-vuon-kinh .vk-plate-when { font-family: var(--iv-sans), sans-serif; font-size: 12px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--vk-accent); }
+.theme-vuon-kinh .vk-plate-lunar { font-family: var(--iv-serif), Georgia, serif; font-style: italic; font-size: 12.5px; color: var(--iv-muted); margin-top: 2px; }
+
+/* ── families: two plant tags hanging on strings ── */
+.theme-vuon-kinh .vk-families { padding: 30px 22px 40px; }
+.theme-vuon-kinh .vk-tags { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 34px; align-items: start; }
+.theme-vuon-kinh .vk-tag {
+  position: relative; padding: 34px 12px 20px; background: #fff; border-radius: 14px 14px 4px 4px;
+  box-shadow: inset 0 0 0 1px var(--vk-line), inset 0 0 0 5px #fff, inset 0 0 0 6px color-mix(in srgb, var(--c2) 26%, #fff), 0 16px 28px -22px rgb(40 35 30 / 0.55);
+  transform-origin: 50% -24px;
+}
+.theme-vuon-kinh .vk-tag.a { rotate: -1.6deg; }
+.theme-vuon-kinh .vk-tag.b { rotate: 1.6deg; }
+.theme-vuon-kinh .vk-tag::before {
+  content: ""; position: absolute; left: 50%; top: 11px; width: 10px; height: 10px; margin-left: -5px; border-radius: 50%;
+  background: var(--vk-cream); box-shadow: inset 0 0 0 1.5px var(--vk-iron);
+}
+.theme-vuon-kinh .vk-tag::after { content: ""; position: absolute; left: 50%; top: -24px; width: 1px; height: 40px; background: var(--vk-iron); opacity: 0.7; }
+.theme-vuon-kinh .vk-tag h2 { font-family: var(--iv-display), Georgia, serif; font-weight: 400; font-size: 13.5px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--vk-accent); margin-bottom: 10px; }
+.theme-vuon-kinh .vk-tag h2 .iv-en { letter-spacing: 0.06em; color: var(--iv-muted); }
+.theme-vuon-kinh .vk-parents { white-space: pre-line; font-size: 14px; font-weight: 500; line-height: 1.7; }
+.theme-vuon-kinh .vk-addr { margin-top: 8px; font-size: 12.5px; color: var(--iv-muted); }
+
+/* ── couple: Wardian case portrait ── */
+.theme-vuon-kinh .vk-couple { padding: 44px 24px 56px; overflow: hidden; }
+.theme-vuon-kinh .vk-announce { font-family: var(--iv-serif), Georgia, serif; font-style: italic; font-size: 15px; color: var(--iv-muted); max-width: 310px; margin: 0 auto 4px; }
+.theme-vuon-kinh .vk-case { position: relative; width: 80%; aspect-ratio: 300 / 384; margin: 26px auto 0; }
+.theme-vuon-kinh .vk-case-photo {
+  position: absolute; left: 10%; right: 10%; top: 16.667%; bottom: 10.417%;
+  clip-path: polygon(0 25%, 50% 0, 100% 25%, 100% 100%, 0 100%); background: var(--vk-glass);
+}
+.theme-vuon-kinh .vk-case-art { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; filter: drop-shadow(0 14px 16px rgb(40 35 30 / 0.16)); }
+.theme-vuon-kinh .vk-pair { display: grid; justify-items: center; gap: 4px; margin-top: 34px; }
+.theme-vuon-kinh .vk-person { display: grid; justify-items: center; }
+.theme-vuon-kinh .vk-person em { font-family: var(--iv-sans), sans-serif; font-style: normal; font-size: 10.5px; font-weight: 600; letter-spacing: 0.32em; text-transform: uppercase; color: var(--vk-leaf); }
+.theme-vuon-kinh .vk-person p { font-family: var(--iv-script), cursive; font-size: clamp(34px, 10vw, 42px); color: var(--vk-accent); line-height: 1.2; }
+.theme-vuon-kinh .vk-pair > i { font-family: var(--iv-thin), cursive; font-style: normal; font-size: 34px; line-height: 1; color: var(--c1); margin: 2px 0; }
+.theme-vuon-kinh .vk-pair .iv-person-title { color: var(--iv-muted); opacity: 1; font-size: 10.5px; }
+
+/* ── invitation + guest + three date windows ── */
+.theme-vuon-kinh .vk-invite { background: rgb(255 255 255 / 0.88); padding: 40px 22px 52px; box-shadow: 0 1px 0 var(--vk-line), 0 -1px 0 var(--vk-line); }
+.theme-vuon-kinh .vk-crest-sec { width: 56%; margin: 0 auto 22px; }
+.theme-vuon-kinh .vk-inv-heading { font-family: var(--iv-display), Georgia, serif; text-transform: uppercase; letter-spacing: 0.2em; font-size: 13.5px; color: var(--vk-accent); }
+.theme-vuon-kinh .vk-inv-line { font-family: var(--iv-display), Georgia, serif; text-transform: uppercase; letter-spacing: 0.13em; font-size: 12.5px; line-height: 1.8; color: var(--iv-ink); max-width: 320px; margin: 0 auto; }
+.theme-vuon-kinh .vk-guest { margin: 10px 0 14px; }
+.theme-vuon-kinh .vk-guest p { font-family: var(--iv-script), cursive; font-size: clamp(40px, 12vw, 54px); line-height: 1.2; color: var(--vk-accent); }
+.theme-vuon-kinh .vk-guest .vk-sprig { width: 180px; margin-top: 2px; }
+.theme-vuon-kinh .vk-trio { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 30px; }
+.theme-vuon-kinh .vk-trio figure { margin: 0; display: grid; justify-items: center; }
+.theme-vuon-kinh .vk-mini { position: relative; width: 100%; aspect-ratio: 2 / 3; }
+.theme-vuon-kinh .vk-mini .iv-photo { position: absolute; inset: 0; border-radius: 50% 50% 0 0 / 33.33% 33.33% 0 0; background: var(--vk-glass); }
+.theme-vuon-kinh .vk-mini .iv-photo img, .theme-vuon-kinh .vk-mini .iv-ph { border-radius: inherit; }
+.theme-vuon-kinh .vk-mini .iv-ph i { font-size: 22px; }
+.theme-vuon-kinh .vk-mini-art { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.theme-vuon-kinh .vk-trio figcaption {
+  margin-top: 10px; min-width: 64%; padding: 3px 8px; background: #fff;
+  font-family: var(--iv-display), Georgia, serif; font-size: clamp(17px, 5vw, 21px); line-height: 1.3; color: var(--iv-ink);
+  box-shadow: inset 0 0 0 1px var(--vk-iron), inset 0 0 0 3px #fff, inset 0 0 0 4px var(--vk-line);
+}
+.theme-vuon-kinh .vk-quote { font-family: var(--iv-thin), cursive; font-size: clamp(24px, 7vw, 28px); line-height: 1.3; color: var(--vk-leaf); margin: 32px auto 0; max-width: 340px; }
+.theme-vuon-kinh .vk-quote .iv-en { font-size: 0.6em; }
+
+/* ── events: herbarium sheets taped to the glass ── */
+.theme-vuon-kinh .vk-events { display: grid; gap: 34px; padding: 50px 20px 46px; }
+.theme-vuon-kinh .vk-events .vk-title { justify-self: center; margin-bottom: 0; }
+.theme-vuon-kinh .vk-event {
+  position: relative; padding: 30px 22px 26px; border-radius: 2px;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--c2) 7%, transparent), transparent 40%),
+    #fffefb;
+  box-shadow: 0 0 0 1px rgb(40 35 30 / 0.06), 0 24px 40px -30px rgb(40 35 30 / 0.55);
+}
+.theme-vuon-kinh .vk-event.alt { rotate: 0.6deg; }
+.theme-vuon-kinh .vk-event:not(.alt) { rotate: -0.5deg; }
+.theme-vuon-kinh .vk-event > :not(.vk-tape, .vk-event-fern) { position: relative; z-index: 1; }
+.theme-vuon-kinh .vk-tape { position: absolute; z-index: 2; top: -10px; width: 70px; height: 22px; background: var(--vk-tape); opacity: 0.85; box-shadow: 0 1px 2px rgb(0 0 0 / 0.06); }
+.theme-vuon-kinh .vk-tape.a { left: 10px; rotate: -9deg; }
+.theme-vuon-kinh .vk-tape.b { right: 10px; rotate: 8deg; }
+.theme-vuon-kinh .vk-event-fern { position: absolute; z-index: 0; left: 6px; bottom: 10px; width: 58px; height: auto; opacity: 0.4; rotate: -8deg; }
+.theme-vuon-kinh .vk-event-fan { display: block; width: 92px; height: auto; margin: 0 auto 12px; }
+.theme-vuon-kinh .vk-event h3 { font-family: var(--iv-display), Georgia, serif; font-weight: 400; text-transform: uppercase; letter-spacing: 0.16em; font-size: 17px; color: var(--vk-accent); padding: 0 10px; }
+.theme-vuon-kinh .vk-event-when { display: flex; justify-content: center; gap: 8px; margin-top: 8px; font-size: 12.5px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--iv-muted); }
+.theme-vuon-kinh .vk-event-when b { color: var(--iv-ink); font-weight: 600; }
+.theme-vuon-kinh .vk-event-date { font-family: var(--iv-serif), Georgia, serif; font-weight: 400; font-size: clamp(32px, 10vw, 40px); letter-spacing: 0.03em; line-height: 1.25; color: var(--iv-ink); }
+.theme-vuon-kinh .vk-event-date i { font-style: normal; color: var(--c1); margin: 0 4px; font-weight: 300; }
+.theme-vuon-kinh .vk-event-lunar { font-family: var(--iv-serif), Georgia, serif; font-style: italic; font-size: 12.5px; color: var(--iv-muted); }
+.theme-vuon-kinh .vk-event .iv-event-sub span { background: var(--vk-glass); color: var(--iv-ink); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--c2) 30%, #fff); }
+.theme-vuon-kinh .vk-event-place {
+  margin: 18px auto 0; max-width: 300px; padding: 16px 14px 12px; position: relative; background: #fff;
+  box-shadow: inset 0 0 0 1px var(--vk-iron), inset 0 0 0 3px #fff, inset 0 0 0 4px var(--vk-line);
+}
+.theme-vuon-kinh .vk-event-place small {
+  position: absolute; top: -8px; left: 50%; translate: -50% 0; padding: 0 8px; background: #fffefb; white-space: nowrap;
+  font-size: 10px; font-weight: 600; letter-spacing: 0.3em; text-transform: uppercase; line-height: 16px; color: var(--vk-leaf);
+}
+.theme-vuon-kinh .vk-event-place small .iv-en { display: none; }
+.theme-vuon-kinh .vk-event-venue { font-family: var(--iv-display), Georgia, serif; text-transform: uppercase; letter-spacing: 0.08em; font-size: 15px; line-height: 1.4; color: var(--vk-accent); }
+.theme-vuon-kinh .vk-event-address { font-size: 13px; color: var(--iv-muted); margin-top: 3px; }
+.theme-vuon-kinh .vk-event .iv-event-map { border-radius: 2px; border: 1px solid var(--vk-line); height: 180px; }
+.theme-vuon-kinh .vk-event-actions { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+.theme-vuon-kinh .vk-event-actions a {
+  text-decoration: none; font-size: 12px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+  padding: 9px 18px; border-radius: 999px; border: 1px solid var(--vk-deep); color: var(--vk-deep); background: #fff;
+}
+.theme-vuon-kinh .vk-event-actions a:first-child { background: var(--vk-deep); color: #fff; }
+.theme-vuon-kinh .vk-event-actions .iv-en { display: inline; margin: 0 0 0 6px; font-size: 0.85em; opacity: 0.8; }
+
+/* ── calendar in an arched pane + countdown windows ── */
+.theme-vuon-kinh .vk-when { padding: 50px 24px; }
+.theme-vuon-kinh .vk-when .vk-cal { max-width: 340px; margin: 0 auto; }
+.theme-vuon-kinh .iv-calendar {
+  border: 0; border-radius: 170px 170px 4px 4px; overflow: hidden;
+  background: linear-gradient(160deg, rgb(255 255 255 / 0.95), var(--vk-glass));
+  box-shadow: inset 0 0 0 3px var(--vk-iron), inset 0 0 0 7px #fff, inset 0 0 0 8px var(--vk-line), 0 20px 36px -28px rgb(40 35 30 / 0.6);
+}
+.theme-vuon-kinh .iv-cal-head {
+  background: none; color: var(--vk-accent); padding: 64px 12px 6px;
+  font-family: var(--iv-display), Georgia, serif; font-size: 15px; letter-spacing: 0.22em;
+}
+.theme-vuon-kinh .iv-cal-grid { padding: 8px 18px 24px; gap: 3px; }
+.theme-vuon-kinh .iv-cal-grid span { font-family: var(--iv-serif), Georgia, serif; font-size: 14.5px; color: var(--iv-ink); }
+.theme-vuon-kinh .iv-cal-grid .dow { font-family: var(--iv-sans), sans-serif; font-size: 10.5px; letter-spacing: 0.08em; color: var(--vk-leaf); border-bottom: 1px solid var(--vk-line); margin-bottom: 4px; }
+.theme-vuon-kinh .iv-cal-grid .on svg { fill: var(--c1); }
+.theme-vuon-kinh .iv-cal-grid .on b { color: #fff; font-family: var(--iv-sans), sans-serif; }
+.theme-vuon-kinh .iv-countdown { gap: 10px; margin: 26px auto 0; max-width: 340px; }
+.theme-vuon-kinh .iv-countdown div {
+  padding: 22px 0 12px; border-radius: 999px 999px 3px 3px; color: var(--vk-accent);
+  background: linear-gradient(170deg, #fff, var(--vk-glass));
+  box-shadow: inset 0 0 0 2px var(--vk-iron), inset 0 0 0 5px #fff, inset 0 0 0 6px var(--vk-line), 0 12px 20px -16px rgb(40 35 30 / 0.6);
+}
+.theme-vuon-kinh .iv-countdown b { font-family: var(--iv-display), Georgia, serif; font-weight: 400; font-size: clamp(22px, 6.4vw, 28px); }
+.theme-vuon-kinh .iv-countdown span { font-size: 9.5px; letter-spacing: 0.16em; color: var(--iv-muted); }
+.theme-vuon-kinh .iv-countdown .iv-en { display: none; }
+
+/* ── album: iron-framed panes ── */
+.theme-vuon-kinh .vk-album { padding: 50px 18px 46px; }
+.theme-vuon-kinh .iv-gallery { gap: 10px; }
+.theme-vuon-kinh .iv-g .iv-photo {
+  border-radius: 999px 999px 2px 2px; background: var(--vk-glass);
+  box-shadow: 0 0 0 4px #fff, 0 0 0 5px var(--vk-iron), 0 14px 22px -16px rgb(40 35 30 / 0.6);
+}
+.theme-vuon-kinh .iv-gallery .iv-g { margin: 5px; }
+.theme-vuon-kinh .iv-g.wide .iv-photo { border-radius: 2px; }
+.theme-vuon-kinh .iv-g.wide .iv-photo::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background:
+    linear-gradient(90deg, transparent calc(33.33% - 1.5px), rgb(255 255 255 / 0.75) calc(33.33% - 1.5px), rgb(255 255 255 / 0.75) calc(33.33% + 1.5px), transparent calc(33.33% + 1.5px)),
+    linear-gradient(90deg, transparent calc(66.67% - 1.5px), rgb(255 255 255 / 0.75) calc(66.67% - 1.5px), rgb(255 255 255 / 0.75) calc(66.67% + 1.5px), transparent calc(66.67% + 1.5px));
+}
+
+/* ── gift ── */
+.theme-vuon-kinh .vk-gift { padding: 46px 24px 54px; }
+.theme-vuon-kinh .vk-gift-can { display: block; width: 104px; height: auto; margin: 0 auto 16px; overflow: visible; }
+.theme-vuon-kinh .vk-gift .vk-title { margin-bottom: 14px; }
+.theme-vuon-kinh .vk-gift-sub { color: var(--iv-muted); font-size: 14px; margin: 0 0 20px; }
+.theme-vuon-kinh .iv-gift-btn {
+  background: var(--vk-deep); color: #fff; border-radius: 999px; font-family: var(--iv-sans), sans-serif; font-weight: 600; font-size: 12.5px; letter-spacing: 0.16em; padding: 12px 26px;
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.25), 0 12px 24px -14px color-mix(in srgb, var(--vk-deep) 80%, transparent);
+}
+.theme-vuon-kinh .iv-bank { background: #fff; border: 0; border-radius: 3px; box-shadow: inset 0 0 0 1px var(--vk-iron), inset 0 0 0 4px #fff, inset 0 0 0 5px var(--vk-line); padding: 22px; }
+.theme-vuon-kinh .iv-bank h4 { color: var(--vk-accent); font-family: var(--iv-display), Georgia, serif; font-weight: 400; }
+.theme-vuon-kinh .iv-bank-acc { border-color: color-mix(in srgb, var(--c2) 60%, #fff); background: var(--vk-glass); }
+
+/* ── thank you: looking out through the greenhouse glass ── */
+.theme-vuon-kinh .vk-thanks { min-height: 560px; }
+.theme-vuon-kinh .vk-thanks .iv-thanks-bg::after {
+  background: linear-gradient(180deg, var(--vk-cream) 0%, rgb(250 247 241 / 0) 22%, rgb(0 0 0 / 0) 44%, color-mix(in srgb, var(--vk-iron) 55%, rgb(20 18 16 / 0.7)) 100%);
+}
+.theme-vuon-kinh .vk-thanks-panes {
+  position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none;
+  -webkit-mask-image: linear-gradient(180deg, #000 45%, transparent 72%); mask-image: linear-gradient(180deg, #000 45%, transparent 72%);
+}
+.theme-vuon-kinh .vk-thanks-crest { position: absolute; z-index: 1; top: 14px; left: 15%; width: 70%; }
+.theme-vuon-kinh .vk-thanks h2 { font-family: var(--iv-script), cursive; font-weight: 400; font-size: clamp(54px, 16vw, 68px); color: #fff; text-shadow: 0 2px 18px rgb(0 0 0 / 0.3); }
+.theme-vuon-kinh .vk-thanks p { color: #fff; }
+
+/* ── shared sections in the wishes slot ── */
+.theme-vuon-kinh .vk-shared > .iv-sec:nth-child(odd) { background: rgb(255 255 255 / 0.7); }
+.theme-vuon-kinh .iv-block-title {
+  display: inline-block; font-family: var(--iv-display), Georgia, serif; font-weight: 400; text-transform: uppercase; letter-spacing: 0.18em; font-size: clamp(16px, 4.8vw, 19px);
+  color: var(--vk-accent); padding: 14px 24px 12px; background: #fff;
+  box-shadow: inset 0 0 0 1px var(--vk-iron), inset 0 0 0 4px #fff, inset 0 0 0 5px var(--vk-line);
+}
+.theme-vuon-kinh .iv-block-title .iv-en { font-size: 11.5px; letter-spacing: 0.08em; color: var(--iv-muted); }
+.theme-vuon-kinh .iv-timeline::before { background: color-mix(in srgb, var(--c2) 55%, #fff); }
+.theme-vuon-kinh .iv-timeline li::before { background: var(--c1); box-shadow: 0 0 0 3px #fff, 0 0 0 4px var(--vk-line); }
+.theme-vuon-kinh .iv-timeline b { color: var(--vk-accent); font-weight: 400; font-family: var(--iv-display), Georgia, serif; }
+.theme-vuon-kinh .iv-dress-note { color: var(--iv-muted); }
+.theme-vuon-kinh .iv-dress-colors span { box-shadow: 0 0 0 3px #fff, 0 0 0 4px var(--vk-iron), 0 8px 16px -8px rgb(0 0 0 / 0.4); }
+.theme-vuon-kinh .iv-rsvp {
+  color: var(--iv-ink); padding-top: 54px; padding-bottom: 54px;
+  background:
+    linear-gradient(90deg, color-mix(in srgb, var(--c2) 9%, transparent) 1px, transparent 1px) 50% 0 / 92px 100%,
+    linear-gradient(180deg, #fff, var(--vk-glass));
+}
+.theme-vuon-kinh .iv-rsvp > h2.iv-script {
+  display: inline-block; margin-bottom: 8px; font-family: var(--iv-display), Georgia, serif; text-transform: uppercase; letter-spacing: 0.18em; font-size: clamp(16px, 4.8vw, 19px); line-height: 1.3;
+  color: var(--vk-accent); padding: 14px 24px 12px; background: #fff;
+  box-shadow: inset 0 0 0 1px var(--vk-iron), inset 0 0 0 4px #fff, inset 0 0 0 5px var(--vk-line);
+}
+.theme-vuon-kinh .iv-rsvp > h2.iv-script .iv-en { font-size: 11.5px; letter-spacing: 0.08em; color: var(--iv-muted); }
+.theme-vuon-kinh .iv-rsvp-sub { color: var(--iv-muted); opacity: 1; }
+.theme-vuon-kinh .iv-rsvp-block { background: transparent; }
+.theme-vuon-kinh .iv-rsvp-block .iv-block-title { margin-bottom: 18px; }
+.theme-vuon-kinh .iv-form input, .theme-vuon-kinh .iv-form textarea, .theme-vuon-kinh .iv-form select {
+  background: #fff; border: 1px solid color-mix(in srgb, var(--c1) 30%, #ddd); border-radius: 4px; color: var(--iv-ink);
+}
+.theme-vuon-kinh .iv-form input:focus, .theme-vuon-kinh .iv-form textarea:focus, .theme-vuon-kinh .iv-form select:focus { outline: 2px solid color-mix(in srgb, var(--c1) 45%, transparent); outline-offset: 1px; }
+.theme-vuon-kinh .iv-form button[type="submit"] { background: var(--vk-deep); color: #fff; border-radius: 999px; font-size: 12.5px; letter-spacing: 0.16em; }
+.theme-vuon-kinh .iv-form-note { color: var(--iv-muted); opacity: 1; }
+.theme-vuon-kinh .iv-form-err { color: color-mix(in srgb, var(--c1) 25%, #b3261e); }
+.theme-vuon-kinh .iv-field { color: var(--iv-ink); }
+.theme-vuon-kinh .iv-rsvp-open { background: var(--vk-deep); color: #fff; border-radius: 999px; font-size: 12.5px; letter-spacing: 0.16em; }
+.theme-vuon-kinh .iv-rsvp-choices button { border-color: color-mix(in srgb, var(--c2) 50%, #fff); border-radius: 4px; }
+.theme-vuon-kinh .iv-rsvp-choices button.on { background: var(--vk-deep); border-color: var(--vk-deep); color: #fff; }
+.theme-vuon-kinh .iv-rsvp-done { background: #fff; border: 1px solid var(--vk-line); color: var(--iv-ink); border-radius: 4px; }
+.theme-vuon-kinh .iv-rsvp-done button { color: var(--vk-deep); border-color: var(--vk-deep); }
+.theme-vuon-kinh .iv-wishes figure { background: #fff; border-left: 2px solid var(--c2); border-radius: 2px; box-shadow: 0 8px 20px -18px rgb(40 35 30 / 0.5); }
+.theme-vuon-kinh .iv-wishes figcaption { color: var(--vk-accent); }
+.theme-vuon-kinh .iv-modal { background: color-mix(in srgb, var(--vk-iron) 70%, transparent); }
+.theme-vuon-kinh .iv-modal-card { background: #fff; border-radius: 120px 120px 6px 6px; padding-top: 56px; box-shadow: inset 0 0 0 2px var(--vk-iron), inset 0 0 0 6px #fff, inset 0 0 0 7px var(--vk-line); }
+.theme-vuon-kinh .iv-modal-card h3 { color: var(--vk-accent); font-family: var(--iv-display), Georgia, serif; font-weight: 400; letter-spacing: 0.06em; }
+.theme-vuon-kinh .iv-modal-close { top: 18px; right: 50%; translate: 50% 0; }
+
+/* placeholders, footer, intro, music, petals */
+.theme-vuon-kinh .iv-ph {
+  background:
+    radial-gradient(circle at 30% 22%, rgb(255 255 255 / 0.75), transparent 55%),
+    linear-gradient(160deg, color-mix(in srgb, var(--c2) 16%, #fff), color-mix(in srgb, var(--c1) 18%, #fff));
+}
+.theme-vuon-kinh .iv-ph i { font-family: var(--iv-script), cursive; color: color-mix(in srgb, var(--c1) 60%, transparent); }
+.theme-vuon-kinh .iv-foot { background: var(--vk-iron); color: color-mix(in srgb, var(--c2) 30%, #fff); }
+.theme-vuon-kinh .iv-foot a { color: #fff; }
+.theme-vuon-kinh .iv-intro {
+  background:
+    linear-gradient(90deg, color-mix(in srgb, var(--c2) 14%, transparent) 1px, transparent 1px) 50% 0 / 84px 100%,
+    linear-gradient(180deg, color-mix(in srgb, var(--c2) 12%, transparent) 1px, transparent 1px) 0 0 / 100% 120px,
+    radial-gradient(70% 50% at 50% 0%, #fff, transparent 75%),
+    radial-gradient(60% 40% at 100% 100%, color-mix(in srgb, var(--c1) 18%, transparent), transparent 70%),
+    #f1eee8;
+}
+.theme-vuon-kinh .iv-intro-card {
+  background: linear-gradient(180deg, #fff, var(--vk-cream)); border-radius: 200px 200px 6px 6px; padding-top: 58px;
+  box-shadow: 0 30px 70px -34px rgb(40 35 30 / 0.5), inset 0 0 0 3px var(--vk-iron), inset 0 0 0 9px #fff, inset 0 0 0 10px var(--vk-line);
+}
+.theme-vuon-kinh .iv-intro .iv-script { color: var(--vk-accent); }
+.theme-vuon-kinh .iv-intro-heart { fill: var(--c1); }
+.theme-vuon-kinh .iv-intro-kicker { color: var(--vk-leaf); }
+.theme-vuon-kinh .iv-intro-date { color: var(--iv-ink); font-family: var(--iv-display), Georgia, serif; }
+.theme-vuon-kinh .iv-intro-guest b { color: var(--vk-accent); }
+.theme-vuon-kinh .iv-intro button { background: var(--vk-deep); color: #fff; font-size: 12.5px; letter-spacing: 0.2em; box-shadow: 0 12px 26px -12px color-mix(in srgb, var(--vk-deep) 80%, transparent); }
+.theme-vuon-kinh .iv-music { background: #fff; box-shadow: 0 6px 16px -6px rgb(0 0 0 / 0.3), inset 0 0 0 2px var(--vk-iron); }
+.theme-vuon-kinh .iv-music svg { stroke: var(--vk-iron); }
+.theme-vuon-kinh .iv-music:not(.on)::after { background: var(--vk-iron); }
+.theme-vuon-kinh .iv-petals span { border-radius: 0 100% 0 100%; background: linear-gradient(135deg, color-mix(in srgb, var(--c2) 40%, #fff), var(--c2)); opacity: 0.75; }
+.theme-vuon-kinh .iv-petals span.h1 { border-radius: 150% 0 150% 0; background: linear-gradient(135deg, color-mix(in srgb, var(--c1) 30%, #fff), var(--c1)); }
+.theme-vuon-kinh .iv-petals span.h2 { background: linear-gradient(135deg, #fff, color-mix(in srgb, var(--c1) 45%, #fff)); }
+
+/* gentle life: daylight gliding over the glass, plants and tags swaying */
+@media (prefers-reduced-motion: no-preference) {
+  .theme-vuon-kinh .vk-glint { animation: vk-glint 9s ease-in-out infinite; }
+  .theme-vuon-kinh .vk-pot-a { animation: vk-sway 7s ease-in-out infinite; transform-box: fill-box; transform-origin: 50% 100%; }
+  .theme-vuon-kinh .vk-pot-b { animation: vk-sway 8.5s ease-in-out infinite reverse; transform-box: fill-box; transform-origin: 50% 100%; }
+  .theme-vuon-kinh .vk-tag.a { animation: vk-swing-a 6s ease-in-out infinite; }
+  .theme-vuon-kinh .vk-tag.b { animation: vk-swing-b 7s ease-in-out infinite; }
+}
+@keyframes vk-glint { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(46px); } }
+@keyframes vk-sway { 0%, 100% { transform: rotate(0deg); } 50% { transform: rotate(1.4deg); } }
+@keyframes vk-swing-a { 0%, 100% { rotate: -1.6deg; } 50% { rotate: 0.4deg; } }
+@keyframes vk-swing-b { 0%, 100% { rotate: 1.6deg; } 50% { rotate: -0.4deg; } }
+
+@media (max-width: 380px) {
+  .theme-vuon-kinh .vk-tags { gap: 12px; }
+  .theme-vuon-kinh .vk-tag { padding-left: 8px; padding-right: 8px; }
+  .theme-vuon-kinh .vk-parents { font-size: 13px; }
+  .theme-vuon-kinh .vk-plate { padding-left: 24px; padding-right: 24px; min-width: 0; }
+  .theme-vuon-kinh .vk-trio { gap: 8px; }
+}

@@ -1,0 +1,394 @@
+/* ════════════════════ LÂU ĐÀI ════════════════════
+   A fairy-tale castle at dusk: starry sky sections (--c1 pulled toward night) alternate with cream parchment;
+   cream stone, --c1 roofs and --c2 gilt (pennants, keystones, crest, ribbons). Every colour is --c1, --c2,
+   a neutral or a color-mix() of them, so the variants recolour the card. Ornaments live in LauDai.tsx.
+   Selectors are scoped .theme-lau-dai … (two classes) so they beat the base .iv-* rules. */
+
+.iv.theme-lau-dai {
+  --c1: #2e4a6b;
+  --c2: #c9a24a;
+  --iv-red: var(--c1);
+  --iv-red-dark: color-mix(in srgb, var(--c1) 55%, #000);
+  --iv-gold: var(--c2);
+  --iv-gold-soft: color-mix(in srgb, var(--c2) 40%, #fff);
+  --iv-cream: #f7f1e5;
+  --iv-paper: #fdf9f0;
+  --iv-ink: color-mix(in srgb, var(--c1) 32%, #24211e);
+  --iv-muted: color-mix(in srgb, var(--c1) 24%, #706a5e);
+  /* castle palette */
+  --ld-night: color-mix(in srgb, var(--c1) 48%, #000);
+  --ld-dusk: color-mix(in srgb, var(--c1) 80%, #000);
+  --ld-on: #fbf5e7;
+  --ld-gilt: color-mix(in srgb, var(--c2) 52%, #fff);
+  --ld-gold-ink: color-mix(in srgb, var(--c2) 55%, #000);
+  --ld-line: color-mix(in srgb, var(--c2) 60%, transparent);
+  --ld-stone: #f6efdf;
+  --ld-stone-2: #e6dac2;
+  --ld-joint: rgb(92 78 58 / 0.32);
+  --ld-shade: rgb(70 55 35 / 0.08);
+  --ld-roof: var(--c1);
+  --ld-roof-back: color-mix(in srgb, var(--c1) 72%, #fff);
+  --ld-roof-hi: color-mix(in srgb, var(--c1) 55%, #fff);
+  --ld-pole: color-mix(in srgb, var(--c2) 55%, #fff);
+  --ld-window: color-mix(in srgb, var(--c2) 70%, #fff);
+  --ld-moon: color-mix(in srgb, var(--c2) 28%, #fff);
+  --ld-moon-halo: color-mix(in srgb, var(--c2) 16%, transparent);
+  --ld-ribbon-dark: color-mix(in srgb, var(--c1) 62%, #000);
+  --ld-stardots:
+    radial-gradient(1.2px 1.2px at 12% 18%, #fff 60%, transparent 70%),
+    radial-gradient(1px 1px at 64% 9%, #fff 60%, transparent 70%),
+    radial-gradient(1.5px 1.5px at 38% 62%, rgb(255 255 255 / 0.8) 60%, transparent 70%),
+    radial-gradient(1px 1px at 86% 44%, #fff 60%, transparent 70%),
+    radial-gradient(1.2px 1.2px at 24% 86%, rgb(255 255 255 / 0.7) 60%, transparent 70%),
+    radial-gradient(1px 1px at 78% 78%, #fff 60%, transparent 70%);
+  --ld-skybg:
+    radial-gradient(ellipse 90% 45% at 50% 100%, color-mix(in srgb, var(--c2) 26%, transparent), transparent 70%),
+    linear-gradient(180deg, var(--ld-night) 0%, var(--ld-dusk) 45%, var(--c1) 100%);
+  color: var(--iv-ink);
+  background:
+    var(--ld-stardots) 0 0 / 220px 200px,
+    radial-gradient(ellipse at 50% 0%, color-mix(in srgb, var(--c1) 70%, #000), transparent 70%),
+    var(--ld-night);
+}
+.theme-lau-dai .iv-page { background: var(--iv-paper); box-shadow: 0 0 0 1px var(--ld-line), 0 0 90px rgb(0 0 0 / 0.5); }
+
+/* ── section skins ── */
+.theme-lau-dai .ld-sky { position: relative; color: var(--ld-on); background: var(--ld-skybg); }
+.theme-lau-dai .ld-sky > :not(.ld-stars):not(.ld-moon) { position: relative; z-index: 1; }
+.theme-lau-dai .ld-parch {
+  position: relative; color: var(--iv-ink);
+  background:
+    radial-gradient(ellipse 80% 40% at 50% 0%, #fff, transparent 70%),
+    radial-gradient(ellipse 90% 40% at 50% 100%, color-mix(in srgb, var(--c2) 10%, transparent), transparent 70%),
+    var(--iv-paper);
+}
+/* battlements where sky and parchment meet */
+.theme-lau-dai .ld-sky + .ld-parch::before,
+.theme-lau-dai .ld-parch + .ld-sky::before {
+  content: ""; position: absolute; left: 0; right: 0; top: -11px; height: 12px; z-index: 2; pointer-events: none;
+  background: var(--iv-paper);
+  -webkit-mask: repeating-linear-gradient(90deg, #000 0 20px, transparent 20px 32px) 6px 0 / auto;
+  mask: repeating-linear-gradient(90deg, #000 0 20px, transparent 20px 32px) 6px 0 / auto;
+}
+.theme-lau-dai .ld-parch + .ld-sky::before { background: var(--ld-night); }
+
+/* stars */
+.theme-lau-dai .ld-stars { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+.theme-lau-dai .ld-stars span {
+  position: absolute; width: 2px; height: 2px; border-radius: 50%; background: #fff; opacity: 0.75;
+  animation: ld-twinkle 3.8s ease-in-out infinite;
+}
+.theme-lau-dai .ld-stars span.s1 { width: 3px; height: 3px; box-shadow: 0 0 6px rgb(255 255 255 / 0.8); }
+.theme-lau-dai .ld-stars span.s2 {
+  width: 11px; height: 11px; border-radius: 0; background: var(--ld-gilt); opacity: 0.9;
+  clip-path: polygon(50% 0, 60% 40%, 100% 50%, 60% 60%, 50% 100%, 40% 60%, 0 50%, 40% 40%);
+}
+@keyframes ld-twinkle { 0%, 100% { opacity: 0.85; transform: scale(1); } 50% { opacity: 0.25; transform: scale(0.7); } }
+
+/* pennants & lit windows */
+.theme-lau-dai .ld-flag { transform-box: fill-box; transform-origin: 0 50%; animation: ld-wave 3.2s ease-in-out infinite; }
+@keyframes ld-wave { 0%, 100% { transform: skewY(0deg) scaleX(1); } 50% { transform: skewY(-6deg) scaleX(0.92); } }
+.theme-lau-dai .ld-lit { animation: ld-glow 4.5s ease-in-out infinite; }
+@keyframes ld-glow { 0%, 100% { opacity: 1; } 50% { opacity: 0.78; } }
+
+/* ── headings, divider, ribbon ── */
+.theme-lau-dai .ld-heading { margin-bottom: 24px; display: grid; justify-items: center; }
+.theme-lau-dai .ld-heading-crown { width: 38px; height: auto; margin-bottom: 8px; }
+.theme-lau-dai .ld-kicker { font-family: var(--iv-display), Georgia, serif; text-transform: uppercase; letter-spacing: 0.3em; font-size: 11.5px; color: var(--ld-gold-ink); }
+.theme-lau-dai .ld-kicker .iv-en { letter-spacing: 0.08em; }
+.theme-lau-dai .ld-title { font-family: var(--iv-script), cursive; font-weight: 400; font-size: clamp(40px, 11.5vw, 52px); line-height: 1.15; color: var(--c1); margin-top: 2px; }
+.theme-lau-dai .ld-title .iv-en { font-size: 0.36em; }
+.theme-lau-dai .ld-sky .ld-kicker { color: var(--ld-gilt); }
+.theme-lau-dai .ld-sky .ld-title { color: var(--ld-on); text-shadow: 0 0 24px color-mix(in srgb, var(--c2) 35%, transparent); }
+
+.theme-lau-dai .ld-divider { display: block; width: min(240px, 80%); height: auto; margin: 0 auto 20px; }
+
+.theme-lau-dai .ld-ribbon { position: relative; display: inline-block; margin: 0 30px; max-width: calc(100% - 60px); }
+.theme-lau-dai .ld-ribbon::before, .theme-lau-dai .ld-ribbon::after {
+  content: ""; position: absolute; top: 10px; bottom: -10px; width: 36px; z-index: 0; background: var(--ld-ribbon-dark);
+}
+.theme-lau-dai .ld-ribbon::before { left: -28px; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 32% 50%); }
+.theme-lau-dai .ld-ribbon::after { right: -28px; clip-path: polygon(0 0, 100% 0, 68% 50%, 100% 100%, 0 100%); }
+.theme-lau-dai .ld-ribbon-band {
+  position: relative; z-index: 1; display: block; padding: 10px 22px;
+  font-family: var(--iv-display), Georgia, serif; letter-spacing: 0.12em; color: var(--ld-on);
+  background: linear-gradient(180deg, color-mix(in srgb, var(--c1) 82%, #fff), var(--c1) 55%, color-mix(in srgb, var(--c1) 82%, #000));
+  box-shadow: inset 0 1.5px 0 var(--c2), inset 0 -1.5px 0 var(--c2), 0 8px 16px -8px rgb(0 0 0 / 0.5);
+}
+.theme-lau-dai .ld-ribbon-band::before, .theme-lau-dai .ld-ribbon-band::after {
+  content: ""; position: absolute; bottom: -10px; width: 8px; height: 10px; background: color-mix(in srgb, var(--c1) 35%, #000);
+}
+.theme-lau-dai .ld-ribbon-band::before { left: 0; clip-path: polygon(0 0, 100% 0, 100% 100%); }
+.theme-lau-dai .ld-ribbon-band::after { right: 0; clip-path: polygon(0 0, 100% 0, 0 100%); }
+
+/* ── cover ── */
+.theme-lau-dai .ld-cover { padding: 46px 0 0; text-align: center; overflow: hidden; }
+.theme-lau-dai .ld-moon { position: absolute; top: 26px; right: 24px; width: 52px; height: auto; z-index: 0; }
+.theme-lau-dai .ld-cover-head { padding: 0 24px; }
+.theme-lau-dai .ld-cover-kicker { font-family: var(--iv-display), Georgia, serif; text-transform: uppercase; letter-spacing: 0.42em; font-size: 12px; color: var(--ld-gilt); }
+.theme-lau-dai .ld-cover-kicker .iv-en { letter-spacing: 0.12em; }
+.theme-lau-dai .ld-cover-names { margin: 10px 0 0; display: grid; justify-items: center; font-weight: 400; line-height: 1.02; }
+.theme-lau-dai .ld-cover-names span {
+  font-family: var(--iv-script), cursive; font-size: clamp(46px, 14vw, 64px); color: var(--ld-on); overflow-wrap: anywhere;
+  text-shadow: 0 2px 0 var(--ld-night), 0 0 28px color-mix(in srgb, var(--c2) 45%, transparent);
+}
+.theme-lau-dai .ld-cover-names i { font-style: normal; font-family: var(--iv-display), Georgia, serif; font-size: 20px; color: var(--ld-gilt); margin: 2px 0; }
+.theme-lau-dai .ld-castle-wrap { position: relative; width: 100%; aspect-ratio: 400 / 430; margin-top: 4px; }
+.theme-lau-dai .ld-castle { position: absolute; inset: 0; width: 100%; height: 100%; display: block; filter: drop-shadow(0 -2px 14px color-mix(in srgb, var(--c2) 25%, transparent)); }
+.theme-lau-dai .ld-gateway { position: absolute; left: 26%; width: 48%; top: 33.95%; bottom: 0; border-radius: 999px 999px 0 0; }
+.theme-lau-dai .ld-cover-base {
+  position: relative; z-index: 2; padding: 0 20px 34px; margin-top: -1px;
+  background: linear-gradient(180deg, var(--ld-stone-2), var(--iv-paper) 46px);
+}
+.theme-lau-dai .ld-cover-ribbon { top: -22px; margin-bottom: -10px; }
+.theme-lau-dai .ld-cover-ribbon .ld-ribbon-band { font-size: clamp(22px, 7vw, 28px); padding: 8px 24px; }
+.theme-lau-dai .ld-cover-ribbon i { font-style: normal; color: var(--ld-gilt); margin: 0 8px; }
+.theme-lau-dai .ld-cover-when { color: var(--iv-ink); font-size: 12.5px; letter-spacing: 0.2em; text-transform: uppercase; }
+.theme-lau-dai .ld-cover-when small { display: block; text-transform: none; letter-spacing: 0.03em; font-family: var(--iv-serif), Georgia, serif; font-style: italic; font-size: 13.5px; color: var(--iv-muted); margin-top: 2px; }
+
+/* ── families ── */
+.theme-lau-dai .ld-families { padding-top: 40px; padding-bottom: 46px; }
+.theme-lau-dai .ld-crest { display: block; width: 190px; height: auto; margin: 0 auto 14px; }
+.theme-lau-dai .ld-crest-mono { font-family: var(--iv-display), Georgia, serif; font-size: 24px; letter-spacing: 0.04em; fill: var(--ld-on); }
+.theme-lau-dai .ld-crest-motto { font-family: var(--iv-display), Georgia, serif; font-size: 11.5px; letter-spacing: 0.12em; fill: var(--ld-on); }
+.theme-lau-dai .ld-announce { font-family: var(--iv-serif), Georgia, serif; color: var(--iv-muted); margin-bottom: 24px; }
+.theme-lau-dai .ld-announce.on-sky { color: var(--ld-on); opacity: 0.85; }
+.theme-lau-dai .ld-fam-grid { position: relative; display: grid; grid-template-columns: 1fr 1fr; gap: 36px; }
+.theme-lau-dai .ld-fam { min-width: 0; }
+.theme-lau-dai .ld-fam h2 { font-family: var(--iv-display), Georgia, serif; font-weight: 400; text-transform: uppercase; letter-spacing: 0.2em; font-size: 14.5px; color: var(--c1); margin-bottom: 10px; }
+.theme-lau-dai .ld-fam h2 .iv-en { letter-spacing: 0.04em; }
+.theme-lau-dai .ld-parents { white-space: pre-line; font-size: 14px; font-weight: 500; line-height: 1.7; overflow-wrap: anywhere; }
+.theme-lau-dai .ld-addr { margin-top: 8px; font-size: 12.5px; color: var(--iv-muted); }
+.theme-lau-dai .ld-fam-bar { position: absolute; left: 50%; top: 4px; bottom: 4px; width: 1px; transform: translateX(-50%); background: linear-gradient(180deg, transparent, var(--c2) 25%, var(--c2) 75%, transparent); }
+.theme-lau-dai .ld-fam-bar::after { content: ""; position: absolute; left: 50%; top: 50%; width: 9px; height: 9px; background: var(--c2); transform: translate(-50%, -50%) rotate(45deg); box-shadow: 0 0 0 3px var(--iv-paper); }
+
+/* ── stone arch frame ── */
+.theme-lau-dai .ld-gate { position: relative; aspect-ratio: 200 / 280; }
+.theme-lau-dai .ld-gate > .iv-photo { position: absolute; left: 7%; right: 7%; top: 5%; bottom: 0; border-radius: 999px 999px 0 0; }
+.theme-lau-dai .ld-gate-frame { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+
+/* ── couple ── */
+.theme-lau-dai .ld-couple { padding-top: 58px; padding-bottom: 56px; overflow: hidden; }
+.theme-lau-dai .ld-couple-gate { width: min(72%, 280px); margin: 0 auto; filter: drop-shadow(0 18px 26px rgb(0 0 0 / 0.45)); }
+.theme-lau-dai .ld-couple-grid { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 6px; margin-top: 26px; }
+.theme-lau-dai .ld-person { display: grid; justify-items: center; gap: 2px; min-width: 0; }
+.theme-lau-dai .ld-person em { font-style: normal; font-family: var(--iv-display), Georgia, serif; text-transform: uppercase; letter-spacing: 0.24em; font-size: 10.5px; color: var(--ld-gilt); }
+.theme-lau-dai .ld-person b { font-family: var(--iv-script), cursive; font-weight: 400; font-size: clamp(27px, 7.8vw, 36px); line-height: 1.2; color: var(--ld-on); overflow-wrap: anywhere; }
+.theme-lau-dai .ld-person .iv-person-title { color: var(--ld-on); }
+.theme-lau-dai .ld-couple-amp { font-family: var(--iv-script), cursive; font-size: 40px; color: var(--ld-gilt); }
+
+/* ── invitation ── */
+.theme-lau-dai .ld-invite { padding-top: 52px; }
+.theme-lau-dai .ld-quote { font-family: var(--iv-serif), Georgia, serif; font-style: italic; font-size: 15px; line-height: 1.8; color: var(--iv-muted); white-space: pre-line; max-width: 320px; margin: 0 auto 18px; }
+.theme-lau-dai .ld-inv-heading, .theme-lau-dai .ld-inv-line { font-family: var(--iv-display), Georgia, serif; text-transform: uppercase; letter-spacing: 0.16em; font-size: 14px; color: var(--c1); }
+.theme-lau-dai .ld-inv-line { font-size: 13px; letter-spacing: 0.12em; color: var(--iv-ink); }
+.theme-lau-dai .ld-guest {
+  font-family: var(--iv-script), cursive; font-size: clamp(38px, 11vw, 50px); line-height: 1.25; color: var(--c1); overflow-wrap: anywhere;
+  margin: 8px auto 10px; padding: 0 12px 10px; display: inline-block; min-width: 60%;
+  background: linear-gradient(90deg, transparent, var(--c2), transparent) bottom / 100% 1px no-repeat;
+}
+.theme-lau-dai .ld-trio { display: grid; grid-template-columns: 1fr 1.22fr 1fr; gap: 10px; align-items: end; margin-top: 30px; }
+.theme-lau-dai .ld-trio figure { margin: 0; min-width: 0; }
+.theme-lau-dai .ld-trio .ld-gate { filter: drop-shadow(0 10px 14px rgb(0 0 0 / 0.22)); }
+.theme-lau-dai .ld-trio figcaption { margin-top: 8px; display: grid; justify-items: center; padding-top: 6px; border-top: 1px solid var(--ld-line); }
+.theme-lau-dai .ld-trio figcaption b { font-family: var(--iv-display), Georgia, serif; font-weight: 400; font-size: clamp(20px, 6.2vw, 28px); line-height: 1.1; color: var(--c1); }
+.theme-lau-dai .ld-trio figcaption small { font-size: 10.5px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--iv-muted); }
+.theme-lau-dai .ld-trio figcaption small .iv-en { letter-spacing: 0.06em; }
+.theme-lau-dai .ld-trio .iv-ph i { font-size: 22px; }
+
+/* ── events ── */
+.theme-lau-dai .ld-events { padding-top: 58px; padding-bottom: 58px; }
+.theme-lau-dai .ld-event-list { display: grid; gap: 26px; }
+.theme-lau-dai .ld-event {
+  position: relative; color: var(--iv-ink); padding: 30px 20px 26px;
+  border-radius: 50% 50% 6px 6px / 96px 96px 6px 6px;
+  background: radial-gradient(ellipse at 50% 0%, #fff, transparent 70%), var(--iv-paper);
+  box-shadow: inset 0 0 0 1px var(--c2), inset 0 0 0 6px var(--iv-paper), inset 0 0 0 7px var(--ld-line), 0 24px 44px -22px rgb(0 0 0 / 0.75);
+}
+.theme-lau-dai .ld-seal {
+  display: grid; place-items: center; width: 54px; height: 54px; margin: 0 auto 10px; border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, color-mix(in srgb, var(--c1) 70%, #fff), var(--c1) 55%, color-mix(in srgb, var(--c1) 70%, #000));
+  box-shadow: 0 0 0 2px var(--iv-paper), 0 0 0 3px var(--c2), 0 6px 12px -4px rgb(0 0 0 / 0.4);
+}
+.theme-lau-dai .ld-seal i { font-style: normal; font-family: var(--iv-display), Georgia, serif; font-size: 13px; color: var(--ld-on); letter-spacing: 0.04em; white-space: nowrap; }
+.theme-lau-dai .ld-event h3 { font-family: var(--iv-display), Georgia, serif; font-weight: 400; text-transform: uppercase; letter-spacing: 0.16em; font-size: 16.5px; color: var(--c1); margin: 0 0 14px; }
+.theme-lau-dai .ld-event-date { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 4px; }
+.theme-lau-dai .ld-event-date span { display: grid; gap: 1px; font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--iv-muted); padding: 7px 0; border-top: 1px solid var(--c2); border-bottom: 1px solid var(--c2); }
+.theme-lau-dai .ld-event-date span b { font-family: var(--iv-display), Georgia, serif; font-weight: 400; font-size: 15px; letter-spacing: 0.06em; color: var(--iv-ink); }
+.theme-lau-dai .ld-event-date strong { font-family: var(--iv-display), Georgia, serif; font-weight: 400; font-size: 56px; line-height: 1; color: var(--c1); padding: 0 14px; }
+.theme-lau-dai .ld-event-lunar { margin-top: 10px; font-family: var(--iv-serif), Georgia, serif; font-style: italic; font-size: 13px; color: var(--iv-muted); }
+.theme-lau-dai .ld-event .iv-event-sub span { background: color-mix(in srgb, var(--c1) 8%, transparent); color: var(--c1); }
+.theme-lau-dai .ld-event-div { width: 170px; margin: 16px auto 10px; }
+.theme-lau-dai .ld-event-venue { font-family: var(--iv-display), Georgia, serif; text-transform: uppercase; letter-spacing: 0.08em; font-size: 15.5px; color: var(--c1); }
+.theme-lau-dai .ld-event-address { font-size: 13px; color: var(--iv-muted); margin-top: 3px; }
+.theme-lau-dai .ld-event .iv-event-map { border: 1px solid var(--ld-line); border-radius: 4px; }
+.theme-lau-dai .ld-event-actions { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-top: 18px; }
+.theme-lau-dai .ld-event-actions a {
+  text-decoration: none; font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+  padding: 10px 18px; border-radius: 3px; background: var(--c1); color: var(--ld-on); box-shadow: inset 0 0 0 1px var(--c2), inset 0 0 0 3px var(--c1), inset 0 0 0 4px var(--ld-line);
+}
+.theme-lau-dai .ld-event-actions a + a { background: transparent; color: var(--c1); box-shadow: inset 0 0 0 1px var(--c1); }
+.theme-lau-dai .ld-event-actions .iv-en { display: inline; margin-left: 4px; }
+
+/* ── calendar + countdown ── */
+.theme-lau-dai .ld-when { padding-top: 54px; padding-bottom: 52px; }
+.theme-lau-dai .ld-when-ribbon { margin-bottom: 22px; }
+.theme-lau-dai .ld-when-ribbon .ld-ribbon-band { font-size: 15px; text-transform: uppercase; letter-spacing: 0.2em; }
+.theme-lau-dai .iv-calendar {
+  background: #fff; border: 1px solid var(--ld-line); border-radius: 50% 50% 8px 8px / 64px 64px 8px 8px;
+  box-shadow: 0 0 0 5px var(--iv-paper), 0 0 0 6px color-mix(in srgb, var(--c2) 35%, transparent), 0 18px 34px -22px rgb(0 0 0 / 0.5);
+}
+.theme-lau-dai .iv-cal-head { display: none; }
+.theme-lau-dai .iv-cal-grid { padding: 34px 12px 16px; }
+.theme-lau-dai .iv-cal-grid span { font-family: var(--iv-display), Georgia, serif; color: var(--iv-ink); }
+.theme-lau-dai .iv-cal-grid .dow { color: var(--c1); font-family: var(--iv-sans), sans-serif; border-bottom: 1px solid var(--ld-line); margin-bottom: 4px; }
+.theme-lau-dai .iv-cal-grid .on svg { fill: var(--c1); }
+.theme-lau-dai .iv-cal-grid .on b { color: var(--ld-on); }
+.theme-lau-dai .iv-countdown { margin-top: 26px; gap: 8px; }
+.theme-lau-dai .iv-countdown div {
+  position: relative; background: linear-gradient(180deg, color-mix(in srgb, var(--c1) 85%, #fff), var(--c1) 40%, color-mix(in srgb, var(--c1) 80%, #000)); color: var(--ld-on);
+  border-radius: 0 0 4px 4px; padding: 20px 0 10px; box-shadow: inset 0 -2px 0 var(--c2);
+  clip-path: polygon(0 0, 24% 0, 24% 8px, 38% 8px, 38% 0, 62% 0, 62% 8px, 76% 8px, 76% 0, 100% 0, 100% 100%, 0 100%);
+}
+.theme-lau-dai .iv-countdown b { font-family: var(--iv-display), Georgia, serif; font-weight: 400; font-size: 26px; }
+.theme-lau-dai .iv-countdown span { color: var(--ld-gilt); font-size: 10.5px; }
+
+/* ── album ── */
+.theme-lau-dai .ld-album { padding-top: 58px; padding-bottom: 52px; }
+.theme-lau-dai .ld-album .iv-gallery { gap: 10px; }
+.theme-lau-dai .iv-g .iv-photo { border-radius: 999px 999px 4px 4px; box-shadow: 0 0 0 2px var(--ld-stone-2), 0 0 0 3px var(--c2), 0 12px 22px -12px rgb(0 0 0 / 0.7); }
+.theme-lau-dai .iv-g.wide .iv-photo { border-radius: 4px; }
+.theme-lau-dai .iv-g { padding: 3px; }
+
+/* ── gift ── */
+.theme-lau-dai .ld-gift { padding-top: 50px; padding-bottom: 50px; }
+.theme-lau-dai .ld-gift-title { font-family: var(--iv-script), cursive; font-weight: 400; font-size: clamp(38px, 11vw, 46px); line-height: 1.15; color: var(--c1); }
+.theme-lau-dai .ld-gift-title .iv-en { font-size: 0.38em; }
+.theme-lau-dai .ld-gift-note { font-family: var(--iv-serif), Georgia, serif; font-style: italic; color: var(--iv-muted); font-size: 14.5px; margin: 4px auto 20px; max-width: 330px; }
+.theme-lau-dai .iv-gift-btn {
+  display: inline-flex; align-items: center; gap: 8px; border: 0; background: var(--c1); color: var(--ld-on); border-radius: 3px; padding: 13px 26px;
+  font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; font-size: 13px;
+  box-shadow: inset 0 0 0 1px var(--c2), inset 0 0 0 3px var(--c1), inset 0 0 0 4px var(--ld-line), 0 12px 24px -12px rgb(0 0 0 / 0.55);
+}
+.theme-lau-dai .iv-gift-btn svg { width: 18px; height: 18px; fill: none; stroke: var(--c2); stroke-width: 1.8; }
+.theme-lau-dai .iv-banks { margin-top: 18px; }
+.theme-lau-dai .iv-bank { background: #fff; border: 1px solid var(--ld-line); border-radius: 50% 50% 8px 8px / 40px 40px 8px 8px; padding-top: 28px; }
+.theme-lau-dai .iv-bank h4 { color: var(--c1); font-family: var(--iv-display), Georgia, serif; font-weight: 400; }
+.theme-lau-dai .iv-bank-acc { border-color: var(--c2); background: var(--iv-cream); }
+
+/* ── shared blocks from {wishes}: schedule, dress code, RSVP, guestbook ── */
+.theme-lau-dai .iv-schedule, .theme-lau-dai .iv-dress, .theme-lau-dai .iv-rsvp-block { background: var(--iv-paper); border-top: 1px solid color-mix(in srgb, var(--c2) 30%, transparent); }
+.theme-lau-dai .iv-block-title { font-family: var(--iv-display), Georgia, serif; font-weight: 400; color: var(--c1); letter-spacing: 0.18em; }
+.theme-lau-dai .iv-block-title::after { content: ""; display: block; width: 70px; height: 7px; margin: 12px auto 0; background: radial-gradient(circle, var(--c2) 2.6px, transparent 3px) center / 7px 7px no-repeat, linear-gradient(var(--c2), var(--c2)) center / 100% 1px no-repeat; }
+.theme-lau-dai .iv-timeline::before { background: var(--c2); }
+.theme-lau-dai .iv-timeline li::before { background: var(--c1); border-radius: 1px; transform: rotate(45deg); box-shadow: 0 0 0 3px var(--iv-paper), 0 0 0 4px var(--c2); }
+.theme-lau-dai .iv-timeline b { color: var(--c1); font-family: var(--iv-display), Georgia, serif; font-weight: 400; }
+.theme-lau-dai .iv-dress-colors span { box-shadow: 0 0 0 3px #fff, 0 0 0 4px var(--c2), 0 8px 16px -8px rgb(0 0 0 / 0.4); }
+.theme-lau-dai .iv-rsvp-block .iv-rsvp-sub { color: var(--iv-muted); }
+.theme-lau-dai .iv-rsvp-open { background: var(--c1); color: var(--ld-on); border-radius: 3px; font-family: var(--iv-display), Georgia, serif; font-weight: 400; box-shadow: inset 0 0 0 1px var(--c2), inset 0 0 0 3px var(--c1), inset 0 0 0 4px var(--ld-line), 0 12px 24px -12px rgb(0 0 0 / 0.5); }
+.theme-lau-dai .iv-rsvp-open .iv-en { display: inline; margin-left: 4px; }
+.theme-lau-dai .iv-rsvp-choices button { border-color: var(--ld-line); border-radius: 4px; }
+.theme-lau-dai .iv-rsvp-choices button.on { background: var(--c1); border-color: var(--c1); color: var(--ld-on); }
+.theme-lau-dai .iv-rsvp-block .iv-rsvp-done { border-color: var(--c2); color: var(--iv-ink); }
+.theme-lau-dai .iv-modal { background: color-mix(in srgb, var(--ld-night) 72%, transparent); }
+.theme-lau-dai .iv-modal-card {
+  border-radius: 50% 50% 8px 8px / 60px 60px 8px 8px; padding-top: 40px; background: var(--iv-paper);
+  box-shadow: inset 0 0 0 1px var(--c2), inset 0 0 0 5px var(--iv-paper), inset 0 0 0 6px var(--ld-line), 0 30px 60px -20px rgb(0 0 0 / 0.6);
+}
+.theme-lau-dai .iv-modal-card h3 { color: var(--c1); font-family: var(--iv-display), Georgia, serif; font-weight: 400; }
+
+.theme-lau-dai .iv-rsvp {
+  color: var(--ld-on);
+  background:
+    linear-gradient(var(--ld-line), var(--ld-line)) top 14px left 50% / calc(100% - 28px) 1px no-repeat,
+    linear-gradient(var(--ld-line), var(--ld-line)) bottom 14px left 50% / calc(100% - 28px) 1px no-repeat,
+    var(--ld-stardots) 0 0 / 200px 180px,
+    var(--ld-skybg);
+  padding-top: 58px; padding-bottom: 58px;
+}
+.theme-lau-dai .iv-rsvp .iv-script { color: var(--ld-on); font-size: clamp(38px, 10.5vw, 46px); text-shadow: 0 0 24px color-mix(in srgb, var(--c2) 35%, transparent); }
+.theme-lau-dai .iv-rsvp .iv-script .iv-en { font-size: 0.4em; }
+.theme-lau-dai .iv-rsvp-sub { color: var(--ld-on); }
+.theme-lau-dai .iv-form input, .theme-lau-dai .iv-form textarea, .theme-lau-dai .iv-form select { border-radius: 4px; border: 1px solid var(--ld-line); background: #fffdf8; color: #2b2724; }
+.theme-lau-dai .iv-rsvp-form input, .theme-lau-dai .iv-rsvp-form select { border-color: color-mix(in srgb, var(--c2) 55%, #999); }
+.theme-lau-dai .iv-form button[type="submit"] { background: linear-gradient(180deg, color-mix(in srgb, var(--c2) 45%, #fff), var(--c2)); color: var(--ld-night); border-radius: 3px; font-family: var(--iv-display), Georgia, serif; font-weight: 400; letter-spacing: 0.14em; }
+.theme-lau-dai .iv-rsvp-form button[type="submit"] { background: var(--c1); color: var(--ld-on); }
+.theme-lau-dai .iv-form-err { color: color-mix(in srgb, var(--c2) 30%, #fff); }
+.theme-lau-dai .iv-rsvp-form .iv-form-err, .theme-lau-dai .iv-rsvp-form .iv-form-note { color: var(--c1); }
+.theme-lau-dai .iv-rsvp-done { border-color: var(--c2); }
+.theme-lau-dai .iv-rsvp-done button { color: var(--ld-gilt); border-color: var(--c2); }
+.theme-lau-dai .iv-wishes figure { background: var(--iv-paper); border-left: 3px solid var(--c2); border-radius: 3px; }
+.theme-lau-dai .iv-wishes figcaption { color: var(--c1); }
+
+/* ── thanks ── */
+.theme-lau-dai .ld-thanks { min-height: 600px; overflow: hidden; }
+.theme-lau-dai .ld-thanks .iv-thanks-bg::after {
+  background: linear-gradient(180deg, color-mix(in srgb, var(--c1) 12%, transparent) 25%, color-mix(in srgb, var(--c1) 78%, transparent) 70%, color-mix(in srgb, var(--c1) 88%, #000) 100%);
+}
+.theme-lau-dai .ld-thanks .ld-stars { height: 45%; }
+.theme-lau-dai .ld-thanks .iv-thanks-body { z-index: 2; padding-bottom: 128px; }
+.theme-lau-dai .ld-thanks-crown { width: 44px; height: auto; display: block; margin: 0 auto; }
+.theme-lau-dai .ld-thanks h2 { font-family: var(--iv-script), cursive; font-weight: 400; font-size: clamp(54px, 16vw, 70px); color: var(--ld-on); margin-top: 4px; text-shadow: 0 2px 14px rgb(0 0 0 / 0.45); }
+.theme-lau-dai .ld-thanks p { color: #fff; }
+.theme-lau-dai .ld-thanks-sign { font-family: var(--iv-display), Georgia, serif; letter-spacing: 0.18em; text-transform: uppercase; font-size: 12px; color: var(--ld-gilt) !important; margin-top: 14px !important; }
+.theme-lau-dai .ld-skyline { position: absolute; left: 0; right: 0; bottom: -1px; z-index: 1; width: 100%; height: auto; aspect-ratio: 400 / 120; display: block; }
+
+/* ── shared chrome: placeholders, footer, intro, music, petals ── */
+.theme-lau-dai .iv-photo { background: color-mix(in srgb, var(--c1) 14%, #efe8da); }
+.theme-lau-dai .iv-ph {
+  background:
+    radial-gradient(circle at 30% 25%, rgb(255 255 255 / 0.55), transparent 55%),
+    linear-gradient(160deg, color-mix(in srgb, var(--c2) 18%, #f8f1e2), color-mix(in srgb, var(--c1) 28%, #e5dccb));
+}
+.theme-lau-dai .iv-ph i { color: color-mix(in srgb, var(--c1) 55%, transparent); }
+.theme-lau-dai .ld-album .iv-g:not(.wide) .iv-ph i { font-size: 32px; }
+.theme-lau-dai .ld-gateway .iv-ph, .theme-lau-dai .ld-couple-gate .iv-ph, .theme-lau-dai .ld-album .iv-ph {
+  background:
+    radial-gradient(circle at 50% 28%, color-mix(in srgb, var(--c2) 35%, transparent), transparent 45%),
+    linear-gradient(180deg, color-mix(in srgb, var(--c1) 55%, #fff), color-mix(in srgb, var(--c1) 85%, #000));
+}
+.theme-lau-dai .ld-gateway .iv-ph i, .theme-lau-dai .ld-couple-gate .iv-ph i, .theme-lau-dai .ld-album .iv-ph i { color: var(--ld-gilt); opacity: 0.8; }
+.theme-lau-dai .iv-foot { background: var(--ld-night); color: var(--ld-gilt); border-top: 1px solid var(--ld-line); }
+.theme-lau-dai .iv-foot a { color: var(--ld-on); }
+.theme-lau-dai .iv-intro {
+  background: var(--ld-stardots) 0 0 / 220px 200px, var(--ld-skybg);
+  background-blend-mode: normal;
+}
+.theme-lau-dai .iv-intro-card {
+  border-radius: 50% 50% 10px 10px / 120px 120px 10px 10px; padding-top: 52px;
+  background: radial-gradient(ellipse at 50% 0%, #fff, transparent 60%), var(--iv-paper);
+  box-shadow: 0 30px 80px -20px rgb(0 0 0 / 0.65), inset 0 0 0 1px var(--c2), inset 0 0 0 7px var(--iv-paper), inset 0 0 0 8px var(--ld-line);
+}
+.theme-lau-dai .iv-intro-kicker { color: var(--ld-gold-ink); font-family: var(--iv-display), Georgia, serif; }
+.theme-lau-dai .iv-intro .iv-script { color: var(--c1); }
+.theme-lau-dai .iv-intro-heart { width: 40px; height: 40px; fill: var(--c1); }
+.theme-lau-dai .iv-intro-date { color: var(--iv-ink); font-family: var(--iv-display), Georgia, serif; }
+.theme-lau-dai .iv-intro-guest { color: var(--iv-muted); }
+.theme-lau-dai .iv-intro-guest b { color: var(--c1); }
+.theme-lau-dai .iv-intro button {
+  background: var(--c1); color: var(--ld-on); border-radius: 3px; font-family: var(--iv-display), Georgia, serif; font-weight: 400; letter-spacing: 0.2em;
+  box-shadow: inset 0 0 0 1px var(--c2), inset 0 0 0 3px var(--c1), inset 0 0 0 4px var(--ld-line), 0 12px 26px -10px rgb(0 0 0 / 0.6);
+}
+.theme-lau-dai .iv-music { background: var(--c1); box-shadow: 0 8px 20px -6px rgb(0 0 0 / 0.5), inset 0 0 0 2px var(--c2); }
+.theme-lau-dai .iv-music svg { stroke: var(--ld-gilt); }
+.theme-lau-dai .iv-music:not(.on)::after { background: var(--ld-gilt); }
+.theme-lau-dai .iv-petals span {
+  border-radius: 0; opacity: 0.8;
+  background: linear-gradient(135deg, #fff, color-mix(in srgb, var(--c2) 70%, #fff));
+  clip-path: polygon(50% 0, 61% 39%, 100% 50%, 61% 61%, 50% 100%, 39% 61%, 0 50%, 39% 39%);
+}
+.theme-lau-dai .iv-petals span.h1 { background: var(--c2); }
+.theme-lau-dai .iv-petals span.h2 { background: color-mix(in srgb, var(--c1) 35%, #fff); }
+.theme-lau-dai .iv-announce { font-family: var(--iv-serif), Georgia, serif; }
+
+@media (prefers-reduced-motion: reduce) {
+  .theme-lau-dai .ld-stars span, .theme-lau-dai .ld-flag, .theme-lau-dai .ld-lit { animation: none; }
+}
+
+@media (max-width: 380px) {
+  .theme-lau-dai .ld-fam-grid { gap: 26px; }
+  .theme-lau-dai .ld-event { padding-left: 14px; padding-right: 14px; }
+  .theme-lau-dai .ld-event-date strong { font-size: 46px; padding: 0 10px; }
+  .theme-lau-dai .ld-trio { gap: 7px; }
+  .theme-lau-dai .ld-moon { width: 42px; right: 16px; }
+}
