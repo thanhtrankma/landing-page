@@ -1,0 +1,61 @@
+/* Guest list & RSVP dashboard. */
+
+.gm { display: grid; gap: 16px; }
+.gm-loading, .gm-empty { color: var(--muted); text-align: center; padding: 30px 10px; background: #fff; border: 1px dashed var(--line-2); border-radius: 14px; margin: 0; }
+.gm-stats { display: grid; grid-template-columns: 1.6fr repeat(4, 1fr); gap: 10px; }
+.gm-stat { background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 14px; display: grid; align-content: center; justify-items: start; gap: 2px; }
+.gm-stat b { font-size: 26px; line-height: 1.1; }
+.gm-stat span { font-size: 12.5px; color: var(--muted); font-weight: 600; }
+.gm-stat.yes b { color: var(--ok); }
+.gm-stat.no b { color: var(--danger); }
+.gm-stat.big { grid-row: span 2; background: linear-gradient(160deg, #fff, var(--sky-100)); }
+.gm-stat.big b { font-size: 46px; color: var(--sky-700); }
+.gm-stat.big small { font-size: 12.5px; color: var(--ink-2); }
+.gm-stat.q { grid-column: span 2; }
+.gm-stat.q p { margin: 2px 0 0; font-weight: 600; font-size: 14px; }
+.gm-bar { width: 100%; height: 8px; border-radius: 999px; background: var(--line); overflow: hidden; margin: 8px 0 2px; }
+.gm-bar i { display: block; height: 100%; background: var(--accent); border-radius: 999px; }
+
+.gm-tabs { display: flex; align-items: center; gap: 4px; border-bottom: 1px solid var(--line); }
+.gm-tabs > button[role="tab"] { border: 0; background: none; padding: 10px 14px; font-weight: 600; font-size: 14px; color: var(--muted); border-bottom: 2px solid transparent; margin-bottom: -1px; }
+.gm-tabs > button.on { color: var(--ink); border-color: var(--accent); }
+.gm-export { margin-left: auto; }
+
+.gm-add { display: flex; gap: 8px; flex-wrap: wrap; }
+.gm-add input { flex: 1; min-width: 220px; height: 40px; border: 1px solid var(--line-2); border-radius: 10px; padding: 0 12px; font-size: 15px; background: #fff; }
+.gm-add input:focus { outline: none; border-color: var(--sky-500); box-shadow: 0 0 0 3px rgb(79 179 224 / 0.2); }
+.gm-groups { display: flex; gap: 6px; flex-wrap: wrap; }
+.gm-groups button { border: 1px solid var(--line-2); background: #fff; border-radius: 999px; padding: 6px 12px; font-size: 13px; font-weight: 600; color: var(--ink-2); }
+.gm-groups button.on { background: var(--sky-300); border-color: var(--sky-500); color: var(--ink); }
+.gm-groups button.add { border-style: dashed; }
+.gm-groups button.ghost { border-color: transparent; background: none; color: var(--accent); }
+.gm-groups button.ghost.danger { color: var(--danger); }
+.gm-bulk { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; padding: 10px 14px; border-radius: 12px; background: var(--sky-100); border: 1px solid var(--sky-300); }
+.gm-bulk select { border: 1px solid var(--line-2); border-radius: 9px; padding: 6px 10px; background: #fff; }
+
+.gm-list { list-style: none; margin: 0; padding: 0; background: #fff; border: 1px solid var(--line); border-radius: 16px; overflow: hidden; }
+.gm-list li { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-top: 1px solid var(--line); }
+.gm-list li:first-child { border-top: 0; }
+.gm-list li.sel { background: #f3f9fd; }
+.gm-list input[type="checkbox"] { width: 17px; height: 17px; accent-color: var(--accent); flex: none; }
+.gm-who { flex: 1; min-width: 0; display: grid; gap: 2px; }
+.gm-who b { font-size: 14.5px; }
+.gm-who small { color: var(--muted); font-size: 12px; overflow: hidden; text-overflow: ellipsis; }
+.gm-greet { font-style: italic; }
+.gm-chip { font-size: 12px; font-weight: 700; padding: 4px 10px; border-radius: 999px; background: #eef3f6; color: var(--ink-2); white-space: nowrap; }
+.gm-chip.yes { background: #e3f6ea; color: #17643a; }
+.gm-chip.no { background: #fdecea; color: #8e2a1f; }
+.gm-chip.maybe { background: #fff4d6; color: #7a5a00; }
+.gm-actions { display: flex; gap: 4px; flex: none; }
+.gm-textarea, .gm-edit input, .gm-edit select { width: 100%; border: 1px solid var(--line-2); border-radius: 10px; padding: 10px 12px; font-size: 15px; font-family: inherit; }
+.gm-edit { display: grid; gap: 12px; }
+
+@media (max-width: 900px) {
+  .gm-stats { grid-template-columns: repeat(2, 1fr); }
+  .gm-stat.big { grid-column: 1 / -1; grid-row: auto; }
+}
+@media (max-width: 640px) {
+  .gm-list li { flex-wrap: wrap; }
+  .gm-actions { width: 100%; justify-content: flex-end; }
+  .gm-export { font-size: 12px; }
+}

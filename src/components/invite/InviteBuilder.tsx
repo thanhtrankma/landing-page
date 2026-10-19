@@ -280,8 +280,8 @@ export default function InviteBuilder({ initial, invite: savedInvite }: Props) {
 
           <Section id="couple" title="Cô dâu & chú rể" hint={inviteTitle(data)} open={open === "couple"} onToggle={toggle}>
             <div className="ib-grid2">
-              <Text label="Tên chú rể (ngắn)" value={data.groomName} onChange={(v) => update({ groomName: v })} placeholder="Minh Anh" max={60} />
-              <Text label="Tên cô dâu (ngắn)" value={data.brideName} onChange={(v) => update({ brideName: v })} placeholder="Thu Hà" max={60} />
+              <Text label="Tên chú rể (ngắn)" value={data.groomName} onChange={(v) => update({ groomName: v })} placeholder="Dũng Thành" max={60} />
+              <Text label="Tên cô dâu (ngắn)" value={data.brideName} onChange={(v) => update({ brideName: v })} placeholder="Thuỳ Trang" max={60} />
             </div>
             <div className="ib-grid2">
               <Text label="Họ tên đầy đủ chú rể" value={data.groomFullName} onChange={(v) => update({ groomFullName: v })} max={80} />
@@ -360,7 +360,7 @@ export default function InviteBuilder({ initial, invite: savedInvite }: Props) {
           </Section>
 
           <Section id="rsvp" title="Lời chúc & xác nhận tham dự" hint={data.rsvp.enabled ? "Đang nhận" : "Đang tắt"} open={open === "rsvp"} onToggle={toggle}>
-            <Toggle label="Cho khách gửi lời chúc và xác nhận tham dự" checked={data.rsvp.enabled} onChange={(v) => update({ rsvp: { enabled: v } })} hint="Lời chúc hiện công khai trên thiệp; bạn có thể ẩn từng lời chúc." />
+            <Toggle label="Cho khách gửi lời chúc và xác nhận tham dự" checked={data.rsvp.enabled} onChange={(v) => update({ rsvp: { ...data.rsvp, enabled: v } })} hint="Lời chúc hiện công khai trên thiệp; bạn có thể ẩn từng lời chúc." />
             {invite ? <WishesPanel inviteId={invite.id} onError={onError} /> : <p className="ib-muted">Lưu thiệp để bắt đầu nhận lời chúc.</p>}
           </Section>
 

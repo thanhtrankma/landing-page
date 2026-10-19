@@ -1,7 +1,8 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
-import { mapsLink, parseDate, type BankInfo, type InviteData, type InviteEvent, type PublicWish } from "@/lib/invites/types";
+import { mapsLink, parseDate, VIETQR_BANKS, vietQrUrl, type BankInfo, type InviteData, type InviteEvent, type PublicWish } from "@/lib/invites/types";
+import { T } from "./lang";
 
 // Building blocks shared by every invitation theme. Themes arrange them and restyle them with CSS.
 
@@ -53,10 +54,19 @@ export function Countdown({ date }: { date: string }) {
   const parts = left === null ? ["--", "--", "--", "--"] : [Math.floor(left / 864e5), Math.floor(left / 36e5) % 24, Math.floor(left / 6e4) % 60, Math.floor(left / 1e3) % 60].map((n) => String(n).padStart(2, "0"));
   return (
     <div className="iv-countdown" aria-label="Đếm ngược đến ngày cưới">
-      {["Ngày", "Giờ", "Phút", "Giây"].map((label, i) => (
-        <div key={label}>
+      {(
+        [
+          ["Ngày", "Days"],
+          ["Giờ", "Hours"],
+          ["Phút", "Mins"],
+          ["Giây", "Secs"],
+        ] as const
+      ).map(([vi, en], i) => (
+        <div key={vi}>
           <b>{parts[i]}</b>
-          <span>{label}</span>
+          <span>
+            <T vi={vi} en={en} />
+          </span>
         </div>
       ))}
     </div>
@@ -114,11 +124,17 @@ export const calendarLink = (e: InviteEvent, title: string) => {
   return `https://calendar.google.com/calendar/render?${q}`;
 };
 
+const mapEmbed = (e: InviteEvent) => {
+  const q = [e.venue, e.address].filter(Boolean).join(", ");
+  return q ? `https://maps.google.com/maps?q=${encodeURIComponent(q)}&z=15&output=embed` : "";
+};
+
 export function EventCard({ e, title }: { e: InviteEvent; title: string }) {
   const p = parseDate(e.date);
   const map = mapsLink(e);
+  const embed = e.showMap ? mapEmbed(e) : "";
   return (
-    <article className="iv-event iv-reveal">
+    <article className={`iv-event iv-reveal ${e.kind}`}>
       <h3>{e.title || "Sự kiện"}</h3>
       <p className="iv-event-time">
         {e.time}
@@ -134,17 +150,32 @@ export function EventCard({ e, title }: { e: InviteEvent; title: string }) {
         </p>
       )}
       {e.lunar && <p className="iv-event-lunar">{e.lunar}</p>}
+      {(e.welcomeTime || e.startTime) && (
+        <p className="iv-event-sub">
+          {e.welcomeTime && (
+            <span>
+              <T vi="Đón khách" en="Welcome" /> {e.welcomeTime}
+            </span>
+          )}
+          {e.startTime && (
+            <span>
+              <T vi="Khai tiệc" en="Dinner" /> {e.startTime}
+            </span>
+          )}
+        </p>
+      )}
       {e.venue && <p className="iv-event-venue">{e.venue}</p>}
       {e.address && <p className="iv-event-address">{e.address}</p>}
+      {embed && <iframe className="iv-event-map" src={embed} title={`Bản đồ ${e.venue || e.title}`} loading="lazy" referrerPolicy="no-referrer-when-downgrade" />}
       <div className="iv-event-actions">
         {map && (
           <a href={map} target="_blank" rel="noopener noreferrer">
-            Chỉ đường
+            <T vi="Chỉ đường" en="Directions" />
           </a>
         )}
         {p && (
           <a href={calendarLink(e, title)} target="_blank" rel="noopener noreferrer">
-            Lưu vào lịch
+            <T vi="Lưu vào lịch" en="Add to calendar" />
           </a>
         )}
       </div>
@@ -155,14 +186,16 @@ export function EventCard({ e, title }: { e: InviteEvent; title: string }) {
 export function BankCard({ who, b }: { who: string; b: BankInfo }) {
   const [copied, setCopied] = useState(false);
   if (!b.account && !b.qr) return null;
+  const qr = b.qr || vietQrUrl(b);
+  const bankName = b.bank || VIETQR_BANKS.find(([c]) => c === b.code)?.[1] || "";
   return (
     <div className="iv-bank iv-reveal">
       <h4>{who}</h4>
-      {b.qr && (
+      {qr && (
         // eslint-disable-next-line @next/next/no-img-element
-        <img src={b.qr} alt={`Mã QR mừng cưới ${who}`} loading="lazy" />
+        <img src={qr} alt={`Mã QR mừng cưới ${who}`} loading="lazy" />
       )}
-      {b.bank && <p className="iv-bank-name">{b.bank}</p>}
+      {bankName && <p className="iv-bank-name">{bankName}</p>}
       {b.account && (
         <button
           type="button"

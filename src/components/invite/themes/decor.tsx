@@ -7,10 +7,11 @@ const r2 = (n: number) => Math.round(n * 100) / 100;
 const petals = (cx: number, cy: number, r: number, n: number, fill: string, rot = 0) =>
   Array.from({ length: n }, (_, i) => {
     const a = (360 / n) * i + rot;
-    return <ellipse key={i} cx={cx} cy={cy - r} rx={r * 0.55} ry={r} fill={fill} transform={`rotate(${a} ${cx} ${cy})`} />;
+    return <ellipse key={i} cx={cx} cy={cy - r} rx={r * 0.55} ry={r} style={{ fill }} transform={`rotate(${a} ${cx} ${cy})`} />;
   });
 
-export function Rose({ className = "", tone = "#e98a9b" }: { className?: string; tone?: string }) {
+/** Flower colours follow the theme's palette (--pb-* vars) when set, else the original pinks. */
+export function Rose({ className = "", tone = "var(--pb-rose, #e98a9b)" }: { className?: string; tone?: string }) {
   return (
     <svg className={className} viewBox="0 0 120 170" aria-hidden="true">
       <path d="M60 78 C 57 108, 64 136, 57 168" stroke="#6f8f5e" strokeWidth="3" fill="none" strokeLinecap="round" />
@@ -18,9 +19,9 @@ export function Rose({ className = "", tone = "#e98a9b" }: { className?: string;
       <path d="M61 140 C 82 126, 98 132, 104 146 C 86 150, 70 148, 61 140 Z" fill="#8db07a" />
       <g opacity="0.95">
         {petals(60, 50, 26, 7, tone)}
-        {petals(60, 50, 18, 6, "#f4b3bf", 25)}
-        {petals(60, 50, 10, 5, "#fbd6dd", 10)}
-        <circle cx="60" cy="50" r="5" fill="#d4687c" />
+        {petals(60, 50, 18, 6, "var(--pb-rose-2, #f4b3bf)", 25)}
+        {petals(60, 50, 10, 5, "var(--pb-rose-3, #fbd6dd)", 10)}
+        <circle cx="60" cy="50" r="5" style={{ fill: "var(--pb-rose-core, #d4687c)" }} />
       </g>
     </svg>
   );
@@ -100,8 +101,8 @@ export function HeartLine({ className = "" }: { className?: string }) {
 export function GiftBox({ className = "" }: { className?: string }) {
   return (
     <svg className={className} viewBox="0 0 160 150" aria-hidden="true">
-      <rect x="22" y="62" width="116" height="80" rx="6" fill="#f3a3b2" />
-      <rect x="14" y="46" width="132" height="26" rx="5" fill="#f7b9c5" />
+      <rect x="22" y="62" width="116" height="80" rx="6" style={{ fill: "var(--pb-box, #f3a3b2)" }} />
+      <rect x="14" y="46" width="132" height="26" rx="5" style={{ fill: "var(--pb-box-lid, #f7b9c5)" }} />
       <rect x="72" y="46" width="16" height="96" fill="#fbe2a6" />
       <path d="M80 46 C 60 18, 34 22, 42 40 C 48 50, 66 48, 80 46 Z" fill="#fbe2a6" stroke="#e9c77a" strokeWidth="2" />
       <path d="M80 46 C 100 18, 126 22, 118 40 C 112 50, 94 48, 80 46 Z" fill="#fbe2a6" stroke="#e9c77a" strokeWidth="2" />

@@ -1,18 +1,26 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useRef, useState, type ComponentType } from "react";
-import { parseDate, type InviteData, type InviteTheme, type PublicWish } from "@/lib/invites/types";
-import { initials, Petals, SongHy, Wishes } from "./parts";
+import { useEffect, useRef, useState, type ComponentType, type CSSProperties } from "react";
+import { parseDate, themeVariant, type InviteData, type InviteTheme, type PublicWish } from "@/lib/invites/types";
+// Base styles first: each theme component imports its own stylesheet, which must load after these.
+import "./invitation.css";
+import "./themes/themes.css";
+import { initials, Petals, SongHy } from "./parts";
+import { InviteCtx, type GuestInfo } from "./lang";
+import { DressCode, Guestbook, Rsvp, Schedule } from "./sections";
 import DongNoiTheme from "./themes/DongNoi";
 import PhongBiHongTheme from "./themes/PhongBiHong";
 import SongHyTheme from "./themes/SongHy";
 import ToiGianTheme from "./themes/ToiGian";
 import VangDoTheme from "./themes/VangDo";
 import DoDoTheme from "./themes/DoDo";
+import LongPhungTheme from "./themes/LongPhung";
+import HoangKimTheme from "./themes/HoangKim";
+import BaroqueTheme from "./themes/Baroque";
+import MauNuocTheme from "./themes/MauNuoc";
+import CoPhucTheme from "./themes/CoPhuc";
 import type { ThemeCtx } from "./themes/types";
-import "./invitation.css";
-import "./themes/themes.css";
 
 // The online wedding invitation: a mobile-first page shared by link. This shell owns the intro screen, music,
 // petals and scroll reveal; the chosen theme lays out the sections. Rendered by /thiep/[slug] and, with
@@ -20,9 +28,10 @@ import "./themes/themes.css";
 
 export type InvitationProps = {
   data: InviteData;
-  /** Public slug: enables the wishes form. Null for the builder preview and the demos. */
+  /** Public slug: enables the RSVP and guestbook forms. Null for the builder preview and the demos. */
   slug?: string | null;
-  guest?: string;
+  /** A personal link's guest (?k=code), or a plain name from ?khach=. */
+  guest?: GuestInfo | string;
   initialWishes?: PublicWish[];
   preview?: boolean;
   demo?: boolean;
@@ -35,6 +44,11 @@ const THEMES: Record<InviteTheme, ComponentType<ThemeCtx>> = {
   "dong-noi": DongNoiTheme,
   "vang-do": VangDoTheme,
   "do-do": DoDoTheme,
+  "long-phung": LongPhungTheme,
+  "hoang-kim": HoangKimTheme,
+  baroque: BaroqueTheme,
+  "mau-nuoc": MauNuocTheme,
+  "co-phuc": CoPhucTheme,
 };
 
 const Heart = () => (
@@ -43,13 +57,35 @@ const Heart = () => (
   </svg>
 );
 
-export default function Invitation({ data: d, slug, guest, initialWishes = [], preview = false, demo = false }: InvitationProps) {
+/** Bride's side first: swap what the themes read as "first" (groom*) and "second" (bride*). */
+function brideFirst(d: InviteData): InviteData {
+  return {
+    ...d,
+    groomName: d.brideName,
+    brideName: d.groomName,
+    groomFullName: d.brideFullName,
+    brideFullName: d.groomFullName,
+    groomTitle: d.brideTitle,
+    brideTitle: d.groomTitle,
+    groomFamily: d.brideFamily,
+    brideFamily: d.groomFamily,
+    en: { ...d.en, groomFamily: d.en.brideFamily, brideFamily: d.en.groomFamily },
+  };
+}
+
+export default function Invitation({ data: raw, slug = null, guest, initialWishes = [], preview = false, demo = false }: InvitationProps) {
+  const guestInfo = typeof guest === "object" ? guest : null;
+  // A personal greeting replaces the general invitation line for that guest.
+  const withGreeting = guestInfo?.greeting ? { ...raw, inviteLine: guestInfo.greeting, en: { ...raw.en, inviteLine: "" } } : raw;
+  const d = raw.groomFirst ? withGreeting : brideFirst(withGreeting);
   const root = useRef<HTMLDivElement>(null);
   const audio = useRef<HTMLAudioElement>(null);
   // Without the intro the card is open from the start (and music waits for the first tap).
   const [opened, setOpened] = useState(preview || !d.intro);
   const [playing, setPlaying] = useState(false);
   const Theme = THEMES[d.theme] ?? SongHyTheme;
+  const variant = themeVariant(d.theme, d.color);
+  const paletteVars = { "--c1": variant.c1, ...(variant.c2 ? { "--c2": variant.c2 } : {}) } as CSSProperties;
 
   const date = parseDate(d.date);
   const title = `${d.groomName} & ${d.brideName}`;
@@ -64,12 +100,19 @@ export default function Invitation({ data: d, slug, guest, initialWishes = [], p
     title,
     date,
     mono: initials(d),
-    guestName: guest?.trim() || d.defaultGuest || "Quý khách",
+    guestName: (typeof guest === "string" ? guest : guest?.name)?.trim() || d.defaultGuest || "Quý khách",
     highlights: d.highlights.some(Boolean) ? d.highlights : [d.cover, d.couplePhoto, d.cover],
     mainEvent: d.events.find((e) => e.date === d.date) ?? d.events[0],
-    wishes: d.rsvp.enabled ? (
-      <Wishes slug={slug} initial={initialWishes} disabledNote={preview ? "Bản xem trước: form sẽ hoạt động khi thiệp được chia sẻ." : demo ? "Đây là thiệp mẫu, form chưa gửi được." : undefined} />
-    ) : null,
+    show: d.show,
+    labels: raw.groomFirst ? { first: "Chú rể", second: "Cô dâu" } : { first: "Cô dâu", second: "Chú rể" },
+    wishes: (
+      <>
+        {d.show.schedule && <Schedule />}
+        {d.show.dressCode && <DressCode />}
+        {d.show.rsvp && d.rsvp.enabled && <Rsvp />}
+        {d.show.guestbook && <Guestbook initial={initialWishes} />}
+      </>
+    ),
   };
 
   // Fade sections in as they scroll into view (skipped in the builder so edits show at once).
@@ -87,7 +130,21 @@ export default function Invitation({ data: d, slug, guest, initialWishes = [], p
       { rootMargin: "0px 0px -8% 0px" },
     );
     els.forEach((el) => io.observe(el));
-    return () => io.disconnect();
+    // Blocks mounted later (bank cards behind "Gửi mừng cưới", new wishes…) must be revealed too.
+    const mo = new MutationObserver((records) =>
+      records.forEach((r) =>
+        r.addedNodes.forEach((n) => {
+          if (!(n instanceof Element)) return;
+          if (n.matches(".iv-reveal:not(.in)")) io.observe(n);
+          n.querySelectorAll(".iv-reveal:not(.in)").forEach((el) => io.observe(el));
+        }),
+      ),
+    );
+    if (root.current) mo.observe(root.current, { childList: true, subtree: true });
+    return () => {
+      io.disconnect();
+      mo.disconnect();
+    };
   }, [preview, opened, d.theme]);
 
   // Browsers only allow sound after a user gesture: with no "Mở thiệp" button, use the first tap anywhere.
@@ -122,11 +179,12 @@ export default function Invitation({ data: d, slug, guest, initialWishes = [], p
   };
 
   return (
-    <div ref={root} className={`iv theme-${d.theme} ${preview ? "preview" : ""} ${opened ? "opened" : ""}`}>
+    <InviteCtx.Provider value={{ d, guest: guestInfo, slug, preview, demo }}>
+    <div ref={root} className={`iv theme-${d.theme} ${preview ? "preview" : ""} ${opened ? "opened" : ""}`} style={paletteVars}>
       {!opened && d.intro && (
         <div className="iv-intro" role="dialog" aria-label="Thiệp mời cưới">
           <div className="iv-intro-card">
-            {d.theme === "song-hy" ? <SongHy size={72} /> : <Heart />}
+            {["song-hy", "long-phung"].includes(d.theme) ? <SongHy size={72} /> : <Heart />}
             <p className="iv-intro-kicker">Thiệp mời cưới</p>
             <h1 className="iv-script">{names}</h1>
             {date && (
@@ -145,7 +203,7 @@ export default function Invitation({ data: d, slug, guest, initialWishes = [], p
         </div>
       )}
 
-      {d.petals && opened && <Petals kind={["song-hy", "vang-do", "do-do"].includes(d.theme) ? "hearts" : "petals"} />}
+      {d.petals && opened && <Petals kind={["song-hy", "vang-do", "do-do", "long-phung"].includes(d.theme) ? "hearts" : "petals"} />}
       {d.music.src && <audio ref={audio} src={d.music.src} loop preload="none" onPause={() => setPlaying(false)} onPlay={() => setPlaying(true)} />}
       {d.music.src && opened && (
         <button type="button" className={`iv-music ${playing ? "on" : ""}`} onClick={(e) => { e.stopPropagation(); toggleMusic(); }} onPointerDown={(e) => e.stopPropagation()} aria-label={playing ? "Tắt nhạc" : "Bật nhạc"} title={d.music.title || "Nhạc nền"}>
@@ -162,5 +220,6 @@ export default function Invitation({ data: d, slug, guest, initialWishes = [], p
         </footer>
       </main>
     </div>
+    </InviteCtx.Provider>
   );
 }

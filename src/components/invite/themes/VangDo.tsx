@@ -1,9 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { mapsLink, parseDate, type InviteEvent } from "@/lib/invites/types";
 import { Calendar, EventCard, Gallery, GiftReveal, Photo } from "../parts";
 import { HeartLine } from "./decor";
+import { Announce, Bi, FamilyTitle } from "../lang";
 import type { ThemeCtx } from "./types";
 
 // "Đỏ rượu vang" (after LoveCard mẫu 32): a big cover photo fading to white, burgundy pages in white type,
@@ -41,19 +41,11 @@ function BigDate({ e }: { e: InviteEvent }) {
   );
 }
 
-export default function VangDoTheme({ d, names, title, date, mono, guestName, highlights, wishes, mainEvent }: ThemeCtx) {
-  const [rsvpOpen, setRsvpOpen] = useState(false);
+export default function VangDoTheme({ d, names, title, date, mono, guestName, highlights, wishes, mainEvent, show, labels }: ThemeCtx) {
   const others = d.events.filter((e) => e !== mainEvent);
   const place = mainEvent && (mainEvent.venue || mainEvent.address) ? mainEvent : d.events.find((e) => e.venue || e.address);
   const embed = place ? mapEmbed(place) : "";
   const trio = [d.couplePhoto, highlights[2], d.cover];
-
-  useEffect(() => {
-    if (!rsvpOpen) return;
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setRsvpOpen(false);
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [rsvpOpen]);
 
   return (
     <>
@@ -75,24 +67,25 @@ export default function VangDoTheme({ d, names, title, date, mono, guestName, hi
         </div>
       </section>
 
-      <section className="iv-sec vd-red vd-intro">
-        {d.quote && <p className="vd-quote iv-reveal">“{d.quote}</p>}
-        <div className="vd-families">
+      {(show.families || (show.invite && d.quote)) && <section className="iv-sec vd-red vd-intro">
+        {show.invite && d.quote && <p className="vd-quote iv-reveal">“<Bi k="quote" /></p>}
+        {show.families && <div className="vd-families">
           {[d.groomFamily, d.brideFamily].map((f, i) => (
             <div key={i} className="iv-reveal">
-              <h2>{f.title}</h2>
+              <h2><FamilyTitle which={i ? "brideFamily" : "groomFamily"} /></h2>
               <p className="vd-parents">{f.parents}</p>
               {f.address && <p className="vd-addr">{f.address}</p>}
             </div>
           ))}
-        </div>
+        </div>}
         <HeartLine className="vd-heart" />
-      </section>
+      </section>}
 
-      <section className="iv-sec vd-red vd-couple">
+      {show.couple && <section className="iv-sec vd-red vd-couple">
+        <Announce className="vd-announce" />
         {[
-          { label: "Chú rể", name: d.groomFullName || d.groomName, photo: highlights[0] },
-          { label: "Cô dâu", name: d.brideFullName || d.brideName, photo: highlights[1] },
+          { label: labels.first, name: d.groomFullName || d.groomName, photo: highlights[0] },
+          { label: labels.second, name: d.brideFullName || d.brideName, photo: highlights[1] },
         ].map((p) => (
           <figure key={p.label} className="iv-reveal">
             <figcaption>
@@ -102,27 +95,27 @@ export default function VangDoTheme({ d, names, title, date, mono, guestName, hi
             <Photo src={p.photo} alt={`${p.label} ${p.name}`} mono={mono} />
           </figure>
         ))}
-      </section>
+      </section>}
 
-      <section className="iv-sec vd-red vd-invite">
-        <p className="vd-invite-heading iv-reveal">{d.inviteHeading}</p>
+      {show.invite && <section className="iv-sec vd-red vd-invite">
+        <p className="vd-invite-heading iv-reveal"><Bi k="inviteHeading" /></p>
         <p className="vd-guest iv-reveal">{guestName}</p>
-        <p className="vd-invite-heading iv-reveal">{d.inviteLine}</p>
+        <p className="vd-invite-heading iv-reveal"><Bi k="inviteLine" /></p>
         <div className="vd-trio iv-reveal">
           {trio.map((src, i) => (
             <Photo key={i} src={src} alt={`Ảnh cưới ${i + 1}`} mono={mono} />
           ))}
         </div>
-      </section>
+      </section>}
 
-      <section className="iv-sec vd-red vd-events">
+      {show.events && <section className="iv-sec vd-red vd-events">
         {mainEvent && <BigDate e={mainEvent} />}
         {others.map((e) => (
           <EventCard key={e.id} e={e} title={title} />
         ))}
-      </section>
+      </section>}
 
-      {date && (
+      {show.calendar && date && (
         <section className="iv-sec vd-red vd-when">
           <div className="vd-cal-title iv-reveal">
             <span>Tháng {date.m}</span>
@@ -134,7 +127,7 @@ export default function VangDoTheme({ d, names, title, date, mono, guestName, hi
         </section>
       )}
 
-      {place && (
+      {show.events && place && (
         <section className="iv-sec vd-red vd-place">
           <h2 className="vd-script iv-reveal">Địa điểm tổ chức</h2>
           <div className="vd-place-card iv-reveal">
@@ -148,38 +141,31 @@ export default function VangDoTheme({ d, names, title, date, mono, guestName, hi
         </section>
       )}
 
-      {d.gallery.length > 0 && (
+      {show.gallery && d.gallery.length > 0 && (
         <section className="iv-sec vd-red vd-album">
           <h2 className="vd-script iv-reveal">Album ảnh cưới</h2>
           <Gallery photos={d.gallery} mono={mono} />
         </section>
       )}
 
-      <section className="iv-sec iv-thanks vd-thanks">
-        <Photo src={d.thanksPhoto || d.cover} alt="" mono="" className="iv-thanks-bg" />
-        <div className="iv-thanks-body">
-          <div className="vd-actions">
-            {d.rsvp.enabled && (
-              <button type="button" className="vd-pill light" onClick={() => setRsvpOpen(true)}>
-                Xác nhận tham dự
-              </button>
-            )}
-            {d.gift.enabled && <GiftReveal groom={d.gift.groom} bride={d.gift.bride} />}
-          </div>
-          <h2 className="iv-script iv-reveal">Thank you</h2>
-          <p className="iv-reveal">{d.thanks}</p>
-        </div>
-      </section>
+      <div className="vd-red vd-shared">{wishes}</div>
 
-      {rsvpOpen && wishes && (
-        <div className="vd-modal" role="dialog" aria-modal="true" aria-label="Xác nhận tham dự" onClick={(e) => e.target === e.currentTarget && setRsvpOpen(false)}>
-          <div className="vd-modal-box">
-            <button type="button" className="vd-modal-close" onClick={() => setRsvpOpen(false)} aria-label="Đóng">
-              ×
-            </button>
-            {wishes}
+      {show.gift && d.gift.enabled && (
+        <section className="iv-sec vd-red vd-gift">
+          <div className="vd-actions">
+            <GiftReveal groom={d.gift.groom} bride={d.gift.bride} />
           </div>
-        </div>
+        </section>
+      )}
+
+      {show.thanks && (
+        <section className="iv-sec iv-thanks vd-thanks">
+          <Photo src={d.thanksPhoto || d.cover} alt="" mono="" className="iv-thanks-bg" />
+          <div className="iv-thanks-body">
+            <h2 className="iv-script iv-reveal">Thank you</h2>
+            <p className="iv-reveal"><Bi k="thanks" /></p>
+          </div>
+        </section>
       )}
     </>
   );

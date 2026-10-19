@@ -3,10 +3,11 @@
 import { lunarLabel } from "@/lib/invites/lunar";
 import { BankCard, Calendar, Countdown, EventCard, Gallery, Photo } from "../parts";
 import { Tulip } from "./decor";
+import { Announce, Bi, FamilyTitle } from "../lang";
 import type { ThemeCtx } from "./types";
 
 // "Tối giản trắng": white paper, black calligraphy, blush watercolour washes and a line-art tulip.
-export default function ToiGianTheme({ d, names, title, date, mono, guestName, highlights, wishes, mainEvent }: ThemeCtx) {
+export default function ToiGianTheme({ d, names, title, date, mono, guestName, highlights, wishes, mainEvent, show, labels }: ThemeCtx) {
   return (
     <>
       <section className="iv-sec tg-hero">
@@ -34,16 +35,18 @@ export default function ToiGianTheme({ d, names, title, date, mono, guestName, h
         <Tulip className="tg-tulip" />
       </section>
 
-      {d.quote && (
+      {show.invite && d.quote && (
         <section className="iv-sec tg-quote">
-          <p className="iv-script iv-reveal">{d.quote}</p>
+          <p className="iv-script iv-reveal"><Bi k="quote" /></p>
         </section>
       )}
 
+      {show.couple && (
       <section className="iv-sec tg-couple">
+        <Announce className="tg-announce" />
         {[
-          { label: "Chú rể", name: d.groomFullName || d.groomName, photo: highlights[0] },
-          { label: "Cô dâu", name: d.brideFullName || d.brideName, photo: highlights[1] },
+          { label: labels.first, name: d.groomFullName || d.groomName, photo: highlights[0] },
+          { label: labels.second, name: d.brideFullName || d.brideName, photo: highlights[1] },
         ].map((p) => (
           <figure key={p.label} className="tg-person iv-reveal">
             <Photo src={p.photo} alt={`${p.label} ${p.name}`} mono={mono} />
@@ -54,27 +57,32 @@ export default function ToiGianTheme({ d, names, title, date, mono, guestName, h
           </figure>
         ))}
       </section>
+      )}
 
+      {show.families && (
       <section className="iv-sec iv-families tg-families">
         {[d.groomFamily, d.brideFamily].map((f, i) => (
           <div key={i} className="iv-family iv-reveal">
-            <h2>{f.title}</h2>
+            <h2><FamilyTitle which={i ? "brideFamily" : "groomFamily"} /></h2>
             <p className="iv-parents">{f.parents}</p>
             {f.address && <p className="iv-addr">{f.address}</p>}
           </div>
         ))}
       </section>
+      )}
 
+      {show.invite && (
       <section className="iv-sec tg-invite">
-        <p className="tg-invite-heading iv-reveal">{d.inviteHeading}</p>
+        <p className="tg-invite-heading iv-reveal"><Bi k="inviteHeading" /></p>
         <p className="iv-script tg-guest iv-reveal">{guestName}</p>
-        <p className="tg-invite-line iv-reveal">{d.inviteLine}</p>
+        <p className="tg-invite-line iv-reveal"><Bi k="inviteLine" /></p>
         <div className="tg-wide iv-reveal">
           <Photo src={d.couplePhoto || highlights[2]} alt={`Ảnh cưới ${title}`} mono={mono} />
         </div>
       </section>
+      )}
 
-      {d.events.length > 0 && (
+      {show.events && d.events.length > 0 && (
         <section className="iv-sec iv-events tg-events">
           {d.events.map((e) => (
             <EventCard key={e.id} e={e} title={title} />
@@ -82,24 +90,30 @@ export default function ToiGianTheme({ d, names, title, date, mono, guestName, h
         </section>
       )}
 
+      {(show.calendar || show.countdown) && (
       <section className="iv-sec iv-when tg-when-sec">
         <p className="iv-kicker iv-reveal">Save the date</p>
-        <div className="iv-reveal">
-          <Calendar date={d.date} />
-        </div>
-        <div className="iv-reveal">
-          <Countdown date={d.date} />
-        </div>
+        {show.calendar && (
+          <div className="iv-reveal">
+            <Calendar date={d.date} />
+          </div>
+        )}
+        {show.countdown && (
+          <div className="iv-reveal">
+            <Countdown date={d.date} />
+          </div>
+        )}
       </section>
+      )}
 
-      {d.gallery.length > 0 && (
+      {show.gallery && d.gallery.length > 0 && (
         <section className="iv-sec iv-album tg-album">
           <h2 className="iv-script iv-reveal">Album</h2>
           <Gallery photos={d.gallery} mono={mono} />
         </section>
       )}
 
-      {d.gift.enabled && (
+      {show.gift && d.gift.enabled && (
         <section className="iv-sec iv-gift tg-gift">
           <h2 className="iv-script iv-reveal">Mừng cưới</h2>
           <p className="iv-gift-sub iv-reveal">Cảm ơn tấm lòng của bạn dành cho chúng mình.</p>
@@ -112,13 +126,15 @@ export default function ToiGianTheme({ d, names, title, date, mono, guestName, h
 
       {wishes}
 
+      {show.thanks && (
       <section className="iv-sec iv-thanks">
         <Photo src={d.thanksPhoto || d.cover} alt="" mono="" className="iv-thanks-bg" />
         <div className="iv-thanks-body">
           <h2 className="iv-script iv-reveal">Thank you</h2>
-          <p className="iv-reveal">{d.thanks}</p>
+          <p className="iv-reveal"><Bi k="thanks" /></p>
         </div>
       </section>
+      )}
     </>
   );
 }

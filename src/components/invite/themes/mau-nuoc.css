@@ -1,0 +1,258 @@
+/* ════════════════════ HOA MÀU NƯỚC ════════════════════
+   White watercolour paper, painted peonies (--c1) and eucalyptus (--c2). Every colour is --c1, --c2, a neutral,
+   or a color-mix() of them, so the variants in INVITE_THEMES recolour the whole card.
+   Selectors are scoped as .theme-mau-nuoc … (two classes) because this file loads before invitation.css. */
+
+.iv.theme-mau-nuoc {
+  --c1: #c98a8f;
+  --c2: #8aa58a;
+  /* readable accents: the paint colour pulled toward a warm dark ink */
+  --mn-accent: color-mix(in srgb, var(--c1) 66%, #2b2424);
+  --mn-deep: color-mix(in srgb, var(--c1) 62%, #2b2424);
+  --mn-leaf: color-mix(in srgb, var(--c2) 62%, #2b2b28);
+  --mn-line: color-mix(in srgb, var(--c1) 28%, #fff);
+  --iv-red: var(--mn-accent);
+  --iv-red-dark: var(--mn-deep);
+  --iv-gold: var(--c2);
+  --iv-gold-soft: color-mix(in srgb, var(--c2) 22%, #fff);
+  --iv-cream: #fbfaf7;
+  --iv-paper: #fff;
+  --iv-ink: color-mix(in srgb, var(--c1) 12%, #2e2a2a);
+  --iv-muted: color-mix(in srgb, var(--c1) 16%, #7a7473);
+  --mn-paper: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.42 0 0 0 0 0.4 0 0 0 0 0.38 0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
+  color: var(--iv-ink);
+  background:
+    radial-gradient(60% 40% at 10% 0%, color-mix(in srgb, var(--c1) 16%, transparent), transparent 70%),
+    radial-gradient(50% 40% at 100% 100%, color-mix(in srgb, var(--c2) 16%, transparent), transparent 70%),
+    #f3f1ed;
+}
+.theme-mau-nuoc .iv-page { background: var(--mn-paper), var(--iv-cream); box-shadow: 0 0 60px rgb(40 30 30 / 0.12); }
+
+/* shared bits */
+.theme-mau-nuoc .mn-wash { position: absolute; pointer-events: none; z-index: 0; height: auto; overflow: visible; }
+.theme-mau-nuoc .mn-hero > :not(.mn-wash),
+.theme-mau-nuoc .mn-couple > :not(.mn-wash),
+.theme-mau-nuoc .mn-when > :not(.mn-wash) { position: relative; z-index: 1; }
+.theme-mau-nuoc .mn-rule { display: block; width: 160px; height: 24px; margin: 0 auto; }
+.theme-mau-nuoc .mn-title { display: grid; justify-items: center; font-weight: 400; margin: 0 0 22px; }
+.theme-mau-nuoc .mn-title span { font-family: var(--iv-script), cursive; font-size: clamp(40px, 11.5vw, 50px); line-height: 1.1; color: var(--mn-accent); }
+.theme-mau-nuoc .mn-title small { font-family: var(--iv-sans), sans-serif; font-size: 11px; letter-spacing: 0.34em; text-transform: uppercase; color: var(--iv-muted); margin-top: 2px; }
+.theme-mau-nuoc .mn-title .iv-en { font-family: var(--iv-sans), sans-serif; font-size: 12px; letter-spacing: 0.1em; color: var(--iv-muted); }
+.theme-mau-nuoc .iv-announce { font-family: var(--iv-serif), Georgia, serif; font-style: italic; font-size: 15px; color: var(--iv-muted); max-width: 300px; margin: 0 auto 6px; }
+
+/* ── hero: arch photo wrapped in painted flowers ── */
+.theme-mau-nuoc .mn-hero { position: relative; overflow: hidden; text-align: center; padding: 44px 26px 50px; }
+.theme-mau-nuoc .mn-wash-a { width: 150%; left: -62%; top: -12%; }
+.theme-mau-nuoc .mn-wash-b { width: 120%; right: -58%; top: 28%; }
+.theme-mau-nuoc .mn-kicker {
+  display: inline-flex; flex-direction: column; align-items: center;
+  font-family: var(--iv-sans), sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 0.42em; text-transform: uppercase; color: var(--iv-muted);
+}
+.theme-mau-nuoc .mn-kicker .iv-en { letter-spacing: 0.16em; }
+.theme-mau-nuoc .mn-arch { position: relative; width: 74%; aspect-ratio: 220 / 300; margin: 26px auto 0; }
+.theme-mau-nuoc .mn-arch-photo { position: absolute; left: 4.55%; right: 4.55%; top: 3.33%; bottom: 0; border-radius: 999px 999px 0 0; background: #f4efea; }
+.theme-mau-nuoc .mn-arch-lines { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.theme-mau-nuoc .mn-arch-bouquet { position: absolute; width: 126%; left: -46%; bottom: -24%; transform: rotate(-10deg); transform-origin: 55% 55%; }
+.theme-mau-nuoc .mn-arch-spray { position: absolute; width: 58%; right: -22%; top: -7%; transform: scale(-1, -1); }
+.theme-mau-nuoc .mn-names { display: grid; justify-items: center; margin: 54px 0 0; font-weight: 400; line-height: 1; }
+.theme-mau-nuoc .mn-names span { font-family: var(--iv-script), cursive; font-size: clamp(46px, 14vw, 64px); color: var(--mn-accent); padding: 0 6px; }
+.theme-mau-nuoc .mn-names i { font-family: var(--iv-thin), cursive; font-style: normal; font-size: clamp(32px, 9vw, 40px); color: var(--mn-leaf); margin: -2px 0 -6px; }
+.theme-mau-nuoc .mn-datebar { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 14px; max-width: 330px; margin: 26px auto 0; }
+.theme-mau-nuoc .mn-datebar span {
+  font-family: var(--iv-sans), sans-serif; font-size: clamp(10px, 2.9vw, 11.5px); font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--iv-ink);
+  padding: 8px 0; border-top: 1px solid var(--mn-line); border-bottom: 1px solid var(--mn-line);
+}
+.theme-mau-nuoc .mn-datebar b { font-family: var(--iv-display), Georgia, serif; font-weight: 400; font-size: clamp(46px, 13vw, 56px); line-height: 1; color: var(--mn-accent); }
+.theme-mau-nuoc .mn-lunar { font-family: var(--iv-serif), Georgia, serif; font-style: italic; font-size: 13px; color: var(--iv-muted); margin-top: 12px; }
+
+/* ── families ── */
+.theme-mau-nuoc .mn-families { padding: 26px 24px 30px; }
+.theme-mau-nuoc .mn-families-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; margin-top: 22px; position: relative; }
+.theme-mau-nuoc .mn-families-grid::before { content: ""; position: absolute; left: 50%; top: 6px; bottom: 6px; width: 1px; background: linear-gradient(transparent, var(--mn-line), transparent); }
+.theme-mau-nuoc .mn-family h2 { font-family: var(--iv-display), Georgia, serif; font-weight: 400; font-size: 14px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--mn-accent); margin-bottom: 10px; }
+.theme-mau-nuoc .mn-family h2 .iv-en { letter-spacing: 0.06em; }
+.theme-mau-nuoc .mn-parents { white-space: pre-line; font-size: 14px; font-weight: 500; line-height: 1.7; }
+.theme-mau-nuoc .mn-addr { margin-top: 8px; font-size: 12.5px; color: var(--iv-muted); }
+
+/* ── couple: oval photo, painted bouquet, stacked script names ── */
+.theme-mau-nuoc .mn-couple { padding: 34px 26px 54px; overflow: hidden; }
+.theme-mau-nuoc .mn-wash-c { width: 150%; left: -25%; top: 14%; }
+.theme-mau-nuoc .mn-oval { position: relative; width: 64%; aspect-ratio: 200 / 260; margin: 22px auto 0; }
+.theme-mau-nuoc .mn-oval-photo { position: absolute; inset: 0; border-radius: 50%; background: #f4efea; }
+.theme-mau-nuoc .mn-oval-photo img, .theme-mau-nuoc .mn-oval-photo .iv-ph { border-radius: 50%; }
+.theme-mau-nuoc .mn-oval-lines { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.theme-mau-nuoc .mn-oval-bouquet { position: absolute; width: 136%; left: -18%; bottom: -30%; }
+.theme-mau-nuoc .mn-oval-spray { position: absolute; width: 62%; left: -28%; top: -9%; transform: scaleY(-1) rotate(8deg); }
+.theme-mau-nuoc .mn-pair { display: grid; justify-items: center; gap: 2px; margin-top: 64px; }
+.theme-mau-nuoc .mn-pair > div { display: grid; justify-items: center; }
+.theme-mau-nuoc .mn-pair em { font-family: var(--iv-thin), cursive; font-style: normal; font-size: 24px; color: var(--mn-leaf); line-height: 1.2; }
+.theme-mau-nuoc .mn-pair p { font-family: var(--iv-script), cursive; font-size: clamp(34px, 10vw, 42px); color: var(--mn-accent); line-height: 1.15; }
+.theme-mau-nuoc .mn-pair > i { font-family: var(--iv-serif), Georgia, serif; font-size: 26px; color: color-mix(in srgb, var(--c1) 55%, #fff); margin: 6px 0; }
+.theme-mau-nuoc .mn-pair .iv-person-title { color: var(--iv-muted); opacity: 1; font-size: 10.5px; }
+
+/* ── invitation + guest ── */
+.theme-mau-nuoc .mn-invite { background: #fff; padding: 52px 26px; box-shadow: 0 1px 0 var(--mn-line), 0 -1px 0 var(--mn-line); }
+.theme-mau-nuoc .mn-inv-heading { font-family: var(--iv-display), Georgia, serif; text-transform: uppercase; letter-spacing: 0.2em; font-size: 13.5px; color: var(--mn-accent); }
+.theme-mau-nuoc .mn-inv-line { font-family: var(--iv-display), Georgia, serif; text-transform: uppercase; letter-spacing: 0.14em; font-size: 12.5px; line-height: 1.8; color: var(--iv-ink); max-width: 320px; margin: 0 auto; }
+.theme-mau-nuoc .mn-guest { margin: 12px 0 14px; }
+.theme-mau-nuoc .mn-guest p { font-family: var(--iv-script), cursive; font-size: clamp(40px, 12vw, 54px); line-height: 1.2; color: var(--mn-accent); }
+.theme-mau-nuoc .mn-swash { display: block; width: 210px; height: 22px; margin: -4px auto 0; }
+.theme-mau-nuoc .mn-trio { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 30px; }
+.theme-mau-nuoc .mn-trio .iv-photo { aspect-ratio: 3 / 4.5; border-radius: 999px 999px 6px 6px; }
+.theme-mau-nuoc .mn-trio .iv-photo::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 50%, color-mix(in srgb, var(--mn-deep) 70%, transparent)); pointer-events: none; }
+.theme-mau-nuoc .mn-trio .iv-photo b { position: absolute; z-index: 1; left: 0; right: 0; bottom: 10px; font-family: var(--iv-display), Georgia, serif; font-weight: 400; font-size: clamp(22px, 6.6vw, 28px); color: #fff; }
+.theme-mau-nuoc .mn-trio .iv-ph i { font-size: 24px; }
+.theme-mau-nuoc .mn-quote { font-family: var(--iv-thin), cursive; font-size: clamp(24px, 7vw, 28px); line-height: 1.3; color: var(--mn-leaf); margin: 30px auto 0; max-width: 340px; }
+.theme-mau-nuoc .mn-quote .iv-en { font-size: 0.6em; }
+
+/* ── events ── */
+.theme-mau-nuoc .mn-events { display: grid; gap: 22px; padding: 52px 22px 44px; }
+.theme-mau-nuoc .mn-events .mn-title { margin-bottom: 4px; }
+.theme-mau-nuoc .mn-event {
+  position: relative; overflow: hidden; border-radius: 6px; padding: 38px 22px 26px;
+  background:
+    radial-gradient(70% 45% at 0% 0%, color-mix(in srgb, var(--c1) 13%, transparent), transparent 70%),
+    radial-gradient(60% 45% at 100% 100%, color-mix(in srgb, var(--c2) 14%, transparent), transparent 70%),
+    #fff;
+  box-shadow: 0 22px 40px -30px rgb(50 35 35 / 0.45), inset 0 0 0 1px color-mix(in srgb, var(--c1) 20%, #fff);
+}
+.theme-mau-nuoc .mn-event::after { content: ""; position: absolute; inset: 8px; border: 1px solid color-mix(in srgb, var(--c1) 16%, #fff); border-radius: 3px; pointer-events: none; }
+.theme-mau-nuoc .mn-event > :not(.mn-event-spray) { position: relative; z-index: 1; }
+.theme-mau-nuoc .mn-event-spray { position: absolute; width: 118px; right: -8px; top: -8px; transform: scale(-1, -1); opacity: 0.9; }
+.theme-mau-nuoc .mn-event h3 { font-family: var(--iv-display), Georgia, serif; font-weight: 400; text-transform: uppercase; letter-spacing: 0.16em; font-size: 17px; color: var(--mn-accent); padding: 0 34px; }
+.theme-mau-nuoc .mn-event-when { display: flex; justify-content: center; gap: 8px; margin-top: 10px; font-size: 12.5px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--iv-muted); }
+.theme-mau-nuoc .mn-event-when b { color: var(--iv-ink); font-weight: 600; }
+.theme-mau-nuoc .mn-event-date { font-family: var(--iv-serif), Georgia, serif; font-weight: 400; font-size: clamp(32px, 10vw, 40px); letter-spacing: 0.04em; line-height: 1.25; color: var(--iv-ink); }
+.theme-mau-nuoc .mn-event-date i { font-style: normal; color: var(--c2); margin: 0 5px; }
+.theme-mau-nuoc .mn-event-lunar { font-family: var(--iv-serif), Georgia, serif; font-style: italic; font-size: 12.5px; color: var(--iv-muted); }
+.theme-mau-nuoc .mn-event .iv-event-sub span { background: color-mix(in srgb, var(--c1) 10%, #fff); color: var(--iv-ink); }
+.theme-mau-nuoc .mn-event-venue { margin-top: 16px; font-family: var(--iv-display), Georgia, serif; text-transform: uppercase; letter-spacing: 0.08em; font-size: 15.5px; color: var(--mn-accent); }
+.theme-mau-nuoc .mn-event-address { font-size: 13px; color: var(--iv-muted); margin-top: 3px; }
+.theme-mau-nuoc .mn-event .iv-event-map { border-radius: 4px; border: 1px solid var(--mn-line); height: 180px; }
+.theme-mau-nuoc .mn-event-actions { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+.theme-mau-nuoc .mn-event-actions a {
+  text-decoration: none; font-size: 12px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+  padding: 9px 18px; border-radius: 999px; border: 1px solid var(--mn-deep); color: var(--mn-deep); background: #fff;
+}
+.theme-mau-nuoc .mn-event-actions a:first-child { background: var(--mn-deep); color: #fff; }
+
+/* ── calendar + countdown ── */
+.theme-mau-nuoc .mn-when { padding: 50px 26px; overflow: hidden; }
+.theme-mau-nuoc .mn-wash-d { width: 130%; right: -60%; top: -10%; }
+.theme-mau-nuoc .iv-calendar { background: rgb(255 255 255 / 0.85); border: 1px solid var(--mn-line); border-radius: 6px; box-shadow: 0 18px 36px -30px rgb(50 35 35 / 0.5); }
+.theme-mau-nuoc .iv-cal-head { display: none; }
+.theme-mau-nuoc .iv-cal-grid { padding: 16px 12px 18px; }
+.theme-mau-nuoc .iv-cal-grid span { font-family: var(--iv-serif), Georgia, serif; font-size: 15px; color: var(--iv-ink); }
+.theme-mau-nuoc .iv-cal-grid .dow { font-family: var(--iv-sans), sans-serif; font-size: 10.5px; letter-spacing: 0.1em; color: var(--mn-leaf); }
+.theme-mau-nuoc .iv-cal-grid .on svg { fill: var(--c1); opacity: 0.9; }
+.theme-mau-nuoc .iv-cal-grid .on b { color: #fff; font-family: var(--iv-sans), sans-serif; }
+.theme-mau-nuoc .iv-countdown { gap: 10px; margin-top: 22px; }
+.theme-mau-nuoc .iv-countdown div {
+  aspect-ratio: 1; display: grid; place-content: center; padding: 0; border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #fff, color-mix(in srgb, var(--c1) 9%, #fff));
+  color: var(--mn-accent); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--c1) 38%, #fff), 0 0 0 4px rgb(255 255 255 / 0.6), 0 0 0 5px color-mix(in srgb, var(--c2) 26%, transparent);
+}
+.theme-mau-nuoc .iv-countdown b { font-family: var(--iv-serif), Georgia, serif; font-weight: 400; font-size: clamp(20px, 6vw, 26px); }
+.theme-mau-nuoc .iv-countdown span { font-size: 9.5px; letter-spacing: 0.14em; color: var(--iv-muted); }
+.theme-mau-nuoc .iv-countdown .iv-en { display: none; }
+
+/* ── album ── */
+.theme-mau-nuoc .mn-album { padding: 50px 18px 44px; }
+.theme-mau-nuoc .iv-gallery { gap: 10px; }
+.theme-mau-nuoc .iv-g .iv-photo { border-radius: 3px; border: 4px solid #fff; box-shadow: 0 12px 24px -18px rgb(40 30 30 / 0.6); }
+
+/* ── gift ── */
+.theme-mau-nuoc .mn-gift { position: relative; overflow: hidden; padding: 52px 26px; }
+.theme-mau-nuoc .mn-gift > :not(.mn-gift-spray) { position: relative; z-index: 1; }
+.theme-mau-nuoc .mn-gift-spray { position: absolute; width: 150px; left: -40px; top: -26px; transform: scaleY(-1); }
+.theme-mau-nuoc .mn-gift .mn-title { margin-bottom: 6px; }
+.theme-mau-nuoc .mn-gift-sub { color: var(--iv-muted); font-size: 14px; margin: 0 0 20px; }
+.theme-mau-nuoc .iv-gift-btn { background: var(--mn-deep); color: #fff; font-family: var(--iv-sans), sans-serif; font-weight: 600; font-size: 12.5px; letter-spacing: 0.16em; padding: 12px 26px; }
+.theme-mau-nuoc .iv-bank { background: #fff; border: 1px solid var(--mn-line); border-radius: 6px; }
+.theme-mau-nuoc .iv-bank h4 { color: var(--mn-accent); font-family: var(--iv-display), Georgia, serif; font-weight: 400; }
+.theme-mau-nuoc .iv-bank-acc { border-color: color-mix(in srgb, var(--c1) 50%, #fff); background: var(--iv-cream); }
+
+/* ── thank you: photo fading up into the paper, a bouquet on the seam ── */
+.theme-mau-nuoc .mn-thanks { min-height: 560px; }
+.theme-mau-nuoc .mn-thanks .iv-thanks-bg::after {
+  background: linear-gradient(180deg, var(--iv-cream) 0%, rgb(251 250 247 / 0) 28%, rgb(0 0 0 / 0) 46%, color-mix(in srgb, var(--mn-deep) 30%, rgb(25 20 20 / 0.72)) 100%);
+}
+.theme-mau-nuoc .mn-thanks-bouquet { position: absolute; z-index: 1; width: 78%; left: 11%; top: -26px; }
+.theme-mau-nuoc .mn-thanks h2 { font-family: var(--iv-script), cursive; font-weight: 400; font-size: clamp(54px, 16vw, 68px); color: #fff; text-shadow: 0 2px 18px rgb(0 0 0 / 0.25); }
+.theme-mau-nuoc .mn-thanks p { color: #fff; }
+
+/* ── shared sections in the wishes slot ── */
+.theme-mau-nuoc .iv-block-title { font-family: var(--iv-script), cursive; font-weight: 400; text-transform: none; letter-spacing: 0; font-size: clamp(38px, 11vw, 46px); color: var(--mn-accent); }
+.theme-mau-nuoc .iv-block-title .iv-en { font-size: 12px; letter-spacing: 0.1em; color: var(--iv-muted); }
+.theme-mau-nuoc .iv-timeline::before { background: color-mix(in srgb, var(--c2) 55%, #fff); }
+.theme-mau-nuoc .iv-timeline li::before { background: var(--c1); box-shadow: 0 0 0 3px var(--iv-cream); }
+.theme-mau-nuoc .iv-timeline b { color: var(--mn-accent); font-weight: 400; }
+.theme-mau-nuoc .iv-rsvp {
+  color: var(--iv-ink); padding-top: 54px; padding-bottom: 54px;
+  background:
+    radial-gradient(60% 35% at 0% 0%, color-mix(in srgb, var(--c1) 14%, transparent), transparent 70%),
+    radial-gradient(60% 35% at 100% 100%, color-mix(in srgb, var(--c2) 16%, transparent), transparent 70%),
+    #fff;
+}
+.theme-mau-nuoc .iv-rsvp .iv-script { color: var(--mn-accent); font-size: clamp(38px, 11vw, 46px); }
+.theme-mau-nuoc .iv-rsvp-sub { color: var(--iv-muted); opacity: 1; }
+.theme-mau-nuoc .iv-rsvp-block { background: transparent; }
+.theme-mau-nuoc .iv-form input, .theme-mau-nuoc .iv-form textarea, .theme-mau-nuoc .iv-form select { background: #fff; border: 1px solid color-mix(in srgb, var(--c1) 32%, #fff); border-radius: 6px; color: var(--iv-ink); }
+.theme-mau-nuoc .iv-form input:focus, .theme-mau-nuoc .iv-form textarea:focus, .theme-mau-nuoc .iv-form select:focus { outline: 2px solid color-mix(in srgb, var(--c1) 45%, transparent); outline-offset: 1px; }
+.theme-mau-nuoc .iv-form button[type="submit"] { background: var(--mn-deep); color: #fff; border-radius: 999px; font-size: 12.5px; letter-spacing: 0.16em; }
+.theme-mau-nuoc .iv-form-note { color: var(--iv-muted); opacity: 1; }
+.theme-mau-nuoc .iv-form-err { color: color-mix(in srgb, var(--c1) 30%, #b3261e); }
+.theme-mau-nuoc .iv-rsvp-open { background: var(--mn-deep); font-size: 12.5px; letter-spacing: 0.16em; }
+.theme-mau-nuoc .iv-rsvp-choices button { border-color: color-mix(in srgb, var(--c1) 40%, #fff); }
+.theme-mau-nuoc .iv-rsvp-choices button.on { background: var(--mn-deep); border-color: var(--mn-deep); color: #fff; }
+.theme-mau-nuoc .iv-rsvp-done { background: #fff; border: 1px solid color-mix(in srgb, var(--c1) 40%, #fff); color: var(--iv-ink); }
+.theme-mau-nuoc .iv-rsvp-done button { color: var(--mn-deep); border-color: var(--mn-deep); }
+.theme-mau-nuoc .iv-wishes figure { background: #fff; border-left: 2px solid var(--c2); border-radius: 4px; box-shadow: 0 8px 20px -18px rgb(40 30 30 / 0.5); }
+.theme-mau-nuoc .iv-wishes figcaption { color: var(--mn-accent); }
+.theme-mau-nuoc .iv-modal-card { background: #fff; border-radius: 8px; }
+.theme-mau-nuoc .iv-modal-card h3 { color: var(--mn-accent); font-weight: 400; }
+
+/* placeholders, footer, intro, music, petals */
+.theme-mau-nuoc .iv-ph {
+  background:
+    radial-gradient(circle at 30% 25%, rgb(255 255 255 / 0.7), transparent 55%),
+    linear-gradient(150deg, color-mix(in srgb, var(--c1) 12%, #fff), color-mix(in srgb, var(--c2) 22%, #fff));
+}
+.theme-mau-nuoc .iv-ph i { font-family: var(--iv-script), cursive; color: color-mix(in srgb, var(--c1) 55%, transparent); }
+.theme-mau-nuoc .iv-foot { background: color-mix(in srgb, var(--c1) 10%, #fff); color: var(--iv-muted); border-top: 1px solid var(--mn-line); }
+.theme-mau-nuoc .iv-foot a { color: var(--mn-accent); }
+.theme-mau-nuoc .iv-intro {
+  background:
+    radial-gradient(55% 40% at 12% 8%, color-mix(in srgb, var(--c1) 26%, transparent), transparent 70%),
+    radial-gradient(55% 40% at 92% 92%, color-mix(in srgb, var(--c2) 26%, transparent), transparent 70%),
+    var(--mn-paper), #f7f5f1;
+}
+.theme-mau-nuoc .iv-intro-card {
+  background: #fff; border-radius: 4px;
+  box-shadow: 0 30px 70px -34px rgb(50 35 35 / 0.45), inset 0 0 0 1px color-mix(in srgb, var(--c1) 30%, #fff), inset 0 0 0 8px #fff, inset 0 0 0 9px color-mix(in srgb, var(--c2) 35%, #fff);
+}
+.theme-mau-nuoc .iv-intro .iv-script { color: var(--mn-accent); }
+.theme-mau-nuoc .iv-intro-heart { fill: var(--c1); opacity: 0.85; }
+.theme-mau-nuoc .iv-intro-date { color: var(--iv-ink); }
+.theme-mau-nuoc .iv-intro-guest b { color: var(--mn-accent); }
+.theme-mau-nuoc .iv-intro button { background: var(--mn-deep); color: #fff; font-size: 12.5px; letter-spacing: 0.2em; box-shadow: 0 12px 26px -12px color-mix(in srgb, var(--mn-deep) 80%, transparent); }
+.theme-mau-nuoc .iv-music { background: #fff; box-shadow: 0 6px 16px -6px rgb(0 0 0 / 0.3), inset 0 0 0 1.5px color-mix(in srgb, var(--c1) 50%, #fff); }
+.theme-mau-nuoc .iv-music svg { stroke: var(--mn-accent); }
+.theme-mau-nuoc .iv-music:not(.on)::after { background: var(--mn-accent); }
+.theme-mau-nuoc .iv-petals span { background: linear-gradient(135deg, color-mix(in srgb, var(--c1) 30%, #fff), var(--c1)); opacity: 0.7; }
+.theme-mau-nuoc .iv-petals span.h1 { background: linear-gradient(135deg, color-mix(in srgb, var(--c2) 30%, #fff), var(--c2)); border-radius: 50%; }
+.theme-mau-nuoc .iv-petals span.h2 { background: linear-gradient(135deg, #fff, color-mix(in srgb, var(--c1) 50%, #fff)); }
+
+/* a breath of wind in the hero flowers */
+@media (prefers-reduced-motion: no-preference) {
+  .theme-mau-nuoc .mn-arch-bouquet { animation: mn-sway 9s ease-in-out infinite; }
+  .theme-mau-nuoc .mn-arch-spray { animation: mn-sway-flip 11s ease-in-out infinite; transform-origin: 100% 0; }
+}
+@keyframes mn-sway { 0%, 100% { transform: rotate(-10deg); } 50% { transform: rotate(-8deg); } }
+@keyframes mn-sway-flip { 0%, 100% { transform: scale(-1, -1) rotate(0deg); } 50% { transform: scale(-1, -1) rotate(2deg); } }
+
+@media (max-width: 380px) {
+  .theme-mau-nuoc .mn-families-grid { grid-template-columns: 1fr; gap: 22px; }
+  .theme-mau-nuoc .mn-families-grid::before { display: none; }
+  .theme-mau-nuoc .mn-datebar { gap: 10px; }
+}

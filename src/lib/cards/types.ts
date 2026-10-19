@@ -31,8 +31,8 @@ export const CARD_FONTS: { family: string; label: string; kind: "script" | "seri
 
 /** Text roles: the "Điền nhanh" form fills every text object carrying one of these. */
 export const TEXT_ROLES: { role: string; label: string; placeholder: string; multiline?: boolean }[] = [
-  { role: "groomName", label: "Tên chú rể", placeholder: "Minh Anh" },
-  { role: "brideName", label: "Tên cô dâu", placeholder: "Thu Hà" },
+  { role: "groomName", label: "Tên chú rể", placeholder: "Dũng Thành" },
+  { role: "brideName", label: "Tên cô dâu", placeholder: "Thuỳ Trang" },
   { role: "date", label: "Ngày cưới", placeholder: "12 . 12 . 2026" },
   { role: "weekday", label: "Thứ / giờ", placeholder: "Thứ Bảy, 11 giờ 00" },
   { role: "lunarDate", label: "Ngày âm lịch", placeholder: "(Tức ngày 23 tháng 10 năm Bính Ngọ)" },

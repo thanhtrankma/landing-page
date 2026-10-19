@@ -2,7 +2,8 @@ import Link from "next/link";
 import JsonLd from "@/components/JsonLd";
 import { Button, Heading } from "@/components/ui";
 import { DEMO_SLUG } from "@/lib/invites/defaults";
-import { demoSlug, INVITE_THEMES } from "@/lib/invites/types";
+import ThemeGallery from "@/components/invite/ThemeGallery";
+import { ALL_TEMPLATES, INVITE_THEMES } from "@/lib/invites/types";
 import { SITE_URL, breadcrumbJsonLd, graph, pageMetadata } from "@/lib/seo";
 import "../cards.css";
 
@@ -78,10 +79,13 @@ export default function WeddingInviteToolPage() {
               <Button href={DEMO} light>
                 Xem thiệp mẫu
               </Button>
+              <Button href={`${PATH}/quan-ly`} light>
+                Thiệp của tôi
+              </Button>
             </div>
             <ul className="invite-checks">
-              <li>Miễn phí, không cần tài khoản</li>
-              <li>Link có tên từng khách mời</li>
+              <li>Miễn phí, đăng nhập bằng Google hoặc email</li>
+              <li>Link riêng có tên từng khách, thống kê RSVP</li>
               <li>Tối ưu cho điện thoại</li>
             </ul>
           </div>
@@ -114,26 +118,8 @@ export default function WeddingInviteToolPage() {
 
       <section className="surface" id="mau-thiep">
         <div className="gv-wrap">
-          <Heading center eyebrow="KHO MẪU" title="Chọn mẫu thiệp bạn yêu thích" text="Cuộn thử ngay trong khung điện thoại. Đổi mẫu bất cứ lúc nào mà không mất nội dung đã nhập." />
-          <div className="invite-themes">
-            {INVITE_THEMES.map((t) => (
-              <article key={t.id} className="invite-theme">
-                <div className="invite-phone small">
-                  <iframe src={`/thiep/${demoSlug(t.id)}?khach=Bạn`} title={`Mẫu thiệp ${t.name}`} loading="lazy" />
-                </div>
-                <h3>{t.name}</h3>
-                <p>{t.note}</p>
-                <div className="invite-theme-actions">
-                  <Link href={`${CREATE}?mau=${t.id}`} className="gv-btn">
-                    Dùng mẫu này
-                  </Link>
-                  <Link href={`/thiep/${demoSlug(t.id)}`} target="_blank" className="invite-phone-link">
-                    Xem toàn màn hình ↗
-                  </Link>
-                </div>
-              </article>
-            ))}
-          </div>
+          <Heading center eyebrow="KHO MẪU" title="Chọn mẫu thiệp bạn yêu thích" text={`${ALL_TEMPLATES.length} mẫu từ ${INVITE_THEMES.length} bố cục, bấm chấm màu để đổi bảng màu. Đổi mẫu bất cứ lúc nào mà không mất nội dung đã nhập.`} />
+          <ThemeGallery create={CREATE} />
         </div>
       </section>
 

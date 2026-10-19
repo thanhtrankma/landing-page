@@ -1,0 +1,309 @@
+/* ════════════════════ HOÀNG KIM ════════════════════
+   Foil-stamped luxury: deep --c1 panels with metallic --c2 (gold) double frames and art-deco corners,
+   ivory paper panels in between. Every colour is --c1 / --c2 or a color-mix of them with neutrals. */
+
+.theme-hoang-kim {
+  --c1: #7a1420;
+  --c2: #c9a24a;
+  --iv-red: var(--c1);
+  --iv-red-dark: color-mix(in srgb, var(--c1) 72%, #000);
+  --iv-gold: var(--c2);
+  --iv-gold-soft: color-mix(in srgb, var(--c2) 40%, #fff);
+  --iv-cream: color-mix(in srgb, var(--c2) 7%, #fffdf7);
+  --iv-paper: color-mix(in srgb, var(--c2) 9%, #fffdf6);
+  --iv-ink: color-mix(in srgb, var(--c1) 22%, #2a2420);
+  --iv-muted: color-mix(in srgb, var(--c1) 18%, #85796a);
+  --hk-deep: color-mix(in srgb, var(--c1) 74%, #000);
+  --hk-gold-hi: color-mix(in srgb, var(--c2) 52%, #fff);
+  --hk-gold-lo: color-mix(in srgb, var(--c2) 62%, #000);
+  --hk-ivory: color-mix(in srgb, var(--c2) 14%, #fffaf0);
+  --hk-foil: linear-gradient(115deg,
+    color-mix(in srgb, var(--c2) 72%, #000) 0%, color-mix(in srgb, var(--c2) 42%, #fff) 18%, var(--c2) 33%,
+    color-mix(in srgb, var(--c2) 70%, #000) 50%, color-mix(in srgb, var(--c2) 38%, #fff) 67%, var(--c2) 82%,
+    color-mix(in srgb, var(--c2) 74%, #000) 100%);
+  --hk-foil-dark: linear-gradient(115deg,
+    color-mix(in srgb, var(--c2) 55%, #000) 0%, color-mix(in srgb, var(--c2) 85%, #fff) 22%,
+    color-mix(in srgb, var(--c2) 52%, #000) 48%, color-mix(in srgb, var(--c2) 90%, #fff) 72%, color-mix(in srgb, var(--c2) 55%, #000) 100%);
+  --hk-lattice:
+    repeating-linear-gradient(45deg, color-mix(in srgb, var(--c2) 7%, transparent) 0 1px, transparent 1px 26px),
+    repeating-linear-gradient(-45deg, color-mix(in srgb, var(--c2) 7%, transparent) 0 1px, transparent 1px 26px);
+  background: var(--hk-lattice), radial-gradient(circle at 50% 0%, color-mix(in srgb, var(--c1) 60%, #000), var(--hk-deep) 70%);
+}
+.theme-hoang-kim .iv-page { background: var(--iv-paper); box-shadow: 0 0 90px rgb(0 0 0 / 0.5); }
+
+/* ── building blocks ── */
+.theme-hoang-kim .hk-deep {
+  color: var(--hk-ivory);
+  background:
+    var(--hk-lattice),
+    radial-gradient(120% 55% at 50% 0%, color-mix(in srgb, var(--c1) 88%, #fff), transparent 70%),
+    linear-gradient(180deg, var(--c1), var(--hk-deep));
+}
+.theme-hoang-kim .hk-paper {
+  color: var(--iv-ink);
+  background:
+    radial-gradient(90% 50% at 50% 0%, #fff, transparent 70%),
+    var(--iv-paper);
+}
+.theme-hoang-kim .hk-framed { padding: 62px 40px 58px; isolation: isolate; }
+.theme-hoang-kim .hk-framed::before, .theme-hoang-kim .hk-framed::after {
+  content: ""; position: absolute; pointer-events: none; z-index: 1;
+  border: 1px solid transparent; border-image: var(--hk-foil) 1;
+}
+.theme-hoang-kim .hk-framed::before { inset: 12px; border-width: 1.5px; }
+.theme-hoang-kim .hk-framed::after { inset: 18px; opacity: 0.7; }
+.theme-hoang-kim .hk-corner { position: absolute; z-index: 2; width: 54px; height: 54px; color: var(--hk-gold-hi); pointer-events: none; }
+.theme-hoang-kim .hk-corner.tl { top: 12px; left: 12px; }
+.theme-hoang-kim .hk-corner.tr { top: 12px; right: 12px; transform: scaleX(-1); }
+.theme-hoang-kim .hk-corner.bl { bottom: 12px; left: 12px; transform: scaleY(-1); }
+.theme-hoang-kim .hk-corner.br { bottom: 12px; right: 12px; transform: scale(-1); }
+
+.theme-hoang-kim .hk-foil-text {
+  background: var(--hk-foil); background-size: 220% 100%; background-position: 0 0;
+  -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent;
+}
+.theme-hoang-kim .hk-paper .hk-foil-text { background-image: var(--hk-foil-dark); }
+
+.theme-hoang-kim .hk-divider { display: block; width: min(220px, 70%); height: 16px; margin: 14px auto; color: var(--hk-gold-hi); -webkit-mask-image: linear-gradient(90deg, transparent, #000 22%, #000 78%, transparent); mask-image: linear-gradient(90deg, transparent, #000 22%, #000 78%, transparent); }
+.theme-hoang-kim .hk-paper .hk-divider { color: var(--hk-gold-lo); }
+.theme-hoang-kim .hk-fan { display: block; width: 104px; height: 40px; margin: 0 auto 12px; color: var(--hk-gold-hi); }
+.theme-hoang-kim .hk-paper .hk-fan { color: color-mix(in srgb, var(--c2) 80%, #000); }
+
+.theme-hoang-kim .hk-kicker { font-family: var(--iv-display), Georgia, serif; text-transform: uppercase; letter-spacing: 0.42em; font-size: 12px; color: var(--hk-gold-hi); margin-right: -0.42em; }
+.theme-hoang-kim .hk-heading { font-family: var(--iv-display), Georgia, serif; font-weight: 400; text-transform: uppercase; letter-spacing: 0.26em; font-size: clamp(18px, 5.4vw, 22px); line-height: 1.35; color: var(--c1); margin: 0; }
+.theme-hoang-kim .hk-deep .hk-heading { color: var(--hk-gold-hi); }
+.theme-hoang-kim .hk-heading .iv-en { letter-spacing: 0.08em; font-size: 0.6em; }
+
+/* arched photo: foil hairline, gap, inner gold line */
+.theme-hoang-kim .hk-arch { padding: 1.5px; background: var(--hk-foil); border-radius: 999px 999px 6px 6px; box-shadow: 0 22px 44px -24px rgb(0 0 0 / 0.65); }
+.theme-hoang-kim .hk-arch-in { padding: 6px; border-radius: inherit; background: var(--hk-deep); }
+.theme-hoang-kim .hk-paper .hk-arch-in { background: var(--iv-paper); }
+.theme-hoang-kim .hk-arch .iv-photo { border-radius: inherit; box-shadow: 0 0 0 1px color-mix(in srgb, var(--c2) 80%, transparent); aspect-ratio: 3 / 4; }
+
+/* ── cover ── */
+.theme-hoang-kim .hk-cover { padding-top: 70px; padding-bottom: 64px; }
+.theme-hoang-kim .hk-crest { position: relative; width: clamp(150px, 46vw, 182px); aspect-ratio: 1; margin: 18px auto 10px; color: var(--hk-gold-hi); }
+.theme-hoang-kim .hk-crest-svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.theme-hoang-kim .hk-crest-core { fill: color-mix(in srgb, var(--c1) 82%, #000); }
+.theme-hoang-kim .hk-rays { color: color-mix(in srgb, var(--c2) 85%, #fff); opacity: 0.85; }
+.theme-hoang-kim .hk-mono {
+  position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; gap: 2px; padding-bottom: 8%;
+  font-family: var(--iv-display), Georgia, serif; font-size: clamp(30px, 9.4vw, 38px); line-height: 1; color: var(--hk-gold-hi);
+}
+.theme-hoang-kim .hk-mono b { font-weight: 400; background: var(--hk-foil); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+.theme-hoang-kim .hk-mono i { font-family: var(--iv-script), cursive; font-style: normal; font-size: 0.62em; margin: 0 2px; color: var(--hk-gold-hi); transform: translateY(0.1em); }
+.theme-hoang-kim .hk-names { display: grid; justify-items: center; font-weight: 400; margin: 6px 0 0; line-height: 1.15; }
+.theme-hoang-kim .hk-names .hk-foil-text {
+  font-family: var(--iv-display), Georgia, serif; text-transform: uppercase; letter-spacing: 0.16em; margin-right: -0.16em;
+  font-size: clamp(26px, 8.4vw, 36px); animation: hk-shimmer 7s ease-in-out infinite alternate;
+}
+.theme-hoang-kim .hk-names i { font-family: var(--iv-script), cursive; font-style: normal; font-size: clamp(34px, 10vw, 44px); line-height: 1; color: var(--hk-gold-hi); margin: 2px 0 0; }
+@keyframes hk-shimmer { to { background-position: 100% 0; } }
+.theme-hoang-kim .hk-cover-date { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 12px; margin: 2px 0 6px; }
+.theme-hoang-kim .hk-cover-date span { font-family: var(--iv-display), Georgia, serif; text-transform: uppercase; letter-spacing: 0.14em; text-wrap: balance; font-size: clamp(10.5px, 3vw, 12px); color: var(--hk-gold-hi); }
+.theme-hoang-kim .hk-cover-date span:first-child { text-align: right; }
+.theme-hoang-kim .hk-cover-date span:last-child { text-align: left; }
+.theme-hoang-kim .hk-cover-date b { font-family: var(--iv-display), Georgia, serif; font-weight: 400; font-size: clamp(22px, 6.6vw, 28px); letter-spacing: 0.06em; color: #fff; padding: 2px 12px; border-left: 1px solid color-mix(in srgb, var(--c2) 70%, transparent); border-right: 1px solid color-mix(in srgb, var(--c2) 70%, transparent); white-space: nowrap; }
+.theme-hoang-kim .hk-cover-date b i { font-style: normal; color: var(--hk-gold-hi); margin: 0 4px; }
+.theme-hoang-kim .hk-cover-lunar { font-family: var(--iv-serif), Georgia, serif; font-style: italic; font-size: 13px; color: color-mix(in srgb, var(--hk-ivory) 75%, transparent); }
+.theme-hoang-kim .hk-cover-photo { width: 84%; margin: 26px auto 0; }
+.theme-hoang-kim .hk-cover-photo .iv-photo { aspect-ratio: 3 / 4.2; }
+
+/* ── couple ── */
+.theme-hoang-kim .hk-couple { padding-top: 52px; padding-bottom: 50px; }
+.theme-hoang-kim .hk-announce { font-family: var(--iv-serif), Georgia, serif; font-style: italic; font-size: 15px; color: var(--iv-muted); margin: 0 auto 22px; max-width: 300px; }
+.theme-hoang-kim .hk-person { display: grid; justify-items: center; gap: 4px; }
+.theme-hoang-kim .hk-person em { font-style: normal; font-family: var(--iv-sans), sans-serif; font-size: 11px; letter-spacing: 0.36em; text-transform: uppercase; color: var(--hk-gold-lo); margin-right: -0.36em; }
+.theme-hoang-kim .hk-person b { font-family: var(--iv-display), Georgia, serif; font-weight: 400; text-transform: uppercase; letter-spacing: 0.12em; font-size: clamp(20px, 6vw, 25px); line-height: 1.3; color: var(--c1); }
+.theme-hoang-kim .hk-person .iv-person-title { color: var(--iv-muted); opacity: 1; }
+.theme-hoang-kim .hk-amp { font-family: var(--iv-script), cursive; font-size: 46px; line-height: 1; margin: 10px 0 6px; color: var(--hk-gold-lo); }
+.theme-hoang-kim .hk-couple-photo { width: 76%; margin: 30px auto 0; }
+.theme-hoang-kim .hk-quote { margin: 28px auto 0; max-width: 320px; white-space: pre-line; font-family: var(--iv-serif), Georgia, serif; font-style: italic; font-size: 15.5px; line-height: 1.75; color: var(--iv-ink); position: relative; padding-top: 22px; }
+.theme-hoang-kim .hk-quote::before { content: "\201C"; position: absolute; top: -10px; left: 50%; transform: translateX(-50%); font-family: var(--iv-display), Georgia, serif; font-size: 48px; line-height: 1; color: var(--hk-gold-lo); }
+
+/* ── invitation + families ── */
+.theme-hoang-kim .hk-inv-heading, .theme-hoang-kim .hk-inv-line { font-family: var(--iv-display), Georgia, serif; text-transform: uppercase; letter-spacing: 0.14em; text-wrap: balance; font-size: clamp(13px, 3.8vw, 15px); line-height: 1.7; color: var(--hk-ivory); }
+.theme-hoang-kim .hk-inv-heading { color: var(--hk-gold-hi); }
+.theme-hoang-kim .hk-guest { font-family: var(--iv-script), cursive; font-size: clamp(38px, 11vw, 48px); line-height: 1.3; margin: 8px 0 -4px; }
+.theme-hoang-kim .hk-guest .hk-foil-text { padding: 0 6px; }
+.theme-hoang-kim .hk-families { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin-top: 30px; }
+.theme-hoang-kim .hk-family { padding: 4px 10px; }
+.theme-hoang-kim .hk-family + .hk-family { border-left: 1px solid color-mix(in srgb, var(--c2) 55%, transparent); }
+.theme-hoang-kim .hk-family h3 { font-family: var(--iv-display), Georgia, serif; font-weight: 400; text-transform: uppercase; letter-spacing: 0.22em; font-size: 13.5px; color: var(--hk-gold-hi); margin: 0 0 10px; }
+.theme-hoang-kim .hk-parents { white-space: pre-line; font-size: 13px; line-height: 1.7; font-weight: 500; color: #fff; }
+.theme-hoang-kim .hk-addr { margin-top: 8px; font-size: 11.5px; color: color-mix(in srgb, var(--hk-ivory) 70%, transparent); }
+.theme-hoang-kim .hk-trio { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 30px; }
+.theme-hoang-kim .hk-trio .hk-arch-in { padding: 4px; }
+.theme-hoang-kim .hk-trio .iv-photo { aspect-ratio: 3 / 4.6; }
+.theme-hoang-kim .hk-trio .iv-photo::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 50%, color-mix(in srgb, var(--c1) 85%, transparent)); }
+.theme-hoang-kim .hk-trio .iv-photo b { position: absolute; z-index: 1; left: 0; right: 0; bottom: 10px; font-family: var(--iv-display), Georgia, serif; font-weight: 400; font-size: clamp(20px, 6.4vw, 26px); color: var(--hk-gold-hi); letter-spacing: 0.04em; }
+.theme-hoang-kim .hk-trio .iv-ph i { font-size: 20px; }
+
+/* ── events ── */
+.theme-hoang-kim .hk-events { display: grid; gap: 22px; padding-top: 52px; }
+.theme-hoang-kim .hk-events > .hk-divider { margin: -8px auto 0; }
+.theme-hoang-kim .hk-event {
+  position: relative; padding: 44px 30px 38px; color: var(--hk-ivory);
+  background: var(--hk-lattice), radial-gradient(100% 60% at 50% 0%, color-mix(in srgb, var(--c1) 85%, #fff), transparent 70%), linear-gradient(180deg, var(--c1), var(--hk-deep));
+  box-shadow: inset 0 0 0 8px var(--c1), inset 0 0 0 9px color-mix(in srgb, var(--c2) 80%, transparent), inset 0 0 0 13px transparent, 0 24px 44px -26px rgb(0 0 0 / 0.7);
+}
+.theme-hoang-kim .hk-event::before { content: ""; position: absolute; inset: 13px; border: 0.5px solid color-mix(in srgb, var(--c2) 50%, transparent); pointer-events: none; }
+.theme-hoang-kim .hk-event .hk-corner { width: 40px; height: 40px; }
+.theme-hoang-kim .hk-event .hk-corner.tl { top: 8px; left: 8px; }
+.theme-hoang-kim .hk-event .hk-corner.tr { top: 8px; right: 8px; }
+.theme-hoang-kim .hk-event .hk-corner.bl { bottom: 8px; left: 8px; }
+.theme-hoang-kim .hk-event .hk-corner.br { bottom: 8px; right: 8px; }
+.theme-hoang-kim .hk-event h3 { font-family: var(--iv-display), Georgia, serif; font-weight: 400; text-transform: uppercase; letter-spacing: 0.22em; font-size: clamp(16px, 4.8vw, 19px); color: var(--hk-gold-hi); line-height: 1.4; }
+.theme-hoang-kim .hk-event .hk-divider { margin: 10px auto 12px; width: 150px; }
+.theme-hoang-kim .hk-ev-time { font-family: var(--iv-display), Georgia, serif; text-transform: uppercase; letter-spacing: 0.2em; font-size: 12px; color: color-mix(in srgb, var(--hk-ivory) 85%, transparent); }
+.theme-hoang-kim .hk-ev-time b { font-weight: 400; font-size: 17px; letter-spacing: 0.08em; color: #fff; margin-left: 4px; }
+.theme-hoang-kim .hk-ev-date { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; margin: 10px auto 4px; max-width: 290px; }
+.theme-hoang-kim .hk-ev-date span { font-family: var(--iv-display), Georgia, serif; text-transform: uppercase; letter-spacing: 0.14em; font-size: clamp(10.5px, 3vw, 12px); line-height: 1.5; color: var(--hk-gold-hi); padding: 6px 0; border-top: 1px solid color-mix(in srgb, var(--c2) 65%, transparent); border-bottom: 1px solid color-mix(in srgb, var(--c2) 65%, transparent); }
+.theme-hoang-kim .hk-ev-date b { font-family: var(--iv-display), Georgia, serif; font-weight: 400; font-size: clamp(46px, 14vw, 58px); line-height: 1; padding: 0 14px; background: var(--hk-foil); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+.theme-hoang-kim .hk-ev-lunar { font-family: var(--iv-serif), Georgia, serif; font-style: italic; font-size: 12.5px; color: color-mix(in srgb, var(--hk-ivory) 72%, transparent); }
+.theme-hoang-kim .hk-ev-sub { display: flex; justify-content: center; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+.theme-hoang-kim .hk-ev-sub span { font-size: 12px; letter-spacing: 0.06em; padding: 4px 12px; border: 1px solid color-mix(in srgb, var(--c2) 50%, transparent); color: var(--hk-ivory); }
+.theme-hoang-kim .hk-ev-sub .iv-en { display: inline; margin: 0 0 0 4px; }
+.theme-hoang-kim .hk-ev-venue { margin-top: 18px; font-family: var(--iv-display), Georgia, serif; text-transform: uppercase; letter-spacing: 0.14em; font-size: 15px; line-height: 1.45; color: #fff; }
+.theme-hoang-kim .hk-ev-address { margin-top: 4px; font-size: 12.5px; color: color-mix(in srgb, var(--hk-ivory) 80%, transparent); }
+.theme-hoang-kim .hk-ev-map { border-radius: 0; border: 1px solid color-mix(in srgb, var(--c2) 60%, transparent); position: relative; z-index: 3; }
+.theme-hoang-kim .hk-ev-actions { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; margin-top: 20px; position: relative; z-index: 3; }
+.theme-hoang-kim .hk-ev-actions a {
+  text-decoration: none; padding: 9px 18px; font-family: var(--iv-display), Georgia, serif; text-transform: uppercase; letter-spacing: 0.14em; font-size: 11.5px;
+  color: var(--hk-deep); background: var(--hk-foil); background-size: 160% 100%; transition: background-position 0.4s ease;
+}
+.theme-hoang-kim .hk-ev-actions a:nth-child(2) { background: transparent; color: var(--hk-gold-hi); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--c2) 75%, transparent); }
+.theme-hoang-kim .hk-ev-actions a:hover { background-position: 100% 0; }
+.theme-hoang-kim .hk-ev-actions .iv-en { font-size: 0.85em; }
+
+/* shared EventCard, in case it is used */
+.theme-hoang-kim .iv-event { border-radius: 0; background: linear-gradient(180deg, var(--c1), var(--hk-deep)); box-shadow: inset 0 0 0 1px var(--c2), inset 0 0 0 6px var(--c1), inset 0 0 0 7px color-mix(in srgb, var(--c2) 55%, transparent); color: var(--hk-ivory); }
+.theme-hoang-kim .iv-event h3, .theme-hoang-kim .iv-event-venue { font-family: var(--iv-display), Georgia, serif; font-weight: 400; color: var(--hk-gold-hi); }
+.theme-hoang-kim .iv-event-date { font-family: var(--iv-display), Georgia, serif; font-weight: 400; }
+.theme-hoang-kim .iv-event-date i { color: var(--c2); }
+.theme-hoang-kim .iv-event-actions a { border-radius: 0; border-color: color-mix(in srgb, var(--c2) 70%, transparent); color: var(--hk-gold-hi); }
+.theme-hoang-kim .iv-event-sub span { background: transparent; border: 1px solid color-mix(in srgb, var(--c2) 50%, transparent); border-radius: 0; }
+
+/* ── calendar + countdown ── */
+.theme-hoang-kim .hk-month { font-family: var(--iv-display), Georgia, serif; text-transform: uppercase; letter-spacing: 0.2em; font-size: clamp(22px, 6.6vw, 28px); margin: 10px 0 0; }
+.theme-hoang-kim .iv-calendar { background: transparent; border: 0; border-radius: 0; box-shadow: none; margin-top: 8px; }
+.theme-hoang-kim .iv-cal-head { display: none; }
+.theme-hoang-kim .iv-cal-grid { padding: 0; gap: 4px 2px; }
+.theme-hoang-kim .iv-cal-grid .dow { font-family: var(--iv-display), Georgia, serif; font-weight: 400; font-size: 11px; letter-spacing: 0.08em; color: var(--hk-gold-hi); padding: 0 0 8px; margin-bottom: 4px; border-bottom: 1px solid color-mix(in srgb, var(--c2) 45%, transparent); }
+.theme-hoang-kim .iv-cal-grid span { font-family: var(--iv-display), Georgia, serif; font-size: 15px; color: var(--hk-ivory); }
+.theme-hoang-kim .iv-cal-grid .on svg { fill: var(--c2); filter: drop-shadow(0 2px 6px rgb(0 0 0 / 0.35)); }
+.theme-hoang-kim .iv-cal-grid .on b { color: var(--hk-deep); font-family: var(--iv-display), Georgia, serif; font-weight: 400; }
+.theme-hoang-kim .iv-countdown { margin-top: 26px; gap: 8px; }
+.theme-hoang-kim .iv-countdown div { background: var(--hk-deep); border-radius: 0; padding: 14px 0 10px; box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--c2) 80%, transparent), inset 0 0 0 4px var(--hk-deep), inset 0 0 0 5px color-mix(in srgb, var(--c2) 35%, transparent); color: #fff; }
+.theme-hoang-kim .iv-countdown b { font-family: var(--iv-display), Georgia, serif; font-weight: 400; font-size: clamp(22px, 6.6vw, 28px); color: var(--hk-gold-hi); }
+.theme-hoang-kim .iv-countdown span { font-size: 10px; letter-spacing: 0.2em; color: color-mix(in srgb, var(--hk-ivory) 80%, transparent); }
+
+/* ── album ── */
+.theme-hoang-kim .hk-album { padding-top: 50px; }
+.theme-hoang-kim .hk-album .hk-divider { margin-bottom: 22px; }
+.theme-hoang-kim .iv-gallery { gap: 10px; }
+.theme-hoang-kim .iv-g .iv-photo { border-radius: 0; border: 4px solid #fff; box-shadow: 0 0 0 1px color-mix(in srgb, var(--c2) 75%, transparent), 0 12px 24px -16px rgb(0 0 0 / 0.55); }
+.theme-hoang-kim .iv-g:first-child .iv-photo { border-radius: 999px 999px 0 0; }
+
+/* ── schedule / dress code / RSVP / guestbook (the {wishes} slot) ── */
+.theme-hoang-kim .iv-schedule, .theme-hoang-kim .iv-dress, .theme-hoang-kim .iv-rsvp-block { background: var(--iv-paper); border-top: 1px solid color-mix(in srgb, var(--c2) 30%, transparent); }
+.theme-hoang-kim .iv-block-title { font-family: var(--iv-display), Georgia, serif; font-weight: 400; letter-spacing: 0.26em; font-size: clamp(17px, 5vw, 20px); color: var(--c1); padding-bottom: 18px; background: linear-gradient(90deg, transparent, var(--hk-gold-lo), transparent) bottom / 120px 1px no-repeat; }
+.theme-hoang-kim .iv-timeline::before { background: color-mix(in srgb, var(--c2) 70%, transparent); }
+.theme-hoang-kim .iv-timeline li::before { background: var(--c2); border-radius: 0; transform: rotate(45deg); box-shadow: 0 0 0 3px var(--iv-paper); }
+.theme-hoang-kim .iv-timeline b { font-family: var(--iv-display), Georgia, serif; font-weight: 400; color: var(--c1); }
+.theme-hoang-kim .iv-dress-colors span { box-shadow: 0 0 0 3px #fff, 0 0 0 4px color-mix(in srgb, var(--c2) 70%, transparent), 0 8px 16px -8px rgb(0 0 0 / 0.4); }
+.theme-hoang-kim .iv-rsvp-open { border-radius: 0; background: var(--c1); color: var(--hk-gold-hi); font-family: var(--iv-display), Georgia, serif; font-weight: 400; letter-spacing: 0.22em; box-shadow: inset 0 0 0 1px var(--c2), inset 0 0 0 4px var(--c1), inset 0 0 0 5px color-mix(in srgb, var(--c2) 55%, transparent), 0 14px 26px -14px rgb(0 0 0 / 0.55); padding: 15px 34px; }
+.theme-hoang-kim .iv-rsvp-choices button { border-radius: 0; border-color: color-mix(in srgb, var(--c2) 70%, #fff); }
+.theme-hoang-kim .iv-rsvp-choices button.on { background: var(--c1); border-color: var(--c1); color: var(--hk-gold-hi); }
+.theme-hoang-kim .iv-rsvp-form button[type="submit"] { background: var(--c1); color: var(--hk-gold-hi); }
+.theme-hoang-kim .iv-rsvp-block .iv-rsvp-done { border-radius: 0; border-color: color-mix(in srgb, var(--c2) 70%, transparent); }
+.theme-hoang-kim .iv-modal-card { border-radius: 0; box-shadow: inset 0 0 0 1px var(--c2), inset 0 0 0 6px var(--iv-paper), inset 0 0 0 7px color-mix(in srgb, var(--c2) 50%, transparent); }
+.theme-hoang-kim .iv-modal-card h3 { font-family: var(--iv-display), Georgia, serif; font-weight: 400; color: var(--c1); letter-spacing: 0.08em; }
+
+.theme-hoang-kim .iv-rsvp {
+  color: var(--hk-ivory); padding-top: 60px; padding-bottom: 56px;
+  background: var(--hk-lattice), radial-gradient(120% 55% at 50% 0%, color-mix(in srgb, var(--c1) 88%, #fff), transparent 70%), linear-gradient(180deg, var(--c1), var(--hk-deep));
+  padding-left: 40px; padding-right: 40px;
+}
+.theme-hoang-kim .iv-rsvp::before, .theme-hoang-kim .iv-rsvp::after { content: ""; position: absolute; pointer-events: none; border: 1px solid transparent; border-image: var(--hk-foil) 1; }
+.theme-hoang-kim .iv-rsvp::before { inset: 12px; border-width: 1.5px; }
+.theme-hoang-kim .iv-rsvp::after { inset: 18px; opacity: 0.7; }
+.theme-hoang-kim .iv-rsvp > * { position: relative; z-index: 1; }
+.theme-hoang-kim .iv-rsvp .iv-script { font-family: var(--iv-display), Georgia, serif; text-transform: uppercase; letter-spacing: 0.24em; font-size: clamp(19px, 5.6vw, 23px); line-height: 1.4; color: var(--hk-gold-hi); }
+.theme-hoang-kim .iv-rsvp .iv-script .iv-en { letter-spacing: 0.08em; font-size: 0.6em; }
+.theme-hoang-kim .iv-rsvp-sub { color: color-mix(in srgb, var(--hk-ivory) 80%, transparent); }
+.theme-hoang-kim .iv-rsvp .iv-form { margin-top: 18px; }
+.theme-hoang-kim .iv-rsvp .iv-form input, .theme-hoang-kim .iv-rsvp .iv-form textarea, .theme-hoang-kim .iv-rsvp .iv-form select {
+  border-radius: 0; background: color-mix(in srgb, var(--hk-deep) 55%, transparent); color: #fff; border: 0; border-bottom: 1px solid color-mix(in srgb, var(--c2) 70%, transparent);
+}
+.theme-hoang-kim .iv-rsvp .iv-form ::placeholder { color: color-mix(in srgb, var(--hk-ivory) 60%, transparent); }
+.theme-hoang-kim .iv-form button[type="submit"] { border-radius: 0; background: var(--hk-foil); color: var(--hk-deep); font-family: var(--iv-display), Georgia, serif; font-weight: 400; letter-spacing: 0.22em; justify-self: center; padding: 12px 38px; }
+.theme-hoang-kim .iv-rsvp-form button[type="submit"] { background: var(--c1); color: var(--hk-gold-hi); }
+.theme-hoang-kim .iv-rsvp .iv-form-note { color: color-mix(in srgb, var(--hk-ivory) 75%, transparent); }
+.theme-hoang-kim .iv-rsvp-done { border-radius: 0; border-color: color-mix(in srgb, var(--c2) 60%, transparent); }
+.theme-hoang-kim .iv-rsvp-done button { border-radius: 0; color: var(--hk-gold-hi); border-color: color-mix(in srgb, var(--c2) 70%, transparent); }
+.theme-hoang-kim .iv-wishes figure { border-radius: 0; background: var(--hk-ivory); color: var(--iv-ink); border-left: 2px solid var(--c2); }
+.theme-hoang-kim .iv-wishes figcaption { color: var(--c1); font-family: var(--iv-display), Georgia, serif; font-weight: 400; letter-spacing: 0.06em; }
+
+/* ── gift ── */
+.theme-hoang-kim .hk-gift-sub { margin: 12px auto 22px; max-width: 290px; font-family: var(--iv-serif), Georgia, serif; font-style: italic; font-size: 14px; color: color-mix(in srgb, var(--hk-ivory) 85%, transparent); }
+.theme-hoang-kim .hk-gift .iv-gift-reveal { position: relative; z-index: 3; }
+.theme-hoang-kim .iv-gift-btn { border-radius: 0; background: var(--hk-foil); background-size: 160% 100%; color: var(--hk-deep); font-family: var(--iv-display), Georgia, serif; letter-spacing: 0.2em; font-size: 13px; padding: 13px 28px; box-shadow: 0 14px 28px -14px rgb(0 0 0 / 0.7); transition: background-position 0.4s ease; }
+.theme-hoang-kim .iv-gift-btn:hover { background-position: 100% 0; }
+.theme-hoang-kim .iv-bank { border-radius: 0; background: var(--hk-ivory); border: 0; box-shadow: inset 0 0 0 1px var(--c2), inset 0 0 0 5px var(--hk-ivory), inset 0 0 0 6px color-mix(in srgb, var(--c2) 45%, transparent); color: var(--iv-ink); }
+.theme-hoang-kim .iv-bank h4 { font-family: var(--iv-display), Georgia, serif; font-weight: 400; color: var(--c1); letter-spacing: 0.24em; }
+.theme-hoang-kim .iv-bank-acc { border-radius: 0; border-color: color-mix(in srgb, var(--c2) 75%, #000); background: #fff; }
+
+/* ── thank you ── */
+.theme-hoang-kim .hk-thanks { min-height: 560px; padding: 0; }
+.theme-hoang-kim .hk-thanks .iv-thanks-bg::after { background: linear-gradient(180deg, color-mix(in srgb, var(--hk-deep) 10%, transparent) 20%, color-mix(in srgb, var(--hk-deep) 88%, transparent) 72%, var(--hk-deep)); }
+.theme-hoang-kim .hk-thanks .iv-thanks-body { z-index: 3; padding: 140px 40px 56px; }
+.theme-hoang-kim .hk-thanks h2 { font-family: var(--iv-display), Georgia, serif; font-weight: 400; text-transform: uppercase; letter-spacing: 0.18em; margin-right: -0.18em; font-size: clamp(26px, 8vw, 36px); line-height: 1.2; white-space: nowrap; }
+.theme-hoang-kim .hk-thanks h2 .hk-foil-text { animation: hk-shimmer 7s ease-in-out infinite alternate; }
+.theme-hoang-kim .hk-thanks p { color: var(--hk-ivory); font-size: 14px; }
+.theme-hoang-kim .hk-thanks-names { font-family: var(--iv-script), cursive; font-size: clamp(26px, 7.6vw, 30px) !important; line-height: 1.3; color: var(--hk-gold-hi) !important; margin-top: 16px !important; }
+
+/* ── placeholders, intro, music, footer ── */
+.theme-hoang-kim .iv-photo { background: color-mix(in srgb, var(--c1) 55%, #000); }
+.theme-hoang-kim .iv-ph {
+  background:
+    radial-gradient(circle at 50% 30%, color-mix(in srgb, var(--c2) 30%, transparent), transparent 60%),
+    repeating-linear-gradient(45deg, color-mix(in srgb, var(--c2) 9%, transparent) 0 1px, transparent 1px 14px),
+    linear-gradient(165deg, color-mix(in srgb, var(--c1) 80%, #fff), color-mix(in srgb, var(--c1) 70%, #000));
+}
+.theme-hoang-kim .iv-ph i { font-family: var(--iv-display), Georgia, serif; font-size: 30px; letter-spacing: 0.08em; color: color-mix(in srgb, var(--c2) 75%, transparent); }
+.theme-hoang-kim .iv-foot { background: var(--hk-deep); color: color-mix(in srgb, var(--c2) 70%, #fff); border-top: 1px solid color-mix(in srgb, var(--c2) 45%, transparent); }
+.theme-hoang-kim .iv-foot a { color: var(--hk-gold-hi); }
+
+.theme-hoang-kim .iv-intro { background: var(--hk-lattice), radial-gradient(circle at 50% 30%, color-mix(in srgb, var(--c1) 92%, #fff), var(--hk-deep) 75%); background-blend-mode: normal; }
+.theme-hoang-kim .iv-intro-card {
+  border-radius: 0; background: linear-gradient(175deg, #fffdf7, var(--iv-paper));
+  box-shadow: 0 34px 90px -24px rgb(0 0 0 / 0.75), inset 0 0 0 1.5px var(--c2), inset 0 0 0 8px #fffdf7, inset 0 0 0 9px color-mix(in srgb, var(--c2) 60%, transparent);
+}
+.theme-hoang-kim .iv-intro-heart { fill: var(--c2); }
+.theme-hoang-kim .iv-intro-kicker { font-family: var(--iv-display), Georgia, serif; letter-spacing: 0.36em; color: color-mix(in srgb, var(--c2) 62%, #000); }
+.theme-hoang-kim .iv-intro .iv-script { font-family: var(--iv-display), Georgia, serif; text-transform: uppercase; letter-spacing: 0.1em; font-size: clamp(22px, 7vw, 28px); line-height: 1.35; color: var(--c1); }
+.theme-hoang-kim .iv-intro .iv-amp { display: block; font-family: var(--iv-script), cursive; text-transform: none; font-size: 1.3em; line-height: 1; color: color-mix(in srgb, var(--c2) 70%, #000); }
+.theme-hoang-kim .iv-intro-date { font-family: var(--iv-display), Georgia, serif; letter-spacing: 0.18em; color: var(--iv-ink); }
+.theme-hoang-kim .iv-intro-guest b { color: var(--c1); }
+.theme-hoang-kim .iv-intro button { border-radius: 0; background: var(--c1); color: var(--hk-gold-hi); font-family: var(--iv-display), Georgia, serif; font-weight: 400; letter-spacing: 0.26em; box-shadow: inset 0 0 0 1px var(--c2), inset 0 0 0 4px var(--c1), inset 0 0 0 5px color-mix(in srgb, var(--c2) 55%, transparent), 0 14px 28px -12px rgb(0 0 0 / 0.55); }
+
+.theme-hoang-kim .iv-music { background: var(--hk-deep); box-shadow: 0 8px 20px -6px rgb(0 0 0 / 0.5), inset 0 0 0 1.5px var(--c2), inset 0 0 0 4px var(--hk-deep), inset 0 0 0 5px color-mix(in srgb, var(--c2) 50%, transparent); }
+.theme-hoang-kim .iv-music svg { stroke: var(--hk-gold-hi); }
+.theme-hoang-kim .iv-music:not(.on)::after { background: var(--hk-gold-hi); }
+
+@media (max-width: 380px) {
+  .theme-hoang-kim .hk-framed { padding-left: 32px; padding-right: 32px; }
+  .theme-hoang-kim .hk-event { padding-left: 22px; padding-right: 22px; }
+  .theme-hoang-kim .hk-family { padding: 4px 6px; }
+  .theme-hoang-kim .hk-kicker { letter-spacing: 0.3em; margin-right: -0.3em; }
+}
+@media (max-width: 340px) {
+  .theme-hoang-kim .hk-families { grid-template-columns: 1fr; gap: 18px; }
+  .theme-hoang-kim .hk-family + .hk-family { border-left: 0; border-top: 1px solid color-mix(in srgb, var(--c2) 55%, transparent); padding-top: 18px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .theme-hoang-kim .hk-names .hk-foil-text, .theme-hoang-kim .hk-thanks h2 .hk-foil-text { animation: none; }
+  .theme-hoang-kim .hk-ev-actions a, .theme-hoang-kim .iv-gift-btn { transition: none; }
+}

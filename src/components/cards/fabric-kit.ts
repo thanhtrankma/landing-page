@@ -114,7 +114,7 @@ export type TextPreset = "heading" | "names" | "body" | "caps" | "date";
 
 const TEXT_PRESETS: Record<TextPreset, Partial<Textbox>> = {
   heading: { text: "Lễ Thành Hôn", fontFamily: "Playfair Display", fontSize: 64, fontWeight: "700" },
-  names: { text: "Minh Anh & Thu Hà", fontFamily: "Great Vibes", fontSize: 96 },
+  names: { text: "Dũng Thành & Thuỳ Trang", fontFamily: "Great Vibes", fontSize: 96 },
   body: { text: "Trân trọng kính mời bạn đến dự", fontFamily: "Be Vietnam Pro", fontSize: 30 },
   caps: { text: "TRÂN TRỌNG KÍNH MỜI", fontFamily: "Montserrat", fontSize: 24, charSpacing: 360 },
   date: { text: "12 . 12 . 2026", fontFamily: "Cormorant Garamond", fontSize: 60, fontWeight: "600" },

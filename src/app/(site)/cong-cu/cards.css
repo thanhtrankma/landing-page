@@ -135,6 +135,10 @@
 .invite-phone.small iframe { border-radius: 26px; }
 .invite-theme h3 { margin: 10px 0 0; font-size: 17px; color: var(--ink); }
 .invite-theme p { margin: 0; font-size: 13.5px; color: var(--secondary); }
+.invite-theme h3 span { font-weight: 500; color: var(--secondary); }
+.invite-dots { display: flex; gap: 7px; justify-content: center; flex-wrap: wrap; margin-top: 4px; }
+.invite-dots button { width: 22px; height: 22px; border-radius: 50%; border: 2px solid #fff; box-shadow: 0 0 0 1px var(--line, #d6e2ea); padding: 0; cursor: pointer; }
+.invite-dots button.on { box-shadow: 0 0 0 2px var(--sky-700, #1a86bd); }
 .invite-theme-actions { display: grid; justify-items: center; gap: 8px; margin-top: 8px; }
 @media (max-width: 1100px) { .invite-themes { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 560px) { .invite-themes { grid-template-columns: 1fr; } .invite-phone.small { max-width: 280px; } }

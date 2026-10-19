@@ -3,10 +3,11 @@
 import { lunarLabel } from "@/lib/invites/lunar";
 import { BankCard, Calendar, Countdown, EventCard, Gallery, Photo } from "../parts";
 import { HeartLine, TornEdge, Wildflowers } from "./decor";
+import { Announce, Bi, FamilyTitle } from "../lang";
 import type { ThemeCtx } from "./types";
 
 // "Hoa đồng nội": full-bleed photo cover, torn paper, cream pages and hand-drawn wildflowers.
-export default function DongNoiTheme({ d, names, title, date, mono, guestName, highlights, wishes }: ThemeCtx) {
+export default function DongNoiTheme({ d, names, title, date, mono, guestName, highlights, wishes, show }: ThemeCtx) {
   const dmy = date ? `${date.dd} . ${date.mm} . ${date.y}` : "";
   return (
     <>
@@ -36,29 +37,35 @@ export default function DongNoiTheme({ d, names, title, date, mono, guestName, h
         </div>
       </section>
 
+      {show.families && (
       <section className="iv-sec iv-families dn-families">
         {[d.groomFamily, d.brideFamily].map((f, i) => (
           <div key={i} className="iv-family iv-reveal">
-            <h2>{f.title}</h2>
+            <h2><FamilyTitle which={i ? "brideFamily" : "groomFamily"} /></h2>
             <p className="iv-parents">{f.parents}</p>
             {f.address && <p className="iv-addr">{f.address}</p>}
           </div>
         ))}
       </section>
+      )}
 
+      {show.couple && (
       <section className="iv-sec dn-couple">
         <Photo src={d.couplePhoto || highlights[0]} alt={`Ảnh cô dâu chú rể ${title}`} mono={mono} className="dn-couple-photo iv-reveal" />
+        <Announce />
         <div className="dn-couple-names iv-reveal">
           <span className="iv-script">{d.groomFullName || d.groomName}</span>
           <i>&amp;</i>
           <span className="iv-script">{d.brideFullName || d.brideName}</span>
         </div>
       </section>
+      )}
 
+      {show.invite && (
       <section className="iv-sec dn-invite">
-        <p className="dn-invite-heading iv-reveal">{d.inviteHeading}</p>
+        <p className="dn-invite-heading iv-reveal"><Bi k="inviteHeading" /></p>
         <p className="iv-script dn-guest iv-reveal">{guestName}</p>
-        <p className="dn-invite-line iv-reveal">{d.inviteLine}</p>
+        <p className="dn-invite-line iv-reveal"><Bi k="inviteLine" /></p>
         <div className="iv-trio iv-reveal">
           {[date?.dd, date?.mm, date?.y].map((label, i) => (
             <Photo key={i} src={highlights[i] ?? ""} alt={`Ảnh cưới ${i + 1}`} mono={mono}>
@@ -66,10 +73,11 @@ export default function DongNoiTheme({ d, names, title, date, mono, guestName, h
             </Photo>
           ))}
         </div>
-        {d.quote && <p className="iv-script dn-quote iv-reveal">{d.quote}</p>}
+        {d.quote && <p className="iv-script dn-quote iv-reveal"><Bi k="quote" /></p>}
       </section>
+      )}
 
-      {d.events.length > 0 && (
+      {show.events && d.events.length > 0 && (
         <section className="iv-sec iv-events dn-events">
           {d.events.map((e) => (
             <EventCard key={e.id} e={e} title={title} />
@@ -77,23 +85,29 @@ export default function DongNoiTheme({ d, names, title, date, mono, guestName, h
         </section>
       )}
 
+      {(show.calendar || show.countdown) && (
       <section className="iv-sec iv-when dn-when">
-        <div className="iv-reveal">
-          <Calendar date={d.date} />
-        </div>
-        <div className="iv-reveal">
-          <Countdown date={d.date} />
-        </div>
+        {show.calendar && (
+          <div className="iv-reveal">
+            <Calendar date={d.date} />
+          </div>
+        )}
+        {show.countdown && (
+          <div className="iv-reveal">
+            <Countdown date={d.date} />
+          </div>
+        )}
       </section>
+      )}
 
-      {d.gallery.length > 0 && (
+      {show.gallery && d.gallery.length > 0 && (
         <section className="iv-sec iv-album dn-album">
           <h2 className="iv-script iv-reveal">Our Moments</h2>
           <Gallery photos={d.gallery} mono={mono} />
         </section>
       )}
 
-      {d.gift.enabled && (
+      {show.gift && d.gift.enabled && (
         <section className="iv-sec iv-gift dn-gift">
           <h2 className="iv-script iv-reveal">Gửi quà mừng</h2>
           <p className="iv-gift-sub iv-reveal">Cảm ơn tấm lòng của bạn dành cho chúng mình.</p>
@@ -106,13 +120,15 @@ export default function DongNoiTheme({ d, names, title, date, mono, guestName, h
 
       {wishes}
 
+      {show.thanks && (
       <section className="iv-sec iv-thanks">
         <Photo src={d.thanksPhoto || d.cover} alt="" mono="" className="iv-thanks-bg" />
         <div className="iv-thanks-body">
           <h2 className="iv-script iv-reveal">Thank you</h2>
-          <p className="iv-reveal">{d.thanks}</p>
+          <p className="iv-reveal"><Bi k="thanks" /></p>
         </div>
       </section>
+      )}
     </>
   );
 }

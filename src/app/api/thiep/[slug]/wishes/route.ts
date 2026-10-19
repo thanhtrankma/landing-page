@@ -21,7 +21,7 @@ export async function POST(request: Request, ctx: RouteContext<"/api/thiep/[slug
   if (!limit.ok) return fail("Bạn gửi hơi nhanh, vui lòng thử lại sau ít phút.", 429);
 
   const invite = await inviteIdBySlug(slug);
-  if (!invite || !invite.rsvp) return fail("Thiệp không nhận lời chúc.", 404);
+  if (!invite || !invite.guestbook) return fail("Thiệp không nhận lời chúc.", 404);
   try {
     const wish = await addWish(invite.id, { name, message, attend, guests, ip });
     return ok({ wish: wish.message ? { id: wish.id, name: wish.name, message: wish.message, createdAt: wish.createdAt } : null });

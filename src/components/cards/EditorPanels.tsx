@@ -94,7 +94,7 @@ export function QuickFillPanel() {
 }
 
 const TEXT_PRESETS: { preset: TextPreset; label: string; style: React.CSSProperties }[] = [
-  { preset: "names", label: "Minh Anh & Thu Hà", style: { fontFamily: "Great Vibes", fontSize: 30 } },
+  { preset: "names", label: "Dũng Thành & Thuỳ Trang", style: { fontFamily: "Great Vibes", fontSize: 30 } },
   { preset: "heading", label: "Lễ Thành Hôn", style: { fontFamily: "Playfair Display", fontSize: 24, fontWeight: 700 } },
   { preset: "date", label: "12 . 12 . 2026", style: { fontFamily: "Cormorant Garamond", fontSize: 24, fontWeight: 600 } },
   { preset: "caps", label: "TRÂN TRỌNG KÍNH MỜI", style: { fontFamily: "Montserrat", fontSize: 12, letterSpacing: "0.3em" } },

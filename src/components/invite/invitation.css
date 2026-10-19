@@ -297,3 +297,43 @@
   .iv-intro-guest b { font-size: 26px; }
   .iv-intro button { padding: 11px 26px; }
 }
+
+/* ───────── shared blocks (v2): bilingual lines, event extras, schedule, dress code, RSVP, modal ───────── */
+.iv-en { display: block; font-size: 0.72em; font-style: italic; letter-spacing: 0.02em; text-transform: none; opacity: 0.75; margin-top: 2px; font-family: var(--iv-sans), sans-serif; font-weight: 400; }
+.iv-event-sub { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; font-size: 13px; margin-top: 8px; opacity: 0.95; }
+.iv-event-sub span { padding: 3px 10px; border-radius: 999px; background: rgb(255 255 255 / 0.14); }
+.iv-event-map { display: block; width: 100%; height: 190px; border: 0; border-radius: 12px; margin-top: 14px; background: #eee; }
+
+.iv-block-title { font-family: var(--iv-serif), Georgia, serif; font-weight: 600; text-transform: uppercase; letter-spacing: 0.14em; font-size: 17px; color: var(--iv-red); margin: 0 0 16px; }
+.iv-schedule .iv-timeline { list-style: none; margin: 0 auto; padding: 0; max-width: 320px; text-align: left; position: relative; }
+.iv-timeline::before { content: ""; position: absolute; left: 64px; top: 6px; bottom: 6px; width: 1px; background: var(--iv-gold); }
+.iv-timeline li { display: grid; grid-template-columns: 56px 1fr; gap: 22px; align-items: baseline; padding: 9px 0; position: relative; }
+.iv-timeline li::before { content: ""; position: absolute; left: 60px; top: 15px; width: 9px; height: 9px; border-radius: 50%; background: var(--iv-red); box-shadow: 0 0 0 3px var(--iv-paper); }
+.iv-timeline b { font-family: var(--iv-serif), Georgia, serif; font-size: 17px; color: var(--iv-red); text-align: right; }
+.iv-timeline span { font-size: 14.5px; }
+.iv-dress-note { color: var(--iv-muted); font-size: 14px; margin: -6px 0 16px; }
+.iv-dress-colors { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
+.iv-dress-colors span { width: 46px; height: 46px; border-radius: 50%; box-shadow: 0 0 0 3px #fff, 0 0 0 4px rgb(0 0 0 / 0.08), 0 8px 16px -8px rgb(0 0 0 / 0.4); }
+
+.iv-rsvp-block { background: var(--iv-paper); }
+.iv-rsvp-block .iv-rsvp-sub { color: var(--iv-muted); font-size: 14px; margin: -6px 0 18px; }
+.iv-rsvp-open { border: 0; border-radius: 999px; padding: 13px 34px; background: var(--iv-red); color: #fff; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; font-size: 14px; box-shadow: 0 12px 24px -12px rgb(0 0 0 / 0.45); }
+.iv-rsvp-block .iv-rsvp-done { border: 1px solid var(--iv-gold); color: var(--iv-ink); }
+.iv-rsvp-form { text-align: left; color: var(--iv-ink); }
+.iv-rsvp-form .iv-rsvp-q { text-align: center; font-weight: 600; margin: 0 0 4px; }
+.iv-rsvp-choices { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.iv-rsvp-choices button { border: 1.5px solid var(--iv-gold); background: #fff; color: var(--iv-ink); border-radius: 12px; padding: 12px 8px; font-weight: 600; font-size: 14px; }
+.iv-rsvp-choices button.on { background: var(--iv-red); border-color: var(--iv-red); color: #fff; }
+.iv-field { display: grid; gap: 6px; font-size: 13px; font-weight: 600; }
+.iv-rsvp-form input, .iv-rsvp-form select { border: 1px solid #ddd; }
+.iv-rsvp-form button[type="submit"] { background: var(--iv-red); color: #fff; }
+.iv-guestbook .iv-wishes { margin-top: 18px; }
+
+.iv-modal { position: fixed; inset: 0; z-index: 85; background: rgb(20 8 6 / 0.6); display: grid; place-items: center; padding: 18px; }
+.iv-modal-card { position: relative; width: min(420px, 100%); max-height: calc(100% - 36px); overflow-y: auto; background: var(--iv-paper); color: var(--iv-ink); border-radius: 18px; padding: 26px 18px 20px; text-align: center; }
+.iv-modal-card h3 { font-family: var(--iv-serif), Georgia, serif; font-size: 18px; color: var(--iv-red); margin: 0 0 14px; }
+.iv-modal-close { position: absolute; top: 8px; right: 10px; width: 34px; height: 34px; border: 0; border-radius: 50%; background: rgb(0 0 0 / 0.06); font-size: 22px; line-height: 1; color: inherit; }
+.vd-shared .iv-sec { background: transparent; }
+.iv-announce { font-family: var(--iv-serif), Georgia, serif; font-style: italic; font-size: 15px; color: var(--iv-muted); margin: 0 0 14px; }
+.iv-person-title { display: block; font-family: var(--iv-sans), sans-serif; font-size: 11.5px; letter-spacing: 0.24em; text-transform: uppercase; opacity: 0.7; margin-top: 2px; }
+.tg-couple .tg-announce, .vd-couple .vd-announce { grid-column: 1 / -1; }

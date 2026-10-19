@@ -3,6 +3,7 @@
 import { mapsLink, parseDate, type InviteEvent } from "@/lib/invites/types";
 import { Calendar, Gallery, GiftReveal, Photo } from "../parts";
 import { Wreath } from "./decor";
+import { Announce, Bi, FamilyTitle } from "../lang";
 import type { ThemeCtx } from "./types";
 
 // "Đỏ đô polaroid" (after LoveCard mẫu 37): cover photo fading into white, burgundy display serif,
@@ -26,8 +27,23 @@ function Event({ e }: { e: InviteEvent }) {
         </p>
       )}
       {e.lunar && <p className="dd-event-lunar">{e.lunar}</p>}
+      {(e.welcomeTime || e.startTime) && (
+        <p className="iv-event-sub">
+          {e.welcomeTime && <span>Đón khách {e.welcomeTime}</span>}
+          {e.startTime && <span>Khai tiệc {e.startTime}</span>}
+        </p>
+      )}
       {e.venue && <p className="dd-event-venue">{e.venue}</p>}
       {e.address && <p className="dd-event-address">{e.address}</p>}
+      {e.showMap && (e.venue || e.address) && (
+        <iframe
+          className="iv-event-map"
+          src={`https://maps.google.com/maps?q=${encodeURIComponent([e.venue, e.address].filter(Boolean).join(", "))}&z=15&output=embed`}
+          title={`Bản đồ ${e.venue || e.title}`}
+          loading="lazy"
+          referrerPolicy="no-referrer-when-downgrade"
+        />
+      )}
       {map && (
         <a className="dd-event-map" href={map} target="_blank" rel="noopener noreferrer">
           Xem vị trí
@@ -37,7 +53,7 @@ function Event({ e }: { e: InviteEvent }) {
   );
 }
 
-export default function DoDoTheme({ d, title, date, mono, guestName, highlights, wishes }: ThemeCtx) {
+export default function DoDoTheme({ d, title, date, mono, guestName, highlights, wishes, show, labels }: ThemeCtx) {
   const monthLabel = date ? `Tháng ${date.mm} - ${date.y}` : "";
   return (
     <>
@@ -64,20 +80,21 @@ export default function DoDoTheme({ d, title, date, mono, guestName, highlights,
             <Photo src={highlights[1]} alt="" mono={mono} />
           </div>
         </div>
+        <Announce />
         <div className="dd-couple iv-reveal">
           <div>
-            <em>Chú rể</em>
+            <em>{labels.first}</em>
             <b>{d.groomName}</b>
           </div>
           <span className="dd-bar" aria-hidden="true" />
           <div>
-            <em>Cô dâu</em>
+            <em>{labels.second}</em>
             <b>{d.brideName}</b>
           </div>
         </div>
       </section>
 
-      {date && (
+      {show.calendar && date && (
         <section className="iv-sec dd-cal">
           <p className="dd-cal-title iv-reveal">{monthLabel}</p>
           <div className="iv-reveal">
@@ -86,29 +103,31 @@ export default function DoDoTheme({ d, title, date, mono, guestName, highlights,
         </section>
       )}
 
-      <section className="iv-sec dd-paper dd-invite">
-        <p className="dd-inv-heading iv-reveal">{d.inviteHeading}</p>
+      {(show.invite || show.families) && <section className="iv-sec dd-paper dd-invite">
+        {show.invite && <>
+        <p className="dd-inv-heading iv-reveal"><Bi k="inviteHeading" /></p>
         <p className="dd-guest iv-reveal">{guestName}</p>
-        <p className="dd-inv-line iv-reveal">{d.inviteLine}</p>
-        <div className="dd-families">
+        <p className="dd-inv-line iv-reveal"><Bi k="inviteLine" /></p>
+        </>}
+        {show.families && <div className="dd-families">
           {[d.groomFamily, d.brideFamily].map((f, i) => (
             <div key={i} className="iv-reveal">
-              <h3>{f.title}</h3>
+              <h3><FamilyTitle which={i ? "brideFamily" : "groomFamily"} /></h3>
               <p className="dd-parents">{f.parents}</p>
               {f.address && <p className="dd-addr">{f.address}</p>}
             </div>
           ))}
-        </div>
-        <div className="dd-trio iv-reveal">
+        </div>}
+        {show.invite && <div className="dd-trio iv-reveal">
           {[date?.dd, date?.mm, date?.y].map((label, i) => (
             <Photo key={i} src={highlights[i] ?? ""} alt={`Ảnh cưới ${i + 1}`} mono={mono}>
               <b>{label}</b>
             </Photo>
           ))}
-        </div>
-      </section>
+        </div>}
+      </section>}
 
-      {d.events.length > 0 && (
+      {show.events && d.events.length > 0 && (
         <section className="iv-sec dd-paper dd-events">
           {d.events.map((e) => (
             <Event key={e.id} e={e} />
@@ -116,7 +135,7 @@ export default function DoDoTheme({ d, title, date, mono, guestName, highlights,
         </section>
       )}
 
-      {d.gallery.length > 0 && (
+      {show.gallery && d.gallery.length > 0 && (
         <section className="iv-sec dd-album">
           <h2 className="dd-album-title iv-reveal">
             Album <em>of</em> <span>Love</span>
@@ -127,21 +146,23 @@ export default function DoDoTheme({ d, title, date, mono, guestName, highlights,
 
       {wishes}
 
-      <section className="iv-sec dd-paper dd-round">
-        <div className="dd-wreath iv-reveal">
-          <Photo src={d.couplePhoto || d.cover} alt={`Ảnh cô dâu chú rể ${title}`} mono={mono} />
-          <Wreath className="dd-wreath-leaves" />
-        </div>
-        {d.gift.enabled && <GiftReveal groom={d.gift.groom} bride={d.gift.bride} />}
-      </section>
+      {(show.couple || (show.gift && d.gift.enabled)) && <section className="iv-sec dd-paper dd-round">
+        {show.couple && (
+          <div className="dd-wreath iv-reveal">
+            <Photo src={d.couplePhoto || d.cover} alt={`Ảnh cô dâu chú rể ${title}`} mono={mono} />
+            <Wreath className="dd-wreath-leaves" />
+          </div>
+        )}
+        {show.gift && d.gift.enabled && <GiftReveal groom={d.gift.groom} bride={d.gift.bride} />}
+      </section>}
 
-      <section className="iv-sec iv-thanks dd-thanks">
+      {show.thanks && <section className="iv-sec iv-thanks dd-thanks">
         <Photo src={d.thanksPhoto || d.cover} alt="" mono="" className="iv-thanks-bg" />
         <div className="iv-thanks-body">
           <h2 className="iv-reveal">Thank You</h2>
-          <p className="iv-reveal">{d.thanks}</p>
+          <p className="iv-reveal"><Bi k="thanks" /></p>
         </div>
-      </section>
+      </section>}
     </>
   );
 }

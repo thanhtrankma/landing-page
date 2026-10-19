@@ -16,10 +16,17 @@ export const env = {
   r2SecretAccessKey: process.env.R2_SECRET_ACCESS_KEY ?? "",
   r2Bucket: process.env.R2_BUCKET ?? "",
   r2PublicUrl: (process.env.R2_PUBLIC_URL ?? "").replace(/\/+$/, ""),
+  // Visitor accounts for the online invitation tool.
+  userSessionSecret: process.env.USER_SESSION_SECRET || (process.env.ADMIN_SESSION_SECRET ? `${process.env.ADMIN_SESSION_SECRET}:users` : ""),
+  resendKey: process.env.RESEND_API_KEY ?? "",
+  mailFrom: process.env.MAIL_FROM || "SuperLanding <no-reply@superlanding.vn>",
+  googleClientId: process.env.GOOGLE_CLIENT_ID ?? "",
+  googleClientSecret: process.env.GOOGLE_CLIENT_SECRET ?? "",
 };
 
 export const supabaseConfigured = () => Boolean(env.supabaseUrl && env.supabaseKey);
 export const r2Configured = () => Boolean(env.r2AccountId && env.r2AccessKeyId && env.r2SecretAccessKey && env.r2Bucket && env.r2PublicUrl);
+export const googleConfigured = () => Boolean(env.googleClientId && env.googleClientSecret);
 export const authConfigured = () => env.adminPassword.length >= 8 && env.sessionSecret.length >= 24;
 
 /** sb_secret_… keys are not JWTs: they go in `apikey` only. Legacy JWT keys also need a Bearer header. */

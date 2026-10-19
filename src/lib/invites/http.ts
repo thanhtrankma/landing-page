@@ -1,18 +1,8 @@
 import "server-only";
-import { INVITE_COOKIE, inviteTokenMatches } from "./server";
+import { fail } from "../cards/http";
+import { requestRole, type Role } from "./access";
 
-// Owner access for /api/invites routes: the httpOnly cookie set at creation/claim, or an explicit header.
-function cookieValue(request: Request, name: string) {
-  for (const part of (request.headers.get("cookie") ?? "").split(";")) {
-    const [k, ...v] = part.trim().split("=");
-    if (k === name) return decodeURIComponent(v.join("="));
-  }
-  return undefined;
-}
-
-export function canEditInvite(request: Request, id: string) {
-  return inviteTokenMatches(id, request.headers.get("x-edit-token") ?? cookieValue(request, INVITE_COOKIE(id)));
-}
+// Request helpers for /api/invites routes.
 
 export const inviteCookieOptions = {
   httpOnly: true,
@@ -21,3 +11,10 @@ export const inviteCookieOptions = {
   path: "/",
   maxAge: 60 * 60 * 24 * 400,
 };
+
+/** Resolves the caller's role, or returns the 403 response to send. */
+export async function guard(request: Request, id: string, allowed: Role[] = ["owner", "editor", "token"]) {
+  const { role, user } = await requestRole(request, id);
+  if (!role || !allowed.includes(role)) return { denied: fail("Bạn không có quyền với thiệp này.", 403) } as const;
+  return { role, user } as const;
+}

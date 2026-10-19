@@ -51,8 +51,14 @@ const defaults: Record<string, () => Row> = {
   projects: () => ({ published: true, sample: false }),
   pages: () => ({ published: true, updated_at: new Date().toISOString() }),
   card_templates: () => ({ published: false, updated_at: new Date().toISOString(), thumb_key: "", sort_order: 0, tags: [] }),
-  invitations: () => ({ updated_at: new Date().toISOString(), published: true, view_count: 0 }),
+  invitations: () => ({ updated_at: new Date().toISOString(), published: true, view_count: 0, owner_id: null, status: "draft", published_at: null }),
   invitation_wishes: () => ({ hidden: false, guests: 1, attend: null }),
+  app_users: () => ({ name: "", avatar_url: "", google_sub: null, last_login_at: null }),
+  login_codes: () => ({ attempts: 0, used: false }),
+  invitation_members: () => ({ user_id: null, role: "editor" }),
+  guest_groups: () => ({ sort_order: 0 }),
+  guests: () => ({ group_id: null, greeting: "", max_people: null, note: "", rsvp_status: null, rsvp_people: null, rsvp_answers: {}, rsvp_at: null, opened_at: null }),
+  rsvps: () => ({ people: 1, answers: {}, guest_id: null }),
   card_designs: () => ({ updated_at: new Date().toISOString(), share_slug: null, preview_key: "", meta: {}, view_count: 0 }),
 };
 const prepare = (table: string, r: Row): Row => ({
