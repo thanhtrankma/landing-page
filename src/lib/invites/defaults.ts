@@ -23,8 +23,8 @@ export function defaultInvite(date = suggestedDate(), theme: InviteTheme = "song
     color: themeDef(theme).variants.some((v) => v.id === color) ? color : "",
     groomName: "Dũng Thành",
     brideName: "Thuỳ Trang",
-    groomFullName: "Nguyễn Dũng Thành",
-    brideFullName: "Trần Thuỳ Trang",
+    groomFullName: "Trần Dũng Thành",
+    brideFullName: "Ninh Thị Thuỳ Trang",
     groomTitle: "Trưởng nam",
     brideTitle: "Út nữ",
     groomFirst: true,
@@ -33,8 +33,8 @@ export function defaultInvite(date = suggestedDate(), theme: InviteTheme = "song
     cover: "",
     couplePhoto: "",
     highlights: ["", "", ""],
-    groomFamily: { title: "Nhà trai", parents: "Bố: Nguyễn Văn Bình\nMẹ: Lê Thị Hoa", address: "Phường Tân Định, TP. Hồ Chí Minh" },
-    brideFamily: { title: "Nhà gái", parents: "Bố: Trần Văn Cường\nMẹ: Phạm Thị Lan", address: "Phường Thảo Điền, TP. Hồ Chí Minh" },
+    groomFamily: { title: "Nhà trai", parents: "Bố: Trần Văn Thiện\nMẹ: Trần Thị Thu Doan", address: "Mỹ Ngự, Quyết Thắng, Hải Phòng" },
+    brideFamily: { title: "Nhà gái", parents: "Bố: Ninh Văn Thảo\nMẹ: Lại Thị Thu Hường", address: "Điền Viên, An Quang, Hải Phòng" },
     inviteHeading: "Trân trọng kính mời",
     inviteLine: "Tham dự lễ cưới của chúng tôi",
     quote: "Hôn nhân là chuyện cả đời,\nYêu người vừa ý, cưới người mình thương…",
@@ -94,5 +94,5 @@ export const demoBySlug = (slug: string) => {
 export const demoInvite = (theme: InviteTheme = "song-hy", color = ""): InviteData => {
   const d = defaultInvite("2026-12-12", theme, color);
   const bank = (holder: string) => ({ ...emptyBank(), bank: "Vietcombank", account: "0000 000 000", holder });
-  return { ...d, gallery: ["", "", "", "", ""], gift: { enabled: true, groom: bank("NGUYEN DUNG THANH"), bride: bank("TRAN THUY TRANG") } };
+  return { ...d, gallery: ["", "", "", "", ""], gift: { enabled: true, groom: bank("TRAN DUNG THANH"), bride: bank("NINH THI THUY TRANG") } };
 };

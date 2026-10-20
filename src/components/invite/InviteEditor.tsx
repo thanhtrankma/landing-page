@@ -357,8 +357,8 @@ export default function InviteEditor({ initial, invite: initialInvite, user, aut
 
           <Card title="Thông tin cơ bản" icon="♡" {...card("basic")}>
             <div className="ib-grid2">
-              <Text label="Họ tên chú rể" value={data.groomFullName} onChange={(v) => update({ groomFullName: v, groomName: data.groomName || v.split(" ").slice(-2).join(" ") })} placeholder="Nguyễn Dũng Thành" max={80} />
-              <Text label="Họ tên cô dâu" value={data.brideFullName} onChange={(v) => update({ brideFullName: v, brideName: data.brideName || v.split(" ").slice(-2).join(" ") })} placeholder="Trần Thuỳ Trang" max={80} />
+              <Text label="Họ tên chú rể" value={data.groomFullName} onChange={(v) => update({ groomFullName: v, groomName: data.groomName || v.split(" ").slice(-2).join(" ") })} placeholder="Trần Dũng Thành" max={80} />
+              <Text label="Họ tên cô dâu" value={data.brideFullName} onChange={(v) => update({ brideFullName: v, brideName: data.brideName || v.split(" ").slice(-2).join(" ") })} placeholder="Ninh Thị Thuỳ Trang" max={80} />
               <Text label="Tên ngắn chú rể" value={data.groomName} onChange={(v) => update({ groomName: v })} placeholder="Dũng Thành" max={60} />
               <Text label="Tên ngắn cô dâu" value={data.brideName} onChange={(v) => update({ brideName: v })} placeholder="Thuỳ Trang" max={60} />
               <Text label="Danh xưng chú rể" value={data.groomTitle} onChange={(v) => update({ groomTitle: v })} placeholder="Trưởng nam" max={40} />
