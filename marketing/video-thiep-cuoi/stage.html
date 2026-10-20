@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;700;800&family=Great+Vibes&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; }
+  html, body { width: 1080px; height: 1920px; overflow: hidden; }
+  body {
+    font-family: "Be Vietnam Pro", sans-serif; color: #12202b;
+    background: radial-gradient(900px 700px at 15% 8%, var(--bg1, #ffe3ea) 0%, transparent 60%),
+                radial-gradient(900px 800px at 95% 95%, var(--bg2, #dceefb) 0%, transparent 60%), #fbf7f4;
+  }
+  .glow { position: absolute; inset: 0; background: radial-gradient(520px 520px at 50% 58%, rgb(255 255 255 / 0.9), transparent 70%); }
+  .petal { position: absolute; width: 26px; height: 18px; border-radius: 60% 0 60% 0; background: linear-gradient(135deg, var(--soft, #ffd1dc), var(--accent, #f39bb0)); opacity: 0.4; }
+
+  .cap { position: absolute; left: 60px; right: 60px; top: 92px; text-align: center; }
+  .cap .kicker { display: inline-block; font-weight: 700; font-size: 30px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent, #c2416b); background: #fff; border-radius: 999px; padding: 10px 26px; box-shadow: 0 10px 30px -14px rgb(194 65 107 / 0.6); margin-bottom: 22px; }
+  .cap h1 { font-weight: 800; font-size: 68px; line-height: 1.16; letter-spacing: -0.01em; }
+  .cap h1 em { font-style: normal; background: linear-gradient(transparent 62%, var(--soft, #ffd2de) 62%); padding: 0 6px; }
+
+  .phone { position: absolute; left: 50%; width: 660px; height: 1386px; transform-origin: 50% 0; border-radius: 92px; background: #111317; padding: 18px;
+    box-shadow: 0 60px 120px -40px rgb(40 20 40 / 0.55), inset 0 0 0 3px #2e3138, inset 0 0 0 9px #0a0b0d; }
+  .screen { position: relative; width: 624px; height: 1350px; border-radius: 76px; overflow: hidden; background: #000; }
+  .screen img { width: 624px; height: 1350px; display: block; }
+  .island { position: absolute; top: 22px; left: 50%; width: 190px; height: 54px; margin-left: -95px; background: #000; border-radius: 30px; z-index: 5; }
+
+  /* lock screen */
+  .lock { position: absolute; inset: 0; background: radial-gradient(500px 700px at 30% 20%, #6b5a7a, transparent 70%), linear-gradient(170deg, #2b2440, #121522 70%); color: #fff; text-align: center; padding-top: 170px; }
+  .lock .time { font-size: 150px; font-weight: 600; letter-spacing: -0.02em; line-height: 1; }
+  .lock .date { font-size: 30px; opacity: 0.85; margin-top: 14px; }
+  .notif { position: absolute; left: 26px; right: 26px; top: 520px; display: flex; gap: 22px; align-items: flex-start; text-align: left; padding: 26px 28px; border-radius: 40px; background: rgb(255 255 255 / 0.82); color: #111; backdrop-filter: blur(20px); box-shadow: 0 20px 50px -20px rgb(0 0 0 / 0.6); }
+  .notif .ic { flex: none; width: 76px; height: 76px; border-radius: 20px; background: linear-gradient(135deg, #ff8fab, #e2466f); display: grid; place-items: center; font-size: 40px; }
+  .notif b { font-size: 30px; display: block; }
+  .notif p { font-size: 28px; line-height: 1.35; margin-top: 4px; color: #333; }
+  .notif small { position: absolute; right: 28px; top: 28px; font-size: 22px; color: #777; }
+
+  .tap { position: absolute; width: 120px; height: 120px; margin: -60px 0 0 -60px; border-radius: 50%; border: 6px solid rgb(255 255 255 / 0.95); background: rgb(226 70 111 / 0.35); box-shadow: 0 0 0 2px rgb(0 0 0 / 0.1); z-index: 6; pointer-events: none; }
+
+  .end { position: absolute; inset: 0; display: grid; place-items: center; align-content: center; gap: 30px; text-align: center; background: radial-gradient(800px 600px at 50% 40%, #fff, color-mix(in srgb, var(--bg1, #fbeef2) 60%, #fff) 70%, var(--bg1, #f4e4ea)); }
+  .end .script { font-family: "Great Vibes", cursive; font-size: 120px; color: var(--accent, #c2416b); line-height: 1; }
+  .end h2 { font-size: 84px; font-weight: 800; line-height: 1.12; }
+  .end p { font-size: 40px; color: #42505b; }
+  .end .chips { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; max-width: 900px; }
+  .end .chips span { font-size: 30px; font-weight: 600; background: #fff; border: 2px solid var(--soft, #f2cdd8); border-radius: 999px; padding: 12px 26px; }
+  .end .url { margin-top: 26px; font-size: 32px; font-weight: 600; color: #6a7a86; letter-spacing: 0.02em; }
+</style>
+</head>
+<body>
+  <div class="glow"></div>
+  <div id="petals"></div>
+  <div class="cap" id="cap"><div class="kicker" id="kicker"></div><h1 id="title"></h1></div>
+  <div class="phone" id="phone">
+    <div class="screen" id="screen">
+      <img id="shot" alt="">
+      <div class="lock" id="lock">
+        <div class="time">20:15</div>
+        <div class="date">Thứ Bảy, 24 tháng 10</div>
+        <div class="notif" id="notif">
+          <div class="ic">💌</div>
+          <div><b>Thành &amp; Trang</b><p>Gửi bạn thiệp mời cưới 💍<br>Mở thiệp để xem nhé!</p></div>
+          <small>bây giờ</small>
+        </div>
+      </div>
+      <div class="island"></div>
+    </div>
+  </div>
+  <div class="tap" id="tap"></div>
+  <div class="end" id="end">
+    <div class="script">Thành &amp; Trang</div>
+    <h2>Thiệp cưới online<br>ghi tên từng khách</h2>
+    <div class="chips"><span>88 mẫu thiệp</span><span>Xác nhận tham dự</span><span>Bản đồ · Lịch cưới</span><span>Miễn phí</span></div>
+    <div class="url">superlanding.vn</div>
+  </div>
+<script>
+  // Deterministic petals in the background.
+  const P = document.getElementById("petals");
+  const seeds = Array.from({ length: 14 }, (_, i) => ({ x: (i * 137) % 1040, y: (i * 389) % 1900, r: (i * 47) % 360, s: 0.6 + ((i * 13) % 10) / 12 }));
+  seeds.forEach(() => P.appendChild(Object.assign(document.createElement("div"), { className: "petal" })));
+  const $ = (id) => document.getElementById(id);
+  const PHONE_TOP = 520;
+  // Called once per frame by the renderer.
+  window.setFrame = async (f) => {
+    [...P.children].forEach((el, i) => {
+      const s = seeds[i];
+      const y = (s.y + f.t * 60 * s.s) % 1980 - 40;
+      el.style.transform = `translate(${s.x + Math.sin(f.t * 0.8 + i) * 30}px, ${y}px) rotate(${s.r + f.t * 40}deg) scale(${s.s})`;
+    });
+    $("kicker").textContent = f.kicker || "";
+    $("kicker").style.display = f.kicker ? "inline-block" : "none";
+    $("title").innerHTML = f.title || "";
+    $("cap").style.opacity = f.capIn ?? 1;
+    $("cap").style.transform = `translateY(${(1 - (f.capIn ?? 1)) * 30}px)`;
+    const scale = f.phoneScale ?? 1;
+    $("phone").style.top = `${f.phoneTop ?? PHONE_TOP}px`;
+    $("phone").style.transform = `translateX(-50%) scale(${scale})`;
+    $("lock").style.display = f.lock ? "block" : "none";
+    $("notif").style.opacity = f.notif ?? 0;
+    $("notif").style.transform = `translateY(${(1 - (f.notif ?? 0)) * -60}px)`;
+    if (f.shot) {
+      if ($("shot").src !== f.shot) { $("shot").src = f.shot; await $("shot").decode().catch(() => {}); }
+    }
+    const tap = $("tap");
+    if (f.tap) {
+      // tap.x/y in phone CSS px (390 x 844) → stage px
+      const ph = $("phone").getBoundingClientRect();
+      const k = (624 / 390) * scale;
+      tap.style.display = "block";
+      tap.style.left = `${ph.left + 18 * scale + f.tap.x * k}px`;
+      tap.style.top = `${ph.top + 18 * scale + f.tap.y * k}px`;
+      tap.style.opacity = 1 - f.tap.p * 0.6;
+      tap.style.transform = `scale(${0.6 + f.tap.p * 0.6})`;
+    } else tap.style.display = "none";
+    $("end").style.display = f.end ? "grid" : "none";
+    $("end").style.opacity = f.end ?? 0;
+  };
+</script>
+</body>
+</html>

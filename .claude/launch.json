@@ -4,9 +4,21 @@
     {
       "name": "nextjs-dev",
       "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "dev"],
+      "runtimeArgs": [
+        "run",
+        "dev"
+      ],
       "port": 3000,
       "autoPort": true
+    },
+    {
+      "name": "video-sandbox",
+      "runtimeExecutable": "sh",
+      "runtimeArgs": [
+        "-c",
+        "SUPABASE_URL= SUPABASE_SECRET_KEY= RESEND_API_KEY= npx next start -p 3100"
+      ],
+      "port": 3100
     }
   ]
 }
