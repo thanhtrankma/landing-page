@@ -177,6 +177,7 @@ export const navLinks: [href: string, label: string][] = [
 export const toolLinks: [href: string, label: string][] = [
   ["/cong-cu/thiep-cuoi-online", "Tạo thiệp cưới online"],
   ["/cong-cu/luyen-viet-chu-han", "Luyện viết chữ Hán"],
+  ["/cong-cu/tu-dien-hsk", "Từ điển HSK 1"],
 ];
 
 export const heroTexts = [

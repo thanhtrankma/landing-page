@@ -48,7 +48,7 @@ export default function Header() {
     setOpen(false);
     setToolsOpen(false);
   };
-  const toolsActive = toolLinks.some(([href]) => pathname === href);
+  const toolsActive = toolLinks.some(([href]) => pathname === href || pathname.startsWith(`${href}/`));
 
   return (
     <header className={`gv-header ${visible ? "" : "hidden"}`}>
@@ -72,7 +72,7 @@ export default function Header() {
           </button>
           <div className="gv-nav-menu">
             {toolLinks.map(([href, label]) => (
-              <Link key={href} className={pathname === href ? "active" : ""} href={href} onClick={closeAll}>
+              <Link key={href} className={pathname === href || pathname.startsWith(`${href}/`) ? "active" : ""} href={href} onClick={closeAll}>
                 {label}
               </Link>
             ))}

@@ -1,10 +1,10 @@
 /* Hanzi writing practice tool. Uses the site's sky tokens (theme.css). */
 
-.hanzi-hero { padding: 130px 0 56px; }
-.hanzi-hero-copy { max-width: 720px; margin: 0 auto 28px; text-align: center; }
-.hanzi-hero h1 { font-size: clamp(32px, 4.6vw, 52px); line-height: 1.14; margin: 18px 0 14px; color: var(--ink); }
+.hanzi-hero { padding: 120px 0 56px; }
+.hanzi-hero-copy { max-width: 720px; margin: 0 auto 24px; text-align: center; }
+.hanzi-hero h1 { font-size: clamp(30px, 4.4vw, 50px); line-height: 1.14; margin: 16px 0 12px; color: var(--ink); text-wrap: balance; }
 .hanzi-hero h1 em { font-style: normal; color: var(--sky-700); }
-.hanzi-hero-copy > p { font-size: 17px; line-height: 1.65; color: var(--secondary); margin: 0; }
+.hanzi-hero-copy > p { font-size: 17px; line-height: 1.6; color: var(--secondary); margin: 0; text-wrap: pretty; }
 
 .hanzi-practice {
   max-width: 860px; margin: 0 auto; padding: 24px;
@@ -12,50 +12,79 @@
   box-shadow: var(--shadow-soft);
 }
 
-.hanzi-form { display: flex; gap: 10px; }
+.hanzi-label { display: block; margin-bottom: 8px; font-size: 14px; font-weight: 700; color: var(--ink); }
+.hanzi-label small { font-weight: 500; color: var(--tertiary); }
+.hanzi-form-row { display: flex; gap: 10px; }
 .hanzi-form input {
-  flex: 1; min-width: 0; padding: 12px 16px; font-size: 20px;
-  border: 1px solid var(--sky-200); border-radius: 14px; background: var(--sky-50); color: var(--ink);
+  flex: 1; min-width: 0; height: 52px; padding: 0 16px; font-size: 22px;
+  border: 1px solid var(--sky-400); border-radius: 14px; background: #fff; color: var(--ink);
 }
-.hanzi-form input:focus { outline: none; border-color: var(--sky-500); background: #fff; box-shadow: 0 0 0 3px var(--sky-200); }
-.hanzi-form .gv-btn { padding: 0 26px; border-radius: 14px; font-size: 15px; cursor: pointer; }
+.hanzi-form input::placeholder { color: var(--quaternary); font-size: 17px; }
+.hanzi-form input:focus { outline: none; border-color: var(--sky-600); box-shadow: 0 0 0 3px var(--sky-200); }
+.hanzi-form .gv-btn { height: 52px; padding: 0 26px; border-radius: 14px; font-size: 15px; cursor: pointer; }
 
+/* Suggestions: wrap on desktop, one swipeable row on phones. */
 .hanzi-suggest { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
 .hanzi-suggest button {
-  display: inline-flex; align-items: baseline; gap: 6px;
+  flex: none; display: inline-flex; align-items: baseline; gap: 6px; min-height: 40px;
   border: 1px solid var(--sky-200); background: #fff; color: var(--ink);
-  border-radius: 999px; padding: 6px 14px; cursor: pointer; font: inherit;
+  border-radius: 999px; padding: 8px 14px; cursor: pointer; font: inherit;
+  transition: background 0.15s, border-color 0.15s;
 }
 .hanzi-suggest button span { font-size: 17px; font-weight: 600; }
 .hanzi-suggest button small { font-size: 12px; color: var(--tertiary); }
 .hanzi-suggest button:hover { border-color: var(--sky-500); }
-.hanzi-suggest button.on { background: var(--sky-300); border-color: var(--sky-500); }
-.hanzi-suggest button.on small { color: var(--secondary); }
+.hanzi-suggest button[aria-pressed="true"] { background: var(--sky-300); border-color: var(--sky-500); }
+.hanzi-suggest button[aria-pressed="true"] small { color: var(--secondary); }
 
-.hanzi-board { display: flex; flex-wrap: wrap; justify-content: center; gap: 18px; margin-top: 22px; }
-.hanzi-cell { display: flex; flex-direction: column; align-items: center; }
-.hanzi-canvas {
-  width: 240px; height: 240px; border-radius: 16px;
-  background-color: var(--sky-50); background-size: 100% 100%;
-  border: 1px solid var(--sky-200);
-  touch-action: none;
+/* Mode switch + replay/restart, above the boxes so they stay in reach. */
+.hanzi-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin: 20px 0 16px; }
+.hanzi-practice.compact .hanzi-toolbar { margin-top: 0; }
+.hanzi-seg { display: inline-flex; padding: 4px; border-radius: 999px; background: var(--sky-100); border: 1px solid var(--sky-200); }
+.hanzi-seg button {
+  min-height: 40px; padding: 0 18px; border: 0; border-radius: 999px; background: none;
+  font: inherit; font-weight: 700; font-size: 14.5px; color: var(--secondary); cursor: pointer;
+  transition: background 0.15s, color 0.15s, box-shadow 0.15s;
 }
-.hanzi-note { margin: 8px 0 0; max-width: 240px; text-align: center; font-size: 13px; font-weight: 700; color: var(--tertiary); }
+.hanzi-seg button:hover { color: var(--ink); }
+.hanzi-seg button[aria-pressed="true"] { background: #fff; color: var(--ink); box-shadow: 0 2px 8px -2px rgb(11 111 164 / 0.35); }
+.hanzi-action {
+  display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 0 16px;
+  border: 1px solid var(--sky-400); border-radius: 999px; background: #fff; color: var(--sky-800);
+  font: inherit; font-weight: 700; font-size: 14.5px; cursor: pointer;
+}
+.hanzi-action:hover { background: var(--sky-100); }
+
+.hanzi-board { display: flex; flex-wrap: wrap; justify-content: center; }
+.hanzi-cell { display: flex; flex-direction: column; align-items: center; max-width: 100%; }
+.hanzi-canvas {
+  border-radius: 16px; aspect-ratio: 1; min-width: 120px;
+  background-color: var(--sky-50); background-size: 100% 100%;
+  border: 2px solid var(--sky-200);
+  touch-action: none; user-select: none; -webkit-user-select: none;
+  transition: border-color 0.2s;
+}
+.hanzi-cell[data-status="done"] .hanzi-canvas { border-color: #34b37a; }
+.hanzi-cell[data-status="mistake"] .hanzi-canvas { border-color: #e3a33b; }
+.hanzi-note { margin: 8px 0 0; width: 100%; min-height: 20px; text-align: center; font-size: 13px; line-height: 1.4; font-weight: 600; color: var(--tertiary); }
 .hanzi-note .ok { color: #0f7a4f; }
 .hanzi-note .warn, .hanzi-note.warn { color: #a15c07; }
 
-.hanzi-modes { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 10px; margin-top: 20px; }
-.hanzi-modes button {
-  border: 1px solid var(--sky-400); background: #fff; color: var(--ink);
-  border-radius: 999px; padding: 10px 20px; font: inherit; font-weight: 700; font-size: 14.5px; cursor: pointer;
-}
-.hanzi-modes button:hover { background: var(--sky-100); }
-.hanzi-modes button.on { background: var(--sky-300); border-color: var(--sky-500); }
-.hanzi-modes button.icon { display: grid; place-items: center; padding: 9px; color: var(--sky-700); border-color: var(--sky-200); }
+.hanzi-toggle { display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 8px; min-height: 44px; font-size: 14px; color: var(--secondary); cursor: pointer; }
+.hanzi-toggle input { width: 18px; height: 18px; accent-color: var(--sky-700); }
 
-@media (max-width: 900px) { .hanzi-hero { padding-top: 100px; } }
+.hanzi-practice.compact { padding: 0; border: 0; box-shadow: none; background: none; }
+
+@media (max-width: 900px) { .hanzi-hero { padding-top: 96px; } }
 @media (max-width: 600px) {
+  .hanzi-hero { padding-bottom: 40px; }
+  .hanzi-hero-copy > p { font-size: 15.5px; }
   .hanzi-practice { padding: 16px; border-radius: 18px; }
-  .hanzi-suggest button small { display: none; }
-  .hanzi-board { gap: 12px; }
+  .hanzi-suggest { flex-wrap: nowrap; overflow-x: auto; margin-inline: -16px; padding: 0 16px 4px; scrollbar-width: none; }
+  .hanzi-suggest::-webkit-scrollbar { display: none; }
+  .hanzi-seg button { padding: 0 14px; }
+  .hanzi-action { padding: 0 14px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hanzi-suggest button, .hanzi-seg button, .hanzi-canvas { transition: none; }
 }
