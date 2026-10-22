@@ -32,8 +32,8 @@ function Arrow({ dir }: { dir: "left" | "right" }) {
 }
 
 /**
- * Word details shown beside the list (desktop) or in a bottom sheet (phones). `prev`/`next` step through the current
- * search results rather than the whole list.
+ * Word details shown beside the list (desktop, `panel`) or in a bottom sheet (phones, `sheet`). `prev`/`next` step
+ * through the current search results rather than the whole list; the sheet puts them in a footer within thumb reach.
  */
 export default function WordPreview({
   slug,
@@ -41,13 +41,16 @@ export default function WordPreview({
   next,
   onSelect,
   onClose,
+  variant = "panel",
 }: {
   slug: string;
   prev?: string;
   next?: string;
   onSelect: (slug: string) => void;
   onClose?: () => void;
+  variant?: "panel" | "sheet";
 }) {
+  const sheet = variant === "sheet";
   const [dict, setDict] = useState<Dictionary | null>(null);
   const bodyRef = useRef<HTMLDivElement>(null);
 
@@ -66,18 +69,22 @@ export default function WordPreview({
 
   const w = dict?.getWord(slug);
   const others = dict && w ? dict.related(w) : [];
+  const prevWord = prev ? dict?.getWord(prev) : undefined;
+  const nextWord = next ? dict?.getWord(next) : undefined;
 
   return (
-    <div className="preview">
+    <div className={`preview ${variant}`}>
       <div className="preview-bar">
-        <div className="preview-steps">
-          <button type="button" disabled={!prev} onClick={() => prev && onSelect(prev)} aria-label="Từ trước" title="Từ trước (phím ←)">
-            <Arrow dir="left" />
-          </button>
-          <button type="button" disabled={!next} onClick={() => next && onSelect(next)} aria-label="Từ tiếp" title="Từ tiếp (phím →)">
-            <Arrow dir="right" />
-          </button>
-        </div>
+        {!sheet && (
+          <div className="preview-steps">
+            <button type="button" disabled={!prev} onClick={() => prev && onSelect(prev)} aria-label="Từ trước" title="Từ trước (phím ←)">
+              <Arrow dir="left" />
+            </button>
+            <button type="button" disabled={!next} onClick={() => next && onSelect(next)} aria-label="Từ tiếp" title="Từ tiếp (phím →)">
+              <Arrow dir="right" />
+            </button>
+          </div>
+        )}
         <Link href={wordHref(slug)} className="preview-open">
           Mở trang riêng
           <svg
@@ -112,7 +119,7 @@ export default function WordPreview({
         )}
       </div>
 
-      <div ref={bodyRef} className="preview-body" aria-live="polite" aria-busy={!w}>
+      <div ref={bodyRef} className="preview-body" aria-live="polite" aria-busy={!w} tabIndex={-1}>
         {!w ? (
           <div className="preview-loading" aria-label="Đang tải">
             <span />
@@ -127,7 +134,7 @@ export default function WordPreview({
 
             <div className="word-block">
               <h2>Cách viết</h2>
-              <HanziWriterPractice key={w.slug} initialChar={w.hanzi} compact />
+              <HanziWriterPractice key={w.slug} initialChar={w.hanzi} compact maxSize={sheet ? 200 : undefined} />
             </div>
 
             <WordUsage usage={w.usage} />
@@ -151,6 +158,25 @@ export default function WordPreview({
           </>
         )}
       </div>
+
+      {sheet && (
+        <nav className="preview-foot" aria-label="Từ trước / sau">
+          <button type="button" disabled={!prev} onClick={() => prev && onSelect(prev)}>
+            <Arrow dir="left" />
+            <span>
+              <small>Từ trước</small>
+              {prevWord && <b lang="zh">{prevWord.hanzi}</b>}
+            </span>
+          </button>
+          <button type="button" disabled={!next} onClick={() => next && onSelect(next)} className="next">
+            <span>
+              <small>Từ tiếp</small>
+              {nextWord && <b lang="zh">{nextWord.hanzi}</b>}
+            </span>
+            <Arrow dir="right" />
+          </button>
+        </nav>
+      )}
     </div>
   );
 }

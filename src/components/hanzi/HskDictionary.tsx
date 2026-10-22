@@ -215,7 +215,11 @@ export default function HskDictionary({ words }: { words: HskListItem[] }) {
   useEffect(() => {
     const d = dialogRef.current;
     if (!d) return;
-    if (sheetOpen && !d.open) d.showModal();
+    if (sheetOpen && !d.open) {
+      d.showModal();
+      // showModal focuses the first control (the "Mở trang riêng" link); start on the content instead, with no ring.
+      d.querySelector<HTMLElement>(".preview-body")?.focus({ preventScroll: true });
+    }
     if (!sheetOpen && d.open) d.close();
   }, [sheetOpen]);
 
@@ -298,20 +302,22 @@ export default function HskDictionary({ words }: { words: HskListItem[] }) {
                 <h2 id="dict-level-h" className="dict-side-h">
                   Cấp độ
                 </h2>
-                <button type="button" aria-pressed={level === null} onClick={() => setLevel(null)}>
-                  Tất cả <small>{levelCounts.all}</small>
-                </button>
-                {levels.map((l) => (
-                  <button
-                    key={l}
-                    type="button"
-                    aria-pressed={level === l}
-                    disabled={!levelCounts[l] && level !== l}
-                    onClick={() => setLevel(level === l ? null : l)}
-                  >
-                    HSK {l} <small>{levelCounts[l]}</small>
+                <div className="dict-seg">
+                  <button type="button" aria-pressed={level === null} onClick={() => setLevel(null)}>
+                    Tất cả <small>{levelCounts.all}</small>
                   </button>
-                ))}
+                  {levels.map((l) => (
+                    <button
+                      key={l}
+                      type="button"
+                      aria-pressed={level === l}
+                      disabled={!levelCounts[l] && level !== l}
+                      onClick={() => setLevel(level === l ? null : l)}
+                    >
+                      HSK {l} <small>{levelCounts[l]}</small>
+                    </button>
+                  ))}
+                </div>
               </div>
               <span className="dict-filter-sep" aria-hidden="true" />
             </>
@@ -413,12 +419,17 @@ export default function HskDictionary({ words }: { words: HskListItem[] }) {
                       data-slug={w.slug}
                       aria-current={w.slug === selected ? "true" : undefined}
                     >
-                      <span className="dict-card-hanzi" lang="zh">
+                      <span className="dict-card-hanzi" lang="zh" data-len={Math.min([...w.hanzi].length, 4)}>
                         {w.hanzi}
                       </span>
                       <span className="dict-card-pinyin">{displayPinyin(w.pinyin)}</span>
                       <span className="dict-card-meaning">{w.meaning}</span>
-                      {!level && levels.length > 1 && <span className="dict-card-level">HSK {w.level}</span>}
+                      {!level && levels.length > 1 && (
+                        <span className="dict-card-level" title={`HSK ${w.level}`}>
+                          H<span>SK </span>
+                          {w.level}
+                        </span>
+                      )}
                     </Link>
                   </li>
                 ))}
@@ -447,7 +458,9 @@ export default function HskDictionary({ words }: { words: HskListItem[] }) {
       )}
 
       <dialog ref={dialogRef} className="dict-sheet" aria-label="Chi tiết từ" onClose={() => sheetOpen && close()}>
-        {sheetOpen && selected && <WordPreview slug={selected} prev={prev} next={next} onSelect={setSelected} onClose={close} />}
+        {sheetOpen && selected && (
+          <WordPreview slug={selected} prev={prev} next={next} onSelect={setSelected} onClose={close} variant="sheet" />
+        )}
       </dialog>
     </div>
   );

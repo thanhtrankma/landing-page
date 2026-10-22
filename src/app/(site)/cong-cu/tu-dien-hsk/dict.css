@@ -75,11 +75,18 @@
 .dict-filter { display: grid; gap: 18px; }
 .dict-filter-group { display: grid; gap: 4px; }
 .dict-filter-sep { display: none; }
-/* Levels: a compact 3-up segmented row instead of another long list. */
-.dict-levels { grid-template-columns: repeat(3, 1fr); }
-.dict-levels .dict-side-h { grid-column: 1 / -1; }
-.dict-filter .dict-levels button { flex-direction: column; justify-content: center; gap: 2px; min-height: 52px; padding: 6px 4px; border-color: var(--sky-200); text-align: center; }
-.dict-filter .dict-levels button small { min-width: 0; padding: 0; background: none; }
+/* Levels: one segmented control (same look as the writing tool's mode switch) instead of another long list. */
+.dict-seg { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; padding: 4px; border-radius: 14px; background: var(--sky-100); border: 1px solid var(--sky-200); }
+.dict-filter .dict-seg button {
+  flex-direction: column; justify-content: center; align-items: center; gap: 1px;
+  min-height: 48px; padding: 6px 2px; border: 0; border-radius: 10px;
+  font-size: 13.5px; line-height: 1.2; white-space: nowrap; text-align: center; color: var(--secondary);
+}
+.dict-filter .dict-seg button small,
+.dict-filter .dict-seg button[aria-pressed="true"] small { min-width: 0; padding: 0; border-radius: 0; background: none; font-size: 11.5px; color: var(--tertiary); }
+.dict-filter .dict-seg button:hover:not(:disabled) { background: rgb(255 255 255 / 0.6); }
+.dict-filter .dict-seg button[aria-pressed="true"] { background: #fff; color: var(--ink); box-shadow: 0 2px 8px -2px rgb(11 111 164 / 0.35); }
+.dict-filter .dict-seg button[aria-pressed="true"] small { color: var(--sky-800); }
 .dict-filter button {
   display: flex; align-items: center; justify-content: space-between; gap: 8px; min-height: 40px;
   padding: 0 12px; border: 1px solid transparent; border-radius: 12px; background: none;
@@ -156,7 +163,10 @@
   .dict-filter::-webkit-scrollbar { display: none; }
   .dict-filter-group { display: contents; }
   .dict-filter-sep { display: block; flex: none; width: 1px; margin: 6px 2px; background: var(--sky-200); }
-  .dict-filter .dict-levels button { flex-direction: row; min-height: 38px; padding: 0 12px; }
+  .dict-seg { display: contents; }
+  .dict-filter .dict-seg button { flex-direction: row; gap: 6px; min-height: 38px; padding: 0 12px; border: 1px solid var(--sky-200); border-radius: 999px; background: #fff; box-shadow: none; }
+  .dict-filter .dict-seg button[aria-pressed="true"] { background: var(--sky-300); border-color: var(--sky-500); box-shadow: none; }
+  .dict-filter .dict-seg button small { font-size: 12px; }
   /* One "Tất cả" chip in the row is enough; tapping an active HSK chip again clears it. */
   .dict-levels button:first-of-type { display: none; }
   .dict-filter button { flex: none; min-height: 38px; padding: 0 12px; border: 1px solid var(--sky-200); border-radius: 999px; background: #fff; font-size: 13.5px; }
@@ -226,8 +236,9 @@
 @keyframes preview-dot { 0%, 80%, 100% { opacity: 0.3; transform: scale(0.8); } 40% { opacity: 1; transform: scale(1); } }
 
 .dict-sheet {
-  width: min(560px, 100%); max-width: 100%; height: min(88dvh, 860px); max-height: 100dvh;
-  margin: auto auto 0; padding: 0; border: 0; border-radius: 22px 22px 0 0;
+  /* Override the UA's modal dialog insets (max-width: calc(100% - 2em - 6px)) so the sheet spans the phone. */
+  width: 100%; max-width: 100%; height: min(90dvh, 860px); max-height: 100dvh;
+  inset: auto 0 0 0; margin: 0; padding: 0; border: 0; border-radius: 22px 22px 0 0;
   background: #fff; color: var(--ink); box-shadow: 0 -20px 50px -20px rgb(11 42 60 / 0.45);
   overflow: hidden;
 }
@@ -240,8 +251,37 @@
 .dict-sheet .preview-body { padding: 16px 16px calc(24px + env(safe-area-inset-bottom)); }
 @keyframes sheet-up { from { transform: translateY(40px); opacity: 0; } to { transform: none; opacity: 1; } }
 @media (min-width: 600px) {
-  .dict-sheet { margin: auto; border-radius: 22px; height: min(86dvh, 860px); }
+  .dict-sheet { width: min(560px, calc(100% - 48px)); inset: 0; margin: auto; border-radius: 22px; height: min(86dvh, 860px); }
 }
+
+/* Sheet layout: compact header row, body, thumb-reach footer to step between words. */
+.preview.sheet .preview-bar { gap: 4px; padding: 16px 8px 6px 4px; border-bottom: 0; }
+.preview.sheet .preview-open { margin-left: 0; margin-right: auto; }
+.preview-body:focus { outline: none; }
+.preview.sheet .preview-head { flex-direction: row; align-items: center; gap: 16px; padding-bottom: 16px; text-align: left; }
+.preview.sheet .preview-head .word-hanzi { flex: none; min-width: 88px; padding: 6px 12px; border-radius: 16px; font-size: 44px; line-height: 1.25; }
+.preview.sheet .preview-head .word-pinyin { justify-content: flex-start; gap: 8px; font-size: 22px; }
+.preview.sheet .preview-head .word-pinyin .speak { min-height: 36px; padding: 0 10px; font-size: 13px; }
+.preview.sheet .preview-head .word-hv { margin-top: 2px; font-size: 12.5px; }
+.preview.sheet .preview-head .word-meaning { margin: 4px 0 8px; font-size: 17px; }
+.preview.sheet .preview-head .word-tags { justify-content: flex-start; }
+.preview.sheet .word-block { padding-top: 16px; }
+.preview.sheet .hanzi-toolbar { margin-bottom: 12px; }
+.preview-foot {
+  flex: none; display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
+  padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
+  border-top: 1px solid var(--sky-200); background: #fff;
+}
+.preview-foot button {
+  display: flex; align-items: center; gap: 6px; min-height: 52px; padding: 0 12px; cursor: pointer;
+  border: 1px solid var(--sky-200); border-radius: 14px; background: var(--sky-50); color: var(--sky-800); font: inherit; text-align: left;
+}
+.preview-foot button.next { justify-content: flex-end; text-align: right; }
+.preview-foot button:active:not(:disabled) { background: var(--sky-100); }
+.preview-foot button:disabled { opacity: 0.4; cursor: default; }
+.preview-foot span { display: grid; min-width: 0; }
+.preview-foot small { font-size: 11.5px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--tertiary); }
+.preview-foot b { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 18px; font-weight: 600; color: var(--ink); }
 html:has(.dict-sheet[open]) { overflow: hidden; }
 
 /* ───────── Word page ───────── */
@@ -331,11 +371,24 @@ a.word-step:hover { background: var(--sky-100); }
 }
 @media (max-width: 600px) {
   .hanzi-hero-copy { margin-bottom: 18px; }
+  /* Phones: just the title; the count line above the list already says what's here and how to use it. */
+  .dict-hero { padding-top: 92px; padding-bottom: 32px; }
+  .dict-hero .hanzi-hero-copy { margin-bottom: 14px; }
+  .dict-hero .invite-eyebrow, .dict-hero h1 em, .dict-hero .hanzi-hero-copy > p { display: none; }
+  .dict-hero h1 { margin: 0; font-size: 28px; }
   .dict-search input { height: 50px; font-size: 16px; }
   .dict-count { justify-content: center; text-align: center; }
   .dict-kbd { display: none; }
-  .dict-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
-  .dict-card-hanzi { font-size: 30px; }
+  /* Four words per row: smaller type, one-line meaning, "H2" instead of "HSK 2". */
+  .dict-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; }
+  .dict-card { gap: 0; padding: 16px 4px 8px; border-radius: 12px; }
+  .dict-card-hanzi { font-size: 22px; line-height: 1.25; white-space: nowrap; }
+  .dict-card-hanzi[data-len="3"] { font-size: 18px; }
+  .dict-card-hanzi[data-len="4"] { font-size: 14px; }
+  .dict-card-pinyin { max-width: 100%; font-size: 11.5px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .dict-card-meaning { max-width: 100%; margin-top: 1px; font-size: 11px; line-height: 1.35; -webkit-line-clamp: 1; }
+  .dict-card-level { top: 3px; right: 3px; padding: 0 4px; border-radius: 5px; font-size: 9px; }
+  .dict-card-level span { display: none; }
 
   .word-page { padding-top: 92px; padding-bottom: 110px; }
   .word-crumbs { margin-bottom: 12px; }

@@ -159,7 +159,7 @@ function toChars(text: string): string[] {
 const GAP = 12;
 
 /** Fits the canvases to the board: one big box for a single character, otherwise at least two per row on phones. */
-function useCanvasSize(count: number, compact: boolean) {
+function useCanvasSize(count: number, compact: boolean, maxSize: number) {
   const ref = useRef<HTMLDivElement>(null);
   const [size, setSize] = useState(0);
   useEffect(() => {
@@ -167,7 +167,7 @@ function useCanvasSize(count: number, compact: boolean) {
     if (!el) return;
     const measure = () => {
       const w = el.clientWidth;
-      const target = count === 1 ? 260 : compact ? 160 : 220;
+      const target = Math.min(maxSize, count === 1 ? 260 : compact ? 160 : 220);
       let cols = Math.max(1, Math.min(count, Math.floor((w + GAP) / (target + GAP))));
       if (count > 1 && cols < 2) cols = 2;
       const next = Math.floor(Math.min(target, (w - GAP * (cols - 1)) / cols));
@@ -177,7 +177,7 @@ function useCanvasSize(count: number, compact: boolean) {
     const ro = new ResizeObserver(measure);
     ro.observe(el);
     return () => ro.disconnect();
-  }, [count, compact]);
+  }, [count, compact, maxSize]);
   return [ref, size] as const;
 }
 
@@ -186,13 +186,22 @@ const ICONS = {
 };
 
 /** `compact` drops the input and suggestions, for embedding next to a dictionary entry. */
-export default function HanziWriterPractice({ initialChar = "你好", compact = false }: { initialChar?: string; compact?: boolean }) {
+export default function HanziWriterPractice({
+  initialChar = "你好",
+  compact = false,
+  maxSize = 260,
+}: {
+  initialChar?: string;
+  compact?: boolean;
+  /** Upper bound for each box, in px. */
+  maxSize?: number;
+}) {
   const [chars, setChars] = useState(() => toChars(initialChar));
   const [input, setInput] = useState(initialChar);
   const [mode, setMode] = useState<Mode>("demo");
   const [showOutline, setShowOutline] = useState(true);
   const [actionToken, setActionToken] = useState(0);
-  const [boardRef, size] = useCanvasSize(chars.length, compact);
+  const [boardRef, size] = useCanvasSize(chars.length, compact, maxSize);
 
   function show(text: string) {
     const next = toChars(text);
@@ -267,7 +276,14 @@ export default function HanziWriterPractice({ initialChar = "你好", compact = 
 
       <div ref={boardRef} className="hanzi-board" style={{ gap: GAP }}>
         {chars.map((c, i) => (
-          <CharCanvas key={`${i}-${c}`} char={c} mode={mode} actionToken={actionToken} size={size} showOutline={mode === "demo" || showOutline} />
+          <CharCanvas
+            key={`${i}-${c}`}
+            char={c}
+            mode={mode}
+            actionToken={actionToken}
+            size={size}
+            showOutline={mode === "demo" || showOutline}
+          />
         ))}
       </div>
 

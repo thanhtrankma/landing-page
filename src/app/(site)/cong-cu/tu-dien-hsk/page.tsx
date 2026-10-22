@@ -33,7 +33,7 @@ export default function HskDictionaryPage() {
         )}
       />
 
-      <section className="hanzi-hero">
+      <section className="hanzi-hero dict-hero">
         <div className="gv-wrap">
           <div className="hanzi-hero-copy fade-in-up">
             <span className="invite-eyebrow">CÔNG CỤ MIỄN PHÍ</span>
