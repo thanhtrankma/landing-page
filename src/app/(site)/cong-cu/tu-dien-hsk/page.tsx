@@ -1,17 +1,19 @@
 import JsonLd from "@/components/JsonLd";
 import { Button } from "@/components/ui";
 import HskDictionary from "@/components/hanzi/HskDictionary";
-import { DICT_PATH, HSK1, listItems } from "@/lib/hsk";
+import { DICT_PATH, LEVELS, WORDS, listItems } from "@/lib/hsk";
 import { SITE_URL, breadcrumbJsonLd, graph, pageMetadata } from "@/lib/seo";
 import "../cards.css";
 import "../luyen-viet-chu-han/hanzi.css";
 import "./dict.css";
 
+const LEVEL_RANGE = `HSK ${LEVELS.map((l) => l.level).join("–")}`;
+
 export const metadata = pageMetadata({
-  title: `Từ Điển HSK 1 – ${HSK1.length} Từ Vựng Có Nghĩa, Cách Viết, Ví Dụ | SuperLanding`,
-  description: `Tra cứu ${HSK1.length} từ vựng HSK 1 (chuẩn HSK 3.0): pinyin, âm Hán Việt, nghĩa tiếng Việt, cách dùng, câu ví dụ và hoạt hình thứ tự nét viết từng chữ.`,
+  title: `Từ Điển ${LEVEL_RANGE} – ${WORDS.length} Từ Vựng Có Nghĩa, Cách Viết, Ví Dụ | SuperLanding`,
+  description: `Tra cứu ${WORDS.length} từ vựng ${LEVEL_RANGE} (chuẩn HSK 3.0): pinyin, âm Hán Việt, nghĩa tiếng Việt, cách dùng, câu ví dụ và hoạt hình thứ tự nét viết từng chữ.`,
   path: DICT_PATH,
-  keywords: "từ điển hsk 1, từ vựng hsk 1, 500 từ hsk 1, hsk 3.0, tra từ tiếng trung, từ vựng tiếng trung cơ bản",
+  keywords: "từ điển hsk, từ vựng hsk 1, từ vựng hsk 2, hsk 3.0, tra từ tiếng trung, từ vựng tiếng trung cơ bản",
 });
 
 export default function HskDictionaryPage() {
@@ -23,11 +25,11 @@ export default function HskDictionaryPage() {
           {
             "@type": "DefinedTermSet",
             "@id": `${url}#set`,
-            name: "Từ vựng HSK 1",
+            name: `Từ vựng ${LEVEL_RANGE}`,
             url,
             inLanguage: ["zh-CN", "vi-VN"],
           },
-          breadcrumbJsonLd(url, [["Trang chủ", "/"], ["Công cụ", DICT_PATH], ["Từ điển HSK 1", DICT_PATH]]),
+          breadcrumbJsonLd(url, [["Trang chủ", "/"], ["Công cụ", DICT_PATH], ["Từ điển HSK", DICT_PATH]]),
         )}
       />
 
@@ -36,9 +38,9 @@ export default function HskDictionaryPage() {
           <div className="hanzi-hero-copy fade-in-up">
             <span className="invite-eyebrow">CÔNG CỤ MIỄN PHÍ</span>
             <h1>
-              Từ điển HSK 1 <em>{HSK1.length} từ vựng.</em>
+              Từ điển <span className="nowrap">{LEVEL_RANGE}</span> <em>{WORDS.length} từ vựng.</em>
             </h1>
-            <p>Danh sách từ vựng cấp 1 theo chuẩn HSK 3.0. Bấm vào một từ để xem nghĩa, âm Hán Việt, cách dùng, câu ví dụ và cách viết từng nét.</p>
+            <p>Từ vựng {LEVELS.map((l) => `HSK ${l.level} (${l.count} từ)`).join(", ")} theo chuẩn HSK 3.0. Bấm vào một từ để xem nghĩa, âm Hán Việt, cách dùng, câu ví dụ và cách viết từng nét.</p>
           </div>
           <HskDictionary words={listItems()} />
         </div>

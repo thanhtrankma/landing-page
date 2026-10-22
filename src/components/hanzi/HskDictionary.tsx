@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useCallback, useDeferredValue, useEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
 import WordPreview, { loadDictionary } from "@/components/hanzi/WordPreview";
-import { displayPinyin, plainPinyin, plainVi, posLabel, posTitle, wordHref, type HskListItem } from "@/lib/hsk-text";
+import { displayPinyin, plainPinyin, plainVi, posLabel, posTitle, wordHref, type HskLevel, type HskListItem } from "@/lib/hsk-text";
 
 const POS_FILTERS = ["名", "动", "形", "副", "代", "数", "量"];
 
@@ -39,9 +39,9 @@ function termScore(w: HskListItem, raw: string): number {
   return score;
 }
 
-/** Words matching every term (and the part-of-speech filter), best matches first; list order breaks ties. */
-function search(words: HskListItem[], q: string, pos: string | null): HskListItem[] {
-  const pool = pos ? words.filter((w) => w.pos.includes(pos)) : words;
+/** Words matching every term (and the level / part-of-speech filters), best matches first; list order breaks ties. */
+function search(words: HskListItem[], q: string, pos: string | null, level: HskLevel | null): HskListItem[] {
+  const pool = words.filter((w) => (!pos || w.pos.includes(pos)) && (!level || w.level === level));
   const terms = q.split(/\s+/).filter(Boolean);
   if (!terms.length) return pool;
   return pool
@@ -55,17 +55,18 @@ function search(words: HskListItem[], q: string, pos: string | null): HskListIte
       return { w, total };
     })
     .filter((r): r is { w: HskListItem; total: number } => r !== null)
-    .sort((a, b) => b.total - a.total || a.w.n - b.w.n)
+    .sort((a, b) => b.total - a.total || a.w.level - b.w.level || a.w.n - b.w.n)
     .map((r) => r.w);
 }
 
 /**
  * The prerendered HTML holds the unfiltered list (every word linked, for crawlers and first paint); on the client the
- * URL's ?q= / ?loai= are restored so "Back" from a word page returns to the same search.
+ * URL's ?q= / ?cap= / ?loai= are restored so "Back" from a word page returns to the same search.
  */
 export default function HskDictionary({ words }: { words: HskListItem[] }) {
   const [query, setQuery] = useState("");
   const [pos, setPos] = useState<string | null>(null);
+  const [level, setLevel] = useState<HskLevel | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const q = useDeferredValue(query.trim());
 
@@ -85,11 +86,13 @@ export default function HskDictionary({ words }: { words: HskListItem[] }) {
     // eslint-disable-next-line react-hooks/set-state-in-effect -- one-off sync from the URL after hydration
     setQuery(params.get("q") ?? "");
     setPos(params.get("loai"));
+    const cap = Number(params.get("cap"));
+    setLevel(words.some((w) => w.level === cap) ? (cap as HskLevel) : null);
     setSelected(params.get("tu"));
     // Start fetching the word data while the user is still scanning the list.
     const idle = window.requestIdleCallback ?? ((cb: () => void) => window.setTimeout(cb, 1200));
     idle(() => void loadDictionary());
-  }, []);
+  }, [words]);
 
   // Browser Back closes the sheet (or steps back to the previously shown word).
   useEffect(() => {
@@ -111,12 +114,14 @@ export default function HskDictionary({ words }: { words: HskListItem[] }) {
     const url = new URL(window.location.href);
     if (q) url.searchParams.set("q", q);
     else url.searchParams.delete("q");
+    if (level) url.searchParams.set("cap", String(level));
+    else url.searchParams.delete("cap");
     if (pos) url.searchParams.set("loai", pos);
     else url.searchParams.delete("loai");
     if (selected) url.searchParams.set("tu", selected);
     else url.searchParams.delete("tu");
     window.history.replaceState(window.history.state, "", url);
-  }, [q, pos, selected]);
+  }, [q, pos, level, selected]);
 
   // "/" focuses the search box from anywhere on the page.
   useEffect(() => {
@@ -130,13 +135,21 @@ export default function HskDictionary({ words }: { words: HskListItem[] }) {
     return () => document.removeEventListener("keydown", onKey);
   }, []);
 
-  const results = useMemo(() => search(words, q, pos), [words, q, pos]);
+  const levels = useMemo(() => [...new Set(words.map((w) => w.level))], [words]);
+  const results = useMemo(() => search(words, q, pos, level), [words, q, pos, level]);
+  // Each filter's counts reflect the search and the *other* filter, so they show what picking it would give.
   const posCounts = useMemo(() => {
-    const base = search(words, q, null);
+    const base = search(words, q, null, level);
     const counts: Record<string, number> = { all: base.length };
     for (const p of POS_FILTERS) counts[p] = base.filter((w) => w.pos.includes(p)).length;
     return counts;
-  }, [words, q]);
+  }, [words, q, level]);
+  const levelCounts = useMemo(() => {
+    const base = search(words, q, pos, null);
+    const counts: Record<string, number> = { all: base.length };
+    for (const l of levels) counts[l] = base.filter((w) => w.level === l).length;
+    return counts;
+  }, [words, q, pos, levels]);
 
   const groups = useMemo(() => {
     if (q) return [["", results]] as [string, HskListItem[]][];
@@ -145,15 +158,16 @@ export default function HskDictionary({ words }: { words: HskListItem[] }) {
       const k = initial(w);
       map.set(k, [...(map.get(k) ?? []), w]);
     }
-    return [...map];
+    return [...map].sort(([a], [b]) => a.localeCompare(b));
   }, [results, q]);
   const allLetters = useMemo(() => [...new Set(words.map(initial))], [words]);
   const present = new Set(groups.map(([k]) => k));
-  const filtered = Boolean(q || pos);
+  const filtered = Boolean(q || pos || level);
 
   function reset() {
     setQuery("");
     setPos(null);
+    setLevel(null);
     inputRef.current?.focus();
   }
 
@@ -277,24 +291,50 @@ export default function HskDictionary({ words }: { words: HskListItem[] }) {
       </div>
 
       <aside className="dict-side" aria-label="Bộ lọc">
-        <div className="dict-filter" role="group" aria-labelledby="dict-pos-h">
-          <h2 id="dict-pos-h" className="dict-side-h">
-            Từ loại
-          </h2>
-          <button type="button" aria-pressed={pos === null} onClick={() => setPos(null)}>
-            Tất cả <small>{posCounts.all}</small>
-          </button>
-          {POS_FILTERS.map((p) => (
-            <button
-              key={p}
-              type="button"
-              aria-pressed={pos === p}
-              disabled={!posCounts[p] && pos !== p}
-              onClick={() => setPos(pos === p ? null : p)}
-            >
-              {posTitle(p)} <small>{posCounts[p]}</small>
+        <div className="dict-filter">
+          {levels.length > 1 && (
+            <>
+              <div className="dict-filter-group dict-levels" role="group" aria-labelledby="dict-level-h">
+                <h2 id="dict-level-h" className="dict-side-h">
+                  Cấp độ
+                </h2>
+                <button type="button" aria-pressed={level === null} onClick={() => setLevel(null)}>
+                  Tất cả <small>{levelCounts.all}</small>
+                </button>
+                {levels.map((l) => (
+                  <button
+                    key={l}
+                    type="button"
+                    aria-pressed={level === l}
+                    disabled={!levelCounts[l] && level !== l}
+                    onClick={() => setLevel(level === l ? null : l)}
+                  >
+                    HSK {l} <small>{levelCounts[l]}</small>
+                  </button>
+                ))}
+              </div>
+              <span className="dict-filter-sep" aria-hidden="true" />
+            </>
+          )}
+          <div className="dict-filter-group" role="group" aria-labelledby="dict-pos-h">
+            <h2 id="dict-pos-h" className="dict-side-h">
+              Từ loại
+            </h2>
+            <button type="button" aria-pressed={pos === null} onClick={() => setPos(null)}>
+              Tất cả <small>{posCounts.all}</small>
             </button>
-          ))}
+            {POS_FILTERS.map((p) => (
+              <button
+                key={p}
+                type="button"
+                aria-pressed={pos === p}
+                disabled={!posCounts[p] && pos !== p}
+                onClick={() => setPos(pos === p ? null : p)}
+              >
+                {posTitle(p)} <small>{posCounts[p]}</small>
+              </button>
+            ))}
+          </div>
         </div>
 
         {!q && (
@@ -332,7 +372,7 @@ export default function HskDictionary({ words }: { words: HskListItem[] }) {
             </>
           ) : (
             <span>
-              <b>{words.length}</b> từ vựng HSK 1 · bấm vào từ để xem nghĩa và cách viết
+              <b>{words.length}</b> từ vựng HSK {levels.join("–")} · bấm vào từ để xem nghĩa và cách viết
             </span>
           )}
         </p>
@@ -341,7 +381,8 @@ export default function HskDictionary({ words }: { words: HskListItem[] }) {
           <div className="dict-empty">
             <p>
               <b>
-                Không tìm thấy “{q}”{pos ? ` trong nhóm ${posLabel(pos)}` : ""}.
+                Không tìm thấy “{q}”{level ? ` ở HSK ${level}` : ""}
+                {pos ? ` trong nhóm ${posLabel(pos)}` : ""}.
               </b>
             </p>
             <p>Thử gõ pinyin không dấu (vd: chifan), một chữ Hán đơn, hoặc một từ tiếng Việt ngắn hơn.</p>
@@ -377,6 +418,7 @@ export default function HskDictionary({ words }: { words: HskListItem[] }) {
                       </span>
                       <span className="dict-card-pinyin">{displayPinyin(w.pinyin)}</span>
                       <span className="dict-card-meaning">{w.meaning}</span>
+                      {!level && levels.length > 1 && <span className="dict-card-level">HSK {w.level}</span>}
                     </Link>
                   </li>
                 ))}

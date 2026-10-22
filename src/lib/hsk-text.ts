@@ -1,5 +1,5 @@
 // Types and text helpers shared by the server pages and the client search. Kept free of the word data so importing
-// them doesn't pull hsk1.json (≈280KB) into the browser bundle; the client loads "@/lib/hsk" lazily when it needs it.
+// them doesn't pull the word lists (hsk1.json, hsk2.json…) into the browser bundle; the client loads "@/lib/hsk" lazily when it needs it.
 
 export type HskExample = { zh: string; pinyin: string; vi: string };
 
@@ -15,10 +15,12 @@ export type HskWord = {
   examples: HskExample[];
 };
 
-export type HskEntry = HskWord & { slug: string };
+export type HskLevel = 1 | 2;
+
+export type HskEntry = HskWord & { slug: string; level: HskLevel };
 
 /** What the client-side search list needs; the full entry (usage, examples) is loaded on demand. */
-export type HskListItem = Pick<HskEntry, "n" | "hanzi" | "pinyin" | "pos" | "meaning" | "slug"> & {
+export type HskListItem = Pick<HskEntry, "n" | "hanzi" | "pinyin" | "pos" | "meaning" | "slug" | "level"> & {
   /** Search fields: hanzi + variants, toneless pinyin, accent-free meaning and Hán Việt. */
   zh: string;
   py: string;

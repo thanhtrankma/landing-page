@@ -72,7 +72,14 @@
 }
 .dict-side-h { margin: 0 0 8px; font-size: 12px; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: var(--sky-800); }
 
-.dict-filter { display: grid; gap: 4px; }
+.dict-filter { display: grid; gap: 18px; }
+.dict-filter-group { display: grid; gap: 4px; }
+.dict-filter-sep { display: none; }
+/* Levels: a compact 3-up segmented row instead of another long list. */
+.dict-levels { grid-template-columns: repeat(3, 1fr); }
+.dict-levels .dict-side-h { grid-column: 1 / -1; }
+.dict-filter .dict-levels button { flex-direction: column; justify-content: center; gap: 2px; min-height: 52px; padding: 6px 4px; border-color: var(--sky-200); text-align: center; }
+.dict-filter .dict-levels button small { min-width: 0; padding: 0; background: none; }
 .dict-filter button {
   display: flex; align-items: center; justify-content: space-between; gap: 8px; min-height: 40px;
   padding: 0 12px; border: 1px solid transparent; border-radius: 12px; background: none;
@@ -125,6 +132,8 @@
 }
 .dict-card:hover, .dict-card:focus-visible { transform: translateY(-3px); border-color: var(--sky-500); box-shadow: var(--shadow-lift); }
 .dict-card:active { transform: scale(0.98); }
+.dict-card { position: relative; }
+.dict-card-level { position: absolute; top: 8px; right: 8px; padding: 1px 6px; border-radius: 6px; font-size: 10.5px; font-weight: 800; letter-spacing: 0.02em; color: var(--sky-800); background: var(--sky-100); }
 .dict-card-hanzi { font-size: 30px; line-height: 1.3; font-weight: 600; }
 .dict-card-pinyin { font-size: 14.5px; font-weight: 700; color: var(--sky-700); }
 .dict-card-meaning { margin-top: 2px; font-size: 13.5px; line-height: 1.4; color: var(--secondary); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
@@ -145,6 +154,11 @@
     transition: top 0.25s ease;
   }
   .dict-filter::-webkit-scrollbar { display: none; }
+  .dict-filter-group { display: contents; }
+  .dict-filter-sep { display: block; flex: none; width: 1px; margin: 6px 2px; background: var(--sky-200); }
+  .dict-filter .dict-levels button { flex-direction: row; min-height: 38px; padding: 0 12px; }
+  /* One "Tất cả" chip in the row is enough; tapping an active HSK chip again clears it. */
+  .dict-levels button:first-of-type { display: none; }
   .dict-filter button { flex: none; min-height: 38px; padding: 0 12px; border: 1px solid var(--sky-200); border-radius: 999px; background: #fff; font-size: 13.5px; }
   .dict-filter button small { min-width: 0; padding: 0; background: none; }
   .dict-filter button[aria-pressed="true"] small { background: none; }

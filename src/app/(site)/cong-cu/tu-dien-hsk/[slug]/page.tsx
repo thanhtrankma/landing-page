@@ -4,7 +4,7 @@ import JsonLd from "@/components/JsonLd";
 import HanziWriterPractice from "@/components/hanzi/HanziWriterPractice";
 import WordKeys from "@/components/hanzi/WordKeys";
 import { WordExamples, WordSummary, WordUsage } from "@/components/hanzi/WordParts";
-import { DICT_PATH, HSK1, displayPinyin as display, getWord, neighbours, related, wordHref, type HskEntry } from "@/lib/hsk";
+import { DICT_PATH, WORDS, displayPinyin as display, levelCount, getWord, neighbours, related, wordHref, type HskEntry } from "@/lib/hsk";
 import { SITE_URL, breadcrumbJsonLd, graph, pageMetadata } from "@/lib/seo";
 import "../../cards.css";
 import "../../luyen-viet-chu-han/hanzi.css";
@@ -13,7 +13,7 @@ import "../dict.css";
 export const dynamicParams = false;
 
 export function generateStaticParams() {
-  return HSK1.map((w) => ({ slug: w.slug }));
+  return WORDS.map((w) => ({ slug: w.slug }));
 }
 
 const href = (w: HskEntry) => wordHref(w.slug);
@@ -61,10 +61,10 @@ export async function generateMetadata({ params }: PageProps<"/cong-cu/tu-dien-h
   const w = getWord(slug);
   if (!w) return {};
   return pageMetadata({
-    title: `${w.hanzi} (${display(w.pinyin)}) nghĩa là gì? Cách viết, ví dụ – Từ điển HSK 1 | SuperLanding`,
+    title: `${w.hanzi} (${display(w.pinyin)}) nghĩa là gì? Cách viết, ví dụ – Từ vựng HSK ${w.level} | SuperLanding`,
     description: `${w.hanzi} – ${display(w.pinyin)} – ${w.hanViet}: ${w.meaning}. ${w.usage}`.slice(0, 300),
     path: `${DICT_PATH}/${w.slug}`,
-    keywords: `${w.hanzi}, ${w.hanzi} nghĩa là gì, ${display(w.pinyin)}, cách viết chữ ${w.hanzi}, từ vựng hsk 1`,
+    keywords: `${w.hanzi}, ${w.hanzi} nghĩa là gì, ${display(w.pinyin)}, cách viết chữ ${w.hanzi}, từ vựng hsk ${w.level}`,
   });
 }
 
@@ -91,7 +91,7 @@ export default async function HskWordPage({ params }: PageProps<"/cong-cu/tu-die
           },
           breadcrumbJsonLd(url, [
             ["Trang chủ", "/"],
-            ["Từ điển HSK 1", DICT_PATH],
+            ["Từ điển HSK", DICT_PATH],
             [w.hanzi, `${DICT_PATH}/${w.slug}`],
           ]),
         )}
@@ -103,12 +103,12 @@ export default async function HskWordPage({ params }: PageProps<"/cong-cu/tu-die
         <div className="gv-wrap">
           <nav className="word-crumbs" aria-label="Điều hướng từ điển">
             <Link href={DICT_PATH} className="word-back">
-              <Arrow dir="left" /> Từ điển HSK 1
+              <Arrow dir="left" /> Từ điển HSK
             </Link>
             <div className="word-steps">
               <StepLink word={prev} dir="left" />
               <span>
-                {w.n}/{HSK1.length}
+                HSK {w.level} · {w.n}/{levelCount(w.level)}
               </span>
               <StepLink word={next} dir="right" />
             </div>

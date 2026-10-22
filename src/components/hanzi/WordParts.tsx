@@ -19,7 +19,7 @@ export function WordSummary({ w, level = 1 }: { w: HskEntry; level?: 1 | 2 }) {
         </p>
         <p className="word-meaning">{w.meaning}</p>
         <div className="word-tags">
-          <span>HSK 1</span>
+          <span>HSK {w.level}</span>
           {w.pos.map((p) => (
             <span key={p}>{posTitle(p)}</span>
           ))}
