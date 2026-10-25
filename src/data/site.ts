@@ -178,6 +178,7 @@ export const toolLinks: [href: string, label: string][] = [
   ["/cong-cu/thiep-cuoi-online", "Tạo thiệp cưới online"],
   ["/cong-cu/luyen-viet-chu-han", "Luyện viết chữ Hán"],
   ["/cong-cu/tu-dien-hsk", "Từ điển HSK"],
+  ["/cong-cu/bai-hoc-tieng-trung", "Bài học tiếng Trung theo buổi"],
   ["/cong-cu/mua-tu-vung-tieng-trung", "Game Mưa từ vựng"],
   ["/cong-cu/chu-han-roi", "Game Chữ Hán rơi"],
 ];

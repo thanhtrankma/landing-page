@@ -2,8 +2,9 @@
 
 import Link from "next/link";
 import { useCallback, useEffect, useRef, useState, type FormEvent } from "react";
-import { wordHref } from "@/lib/hsk-text";
 import {
+  bestScope,
+  gameWordHref,
   LEVEL_PICKS,
   MODES,
   MODE_PLACEHOLDER,
@@ -34,7 +35,7 @@ const PER_LEVEL = 100; // points per level
 const BOOM_MS = 450;
 const LASER_MS = 220;
 const PREFS_KEY = "sl_meteor_prefs";
-const bestKey = (p: Prefs) => `sl_meteor_best_${p.mode}_${p.level}`;
+const bestKey = (p: Prefs, set?: string) => `sl_meteor_best_${p.mode}_${bestScope(p.level, set)}`;
 
 /** Seconds a meteor takes to fall the whole way, and seconds between spawns, at a given level. */
 const fallSeconds = (level: number) => Math.max(4.2, 11 * Math.pow(0.9, level - 1));
@@ -52,7 +53,8 @@ function hintFor(word: GameWord, mode: AnswerMode): string {
 type View = { meteors: Meteor[]; lasers: Laser[]; score: number; lives: number; level: number; hits: number; flash: number };
 const EMPTY_VIEW: View = { meteors: [], lasers: [], score: 0, lives: LIVES, level: 1, hits: 0, flash: 0 };
 
-export default function VocabMeteor({ words }: { words: GameWord[] }) {
+/** `set` names a fixed word list (a lesson): it is played whole, without the HSK level choice, and keeps its own record. */
+export default function VocabMeteor({ words, set }: { words: GameWord[]; set?: string }) {
   const [prefs, setPrefs] = useState<Prefs>({ mode: "pinyin", level: 1, hints: false });
   const [phase, setPhase] = useState<Phase>("ready");
   const [view, setView] = useState<View>(EMPTY_VIEW);
@@ -83,14 +85,14 @@ export default function VocabMeteor({ words }: { words: GameWord[] }) {
     const p = readPrefs<Prefs>(PREFS_KEY, { mode: "pinyin", level: 1, hints: false });
     // eslint-disable-next-line react-hooks/set-state-in-effect -- one-time sync from localStorage after hydration
     setPrefs(p);
-    setBest(readBest(bestKey(p)));
-  }, []);
+    setBest(readBest(bestKey(p, set)));
+  }, [set]);
 
   const updatePrefs = (patch: Partial<Prefs>) => {
     const next = { ...prefs, ...patch };
     setPrefs(next);
     savePrefs(PREFS_KEY, next);
-    setBest(readBest(bestKey(next)));
+    setBest(readBest(bestKey(next, set)));
   };
 
   const publish = useCallback(() => {
@@ -107,7 +109,7 @@ export default function VocabMeteor({ words }: { words: GameWord[] }) {
   }, []);
 
   const start = () => {
-    const pool = pickWords(words, prefs.level);
+    const pool = set ? words : pickWords(words, prefs.level);
     game.current = {
       meteors: [],
       lasers: [],
@@ -177,8 +179,8 @@ export default function VocabMeteor({ words }: { words: GameWord[] }) {
 
       if (g.lives <= 0) {
         setMissed([...g.missed]);
-        setRecord(g.score > 0 && g.score > readBest(bestKey(prefs)));
-        setBest(saveBest(bestKey(prefs), g.score));
+        setRecord(g.score > 0 && g.score > readBest(bestKey(prefs, set)));
+        setBest(saveBest(bestKey(prefs, set), g.score));
         setPhase("over");
         return;
       }
@@ -186,7 +188,7 @@ export default function VocabMeteor({ words }: { words: GameWord[] }) {
     };
     raf = requestAnimationFrame(step);
     return () => cancelAnimationFrame(raf);
-  }, [phase, prefs, publish]);
+  }, [phase, prefs, publish, set]);
 
   // Pause when the tab is hidden; Esc toggles pause.
   useEffect(() => {
@@ -291,7 +293,7 @@ export default function VocabMeteor({ words }: { words: GameWord[] }) {
           <div className="vg-overlay">
             <h2>Mưa từ vựng</h2>
             <p>Gõ đúng để bắn hạ chữ Hán trước khi chạm đất. Bạn có {LIVES} mạng.</p>
-            <Settings prefs={prefs} onChange={updatePrefs} showHints />
+            <Settings prefs={prefs} onChange={updatePrefs} showHints showLevel={!set} />
             <button type="button" className="gv-btn vg-start" onClick={start}>
               Bắt đầu chơi
             </button>
@@ -354,19 +356,31 @@ export default function VocabMeteor({ words }: { words: GameWord[] }) {
   );
 }
 
-export function Settings({ prefs, onChange, showHints = false }: { prefs: { mode: AnswerMode; level: LevelPick; hints?: boolean }; onChange: (p: { mode?: AnswerMode; level?: LevelPick; hints?: boolean }) => void; showHints?: boolean }) {
+export function Settings({
+  prefs,
+  onChange,
+  showHints = false,
+  showLevel = true,
+}: {
+  prefs: { mode: AnswerMode; level: LevelPick; hints?: boolean };
+  onChange: (p: { mode?: AnswerMode; level?: LevelPick; hints?: boolean }) => void;
+  showHints?: boolean;
+  showLevel?: boolean;
+}) {
   return (
     <div className="vg-settings">
-      <div className="vg-setting">
-        <span>Bộ từ</span>
-        <div className="vg-seg" role="group" aria-label="Bộ từ">
-          {LEVEL_PICKS.map(([v, label]) => (
-            <button key={v} type="button" aria-pressed={prefs.level === v} onClick={() => onChange({ level: v })}>
-              {label}
-            </button>
-          ))}
+      {showLevel && (
+        <div className="vg-setting">
+          <span>Bộ từ</span>
+          <div className="vg-seg" role="group" aria-label="Bộ từ">
+            {LEVEL_PICKS.map(([v, label]) => (
+              <button key={v} type="button" aria-pressed={prefs.level === v} onClick={() => onChange({ level: v })}>
+                {label}
+              </button>
+            ))}
+          </div>
         </div>
-      </div>
+      )}
       <div className="vg-setting">
         <span>Gõ đáp án</span>
         <div className="vg-seg" role="group" aria-label="Kiểu đáp án">
@@ -394,7 +408,7 @@ export function MissedList({ words, title = "Ôn lại các từ bị lọt" }: 
       <ul>
         {words.map((w) => (
           <li key={w[5]}>
-            <Link href={wordHref(w[5])} target="_blank">
+            <Link href={gameWordHref(w)} target="_blank">
               <b>{w[0]}</b>
               <span>{w[1]}</span>
               <small>{shortMeaning(w[2])}</small>

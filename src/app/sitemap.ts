@@ -3,6 +3,7 @@ import { servicePages } from "@/lib/content";
 import { getPosts, getProjects, getPublishedPages } from "@/lib/site-data";
 import { SITE_URL } from "@/lib/seo";
 import { DICT_PATH, WORDS } from "@/lib/hsk";
+import { LESSONS, LESSONS_PATH, lessonHref } from "@/lib/lessons";
 
 type Entry = MetadataRoute.Sitemap[number];
 
@@ -28,6 +29,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     page(DICT_PATH, "monthly", 0.7),
     page("/cong-cu/mua-tu-vung-tieng-trung", "monthly", 0.6),
     page("/cong-cu/chu-han-roi", "monthly", 0.6),
+    page(LESSONS_PATH, "monthly", 0.6),
+    ...LESSONS.map((l) => page(lessonHref(l), "monthly", 0.5)),
     ...WORDS.map((w) => page(`${DICT_PATH}/${w.slug}`, "yearly", 0.5)),
     ...legal.map((p) => page(`/${p.slug}`, "yearly", 0.3)),
     ...servicePages.map((s) => page(`/${s.slug}`, "monthly", 0.9)),

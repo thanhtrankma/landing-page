@@ -1,9 +1,12 @@
 // Shared pieces of the two vocabulary games (Mưa từ vựng, Chữ Hán rơi): word tuples, answer checking, deck and
 // best-score helpers. Pure functions only, so both client components can use them.
-import { plainPinyin, plainVi } from "@/lib/hsk-text";
+import { plainPinyin, plainVi, wordHref } from "@/lib/hsk-text";
 
-/** Compact word passed from the server page: [hanzi, pinyin (display), meaning, Hán Việt, level, slug, parts of speech]. */
-export type GameWord = [hanzi: string, pinyin: string, meaning: string, hanViet: string, level: number, slug: string, pos: string[]];
+/** Compact word passed from the server page: [hanzi, pinyin (display), meaning, Hán Việt, level, slug, parts of speech, link].
+ * The link defaults to the word's HSK dictionary page; lesson words outside the dictionary point to their lesson instead. */
+export type GameWord = [hanzi: string, pinyin: string, meaning: string, hanViet: string, level: number, slug: string, pos: string[], href?: string];
+
+export const gameWordHref = (w: GameWord) => w[7] ?? wordHref(w[5]);
 
 /** What the player types: toneless pinyin, a Vietnamese meaning, or either. */
 export type AnswerMode = "pinyin" | "meaning" | "both";
@@ -92,6 +95,9 @@ export function makeDeck(words: GameWord[]) {
 }
 
 export const pickWords = (words: GameWord[], level: LevelPick) => (level === 0 ? words : words.filter((w) => w[4] === level));
+
+/** Where a game keeps its record: per answer mode and HSK level, or per word set (a lesson) when it plays one. */
+export const bestScope = (level: LevelPick, set?: string) => set ?? String(level);
 
 /** Best score kept in this browser only (wrapped: storage can be blocked in private windows). */
 export function readBest(key: string): number {

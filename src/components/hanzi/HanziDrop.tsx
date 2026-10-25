@@ -2,10 +2,12 @@
 
 import Link from "next/link";
 import { useCallback, useEffect, useLayoutEffect, useRef, useState, type CSSProperties } from "react";
-import { posLabel, wordHref } from "@/lib/hsk-text";
+import { posLabel } from "@/lib/hsk-text";
 import SpeakButton from "./SpeakButton";
 import { MissedList, Settings } from "./VocabMeteor";
 import {
+  bestScope,
+  gameWordHref,
   answerSlots,
   letterMatches,
   makeDeck,
@@ -54,7 +56,7 @@ const GUN_PLACEHOLDER: Record<AnswerMode, string> = {
   meaning: "Gõ từng chữ cái của nghĩa, không cần dấu",
   both: "Gõ từng chữ cái pinyin để bắn",
 };
-const bestKey = (p: Prefs) => `sl_drop_best_${p.mode}_${p.level}`;
+const bestKey = (p: Prefs, set?: string) => `sl_drop_best_${p.mode}_${bestScope(p.level, set)}`;
 
 const fallSeconds = (level: number) => Math.max(5, 14 * Math.pow(0.88, level - 1));
 const pointsFor = (hints: number) => Math.max(MIN_POINTS, MAX_POINTS - hints * HINT_COST);
@@ -216,7 +218,8 @@ function ShotFx({ shot, onDone }: { shot: Shot; onDone: (id: number) => void }) 
 
 type View = { round: Round | null; score: number; lives: number; level: number; streak: number };
 
-export default function HanziDrop({ words }: { words: GameWord[] }) {
+/** `set` names a fixed word list (a lesson): it is played whole, without the HSK level choice, and keeps its own record. */
+export default function HanziDrop({ words, set }: { words: GameWord[]; set?: string }) {
   const [prefs, setPrefs] = useState<Prefs>({ mode: "pinyin", level: 1 });
   const [phase, setPhase] = useState<Phase>("ready");
   const [view, setView] = useState<View>({ round: null, score: 0, lives: LIVES, level: 1, streak: 0 });
@@ -247,14 +250,14 @@ export default function HanziDrop({ words }: { words: GameWord[] }) {
     const p = readPrefs<Prefs>(PREFS_KEY, { mode: "pinyin", level: 1 });
     // eslint-disable-next-line react-hooks/set-state-in-effect -- one-time sync from localStorage after hydration
     setPrefs(p);
-    setBest(readBest(bestKey(p)));
-  }, []);
+    setBest(readBest(bestKey(p, set)));
+  }, [set]);
 
   const updatePrefs = (patch: Partial<Prefs>) => {
     const next = { ...prefs, ...patch };
     setPrefs(next);
     savePrefs(PREFS_KEY, next);
-    setBest(readBest(bestKey(next)));
+    setBest(readBest(bestKey(next, set)));
   };
 
   const publish = useCallback(() => {
@@ -269,7 +272,7 @@ export default function HanziDrop({ words }: { words: GameWord[] }) {
   }, []);
 
   const start = () => {
-    const pool = pickWords(words, prefs.level);
+    const pool = set ? words : pickWords(words, prefs.level);
     const deck = makeDeck(pool.length ? pool : words);
     game.current = { round: newRound(deck.draw(), prefs.mode), score: 0, lives: LIVES, correct: 0, streak: 0, bestStreak: 0, clock: 0, nextId: 1, deck, played: [] };
     setHistory([]);
@@ -312,8 +315,8 @@ export default function HanziDrop({ words }: { words: GameWord[] }) {
         } else if (g.clock - r.doneAt > (r.status === "correct" ? NEXT_AFTER_OK : NEXT_AFTER_MISS)) {
           if (g.lives <= 0) {
             publish();
-            setSummary({ correct: g.correct, bestStreak: g.bestStreak, record: g.score > 0 && g.score > readBest(bestKey(prefs)) });
-            setBest(saveBest(bestKey(prefs), g.score));
+            setSummary({ correct: g.correct, bestStreak: g.bestStreak, record: g.score > 0 && g.score > readBest(bestKey(prefs, set)) });
+            setBest(saveBest(bestKey(prefs, set), g.score));
             setPhase("over");
             return;
           }
@@ -325,7 +328,7 @@ export default function HanziDrop({ words }: { words: GameWord[] }) {
     };
     raf = requestAnimationFrame(step);
     return () => cancelAnimationFrame(raf);
-  }, [phase, prefs, publish, record]);
+  }, [phase, prefs, publish, record, set]);
 
   useEffect(() => {
     const onHide = () => document.hidden && setPhase((p) => (p === "playing" ? "paused" : p));
@@ -466,7 +469,7 @@ export default function HanziDrop({ words }: { words: GameWord[] }) {
             <div className="vg-overlay">
               <h2>Chữ Hán rơi</h2>
               <p>Bắn đủ ô chữ trước khi thẻ chạm đáy, càng sớm càng nhiều điểm. Gõ từng chữ cái để súng bắn vào ô chữ: đúng thì chữ xếp vào, sai thì nảy ra và thẻ bị đẩy xuống. Mỗi khi thẻ rơi qua một vạch ngang, ô chữ lộ thêm chữ cái và bớt {HINT_COST} điểm.</p>
-              <Settings prefs={prefs} onChange={updatePrefs} />
+              <Settings prefs={prefs} onChange={updatePrefs} showLevel={!set} />
               <button type="button" className="gv-btn vg-start" onClick={start}>
                 Bắt đầu chơi
               </button>
@@ -556,7 +559,7 @@ export default function HanziDrop({ words }: { words: GameWord[] }) {
                 <span className="drop-mark" aria-label={h.ok ? "Đúng" : "Lọt"}>
                   {h.ok ? "✓" : "✗"}
                 </span>
-                <Link href={wordHref(h.word[5])} target="_blank" title="Mở trong Từ điển HSK">
+                <Link href={gameWordHref(h.word)} target="_blank" title="Mở từ này">
                   <b>{h.word[0]}</b>
                   <span>
                     {h.word[1]}

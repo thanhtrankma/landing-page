@@ -1,0 +1,128 @@
+/* "Bài học tiếng Trung": lesson list, then one lesson in tabs (new words, grammar, writing, games). Builds on hanzi.css. */
+
+/* lesson list */
+.lesson-book { max-width: 980px; margin: 34px auto 0; }
+.lesson-book h2 { margin: 0 0 14px; font-size: 22px; color: var(--ink); }
+.lesson-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+.lesson-card {
+  display: flex; flex-direction: column; gap: 8px; padding: 20px; border-radius: 22px; text-decoration: none; color: inherit;
+  background: #fff; border: 1px solid var(--sky-200); box-shadow: var(--shadow-soft); transition: border-color 0.15s, transform 0.15s;
+}
+.lesson-card:hover { border-color: var(--sky-500); transform: translateY(-2px); }
+.lesson-card-tag { align-self: flex-start; padding: 3px 12px; border-radius: 999px; font-size: 13px; font-weight: 800; background: var(--sky-100); color: var(--sky-800); }
+.lesson-card b { font-size: 18px; color: var(--ink); }
+.lesson-card-words { font-size: 17px; color: var(--sky-800); line-height: 1.5; }
+.lesson-card small { font-size: 13.5px; color: var(--tertiary); font-weight: 600; }
+
+/* lesson page */
+.lesson-page { padding: 112px 0 72px; }
+.lesson-back { display: inline-block; margin-bottom: 14px; font-size: 14px; font-weight: 700; color: var(--sky-700); text-decoration: none; }
+.lesson-back:hover { text-decoration: underline; }
+.lesson-head { margin-bottom: 18px; }
+.lesson-head h1 { margin: 8px 0 6px; font-size: clamp(28px, 4vw, 40px); color: var(--ink); }
+.lesson-head p { margin: 0; color: var(--secondary); font-size: 15.5px; }
+
+.lesson-tabs {
+  position: sticky; top: var(--header-clear, 84px); z-index: 10; display: flex; gap: 6px; padding: 6px; margin-bottom: 18px; overflow-x: auto;
+  border-radius: 18px; background: rgb(255 255 255 / 0.92); backdrop-filter: blur(8px); border: 1px solid var(--sky-200); box-shadow: var(--shadow-soft);
+  scroll-margin-top: calc(var(--header-clear, 84px) + 8px);
+}
+.lesson-tabs button {
+  flex: 1 0 auto; display: inline-flex; align-items: center; justify-content: center; gap: 6px; min-height: 44px; padding: 0 16px;
+  border: 0; border-radius: 13px; background: transparent; color: var(--sky-800); font: inherit; font-weight: 700; font-size: 15px; cursor: pointer;
+}
+.lesson-tabs button:hover { background: var(--sky-50); }
+.lesson-tabs button[aria-selected="true"] { background: var(--sky-700); color: #fff; }
+.lesson-tabs small { font-size: 12px; padding: 1px 8px; border-radius: 999px; background: var(--sky-100); color: var(--sky-800); }
+.lesson-tabs button[aria-selected="true"] small { background: rgb(255 255 255 / 0.22); color: #fff; }
+
+.lesson-hint { margin: 0 0 14px; color: var(--secondary); font-size: 15px; }
+.lesson-view mark { background: none; color: #d6333f; font-weight: 700; }
+
+/* word index: quick overview that jumps to each card */
+.lesson-index { list-style: none; margin: 0 0 18px; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 8px; }
+.lesson-index a {
+  display: grid; grid-template-columns: auto 1fr; grid-template-rows: auto auto; column-gap: 10px; align-items: center; padding: 8px 12px;
+  border-radius: 14px; background: #fff; border: 1px solid var(--sky-200); text-decoration: none; color: inherit;
+}
+.lesson-index a:hover { border-color: var(--sky-500); }
+.lesson-index b { grid-row: span 2; font-size: 24px; color: var(--ink); }
+.lesson-index span { font-size: 13.5px; font-weight: 700; color: var(--sky-700); }
+.lesson-index small { font-size: 12.5px; color: var(--tertiary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+/* word cards */
+.lesson-words { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; align-items: start; }
+.lesson-word, .lesson-grammar {
+  padding: 20px; border-radius: 22px; background: #fff; border: 1px solid var(--sky-200); box-shadow: var(--shadow-soft);
+  scroll-margin-top: calc(var(--header-clear, 84px) + 76px);
+}
+.lesson-word > header, .lesson-grammar > header { display: flex; align-items: center; gap: 14px; }
+.lesson-num {
+  flex: none; width: 30px; height: 30px; display: grid; place-items: center; align-self: flex-start;
+  border-radius: 50%; background: var(--sky-100); color: var(--sky-800); font-size: 13px; font-weight: 800;
+}
+.lesson-word h3 { margin: 0; font-size: clamp(34px, 4vw, 44px); line-height: 1.1; font-weight: 700; color: var(--ink); }
+.lesson-word-info { min-width: 0; }
+.lesson-py { display: flex; align-items: center; gap: 8px; margin: 0; font-size: 19px; font-weight: 700; color: var(--sky-700); }
+.lesson-meaning { margin: 2px 0 0; font-size: 16.5px; font-weight: 700; color: var(--ink); }
+.lesson-pos { font-weight: 600; color: var(--tertiary); }
+.lesson-hv { margin: 2px 0 0; font-size: 12.5px; letter-spacing: 0.04em; color: var(--tertiary); }
+
+.lesson-parts { list-style: none; margin: 14px 0 0; padding: 10px 14px; display: grid; gap: 4px; border-radius: 14px; background: #fff8ee; border: 1px solid #f6d7ad; font-size: 14.5px; }
+.lesson-parts b { font-size: 17px; }
+.lesson-pattern { margin: 12px 0 0; padding: 8px 14px; border-radius: 12px; background: var(--sky-50); border: 1px dashed var(--sky-400); font-size: 17px; text-align: center; color: var(--sky-800); }
+.lesson-phrases { list-style: none; margin: 14px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+.lesson-phrases li { display: flex; flex-direction: column; padding: 6px 12px; border-radius: 12px; background: var(--sky-50); }
+.lesson-phrases span { font-size: 16.5px; color: var(--ink); }
+.lesson-phrases small { font-size: 12.5px; color: var(--tertiary); }
+
+.lesson-lines { list-style: none; margin: 12px 0 0; padding: 0; display: grid; gap: 8px; }
+.lesson-dialogue { padding: 10px 12px; border-radius: 14px; border-left: 3px solid #f0a050; background: #fffaf3; }
+.lesson-line { display: flex; align-items: flex-start; gap: 10px; }
+.lesson-line > div { flex: 1; min-width: 0; }
+.lesson-line p { margin: 0; }
+.lesson-line .zh { font-size: 17px; color: var(--ink); line-height: 1.45; }
+.lesson-line .py { font-size: 13.5px; color: var(--sky-700); }
+.lesson-line .vi { font-size: 13.5px; color: var(--tertiary); }
+.lesson-who { flex: none; width: 24px; height: 24px; margin-top: 1px; display: grid; place-items: center; border-radius: 50%; background: #f0a050; color: #fff; font-size: 12px; font-weight: 800; }
+.lesson-line .speak { flex: none; width: 32px; height: 32px; display: grid; place-items: center; border-radius: 50%; border: 1px solid var(--sky-300); background: #fff; color: var(--sky-800); cursor: pointer; }
+
+.lesson-word > footer { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--sky-100); }
+.lesson-word > footer button, .lesson-word > footer a {
+  min-height: 38px; padding: 0 14px; display: inline-flex; align-items: center; border-radius: 12px; font: inherit; font-size: 14px; font-weight: 700; cursor: pointer; text-decoration: none;
+}
+.lesson-word > footer button { border: 0; background: var(--sky-700); color: #fff; }
+.lesson-word > footer button:hover { background: var(--sky-800); }
+.lesson-word > footer a { border: 1px solid var(--sky-300); background: #fff; color: var(--sky-800); }
+
+/* grammar */
+.lesson-grammars { display: grid; gap: 16px; }
+.lesson-grammar h3 { margin: 0; font-size: clamp(24px, 3vw, 30px); color: var(--ink); }
+.lesson-grammar header p { margin: 2px 0 0; font-size: 17px; font-weight: 700; color: var(--sky-700); }
+.lesson-summary { margin: 14px 0 0; font-size: 15.5px; line-height: 1.6; color: var(--secondary); }
+.lesson-structures { margin-top: 14px; padding: 12px 16px; border-radius: 14px; background: #fff8ee; border: 1px solid #f6d7ad; }
+.lesson-structures p { margin: 4px 0 0; font-size: 19px; color: var(--ink); }
+.lesson-structures mark { color: #1a6fc4; }
+.lesson-structures small, .lesson-sub { display: block; margin-top: 14px; font-size: 12.5px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: var(--tertiary); }
+.lesson-structures small { margin-top: 0; }
+.lesson-note { margin: 12px 0 0; padding-left: 12px; border-left: 3px solid var(--sky-400); font-size: 14.5px; color: var(--secondary); }
+
+/* writing and games */
+.lesson-write .hanzi-practice, .lesson-games .vg { margin-inline: auto; }
+.lesson-game-pick { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; max-width: 620px; margin-bottom: 12px; }
+.lesson-game-pick button {
+  display: flex; flex-direction: column; align-items: flex-start; gap: 2px; padding: 12px 16px; border-radius: 16px; text-align: left;
+  border: 1px solid var(--sky-200); background: #fff; color: var(--ink); font: inherit; cursor: pointer;
+}
+.lesson-game-pick button[aria-pressed="true"] { border-color: var(--sky-600); background: var(--sky-50); box-shadow: 0 0 0 2px var(--sky-200); }
+.lesson-game-pick b { font-size: 16px; }
+.lesson-game-pick small { font-size: 13px; color: var(--tertiary); }
+
+@media (max-width: 860px) {
+  .lesson-words { grid-template-columns: 1fr; }
+}
+@media (max-width: 600px) {
+  .lesson-word, .lesson-grammar { padding: 16px; }
+  .lesson-tabs button { padding: 0 12px; font-size: 14px; }
+  .lesson-index { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}

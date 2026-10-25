@@ -190,11 +190,14 @@ export default function HanziWriterPractice({
   initialChar = "你好",
   compact = false,
   maxSize = 260,
+  suggestions = SUGGESTIONS,
 }: {
   initialChar?: string;
   compact?: boolean;
   /** Upper bound for each box, in px. */
   maxSize?: number;
+  /** Quick picks under the input, e.g. a lesson's words. */
+  suggestions?: [hanzi: string, hint: string][];
 }) {
   const [chars, setChars] = useState(() => toChars(initialChar));
   const [input, setInput] = useState(initialChar);
@@ -238,7 +241,7 @@ export default function HanziWriterPractice({
           </form>
 
           <div className="hanzi-suggest" aria-label="Gợi ý">
-            {SUGGESTIONS.map(([hanzi, hint]) => (
+            {suggestions.map(([hanzi, hint]) => (
               <button
                 key={hanzi}
                 type="button"
