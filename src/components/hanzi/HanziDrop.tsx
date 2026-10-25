@@ -7,9 +7,11 @@ import SpeakButton from "./SpeakButton";
 import { MissedList, Settings } from "./VocabMeteor";
 import {
   MODE_PLACEHOLDER,
+  answerSlots,
   isCorrect,
   makeDeck,
   maskText,
+  openLetters,
   pickWords,
   readBest,
   readPrefs,
@@ -19,9 +21,11 @@ import {
   type AnswerMode,
   type GameWord,
   type LevelPick,
+  type Slot,
 } from "./vocab-game";
 
-// "Chữ Hán rơi": one word falls at a time. Each depth mark it passes opens one more hint and lowers the points.
+// "Chữ Hán rơi": one word falls at a time. Each depth mark it passes opens more letters of the crossword on the card
+// (plus the next hint in the list, while there is one) and lowers the points.
 // Like VocabMeteor, the round state lives in a ref and each frame copies what is drawn into state.
 
 type Phase = "ready" | "playing" | "paused" | "over";
@@ -45,31 +49,45 @@ const fallSeconds = (level: number) => Math.max(5, 14 * Math.pow(0.88, level - 1
 const pointsFor = (hints: number) => Math.max(MIN_POINTS, MAX_POINTS - hints * HINT_COST);
 const hintsOpen = (y: number) => MARKS.filter((m) => y >= m).length;
 
-/** Four hints in opening order, chosen so none of them is itself an accepted answer for the mode. */
+/** Hints listed under the field, in opening order. The crossword on the card already spells out the answer letter by
+ * letter, so these only add what it doesn't show, and none of them is itself an accepted answer for the mode. */
 function hintsFor(word: GameWord, mode: AnswerMode): [label: string, value: string][] {
   const [, pinyin, meaning, hanViet, , , pos] = word;
   const posText = pos.length ? pos.map(posLabel).join(", ") : "—";
-  const first = shortMeaning(meaning);
   if (mode === "pinyin")
     return [
       ["Hán Việt", hanViet],
       ["Nghĩa", meaning],
-      ["Chữ cái đầu", `${pinyin.charAt(0)}…`],
-      ["Pinyin", maskText(pinyin)],
     ];
   if (mode === "meaning")
     return [
       ["Từ loại", posText],
       ["Pinyin", pinyin],
-      ["Nghĩa bắt đầu bằng", `${first.charAt(0)}…`],
-      ["Nghĩa", maskText(first)],
     ];
   return [
     ["Từ loại", posText],
-    ["Chữ cái đầu pinyin", `${pinyin.charAt(0)}…`],
-    ["Pinyin", maskText(pinyin)],
-    ["Nghĩa", maskText(first)],
+    ["Nghĩa", maskText(shortMeaning(meaning))],
   ];
+}
+
+/** The crossword under the hanzi, "x_ ____": one underlined group per syllable (or word), letters filled in as they open. */
+function Crossword({ slots, open }: { slots: Slot[][]; open: Set<number> | null }) {
+  let n = 0;
+  const groups = slots.map((g) => g.map((s) => (s.letter ? { c: s.c, shown: !open || open.has(n++), letter: true } : { c: s.c, shown: true, letter: false })));
+  const label = groups.map((g) => g.map((s) => (s.shown ? s.c : "_")).join("")).join(" ");
+  return (
+    <span className="drop-cross" role="img" aria-label={`Gợi ý ô chữ: ${label}`}>
+      {groups.map((g, k) => (
+        <span key={k} className="drop-cross-word">
+          {g.map((s, i) => (
+            <i key={i} className={s.letter ? (s.shown ? "on" : "") : "mark"}>
+              {s.shown ? s.c : ""}
+            </i>
+          ))}
+        </span>
+      ))}
+    </span>
+  );
 }
 
 type View = { round: Round | null; score: number; lives: number; level: number; streak: number };
@@ -234,6 +252,8 @@ export default function HanziDrop({ words }: { words: GameWord[] }) {
   const r = view.round;
   const open = r ? (r.status === "falling" ? hintsOpen(r.y) : 4) : 0;
   const hints = r ? hintsFor(r.word, prefs.mode) : [];
+  const slots = r ? answerSlots(r.word, prefs.mode) : [];
+  const letters = r && r.status === "falling" ? openLetters(slots, open, MARKS.length, r.word[5]) : null;
   const nowPoints = r && r.status === "falling" ? pointsFor(open) : 0;
 
   return (
@@ -279,6 +299,7 @@ export default function HanziDrop({ words }: { words: GameWord[] }) {
             {r && (
               <div className={`drop-card ${r.status}`} style={{ top: `${r.y * 100}%`, "--y": r.y } as CSSProperties}>
                 <span className="drop-hanzi">{r.word[0]}</span>
+                {r.status !== "missed" && <Crossword slots={slots} open={letters} />}
                 {r.status === "falling" && <span className="drop-points">+{nowPoints}</span>}
                 {r.status === "correct" && <span className="drop-points ok">+{r.points}</span>}
                 {r.status === "missed" && (
@@ -294,7 +315,7 @@ export default function HanziDrop({ words }: { words: GameWord[] }) {
           {phase === "ready" && (
             <div className="vg-overlay">
               <h2>Chữ Hán rơi</h2>
-              <p>Đoán từ trước khi chữ chạm đáy. Càng đoán sớm càng nhiều điểm, mỗi gợi ý mở ra bớt {HINT_COST} điểm.</p>
+              <p>Đoán từ trước khi chữ chạm đáy. Càng đoán sớm càng nhiều điểm, mỗi mốc độ sâu lộ thêm chữ cái trong ô chữ và bớt {HINT_COST} điểm.</p>
               <Settings prefs={prefs} onChange={updatePrefs} />
               <button type="button" className="gv-btn vg-start" onClick={start}>
                 Bắt đầu chơi
@@ -334,7 +355,7 @@ export default function HanziDrop({ words }: { words: GameWord[] }) {
         </div>
 
         <ol className="drop-hints" aria-label="Gợi ý">
-          {(hints.length ? hints : MARKS.map(() => ["Gợi ý", ""] as [string, string])).map(([label, value], k) => (
+          {(hints.length ? hints : hintsFor(["", "", "", "", 1, "", []], prefs.mode).map(([label]) => [label, ""] as [string, string])).map(([label, value], k) => (
             <li key={k} className={open > k ? "on" : ""}>
               <small>
                 {k + 1}. {label}

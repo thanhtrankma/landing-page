@@ -44,10 +44,12 @@ export function meaningAnswers(meaning: string, hanViet: string): string[] {
   return [...new Set(hv ? [...parts, hv] : parts)];
 }
 
-/** Toneless spellings accepted for a pinyin answer: ü may be typed as v or u. */
+/** Toneless spellings accepted for a pinyin answer: ü may be typed as v or u, and "shéi / shuí" accepts either reading. */
 export function pinyinAnswers(pinyin: string): string[] {
-  const base = plainPinyin(pinyin);
-  return [...new Set([base, base.replace(/v/g, "u")])].filter(Boolean);
+  return [...new Set(pinyin.split("/").flatMap((p) => {
+    const base = plainPinyin(p);
+    return [base, base.replace(/v/g, "u")];
+  }))].filter(Boolean);
 }
 
 /** True when the typed text answers this word in the chosen mode. */
@@ -137,4 +139,76 @@ export function maskText(text: string): string {
   if (!letters.length) return text;
   const keep = new Set(letters.length <= 2 ? [letters[0].i] : [letters[0].i, letters[letters.length - 1].i]);
   return chars.map((c, i) => (keep.has(i) || !/\p{L}/u.test(c) ? c : "_")).join("");
+}
+
+/** One cell of the crossword hint: a letter to guess, or punctuation shown as is. */
+export type Slot = { c: string; letter: boolean };
+
+// A pinyin syllable, toneless with ü as v. Only a/o/e syllables have no initial (y and w count as initials);
+// "r" is the erhua 儿 written onto the syllable before it.
+const SYLLABLE = /^(?:(?:[zcs]h|[bpmfdtnlgkhjqxrzcsyw])(?:iang|iong|uang|ang|eng|ing|ong|ian|iao|uai|uan|van|ai|ei|ao|ou|an|en|in|un|vn|ia|ie|iu|ua|uo|ui|ve|ue|a|o|e|i|u|v)|[aoe]|ai|ei|ao|ou|an|en|ang|eng|ong|er|r|ng|m|n)$/;
+const plainChar = (c: string) => plainPinyin(c) || c;
+const toneMarks = (c: string) => c.normalize("NFD").replace(/[^\u0300-\u0307\u0309-\u036f]/g, "").length;
+
+/**
+ * Splits joined pinyin into syllables, one per hanzi when the count can be matched: "àihào" → ["ài", "hào"].
+ * Longest syllable first, at most one tone mark each, and only a chunk's first syllable may start with a vowel
+ * (pinyin writes "xī'ān" with an apostrophe), which settles cases like "dàngāo" → "dàn gāo".
+ */
+export function pinyinSyllables(pinyin: string, count: number): string[] {
+  const chunks = (pinyin.normalize("NFC").split("/")[0].match(/\p{L}+/gu) ?? []).map((c) => [...c]);
+  const memo = new Map<string, string[] | null>();
+  const solve = (ci: number, pos: number, left: number, strict: boolean): string[] | null => {
+    if (ci === chunks.length) return !strict || left === 0 ? [] : null;
+    const chunk = chunks[ci];
+    if (pos === chunk.length) return solve(ci + 1, 0, left, strict);
+    const key = `${ci}:${pos}:${left}:${strict}`;
+    if (memo.has(key)) return memo.get(key)!;
+    let found: string[] | null = null;
+    for (let end = Math.min(chunk.length, pos + 6); end > pos && !found; end--) {
+      const part = chunk.slice(pos, end);
+      const plain = part.map(plainChar).join("");
+      if (!SYLLABLE.test(plain) || part.reduce((n, c) => n + toneMarks(c), 0) > 1) continue;
+      if (pos > 0 && /^[aoe]/.test(plain)) continue;
+      const rest = solve(ci, end, left - 1, strict);
+      if (rest) found = [part.join(""), ...rest];
+    }
+    memo.set(key, found);
+    return found;
+  };
+  return solve(0, 0, count, true) ?? solve(0, 0, count, false) ?? chunks.map((c) => c.join(""));
+}
+
+/** What the crossword under the falling hanzi spells: pinyin syllables, or the words of the first meaning in meaning mode. */
+export function answerSlots(word: GameWord, mode: AnswerMode): Slot[][] {
+  const [hanzi, pinyin, meaning] = word;
+  const groups = mode === "meaning" ? shortMeaning(meaning).split(/\s+/).filter(Boolean) : pinyinSyllables(pinyin, (hanzi.match(/\p{Script=Han}/gu) ?? []).length);
+  return groups.map((g) => [...g].map((c) => ({ c, letter: /\p{L}/u.test(c) })));
+}
+
+/**
+ * Indexes of the letters (counting letters only, left to right) open after `stage` depth marks out of `stages`.
+ * Each group's first letter comes first, the rest in an order fixed by `seed`; one letter always stays hidden.
+ */
+export function openLetters(slots: Slot[][], stage: number, stages: number, seed: string): Set<number> {
+  const firsts: number[] = [];
+  const others: number[] = [];
+  let n = 0;
+  for (const group of slots) {
+    let first = true;
+    for (const s of group) {
+      if (!s.letter) continue;
+      (first ? firsts : others).push(n++);
+      first = false;
+    }
+  }
+  let h = 2166136261;
+  for (const c of seed) h = Math.imul(h ^ c.charCodeAt(0), 16777619);
+  for (let i = others.length - 1; i > 0; i--) {
+    h = Math.imul(h ^ (h >>> 15), 2246822507) >>> 0;
+    const j = h % (i + 1);
+    [others[i], others[j]] = [others[j], others[i]];
+  }
+  const shown = stage <= 0 ? 0 : Math.min(n - 1, Math.ceil((n * stage) / (stages + 1)));
+  return new Set([...firsts, ...others].slice(0, shown));
 }

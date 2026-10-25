@@ -20,7 +20,7 @@ export const metadata = pageMetadata({
 
 const features: [string, string][] = [
   ["Mỗi lượt một từ", "Chỉ một chữ Hán rơi xuống mỗi lần, đủ thời gian để nhớ lại thay vì phải chạy theo cả màn hình."],
-  ["Gợi ý mở dần", "Rơi đến mỗi mốc trên thanh độ sâu, thẻ mở thêm một gợi ý: âm Hán Việt, nghĩa, chữ cái pinyin…"],
+  ["Gợi ý mở dần", "Dưới chữ Hán là ô chữ kiểu x_ ____ cho từng âm tiết. Rơi qua mỗi mốc trên thanh độ sâu, ô chữ lộ thêm chữ cái, kèm gợi ý Hán Việt, nghĩa…"],
   ["Đoán sớm, điểm cao", "Trả lời trước khi có gợi ý được 50 điểm, mỗi gợi ý mở ra bớt 10 điểm. Đoán đúng liên tiếp để giữ chuỗi."],
   ["Lịch sử từ đã rơi", "Khung bên cạnh lưu mọi từ đã rơi qua, đúng hay lọt, kèm pinyin và nghĩa. Bấm vào để mở trong từ điển."],
   ["Gõ pinyin hoặc nghĩa", "Chọn gõ pinyin không dấu, nghĩa tiếng Việt hoặc cả hai. Gợi ý tự đổi để không lộ đáp án quá sớm."],
