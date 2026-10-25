@@ -7,6 +7,15 @@ import { useEffect, useState, type ReactNode } from "react";
 import { facebookPath } from "@/data/site";
 import { useSettings } from "./SettingsProvider";
 
+/** Pages where floating buttons would cover the content (the game's answer box sits at the bottom of the screen). */
+const NO_FLOATING = ["/cong-cu/mua-tu-vung-tieng-trung", "/cong-cu/chu-han-roi"];
+
+/** Renders the floating buttons (scroll-to-top, Zalo, mobile bottom nav) everywhere except on NO_FLOATING pages. */
+export function FloatingLayer({ children }: { children: ReactNode }) {
+  const pathname = usePathname();
+  return NO_FLOATING.some((p) => pathname === p || pathname.startsWith(`${p}/`)) ? null : children;
+}
+
 export function ScrollToTop() {
   const [progress, setProgress] = useState(0);
 

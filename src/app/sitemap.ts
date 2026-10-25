@@ -26,6 +26,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     page("/cong-cu/anh-thiep-cuoi", "monthly", 0.6),
     page("/cong-cu/luyen-viet-chu-han", "monthly", 0.6),
     page(DICT_PATH, "monthly", 0.7),
+    page("/cong-cu/mua-tu-vung-tieng-trung", "monthly", 0.6),
+    page("/cong-cu/chu-han-roi", "monthly", 0.6),
     ...WORDS.map((w) => page(`${DICT_PATH}/${w.slug}`, "yearly", 0.5)),
     ...legal.map((p) => page(`/${p.slug}`, "yearly", 0.3)),
     ...servicePages.map((s) => page(`/${s.slug}`, "monthly", 0.9)),

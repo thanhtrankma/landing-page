@@ -5,7 +5,7 @@ import SkyCursor from "@/components/SkyCursor";
 import CookieBanner from "@/components/CookieBanner";
 import Tracker from "@/components/Tracker";
 import Footer from "@/components/Footer";
-import { MobileBottomNav, ScrollToTop, ZaloFloat } from "@/components/FloatingUi";
+import { FloatingLayer, MobileBottomNav, ScrollToTop, ZaloFloat } from "@/components/FloatingUi";
 import Header from "@/components/Header";
 import ScrollReveal from "@/components/ScrollReveal";
 import { SettingsProvider } from "@/components/SettingsProvider";
@@ -151,9 +151,11 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
             <CookieBanner />
             <Header />
             {children}
-            <ScrollToTop />
-            <ZaloFloat />
-            <MobileBottomNav />
+            <FloatingLayer>
+              <ScrollToTop />
+              <ZaloFloat />
+              <MobileBottomNav />
+            </FloatingLayer>
             <Footer />
           </div>
         </SettingsProvider>
