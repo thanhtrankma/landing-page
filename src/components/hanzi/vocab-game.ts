@@ -186,11 +186,9 @@ export function answerSlots(word: GameWord, mode: AnswerMode): Slot[][] {
   return groups.map((g) => [...g].map((c) => ({ c, letter: /\p{L}/u.test(c) })));
 }
 
-/**
- * Indexes of the letters (counting letters only, left to right) open after `stage` depth marks out of `stages`.
- * Each group's first letter comes first, the rest in an order fixed by `seed`; one letter always stays hidden.
- */
-export function openLetters(slots: Slot[][], stage: number, stages: number, seed: string): Set<number> {
+/** Order the depth marks open letters in (counting letters only, left to right): each group's first letter, then the
+ * rest in an order fixed by `seed`, so a word always opens the same way. */
+export function revealOrder(slots: Slot[][], seed: string): number[] {
   const firsts: number[] = [];
   const others: number[] = [];
   let n = 0;
@@ -209,6 +207,16 @@ export function openLetters(slots: Slot[][], stage: number, stages: number, seed
     const j = h % (i + 1);
     [others[i], others[j]] = [others[j], others[i]];
   }
-  const shown = stage <= 0 ? 0 : Math.min(n - 1, Math.ceil((n * stage) / (stages + 1)));
-  return new Set([...firsts, ...others].slice(0, shown));
+  return [...firsts, ...others];
+}
+
+/** How many of `letters` are open after `stage` of `stages` depth marks; one always stays hidden. */
+export const revealCount = (letters: number, stage: number, stages: number) => (stage <= 0 ? 0 : Math.min(letters - 1, Math.ceil((letters * stage) / (stages + 1))));
+
+/** True when a typed character is the answer letter: pinyin ignores tones (ü may be typed as v or u), Vietnamese ignores accents. */
+export function letterMatches(answer: string, typed: string, mode: AnswerMode): boolean {
+  const key = (c: string) => (mode === "meaning" ? inputVi(c) : plainPinyin(c));
+  const a = key(answer);
+  const t = key(typed);
+  return t !== "" && (t === a || (mode !== "meaning" && a === "v" && t === "u"));
 }

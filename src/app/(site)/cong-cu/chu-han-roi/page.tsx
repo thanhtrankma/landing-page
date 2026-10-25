@@ -20,16 +20,16 @@ export const metadata = pageMetadata({
 
 const features: [string, string][] = [
   ["Mỗi lượt một từ", "Chỉ một chữ Hán rơi xuống mỗi lần, đủ thời gian để nhớ lại thay vì phải chạy theo cả màn hình."],
-  ["Gợi ý mở dần", "Dưới chữ Hán là ô chữ kiểu x_ ____ cho từng âm tiết. Rơi qua mỗi mốc trên thanh độ sâu, ô chữ lộ thêm chữ cái, kèm gợi ý Hán Việt, nghĩa…"],
+  ["Gợi ý mở dần", "Dưới chữ Hán là ô chữ kiểu x_ ____ cho từng âm tiết. Mỗi khi thẻ rơi qua một vạch ngang, ô chữ lộ thêm chữ cái, kèm gợi ý Hán Việt, nghĩa…"],
   ["Đoán sớm, điểm cao", "Trả lời trước khi có gợi ý được 50 điểm, mỗi gợi ý mở ra bớt 10 điểm. Đoán đúng liên tiếp để giữ chuỗi."],
   ["Lịch sử từ đã rơi", "Khung bên cạnh lưu mọi từ đã rơi qua, đúng hay lọt, kèm pinyin và nghĩa. Bấm vào để mở trong từ điển."],
-  ["Gõ pinyin hoặc nghĩa", "Chọn gõ pinyin không dấu, nghĩa tiếng Việt hoặc cả hai. Gợi ý tự đổi để không lộ đáp án quá sớm."],
+  ["Súng bắn chữ cái", "Gõ chữ cái nào, súng bắn ra chữ đó: đúng thì xếp vào ô chữ, sai thì nảy ra và thẻ bị đẩy xuống. Chọn bắn pinyin hoặc nghĩa tiếng Việt, không cần dấu."],
   ["Nhanh dần theo level", "Cứ 5 từ đúng lại lên level, chữ rơi nhanh hơn và gợi ý xuất hiện sớm hơn theo thời gian."],
 ];
 
 const faqs: [string, string][] = [
   ["Khác gì với game Mưa từ vựng?", "Mưa từ vựng có nhiều thiên thạch rơi cùng lúc để luyện phản xạ. Chữ Hán rơi chỉ một từ mỗi lượt và có gợi ý mở dần, phù hợp để ôn và ghi nhớ từ mới."],
-  ["Gợi ý xuất hiện khi nào?", "Khi từ rơi qua 20%, 40%, 60% và 80% quãng đường, các mốc này hiện trên thanh độ sâu bên trái khung chơi."],
+  ["Gợi ý xuất hiện khi nào?", "Khi từ rơi qua 20%, 40%, 60% và 80% quãng đường, đánh dấu bằng các vạch ngang trong khung chơi. Thanh thời gian bên trái cho biết còn bao lâu trước khi thẻ chạm đáy."],
   ["Tính điểm thế nào?", "Đúng khi chưa có gợi ý: 50 điểm. Sau mỗi gợi ý giảm 10 điểm, thấp nhất 10 điểm. Từ chạm đáy sẽ mất 1 trong 3 mạng."],
   ["Từ vựng lấy từ đâu?", `Từ danh sách HSK 3.0: ${LEVELS.map((l) => `HSK ${l.level} (${l.count} từ)`).join(", ")}, giống Từ điển HSK của SuperLanding.`],
 ];
