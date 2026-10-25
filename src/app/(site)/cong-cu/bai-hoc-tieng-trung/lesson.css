@@ -12,6 +12,7 @@
 .lesson-card-tag { align-self: flex-start; padding: 3px 12px; border-radius: 999px; font-size: 13px; font-weight: 800; background: var(--sky-100); color: var(--sky-800); }
 .lesson-card b { font-size: 18px; color: var(--ink); }
 .lesson-card-words { font-size: 17px; color: var(--sky-800); line-height: 1.5; }
+.lesson-card-text { font-size: 14.5px; line-height: 1.55; color: var(--secondary); }
 .lesson-card small { font-size: 13.5px; color: var(--tertiary); font-weight: 600; }
 
 /* lesson page */

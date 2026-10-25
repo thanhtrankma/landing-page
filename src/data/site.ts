@@ -173,14 +173,19 @@ export const navLinks: [href: string, label: string][] = [
   ["/lien-he", "Liên hệ"],
 ];
 
-// Shown as the "Công cụ" dropdown in the header.
-export const toolLinks: [href: string, label: string][] = [
+// The Chinese-learning tools, gathered on the "Học HSK" page.
+export const hskTools = [
+  "/cong-cu/bai-hoc-tieng-trung",
+  "/cong-cu/tu-dien-hsk",
+  "/cong-cu/luyen-viet-chu-han",
+  "/cong-cu/chu-han-roi",
+  "/cong-cu/mua-tu-vung-tieng-trung",
+];
+
+// Shown as the "Công cụ" dropdown in the header; an item also lights up on the pages listed in `also`.
+export const toolLinks: [href: string, label: string, also?: string[]][] = [
   ["/cong-cu/thiep-cuoi-online", "Tạo thiệp cưới online"],
-  ["/cong-cu/luyen-viet-chu-han", "Luyện viết chữ Hán"],
-  ["/cong-cu/tu-dien-hsk", "Từ điển HSK"],
-  ["/cong-cu/bai-hoc-tieng-trung", "Bài học tiếng Trung theo buổi"],
-  ["/cong-cu/mua-tu-vung-tieng-trung", "Game Mưa từ vựng"],
-  ["/cong-cu/chu-han-roi", "Game Chữ Hán rơi"],
+  ["/cong-cu/hoc-hsk", "Học HSK", hskTools],
 ];
 
 export const heroTexts = [
