@@ -66,8 +66,8 @@ function WordCard({ word, index, keyHanzi, dict, onWrite }: { word: LessonWord; 
   const marks = [keyHanzi];
   return (
     <article className="lesson-word" id={`tu-${index + 1}`}>
-      <header>
-        <span className="lesson-num">{index + 1}</span>
+      <span className="lesson-num">{index + 1}</span>
+      <div className="lesson-word-head">
         <h3 lang="zh">{word.hanzi}</h3>
         <div className="lesson-word-info">
           <p className="lesson-py">
@@ -79,13 +79,16 @@ function WordCard({ word, index, keyHanzi, dict, onWrite }: { word: LessonWord; 
           </p>
           <p className="lesson-hv">Hán Việt {word.hanViet}</p>
         </div>
-      </header>
+      </div>
 
       {word.parts && (
         <ul className="lesson-parts">
           {word.parts.map((p) => (
             <li key={p.hanzi}>
-              <b lang="zh">{p.hanzi}</b> {p.pinyin} {p.pos && <span className="lesson-pos">【{p.pos}】</span>} {p.meaning}
+              <b lang="zh">{p.hanzi}</b>
+              <span>{p.pinyin}</span>
+              <span className="lesson-pos">{p.pos && `【${p.pos}】`}</span>
+              <span>{p.meaning}</span>
             </li>
           ))}
         </ul>
@@ -110,7 +113,7 @@ function WordCard({ word, index, keyHanzi, dict, onWrite }: { word: LessonWord; 
         </ul>
       )}
       {word.sentences && (
-        <ul className="lesson-lines">
+        <ul className="lesson-lines lesson-sentences">
           {word.sentences.map((l) => (
             <Line key={l.zh} line={l} marks={marks} />
           ))}
@@ -124,7 +127,7 @@ function WordCard({ word, index, keyHanzi, dict, onWrite }: { word: LessonWord; 
         </ul>
       ))}
 
-      <footer>
+      <div className="lesson-actions">
         <button type="button" onClick={onWrite}>
           Luyện viết {keyHanzi}
         </button>
@@ -133,7 +136,7 @@ function WordCard({ word, index, keyHanzi, dict, onWrite }: { word: LessonWord; 
             Xem trong từ điển
           </Link>
         )}
-      </footer>
+      </div>
     </article>
   );
 }
@@ -141,13 +144,11 @@ function WordCard({ word, index, keyHanzi, dict, onWrite }: { word: LessonWord; 
 function GrammarCard({ point, index }: { point: GrammarPoint; index: number }) {
   return (
     <article className="lesson-grammar" id={point.id}>
-      <header>
-        <span className="lesson-num">{index + 1}</span>
-        <div>
-          <h3 lang="zh">“{point.title}”</h3>
-          <p>{point.name}</p>
-        </div>
-      </header>
+      <span className="lesson-num">{index + 1}</span>
+      <div className="lesson-grammar-head">
+        <h3 lang="zh">“{point.title}”</h3>
+        <p>{point.name}</p>
+      </div>
       <p className="lesson-summary">{point.summary}</p>
       <div className="lesson-structures">
         <small>Cấu trúc</small>
