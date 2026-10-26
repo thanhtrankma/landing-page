@@ -37,6 +37,6 @@ export function lessonGameWords(l: Lesson): GameWord[] {
   return l.words.map((w, i) => {
     const { hanzi, pinyin } = wordKey(w);
     const entry = dictByHanzi.get(hanzi);
-    return [hanzi, pinyin, w.meaning, w.hanViet, l.book, entry?.slug ?? `${l.slug}-${i + 1}`, w.pos ? [w.pos] : [], entry ? wordHref(entry.slug) : `${lessonHref(l)}#${wordAnchor(i)}`];
+    return [hanzi, pinyin, w.meaning, w.hanViet, l.book, entry?.slug ?? `${l.slug}-${i + 1}`, w.pos ? w.pos.split("/") : [], entry ? wordHref(entry.slug) : `${lessonHref(l)}#${wordAnchor(i)}`];
   });
 }

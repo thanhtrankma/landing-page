@@ -94,6 +94,7 @@
 .lesson-line .py { font-size: 13.5px; color: var(--sky-700); }
 .lesson-line .vi { font-size: 13.5px; color: var(--tertiary); }
 .lesson-who { flex: none; width: 24px; height: 24px; margin-top: 1px; display: grid; place-items: center; border-radius: 50%; background: #f0a050; color: #fff; font-size: 12px; font-weight: 800; }
+.lesson-who.name { width: auto; min-width: 52px; padding: 0 8px; border-radius: 999px; font-size: 12.5px; white-space: nowrap; }
 .lesson-line .speak { flex: none; width: 32px; height: 32px; display: grid; place-items: center; border-radius: 50%; border: 1px solid var(--sky-300); background: #fff; color: var(--sky-800); cursor: pointer; }
 
 .lesson-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; padding-top: 14px; border-top: 1px solid var(--sky-100); }
@@ -137,7 +138,7 @@
   .lesson-num { top: 12px; right: 12px; }
   .lesson-phrases { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .lesson-tabs { gap: 2px; padding: 4px; }
-  .lesson-tabs button { flex: 1 1 0; min-width: 0; padding: 0 4px; font-size: 13.5px; white-space: nowrap; }
+  .lesson-tabs button { flex: 1 1 0; min-width: 0; padding: 0 4px; font-size: 13px; letter-spacing: -0.01em; white-space: nowrap; }
   .lesson-tabs small { display: none; }
   .lesson-index { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }

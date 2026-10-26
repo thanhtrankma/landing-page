@@ -1,8 +1,10 @@
+import { BOOK_1 } from "./lessons-quyen-1";
+
 // Class lessons ("buổi"), grouped by textbook ("quyển"): new words and grammar exactly as taught in the slides, with
 // Vietnamese added to the example sentences. Add a lesson by appending to LESSONS; its slug becomes the page URL.
 
-/** One sentence; dialogue lines carry the speaker. */
-export type LessonLine = { zh: string; pinyin: string; vi: string; who?: "A" | "B" };
+/** One sentence; dialogue lines carry the speaker: A/B, or a character's name in a passage. */
+export type LessonLine = { zh: string; pinyin: string; vi: string; who?: string };
 
 /** A smaller item shown with a word: a character it is made of, a related word, or a phrase. */
 export type LessonTerm = { hanzi: string; pinyin: string; meaning: string; pos?: string };
@@ -39,7 +41,10 @@ export type GrammarPoint = {
   examples: LessonLine[];
 };
 
-export type Lesson = { book: number; session: number; slug: string; title: string; words: LessonWord[]; grammar: GrammarPoint[] };
+/** A reading or conversation passage (课文). */
+export type LessonText = { title: string; lines: LessonLine[] };
+
+export type Lesson = { book: number; session: number; slug: string; title: string; words: LessonWord[]; grammar: GrammarPoint[]; texts?: LessonText[] };
 
 const book2Session1: Lesson = {
   book: 2,
@@ -448,4 +453,4 @@ const book2Session1: Lesson = {
   ],
 };
 
-export const LESSONS: Lesson[] = [book2Session1];
+export const LESSONS: Lesson[] = [...BOOK_1, book2Session1];

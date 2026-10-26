@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState, type ReactNode } from "react";
+import { useEffect, useMemo, useState, type ReactNode } from "react";
 import { posTitle } from "@/lib/hsk-text";
 import type { GrammarPoint, Lesson, LessonLine, LessonWord } from "@/data/lessons";
 import HanziDrop from "./HanziDrop";
@@ -13,10 +13,11 @@ import type { GameWord } from "./vocab-game";
 // One class lesson in four tabs: new words, grammar, writing practice and the two games on the lesson's words.
 // The open tab follows the URL hash (#tu-moi, #ngu-phap…) so a tab can be linked to directly.
 
-type Tab = "tu-moi" | "ngu-phap" | "luyen-viet" | "tro-choi";
+type Tab = "tu-moi" | "ngu-phap" | "bai-khoa" | "luyen-viet" | "tro-choi";
 const TABS: [Tab, string][] = [
   ["tu-moi", "Từ mới"],
   ["ngu-phap", "Ngữ pháp"],
+  ["bai-khoa", "Bài khóa"],
   ["luyen-viet", "Luyện viết"],
   ["tro-choi", "Trò chơi"],
 ];
@@ -49,7 +50,11 @@ function Marked({ text, marks }: { text: string; marks: string[] }) {
 function Line({ line, marks }: { line: LessonLine; marks: string[] }) {
   return (
     <li className={line.who ? "lesson-line has-who" : "lesson-line"}>
-      {line.who && <span className="lesson-who">{line.who}</span>}
+      {line.who && (
+        <span className={[...line.who].length > 1 ? "lesson-who name" : "lesson-who"} lang="zh">
+          {line.who}
+        </span>
+      )}
       <div>
         <p className="zh" lang="zh">
           <Marked text={line.zh} marks={marks} />
@@ -185,12 +190,14 @@ export default function LessonView({
   const [tab, setTab] = useState<Tab>("tu-moi");
   const [writing, setWriting] = useState(keys[0]);
   const [game, setGame] = useState<Game>("drop");
+  // grammar and passages only get a tab when the lesson has some
+  const tabs = useMemo(() => TABS.filter(([t]) => (t !== "ngu-phap" || lesson.grammar.length > 0) && (t !== "bai-khoa" || !!lesson.texts?.length)), [lesson]);
 
   // open the tab named in the URL hash (after hydration, since the server render has no hash)
   useEffect(() => {
     const fromHash = () => {
       const h = location.hash.slice(1);
-      if (TABS.some(([t]) => t === h)) setTab(h as Tab);
+      if (tabs.some(([t]) => t === h)) setTab(h as Tab);
       else if (/^tu-\d+$/.test(h)) {
         setTab("tu-moi");
         requestAnimationFrame(() => document.getElementById(h)?.scrollIntoView({ block: "start" }));
@@ -199,7 +206,7 @@ export default function LessonView({
     fromHash();
     window.addEventListener("hashchange", fromHash);
     return () => window.removeEventListener("hashchange", fromHash);
-  }, []);
+  }, [tabs]);
 
   const open = (t: Tab) => {
     setTab(t);
@@ -217,7 +224,7 @@ export default function LessonView({
   return (
     <div className="lesson-view">
       <nav className="lesson-tabs" id="lesson-tabs" role="tablist" aria-label="Nội dung buổi học">
-        {TABS.map(([t, label]) => (
+        {tabs.map(([t, label]) => (
           <button key={t} type="button" role="tab" aria-selected={tab === t} onClick={() => open(t)}>
             {label}
             {t === "tu-moi" && <small>{lesson.words.length}</small>}
@@ -251,6 +258,24 @@ export default function LessonView({
         <div role="tabpanel" aria-label="Ngữ pháp" className="lesson-grammars">
           {lesson.grammar.map((g, i) => (
             <GrammarCard key={g.id} point={g} index={i} />
+          ))}
+        </div>
+      )}
+
+      {tab === "bai-khoa" && (
+        <div role="tabpanel" aria-label="Bài khóa" className="lesson-grammars">
+          {lesson.texts?.map((t, i) => (
+            <article key={t.title} className="lesson-grammar">
+              <span className="lesson-num">{i + 1}</span>
+              <div className="lesson-grammar-head">
+                <h3 lang="zh">{t.title}</h3>
+              </div>
+              <ul className={t.lines.some((l) => l.who) ? "lesson-lines lesson-dialogue" : "lesson-lines lesson-sentences"}>
+                {t.lines.map((l, k) => (
+                  <Line key={k} line={l} marks={keys} />
+                ))}
+              </ul>
+            </article>
           ))}
         </div>
       )}
