@@ -15,10 +15,11 @@ import { SITE_URL } from "@/lib/seo";
 import "./globals.css";
 import "./theme.css";
 
+// Inter is a variable font: one file per subset covers every weight. Listing fixed weights made Google Fonts answer
+// with /l/font?kit=…&skey=… URLs, whose "&" breaks Turbopack's font loader (Next 16.3.5) on every page.
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin", "latin-ext", "vietnamese"],
-  weight: ["400", "500", "600", "700", "800"],
 });
 const beVietnam = Be_Vietnam_Pro({
   variable: "--font-be-vietnam",
