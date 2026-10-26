@@ -45,8 +45,8 @@ export default async function PricingPage() {
       <Faq
         faqs={faqs}
         images={[
-          { src: "/images/faq-illustration.png", alt: "Giải đáp thắc mắc dịch vụ thiết kế website và landing page SuperLanding", width: 280, height: 200 },
-          { src: "/images/faq-support.png", alt: "Đội ngũ hỗ trợ tư vấn thiết kế website chuẩn SEO 24/7", width: 280, height: 200 },
+          { src: "/images/faq-illustration.webp", alt: "Giải đáp thắc mắc dịch vụ thiết kế website và landing page SuperLanding", width: 280, height: 200 },
+          { src: "/images/faq-support.webp", alt: "Đội ngũ hỗ trợ tư vấn thiết kế website chuẩn SEO 24/7", width: 280, height: 200 },
         ]}
       />
     </main>

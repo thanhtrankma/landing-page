@@ -15,6 +15,9 @@ const r2Host = hostOf(process.env.R2_PUBLIC_URL);
 
 const nextConfig: NextConfig = {
   images: {
+    // Serve files as-is: the Vercel image optimizer is over its plan quota (402 on /_next/image),
+    // so the images in public/ are pre-compressed to webp instead.
+    unoptimized: true,
     remotePatterns: [
       ...(supabaseHost ? [{ protocol: "https" as const, hostname: supabaseHost, pathname: "/storage/v1/object/public/**" }] : []),
       ...(r2Host ? [{ protocol: "https" as const, hostname: r2Host, pathname: "/cards/**" }] : []),
@@ -31,6 +34,16 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
     ];
+  },
+  // Large PNGs in public/images were converted to webp, but posts/projects stored in the database (and
+  // links indexed elsewhere) still point at the old .png paths. afterFiles only runs when no public file
+  // matched, so PNGs that still exist are served as before.
+  async rewrites() {
+    return {
+      beforeFiles: [],
+      afterFiles: [{ source: "/images/:name([^/]+)\\.png", destination: "/images/:name.webp" }],
+      fallback: [],
+    };
   },
 };
 

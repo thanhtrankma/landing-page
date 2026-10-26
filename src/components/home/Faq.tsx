@@ -7,8 +7,8 @@ import { Heading } from "../ui";
 export default function Faq({
   faqs,
   images = [
-    { src: "/images/faq-illustration.png", alt: "FAQ Illustration", width: 200, height: 200 },
-    { src: "/images/faq-support.png", alt: "Support Illustration", width: 200, height: 200 },
+    { src: "/images/faq-illustration.webp", alt: "FAQ Illustration", width: 200, height: 200 },
+    { src: "/images/faq-support.webp", alt: "Support Illustration", width: 200, height: 200 },
   ],
 }: {
   faqs: [question: string, answer: string][];
