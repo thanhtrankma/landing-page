@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useCallback, useEffect, useLayoutEffect, useRef, useState, type CSSProperties } from "react";
 import { posLabel } from "@/lib/hsk-text";
 import SpeakButton from "./SpeakButton";
+import { useGameFocus } from "./useGameFocus";
 import { MissedList, Settings } from "./VocabMeteor";
 import {
   bestScope,
@@ -231,6 +232,8 @@ export default function HanziDrop({ words, set }: { words: GameWord[]; set?: str
   const [wrong, setWrong] = useState(false);
   const [announce, setAnnounce] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
+  const focus = phase !== "ready";
+  const stage = useGameFocus(focus);
   const composing = useRef(false);
 
   const game = useRef({
@@ -280,7 +283,7 @@ export default function HanziDrop({ words, set }: { words: GameWord[]; set?: str
     setAnswer("");
     publish();
     setPhase("playing");
-    requestAnimationFrame(() => inputRef.current?.focus());
+    requestAnimationFrame(() => inputRef.current?.focus({ preventScroll: true }));
   };
 
   useEffect(() => {
@@ -345,7 +348,7 @@ export default function HanziDrop({ words, set }: { words: GameWord[]; set?: str
   }, []);
 
   useEffect(() => {
-    if (phase === "playing") inputRef.current?.focus();
+    if (phase === "playing") inputRef.current?.focus({ preventScroll: true });
   }, [phase]);
 
   /** Fires one typed character at the next empty slot: lands if it is that letter, bounces off and knocks the card down if not. */
@@ -400,7 +403,7 @@ export default function HanziDrop({ words, set }: { words: GameWord[]; set?: str
     record(r.word, false, 0);
     setAnswer("");
     publish();
-    inputRef.current?.focus();
+    inputRef.current?.focus({ preventScroll: true });
   };
 
   const r = view.round;
@@ -411,168 +414,174 @@ export default function HanziDrop({ words, set }: { words: GameWord[]; set?: str
   const nowPoints = r && r.status === "falling" ? pointsFor(open) : 0;
 
   return (
-    <div className="vg vg-drop">
-      <div className="drop-main">
-        <div className="vg-hud">
-          <span>
-            Điểm <b>{view.score}</b>
-          </span>
-          <span>
-            Level <b>{view.level}</b>
-          </span>
-          <span>
-            Chuỗi <b>{view.streak}</b>
-          </span>
-          <span className="vg-lives" aria-label={`Còn ${view.lives} mạng`}>
-            {Array.from({ length: LIVES }, (_, i) => (
-              <i key={i} className={i < view.lives ? "on" : ""} aria-hidden="true" />
-            ))}
-          </span>
-          {(phase === "playing" || phase === "paused") && (
-            <button type="button" className="vg-pause" onClick={() => setPhase(phase === "playing" ? "paused" : "playing")} aria-label={phase === "playing" ? "Tạm dừng" : "Tiếp tục"}>
-              {phase === "playing" ? (
-                <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1" /><rect x="14" y="5" width="4" height="14" rx="1" /></svg>
-              ) : (
-                <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M7 5v14l12-7z" /></svg>
-              )}
-            </button>
-          )}
-        </div>
-
-        <div className="vg-field drop-field" onClick={() => phase === "playing" && inputRef.current?.focus()}>
-          <div className={`drop-time${r?.status === "falling" && r.y > 0.75 ? " low" : ""}`} aria-hidden="true">
-            <i style={{ top: `${(r?.y ?? 0) * 100}%` }} />
-          </div>
-          <div className="drop-lane">
-            {view.lives < LIVES && <div key={view.lives} className="vg-hurt" aria-hidden="true" />}
-            {r && (
-              <div className={`drop-card ${r.status}`} style={{ top: `${r.y * 100}%`, "--y": r.y } as CSSProperties}>
-                <span className="drop-hanzi">{r.word[0]}</span>
-                {r.status !== "missed" && <Crossword slots={r.slots} filled={filled} />}
-                {r.status === "falling" && <span className="drop-points">+{nowPoints}</span>}
-                {r.status === "correct" && <span className="drop-points ok">+{r.points}</span>}
-                {r.status === "missed" && (
-                  <span className="drop-reveal">
-                    {r.word[1]} · {shortMeaning(r.word[2])}
-                  </span>
+    <div ref={stage} className="vg-holder">
+      <div className={`vg vg-drop${focus ? " focus" : ""}`}>
+        {focus && (
+          // clicking the dimmed page pauses a running game, or leaves a paused or finished one
+          <button type="button" className="vg-backdrop" tabIndex={-1} aria-label="Thoát màn chơi" onClick={() => setPhase((p) => (p === "playing" ? "paused" : "ready"))} />
+        )}
+        <div className="drop-main">
+          <div className="vg-hud">
+            <span>
+              Điểm <b>{view.score}</b>
+            </span>
+            <span>
+              Level <b>{view.level}</b>
+            </span>
+            <span>
+              Chuỗi <b>{view.streak}</b>
+            </span>
+            <span className="vg-lives" aria-label={`Còn ${view.lives} mạng`}>
+              {Array.from({ length: LIVES }, (_, i) => (
+                <i key={i} className={i < view.lives ? "on" : ""} aria-hidden="true" />
+              ))}
+            </span>
+            {(phase === "playing" || phase === "paused") && (
+              <button type="button" className="vg-pause" onClick={() => setPhase(phase === "playing" ? "paused" : "playing")} aria-label={phase === "playing" ? "Tạm dừng" : "Tiếp tục"}>
+                {phase === "playing" ? (
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1" /><rect x="14" y="5" width="4" height="14" rx="1" /></svg>
+                ) : (
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M7 5v14l12-7z" /></svg>
                 )}
+              </button>
+            )}
+          </div>
+
+          <div className="vg-field drop-field" onClick={() => phase === "playing" && inputRef.current?.focus({ preventScroll: true })}>
+            <div className={`drop-time${r?.status === "falling" && r.y > 0.75 ? " low" : ""}`} aria-hidden="true">
+              <i style={{ top: `${(r?.y ?? 0) * 100}%` }} />
+            </div>
+            <div className="drop-lane">
+              {view.lives < LIVES && <div key={view.lives} className="vg-hurt" aria-hidden="true" />}
+              {r && (
+                <div className={`drop-card ${r.status}`} style={{ top: `${r.y * 100}%`, "--y": r.y } as CSSProperties}>
+                  <span className="drop-hanzi">{r.word[0]}</span>
+                  {r.status !== "missed" && <Crossword slots={r.slots} filled={filled} />}
+                  {r.status === "falling" && <span className="drop-points">+{nowPoints}</span>}
+                  {r.status === "correct" && <span className="drop-points ok">+{r.points}</span>}
+                  {r.status === "missed" && (
+                    <span className="drop-reveal">
+                      {r.word[1]} · {shortMeaning(r.word[2])}
+                    </span>
+                  )}
+                </div>
+              )}
+              <div className="drop-floor" aria-hidden="true" />
+            </div>
+            <Cannon />
+            {shots.map((s) => (
+              <ShotFx key={s.id} shot={s} onDone={shotDone} />
+            ))}
+
+            {phase === "ready" && (
+              <div className="vg-overlay">
+                <h2>Chữ Hán rơi</h2>
+                <p>Bắn đủ ô chữ trước khi thẻ chạm đáy, càng sớm càng nhiều điểm. Gõ từng chữ cái để súng bắn vào ô chữ: đúng thì chữ xếp vào, sai thì nảy ra và thẻ bị đẩy xuống. Mỗi khi thẻ rơi qua một vạch ngang, ô chữ lộ thêm chữ cái và bớt {HINT_COST} điểm.</p>
+                <Settings prefs={prefs} onChange={updatePrefs} showLevel={!set} />
+                <button type="button" className="gv-btn vg-start" onClick={start}>
+                  Bắt đầu chơi
+                </button>
+                {best > 0 && <small>Kỷ lục của bạn: {best} điểm</small>}
               </div>
             )}
-            <div className="drop-floor" aria-hidden="true" />
-          </div>
-          <Cannon />
-          {shots.map((s) => (
-            <ShotFx key={s.id} shot={s} onDone={shotDone} />
-          ))}
-
-          {phase === "ready" && (
-            <div className="vg-overlay">
-              <h2>Chữ Hán rơi</h2>
-              <p>Bắn đủ ô chữ trước khi thẻ chạm đáy, càng sớm càng nhiều điểm. Gõ từng chữ cái để súng bắn vào ô chữ: đúng thì chữ xếp vào, sai thì nảy ra và thẻ bị đẩy xuống. Mỗi khi thẻ rơi qua một vạch ngang, ô chữ lộ thêm chữ cái và bớt {HINT_COST} điểm.</p>
-              <Settings prefs={prefs} onChange={updatePrefs} showLevel={!set} />
-              <button type="button" className="gv-btn vg-start" onClick={start}>
-                Bắt đầu chơi
-              </button>
-              {best > 0 && <small>Kỷ lục của bạn: {best} điểm</small>}
-            </div>
-          )}
-          {phase === "paused" && (
-            <div className="vg-overlay">
-              <h2>Tạm dừng</h2>
-              <button type="button" className="gv-btn vg-start" onClick={() => setPhase("playing")}>
-                Tiếp tục
-              </button>
-              <button type="button" className="vg-link" onClick={() => setPhase("ready")}>
-                Chơi lại từ đầu
-              </button>
-            </div>
-          )}
-          {phase === "over" && (
-            <div className="vg-overlay vg-over">
-              <h2>Hết mạng!</h2>
-              <p className="vg-final">
-                <b>{view.score}</b> điểm · đúng {summary.correct} từ · chuỗi dài nhất {summary.bestStreak}
-                {summary.record && <em> · Kỷ lục mới!</em>}
-              </p>
-              <div className="vg-over-actions">
-                <button type="button" className="gv-btn vg-start" onClick={start}>
-                  Chơi lại
+            {phase === "paused" && (
+              <div className="vg-overlay">
+                <h2>Tạm dừng</h2>
+                <button type="button" className="gv-btn vg-start" onClick={() => setPhase("playing")}>
+                  Tiếp tục
                 </button>
                 <button type="button" className="vg-link" onClick={() => setPhase("ready")}>
-                  Đổi chế độ
+                  Chơi lại từ đầu
                 </button>
               </div>
-              {history.some((h) => !h.ok) && <MissedList words={[...new Map(history.filter((h) => !h.ok).map((h) => [h.word[5], h.word])).values()]} />}
-            </div>
-          )}
-        </div>
+            )}
+            {phase === "over" && (
+              <div className="vg-overlay vg-over">
+                <h2>Hết mạng!</h2>
+                <p className="vg-final">
+                  <b>{view.score}</b> điểm · đúng {summary.correct} từ · chuỗi dài nhất {summary.bestStreak}
+                  {summary.record && <em> · Kỷ lục mới!</em>}
+                </p>
+                <div className="vg-over-actions">
+                  <button type="button" className="gv-btn vg-start" onClick={start}>
+                    Chơi lại
+                  </button>
+                  <button type="button" className="vg-link" onClick={() => setPhase("ready")}>
+                    Đổi chế độ
+                  </button>
+                </div>
+                {history.some((h) => !h.ok) && <MissedList words={[...new Map(history.filter((h) => !h.ok).map((h) => [h.word[5], h.word])).values()]} />}
+              </div>
+            )}
+          </div>
 
-        <ol className="drop-hints" aria-label="Gợi ý">
-          {(hints.length ? hints : hintsFor(["", "", "", "", 1, "", []], prefs.mode).map(([label]) => [label, ""] as [string, string])).map(([label, value], k) => (
-            <li key={k} className={open > k ? "on" : ""}>
-              <small>
-                {k + 1}. {label}
-              </small>
-              <b>{open > k ? value : "?"}</b>
-            </li>
-          ))}
-        </ol>
-
-        <form className={`vg-answer${wrong ? " wrong" : ""}`} onSubmit={(e) => e.preventDefault()}>
-          {/* each character fires as it is typed; an IME (e.g. Vietnamese Telex) fires once its letter is composed */}
-          <input
-            ref={inputRef}
-            value={answer}
-            onChange={(e) => (composing.current ? setAnswer(e.target.value) : fire(e.target.value))}
-            onCompositionStart={() => (composing.current = true)}
-            onCompositionEnd={(e) => {
-              composing.current = false;
-              fire(e.currentTarget.value);
-            }}
-            placeholder={GUN_PLACEHOLDER[prefs.mode]}
-            aria-label="Gõ chữ cái để bắn"
-            autoComplete="off"
-            autoCorrect="off"
-            autoCapitalize="none"
-            spellCheck={false}
-            disabled={phase !== "playing"}
-          />
-          <button type="button" className="vg-skip" onClick={skip} disabled={phase !== "playing" || r?.status !== "falling"} title="Bỏ qua từ này (mất 1 mạng)">
-            Bỏ qua
-          </button>
-        </form>
-        <p className="sr-only" aria-live="polite">
-          {announce}
-        </p>
-      </div>
-
-      <aside className="drop-history" aria-label="Từ đã rơi">
-        <h3>
-          Từ đã rơi <small>{history.length}</small>
-        </h3>
-        {history.length === 0 ? (
-          <p className="drop-empty">Các từ đã rơi qua sẽ hiện ở đây, kèm pinyin và nghĩa để bạn ôn lại.</p>
-        ) : (
-          <ul>
-            {history.map((h) => (
-              <li key={h.id} className={h.ok ? "ok" : "miss"}>
-                <span className="drop-mark" aria-label={h.ok ? "Đúng" : "Lọt"}>
-                  {h.ok ? "✓" : "✗"}
-                </span>
-                <Link href={gameWordHref(h.word)} target="_blank" title="Mở từ này">
-                  <b>{h.word[0]}</b>
-                  <span>
-                    {h.word[1]}
-                    <small>{shortMeaning(h.word[2])}</small>
-                  </span>
-                </Link>
-                {h.ok && <em>+{h.points}</em>}
-                <SpeakButton text={h.word[0]} small />
+          <ol className="drop-hints" aria-label="Gợi ý">
+            {(hints.length ? hints : hintsFor(["", "", "", "", 1, "", []], prefs.mode).map(([label]) => [label, ""] as [string, string])).map(([label, value], k) => (
+              <li key={k} className={open > k ? "on" : ""}>
+                <small>
+                  {k + 1}. {label}
+                </small>
+                <b>{open > k ? value : "?"}</b>
               </li>
             ))}
-          </ul>
-        )}
-      </aside>
+          </ol>
+
+          <form className={`vg-answer${wrong ? " wrong" : ""}`} onSubmit={(e) => e.preventDefault()}>
+            {/* each character fires as it is typed; an IME (e.g. Vietnamese Telex) fires once its letter is composed */}
+            <input
+              ref={inputRef}
+              value={answer}
+              onChange={(e) => (composing.current ? setAnswer(e.target.value) : fire(e.target.value))}
+              onCompositionStart={() => (composing.current = true)}
+              onCompositionEnd={(e) => {
+                composing.current = false;
+                fire(e.currentTarget.value);
+              }}
+              placeholder={GUN_PLACEHOLDER[prefs.mode]}
+              aria-label="Gõ chữ cái để bắn"
+              autoComplete="off"
+              autoCorrect="off"
+              autoCapitalize="none"
+              spellCheck={false}
+              disabled={phase !== "playing"}
+            />
+            <button type="button" className="vg-skip" onClick={skip} disabled={phase !== "playing" || r?.status !== "falling"} title="Bỏ qua từ này (mất 1 mạng)">
+              Bỏ qua
+            </button>
+          </form>
+          <p className="sr-only" aria-live="polite">
+            {announce}
+          </p>
+        </div>
+
+        <aside className="drop-history" aria-label="Từ đã rơi">
+          <h3>
+            Từ đã rơi <small>{history.length}</small>
+          </h3>
+          {history.length === 0 ? (
+            <p className="drop-empty">Các từ đã rơi qua sẽ hiện ở đây, kèm pinyin và nghĩa để bạn ôn lại.</p>
+          ) : (
+            <ul>
+              {history.map((h) => (
+                <li key={h.id} className={h.ok ? "ok" : "miss"}>
+                  <span className="drop-mark" aria-label={h.ok ? "Đúng" : "Lọt"}>
+                    {h.ok ? "✓" : "✗"}
+                  </span>
+                  <Link href={gameWordHref(h.word)} target="_blank" title="Mở từ này">
+                    <b>{h.word[0]}</b>
+                    <span>
+                      {h.word[1]}
+                      <small>{shortMeaning(h.word[2])}</small>
+                    </span>
+                  </Link>
+                  {h.ok && <em>+{h.points}</em>}
+                  <SpeakButton text={h.word[0]} small />
+                </li>
+              ))}
+            </ul>
+          )}
+        </aside>
+      </div>
     </div>
   );
 }

@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useCallback, useEffect, useRef, useState, type FormEvent } from "react";
+import { useGameFocus } from "./useGameFocus";
 import {
   bestScope,
   gameWordHref,
@@ -66,6 +67,8 @@ export default function VocabMeteor({ words, set }: { words: GameWord[]; set?: s
   const [announce, setAnnounce] = useState("");
 
   const inputRef = useRef<HTMLInputElement>(null);
+  const focus = phase !== "ready";
+  const stage = useGameFocus(focus);
   const game = useRef({
     meteors: [] as Meteor[],
     lasers: [] as Laser[],
@@ -128,7 +131,7 @@ export default function VocabMeteor({ words, set }: { words: GameWord[]; set?: s
     setAnswer("");
     publish();
     setPhase("playing");
-    requestAnimationFrame(() => inputRef.current?.focus());
+    requestAnimationFrame(() => inputRef.current?.focus({ preventScroll: true }));
   };
 
   // Main loop: runs only while playing.
@@ -206,7 +209,7 @@ export default function VocabMeteor({ words, set }: { words: GameWord[]; set?: s
   }, []);
 
   useEffect(() => {
-    if (phase === "playing") inputRef.current?.focus();
+    if (phase === "playing") inputRef.current?.focus({ preventScroll: true });
   }, [phase]);
 
   const fire = (e: FormEvent) => {
@@ -234,124 +237,130 @@ export default function VocabMeteor({ words, set }: { words: GameWord[]; set?: s
   const fallPct = 86; // meteors fall over the top 86% of the field; the ground takes the rest
 
   return (
-    <div className="vg vg-meteor">
-      <div className="vg-hud">
-        <span>
-          Điểm <b>{view.score}</b>
-        </span>
-        <span>
-          Level <b>{level}</b>
-        </span>
-        <span className="vg-lives" aria-label={`Còn ${view.lives} mạng`}>
-          {Array.from({ length: LIVES }, (_, i) => (
-            <i key={i} className={i < view.lives ? "on" : ""} aria-hidden="true" />
-          ))}
-        </span>
-        <span className="vg-best">
-          Kỷ lục <b>{Math.max(best, view.score)}</b>
-        </span>
-        {(phase === "playing" || phase === "paused") && (
-          <button type="button" className="vg-pause" onClick={() => setPhase(phase === "playing" ? "paused" : "playing")} aria-label={phase === "playing" ? "Tạm dừng" : "Tiếp tục"}>
-            {phase === "playing" ? (
-              <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1" /><rect x="14" y="5" width="4" height="14" rx="1" /></svg>
-            ) : (
-              <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M7 5v14l12-7z" /></svg>
-            )}
-          </button>
+    <div ref={stage} className="vg-holder">
+      <div className={`vg vg-meteor${focus ? " focus" : ""}`}>
+        {focus && (
+          // clicking the dimmed page pauses a running game, or leaves a paused or finished one
+          <button type="button" className="vg-backdrop" tabIndex={-1} aria-label="Thoát màn chơi" onClick={() => setPhase((p) => (p === "playing" ? "paused" : "ready"))} />
         )}
-      </div>
-
-      <div className="vg-field meteor-field">
-        <div className="meteor-stars" aria-hidden="true" />
-        {view.flash > 0 && <div key={view.flash} className="vg-hurt" aria-hidden="true" />}
-        {view.meteors.map((m) => {
-          const landed = m.hitAt !== undefined && m.hitAt < 0;
-          const hit = m.hitAt !== undefined && m.hitAt >= 0;
-          return (
-            <div
-              key={m.id}
-              className={`meteor${hit ? " boom" : ""}${landed ? " landed" : ""}${m.word[0].length > 2 ? " long" : ""}`}
-              style={{ left: `${m.x * 100}%`, top: `${Math.min(m.y, 1) * fallPct}%` }}
-              aria-hidden="true"
-            >
-              <span className="meteor-core">{m.word[0]}</span>
-              {prefs.hints && !hit && <span className="meteor-hint">{hintFor(m.word, prefs.mode)}</span>}
-              {hit && <span className="meteor-score">+{POINTS}</span>}
-            </div>
-          );
-        })}
-        <svg className="meteor-lasers" aria-hidden="true">
-          {view.lasers.map((l) => (
-            <line key={l.id} x1="50%" y1="100%" x2={`${l.x * 100}%`} y2={`${Math.min(l.y, 1) * fallPct}%`} />
-          ))}
-        </svg>
-        <div className="meteor-ground" aria-hidden="true">
-          <span className="meteor-cannon" />
+        <div className="vg-hud">
+          <span>
+            Điểm <b>{view.score}</b>
+          </span>
+          <span>
+            Level <b>{level}</b>
+          </span>
+          <span className="vg-lives" aria-label={`Còn ${view.lives} mạng`}>
+            {Array.from({ length: LIVES }, (_, i) => (
+              <i key={i} className={i < view.lives ? "on" : ""} aria-hidden="true" />
+            ))}
+          </span>
+          <span className="vg-best">
+            Kỷ lục <b>{Math.max(best, view.score)}</b>
+          </span>
+          {(phase === "playing" || phase === "paused") && (
+            <button type="button" className="vg-pause" onClick={() => setPhase(phase === "playing" ? "paused" : "playing")} aria-label={phase === "playing" ? "Tạm dừng" : "Tiếp tục"}>
+              {phase === "playing" ? (
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1" /><rect x="14" y="5" width="4" height="14" rx="1" /></svg>
+              ) : (
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M7 5v14l12-7z" /></svg>
+              )}
+            </button>
+          )}
         </div>
 
-        {phase === "ready" && (
-          <div className="vg-overlay">
-            <h2>Mưa từ vựng</h2>
-            <p>Gõ đúng để bắn hạ chữ Hán trước khi chạm đất. Bạn có {LIVES} mạng.</p>
-            <Settings prefs={prefs} onChange={updatePrefs} showHints showLevel={!set} />
-            <button type="button" className="gv-btn vg-start" onClick={start}>
-              Bắt đầu chơi
-            </button>
-            {best > 0 && <small>Kỷ lục của bạn: {best} điểm</small>}
+        <div className="vg-field meteor-field">
+          <div className="meteor-stars" aria-hidden="true" />
+          {view.flash > 0 && <div key={view.flash} className="vg-hurt" aria-hidden="true" />}
+          {view.meteors.map((m) => {
+            const landed = m.hitAt !== undefined && m.hitAt < 0;
+            const hit = m.hitAt !== undefined && m.hitAt >= 0;
+            return (
+              <div
+                key={m.id}
+                className={`meteor${hit ? " boom" : ""}${landed ? " landed" : ""}${m.word[0].length > 2 ? " long" : ""}`}
+                style={{ left: `${m.x * 100}%`, top: `${Math.min(m.y, 1) * fallPct}%` }}
+                aria-hidden="true"
+              >
+                <span className="meteor-core">{m.word[0]}</span>
+                {prefs.hints && !hit && <span className="meteor-hint">{hintFor(m.word, prefs.mode)}</span>}
+                {hit && <span className="meteor-score">+{POINTS}</span>}
+              </div>
+            );
+          })}
+          <svg className="meteor-lasers" aria-hidden="true">
+            {view.lasers.map((l) => (
+              <line key={l.id} x1="50%" y1="100%" x2={`${l.x * 100}%`} y2={`${Math.min(l.y, 1) * fallPct}%`} />
+            ))}
+          </svg>
+          <div className="meteor-ground" aria-hidden="true">
+            <span className="meteor-cannon" />
           </div>
-        )}
-        {phase === "paused" && (
-          <div className="vg-overlay">
-            <h2>Tạm dừng</h2>
-            <button type="button" className="gv-btn vg-start" onClick={() => setPhase("playing")}>
-              Tiếp tục
-            </button>
-            <button type="button" className="vg-link" onClick={() => setPhase("ready")}>
-              Chơi lại từ đầu
-            </button>
-          </div>
-        )}
-        {phase === "over" && (
-          <div className="vg-overlay vg-over">
-            <h2>Hết mạng!</h2>
-            <p className="vg-final">
-              <b>{view.score}</b> điểm · level {level} · bắn hạ {view.hits} từ
-              {record && <em> · Kỷ lục mới!</em>}
-            </p>
-            <div className="vg-over-actions">
+
+          {phase === "ready" && (
+            <div className="vg-overlay">
+              <h2>Mưa từ vựng</h2>
+              <p>Gõ đúng để bắn hạ chữ Hán trước khi chạm đất. Bạn có {LIVES} mạng.</p>
+              <Settings prefs={prefs} onChange={updatePrefs} showHints showLevel={!set} />
               <button type="button" className="gv-btn vg-start" onClick={start}>
-                Chơi lại
+                Bắt đầu chơi
+              </button>
+              {best > 0 && <small>Kỷ lục của bạn: {best} điểm</small>}
+            </div>
+          )}
+          {phase === "paused" && (
+            <div className="vg-overlay">
+              <h2>Tạm dừng</h2>
+              <button type="button" className="gv-btn vg-start" onClick={() => setPhase("playing")}>
+                Tiếp tục
               </button>
               <button type="button" className="vg-link" onClick={() => setPhase("ready")}>
-                Đổi chế độ
+                Chơi lại từ đầu
               </button>
             </div>
-            {missed.length > 0 && <MissedList words={missed} />}
-          </div>
-        )}
-      </div>
+          )}
+          {phase === "over" && (
+            <div className="vg-overlay vg-over">
+              <h2>Hết mạng!</h2>
+              <p className="vg-final">
+                <b>{view.score}</b> điểm · level {level} · bắn hạ {view.hits} từ
+                {record && <em> · Kỷ lục mới!</em>}
+              </p>
+              <div className="vg-over-actions">
+                <button type="button" className="gv-btn vg-start" onClick={start}>
+                  Chơi lại
+                </button>
+                <button type="button" className="vg-link" onClick={() => setPhase("ready")}>
+                  Đổi chế độ
+                </button>
+              </div>
+              {missed.length > 0 && <MissedList words={missed} />}
+            </div>
+          )}
+        </div>
 
-      <form className={`vg-answer${wrong ? " wrong" : ""}`} onSubmit={fire}>
-        <input
-          ref={inputRef}
-          value={answer}
-          onChange={(e) => setAnswer(e.target.value)}
-          placeholder={MODE_PLACEHOLDER[prefs.mode]}
-          aria-label="Đáp án"
-          autoComplete="off"
-          autoCorrect="off"
-          autoCapitalize="none"
-          spellCheck={false}
-          enterKeyHint="send"
-          disabled={phase !== "playing"}
-        />
-        <button type="submit" className="gv-btn" disabled={phase !== "playing"}>
-          Bắn
-        </button>
-      </form>
-      <p className="sr-only" aria-live="polite">
-        {announce}
-      </p>
+        <form className={`vg-answer${wrong ? " wrong" : ""}`} onSubmit={fire}>
+          <input
+            ref={inputRef}
+            value={answer}
+            onChange={(e) => setAnswer(e.target.value)}
+            placeholder={MODE_PLACEHOLDER[prefs.mode]}
+            aria-label="Đáp án"
+            autoComplete="off"
+            autoCorrect="off"
+            autoCapitalize="none"
+            spellCheck={false}
+            enterKeyHint="send"
+            disabled={phase !== "playing"}
+          />
+          <button type="submit" className="gv-btn" disabled={phase !== "playing"}>
+            Bắn
+          </button>
+        </form>
+        <p className="sr-only" aria-live="polite">
+          {announce}
+        </p>
+      </div>
     </div>
   );
 }

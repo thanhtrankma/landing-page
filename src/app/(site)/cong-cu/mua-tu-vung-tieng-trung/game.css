@@ -2,6 +2,26 @@
    chu-han-roi/drop.css adds the single-word drop game. Uses the site's sky tokens (theme.css). */
 
 .vg { max-width: 920px; margin: 0 auto; }
+
+/* focus mode (useGameFocus): while a game is on it is lifted into a panel fixed in the middle of the screen, over a
+   dimmed page. inset + auto margins + fit-content height center it without a transform, which would turn the panel into
+   the containing block of the fixed backdrop inside it. A game taller than the screen scrolls inside the panel. */
+.vg.focus {
+  position: fixed; inset: 0; z-index: 40; margin: auto; height: fit-content; max-height: calc(100dvh - 24px);
+  width: min(var(--vg-panel, 948px), calc(100vw - 24px)); max-width: none; overflow-y: auto; overscroll-behavior: contain;
+  padding: 14px; border-radius: 24px; background: var(--sky-50); box-shadow: 0 40px 90px -20px rgb(4 22 34 / 0.6);
+  animation: vg-dim 0.25s ease-out;
+}
+.vg-drop.focus { --vg-panel: 1108px; }
+.vg-backdrop {
+  position: fixed; inset: 0; z-index: -1; padding: 0; border: 0; cursor: pointer;
+  background: rgb(6 28 42 / 0.62); backdrop-filter: blur(3px); animation: vg-dim 0.25s ease-out;
+}
+@keyframes vg-dim { from { opacity: 0; } }
+html.vg-focus { overflow: hidden; }
+html.vg-focus .gv-header, html.vg-focus .contact-float-group, html.vg-focus .scroll-top-btn, html.vg-focus .mobile-bottom-nav, html.vg-focus .consent {
+  opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 0.2s, visibility 0.2s;
+}
 .vg-hud {
   display: flex; align-items: center; gap: 8px 20px; flex-wrap: wrap;
   padding: 12px 16px; margin-bottom: 12px; border-radius: 16px;
@@ -141,6 +161,7 @@
   .vg-answer input { font-size: 16px; }
 }
 @media (prefers-reduced-motion: reduce) {
+  .vg-backdrop, .vg.focus { animation: none; }
   .vg-answer.wrong input, .meteor-score { animation: none; }
   .vg-seg button { transition: none; }
 }
