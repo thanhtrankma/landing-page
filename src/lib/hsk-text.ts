@@ -42,6 +42,7 @@ const POS_VI: Record<string, string> = {
   连: "liên từ",
   助: "trợ từ",
   叹: "thán từ",
+  动宾: "động từ ly hợp",
   拟声: "tượng thanh",
   前缀: "tiền tố",
   后缀: "hậu tố",
