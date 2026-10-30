@@ -656,4 +656,456 @@ const book2Session2: Lesson = {
   ],
 };
 
-export const LESSONS: Lesson[] = [...BOOK_1, book2Session1, book2Session2];
+const book2Session3: Lesson = {
+  book: 2,
+  session: 3,
+  slug: "quyen-2-buoi-3",
+  title: "Có thể mượn điện thoại bạn một lát được khum?",
+  words: [
+    {
+      hanzi: "手机",
+      pinyin: "shǒujī",
+      pos: "名",
+      meaning: "điện thoại di động",
+      hanViet: "THỦ CƠ",
+      phrases: [
+        { hanzi: "田中的手机", pinyin: "Tiánzhōng de shǒujī", meaning: "điện thoại của Tanaka" },
+        { hanzi: "美京的手机", pinyin: "Měijīng de shǒujī", meaning: "điện thoại của Mỹ Kinh" },
+        { hanzi: "他的手机很好。", pinyin: "Tā de shǒujī hěn hǎo.", meaning: "Điện thoại của anh ấy rất tốt." },
+      ],
+      dialogues: [
+        [
+          { who: "A", zh: "这是你的手机吗？", pinyin: "Zhè shì nǐ de shǒujī ma?", vi: "Đây có phải là điện thoại của bạn không?" },
+          { who: "B", zh: "这是 / 不是我的手机。", pinyin: "Zhè shì / bú shì wǒ de shǒujī.", vi: "Đây là / không phải là điện thoại của tôi." },
+        ],
+      ],
+    },
+    {
+      hanzi: "电话",
+      pinyin: "diànhuà",
+      pos: "名",
+      meaning: "điện thoại",
+      hanViet: "ĐIỆN THOẠI",
+      parts: [
+        { hanzi: "打电话", pinyin: "dǎ diànhuà", pos: "动", meaning: "gọi điện thoại" },
+      ],
+      phrases: [
+        { hanzi: "一个电话", pinyin: "yí gè diànhuà", meaning: "một cuộc điện thoại" },
+        { hanzi: "跟朋友打电话", pinyin: "gēn péngyou dǎ diànhuà", meaning: "gọi điện thoại với bạn bè" },
+      ],
+      dialogues: [
+        [
+          { who: "A", zh: "他正在做什么？", pinyin: "Tā zhèngzài zuò shénme?", vi: "Anh ấy đang làm gì?" },
+          { who: "B", zh: "他正在打电话。", pinyin: "Tā zhèngzài dǎ diànhuà.", vi: "Anh ấy đang gọi điện thoại." },
+        ],
+        [
+          { who: "A", zh: "你今天跟谁打电话？", pinyin: "Nǐ jīntiān gēn shéi dǎ diànhuà?", vi: "Hôm nay bạn gọi điện thoại với ai?" },
+          { who: "B", zh: "我跟朋友打电话。", pinyin: "Wǒ gēn péngyou dǎ diànhuà.", vi: "Tôi gọi điện thoại với bạn." },
+        ],
+      ],
+    },
+    {
+      hanzi: "号码",
+      pinyin: "hàomǎ",
+      pos: "名",
+      meaning: "số",
+      hanViet: "HẢO MÃ",
+      parts: [
+        { hanzi: "号", pinyin: "hào", pos: "名", meaning: "số" },
+      ],
+      phrases: [
+        { hanzi: "电话号码", pinyin: "diànhuà hàomǎ", meaning: "số điện thoại" },
+        { hanzi: "手机号码", pinyin: "shǒujī hàomǎ", meaning: "số điện thoại di động" },
+        { hanzi: "手机号", pinyin: "shǒujī hào", meaning: "số điện thoại di động" },
+      ],
+      dialogues: [
+        [
+          { who: "A", zh: "你的电话号码是多少？", pinyin: "Nǐ de diànhuà hàomǎ shì duōshao?", vi: "Số điện thoại của bạn là bao nhiêu?" },
+          { who: "B", zh: "我的手机号码是013-225-468。", pinyin: "Wǒ de shǒujī hàomǎ shì 013-225-468.", vi: "Số điện thoại của tôi là 013-225-468." },
+        ],
+        [
+          { who: "A", zh: "这是你的手机号码吗？", pinyin: "Zhè shì nǐ de shǒujī hàomǎ ma?", vi: "Đây có phải số điện thoại di động của bạn không?" },
+          { who: "B", zh: "是 / 不是。", pinyin: "Shì / Bú shì.", vi: "Phải / Không phải." },
+        ],
+      ],
+    },
+    {
+      hanzi: "给",
+      pinyin: "gěi",
+      pos: "动-介",
+      meaning: "cho, cho ai (làm gì)",
+      hanViet: "CẤP",
+      phrases: [
+        { hanzi: "给你一些水果", pinyin: "gěi nǐ yìxiē shuǐguǒ", meaning: "cho bạn một ít hoa quả" },
+        { hanzi: "给妈妈打电话", pinyin: "gěi māma dǎ diànhuà", meaning: "gọi điện thoại cho mẹ" },
+      ],
+      dialogues: [
+        [
+          { who: "A", zh: "今天你给妈妈打电话了吗？", pinyin: "Jīntiān nǐ gěi māma dǎ diànhuà le ma?", vi: "Hôm nay bạn đã gọi điện cho mẹ chưa?" },
+          { who: "B", zh: "我给她打了 / 还没呢。", pinyin: "Wǒ gěi tā dǎ le / hái méi ne.", vi: "Tôi gọi cho bà ấy rồi / Vẫn chưa." },
+        ],
+        [
+          { who: "A", zh: "我想给他打电话，你给我的他的电话号码吧。", pinyin: "Wǒ xiǎng gěi tā dǎ diànhuà, nǐ gěi wǒ tā de diànhuà hàomǎ ba.", vi: "Tôi muốn gọi điện cho anh ấy, bạn cho tôi số điện thoại của anh ấy đi." },
+          { who: "B", zh: "好的。", pinyin: "Hǎo de.", vi: "Được thôi." },
+        ],
+      ],
+    },
+    {
+      hanzi: "可以",
+      pinyin: "kěyǐ",
+      pos: "动",
+      meaning: "có thể",
+      hanViet: "KHẢ DĨ",
+      phrases: [
+        { hanzi: "可以吃", pinyin: "kěyǐ chī", meaning: "có thể ăn" },
+        { hanzi: "可以喝", pinyin: "kěyǐ hē", meaning: "có thể uống" },
+        { hanzi: "可以给你", pinyin: "kěyǐ gěi nǐ", meaning: "có thể cho bạn" },
+        { hanzi: "可以去", pinyin: "kěyǐ qù", meaning: "có thể đi" },
+      ],
+      dialogues: [
+        [
+          { who: "A", zh: "你可以跟我们一起去吗？", pinyin: "Nǐ kěyǐ gēn wǒmen yìqǐ qù ma?", vi: "Bạn có thể đi cùng chúng tôi không?" },
+          { who: "B", zh: "可以 / 不可以。", pinyin: "Kěyǐ / Bù kěyǐ.", vi: "Có thể / Không thể." },
+        ],
+        [
+          { who: "A", zh: "你可以给我他的手机号码吗？", pinyin: "Nǐ kěyǐ gěi wǒ tā de shǒujī hàomǎ ma?", vi: "Bạn có thể cho tôi số điện thoại di động của anh ấy không?" },
+          { who: "B", zh: "可以。", pinyin: "Kěyǐ.", vi: "Được chứ." },
+        ],
+      ],
+    },
+    {
+      hanzi: "可是",
+      pinyin: "kěshì",
+      pos: "连",
+      meaning: "tuy nhiên, nhưng",
+      hanViet: "KHẢ THỊ",
+      phrases: [
+        { hanzi: "我想去中国，可是我的汉语不好。", pinyin: "Wǒ xiǎng qù Zhōngguó, kěshì wǒ de Hànyǔ bù hǎo.", meaning: "Tôi muốn đi Trung Quốc, nhưng tiếng Trung của tôi không tốt." },
+        { hanzi: "我想跟中国朋友说话，可是我的汉语不好。", pinyin: "Wǒ xiǎng gēn Zhōngguó péngyou shuō huà, kěshì wǒ de Hànyǔ bù hǎo.", meaning: "Tôi muốn nói chuyện với bạn Trung Quốc, nhưng tiếng Trung của tôi không tốt." },
+      ],
+      dialogues: [
+        [
+          { who: "A", zh: "明天我可以给你打电话吗？", pinyin: "Míngtiān wǒ kěyǐ gěi nǐ dǎ diànhuà ma?", vi: "Ngày mai tôi có thể gọi điện cho bạn không?" },
+          { who: "B", zh: "可以。", pinyin: "Kěyǐ.", vi: "Được chứ." },
+          { who: "A", zh: "可是我没有你的电话号码。", pinyin: "Kěshì wǒ méiyǒu nǐ de diànhuà hàomǎ.", vi: "Nhưng tôi không có số điện thoại của bạn." },
+        ],
+      ],
+    },
+    {
+      hanzi: "电脑",
+      pinyin: "diànnǎo",
+      pos: "名",
+      meaning: "máy tính",
+      hanViet: "ĐIỆN NÃO",
+      parts: [
+        { hanzi: "电", pinyin: "diàn", pos: "名", meaning: "điện" },
+      ],
+      phrases: [
+        { hanzi: "我的电脑", pinyin: "wǒ de diànnǎo", meaning: "máy tính của tôi" },
+        { hanzi: "你的电脑真好。", pinyin: "Nǐ de diànnǎo zhēn hǎo.", meaning: "Máy tính của bạn thật tốt." },
+        { hanzi: "没 / 有电了！", pinyin: "Méi / yǒu diàn le!", meaning: "Hết / Có điện rồi!" },
+      ],
+      dialogues: [
+        [
+          { who: "A", zh: "我的电脑没电了，你可以给我你的电脑吗？", pinyin: "Wǒ de diànnǎo méi diàn le, nǐ kěyǐ gěi wǒ nǐ de diànnǎo ma?", vi: "Máy tính của tôi hết điện rồi, bạn có thể cho tôi mượn máy tính của bạn không?" },
+          { who: "B", zh: "可以 / 不可以。", pinyin: "Kěyǐ / Bù kěyǐ.", vi: "Được / Không được." },
+        ],
+      ],
+    },
+    {
+      hanzi: "用",
+      pinyin: "yòng",
+      pos: "动",
+      meaning: "dùng, sử dụng",
+      hanViet: "DỤNG",
+      phrases: [
+        { hanzi: "用手机", pinyin: "yòng shǒujī", meaning: "dùng điện thoại" },
+        { hanzi: "用电脑", pinyin: "yòng diànnǎo", meaning: "dùng máy tính" },
+        { hanzi: "用电话", pinyin: "yòng diànhuà", meaning: "dùng điện thoại" },
+        { hanzi: "用汉语说话", pinyin: "yòng Hànyǔ shuō huà", meaning: "nói chuyện bằng tiếng Trung" },
+        { hanzi: "请你用汉语说话。", pinyin: "Qǐng nǐ yòng Hànyǔ shuō huà.", meaning: "Xin bạn hãy nói chuyện bằng tiếng Trung." },
+        { hanzi: "你用我的手机吧。", pinyin: "Nǐ yòng wǒ de shǒujī ba.", meaning: "Bạn dùng điện thoại của tôi đi." },
+      ],
+      dialogues: [
+        [
+          { who: "A", zh: "我的电脑没电了，我可以用你的电脑吗？", pinyin: "Wǒ de diànnǎo méi diàn le, wǒ kěyǐ yòng nǐ de diànnǎo ma?", vi: "Máy tính của tôi hết điện rồi, tôi có thể dùng máy tính của bạn được không?" },
+          { who: "B", zh: "对不起，我现在要用了。", pinyin: "Duìbuqǐ, wǒ xiànzài yào yòng le.", vi: "Xin lỗi, bây giờ tôi đang cần dùng rồi." },
+        ],
+      ],
+    },
+    {
+      hanzi: "等",
+      pinyin: "děng",
+      pos: "动",
+      meaning: "đợi, chờ",
+      hanViet: "ĐẲNG",
+      phrases: [
+        { hanzi: "等朋友", pinyin: "děng péngyou", meaning: "đợi bạn bè" },
+        { hanzi: "等他", pinyin: "děng tā", meaning: "đợi anh ấy" },
+        { hanzi: "我在这儿等你。", pinyin: "Wǒ zài zhèr děng nǐ.", meaning: "Tôi ở đây đợi bạn." },
+        { hanzi: "你在学校门口等他吧。", pinyin: "Nǐ zài xuéxiào ménkǒu děng tā ba.", meaning: "Bạn ở cổng trường đợi anh ấy đi." },
+      ],
+      dialogues: [
+        [
+          { who: "A", zh: "你现在在哪里？", pinyin: "Nǐ xiànzài zài nǎr?", vi: "Bây giờ bạn đang ở đâu?" },
+          { who: "B", zh: "我在学校门口，我在等车呢。", pinyin: "Wǒ zài xuéxiào ménkǒu, wǒ zài děng chē ne.", vi: "Tôi đang ở cổng trường, tôi đang đợi xe." },
+        ],
+      ],
+    },
+    {
+      hanzi: "一下",
+      pinyin: "yíxià",
+      pos: "数",
+      meaning: "một lát, một lúc",
+      hanViet: "NHẤT HẠ",
+      phrases: [
+        { hanzi: "等一下", pinyin: "děng yíxià", meaning: "đợi một chút" },
+        { hanzi: "用一下", pinyin: "yòng yíxià", meaning: "dùng một chút" },
+        { hanzi: "看一下", pinyin: "kàn yíxià", meaning: "xem một chút" },
+        { hanzi: "你等一下我给你他的电话号码", pinyin: "Nǐ děng yíxià wǒ gěi nǐ tā de diànhuà hàomǎ", meaning: "Bạn đợi một chút tôi cho bạn số điện thoại của anh ấy" },
+      ],
+      dialogues: [
+        [
+          { who: "A", zh: "我可以用一下你的手机吗？", pinyin: "Wǒ kěyǐ yòng yíxià nǐ de shǒujī ma?", vi: "Tôi có thể dùng điện thoại của bạn một chút được không?" },
+          { who: "B", zh: "可以，给你。", pinyin: "Kěyǐ, gěi nǐ.", vi: "Được chứ, cho bạn này." },
+        ],
+      ],
+    },
+    {
+      hanzi: "笔",
+      pinyin: "bǐ",
+      pos: "名",
+      meaning: "bút",
+      hanViet: "BÚT",
+      parts: [
+        { hanzi: "支", pinyin: "zhī", pos: "量", meaning: "lượng từ (dùng cho bút, thuốc lá,...)" },
+      ],
+      phrases: [
+        { hanzi: "他的笔", pinyin: "tā de bǐ", meaning: "bút của anh ấy" },
+        { hanzi: "用笔", pinyin: "yòng bǐ", meaning: "dùng bút" },
+        { hanzi: "一支笔", pinyin: "yì zhī bǐ", meaning: "một cây bút" },
+        { hanzi: "两支笔", pinyin: "liǎng zhī bǐ", meaning: "hai cây bút" },
+        { hanzi: "我用他的笔。", pinyin: "Wǒ yòng tā de bǐ.", meaning: "Tôi dùng bút của anh ấy." },
+        { hanzi: "欧文给我一支笔。", pinyin: "Ōuwén gěi wǒ yì zhī bǐ.", meaning: "Owen cho tôi một cây bút." },
+      ],
+      dialogues: [
+        [
+          { who: "A", zh: "你有几支笔？", pinyin: "Nǐ yǒu jǐ zhī bǐ?", vi: "Bạn có mấy cây bút?" },
+          { who: "B", zh: "三支笔。", pinyin: "Sān zhī bǐ.", vi: "Ba cây bút." },
+        ],
+      ],
+    },
+    {
+      hanzi: "写",
+      pinyin: "xiě",
+      pos: "动",
+      meaning: "viết",
+      hanViet: "TẢ",
+      phrases: [
+        { hanzi: "写一下", pinyin: "xiě yíxià", meaning: "viết một chút" },
+        { hanzi: "写名字", pinyin: "xiě míngzi", meaning: "viết tên" },
+        { hanzi: "写汉字", pinyin: "xiě Hànzì", meaning: "viết chữ Hán" },
+        { hanzi: "用笔写汉字", pinyin: "yòng bǐ xiě Hànzì", meaning: "dùng bút viết chữ Hán" },
+      ],
+      dialogues: [
+        [
+          { who: "A", zh: "我可以借你的笔吗？", pinyin: "Wǒ kěyǐ jiè nǐ de bǐ ma?", vi: "Tôi có thể mượn bút của bạn được không?" },
+          { who: "B", zh: "你想做什么？", pinyin: "Nǐ xiǎng zuò shénme?", vi: "Bạn muốn làm gì?" },
+          { who: "A", zh: "我要写汉字。", pinyin: "Wǒ yào xiě Hànzì.", vi: "Tôi muốn viết chữ Hán." },
+          { who: "B", zh: "可以，给你。", pinyin: "Kěyǐ, gěi nǐ.", vi: "Được chứ, cho bạn này." },
+        ],
+      ],
+    },
+    {
+      hanzi: "借",
+      pinyin: "jiè",
+      pos: "动",
+      meaning: "mượn",
+      hanViet: "TÁ",
+      phrases: [
+        { hanzi: "借书", pinyin: "jiè shū", meaning: "mượn sách" },
+        { hanzi: "借钱", pinyin: "jiè qián", meaning: "mượn tiền" },
+        { hanzi: "借电脑", pinyin: "jiè diànnǎo", meaning: "mượn máy tính" },
+        { hanzi: "借手机", pinyin: "jiè shǒujī", meaning: "mượn điện thoại" },
+        { hanzi: "借笔", pinyin: "jiè bǐ", meaning: "mượn bút" },
+        { hanzi: "这本书是我借他的。", pinyin: "Zhè běn shū shì wǒ jiè tā de.", meaning: "Cuốn sách này là tôi mượn của anh ấy." },
+        { hanzi: "今天我去图书馆借书。", pinyin: "Jīntiān wǒ qù túshūguǎn jiè shū.", meaning: "Hôm nay tôi đi thư viện mượn sách." },
+      ],
+      dialogues: [
+        [
+          { who: "A", zh: "我可以借你的钱吗？", pinyin: "Wǒ kěyǐ jiè nǐ de qián ma?", vi: "Tôi có thể mượn tiền của bạn không?" },
+          { who: "B", zh: "可以，等我一下……给你。", pinyin: "Kěyǐ, děng wǒ yíxià... gěi nǐ.", vi: "Được chứ, đợi tôi một chút... cho bạn này." },
+          { who: "A", zh: "谢谢。", pinyin: "Xièxie.", vi: "Cảm ơn." },
+        ],
+      ],
+    },
+    {
+      hanzi: "找",
+      pinyin: "zhǎo",
+      pos: "动",
+      meaning: "tìm",
+      hanViet: "TÌM",
+      phrases: [
+        { hanzi: "找朋友", pinyin: "zhǎo péngyou", meaning: "tìm bạn bè" },
+        { hanzi: "找手机", pinyin: "zhǎo shǒujī", meaning: "tìm điện thoại" },
+        { hanzi: "找他的电话号码", pinyin: "zhǎo tā de diànhuà hàomǎ", meaning: "tìm số điện thoại của anh ấy" },
+        { hanzi: "找一下", pinyin: "zhǎo yíxià", meaning: "tìm một chút" },
+      ],
+      dialogues: [
+        [
+          { who: "A", zh: "你有王老师的电话号码吗？", pinyin: "Nǐ yǒu Wáng lǎoshī de diànhuà hàomǎ ma?", vi: "Bạn có số điện thoại của thầy Vương không?" },
+          { who: "B", zh: "有，你等我，我找一下。", pinyin: "Yǒu, nǐ děng wǒ, wǒ zhǎo yíxià.", vi: "Có, bạn đợi tôi, tôi tìm một chút." },
+          { who: "A", zh: "好。", pinyin: "Hǎo.", vi: "Được." },
+          { who: "B", zh: "这是他的电话号码，给你。", pinyin: "Zhè shì tā de diànhuà hàomǎ, gěi nǐ.", vi: "Đây là số điện thoại của thầy ấy, cho bạn này." },
+          { who: "A", zh: "谢谢。", pinyin: "Xièxie.", vi: "Cảm ơn." },
+        ],
+      ],
+    },
+    {
+      hanzi: "说",
+      pinyin: "shuō",
+      pos: "动",
+      meaning: "nói",
+      hanViet: "THUYẾT",
+      phrases: [
+        { hanzi: "说汉语", pinyin: "shuō Hànyǔ", meaning: "nói tiếng Trung" },
+        { hanzi: "跟朋友说话", pinyin: "gēn péngyou shuō huà", meaning: "nói chuyện với bạn bè" },
+        { hanzi: "说一下", pinyin: "shuō yíxià", meaning: "nói một chút / nói qua" },
+        { hanzi: "他星期天常跟朋友说汉语。", pinyin: "Tā xīngqītiān cháng gēn péngyou shuō Hànyǔ.", meaning: "Chủ nhật anh ấy thường nói tiếng Trung với bạn bè." },
+      ],
+      dialogues: [
+        [
+          { who: "A", zh: "你常跟妈妈说话吗？", pinyin: "Nǐ cháng gēn māma shuō huà ma?", vi: "Bạn có thường nói chuyện với mẹ không?" },
+          { who: "B", zh: "常，每天我都跟妈妈说话。", pinyin: "Cháng, měitiān wǒ dōu gēn māma shuō huà.", vi: "Thường xuyên, mỗi ngày tôi đều nói chuyện với mẹ." },
+        ],
+      ],
+    },
+    {
+      hanzi: "慢",
+      pinyin: "màn",
+      pos: "形",
+      meaning: "chậm",
+      hanViet: "MẠN",
+      parts: [
+        { hanzi: "快", pinyin: "kuài", pos: "形", meaning: "nhanh" },
+      ],
+      phrases: [
+        { hanzi: "很慢", pinyin: "hěn màn", meaning: "rất chậm" },
+        { hanzi: "不慢", pinyin: "bú màn", meaning: "không chậm" },
+        { hanzi: "慢一点儿", pinyin: "màn yìdiǎnr", meaning: "chậm một chút" },
+        { hanzi: "你可以说慢一点吗？", pinyin: "Nǐ kěyǐ shuō màn yìdiǎnr ma?", meaning: "Bạn có thể nói chậm một chút không?" },
+        { hanzi: "你慢走！", pinyin: "Nǐ màn zǒu!", meaning: "Bạn đi thong thả!" },
+      ],
+      dialogues: [
+        [
+          { who: "A", zh: "你的手机号码是多少？", pinyin: "Nǐ de shǒujī hàomǎ shì duōshao?", vi: "Số điện thoại của bạn là bao nhiêu?" },
+          { who: "B", zh: "我的手机号码是12345678。", pinyin: "Wǒ de shǒujī hàomǎ shì 12345678.", vi: "Số điện thoại của tôi là 12345678." },
+          { who: "A", zh: "你慢一点儿。", pinyin: "Nǐ màn yìdiǎnr.", vi: "Bạn chậm một chút." },
+          { who: "B", zh: "12345678。", pinyin: "12345678.", vi: "12345678." },
+        ],
+      ],
+    },
+    {
+      hanzi: "遍",
+      pinyin: "biàn",
+      pos: "量",
+      meaning: "lần, lượt (lượt-lượng từ của hành động)",
+      hanViet: "BIẾN",
+      phrases: [
+        { hanzi: "说两遍", pinyin: "shuō liǎng biàn", meaning: "nói hai lần" },
+        { hanzi: "写两遍", pinyin: "xiě liǎng biàn", meaning: "viết hai lần" },
+        { hanzi: "看一遍", pinyin: "kàn yí biàn", meaning: "xem/đọc một lần" },
+      ],
+      dialogues: [
+        [
+          { who: "A", zh: "你说太快了，请你再说一遍。", pinyin: "Nǐ shuō tài kuài le, qǐng nǐ zài shuō yí biàn.", vi: "Bạn nói nhanh quá, xin bạn nói lại một lần nữa." },
+          { who: "B", zh: "好的。", pinyin: "Hǎo de.", vi: "Được rồi." },
+        ],
+      ],
+    },
+    {
+      hanzi: "对了",
+      pinyin: "duìle",
+      pos: "叹",
+      meaning: "nhân tiện, đúng rồi",
+      hanViet: "ĐỐI LIỄU",
+      phrases: [
+        { hanzi: "说对了", pinyin: "shuō duì le", meaning: "nói đúng rồi" },
+        { hanzi: "写对了", pinyin: "xiě duì le", meaning: "viết đúng rồi" },
+        { hanzi: "对了！", pinyin: "Duìle!", meaning: "Đúng rồi! / Nhân tiện!" },
+      ],
+      dialogues: [
+        [
+          { who: "A", zh: "对了，你的电话号码是多少？", pinyin: "Duìle, nǐ de diànhuà hàomǎ shì duōshao?", vi: "Nhân tiện, số điện thoại của bạn là bao nhiêu?" },
+          { who: "B", zh: "我的电话号码是12345678。", pinyin: "Wǒ de diànhuà hàomǎ shì 12345678.", vi: "Số điện thoại của tôi là 12345678." },
+        ],
+        [
+          { who: "A", zh: "你的手机号码，我写对了吗？", pinyin: "Nǐ de shǒujī hàomǎ, wǒ xiě duì le ma?", vi: "Số điện thoại của bạn, tôi viết đúng chưa?" },
+          { who: "B", zh: "对了 / 不对。", pinyin: "Duìle / Bú duì.", vi: "Đúng rồi / Không đúng." },
+        ],
+      ],
+    },
+    {
+      hanzi: "没问题",
+      pinyin: "méi wèntí",
+      pos: "套",
+      meaning: "không vấn đề",
+      hanViet: "MỘT VẤN ĐỀ",
+      parts: [
+        { hanzi: "问题", pinyin: "wèntí", pos: "名", meaning: "vấn đề, câu hỏi" },
+      ],
+      phrases: [
+        { hanzi: "你有什么问题可以跟我说。", pinyin: "Nǐ yǒu shénme wèntí kěyǐ gēn wǒ shuō.", meaning: "Bạn có vấn đề gì có thể nói với tôi." },
+        { hanzi: "这个问题很难。", pinyin: "Zhè ge wèntí hěn nán.", meaning: "Vấn đề này rất khó." },
+      ],
+      dialogues: [
+        [
+          { who: "A", zh: "我想给朋友打电话，可是手机在家呢，你可以用一下你的手机吗？", pinyin: "Wǒ xiǎng gěi péngyou dǎ diànhuà, kěshì shǒujī zài jiā ne, wǒ kěyǐ yòng yíxià nǐ de shǒujī ma?", vi: "Tôi muốn gọi điện cho bạn, nhưng điện thoại ở nhà rồi, tôi có thể dùng nhờ điện thoại của bạn một chút không?" },
+          { who: "B", zh: "可以，我的手机在那儿。", pinyin: "Kěyǐ, wǒ de shǒujī zài nàr.", vi: "Được chứ, điện thoại của tôi ở đằng kia." },
+          { who: "A", zh: "谢谢你。", pinyin: "Xièxie nǐ.", vi: "Cảm ơn bạn." },
+          { who: "B", zh: "没问题。", pinyin: "Méi wèntí.", vi: "Không có vấn đề gì." },
+        ],
+      ],
+    },
+  ],
+  grammar: [
+    {
+      id: "dong-tu-nang-nguyen",
+      title: "“能愿动词”: 可以、想",
+      name: "Động từ năng nguyện: 可以, 想",
+      summary: "Những từ đứng trước động từ biểu thị khả năng, nhu cầu, nguyện vọng hoặc sự cho phép thì được gọi là động từ năng nguyện, ví dụ “可以、想”. “可以” biểu thị mong muốn nhận được sự chấp thuận để làm việc gì đó. “想” biểu thị nguyện vọng chủ quan hoặc mong muốn của ai đó để làm việc gì đó. Khi phủ định thêm “不” vào phía trước động từ năng nguyện.",
+      structures: [
+        "Khẳng định: 能愿动词 + 动词 + ……",
+        "Phủ định: 不 + 能愿动词 + 动词 + ……",
+      ],
+      note: "Bạn hãy chú ý tới vị trí của các động từ năng nguyện trong ví dụ nhé.",
+      focus: ["可以", "想"],
+      examples: [
+        { zh: "我可以借你的手机吗？", pinyin: "Wǒ kěyǐ jiè nǐ de shǒujī ma?", vi: "Tôi có thể mượn điện thoại của bạn không?" },
+        { zh: "我可以用你的电脑吗？", pinyin: "Wǒ kěyǐ yòng nǐ de diànnǎo ma?", vi: "Tôi có thể dùng máy tính của bạn không?" },
+        { zh: "我想看一下你的书。", pinyin: "Wǒ xiǎng kàn yíxià nǐ de shū.", vi: "Tôi muốn xem qua sách của bạn một chút." },
+        { zh: " me不想用你的笔。", pinyin: "Wǒ bù xiǎng yòng nǐ de bǐ.", vi: "Tôi không muốn dùng bút của bạn." },
+        { zh: " me不想看你的书。", pinyin: "Wǒ bù xiǎng kàn nǐ de shū.", vi: "Tôi không muốn xem sách của bạn." },
+      ],
+    },
+    {
+      id: "so-luong-tu-yixia",
+      title: "数量词 “一下”",
+      name: "Số lượng từ: 一下",
+      summary: "“一下” 置于动词后，表示动作持续时间短暂，常在问句中或祈使句钟出现，使问题或请求的语气更柔和轻松，更礼貌。“一下” đứng sau động từ. Biểu thị động tác diễn ra trong một khoảng thời gian ngắn, thường được dùng trong câu nghi vấn hoặc cầu khiến, làm cho ngữ khí cầu khiến hoặc nghi vấn trở nên nhẹ nhàng và lịch sự hơn.",
+      structures: ["动词 + 一下 + ……"],
+      note: "Bạn hãy chú ý tới vị trí của “一下” trong ví dụ, sau đó đoán xem chúng có tác dụng gì trong câu nhé!",
+      focus: ["一下"],
+      examples: [
+        { zh: "我可以看一下你的书吗？", pinyin: "Wǒ kěyǐ kàn yíxià nǐ de shū ma?", vi: "Tôi có thể xem qua sách của bạn một chút không?" },
+        { zh: "请等一下。", pinyin: "Qǐng děng yíxià.", vi: "Xin đợi một chút." },
+        { zh: "我想用一下你的电脑。", pinyin: "Wǒ xiǎng yòng yíxià nǐ de diànnǎo.", vi: "Tôi muốn dùng máy tính của bạn một chút." },
+        { zh: "我可以用一下你的手机吗？", pinyin: "Wǒ kěyǐ yòng yíxià nǐ de shǒujī ma?", vi: "Tôi có thể dùng điện thoại của bạn một chút không?" },
+        { zh: "你等一下吧。", pinyin: "Nǐ děng yíxià ba.", vi: "Bạn đợi một chút đi." },
+        { zh: "我可以借一下你的笔吗？", pinyin: "Wǒ kěyǐ jiè yíxià nǐ de bǐ ma?", vi: "Tôi có thể mượn bút của bạn một chút không?" },
+      ],
+    },
+  ],
+};
+
+export const LESSONS: Lesson[] = [...BOOK_1, book2Session1, book2Session2, book2Session3];
