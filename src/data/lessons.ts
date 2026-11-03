@@ -1108,4 +1108,330 @@ const book2Session3: Lesson = {
   ],
 };
 
-export const LESSONS: Lesson[] = [...BOOK_1, book2Session1, book2Session2, book2Session3];
+const book2Session4: Lesson = {
+  book: 2,
+  session: 4,
+  slug: "quyen-2-buoi-4",
+  title: "Bài học buổi 4",
+  words: [
+    {
+      hanzi: "买",
+      pinyin: "mǎi",
+      pos: "动",
+      meaning: "mua",
+      hanViet: "MÃI",
+      phrases: [
+        { hanzi: "不买", pinyin: "bù mǎi", meaning: "không mua" },
+        { hanzi: "买书", pinyin: "mǎi shū", meaning: "mua sách" },
+        { hanzi: "买车", pinyin: "mǎi chē", meaning: "mua xe" },
+        { hanzi: "买三个苹果", pinyin: "mǎi sān gè píngguǒ", meaning: "mua ba quả táo" },
+        { hanzi: "我要买三个苹果。", pinyin: "Wǒ yào mǎi sān gè píngguǒ.", meaning: "Tôi muốn mua ba quả táo." },
+      ],
+      dialogues: [
+        [
+          { who: "A", zh: "请问，你要买什么？", pinyin: "Qǐngwèn, nǐ yào mǎi shénme?", vi: "Xin hỏi, bạn muốn mua gì?" },
+          { who: "B", zh: "我要买两杯咖啡。", pinyin: "Wǒ yào mǎi liǎng bēi kāfēi.", vi: "Tôi muốn mua hai cốc cà phê." },
+        ],
+      ],
+    },
+    {
+      hanzi: "衣服",
+      pinyin: "yīfu",
+      pos: "名",
+      meaning: "quần áo",
+      hanViet: "Y PHỤC",
+      phrases: [
+        { hanzi: "买衣服", pinyin: "mǎi yīfu", meaning: "mua quần áo" },
+        { hanzi: "我的衣服", pinyin: "wǒ de yīfu", meaning: "quần áo của tôi" },
+        { hanzi: "他的衣服很漂亮。", pinyin: "Tā de yīfu hěn piàoliang.", meaning: "Quần áo của anh ấy rất đẹp." },
+        { hanzi: "去超市买衣服", pinyin: "Qù chāoshì mǎi yīfu", meaning: "đi siêu thị mua quần áo" },
+      ],
+      dialogues: [
+        [
+          { who: "A", zh: "你去哪？", pinyin: "Nǐ qù nǎr?", vi: "Bạn đi đâu đấy?" },
+          { who: "B", zh: "我去超市买衣服。", pinyin: "Wǒ qù chāoshì mǎi yīfu.", vi: "Tôi đi siêu thị mua quần áo." },
+        ],
+      ],
+    },
+    {
+      hanzi: "件",
+      pinyin: "jiàn",
+      pos: "量",
+      meaning: "chiếc, bộ (dùng cho quần áo, vụ việc...)",
+      hanViet: "KIỆN",
+      phrases: [
+        { hanzi: "两件衣服", pinyin: "liǎng jiàn yīfu", meaning: "hai bộ quần áo" },
+        { hanzi: "买一件衣服", pinyin: "mǎi yí jiàn yīfu", meaning: "mua một bộ quần áo" },
+        { hanzi: "这件衣服很漂亮。", pinyin: "Zhè jiàn yīfu hěn piàoliang.", meaning: "Bộ quần áo này rất đẹp." },
+      ],
+      dialogues: [
+        [
+          { who: "A", zh: "这件衣服是你的吗？", pinyin: "Zhè jiàn yīfu shì nǐ de ma?", vi: "Bộ quần áo này là của bạn phải không?" },
+          { who: "B", zh: "这件衣服是我的。", pinyin: "Zhè jiàn yīfu shì wǒ de.", vi: "Bộ quần áo này là của tôi." },
+        ],
+      ],
+    },
+    {
+      hanzi: "衬衫",
+      pinyin: "chènshān",
+      pos: "名",
+      meaning: "áo sơ mi",
+      hanViet: "SÂN SÂM",
+      phrases: [
+        { hanzi: "买衬衫", pinyin: "mǎi chènshān", meaning: "mua áo sơ mi" },
+        { hanzi: "一件衬衫", pinyin: "yí jiàn chènshān", meaning: "một chiếc áo sơ mi" },
+        { hanzi: "我想买一件衬衫。", pinyin: "Wǒ xiǎng mǎi yí jiàn chènshān.", meaning: "Tôi muốn mua một chiếc áo sơ mi." },
+        { hanzi: "这件衬衫太大了。", pinyin: "Zhè jiàn chènshān tài dà le.", meaning: "Chiếc áo sơ mi này to quá rồi." },
+      ],
+      dialogues: [
+        [
+          { who: "A", zh: "你要买什么？", pinyin: "Nǐ yào mǎi shénme?", vi: "Bạn muốn mua gì?" },
+          { who: "B", zh: "我要买两件衬衫。", pinyin: "Wǒ yào mǎi liǎng jiàn chènshān.", vi: "Tôi muốn mua hai chiếc áo sơ mi." },
+        ],
+      ],
+    },
+    {
+      hanzi: "穿",
+      pinyin: "chuān",
+      pos: "动",
+      meaning: "mặc, mang, đeo",
+      hanViet: "XUYÊN",
+      phrases: [
+        { hanzi: "穿衣服", pinyin: "chuān yīfu", meaning: "mặc quần áo" },
+        { hanzi: "穿衬衫", pinyin: "chuān chènshān", meaning: "mặc áo sơ mi" },
+        { hanzi: "他穿的衣服很漂亮。", pinyin: "Tā chuān de yīfu hěn piàoliang.", meaning: "Bộ quần áo anh ấy mặc rất đẹp." },
+      ],
+      dialogues: [
+        [
+          { who: "A", zh: "今天你穿什么？", pinyin: "Jīntiān nǐ chuān shénme?", vi: "Hôm nay bạn mặc gì?" },
+          { who: "B", zh: "我今天穿一件衬衫。", pinyin: "Wǒ jīntiān chuān yí jiàn chènshān.", vi: "Hôm nay tôi mặc một chiếc áo sơ mi." },
+        ],
+      ],
+    },
+    {
+      hanzi: "号",
+      pinyin: "hào",
+      pos: "名",
+      meaning: "cỡ (size), số",
+      hanViet: "HẢO / HIỆU",
+      phrases: [
+        { hanzi: "大号", pinyin: "dàhào", meaning: "size lớn (L)" },
+        { hanzi: "小号", pinyin: "xiǎohào", meaning: "size nhỏ (S)" },
+        { hanzi: "我买一件大号的衬衫", pinyin: "Wǒ mǎi yí jiàn dàhào de chènshān", meaning: "Tôi mua một chiếc áo sơ mi size lớn." },
+      ],
+      dialogues: [
+        [
+          { who: "A", zh: "你穿的衬衫是什么号的？", pinyin: "Nǐ chuān de chènshān shì shénme hào de?", vi: "Chiếc áo sơ mi bạn mặc là size gì?" },
+          { who: "B", zh: "是小号的。", pinyin: "Shì xiǎohào de.", vi: "Là size nhỏ." },
+        ],
+      ],
+    },
+    {
+      hanzi: "颜色",
+      pinyin: "yánsè",
+      pos: "名",
+      meaning: "màu sắc",
+      hanViet: "NHAN SẮC",
+      parts: [
+        { hanzi: "色", pinyin: "sè", pos: "名", meaning: "màu" },
+      ],
+      phrases: [
+        { hanzi: "黑色", pinyin: "hēisè", meaning: "màu đen" },
+        { hanzi: "蓝色", pinyin: "lánsè", meaning: "màu xanh lam" },
+        { hanzi: "红色", pinyin: "hóngsè", meaning: "màu đỏ" },
+        { hanzi: "红色衬衫", pinyin: "hóngsè chènshān", meaning: "áo sơ mi màu đỏ" },
+        { hanzi: "我喜欢黑色。", pinyin: "Wǒ xǐhuan hēisè.", meaning: "Tôi thích màu đen." },
+      ],
+      dialogues: [
+        [
+          { who: "A", zh: "你喜欢什么颜色？", pinyin: "Nǐ xǐhuan shénme yánsè?", vi: "Bạn thích màu gì?" },
+          { who: "B", zh: "我喜欢红色。", pinyin: "Wǒ xǐhuan hóngsè.", vi: "Tôi thích màu đỏ." },
+        ],
+      ],
+    },
+    {
+      hanzi: "鞋",
+      pinyin: "xié",
+      pos: "名",
+      meaning: "giày",
+      hanViet: "HÀI",
+      parts: [
+        { hanzi: "双", pinyin: "shuāng", pos: "量", meaning: "đôi" },
+      ],
+      phrases: [
+        { hanzi: "穿鞋", pinyin: "chuān xié", meaning: "đi giày / mang giày" },
+        { hanzi: "大号的鞋", pinyin: "dà hào de xié", meaning: "giày cỡ lớn" },
+        { hanzi: "黑色的鞋", pinyin: "hēisè de xié", meaning: "giày màu đen" },
+        { hanzi: "我想买双鞋。", pinyin: "Wǒ xiǎng mǎi yì shuāng xié.", meaning: "Tôi muốn mua một đôi giày." },
+        { hanzi: "这双鞋不太大。", pinyin: "Zhè shuāng xié bú tài dà.", meaning: "Đôi giày này không to lắm." },
+      ],
+      dialogues: [
+        [
+          { who: "A", zh: "你想买什么？", pinyin: "Nǐ xiǎng mǎi shénme?", vi: "Bạn muốn mua gì?" },
+          { who: "B", zh: "我想买双蓝色的鞋。", pinyin: "Wǒ xiǎng mǎi yì shuāng lánsè de xié.", vi: "Tôi muốn mua một đôi giày màu xanh lam." },
+        ],
+      ],
+    },
+    {
+      hanzi: "试",
+      pinyin: "shì",
+      pos: "动",
+      meaning: "thử",
+      hanViet: "THÍ",
+      phrases: [
+        { hanzi: "试一下", pinyin: "shì yíxià", meaning: "thử một chút" },
+        { hanzi: "你试一下这件衣服。", pinyin: "Nǐ shì yíxià zhè jiàn yīfu.", meaning: "Bạn thử bộ quần áo này một chút đi." },
+        { hanzi: "你试一下这双鞋吧。", pinyin: "Nǐ shì yíxià zhè shuāng xié ba.", meaning: "Bạn thử đôi giày này một chút đi." },
+      ],
+      dialogues: [
+        [
+          { who: "A", zh: "你试试这件衣服怎么样？", pinyin: "Nǐ shìshi zhè jiàn yīfu zěnmeyàng?", vi: "Bạn thử bộ quần áo này xem thế nào?" },
+          { who: "B", zh: "好。", pinyin: "Hǎo.", vi: "Được." },
+        ],
+      ],
+    },
+    {
+      hanzi: "合适",
+      pinyin: "héshì",
+      pos: "形",
+      meaning: "hợp, phù hợp",
+      hanViet: "HỢP THÍCH",
+      phrases: [
+        { hanzi: "很合适", pinyin: "hěn héshì", meaning: "rất vừa / rất phù hợp" },
+        { hanzi: "不合适", pinyin: "bù héshì", meaning: "không vừa / không phù hợp" },
+        { hanzi: "这件衣服很合适。", pinyin: "Zhè jiàn yīfu hěn héshì.", meaning: "Bộ quần áo này rất vừa vặn." },
+      ],
+      dialogues: [
+        [
+          { who: "A", zh: "哪件衬衫合适？", pinyin: "Nǎ jiàn chènshān héshì?", vi: "Chiếc áo sơ mi nào phù hợp?" },
+          { who: "B", zh: "黑色的衬衫很合适。", pinyin: "Hēisè de chènshān hěn héshì.", vi: "Chiếc áo sơ mi màu đen rất phù hợp." },
+        ],
+      ],
+    },
+    {
+      hanzi: "大小",
+      pinyin: "dàxiǎo",
+      pos: "名",
+      meaning: "kích cỡ, to nhỏ",
+      hanViet: "ĐẠI TIỂU",
+      phrases: [
+        { hanzi: "大小合适", pinyin: "dàxiǎo héshì", meaning: "kích cỡ vừa vặn" },
+        { hanzi: "大小不合适", pinyin: "dàxiǎo bù héshì", meaning: "kích cỡ không vừa" },
+        { hanzi: "这双鞋大小不合适。", pinyin: "Zhè shuāng xié dàxiǎo bù héshì.", meaning: "Đôi giày này kích cỡ không vừa." },
+      ],
+      dialogues: [
+        [
+          { who: "A", zh: "这双鞋怎么样？", pinyin: "Zhè shuāng xié zěnmeyàng?", vi: "Đôi giày này thế nào?" },
+          { who: "B", zh: "这双鞋大小很合适，可是颜色不好看。", pinyin: "Zhè shuāng xié dàxiǎo hěn héshì, kěshì yánsè bù hǎokàn.", vi: "Đôi giày này kích cỡ rất vừa vặn, nhưng màu sắc không đẹp." },
+        ],
+      ],
+    },
+    {
+      hanzi: "觉得",
+      pinyin: "juéde",
+      pos: "动",
+      meaning: "cảm thấy",
+      hanViet: "GIÁC ĐẮC",
+      phrases: [
+        { hanzi: "觉得怎么样？", pinyin: "juéde zěnmeyàng?", meaning: "cảm thấy thế nào?" },
+        { hanzi: "我觉得这件衣服很好。", pinyin: "Wǒ juéde zhè jiàn yīfu hěn hǎo.", meaning: "Tôi cảm thấy bộ quần áo này rất tốt." },
+      ],
+      dialogues: [
+        [
+          { who: "A", zh: "你觉得那双鞋怎么样？", pinyin: "Nǐ juéde nà shuāng xié zěnmeyàng?", vi: "Bạn cảm thấy đôi giày đó thế nào?" },
+          { who: "B", zh: "那双鞋很好看。", pinyin: "Nà shuāng xié hěn hǎokàn.", vi: "Đôi giày đó rất đẹp." },
+        ],
+      ],
+    },
+    {
+      hanzi: "不错",
+      pinyin: "búcuò",
+      pos: "形",
+      meaning: "tốt, không tồi",
+      hanViet: "BẤT THÁC",
+      phrases: [
+        { hanzi: "很不错", pinyin: "hěn bú cuò", meaning: "rất tốt / rất khá" },
+        { hanzi: "你买的鞋很不错。", pinyin: "Nǐ mǎi de xié hěn búcuò.", meaning: "Đôi giày bạn mua rất tốt." },
+        { hanzi: "你穿的衣服很不错。", pinyin: "Nǐ chuān de yīfu hěn búcuò.", meaning: "Quần áo bạn mặc rất đẹp/tốt." },
+      ],
+      dialogues: [
+        [
+          { who: "A", zh: "你觉得这件衬衫怎么样？", pinyin: "Nǐ juéde zhè jiàn chènshān zěnmeyàng?", vi: "Bạn cảm thấy chiếc áo sơ mi này thế nào?" },
+          { who: "B", zh: "我觉得这件衬衫不错。", pinyin: "Wǒ juéde zhè jiàn chènshān búcuò.", vi: "Tôi cảm thấy chiếc áo sơ mi này rất tốt." },
+        ],
+      ],
+    },
+    {
+      hanzi: "不太",
+      pinyin: "bú tài",
+      pos: "副",
+      meaning: "không quá, không...mấy, không...lắm",
+      hanViet: "BẤT THÁI",
+      phrases: [
+        { hanzi: "不太好", pinyin: "bù tài hǎo", meaning: "không tốt lắm" },
+        { hanzi: "不太合适", pinyin: "bú tài héshì", meaning: "không vừa/hợp lắm" },
+        { hanzi: "这双鞋不太好看。", pinyin: "Zhè shuāng xié bú tài hǎokàn.", meaning: "Đôi giày này không đẹp lắm." },
+        { hanzi: "他买的衣服不太便宜。", pinyin: "Tā mǎi de yīfu bú tài piányi.", meaning: "Quần áo anh ấy mua không rẻ lắm." },
+      ],
+      dialogues: [
+        [
+          { who: "A", zh: "你觉得这件衬衫怎么样？", pinyin: "Nǐ juéde zhè jiàn chènshān zěnmeyàng?", vi: "Bạn cảm thấy chiếc áo sơ mi này thế nào?" },
+          { who: "B", zh: "我觉得这件衬衫不太合适。", pinyin: "Wǒ juéde zhè jiàn chènshān bú tài héshì.", vi: "Tôi cảm thấy chiếc áo sơ mi này không hợp lắm." },
+        ],
+      ],
+    },
+    {
+      hanzi: "贵",
+      pinyin: "guì",
+      pos: "形",
+      meaning: "đắt",
+      hanViet: "QUÝ",
+      phrases: [
+        { hanzi: "不太贵", pinyin: "bú tài guì", meaning: "không đắt lắm" },
+        { hanzi: "很贵", pinyin: "hěn guì", meaning: "rất đắt" },
+        { hanzi: "非常贵", pinyin: "fēicháng guì", meaning: "cực kỳ đắt" },
+        { hanzi: "这件衣服很贵。", pinyin: "Zhè jiàn yīfu hěn guì.", meaning: "Bộ quần áo này rất đắt." },
+      ],
+      dialogues: [
+        [
+          { who: "A", zh: "这件衣服怎么样？", pinyin: "Zhè jiàn yīfu zěnme yàng?", vi: "Bộ quần áo này thế nào?" },
+          { who: "B", zh: "这件衣服颜色很不错可是有点儿贵。", pinyin: "Zhè jiàn yīfu yánsè hěn búcuò kěshì yǒu diǎnr guì.", vi: "Bộ quần áo này màu sắc rất đẹp nhưng có chút đắt." },
+        ],
+      ],
+    },
+  ],
+  grammar: [
+    {
+      id: "tieu-ket-ve-luong-tu",
+      title: "量词小结",
+      name: "Tiểu kết về lượng từ (danh lượng từ)",
+      summary: "Trong tiếng Trung, phía trước các danh từ biểu thị một số lượng nhất định thường đều có lượng từ. Lượng từ đứng giữa danh từ và số từ. Danh từ có đặc điểm khác nhau thì lượng từ cũng sẽ khác nhau, nếu đặc điểm tương đương nhau thì sử dụng lượng từ giống nhau.",
+      structures: ["Số từ + Lượng từ + Danh từ"],
+      note: "Chú ý lựa chọn lượng từ phù hợp với thuộc tính của danh từ đi kèm.",
+      focus: ["量词"],
+      examples: [
+        { zh: "一个人 / 苹果", pinyin: "yí gè rén / píngguǒ", vi: "một người / quả táo" },
+        { zh: "一只猫 / 狗", pinyin: "yì zhī māo / gǒu", vi: "một con mèo / con chó" },
+        { zh: "一件衣服 / 衬衫", pinyin: "yí jiàn yīfu / chènshān", vi: "một bộ quần áo / chiếc áo sơ mi" },
+        { zh: "一双鞋", pinyin: "yì shuāng xié", vi: "một đôi giày" },
+        { zh: "一家书店 / 饭店", pinyin: "yì jiā shūdiàn / fàndiàn", vi: "một hiệu sách / nhà hàng" },
+      ],
+    },
+    {
+      id: "tro-tu-ket-cau-de",
+      title: "“的” 字结构",
+      name: "Trợ từ kết cấu “的”",
+      summary: "Thêm trợ từ “的” ở phía sau danh từ, đại từ nhân xưng, tính từ có thể tạo thành kết cấu câu chữ “的” và bỏ bớt danh từ đã được nhắc đến trước đó, có ý nghĩa tương đương với một danh từ.",
+      structures: [
+        "Danh từ / Đại từ / Tính từ + 的",
+      ],
+      note: "Kết cấu “的” giúp rút gọn câu, tránh lặp lại danh từ đã xuất hiện trong ngữ cảnh.",
+      focus: ["的"],
+      examples: [
+        { zh: "这双鞋有黑的吗？", pinyin: "Zhè shuāng xié yǒu hēi de ma?", vi: "Đôi giày này có cái màu đen không? (黑的 = 黑的颜色)" },
+      ],
+    },
+  ],
+};
+
+export const LESSONS: Lesson[] = [...BOOK_1, book2Session1, book2Session2, book2Session3, book2Session4];
