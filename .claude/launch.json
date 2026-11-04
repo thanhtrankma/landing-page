@@ -19,6 +19,15 @@
         "SUPABASE_URL= SUPABASE_SECRET_KEY= RESEND_API_KEY= npx next start -p 3100"
       ],
       "port": 3100
+    },
+    {
+      "name": "local-data-dev",
+      "runtimeExecutable": "sh",
+      "runtimeArgs": [
+        "-c",
+        "SUPABASE_URL= SUPABASE_SECRET_KEY= RESEND_API_KEY= npx next dev -p 3200"
+      ],
+      "port": 3200
     }
   ]
 }

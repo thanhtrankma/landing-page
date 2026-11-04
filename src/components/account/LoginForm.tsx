@@ -13,7 +13,17 @@ const GoogleLogo = () => (
   </svg>
 );
 
-export default function LoginForm({ next, googleEnabled, initialError }: { next: string; googleEnabled: boolean; initialError?: string }) {
+export default function LoginForm({
+  next,
+  googleEnabled,
+  initialError,
+  intro = "Đăng nhập để xuất bản thiệp, quản lý khách mời và xem xác nhận tham dự.",
+}: {
+  next: string;
+  googleEnabled: boolean;
+  initialError?: string;
+  intro?: string;
+}) {
   const [step, setStep] = useState<"email" | "code">("email");
   const [email, setEmail] = useState("");
   const [code, setCode] = useState("");
@@ -72,7 +82,7 @@ export default function LoginForm({ next, googleEnabled, initialError }: { next:
         </svg>
       </div>
       <h1>Chào mừng bạn</h1>
-      <p>Đăng nhập để xuất bản thiệp, quản lý khách mời và xem xác nhận tham dự.</p>
+      <p>{intro}</p>
 
       <a className={`lg-google ${googleEnabled ? "" : "disabled"}`} href={`/api/auth/google?next=${encodeURIComponent(next)}`} aria-disabled={!googleEnabled}>
         <GoogleLogo /> Đăng nhập với Google

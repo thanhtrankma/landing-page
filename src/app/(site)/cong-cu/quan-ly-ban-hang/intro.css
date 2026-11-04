@@ -1,0 +1,17 @@
+/* Hero illustration of the sales book intro page: a static mini dashboard. */
+
+.shop-demo { background: #fff; border: 1px solid var(--sky-200); border-radius: 24px; padding: 20px; box-shadow: 0 40px 80px -50px rgb(11 42 60 / 0.55); display: grid; gap: 14px; text-align: left; }
+.shop-demo-kpis { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.shop-demo-kpis div { background: var(--sky-50, #f3f9fd); border-radius: 14px; padding: 12px 14px; display: grid; gap: 2px; }
+.shop-demo-kpis span { font-size: 12px; color: var(--secondary); font-weight: 600; }
+.shop-demo-kpis b { font-size: 18px; color: var(--ink); }
+.shop-demo-kpis .good b { color: #1f8a4c; }
+.shop-demo ul { list-style: none; margin: 0; padding: 0; display: grid; }
+.shop-demo li { display: flex; align-items: center; gap: 12px; padding: 10px 2px; }
+.shop-demo li + li { border-top: 1px solid var(--sky-200); }
+.shop-demo i { flex: none; width: 44px; height: 44px; border-radius: 12px; display: grid; place-items: center; font-style: normal; font-size: 22px; }
+.shop-demo li span { flex: 1; display: grid; min-width: 0; }
+.shop-demo li b { font-size: 14px; color: var(--ink); }
+.shop-demo li small { font-size: 12px; color: var(--secondary); }
+.shop-demo em { font-style: normal; font-size: 12px; font-weight: 700; padding: 3px 9px; border-radius: 999px; background: var(--sky-100); color: var(--sky-800); }
+.shop-demo em.low { background: #fff1d6; color: #b26a00; }

@@ -60,6 +60,7 @@ const defaults: Record<string, () => Row> = {
   guests: () => ({ group_id: null, greeting: "", max_people: null, note: "", rsvp_status: null, rsvp_people: null, rsvp_answers: {}, rsvp_at: null, opened_at: null }),
   rsvps: () => ({ people: 1, answers: {}, guest_id: null }),
   card_designs: () => ({ updated_at: new Date().toISOString(), share_slug: null, preview_key: "", meta: {}, view_count: 0 }),
+  shop_books: () => ({ updated_at: new Date().toISOString(), data: {}, version: 1 }),
 };
 const prepare = (table: string, r: Row): Row => ({
   ...(["settings"].includes(table) ? {} : { id: randomUUID() }),

@@ -186,6 +186,7 @@ export const hskTools = [
 export const toolLinks: [href: string, label: string, also?: string[]][] = [
   ["/cong-cu/thiep-cuoi-online", "Tạo thiệp cưới online"],
   ["/cong-cu/hoc-hsk", "Học HSK", hskTools],
+  ["/cong-cu/quan-ly-ban-hang", "Quản lý bán hàng"],
 ];
 
 export const heroTexts = [

@@ -7,11 +7,22 @@ import { useEffect, useRef, useState } from "react";
 import type { AppUser } from "@/lib/account/server";
 import "./tool.css";
 
-// Top bar of the invitation tool pages: brand, navigation and the account menu.
+// Top bar of the account-based tool pages (invitations, sales book): brand, navigation and the account menu.
 
 export const TOOL = "/cong-cu/thiep-cuoi-online";
 
-export default function AppBar({ user }: { user: AppUser | null }) {
+export type ToolInfo = { href: string; name: string; nav: [href: string, label: string][] };
+
+const INVITES: ToolInfo = {
+  href: TOOL,
+  name: "Thiệp cưới online",
+  nav: [
+    [`${TOOL}/quan-ly`, "Thiệp của tôi"],
+    [`${TOOL}#mau-thiep`, "Mẫu thiệp"],
+  ],
+};
+
+export default function AppBar({ user, tool = INVITES }: { user: AppUser | null; tool?: ToolInfo }) {
   const path = usePathname();
   const router = useRouter();
   const [open, setOpen] = useState(false);
@@ -25,23 +36,20 @@ export default function AppBar({ user }: { user: AppUser | null }) {
 
   const logout = async () => {
     await fetch("/api/auth/logout", { method: "POST" });
-    router.push(TOOL);
+    router.push(tool.href);
     router.refresh();
   };
 
-  const nav: [string, string][] = [
-    [`${TOOL}/quan-ly`, "Thiệp của tôi"],
-    [`${TOOL}#mau-thiep`, "Mẫu thiệp"],
-  ];
+  const nav = tool.nav;
   return (
     <header className="tl-bar">
-      <Link href={TOOL} className="tl-brand">
+      <Link href={tool.href} className="tl-brand">
         <Image src="/images/logo.png" alt="" width={32} height={32} />
         <span>
-          SuperLanding <small>· Thiệp cưới online</small>
+          SuperLanding <small>· {tool.name}</small>
         </span>
       </Link>
-      <nav className="tl-nav" aria-label="Công cụ thiệp cưới">
+      <nav className="tl-nav" aria-label={tool.name}>
         {nav.map(([href, label]) => (
           <Link key={href} href={href} className={path === href ? "on" : ""}>
             {label}
@@ -61,8 +69,8 @@ export default function AppBar({ user }: { user: AppUser | null }) {
             {open && (
               <div className="tl-menu" role="menu">
                 <p>{user.email}</p>
-                <Link href={`${TOOL}/quan-ly`} role="menuitem" onClick={() => setOpen(false)}>
-                  Thiệp của tôi
+                <Link href={nav[0][0]} role="menuitem" onClick={() => setOpen(false)}>
+                  {nav[0][1]}
                 </Link>
                 <button type="button" role="menuitem" onClick={logout}>
                   Đăng xuất
@@ -71,7 +79,7 @@ export default function AppBar({ user }: { user: AppUser | null }) {
             )}
           </>
         ) : (
-          <Link className="ce-btn primary" href={`/dang-nhap?next=${encodeURIComponent(path || TOOL)}`}>
+          <Link className="ce-btn primary" href={`/dang-nhap?next=${encodeURIComponent(path || tool.href)}`}>
             Đăng nhập
           </Link>
         )}
