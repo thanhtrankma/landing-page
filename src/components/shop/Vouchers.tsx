@@ -21,7 +21,7 @@ const FILTERS: [Filter, string][] = [
 const PAGE = 60;
 
 export default function Vouchers() {
-  const { book, open, update, undoable } = useShop();
+  const { book, open, update, undoable, me } = useShop();
   const [filter, setFilter] = useState<Filter>("all");
   const [month, setMonth] = useState("");
   const [q, setQ] = useState("");
@@ -125,6 +125,7 @@ export default function Vouchers() {
                       {v.kind === "out" && v.status !== "done" && <em className={v.status}>{statusLabel(v)}</em>}
                       {v.kind === "order" && <em className={`order-${v.status}`}>{statusLabel(v)}</em>}
                       {v.kind === "in" && v.orderId && <em>Theo đơn đặt</em>}
+                      {v.by && v.by !== me && <em className="by">{v.by}</em>}
                       {(v.kind === "out" || v.kind === "in") && !v.paid && v.status !== "cancelled" && <em className="unpaid">{v.kind === "out" ? "Chưa thu" : "Chưa trả"}</em>}
                     </span>
                   </span>

@@ -113,7 +113,7 @@ export async function updateProfile(id: string, patch: { name?: string }) {
 
 const codeHash = (email: string, code: string) => createHash("sha256").update(`${env.userSessionSecret}|${email}|${code}`).digest("hex");
 
-async function sendMail(to: string, subject: string, html: string, text: string) {
+export async function sendMail(to: string, subject: string, html: string, text: string) {
   if (!env.resendKey) {
     if (process.env.NODE_ENV === "production") throw new Error("Chưa cấu hình gửi email (RESEND_API_KEY).");
     console.info(`[account] (dev, no RESEND_API_KEY) email to ${to}: ${text}`);

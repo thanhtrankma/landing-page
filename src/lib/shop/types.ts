@@ -64,6 +64,8 @@ export type Voucher = {
   note: string;
   /** On an "in" voucher: the purchase order it received. */
   orderId: string;
+  /** Who wrote it, in a shared book (name or email). */
+  by: string;
   createdAt: string;
 };
 
@@ -183,6 +185,7 @@ export function sanitizeBook(input: unknown): ShopBook {
       fee: num(v.fee),
       note: str(v.note, 2000),
       orderId: kind === "in" ? id(v.orderId) : "",
+      by: str(v.by, 80),
       createdAt: iso(v.createdAt),
     };
   });

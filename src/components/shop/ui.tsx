@@ -20,10 +20,16 @@ export type Sheet =
   | { t: "supplier"; id?: string; onSaved?: (id: string) => void }
   | { t: "note"; id?: string }
   | { t: "settings" }
+  | { t: "members" }
   | { t: "quick" };
 
 export type Shop = {
   book: ShopBook;
+  /** The open book's id and the signed-in person's role in it. */
+  bookId: string;
+  role: "owner" | "editor" | "viewer";
+  /** Name (or email) stamped on what this person writes. */
+  me: string;
   stats: Map<string, ProductStats>;
   update: (fn: (b: ShopBook) => ShopBook) => void;
   open: (s: Sheet) => void;

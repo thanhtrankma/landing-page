@@ -9,12 +9,18 @@
 .sh-head-actions { display: flex; gap: 8px; }
 .sh-btn-out.primary { background: var(--rose); border-color: var(--rose); color: #fff; box-shadow: 0 8px 18px -10px rgb(228 106 140 / 0.9); }
 .sh-btn-out.primary:hover { background: #d4567a; }
-.sh-save { margin: 4px 0 0; display: inline-flex; align-items: center; gap: 6px; font-size: 12.5px; color: var(--muted); }
+.sh-head-meta { margin: 4px 0 0; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.sh-book-pick { height: 30px; max-width: 260px; padding: 0 8px; border: 1px solid var(--line); border-radius: 9px; background: #fff; font: inherit; font-size: 12.5px; font-weight: 600; color: var(--ink-2); }
+.sh-role { font-size: 12px; font-weight: 700; padding: 3px 9px; border-radius: 999px; background: #f0f4f7; color: var(--ink-2); }
+/* View-only members: hide the one-tap write buttons (forms still open for reading). */
+.sh.readonly .sh-card-actions, .sh.readonly .sh-quick-marks, .sh.readonly .sh-box-action, .sh.readonly .sh-mini-act > .ce-btn, .sh.readonly .sh-empty .sh-row-actions, .sh.readonly .sh-start { display: none; }
+.sh-notice { max-width: 1140px; margin: 16px auto 0; padding: 11px 14px; border-radius: 12px; background: #fff8e8; border: 1px solid #f1d9a9; font-size: 13.5px; line-height: 1.5; }
+.sh-save { display: inline-flex; align-items: center; gap: 6px; font-size: 12.5px; color: var(--muted); }
 .sh-save i { width: 8px; height: 8px; border-radius: 50%; background: var(--ok); }
 .sh-save.dirty i, .sh-save.saving i { background: var(--sky-500); }
 .sh-save.saving i { animation: sh-blink 0.9s infinite alternate; }
-.sh-save.error i, .sh-save.conflict i { background: var(--danger); }
-.sh-save.error, .sh-save.conflict { color: var(--danger); }
+.sh-save.error i { background: var(--danger); }
+.sh-save.error { color: var(--danger); }
 @keyframes sh-blink { to { opacity: 0.3; } }
 
 .sh-alert { margin-top: 16px; display: flex; gap: 12px; align-items: center; justify-content: space-between; flex-wrap: wrap; padding: 12px 14px; border-radius: 14px; background: #fff4f3; border: 1px solid #f0c4c1; }
@@ -170,6 +176,7 @@
 .sh-tags { display: flex; gap: 5px; flex-wrap: wrap; }
 .sh-tags:empty { display: none; }
 .sh-tags em { font-style: normal; font-size: 11px; font-weight: 600; padding: 1px 7px; border-radius: 999px; background: #f0f4f7; color: var(--ink-2); }
+.sh-tags em.by { background: #efe9fb; color: #5a3d99; }
 .sh-tags em.pending { background: #e6f2ff; color: #165b9a; }
 .sh-tags em.cancelled { background: #eee; color: #666; }
 .sh-tags em.unpaid { background: #fff1d6; color: var(--warn); }
@@ -317,6 +324,28 @@
 @media (max-width: 1000px) {
   .sh-kpis { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
+/* People sharing the book */
+.sh-members-intro { margin: 0 0 14px; line-height: 1.55; }
+.sh-members { list-style: none; margin: 0 0 18px; padding: 0; border: 1px solid var(--line); border-radius: 14px; }
+.sh-members li { display: flex; align-items: center; gap: 10px; padding: 10px 12px; }
+.sh-members li + li { border-top: 1px solid var(--line); }
+.sh-avatar { flex: none; width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; background: var(--rose-100); color: var(--rose); font-weight: 700; }
+.sh-member-main { flex: 1; min-width: 0; display: grid; }
+.sh-member-main b, .sh-member-main small { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.sh-member-main small { color: var(--muted); font-size: 12px; display: flex; gap: 6px; align-items: center; }
+.sh-member-wait { font-style: normal; font-weight: 600; font-size: 11px; padding: 1px 7px; border-radius: 999px; background: var(--amber-100); color: #8a5600; }
+.sh-member-role { flex: none; font-style: normal; font-size: 12px; font-weight: 700; padding: 2px 9px; border-radius: 999px; background: #f0f4f7; color: var(--ink-2); }
+.sh-member-role.owner { background: var(--rose-100); color: #b23d63; }
+.sh-member-act { flex: none; display: flex; align-items: center; gap: 4px; }
+.sh-member-act select { height: 32px; border: 1px solid var(--line); border-radius: 9px; padding: 0 6px; font: inherit; font-size: 12.5px; background: #fff; }
+.sh-members-none { justify-content: center; font-size: 13px; }
+.sh-invite { display: grid; gap: 10px; margin-bottom: 16px; }
+.sh-invite h3 { margin: 0; font-size: 15px; }
+.sh-role-hint { margin: 0; font-size: 12.5px; line-height: 1.5; }
+.sh-invite .ce-btn { justify-self: start; }
+.sh-leave { justify-content: space-between; align-items: center; flex-wrap: wrap; }
+.sh-leave p { margin: 0; font-size: 12.5px; }
+
 @media (max-width: 720px) {
   .sh { padding: 18px 16px 150px; }
   .sh-head h1 { font-size: 21px; }

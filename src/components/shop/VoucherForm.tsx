@@ -24,7 +24,7 @@ function saveVoucher(b: ShopBook, v: Voucher, isNew: boolean): ShopBook {
 }
 
 export default function VoucherForm({ sheet, onClose }: { sheet: Extract<Sheet, { t: "voucher" }>; onClose: () => void }) {
-  const { book, stats, update, open, toast, undoable } = useShop();
+  const { book, stats, update, open, toast, undoable, me } = useShop();
   const existing = book.vouchers.find((v) => v.id === sheet.id);
   const priceFor = (p: Product | undefined, kind: VoucherKind) => (!p ? 0 : buying(kind) ? p.cost || Math.round(stats.get(p.id)?.avgCost ?? 0) : kind === "out" ? p.price : 0);
 
@@ -46,6 +46,7 @@ export default function VoucherForm({ sheet, onClose }: { sheet: Extract<Sheet, 
       fee: 0,
       note: "",
       orderId: "",
+      by: me,
       createdAt: new Date().toISOString(),
     };
     const order = book.vouchers.find((x) => x.id === sheet.fromOrder && x.kind === "order");
