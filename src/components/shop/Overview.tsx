@@ -3,7 +3,8 @@
 import { useMemo, useState } from "react";
 import { counts, dmy, money, qtyText, saleCost, saleRevenue, today, voucherTotal, type Voucher } from "@/lib/shop/types";
 import type { Tab } from "./ShopApp";
-import { Empty, useShop } from "./ui";
+import { Icon } from "./icons";
+import { FlowerMark, type Sheet, useShop } from "./ui";
 
 // Month at a glance: sales, profit, purchases, stock value, low stock, best sellers and open orders.
 
@@ -15,7 +16,7 @@ const shiftMonth = (m: string, by: number) => {
 };
 
 export default function Overview({ go }: { go: (t: Tab) => void }) {
-  const { book, stats, open } = useShop();
+  const { book, stats, open, update, undoable } = useShop();
   const [month, setMonth] = useState(() => today().slice(0, 7));
 
   const sum = useMemo(() => {
@@ -51,25 +52,53 @@ export default function Overview({ go }: { go: (t: Tab) => void }) {
   }, [book, stats, month]);
 
   const product = (id: string) => book.products.find((p) => p.id === id);
+  const delivered = (v: Voucher) => {
+    update((b) => ({ ...b, vouchers: b.vouchers.map((x) => (x.id === v.id ? { ...x, status: "done" } : x)) }));
+    undoable(`Đơn của ${v.customer || "khách"}: đã giao.`, () => update((b) => ({ ...b, vouchers: b.vouchers.map((x) => (x.id === v.id ? { ...x, status: v.status } : x)) })));
+  };
 
-  if (!book.products.length && !book.vouchers.length) {
-    return (
-      <Empty title="Chào mừng bạn đến với sổ hàng" text="Bắt đầu bằng việc thêm các mẫu hoa bạn đang bán, rồi ghi phiếu nhập hàng để có số tồn kho. Mỗi đơn bán sẽ tự trừ kho và tính lãi.">
-        <div className="sh-row-actions">
-          <button type="button" className="ce-btn primary" onClick={() => open({ t: "product" })}>
-            + Thêm mẫu đầu tiên
-          </button>
-          <button type="button" className="ce-btn" onClick={() => open({ t: "supplier" })}>
-            + Thêm nguồn hàng
-          </button>
+  const steps: [done: boolean, title: string, text: string, sheet: Sheet][] = [
+    [book.products.length > 0, "Thêm mẫu hàng", "Ảnh, mã, giá nhập, giá bán của từng mẫu hoa.", { t: "product" }],
+    [book.vouchers.some((v) => v.kind === "in"), "Ghi phiếu nhập", "Số lượng đang có hoặc vừa lấy về, để có tồn kho.", { t: "voucher", kind: "in" }],
+    [book.vouchers.some((v) => v.kind === "out"), "Ghi đơn bán đầu tiên", "Chạm chọn mẫu, kho tự trừ, lãi tự tính.", { t: "voucher", kind: "out" }],
+    [book.suppliers.length > 0, "Lưu nguồn hàng", "Số điện thoại, Zalo, link của chỗ lấy hàng (không bắt buộc).", { t: "supplier" }],
+  ];
+  const next = steps.findIndex(([done]) => !done);
+  const checklist = steps.slice(0, 3).every(([done]) => done) ? null : (
+    <div className="sh-start">
+      <div className="sh-start-head">
+        <FlowerMark size={40} />
+        <div>
+          <h2>Bắt đầu với sổ hàng</h2>
+          <p>
+            Xong {steps.filter(([d]) => d).length}/{steps.length} bước. Mỗi bước chỉ mất một phút.
+          </p>
         </div>
-      </Empty>
-    );
-  }
+      </div>
+      <ol>
+        {steps.map(([done, title, text, sheet], i) => (
+          <li key={title} className={done ? "done" : i === next ? "next" : ""}>
+            <span className="sh-start-dot">{done ? <Icon name="check" size={16} /> : i + 1}</span>
+            <span>
+              <b>{title}</b>
+              <small>{text}</small>
+            </span>
+            {!done && (
+              <button type="button" className={`ce-btn sm ${i === next ? "primary" : ""}`} onClick={() => open(sheet)}>
+                Làm ngay
+              </button>
+            )}
+          </li>
+        ))}
+      </ol>
+    </div>
+  );
+  if (!book.products.length && !book.vouchers.length) return checklist;
 
   const margin = sum.revenue ? Math.round((sum.profit / sum.revenue) * 100) : 0;
   return (
     <div className="sh-overview">
+      {checklist}
       <div className="sh-month">
         <button type="button" className="ce-btn ghost sm" onClick={() => setMonth(shiftMonth(month, -1))} aria-label="Tháng trước">
           ‹
@@ -114,7 +143,7 @@ export default function Overview({ go }: { go: (t: Tab) => void }) {
           {sum.pending.length ? (
             <ul className="sh-mini">
               {sum.pending.slice(0, 8).map((v) => (
-                <li key={v.id}>
+                <li key={v.id} className="sh-mini-act">
                   <button type="button" onClick={() => open({ t: "voucher", id: v.id })}>
                     <span>
                       <b>{v.customer || "Khách lẻ"}</b>
@@ -123,6 +152,9 @@ export default function Overview({ go }: { go: (t: Tab) => void }) {
                       </small>
                     </span>
                     <strong>{money(voucherTotal(v))}</strong>
+                  </button>
+                  <button type="button" className="ce-btn sm" onClick={() => delivered(v)} aria-label={`Đánh dấu đơn của ${v.customer || "khách lẻ"} đã giao`}>
+                    <Icon name="check" size={16} /> Đã giao
                   </button>
                 </li>
               ))}

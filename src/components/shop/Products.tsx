@@ -3,6 +3,7 @@
 import { useMemo, useRef, useState } from "react";
 import { uploadFile } from "@/lib/upload-client";
 import { dmy, KIND_LABEL, money, newId, qtyText, today, type Product } from "@/lib/shop/types";
+import { Icon } from "./icons";
 import { Empty, Field, FlowerMark, fold, MoneyInput, Panel, type Sheet, useShop } from "./ui";
 
 // Mẫu hàng: catalogue with photo, prices, source and live stock; the form also shows the item's history.
@@ -80,25 +81,35 @@ export default function Products() {
             const low = p.minStock > 0 && stock <= p.minStock;
             const supplier = book.suppliers.find((x) => x.id === p.supplierId);
             return (
-              <button key={p.id} type="button" className="sh-card" onClick={() => open({ t: "product", id: p.id })}>
-                <div className="sh-thumb">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  {p.image ? <img src={p.image} alt="" loading="lazy" /> : <FlowerMark size={52} />}
-                  <span className={`sh-stock ${stock <= 0 ? "out" : low ? "low" : ""}`}>
-                    {stock <= 0 ? "Hết hàng" : `Tồn ${qtyText(stock)}`}
+              <div key={p.id} className="sh-card">
+                <button type="button" className="sh-card-open" onClick={() => open({ t: "product", id: p.id })}>
+                  <span className="sh-thumb">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    {p.image ? <img src={p.image} alt="" loading="lazy" /> : <FlowerMark size={52} />}
+                    <span className={`sh-stock ${stock <= 0 ? "out" : low ? "low" : ""}`}>
+                      {stock <= 0 ? "Hết hàng" : `Tồn ${qtyText(stock)}`}
+                    </span>
                   </span>
+                  <span className="sh-card-body">
+                    <small>{[p.code, p.category].filter(Boolean).join(" · ")}</small>
+                    <b>{p.name}</b>
+                    {(p.color || p.size) && <small>{[p.color, p.size].filter(Boolean).join(" · ")}</small>}
+                    <span className="sh-prices">
+                      <strong>{money(p.price)}</strong>
+                      <span>vốn {money(s?.avgCost ?? p.cost)}</span>
+                    </span>
+                    {supplier && <small className="sh-src">Nguồn: {supplier.name}</small>}
+                  </span>
+                </button>
+                <div className="sh-card-actions">
+                  <button type="button" onClick={() => open({ t: "voucher", kind: "in", productId: p.id })}>
+                    <Icon name="box" size={16} /> Nhập
+                  </button>
+                  <button type="button" className="out" onClick={() => open({ t: "voucher", kind: "out", productId: p.id })} disabled={stock <= 0} title={stock <= 0 ? "Hết hàng" : undefined}>
+                    <Icon name="cart" size={16} /> Bán
+                  </button>
                 </div>
-                <div className="sh-card-body">
-                  <small>{[p.code, p.category].filter(Boolean).join(" · ")}</small>
-                  <b>{p.name}</b>
-                  {(p.color || p.size) && <small>{[p.color, p.size].filter(Boolean).join(" · ")}</small>}
-                  <div className="sh-prices">
-                    <strong>{money(p.price)}</strong>
-                    <span>vốn {money(s?.avgCost ?? p.cost)}</span>
-                  </div>
-                  {supplier && <small className="sh-src">Nguồn: {supplier.name}</small>}
-                </div>
-              </button>
+              </div>
             );
           })}
         </div>
@@ -125,7 +136,7 @@ function suggestCode(products: Product[], category: string) {
 }
 
 export function ProductForm({ sheet, onClose }: { sheet: Extract<Sheet, { t: "product" }>; onClose: () => void }) {
-  const { book, stats, update, open, toast } = useShop();
+  const { book, stats, update, open, toast, undoable } = useShop();
   const existing = book.products.find((p) => p.id === sheet.id);
   const [p, setP] = useState<Product>(() => {
     if (existing) return existing;
@@ -187,8 +198,8 @@ export function ProductForm({ sheet, onClose }: { sheet: Extract<Sheet, { t: "pr
   const remove = () => {
     if (!existing) return;
     if (history.length) return toast("Mẫu đã có phiếu nhập/bán nên không xoá được. Hãy chọn “Ngừng bán” để ẩn mẫu.", true);
-    if (!confirm(`Xoá mẫu “${existing.name}”?`)) return;
     update((b) => ({ ...b, products: b.products.filter((x) => x.id !== existing.id) }));
+    undoable(`Đã xoá mẫu “${existing.name}”.`, () => update((b) => ({ ...b, products: [existing, ...b.products] })));
     onClose();
   };
 
@@ -304,7 +315,7 @@ export function ProductForm({ sheet, onClose }: { sheet: Extract<Sheet, { t: "pr
         <Field label="Báo sắp hết khi tồn ≤" hint="Để 0 nếu không cần cảnh báo.">
           <MoneyInput value={p.minStock} onChange={(n) => set("minStock", n)} />
         </Field>
-        <Field label="Giá nhập (mỗi đơn vị)">
+        <Field label="Giá nhập (mỗi đơn vị)" hint="Gõ 120k = 120.000đ">
           <MoneyInput value={p.cost} onChange={(n) => set("cost", n)} placeholder="0" />
         </Field>
         <Field label="Giá bán (mỗi đơn vị)" hint={p.price > 0 ? `Lãi ${money(profit)} / ${p.unit || "đv"} (${Math.round((profit / p.price) * 100)}%)` : undefined}>

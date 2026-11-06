@@ -7,6 +7,8 @@ import Overview from "./Overview";
 import Products, { ProductForm } from "./Products";
 import Settings from "./Settings";
 import Suppliers, { SupplierForm } from "./Suppliers";
+import { Icon, type IconName } from "./icons";
+import QuickCreate from "./QuickCreate";
 import { ShopContext, type Sheet, type Shop } from "./ui";
 import VoucherForm from "./VoucherForm";
 import Vouchers from "./Vouchers";
@@ -14,13 +16,14 @@ import "./shop.css";
 
 // The signed-in sales book: tabs over one in-memory book that autosaves to /api/shop after each change.
 
+// [id, label, short label for the phone tab bar, icon]
 const TABS = [
-  ["overview", "Tổng quan"],
-  ["products", "Mẫu hàng"],
-  ["vouchers", "Nhập – Bán"],
-  ["suppliers", "Nguồn hàng"],
-  ["notes", "Ghi chú"],
-] as const;
+  ["overview", "Tổng quan", "Tổng quan", "home"],
+  ["products", "Mẫu hàng", "Mẫu hàng", "flower"],
+  ["vouchers", "Nhập – Bán", "Phiếu", "receipt"],
+  ["suppliers", "Nguồn hàng", "Nguồn", "truck"],
+  ["notes", "Ghi chú", "Ghi chú", "note"],
+] as const satisfies readonly (readonly [string, string, string, IconName])[];
 type Tab = (typeof TABS)[number][0];
 
 type SaveState = "saved" | "dirty" | "saving" | "error" | "conflict";
@@ -31,7 +34,7 @@ export default function ShopApp({ initial, initialVersion }: { initial: ShopBook
   const [tab, setTab] = useState<Tab>("overview");
   const [sheets, setSheets] = useState<Sheet[]>([]);
   const [save, setSave] = useState<SaveState>("saved");
-  const [toastMsg, setToastMsg] = useState<{ m: string; err?: boolean } | null>(null);
+  const [toastMsg, setToastMsg] = useState<{ m: string; err?: boolean; undo?: () => void } | null>(null);
 
   // ── autosave: debounce, one request at a time, version check against other devices ──
   const bookRef = useRef(book);
@@ -111,7 +114,7 @@ export default function ShopApp({ initial, initialVersion }: { initial: ShopBook
 
   useEffect(() => {
     if (!toastMsg) return;
-    const t = setTimeout(() => setToastMsg(null), 3200);
+    const t = setTimeout(() => setToastMsg(null), toastMsg.undo ? 6000 : 3200);
     return () => clearTimeout(t);
   }, [toastMsg]);
 
@@ -119,7 +122,12 @@ export default function ShopApp({ initial, initialVersion }: { initial: ShopBook
   const open = useCallback((s: Sheet) => setSheets((list) => [...list, s]), []);
   const close = useCallback(() => setSheets((list) => list.slice(0, -1)), []);
   const toast = useCallback((m: string, err?: boolean) => setToastMsg({ m, err }), []);
-  const shop: Shop = useMemo(() => ({ book, stats, update, open, toast }), [book, stats, update, open, toast]);
+  const undoable = useCallback((m: string, undo: () => void) => setToastMsg({ m, undo }), []);
+  const shop: Shop = useMemo(() => ({ book, stats, update, open, toast, undoable }), [book, stats, update, open, toast, undoable]);
+  const go = (t: Tab) => {
+    setTab(t);
+    window.scrollTo({ top: 0 });
+  };
 
   return (
     <ShopContext.Provider value={shop}>
@@ -134,13 +142,13 @@ export default function ShopApp({ initial, initialVersion }: { initial: ShopBook
           </div>
           <div className="sh-head-actions">
             <button type="button" className="ce-btn sh-btn-in" onClick={() => open({ t: "voucher", kind: "in" })}>
-              + Nhập hàng
+              <Icon name="box" size={18} /> Nhập hàng
             </button>
             <button type="button" className="ce-btn primary sh-btn-out" onClick={() => open({ t: "voucher", kind: "out" })}>
-              + Bán hàng
+              <Icon name="cart" size={18} /> Bán hàng
             </button>
             <button type="button" className="ce-btn ghost" onClick={() => open({ t: "settings" })} aria-label="Cài đặt & dữ liệu" title="Cài đặt & dữ liệu">
-              ⚙︎ <span className="hide-sm">Cài đặt</span>
+              <Icon name="gear" size={18} /> <span className="hide-sm">Cài đặt</span>
             </button>
           </div>
         </div>
@@ -162,29 +170,26 @@ export default function ShopApp({ initial, initialVersion }: { initial: ShopBook
         )}
 
         <nav className="sh-tabs" aria-label="Mục">
-          {TABS.map(([id, label]) => (
-            <button key={id} type="button" className={tab === id ? "on" : ""} aria-current={tab === id ? "page" : undefined} onClick={() => setTab(id)}>
-              {label}
+          {TABS.map(([id, label, short, icon]) => (
+            <button key={id} type="button" className={tab === id ? "on" : ""} aria-current={tab === id ? "page" : undefined} onClick={() => go(id)}>
+              <Icon name={icon} size={20} />
+              <span className="sh-tab-long">{label}</span>
+              <span className="sh-tab-short">{short}</span>
             </button>
           ))}
         </nav>
 
         <section className="sh-body">
-          {tab === "overview" && <Overview go={setTab} />}
+          {tab === "overview" && <Overview go={go} />}
           {tab === "products" && <Products />}
           {tab === "vouchers" && <Vouchers />}
           {tab === "suppliers" && <Suppliers />}
           {tab === "notes" && <Notes />}
         </section>
 
-        <div className="sh-dock">
-          <button type="button" className="ce-btn" onClick={() => open({ t: "voucher", kind: "in" })}>
-            + Nhập hàng
-          </button>
-          <button type="button" className="ce-btn primary" onClick={() => open({ t: "voucher", kind: "out" })}>
-            + Bán hàng
-          </button>
-        </div>
+        <button type="button" className="sh-fab" onClick={() => open({ t: "quick" })} aria-label="Tạo mới: bán hàng, nhập hàng, mẫu, ghi chú">
+          <Icon name="plus" size={28} />
+        </button>
       </main>
 
       {sheets.map((s, i) => {
@@ -193,12 +198,24 @@ export default function ShopApp({ initial, initialVersion }: { initial: ShopBook
         if (s.t === "voucher") return <VoucherForm key={key} sheet={s} onClose={close} />;
         if (s.t === "supplier") return <SupplierForm key={key} sheet={s} onClose={close} />;
         if (s.t === "note") return <NoteForm key={key} sheet={s} onClose={close} />;
+        if (s.t === "quick") return <QuickCreate key={key} onClose={close} />;
         return <Settings key={key} onClose={close} />;
       })}
 
       {toastMsg && (
         <div className={`sh-toast ${toastMsg.err ? "err" : ""}`} role="status">
-          {toastMsg.m}
+          <span>{toastMsg.m}</span>
+          {toastMsg.undo && (
+            <button
+              type="button"
+              onClick={() => {
+                toastMsg.undo?.();
+                setToastMsg({ m: "Đã hoàn tác." });
+              }}
+            >
+              Hoàn tác
+            </button>
+          )}
         </div>
       )}
     </ShopContext.Provider>

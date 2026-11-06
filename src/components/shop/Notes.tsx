@@ -48,7 +48,7 @@ export default function Notes() {
 }
 
 export function NoteForm({ sheet, onClose }: { sheet: Extract<Sheet, { t: "note" }>; onClose: () => void }) {
-  const { book, update } = useShop();
+  const { book, update, undoable } = useShop();
   const existing = book.notes.find((n) => n.id === sheet.id);
   const [n, setN] = useState<Note>(() => existing ?? { id: newId(), title: "", body: "", pinned: false, color: NOTE_COLORS[0], updatedAt: "" });
   const set = <K extends keyof Note>(k: K, v: Note[K]) => setN((x) => ({ ...x, [k]: v }));
@@ -61,8 +61,9 @@ export function NoteForm({ sheet, onClose }: { sheet: Extract<Sheet, { t: "note"
     onClose();
   };
   const remove = () => {
-    if (!existing || !confirm("Xoá ghi chú này?")) return;
+    if (!existing) return;
     update((b) => ({ ...b, notes: b.notes.filter((x) => x.id !== existing.id) }));
+    undoable("Đã xoá ghi chú.", () => update((b) => ({ ...b, notes: [existing, ...b.notes] })));
     onClose();
   };
 

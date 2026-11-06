@@ -1,7 +1,8 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { dmy, KIND_LABEL, money, qtyText, STATUS_LABEL, voucherTotal, type VoucherKind } from "@/lib/shop/types";
+import { dmy, KIND_LABEL, money, qtyText, STATUS_LABEL, voucherTotal, type Voucher, type VoucherKind } from "@/lib/shop/types";
+import { Icon } from "./icons";
 import { Empty, fold, useShop } from "./ui";
 
 // Sổ nhập – bán: every voucher, newest first, filtered by kind, month, open status and free text.
@@ -18,7 +19,7 @@ const FILTERS: [Filter, string][] = [
 const PAGE = 60;
 
 export default function Vouchers() {
-  const { book, open } = useShop();
+  const { book, open, update, undoable } = useShop();
   const [filter, setFilter] = useState<Filter>("all");
   const [month, setMonth] = useState("");
   const [q, setQ] = useState("");
@@ -44,6 +45,12 @@ export default function Vouchers() {
       })
       .sort((a, b) => b.date.localeCompare(a.date) || b.createdAt.localeCompare(a.createdAt));
   }, [book.vouchers, filter, month, q, nameOf, supplierOf]);
+
+  /** One-tap status changes from the list, undoable. */
+  const mark = (v: Voucher, patch: Partial<Voucher>, msg: string) => {
+    update((b) => ({ ...b, vouchers: b.vouchers.map((x) => (x.id === v.id ? { ...x, ...patch } : x)) }));
+    undoable(msg, () => update((b) => ({ ...b, vouchers: b.vouchers.map((x) => (x.id === v.id ? { ...x, status: v.status, paid: v.paid } : x)) })));
+  };
 
   if (!book.vouchers.length) {
     return (
@@ -114,6 +121,20 @@ export default function Vouchers() {
                   </span>
                   {v.kind !== "adjust" && <strong className={v.kind}>{(v.kind === "in" ? "−" : "+") + money(voucherTotal(v))}</strong>}
                 </button>
+                {v.kind === "out" && v.status !== "cancelled" && (v.status === "pending" || !v.paid) && (
+                  <div className="sh-quick-marks">
+                    {v.status === "pending" && (
+                      <button type="button" onClick={() => mark(v, { status: "done" }, `Đơn của ${v.customer || "khách"}: đã giao.`)}>
+                        <Icon name="check" size={16} /> Đã giao
+                      </button>
+                    )}
+                    {!v.paid && (
+                      <button type="button" onClick={() => mark(v, { paid: true }, `Đã thu ${money(voucherTotal(v))}.`)}>
+                        <Icon name="money" size={16} /> Đã thu tiền
+                      </button>
+                    )}
+                  </div>
+                )}
               </li>
             );
           })}

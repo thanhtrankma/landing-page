@@ -10,7 +10,8 @@ export type Sheet =
   | { t: "voucher"; id?: string; kind?: VoucherKind; productId?: string }
   | { t: "supplier"; id?: string; onSaved?: (id: string) => void }
   | { t: "note"; id?: string }
-  | { t: "settings" };
+  | { t: "settings" }
+  | { t: "quick" };
 
 export type Shop = {
   book: ShopBook;
@@ -18,6 +19,8 @@ export type Shop = {
   update: (fn: (b: ShopBook) => ShopBook) => void;
   open: (s: Sheet) => void;
   toast: (m: string, err?: boolean) => void;
+  /** Toast with a "Hoàn tác" button that runs `restore`. */
+  undoable: (m: string, restore: () => void) => void;
 };
 
 export const ShopContext = createContext<Shop | null>(null);
@@ -70,26 +73,74 @@ export function Field({ label, children, hint, wide }: { label: string; children
   );
 }
 
-/** Number input showing thousands separators ("150.000") while typing. */
+const fmt = (n: number) => new Intl.NumberFormat("vi-VN").format(n);
+
+/**
+ * Number input showing thousands separators ("150.000") while typing. A trailing "k" means thousands,
+ * the way sellers write prices: "250k" → 250.000.
+ */
 export function MoneyInput({ value, onChange, allowNegative, ...rest }: { value: number; onChange: (n: number) => void; allowNegative?: boolean } & Omit<React.InputHTMLAttributes<HTMLInputElement>, "value" | "onChange">) {
-  const show = (n: number) => (n ? new Intl.NumberFormat("vi-VN").format(n) : "");
+  const show = (n: number) => (n ? fmt(n) : "");
   // While typing, keep the user's text; otherwise show the value (picking a product fills its price).
   const [text, setText] = useState<string | null>(null);
   return (
     <input
       {...rest}
-      inputMode={allowNegative ? "text" : "numeric"}
+      inputMode={allowNegative ? "text" : "decimal"}
       value={text ?? show(value)}
-      onFocus={() => setText(show(value))}
+      onFocus={(e) => {
+        setText(show(value));
+        e.target.select();
+      }}
       onBlur={() => setText(null)}
       onChange={(e) => {
-        const neg = allowNegative && e.target.value.trim().startsWith("-");
-        const digits = e.target.value.replace(/[^\d]/g, "");
-        const n = (neg ? -1 : 1) * Number(digits || 0);
-        setText(neg && !digits ? "-" : `${neg ? "-" : ""}${digits ? new Intl.NumberFormat("vi-VN").format(Number(digits)) : ""}`);
-        onChange(n);
+        const raw = e.target.value.trim();
+        const neg = allowNegative && raw.startsWith("-");
+        const kilo = /k$/i.test(raw);
+        const digits = raw.replace(/[^\d]/g, "");
+        const abs = Number(digits || 0) * (kilo ? 1000 : 1);
+        setText(neg && !digits ? "-" : `${neg ? "-" : ""}${digits ? fmt(abs) : ""}`);
+        onChange((neg ? -1 : 1) * abs);
       }}
     />
+  );
+}
+
+/** − qty + : big tap targets for quantities. */
+export function Stepper({ value, onChange, min = 0, label }: { value: number; onChange: (n: number) => void; min?: number; label: string }) {
+  return (
+    <div className="sh-stepper" role="group" aria-label={label}>
+      <button type="button" aria-label="Bớt 1" onClick={() => onChange(Math.max(min, value - 1))} disabled={value <= min}>
+        −
+      </button>
+      <input
+        aria-label={label}
+        inputMode={min < 0 ? "text" : "numeric"}
+        value={value === 0 ? "" : String(value)}
+        onFocus={(e) => e.target.select()}
+        onChange={(e) => {
+          const raw = e.target.value.trim();
+          const n = Number(raw.replace(/[^\d.-]/g, "")) || 0;
+          onChange(Math.max(min, n));
+        }}
+      />
+      <button type="button" aria-label="Thêm 1" onClick={() => onChange(value + 1)}>
+        +
+      </button>
+    </div>
+  );
+}
+
+/** Segmented choice: every option visible, one tap to pick. */
+export function Seg<T extends string>({ value, options, onChange, label }: { value: T; options: [T, string, string?][]; onChange: (v: T) => void; label: string }) {
+  return (
+    <div className="sh-seg" role="radiogroup" aria-label={label}>
+      {options.map(([v, text, tone]) => (
+        <button key={v} type="button" role="radio" aria-checked={value === v} className={`${value === v ? "on" : ""} ${tone ?? ""}`} onClick={() => onChange(v)}>
+          {text}
+        </button>
+      ))}
+    </div>
   );
 }
 

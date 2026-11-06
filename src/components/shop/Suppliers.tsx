@@ -85,7 +85,7 @@ export default function Suppliers() {
 }
 
 export function SupplierForm({ sheet, onClose }: { sheet: Extract<Sheet, { t: "supplier" }>; onClose: () => void }) {
-  const { book, update, toast } = useShop();
+  const { book, update, toast, undoable } = useShop();
   const existing = book.suppliers.find((s) => s.id === sheet.id);
   const [s, setS] = useState<Supplier>(() => existing ?? { id: newId(), name: "", phone: "", address: "", link: "", note: "", createdAt: new Date().toISOString() });
   const set = <K extends keyof Supplier>(k: K, v: Supplier[K]) => setS((x) => ({ ...x, [k]: v }));
@@ -102,12 +102,16 @@ export function SupplierForm({ sheet, onClose }: { sheet: Extract<Sheet, { t: "s
   };
 
   const remove = () => {
-    if (!existing || !confirm(`Xoá nguồn “${existing.name}”? Các mẫu hàng sẽ được bỏ liên kết, phiếu nhập cũ vẫn giữ.`)) return;
+    if (!existing) return;
+    const linked = new Set(book.products.filter((p) => p.supplierId === existing.id).map((p) => p.id));
     update((b) => ({
       ...b,
       suppliers: b.suppliers.filter((x) => x.id !== existing.id),
       products: b.products.map((p) => (p.supplierId === existing.id ? { ...p, supplierId: "" } : p)),
     }));
+    undoable(`Đã xoá nguồn “${existing.name}”.`, () =>
+      update((b) => ({ ...b, suppliers: [...b.suppliers, existing], products: b.products.map((p) => (linked.has(p.id) && !p.supplierId ? { ...p, supplierId: existing.id } : p)) })),
+    );
     onClose();
   };
 
