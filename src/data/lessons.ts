@@ -1436,9 +1436,9 @@ const book2Session4: Lesson = {
 
 const book2Session5: Lesson = {
   book: 2,
-  session: 3,
+  session: 5,
   slug: "quyen-2-buoi-3",
-  title: "Có thể mượn điện thoại bạn một lát được khum?",
+  title: "Cuối tuần này khi nào bạn có thời gian rảnh?",
   words: [
     {
       hanzi: "喂",
