@@ -1437,7 +1437,7 @@ const book2Session4: Lesson = {
 const book2Session5: Lesson = {
   book: 2,
   session: 5,
-  slug: "quyen-2-buoi-3",
+  slug: "quyen-2-buoi-5",
   title: "Cuối tuần này khi nào bạn có thời gian rảnh?",
   words: [
     {
