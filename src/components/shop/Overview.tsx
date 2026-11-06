@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { counts, dmy, money, qtyText, saleCost, saleRevenue, today, voucherTotal, type Voucher } from "@/lib/shop/types";
+import { awaiting, counts, dmy, money, qtyText, saleCost, saleRevenue, today, voucherTotal, type Voucher } from "@/lib/shop/types";
 import type { Tab } from "./ShopApp";
 import { Icon } from "./icons";
 import { FlowerMark, type Sheet, useShop } from "./ui";
@@ -48,10 +48,13 @@ export default function Overview({ go }: { go: (t: Tab) => void }) {
       const rev = list.reduce((s, v) => s + saleRevenue(v), 0);
       return { m, orders: list.length, revenue: rev, profit: rev - list.reduce((s, v) => s + saleCost(v, stats), 0) };
     });
-    return { orders: monthSales.length, revenue, profit: revenue - cost, bought, stockValue, owed, owedTotal: owed.reduce((s, v) => s + voucherTotal(v), 0), pending, low, best, months };
+    const awaitingOrders = book.vouchers.filter(awaiting).sort((a, b) => a.date.localeCompare(b.date));
+    return { orders: monthSales.length, revenue, profit: revenue - cost, bought, stockValue, owed, owedTotal: owed.reduce((s, v) => s + voucherTotal(v), 0), pending, low, best, months, awaitingOrders };
   }, [book, stats, month]);
 
   const product = (id: string) => book.products.find((p) => p.id === id);
+  // Low-stock items nobody has ordered yet.
+  const toOrder = sum.low.filter((p) => !stats.get(p.id)?.onOrder);
   const delivered = (v: Voucher) => {
     update((b) => ({ ...b, vouchers: b.vouchers.map((x) => (x.id === v.id ? { ...x, status: "done" } : x)) }));
     undoable(`Đơn của ${v.customer || "khách"}: đã giao.`, () => update((b) => ({ ...b, vouchers: b.vouchers.map((x) => (x.id === v.id ? { ...x, status: v.status } : x)) })));
@@ -164,25 +167,63 @@ export default function Overview({ go }: { go: (t: Tab) => void }) {
           )}
         </div>
 
-        <div className="sh-box">
-          <h3>Sắp hết hàng {sum.low.length > 0 && <em className="warn">{sum.low.length}</em>}</h3>
-          {sum.low.length ? (
+        {sum.awaitingOrders.length > 0 && (
+          <div className="sh-box">
+            <h3>
+              Đơn đặt chờ hàng về <em>{sum.awaitingOrders.length}</em>
+            </h3>
             <ul className="sh-mini">
-              {sum.low.slice(0, 8).map((p) => (
-                <li key={p.id}>
-                  <button type="button" onClick={() => open({ t: "product", id: p.id })}>
+              {sum.awaitingOrders.slice(0, 8).map((v) => (
+                <li key={v.id} className="sh-mini-act">
+                  <button type="button" onClick={() => open({ t: "voucher", id: v.id })}>
                     <span>
-                      <b>{p.name}</b>
+                      <b>{book.suppliers.find((x) => x.id === v.supplierId)?.name ?? "Đơn đặt hàng"}</b>
                       <small>
-                        {p.code && `${p.code} · `}báo khi còn ≤ {qtyText(p.minStock)}
+                        đặt {dmy(v.date)} · {v.lines.map((l) => `${qtyText(l.qty)} ${product(l.productId)?.name ?? "?"}`).join(", ")}
                       </small>
                     </span>
-                    <strong className="bad">
-                      còn {qtyText(stats.get(p.id)?.stock ?? 0)} {p.unit}
-                    </strong>
+                  </button>
+                  <button type="button" className="ce-btn sm in" onClick={() => open({ t: "voucher", kind: "in", fromOrder: v.id })}>
+                    <Icon name="box" size={16} /> Hàng về
                   </button>
                 </li>
               ))}
+            </ul>
+          </div>
+        )}
+
+        <div className="sh-box">
+          <h3>
+            Sắp hết hàng {sum.low.length > 0 && <em className="warn">{sum.low.length}</em>}
+            {toOrder.length > 1 && (
+              <button type="button" className="ce-btn sm sh-box-action" onClick={() => open({ t: "voucher", kind: "order", productIds: toOrder.map((p) => p.id) })}>
+                Lên đơn đặt {toOrder.length} mẫu
+              </button>
+            )}
+          </h3>
+          {sum.low.length ? (
+            <ul className="sh-mini">
+              {sum.low.slice(0, 8).map((p) => {
+                const s = stats.get(p.id);
+                return (
+                  <li key={p.id} className="sh-mini-act">
+                    <button type="button" onClick={() => open({ t: "product", id: p.id })}>
+                      <span>
+                        <b>{p.name}</b>
+                        <small>
+                          còn <span className="bad">{qtyText(s?.stock ?? 0)} {p.unit}</span> · báo khi ≤ {qtyText(p.minStock)}
+                          {s?.onOrder ? ` · đang đặt ${qtyText(s.onOrder)}` : ""}
+                        </small>
+                      </span>
+                    </button>
+                    {!s?.onOrder && (
+                      <button type="button" className="ce-btn sm in" onClick={() => open({ t: "voucher", kind: "order", productIds: [p.id] })}>
+                        Đặt thêm
+                      </button>
+                    )}
+                  </li>
+                );
+              })}
             </ul>
           ) : (
             <p className="sh-muted">Chưa có mẫu nào dưới mức cảnh báo. Đặt mức cảnh báo trong từng mẫu hàng.</p>

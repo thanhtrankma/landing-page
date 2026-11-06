@@ -141,6 +141,9 @@ export default function ShopApp({ initial, initialVersion }: { initial: ShopBook
             </p>
           </div>
           <div className="sh-head-actions">
+            <button type="button" className="ce-btn sh-btn-in" onClick={() => open({ t: "voucher", kind: "order" })}>
+              <Icon name="receipt" size={18} /> Đặt hàng
+            </button>
             <button type="button" className="ce-btn sh-btn-in" onClick={() => open({ t: "voucher", kind: "in" })}>
               <Icon name="box" size={18} /> Nhập hàng
             </button>

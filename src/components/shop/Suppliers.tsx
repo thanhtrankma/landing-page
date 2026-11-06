@@ -1,7 +1,8 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { dmy, money, newId, voucherTotal, type Supplier } from "@/lib/shop/types";
+import { awaiting, dmy, money, newId, voucherTotal, type Supplier } from "@/lib/shop/types";
+import { Icon } from "./icons";
 import { Empty, Field, fold, Panel, type Sheet, useShop } from "./ui";
 
 // Nguồn hàng: where each item is bought, with contact details and how much has been bought there.
@@ -22,6 +23,7 @@ export default function Suppliers() {
           spent: buys.reduce((n, v) => n + voucherTotal(v), 0),
           owed: buys.filter((v) => !v.paid).reduce((n, v) => n + voucherTotal(v), 0),
           last: buys.reduce((d, v) => (v.date > d ? v.date : d), ""),
+          waiting: book.vouchers.filter((v) => awaiting(v) && v.supplierId === s.id).length,
         };
       })
       .sort((a, b) => b.last.localeCompare(a.last) || a.s.name.localeCompare(b.s.name, "vi"));
@@ -46,7 +48,7 @@ export default function Suppliers() {
         </button>
       </div>
       <div className="sh-suppliers">
-        {rows.map(({ s, products, spent, owed, last }) => (
+        {rows.map(({ s, products, spent, owed, last, waiting }) => (
           <article key={s.id} className="sh-box">
             <button type="button" className="sh-supplier-head" onClick={() => open({ t: "supplier", id: s.id })}>
               <h3>{s.name}</h3>
@@ -72,6 +74,12 @@ export default function Suppliers() {
               )}
             </ul>
             {s.note && <p className="sh-note-text">{s.note}</p>}
+            <div className="sh-row-actions">
+              <button type="button" className="ce-btn sm primary" onClick={() => open({ t: "voucher", kind: "order", supplierId: s.id })}>
+                <Icon name="receipt" size={16} /> Lên đơn đặt
+              </button>
+              {waiting > 0 && <span className="sh-muted">{waiting} đơn chờ hàng về</span>}
+            </div>
             <p className="sh-muted">
               {products} mẫu · đã nhập {money(spent)}
               {last && ` · lần cuối ${dmy(last)}`}

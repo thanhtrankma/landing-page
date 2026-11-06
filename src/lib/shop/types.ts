@@ -37,8 +37,11 @@ export type Supplier = {
 
 export type Line = { productId: string; qty: number; price: number };
 
-/** in = nhập hàng, out = bán hàng, adjust = kiểm kho / hàng hỏng (signed quantities). */
-export type VoucherKind = "in" | "out" | "adjust";
+/**
+ * in = nhập hàng, out = bán hàng, adjust = kiểm kho / hàng hỏng (signed quantities),
+ * order = đơn đặt hàng gửi nguồn: no stock change until it is received as an "in" voucher.
+ */
+export type VoucherKind = "in" | "out" | "adjust" | "order";
 export type OrderStatus = "pending" | "done" | "cancelled";
 
 export type Voucher = {
@@ -59,6 +62,8 @@ export type Voucher = {
   /** Sale: shipping charged to the customer. Purchase: shipping paid for the goods. */
   fee: number;
   note: string;
+  /** On an "in" voucher: the purchase order it received. */
+  orderId: string;
   createdAt: string;
 };
 
@@ -157,7 +162,7 @@ export function sanitizeBook(input: unknown): ShopBook {
   });
   const vouchers = arr(b.vouchers, LIMITS.vouchers).map((x): Voucher => {
     const v = obj(x);
-    const kind: VoucherKind = v.kind === "in" || v.kind === "adjust" ? v.kind : "out";
+    const kind: VoucherKind = v.kind === "in" || v.kind === "adjust" || v.kind === "order" ? v.kind : "out";
     const status: OrderStatus = v.status === "pending" || v.status === "cancelled" ? v.status : "done";
     return {
       id: id(v.id) || newId(),
@@ -177,6 +182,7 @@ export function sanitizeBook(input: unknown): ShopBook {
       discount: num(v.discount),
       fee: num(v.fee),
       note: str(v.note, 2000),
+      orderId: kind === "in" ? id(v.orderId) : "",
       createdAt: iso(v.createdAt),
     };
   });
@@ -222,19 +228,28 @@ export const dmy = (d: string) => d.split("-").reverse().join("/");
 
 export const goodsTotal = (v: Voucher) => v.lines.reduce((s, l) => s + l.qty * l.price, 0);
 /** Money changing hands: what the customer pays, or what the purchase cost in total. */
-export const voucherTotal = (v: Voucher) => (v.kind === "out" ? goodsTotal(v) - v.discount + v.fee : v.kind === "in" ? goodsTotal(v) + v.fee : 0);
+export const voucherTotal = (v: Voucher) => (v.kind === "out" ? goodsTotal(v) - v.discount + v.fee : v.kind === "in" ? goodsTotal(v) + v.fee : v.kind === "order" ? goodsTotal(v) : 0);
 /** Revenue from the goods themselves (shipping passes through). */
 export const saleRevenue = (v: Voucher) => goodsTotal(v) - v.discount;
-/** Cancelled orders never touched the stock. */
-export const counts = (v: Voucher) => !(v.kind === "out" && v.status === "cancelled");
+/** Purchase orders and cancelled sales never touch the stock. */
+export const counts = (v: Voucher) => v.kind !== "order" && !(v.kind === "out" && v.status === "cancelled");
+/** A purchase order still waiting for its goods. */
+export const awaiting = (v: Voucher) => v.kind === "order" && v.status === "pending";
 
-export type ProductStats = { stock: number; inQty: number; soldQty: number; avgCost: number; revenue: number; lastIn: string; lastOut: string };
+/** onOrder: quantity in purchase orders that have not arrived yet. */
+export type ProductStats = { stock: number; inQty: number; soldQty: number; onOrder: number; avgCost: number; revenue: number; lastIn: string; lastOut: string };
 
 /** Stock, weighted-average purchase cost and sales per product, from every voucher. */
 export function productStats(book: ShopBook): Map<string, ProductStats> {
   const map = new Map<string, ProductStats & { costSum: number }>();
-  for (const p of book.products) map.set(p.id, { stock: 0, inQty: 0, soldQty: 0, avgCost: p.cost, revenue: 0, lastIn: "", lastOut: "", costSum: 0 });
+  for (const p of book.products) map.set(p.id, { stock: 0, inQty: 0, soldQty: 0, onOrder: 0, avgCost: p.cost, revenue: 0, lastIn: "", lastOut: "", costSum: 0 });
   for (const v of book.vouchers) {
+    if (awaiting(v)) {
+      for (const l of v.lines) {
+        const s = map.get(l.productId);
+        if (s) s.onOrder += l.qty;
+      }
+    }
     if (!counts(v)) continue;
     const goods = goodsTotal(v);
     for (const l of v.lines) {
@@ -261,5 +276,7 @@ export function productStats(book: ShopBook): Map<string, ProductStats> {
 /** Cost of the goods in a sale, at each product's average purchase cost. */
 export const saleCost = (v: Voucher, stats: Map<string, ProductStats>) => v.lines.reduce((s, l) => s + l.qty * (stats.get(l.productId)?.avgCost ?? 0), 0);
 
-export const KIND_LABEL: Record<VoucherKind, string> = { in: "Nhập hàng", out: "Bán hàng", adjust: "Điều chỉnh kho" };
+export const KIND_LABEL: Record<VoucherKind, string> = { in: "Nhập hàng", out: "Bán hàng", adjust: "Điều chỉnh kho", order: "Đặt hàng" };
 export const STATUS_LABEL: Record<OrderStatus, string> = { pending: "Chờ giao", done: "Hoàn thành", cancelled: "Đã huỷ" };
+export const ORDER_STATUS_LABEL: Record<OrderStatus, string> = { pending: "Chờ hàng về", done: "Đã nhập kho", cancelled: "Đã huỷ" };
+export const statusLabel = (v: Voucher) => (v.kind === "order" ? ORDER_STATUS_LABEL : STATUS_LABEL)[v.status];

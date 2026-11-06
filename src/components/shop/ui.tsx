@@ -7,7 +7,16 @@ import type { Product, ProductStats, ShopBook, VoucherKind } from "@/lib/shop/ty
 
 export type Sheet =
   | { t: "product"; id?: string; category?: string; onSaved?: (p: Product) => void }
-  | { t: "voucher"; id?: string; kind?: VoucherKind; productId?: string }
+  | {
+      t: "voucher";
+      id?: string;
+      kind?: VoucherKind;
+      /** Products to start the cart with. */
+      productIds?: string[];
+      supplierId?: string;
+      /** Receive this purchase order: an "in" voucher prefilled from it. */
+      fromOrder?: string;
+    }
   | { t: "supplier"; id?: string; onSaved?: (id: string) => void }
   | { t: "note"; id?: string }
   | { t: "settings" }

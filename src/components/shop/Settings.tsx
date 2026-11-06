@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { goodsTotal, KIND_LABEL, LIMITS, productStats, sanitizeBook, STATUS_LABEL, today, voucherTotal } from "@/lib/shop/types";
+import { goodsTotal, KIND_LABEL, LIMITS, productStats, sanitizeBook, statusLabel, today, voucherTotal } from "@/lib/shop/types";
 import { csv, download, Field, Panel, useShop } from "./ui";
 
 // Shop name and pick lists, Excel exports, and JSON backup / restore.
@@ -53,7 +53,7 @@ export default function Settings({ onClose }: { onClose: () => void }) {
         v.lines.map((l, i) => [
           v.date.split("-").reverse().join("/"),
           KIND_LABEL[v.kind],
-          v.kind === "in" ? supplier(v.supplierId) : v.customer,
+          v.kind === "in" || v.kind === "order" ? supplier(v.supplierId) : v.customer,
           v.phone,
           v.address,
           v.channel,
@@ -66,8 +66,8 @@ export default function Settings({ onClose }: { onClose: () => void }) {
           i === 0 ? v.discount : "",
           i === 0 ? v.fee : "",
           i === 0 && v.kind !== "adjust" ? voucherTotal(v) : "",
-          v.kind === "out" ? STATUS_LABEL[v.status] : "",
-          v.kind === "adjust" ? "" : v.paid ? "Rồi" : "Chưa",
+          v.kind === "out" || v.kind === "order" ? statusLabel(v) : "",
+          v.kind === "out" || v.kind === "in" ? (v.paid ? "Rồi" : "Chưa") : "",
           v.note,
         ]),
       );

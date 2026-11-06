@@ -2,7 +2,7 @@
 
 import { useMemo, useRef, useState } from "react";
 import { uploadFile } from "@/lib/upload-client";
-import { dmy, KIND_LABEL, money, newId, qtyText, today, type Product } from "@/lib/shop/types";
+import { dmy, KIND_LABEL, money, newId, qtyText, statusLabel, today, type Product } from "@/lib/shop/types";
 import { Icon } from "./icons";
 import { Empty, Field, FlowerMark, fold, MoneyInput, Panel, type Sheet, useShop } from "./ui";
 
@@ -102,10 +102,10 @@ export default function Products() {
                   </span>
                 </button>
                 <div className="sh-card-actions">
-                  <button type="button" onClick={() => open({ t: "voucher", kind: "in", productId: p.id })}>
+                  <button type="button" onClick={() => open({ t: "voucher", kind: "in", productIds: [p.id] })}>
                     <Icon name="box" size={16} /> Nhập
                   </button>
-                  <button type="button" className="out" onClick={() => open({ t: "voucher", kind: "out", productId: p.id })} disabled={stock <= 0} title={stock <= 0 ? "Hết hàng" : undefined}>
+                  <button type="button" className="out" onClick={() => open({ t: "voucher", kind: "out", productIds: [p.id] })} disabled={stock <= 0} title={stock <= 0 ? "Hết hàng" : undefined}>
                     <Icon name="cart" size={16} /> Bán
                   </button>
                 </div>
@@ -246,11 +246,20 @@ export function ProductForm({ sheet, onClose }: { sheet: Extract<Sheet, { t: "pr
             <span>Giá vốn TB</span>
             <b>{money(s.avgCost)}</b>
           </div>
+          {s.onOrder > 0 && (
+            <div>
+              <span>Đang đặt</span>
+              <b>{qtyText(s.onOrder)}</b>
+            </div>
+          )}
           <div className="sh-pstats-actions">
-            <button type="button" className="ce-btn sm" onClick={() => open({ t: "voucher", kind: "in", productId: existing.id })}>
+            <button type="button" className="ce-btn sm" onClick={() => open({ t: "voucher", kind: "order", productIds: [existing.id] })}>
+              + Đặt hàng
+            </button>
+            <button type="button" className="ce-btn sm" onClick={() => open({ t: "voucher", kind: "in", productIds: [existing.id] })}>
               + Nhập thêm
             </button>
-            <button type="button" className="ce-btn primary sm" onClick={() => open({ t: "voucher", kind: "out", productId: existing.id })}>
+            <button type="button" className="ce-btn primary sm" onClick={() => open({ t: "voucher", kind: "out", productIds: [existing.id] })}>
               + Bán
             </button>
           </div>
@@ -355,7 +364,7 @@ export function ProductForm({ sheet, onClose }: { sheet: Extract<Sheet, { t: "pr
               {history.slice(0, 30).map((v) => {
                 const qty = v.lines.filter((l) => l.productId === existing.id).reduce((n, l) => n + l.qty, 0);
                 const line = v.lines.find((l) => l.productId === existing.id);
-                const who = v.kind === "in" ? book.suppliers.find((x) => x.id === v.supplierId)?.name : v.kind === "out" ? v.customer : v.note;
+                const who = v.kind === "in" || v.kind === "order" ? book.suppliers.find((x) => x.id === v.supplierId)?.name : v.kind === "out" ? v.customer : v.note;
                 return (
                   <li key={v.id}>
                     <button type="button" onClick={() => open({ t: "voucher", id: v.id })}>
@@ -367,10 +376,11 @@ export function ProductForm({ sheet, onClose }: { sheet: Extract<Sheet, { t: "pr
                           {dmy(v.date)}
                           {v.kind !== "adjust" && line ? ` · ${money(line.price)}/${p.unit || "đv"}` : ""}
                           {v.kind === "out" && v.status === "cancelled" ? " · đã huỷ" : ""}
+                          {v.kind === "order" ? ` · ${statusLabel(v).toLowerCase()}` : ""}
                         </small>
                       </span>
-                      <strong className={v.kind === "out" ? "" : qty < 0 ? "bad" : "good"}>
-                        {v.kind === "out" ? "−" : qty > 0 ? "+" : ""}
+                      <strong className={v.kind === "out" || v.kind === "order" ? "" : qty < 0 ? "bad" : "good"}>
+                        {v.kind === "order" ? "đặt " : v.kind === "out" ? "−" : qty > 0 ? "+" : ""}
                         {qtyText(qty)}
                       </strong>
                     </button>

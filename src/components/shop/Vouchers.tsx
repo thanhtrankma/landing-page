@@ -1,16 +1,18 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { dmy, KIND_LABEL, money, qtyText, STATUS_LABEL, voucherTotal, type Voucher, type VoucherKind } from "@/lib/shop/types";
+import { dmy, KIND_LABEL, money, qtyText, statusLabel, voucherTotal, type Voucher, type VoucherKind } from "@/lib/shop/types";
 import { Icon } from "./icons";
 import { Empty, fold, useShop } from "./ui";
 
 // Sổ nhập – bán: every voucher, newest first, filtered by kind, month, open status and free text.
 
-type Filter = "all" | VoucherKind | "pending" | "unpaid";
+type Filter = "all" | VoucherKind | "pending" | "unpaid" | "awaiting";
 const FILTERS: [Filter, string][] = [
   ["all", "Tất cả"],
   ["out", "Bán hàng"],
+  ["order", "Đặt hàng"],
+  ["awaiting", "Chờ hàng về"],
   ["in", "Nhập hàng"],
   ["adjust", "Điều chỉnh"],
   ["pending", "Chờ giao"],
@@ -34,6 +36,7 @@ export default function Vouchers() {
     return book.vouchers
       .filter((v) => {
         if (filter === "pending") return v.kind === "out" && v.status === "pending";
+        if (filter === "awaiting") return v.kind === "order" && v.status === "pending";
         if (filter === "unpaid") return v.kind === "out" && !v.paid && v.status !== "cancelled";
         return filter === "all" || v.kind === filter;
       })
@@ -54,8 +57,11 @@ export default function Vouchers() {
 
   if (!book.vouchers.length) {
     return (
-      <Empty title="Chưa có phiếu nào" text="Ghi phiếu nhập khi lấy hàng về để cộng kho, ghi đơn bán khi chốt đơn để trừ kho và tính lãi.">
+      <Empty title="Chưa có phiếu nào" text="Lên đơn đặt hàng gửi nguồn, ghi phiếu nhập khi hàng về để cộng kho, ghi đơn bán khi chốt đơn để trừ kho và tính lãi.">
         <div className="sh-row-actions">
+          <button type="button" className="ce-btn" onClick={() => open({ t: "voucher", kind: "order" })}>
+            + Đặt hàng
+          </button>
           <button type="button" className="ce-btn" onClick={() => open({ t: "voucher", kind: "in" })}>
             + Nhập hàng
           </button>
@@ -101,11 +107,12 @@ export default function Vouchers() {
       {shown.length ? (
         <ul className="sh-list">
           {shown.slice(0, limit).map((v) => {
-            const who = v.kind === "in" ? supplierOf.get(v.supplierId) || "Nhập hàng" : v.kind === "out" ? v.customer || "Khách lẻ" : v.note || "Điều chỉnh kho";
+            const who =
+              v.kind === "in" || v.kind === "order" ? supplierOf.get(v.supplierId) || KIND_LABEL[v.kind] : v.kind === "out" ? v.customer || "Khách lẻ" : v.note || "Điều chỉnh kho";
             const items = v.lines.map((l) => `${qtyText(l.qty)} ${nameOf.get(l.productId)?.name ?? "(đã xoá)"}`).join(", ");
             return (
               <li key={v.id}>
-                <button type="button" className={v.status === "cancelled" && v.kind === "out" ? "cancelled" : ""} onClick={() => open({ t: "voucher", id: v.id })}>
+                <button type="button" className={v.status === "cancelled" && (v.kind === "out" || v.kind === "order") ? "cancelled" : ""} onClick={() => open({ t: "voucher", id: v.id })}>
                   <span className="sh-list-date">{dmy(v.date).slice(0, 5)}</span>
                   <span className="sh-list-main">
                     <b>
@@ -115,12 +122,21 @@ export default function Vouchers() {
                     <small>{items}</small>
                     <span className="sh-tags">
                       {v.kind === "out" && v.channel && <em>{v.channel}</em>}
-                      {v.kind === "out" && v.status !== "done" && <em className={v.status}>{STATUS_LABEL[v.status]}</em>}
-                      {v.kind !== "adjust" && !v.paid && v.status !== "cancelled" && <em className="unpaid">{v.kind === "out" ? "Chưa thu" : "Chưa trả"}</em>}
+                      {v.kind === "out" && v.status !== "done" && <em className={v.status}>{statusLabel(v)}</em>}
+                      {v.kind === "order" && <em className={`order-${v.status}`}>{statusLabel(v)}</em>}
+                      {v.kind === "in" && v.orderId && <em>Theo đơn đặt</em>}
+                      {(v.kind === "out" || v.kind === "in") && !v.paid && v.status !== "cancelled" && <em className="unpaid">{v.kind === "out" ? "Chưa thu" : "Chưa trả"}</em>}
                     </span>
                   </span>
-                  {v.kind !== "adjust" && <strong className={v.kind}>{(v.kind === "in" ? "−" : "+") + money(voucherTotal(v))}</strong>}
+                  {v.kind !== "adjust" && <strong className={v.kind}>{(v.kind === "in" ? "−" : v.kind === "out" ? "+" : "≈ ") + money(voucherTotal(v))}</strong>}
                 </button>
+                {v.kind === "order" && v.status === "pending" && (
+                  <div className="sh-quick-marks">
+                    <button type="button" onClick={() => open({ t: "voucher", kind: "in", fromOrder: v.id })}>
+                      <Icon name="box" size={16} /> Hàng đã về → nhập kho
+                    </button>
+                  </div>
+                )}
                 {v.kind === "out" && v.status !== "cancelled" && (v.status === "pending" || !v.paid) && (
                   <div className="sh-quick-marks">
                     {v.status === "pending" && (
