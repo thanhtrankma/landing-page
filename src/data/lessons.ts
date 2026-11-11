@@ -1864,4 +1864,442 @@ const book2Session5: Lesson = {
   ],
 };
 
+const book2Session6: Lesson = {
+  book: 2,
+  session: 6,
+  slug: "quyen-2-buoi-6",
+  title: "Cuối tuần trước bạn làm gì?",
+  words: [
+    {
+      hanzi: "上个",
+      pinyin: "shàng gè",
+      pos: "套",
+      meaning: "trước",
+      hanViet: "THƯỢNG CÁ",
+      phrases: [
+        { hanzi: "上个月", pinyin: "shàng gè yuè", meaning: "tháng trước" },
+        { hanzi: "上个星期", pinyin: "shàng gè xīngqī", meaning: "tuần trước" },
+        { hanzi: "上个周末", pinyin: "shàng gè zhōumò", meaning: "cuối tuần trước" },
+      ],
+      dialogues: [
+        [
+          { who: "A", zh: "上个星期你做了什么？", pinyin: "Shàng gè xīngqī nǐ zuòle shénme?", vi: "Tuần trước bạn đã làm gì?" },
+          { who: "B", zh: "我去朋友家玩儿。", pinyin: "Wǒ qù péngyou jiā wánr.", vi: "Tôi đi đến nhà bạn chơi." },
+        ],
+      ],
+    },
+    {
+      hanzi: "了",
+      pinyin: "le",
+      pos: "助",
+      meaning: "rồi (biểu thị hành động đã hoàn thành)",
+      hanViet: "LIỄU",
+      phrases: [
+        { hanzi: "吃了", pinyin: "chīle", meaning: "ăn rồi" },
+        { hanzi: "看了", pinyin: "kànle", meaning: "xem rồi" },
+        { hanzi: "昨天你做什么了？", pinyin: "Zuótiān nǐ zuò shénme le?", meaning: "Hôm qua bạn làm gì rồi?" },
+        { hanzi: "你买什么了？", pinyin: "Nǐ mǎi shénme le?", meaning: "Bạn mua gì rồi?" },
+      ],
+      dialogues: [
+        [
+          { who: "A", zh: "你昨天做了什么？", pinyin: "Nǐ zuótiān zuòle shénme?", vi: "Hôm qua bạn đã làm gì?" },
+          { who: "B", zh: "我昨天跟朋友去买了衣服。", pinyin: "Wǒ zuótiān gēn péngyou qù mǎile yīfu.", vi: "Hôm qua tôi đi mua quần áo cùng bạn." },
+        ],
+      ],
+    },
+    {
+      hanzi: "一些",
+      pinyin: "yìxiē",
+      pos: "数量词",
+      meaning: "một số, một vài",
+      hanViet: "NHẤT XƯỚNG",
+      phrases: [
+        { hanzi: "一些东西", pinyin: "yìxiē dōngxi", meaning: "một số đồ đạc" },
+        { hanzi: "一些衣服", pinyin: "yìxiē yīfu", meaning: "một số quần áo" },
+        { hanzi: "一些水果", pinyin: "yìxiē shuǐguǒ", meaning: "một số hoa quả" },
+        { hanzi: "一些国家", pinyin: "yìxiē guójiā", meaning: "một số quốc gia" },
+      ],
+      dialogues: [
+        [
+          { who: "A", zh: "你买了什么？", pinyin: "Nǐ mǎile shénme?", vi: "Bạn đã mua gì?" },
+          { who: "B", zh: "我买了一些衣服和一些水果。", pinyin: "Wǒ mǎile yìxiē yīfu hé yìxiē shuǐguǒ.", vi: "Tôi đã mua một số quần áo và một số hoa quả." },
+        ],
+      ],
+    },
+    {
+      hanzi: "参观",
+      pinyin: "cānguān",
+      pos: "动",
+      meaning: "tham quan",
+      hanViet: "THAM QUAN",
+      phrases: [
+        { hanzi: "参观学校", pinyin: "cānguān xuéxiào", meaning: "tham quan trường học" },
+        { hanzi: "参观图书馆", pinyin: "cānguān túshūguǎn", meaning: "tham quan thư viện" },
+        { hanzi: "参观了朋友家", pinyin: "cānguānle péngyou jiā", meaning: "đã tham quan nhà bạn" },
+      ],
+      dialogues: [
+        [
+          { who: "A", zh: "你参观我们学校了吗？", pinyin: "Nǐ cānguān wǒmen xuéxiào le ma?", vi: "Bạn đã tham quan trường của chúng tôi chưa?" },
+          { who: "B", zh: "我参观了。", pinyin: "Wǒ cānguānle.", vi: "Tôi tham quan rồi." },
+        ],
+      ],
+    },
+    {
+      hanzi: "公园",
+      pinyin: "gōngyuán",
+      pos: "名",
+      meaning: "công viên",
+      hanViet: "CÔNG VIÊN",
+      phrases: [
+        { hanzi: "去公园", pinyin: "qù gōngyuán", meaning: "đi công viên" },
+        { hanzi: "一个公园", pinyin: "yí gè gōngyuán", meaning: "một cái công viên" },
+        { hanzi: "去公园玩儿", pinyin: "qù gōngyuán wánr", meaning: "đi công viên chơi" },
+      ],
+      dialogues: [
+        [
+          { who: "A", zh: "我们去学校附近的公园玩儿吧！", pinyin: "Wǒmen qù xuéxiào fùjìn de gōngyuán wánr ba!", vi: "Chúng ta đi đến công viên gần trường chơi đi!" },
+          { who: "B", zh: "好。", pinyin: "Hǎo.", vi: "Được." },
+        ],
+      ],
+    },
+    {
+      hanzi: "博物馆",
+      pinyin: "bówùguǎn",
+      pos: "名",
+      meaning: "viện bảo tàng",
+      hanViet: "BÁC VẬT QUÁN",
+      phrases: [
+        { hanzi: "参观博物馆", pinyin: "cānguān bówùguǎn", meaning: "tham quan viện bảo tàng" },
+        { hanzi: "去博物馆", pinyin: "qù bówùguǎn", meaning: "đi viện bảo tàng" },
+        { hanzi: "明天我去参观博物馆。", pinyin: "Míngtiān wǒ qù cānguān bówùguǎn.", meaning: "Ngày mai tôi đi tham quan viện bảo tàng." },
+      ],
+      dialogues: [
+        [
+          { who: "A", zh: "今天我们去博物馆还是去公园？", pinyin: "Jīntiān wǒmen qù bówùguǎn háishì qù gōngyuán?", vi: "Hôm nay chúng ta đi bảo tàng hay đi công viên?" },
+          { who: "B", zh: "去博物馆吧。", pinyin: "Qù bówùguǎn ba.", vi: "Đi bảo tàng đi." },
+        ],
+      ],
+    },
+    {
+      hanzi: "里",
+      pinyin: "lǐ",
+      pos: "名",
+      meaning: "bên trong",
+      hanViet: "LÝ",
+      phrases: [
+        { hanzi: "书店里", pinyin: "shūdiàn lǐ", meaning: "trong hiệu sách" },
+        { hanzi: "学校里", pinyin: "xuéxiào lǐ", meaning: "trong trường học" },
+        { hanzi: "博物馆里", pinyin: "bówùguǎn lǐ", meaning: "trong viện bảo tàng" },
+        { hanzi: "公园里", pinyin: "gōngyuán lǐ", meaning: "trong công viên" },
+      ],
+      dialogues: [
+        [
+          { who: "A", zh: "上个周末你去哪儿了？", pinyin: "Shàng gè zhōumò nǐ qù nǎr le?", vi: "Cuối tuần trước bạn đi đâu rồi?" },
+          { who: "B", zh: "我去公园玩儿，公园里的人太多了。", pinyin: "Wǒ qù gōngyuán wánr, gōngyuán lǐ de rén tài duō le.", vi: "Tôi đi công viên chơi, người trong công viên đông quá." },
+        ],
+      ],
+    },
+    {
+      hanzi: "门票",
+      pinyin: "ménpiào",
+      pos: "名",
+      meaning: "vé vào cổng",
+      hanViet: "MÔN PHIẾU",
+      parts: [
+        { hanzi: "票", pinyin: "piào", pos: "名", meaning: "vé" },
+      ],
+      phrases: [
+        { hanzi: "买门票", pinyin: "mǎi ménpiào", meaning: "mua vé vào cổng" },
+        { hanzi: "公园门票", pinyin: "gōngyuán ménpiào", meaning: "vé vào công viên" },
+        { hanzi: "博物馆门票", pinyin: "bówùguǎn ménpiào", meaning: "vé vào viện bảo tàng" },
+        { hanzi: "去买票", pinyin: "qù mǎi piào", meaning: "đi mua vé" },
+        { hanzi: "电影票", pinyin: "diànyǐng piào", meaning: "vé xem phim" },
+        { hanzi: "火车票", pinyin: "huǒchē piào", meaning: "vé tàu hỏa" },
+      ],
+      dialogues: [],
+    },
+    {
+      hanzi: "风景",
+      pinyin: "fēngjǐng",
+      pos: "名",
+      meaning: "phong cảnh",
+      hanViet: "PHONG CẢNH",
+      phrases: [
+        { hanzi: "看风景", pinyin: "kàn fēngjǐng", meaning: "ngắm phong cảnh" },
+        { hanzi: "去看风景", pinyin: "qù kàn fēngjǐng", meaning: "đi ngắm phong cảnh" },
+        { hanzi: "风景很好看", pinyin: "fēngjǐng hěn hǎokàn", meaning: "phong cảnh rất đẹp" },
+      ],
+      dialogues: [
+        [
+          { who: "A", zh: "公园的风景怎么样？", pinyin: "Gōngyuán de fēngjǐng zěnmeyàng?", vi: "Phong cảnh công viên thế nào?" },
+          { who: "B", zh: "很漂亮。", pinyin: "Hěn piàoliang.", vi: "Rất đẹp." },
+        ],
+      ],
+    },
+    {
+      hanzi: "空气",
+      pinyin: "kōngqì",
+      pos: "名",
+      meaning: "không khí",
+      hanViet: "KHÔNG KHÍ",
+      phrases: [
+        { hanzi: "空气很好", pinyin: "kōngqì hěn hǎo", meaning: "không khí rất tốt" },
+        { hanzi: "空气不太好", pinyin: "kōngqì bú tài hǎo", meaning: "không khí không tốt lắm" },
+      ],
+      dialogues: [
+        [
+          { who: "A", zh: "公园怎么样？", pinyin: "Gōngyuán zěnmeyàng?", vi: "Công viên thế nào?" },
+          { who: "B", zh: "公园的风景很漂亮，空气很好。", pinyin: "Gōngyuán de fēngjǐng hěn piàoliang, kōngqì yě hěn hǎo.", vi: "Phong cảnh công viên rất đẹp, không khí cũng rất tốt." },
+        ],
+      ],
+    },
+    {
+      hanzi: "真",
+      pinyin: "zhēn",
+      pos: "副",
+      meaning: "thật, thật là",
+      hanViet: "CHÂN",
+      phrases: [
+        { hanzi: "真好", pinyin: "zhēn hǎo", meaning: "thật tốt" },
+        { hanzi: "真贵", pinyin: "zhēn guì", meaning: "thật đắt" },
+        { hanzi: "真便宜", pinyin: "zhēn piányi", meaning: "thật rẻ" },
+      ],
+      dialogues: [
+        [
+          { who: "A", zh: "博物馆怎么样？", pinyin: "Bówùguǎn zěnme yàng?", vi: "Bảo tàng thế nào?" },
+          { who: "B", zh: "博物馆真大。", pinyin: "Bówùguǎn zhēn dà.", vi: "Bảo tàng thật là to." },
+        ],
+      ],
+    },
+    {
+      hanzi: "非常",
+      pinyin: "fēicháng",
+      pos: "副",
+      meaning: "vô cùng, rất",
+      hanViet: "PHI THƯỜNG",
+      phrases: [
+        { hanzi: "非常喜欢", pinyin: "fēicháng xǐhuan", meaning: "rất thích" },
+        { hanzi: "非常好", pinyin: "fēicháng hǎo", meaning: "rất tốt / vô cùng tốt" },
+        { hanzi: "非常好喝", pinyin: "fēicháng hǎohē", meaning: "rất ngon (đồ uống)" },
+        { hanzi: "非常大", pinyin: "fēicháng dà", meaning: "vô cùng to" },
+      ],
+      dialogues: [
+        [
+          { who: "A", zh: "你想去公园玩儿吗？公园的风景非常漂亮。", pinyin: "Nǐ xiǎng qù gōngyuán wánr ma? Gōngyuán de fēngjǐng fēicháng piàoliang.", vi: "Bạn muốn đi công viên chơi không? Phong cảnh công viên rất đẹp." },
+          { who: "B", zh: "是吗？我想去。", pinyin: "Shì ma? Wǒ xiǎng qù.", vi: "Thật thế sao? Tôi muốn đi." },
+        ],
+      ],
+    },
+    {
+      hanzi: "美",
+      pinyin: "měi",
+      pos: "形",
+      meaning: "đẹp",
+      hanViet: "MỸ",
+      phrases: [
+        { hanzi: "真美", pinyin: "zhēn měi", meaning: "thật đẹp" },
+        { hanzi: "非常美", pinyin: "fēicháng měi", meaning: "rất đẹp / vô cùng đẹp" },
+        { hanzi: "风景很美", pinyin: "fēngjǐng hěn měi", meaning: "phong cảnh rất đẹp" },
+        { hanzi: "公园的风景很美。", pinyin: "Gōngyuán de fēngjǐng hěn měi.", meaning: "Phong cảnh công viên rất đẹp." },
+        { hanzi: "她长得很美。", pinyin: "Tā zhǎng de hěn měi.", meaning: "Cô ấy trông rất đẹp." },
+        { hanzi: "她穿的衣服很美。", pinyin: "Tā chuān de yīfu hěn měi.", meaning: "Quần áo cô ấy mặc rất đẹp." },
+      ],
+      dialogues: [],
+    },
+    {
+      hanzi: "好玩儿",
+      pinyin: "hǎowánr",
+      pos: "形",
+      meaning: "vui, thú vị",
+      hanViet: "HẢO NGOẠN NHI",
+      phrases: [
+        { hanzi: "真好玩儿", pinyin: "zhēn hǎowánr", meaning: "thật vui / thật thú vị" },
+        { hanzi: "很好玩儿", pinyin: "hěn hǎowánr", meaning: "rất vui / rất thú vị" },
+        { hanzi: "非常好玩儿", pinyin: "fēicháng hǎowánr", meaning: "vô cùng vui / vô cùng thú vị" },
+      ],
+      dialogues: [
+        [
+          { who: "A", zh: "你觉得去博物馆怎么样？", pinyin: "Nǐ juéde qù bówùguǎn zěnmeyàng?", vi: "Bạn cảm thấy đi bảo tàng thế nào?" },
+          { who: "B", zh: "去博物馆非常好玩儿。", pinyin: "Qù bówùguǎn fēicháng hǎowánr.", vi: "Đi bảo tàng vô cùng thú vị." },
+        ],
+      ],
+    },
+    {
+      hanzi: "拍",
+      pinyin: "pāi",
+      pos: "动",
+      meaning: "chụp, quay",
+      hanViet: "PHÁCH",
+      phrases: [
+        { hanzi: "照片", pinyin: "zhàopiàn", meaning: "bức ảnh" },
+        { hanzi: "拍照片", pinyin: "pāi zhàopiàn", meaning: "chụp ảnh" },
+      ],
+      dialogues: [
+        [
+          { who: "A", zh: "你想跟我去公园拍照片吗？", pinyin: "Nǐ xiǎng gēn wǒ qù gōngyuán pāi zhàopiàn ma?", vi: "Bạn muốn cùng tôi đến công viên chụp ảnh không?" },
+          { who: "B", zh: "想。", pinyin: "Xiǎng.", vi: "Muốn." },
+        ],
+      ],
+    },
+    {
+      hanzi: "看上去",
+      pinyin: "kàn shàngqù",
+      pos: "动词词组",
+      meaning: "nhìn có vẻ",
+      hanViet: "KHÁN THƯỢNG KHỨ",
+      phrases: [
+        { hanzi: "看上去很累", pinyin: "kàn shàngqù hěn lèi", meaning: "nhìn có vẻ rất mệt" },
+        { hanzi: "看上去不开心", pinyin: "kàn shàngqù bù kāixīn", meaning: "nhìn có vẻ không vui" },
+        { hanzi: "看上去很好吃", pinyin: "kàn shàngqù hěn hǎochī", meaning: "nhìn có vẻ rất ngon" },
+      ],
+      dialogues: [
+        [
+          { who: "A", zh: "你怎么了？看上去有点儿累？", pinyin: "Nǐ zěnme le? Kàn shàngqù yǒudiǎnr lèi?", vi: "Bạn làm sao thế? Nhìn có vẻ hơi mệt à?" },
+          { who: "B", zh: "我没事。", pinyin: "Wǒ méishì.", vi: "Tôi không sao." },
+        ],
+      ],
+    },
+    {
+      hanzi: "累",
+      pinyin: "lèi",
+      pos: "形",
+      meaning: "mệt",
+      hanViet: "LỤY",
+      phrases: [
+        { hanzi: "有点儿累", pinyin: "yǒudiǎnr lèi", meaning: "hơi mệt một chút" },
+        { hanzi: "非常累", pinyin: "fēicháng lèi", meaning: "vô cùng mệt" },
+        { hanzi: "不累", pinyin: "bú lèi", meaning: "không mệt" },
+        { hanzi: "跑得很累", pinyin: "pǎo de hěn lèi", meaning: "chạy rất mệt" },
+      ],
+      dialogues: [
+        [
+          { who: "A", zh: "你走路去博物馆累吗？", pinyin: "Nǐ zǒulù qù bówùguǎn lèi ma?", vi: "Bạn đi bộ đến bảo tàng có mệt không?" },
+          { who: "B", zh: "不累。", pinyin: "Bú lèi.", vi: "Không mệt." },
+        ],
+      ],
+    },
+    {
+      hanzi: "爱",
+      pinyin: "ài",
+      pos: "动",
+      meaning: "thích, yêu",
+      hanViet: "ÁI",
+      phrases: [
+        { hanzi: "不爱", pinyin: "bú ài", meaning: "không yêu / không thích" },
+        { hanzi: "很爱", pinyin: "hěn ài", meaning: "rất yêu / rất thích" },
+        { hanzi: "爱旅行", pinyin: "ài lǚxíng", meaning: "thích du lịch" },
+        { hanzi: "爱汉语", pinyin: "ài Hànyǔ", meaning: "thích tiếng Hán" },
+        { hanzi: "妈妈很爱我。", pinyin: "Māmā hěn ài wǒ.", meaning: "Mẹ rất yêu tôi." },
+        { hanzi: "我爱看书。", pinyin: "Wǒ ài kànshū.", meaning: "Tôi thích đọc sách." },
+        { hanzi: "我爱学习汉语。", pinyin: "Wǒ ài xuéxí Hànyǔ.", meaning: "Tôi thích học tiếng Hán." },
+      ],
+      dialogues: [],
+    },
+    {
+      hanzi: "本",
+      pinyin: "běn",
+      pos: "量",
+      meaning: "quyển (lượng từ của sách, vở)",
+      hanViet: "BẢN",
+      phrases: [
+        { hanzi: "两本书", pinyin: "liǎng běn shū", meaning: "hai quyển sách" },
+        { hanzi: "三本杂志", pinyin: "sān běn zázhì", meaning: "ba quyển tạp chí" },
+        { hanzi: "买了两本书", pinyin: "mǎile liǎng běn shū", meaning: "đã mua hai quyển sách" },
+        { hanzi: "借一本杂志", pinyin: "jiè yì běn zázhì", meaning: "mượn một quyển tạp chí" },
+      ],
+      dialogues: [
+        [
+          { who: "A", zh: "这本书是你的吗？", pinyin: "Zhè běn shū shì nǐ de ma?", vi: "Quyển sách này là của bạn phải không?" },
+          { who: "B", zh: "这本书不是我的。", pinyin: "Zhè běn shū búshì wǒ de.", vi: "Quyển sách này không phải của tôi." },
+        ],
+      ],
+    },
+  ],
+  grammar: [
+    {
+      id: "tro-tu-le-bieu-thi-hoan-thanh-1",
+      title: "“了” 表完成 (Tân ngữ không có từ tu sức)",
+      name: "Trợ từ “了” biểu thị hoàn thành (1)",
+      summary: "Khi “了” đặt ở cuối câu để nói về một sự việc đã xảy ra hoặc đã hoàn thành trong quá quá quá quá khứ, tân ngữ không có từ tu sức cụ thể.",
+      structures: ["……了"],
+      note: "Trợ từ '了' đặt ở cuối câu khi tân ngữ đứng trơn (không đi kèm số lượng từ hay tính từ định ngữ).",
+      focus: ["了"],
+      examples: [
+        { zh: "你昨天买什么了？", pinyin: "Nǐ zuótiān mǎi shénme le?", vi: "Hôm qua bạn mua gì rồi?" },
+        { zh: "我买衣服了。", pinyin: "Wǒ mǎi yīfu le.", vi: "Tôi mua quần áo rồi." },
+        { zh: "你周末去哪儿了？", pinyin: "Nǐ zhōumò qù nǎr le?", vi: "Cuối tuần bạn đi đâu rồi?" },
+        { zh: "我去图书馆了。", pinyin: "Wǒ qù túshūguǎn le.", vi: "Tôi đi thư viện rồi." },
+      ],
+    },
+    {
+      id: "tro-tu-le-bieu-thi-hoan-thanh-2",
+      title: "“了” 表完成 (Tân ngữ có từ tu sức)",
+      name: "Trợ từ “了” biểu thị hoàn thành (2)",
+      summary: "Nếu như sau động từ là tân ngữ có từ tu sức thì “了” phải đứng sau động từ và trước tân ngữ, thể hiện hành động đã hoàn thành hoặc kết thúc.",
+      structures: ["Verb + “了” + The Object"],
+      note: "Khi tân ngữ có định ngữ/từ tu sức (như: 什么, 一件, 一双,...), '了' đứng trực tiếp sau động từ.",
+      focus: ["了"],
+      examples: [
+        { zh: "你买了什么衣服？", pinyin: "Nǐ mǎile shénme yīfu?", vi: "Bạn đã mua quần áo gì?" },
+        { zh: "我买了一件衬衫和一双鞋。", pinyin: "Wǒ mǎile yí jiàn chènshān hé yì shuāng xié.", vi: "Tôi đã mua một chiếc áo sơ mi và một đôi giày." },
+      ],
+    },
+    {
+      id: "tro-tu-le-bieu-thi-hoan-thanh-nghi-van-1",
+      title: "“了” 表完成 (Thể nghi vấn 1)",
+      name: "Trợ từ “了” biểu thị hoàn thành - Thể nghi vấn (1)",
+      summary: "Dạng câu hỏi xác nhận một hành động đã xảy ra/hoàn thành hay chưa bằng cách thêm '了吗' vào cuối câu.",
+      structures: ["V + (O) + 了吗？"],
+      note: "Thêm '吗' sau '了' ở cuối câu để tạo câu hỏi nghi vấn hoàn thành.",
+      focus: ["了吗"],
+      examples: [
+        { zh: "你吃饭了吗？", pinyin: "Nǐ chī fàn le ma?", vi: "Bạn ăn cơm chưa?" },
+        { zh: "你昨天打球了吗？", pinyin: "Nǐ zuótiān dǎqiú le ma?", vi: "Hôm qua bạn có chơi bóng không?" },
+        { zh: "你买衣服了吗？", pinyin: "Nǐ mǎi yīfu le ma?", vi: "Bạn đã mua quần áo chưa?" },
+      ],
+    },
+    {
+      id: "tro-tu-le-bieu-thi-hoan-thanh-nghi-van-2",
+      title: "“了” 表完成 (Thể nghi vấn 2)",
+      name: "Trợ từ “了” biểu thị hoàn thành - Thể nghi vấn chính phản (2)",
+      summary: "Dạng câu hỏi chính phản dùng cấu trúc 'V + 没 + V + (O)?' để hỏi xem một hành động đã hoàn thành hay chưa.",
+      structures: ["V + 没 + V + (O)？"],
+      note: "Dùng hình thức lập lại động từ khẳng định - phủ định 'V + 没 + V', không dùng '了' ở cuối câu.",
+      focus: ["V没V"],
+      examples: [
+        { zh: "你吃没吃饭？", pinyin: "Nǐ chī méi chī fàn?", vi: "Bạn đã ăn cơm chưa?" },
+        { zh: "你昨天打没打球？", pinyin: "Nǐ zuótiān dǎ méi dǎ qiú?", vi: "Hôm qua bạn có chơi bóng không?" },
+        { zh: "你买没买衣服？", pinyin: "Nǐ mǎi méi mǎi yīfu?", vi: "Bạn đã mua quần áo chưa?" },
+      ],
+    },
+    {
+      id: "tro-tu-le-bieu-thi-hoan-thanh-phu-dinh",
+      title: "“了” 表完成 (Thể phủ định)",
+      name: "Trợ từ “了” biểu thị hoàn thành - Thể phủ định",
+      summary: "Khi phủ định một hành động chưa hoàn thành/chưa xảy ra, dùng '没' (hoặc '没有') đứng trước động từ, và lược bỏ '了' ở cuối câu.",
+      structures: ["没 + V + (O)"],
+      note: "Trong câu phủ định dùng '没' thì KHÔNG dùng '了' nữa.",
+      focus: ["没"],
+      examples: [
+        { zh: "我没吃早饭。", pinyin: "Wǒ méi chī zǎofàn.", vi: "Tôi chưa ăn sáng." },
+        { zh: "我昨天没打球。", pinyin: "Wǒ zuótiān méi dǎqiú.", vi: "Hôm qua tôi không chơi bóng." },
+        { zh: "他没买衣服。", pinyin: "Tā méi mǎi yīfu.", vi: "Anh ấy chưa mua quần áo." },
+      ],
+    },
+    {
+      id: "cau-vi-ngu-chu-vi",
+      title: "主谓谓语句",
+      name: "Câu vị ngữ chủ vị",
+      summary: "Là câu có một cụm chủ vị đảm nhận chức năng làm vị ngữ, chủ ngữ có thể coi là chủ đề của câu. Khi đọc, sau chủ ngữ có thể ngừng lại một chút. Khi ở dạng phủ định, từ phủ định phải đứng trước vị ngữ trong kết cấu chủ vị.",
+      structures: ["Chủ ngữ + [Chủ ngữ nhỏ + Vị ngữ nhỏ]"],
+      note: "Cụm chủ vị phía sau đóng vai trò miêu tả/đánh giá cho chủ ngữ lớn ở đầu câu.",
+      focus: ["主谓谓语句"],
+      examples: [
+        { zh: "北京博物馆很多，广场不多。", pinyin: "Běijīng bówùguǎn hěn duō, guǎngchǎng bù duō.", vi: "Bắc Kinh bảo tàng rất nhiều, quảng trường không nhiều." },
+        { zh: "那个博物馆东西很多，人不多。", pinyin: "Nàge bówùguǎn dōngxi hěn duō, rén bù duō.", vi: "Bảo tàng đó đồ đạc rất nhiều, người không nhiều." },
+        { zh: "他汉语很好，英语不好。", pinyin: "Tā Hànyǔ hěn hǎo, Yīngyǔ bù hǎo.", vi: "Tiếng Hán của anh ấy rất tốt, tiếng Anh không tốt." },
+      ],
+    },
+  ],
+};
 export const LESSONS: Lesson[] = [...BOOK_1, book2Session1, book2Session2, book2Session3, book2Session4, book2Session5];

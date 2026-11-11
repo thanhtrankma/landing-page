@@ -2,7 +2,7 @@
 
 import { useMemo, useRef, useState } from "react";
 import { uploadFile } from "@/lib/upload-client";
-import { dmy, KIND_LABEL, money, newId, qtyText, statusLabel, today, type Product } from "@/lib/shop/types";
+import { dmy, KIND_LABEL, lineKey, money, newId, qtyText, statusLabel, today, type Product } from "@/lib/shop/types";
 import { Icon } from "./icons";
 import { Empty, Field, FlowerMark, fold, MoneyInput, Panel, type Sheet, useShop } from "./ui";
 
@@ -96,7 +96,10 @@ export default function Products() {
                     {(p.color || p.size) && <small>{[p.color, p.size].filter(Boolean).join(" · ")}</small>}
                     <span className="sh-prices">
                       <strong>{money(p.price)}</strong>
-                      <span>vốn {money(s?.avgCost ?? p.cost)}</span>
+                      <span title={s?.estimated ? "Giá nhập dự kiến, chưa có phiếu nhập" : "Giá vốn bình quân, đã gồm ship nhập"}>
+                        vốn {s?.estimated ? "~" : ""}
+                        {money(s?.avgCost ?? p.cost)}
+                      </span>
                     </span>
                     {supplier && <small className="sh-src">Nguồn: {supplier.name}</small>}
                   </span>
@@ -136,7 +139,7 @@ function suggestCode(products: Product[], category: string) {
 }
 
 export function ProductForm({ sheet, onClose }: { sheet: Extract<Sheet, { t: "product" }>; onClose: () => void }) {
-  const { book, stats, update, open, toast, undoable } = useShop();
+  const { book, stats, ledger, update, open, toast, undoable } = useShop();
   const existing = book.products.find((p) => p.id === sheet.id);
   const [p, setP] = useState<Product>(() => {
     if (existing) return existing;
@@ -203,7 +206,11 @@ export function ProductForm({ sheet, onClose }: { sheet: Extract<Sheet, { t: "pr
     onClose();
   };
 
-  const profit = p.price - (s?.avgCost ?? p.cost);
+  // Before any purchase the expected price stands in for the cost; after, the moving average does.
+  const bought = Boolean(s && !s.estimated);
+  const unitCost = bought ? s!.avgCost : p.cost;
+  const profit = p.price - unitCost;
+  const lastSupplier = bought ? book.suppliers.find((x) => x.id === s!.lastSupplierId)?.name : "";
   return (
     <Panel
       title={existing ? existing.name : "Thêm mẫu hàng"}
@@ -243,9 +250,15 @@ export function ProductForm({ sheet, onClose }: { sheet: Extract<Sheet, { t: "pr
             <b>{qtyText(s.soldQty)}</b>
           </div>
           <div>
-            <span>Giá vốn TB</span>
-            <b>{money(s.avgCost)}</b>
+            <span>{bought ? "Giá vốn BQ" : "Giá vốn"}</span>
+            <b title={bought ? "Bình quân sau mỗi lần nhập, đã gồm phí ship nhập" : undefined}>{bought ? money(s.avgCost) : "Chưa nhập"}</b>
           </div>
+          {s.lost > 0 && (
+            <div title="Giá vốn của hàng hỏng, mất đã ghi bằng phiếu điều chỉnh kho">
+              <span>Hao hụt</span>
+              <b className="bad">{money(s.lost)}</b>
+            </div>
+          )}
           {s.onOrder > 0 && (
             <div>
               <span>Đang đặt</span>
@@ -324,10 +337,40 @@ export function ProductForm({ sheet, onClose }: { sheet: Extract<Sheet, { t: "pr
         <Field label="Báo sắp hết khi tồn ≤" hint="Để 0 nếu không cần cảnh báo.">
           <MoneyInput value={p.minStock} onChange={(n) => set("minStock", n)} />
         </Field>
-        <Field label="Giá nhập (mỗi đơn vị)" hint="Gõ 120k = 120.000đ">
-          <MoneyInput value={p.cost} onChange={(n) => set("cost", n)} placeholder="0" />
-        </Field>
-        <Field label="Giá bán (mỗi đơn vị)" hint={p.price > 0 ? `Lãi ${money(profit)} / ${p.unit || "đv"} (${Math.round((profit / p.price) * 100)}%)` : undefined}>
+        {bought ? (
+          <div className="sh-field sh-costbox">
+            <span>Giá nhập & giá vốn</span>
+            <dl>
+              <dt>Nhập lần cuối</dt>
+              <dd>
+                <b>{money(s!.lastPrice)}</b>
+                <small>
+                  {dmy(s!.lastIn)}
+                  {lastSupplier ? ` · ${lastSupplier}` : ""}
+                </small>
+              </dd>
+              {s!.minPrice !== s!.maxPrice && (
+                <>
+                  <dt>Từng nhập</dt>
+                  <dd>
+                    {money(s!.minPrice)} – {money(s!.maxPrice)}
+                  </dd>
+                </>
+              )}
+              <dt>Giá vốn bình quân</dt>
+              <dd>
+                <b>{money(s!.avgCost)}</b>
+                <small>đã gồm ship nhập</small>
+              </dd>
+            </dl>
+            <small>Tự tính từ các phiếu nhập. Muốn sửa giá, mở phiếu nhập trong lịch sử bên dưới.</small>
+          </div>
+        ) : (
+          <Field label="Giá nhập dự kiến (mỗi đơn vị)" hint="Chỉ để điền sẵn khi lên đơn và ước tính lãi. Có phiếu nhập rồi, giá vốn tự tính từ phiếu. Gõ 120k = 120.000đ">
+            <MoneyInput value={p.cost} onChange={(n) => set("cost", n)} placeholder="0" />
+          </Field>
+        )}
+        <Field label="Giá bán (mỗi đơn vị)" hint={p.price > 0 && (bought || p.cost > 0) ? `${bought ? "Lãi" : "Lãi dự kiến"} ${money(profit)} / ${p.unit || "đv"} (${Math.round((profit / p.price) * 100)}%)` : undefined}>
           <MoneyInput value={p.price} onChange={(n) => set("price", n)} placeholder="0" />
         </Field>
         <Field label="Nguồn hàng (chỗ lấy hàng)" wide>
@@ -375,6 +418,7 @@ export function ProductForm({ sheet, onClose }: { sheet: Extract<Sheet, { t: "pr
                         <small>
                           {dmy(v.date)}
                           {v.kind !== "adjust" && line ? ` · ${money(line.price)}/${p.unit || "đv"}` : ""}
+                          {v.kind === "in" && ledger.lines.get(lineKey(v.id, existing.id)) ? ` · vốn BQ sau: ${money(ledger.lines.get(lineKey(v.id, existing.id))!.avgAfter)}` : ""}
                           {v.kind === "out" && v.status === "cancelled" ? " · đã huỷ" : ""}
                           {v.kind === "order" ? ` · ${statusLabel(v).toLowerCase()}` : ""}
                         </small>

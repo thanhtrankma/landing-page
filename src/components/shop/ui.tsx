@@ -1,7 +1,7 @@
 "use client";
 
 import { createContext, useContext, useEffect, useId, useRef, useState } from "react";
-import type { Product, ProductStats, ShopBook, VoucherKind } from "@/lib/shop/types";
+import type { Ledger, Product, ProductStats, ShopBook, VoucherKind } from "@/lib/shop/types";
 
 // Shared state and small building blocks of the sales book app.
 
@@ -31,6 +31,8 @@ export type Shop = {
   /** Name (or email) stamped on what this person writes. */
   me: string;
   stats: Map<string, ProductStats>;
+  /** Moving-average costs: per-sale cost of goods and per-purchase unit costs. */
+  ledger: Ledger;
   update: (fn: (b: ShopBook) => ShopBook) => void;
   open: (s: Sheet) => void;
   toast: (m: string, err?: boolean) => void;

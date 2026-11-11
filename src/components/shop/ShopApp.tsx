@@ -5,7 +5,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { mergeBooks } from "@/lib/shop/merge";
 import type { BookRef, BookRole } from "@/lib/shop/server";
 import { SHOP_APP, SHOP_BOOK_COOKIE as BOOK_COOKIE } from "@/lib/shop/tool";
-import { productStats, sanitizeBook, type ShopBook } from "@/lib/shop/types";
+import { bookLedger, sanitizeBook, type ShopBook } from "@/lib/shop/types";
 import Members from "./Members";
 import Notes, { NoteForm } from "./Notes";
 import Overview from "./Overview";
@@ -195,12 +195,13 @@ export default function ShopApp({ initial, initialVersion, bookId, role: initial
     return () => clearTimeout(t);
   }, [toastMsg]);
 
-  const stats = useMemo(() => productStats(book), [book]);
+  const ledger = useMemo(() => bookLedger(book), [book]);
+  const stats = ledger.stats;
   const open = useCallback((s: Sheet) => setSheets((list) => [...list, s]), []);
   const close = useCallback(() => setSheets((list) => list.slice(0, -1)), []);
   const toast = useCallback((m: string, err?: boolean) => setToastMsg({ m, err }), []);
   const undoable = useCallback((m: string, undo: () => void) => setToastMsg({ m, undo }), []);
-  const shop: Shop = useMemo(() => ({ book, bookId, role, me, stats, update, open, toast, undoable }), [book, bookId, role, me, stats, update, open, toast, undoable]);
+  const shop: Shop = useMemo(() => ({ book, bookId, role, me, stats, ledger, update, open, toast, undoable }), [book, bookId, role, me, stats, ledger, update, open, toast, undoable]);
   const others = books.length > 1;
   const go = (t: Tab) => {
     setTab(t);

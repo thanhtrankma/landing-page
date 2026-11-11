@@ -16,7 +16,7 @@ const shiftMonth = (m: string, by: number) => {
 };
 
 export default function Overview({ go }: { go: (t: Tab) => void }) {
-  const { book, stats, open, update, undoable } = useShop();
+  const { book, stats, ledger, open, update, undoable } = useShop();
   const [month, setMonth] = useState(() => today().slice(0, 7));
 
   const sum = useMemo(() => {
@@ -24,9 +24,10 @@ export default function Overview({ go }: { go: (t: Tab) => void }) {
     const inMonth = (v: Voucher) => monthOf(v.date) === month;
     const monthSales = sales.filter(inMonth);
     const revenue = monthSales.reduce((s, v) => s + saleRevenue(v), 0);
-    const cost = monthSales.reduce((s, v) => s + saleCost(v, stats), 0);
+    const cost = monthSales.reduce((s, v) => s + saleCost(v, ledger), 0);
+    const provisional = monthSales.filter((v) => ledger.sales.get(v.id)?.provisional).length;
     const bought = book.vouchers.filter((v) => v.kind === "in" && inMonth(v)).reduce((s, v) => s + voucherTotal(v), 0);
-    const stockValue = book.products.reduce((s, p) => s + Math.max(0, stats.get(p.id)?.stock ?? 0) * (stats.get(p.id)?.avgCost ?? p.cost), 0);
+    const stockValue = book.products.reduce((s, p) => s + (stats.get(p.id)?.value ?? 0), 0);
     const owed = sales.filter((v) => !v.paid);
     const pending = sales.filter((v) => v.status === "pending").sort((a, b) => a.date.localeCompare(b.date));
     const low = book.products
@@ -46,11 +47,11 @@ export default function Overview({ go }: { go: (t: Tab) => void }) {
     const months = Array.from({ length: 6 }, (_, i) => shiftMonth(month, i - 5)).map((m) => {
       const list = sales.filter((v) => monthOf(v.date) === m);
       const rev = list.reduce((s, v) => s + saleRevenue(v), 0);
-      return { m, orders: list.length, revenue: rev, profit: rev - list.reduce((s, v) => s + saleCost(v, stats), 0) };
+      return { m, orders: list.length, revenue: rev, profit: rev - list.reduce((s, v) => s + saleCost(v, ledger), 0) };
     });
     const awaitingOrders = book.vouchers.filter(awaiting).sort((a, b) => a.date.localeCompare(b.date));
-    return { orders: monthSales.length, revenue, profit: revenue - cost, bought, stockValue, owed, owedTotal: owed.reduce((s, v) => s + voucherTotal(v), 0), pending, low, best, months, awaitingOrders };
-  }, [book, stats, month]);
+    return { orders: monthSales.length, revenue, profit: revenue - cost, provisional, bought, stockValue, owed, owedTotal: owed.reduce((s, v) => s + voucherTotal(v), 0), pending, low, best, months, awaitingOrders };
+  }, [book, stats, ledger, month]);
 
   const product = (id: string) => book.products.find((p) => p.id === id);
   // Low-stock items nobody has ordered yet.
@@ -121,7 +122,10 @@ export default function Overview({ go }: { go: (t: Tab) => void }) {
         <div className="sh-kpi good">
           <span>Lãi gộp</span>
           <b>{money(sum.profit)}</b>
-          <small>{sum.revenue ? `${margin}% doanh thu` : "Chưa có đơn"}</small>
+          <small title={sum.provisional ? "Có đơn bán khi chưa ghi phiếu nhập: giá vốn tạm tính theo giá gần nhất, sẽ tự tính lại khi ghi phiếu nhập." : undefined}>
+            {sum.revenue ? `${margin}% doanh thu` : "Chưa có đơn"}
+            {sum.provisional > 0 && ` · ${sum.provisional} đơn giá vốn tạm`}
+          </small>
         </div>
         <div className="sh-kpi">
           <span>Tiền nhập hàng</span>

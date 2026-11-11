@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { dmy, goodsTotal, KIND_LABEL, money, newId, qtyText, today, type Line, type OrderStatus, type Product, type ShopBook, type Voucher, type VoucherKind } from "@/lib/shop/types";
+import { dmy, goodsTotal, KIND_LABEL, lastBuyPrice, money, newId, qtyText, today, type Line, type OrderStatus, type Product, type ShopBook, type Voucher, type VoucherKind } from "@/lib/shop/types";
 import { Icon } from "./icons";
 import { Field, FlowerMark, fold, MoneyInput, Panel, Seg, type Sheet, Stepper, useShop } from "./ui";
 
@@ -24,9 +24,10 @@ function saveVoucher(b: ShopBook, v: Voucher, isNew: boolean): ShopBook {
 }
 
 export default function VoucherForm({ sheet, onClose }: { sheet: Extract<Sheet, { t: "voucher" }>; onClose: () => void }) {
-  const { book, stats, update, open, toast, undoable, me } = useShop();
+  const { book, stats, ledger, update, open, toast, undoable, me } = useShop();
   const existing = book.vouchers.find((v) => v.id === sheet.id);
-  const priceFor = (p: Product | undefined, kind: VoucherKind) => (!p ? 0 : buying(kind) ? p.cost || Math.round(stats.get(p.id)?.avgCost ?? 0) : kind === "out" ? p.price : 0);
+  // Buying prefills the last price paid (to this supplier if known); selling, the list price.
+  const priceFor = (p: Product | undefined, kind: VoucherKind, supplierId = "") => (!p ? 0 : buying(kind) ? lastBuyPrice(book, p.id, supplierId || p.supplierId) : kind === "out" ? p.price : 0);
 
   const [v, setV] = useState<Voucher>(() => {
     if (existing) return existing;
@@ -57,7 +58,7 @@ export default function VoucherForm({ sheet, onClose }: { sheet: Extract<Sheet, 
     const picks = (sheet.productIds ?? []).map((id) => book.products.find((p) => p.id === id)).filter((p): p is Product => Boolean(p));
     return {
       ...base,
-      lines: picks.map((p) => ({ productId: p.id, qty: kind === "adjust" ? -1 : 1, price: priceFor(p, kind) })),
+      lines: picks.map((p) => ({ productId: p.id, qty: kind === "adjust" ? -1 : 1, price: priceFor(p, kind, sheet.supplierId) })),
       supplierId: buying(kind) ? (sheet.supplierId ?? picks.find((p) => p.supplierId)?.supplierId ?? "") : "",
       channel: kind === "out" ? (book.channels[0] ?? "") : "",
       status: kind === "order" ? "pending" : "done",
@@ -72,7 +73,7 @@ export default function VoucherForm({ sheet, onClose }: { sheet: Extract<Sheet, 
     setV((x) => {
       const step = x.kind === "adjust" ? -1 : 1;
       const i = x.lines.findIndex((l) => l.productId === p.id);
-      const lines = i >= 0 ? x.lines.map((l, j) => (j === i ? { ...l, qty: l.qty + step } : l)) : [...x.lines, { productId: p.id, qty: step, price: priceFor(p, x.kind) }];
+      const lines = i >= 0 ? x.lines.map((l, j) => (j === i ? { ...l, qty: l.qty + step } : l)) : [...x.lines, { productId: p.id, qty: step, price: priceFor(p, x.kind, x.supplierId) }];
       const supplierId = buying(x.kind) && !x.supplierId && p.supplierId ? p.supplierId : x.supplierId;
       return { ...x, lines, supplierId };
     });
@@ -81,14 +82,19 @@ export default function VoucherForm({ sheet, onClose }: { sheet: Extract<Sheet, 
     setV((x) => ({
       ...x,
       kind,
-      lines: x.lines.map((l) => ({ ...l, qty: kind === "adjust" ? -Math.abs(l.qty) : Math.abs(l.qty) || 1, price: priceFor(book.products.find((p) => p.id === l.productId), kind) })),
+      lines: x.lines.map((l) => ({ ...l, qty: kind === "adjust" ? -Math.abs(l.qty) : Math.abs(l.qty) || 1, price: priceFor(book.products.find((p) => p.id === l.productId), kind, x.supplierId) })),
       channel: kind === "out" ? x.channel || book.channels[0] || "" : x.channel,
       status: kind === "order" ? "pending" : "done",
     }));
 
   const goods = goodsTotal(v);
   const total = v.kind === "out" ? goods - v.discount + v.fee : v.kind === "in" ? goods + v.fee : v.kind === "order" ? goods : 0;
-  const cost = v.lines.reduce((s, l) => s + l.qty * (stats.get(l.productId)?.avgCost ?? 0), 0);
+  // A saved sale keeps the cost fixed when it was sold; a new or changed one is estimated at today's average.
+  const savedCost = existing && JSON.stringify(existing.lines) === JSON.stringify(v.lines) && existing.date === v.date ? ledger.sales.get(existing.id) : undefined;
+  const cost = savedCost?.cost ?? v.lines.reduce((s, l) => s + l.qty * (stats.get(l.productId)?.avgCost ?? 0), 0);
+  /** What a purchase line is compared with: the order it receives, else the previous purchase. */
+  const refPrice = (productId: string) =>
+    sourceOrder ? sourceOrder.lines.find((l) => l.productId === productId)?.price : book.vouchers.some((x) => x.kind === "in" && x.id !== v.id && x.lines.some((l) => l.productId === productId)) ? lastBuyPrice(book, productId, v.supplierId, v.id) : undefined;
   // Stock before this voucher (adding back its own lines when editing a sale).
   const available = (productId: string) => (stats.get(productId)?.stock ?? 0) + (existing?.kind === "out" && existing.status !== "cancelled" ? existing.lines.filter((l) => l.productId === productId).reduce((n, l) => n + l.qty, 0) : 0);
   const productOf = (id: string) => book.products.find((p) => p.id === id);
@@ -292,6 +298,7 @@ export default function VoucherForm({ sheet, onClose }: { sheet: Extract<Sheet, 
                     <label className="sh-cart-price">
                       <span>{buying(v.kind) ? "Giá nhập" : "Giá bán"}</span>
                       <MoneyInput aria-label="Đơn giá" value={l.price} onChange={(n) => setLine(i, { price: n })} />
+                      {v.kind === "in" && <PriceNote price={l.price} refPrice={refPrice(l.productId)} vsOrder={Boolean(sourceOrder)} landed={goods > 0 && v.fee > 0 ? l.price * (1 + v.fee / goods) : 0} />}
                     </label>
                   )}
                   {v.kind !== "adjust" && <b className="sh-cart-sum">{money(l.qty * l.price)}</b>}
@@ -399,7 +406,7 @@ export default function VoucherForm({ sheet, onClose }: { sheet: Extract<Sheet, 
         )}
         {v.kind === "in" && (
           <>
-            <Field label="Phí vận chuyển">
+            <Field label="Phí vận chuyển" hint="Được chia vào giá vốn từng mẫu theo giá trị hàng.">
               <MoneyInput value={v.fee} onChange={(n) => set("fee", n)} placeholder="0" />
             </Field>
             <div className="sh-field">
@@ -470,7 +477,7 @@ export default function VoucherForm({ sheet, onClose }: { sheet: Extract<Sheet, 
               <dd>{money(total)}</dd>
             </div>
             <div className="profit">
-              <dt>Lãi ước tính</dt>
+              <dt title={savedCost?.provisional ? "Bán khi chưa ghi phiếu nhập: giá vốn tạm tính, sẽ tự tính lại khi ghi phiếu nhập." : undefined}>{savedCost ? (savedCost.provisional ? "Lãi (giá vốn tạm)" : "Lãi gộp") : "Lãi ước tính"}</dt>
               <dd>{money(goods - v.discount - cost)}</dd>
             </div>
           </dl>
@@ -533,7 +540,7 @@ function ProductPicker({ kind, supplierId, inCart, onPick, onCreate }: { kind: V
               </span>
               <b>{p.name}</b>
               <small>
-                {kind === "adjust" ? "" : `${money(buying(kind) ? p.cost : p.price)} · `}
+                {kind === "adjust" ? "" : `${money(buying(kind) ? lastBuyPrice(book, p.id, supplierId || p.supplierId) : p.price)} · `}
                 <span className={stock <= 0 || (buying(kind) && low) ? "bad" : ""}>tồn {qtyText(stock)}</span>
                 {kind === "order" && s?.onOrder ? ` · đặt ${qtyText(s.onOrder)}` : ""}
               </small>
@@ -550,5 +557,21 @@ function ProductPicker({ kind, supplierId, inCart, onPick, onCreate }: { kind: V
       </div>
       {!list.length && q && <p className="sh-muted">Không thấy mẫu “{q}”.</p>}
     </div>
+  );
+}
+
+/** Under a purchase price: how it compares with the order or the previous purchase, and the unit cost after shipping. */
+function PriceNote({ price, refPrice, vsOrder, landed }: { price: number; refPrice?: number; vsOrder: boolean; landed: number }) {
+  const diff = refPrice === undefined ? 0 : price - refPrice;
+  if (!diff && !landed) return null;
+  return (
+    <small className="sh-price-note">
+      {diff !== 0 && (
+        <em className={diff > 0 ? "up" : "down"} title={`${vsOrder ? "Giá trên đơn đặt" : "Lần nhập trước"}: ${money(refPrice ?? 0)}`}>
+          {diff > 0 ? "▲" : "▼"} {money(Math.abs(diff))} {vsOrder ? "so với đơn đặt" : "so với lần trước"}
+        </em>
+      )}
+      {landed > 0 && <span>vốn sau ship {money(landed)}</span>}
+    </small>
   );
 }

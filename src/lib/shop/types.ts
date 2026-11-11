@@ -239,45 +239,169 @@ export const counts = (v: Voucher) => v.kind !== "order" && !(v.kind === "out" &
 /** A purchase order still waiting for its goods. */
 export const awaiting = (v: Voucher) => v.kind === "order" && v.status === "pending";
 
-/** onOrder: quantity in purchase orders that have not arrived yet. */
-export type ProductStats = { stock: number; inQty: number; soldQty: number; onOrder: number; avgCost: number; revenue: number; lastIn: string; lastOut: string };
+/**
+ * avgCost: moving weighted-average cost now (shipping included); `estimated` while the product has no
+ * purchase yet and avgCost is just the expected purchase price. value: what the stock in hand cost.
+ * lastPrice / minPrice / maxPrice: unit prices written on purchases. lost: cost of goods written off.
+ * onOrder: quantity in purchase orders that have not arrived yet.
+ */
+export type ProductStats = {
+  stock: number;
+  inQty: number;
+  soldQty: number;
+  onOrder: number;
+  avgCost: number;
+  estimated: boolean;
+  value: number;
+  revenue: number;
+  lost: number;
+  lastIn: string;
+  lastOut: string;
+  lastPrice: number;
+  lastSupplierId: string;
+  minPrice: number;
+  maxPrice: number;
+};
+/** Cost of goods of one sale, fixed at the moment of the sale. provisional: sold before the goods were bought. */
+export type SaleCost = { cost: number; provisional: boolean };
+/** One product line of a purchase: unit cost after shipping, and the average cost right after it. */
+export type InLine = { unit: number; avgAfter: number };
+export type Ledger = {
+  stats: Map<string, ProductStats>;
+  sales: Map<string, SaleCost>;
+  lines: Map<string, InLine>;
+};
+export const lineKey = (voucherId: string, productId: string) => `${voucherId}:${productId}`;
 
-/** Stock, weighted-average purchase cost and sales per product, from every voucher. */
-export function productStats(book: ShopBook): Map<string, ProductStats> {
-  const map = new Map<string, ProductStats & { costSum: number }>();
-  for (const p of book.products) map.set(p.id, { stock: 0, inQty: 0, soldQty: 0, onOrder: 0, avgCost: p.cost, revenue: 0, lastIn: "", lastOut: "", costSum: 0 });
+// Purchases of a day count before that day's write-offs and sales.
+const DAY_ORDER: Record<VoucherKind, number> = { in: 0, adjust: 1, out: 2, order: 3 };
+
+/**
+ * Replays every voucher by date and keeps a moving weighted average per product (bình quân gia quyền di
+ * động): a purchase adds its goods plus its share of shipping, a sale or write-off takes goods out at the
+ * average of that moment. So a sale's cost never changes when later goods arrive. Goods sold before they
+ * were bought (stock below zero) are costed at the next purchase's price once it is written.
+ */
+export function bookLedger(book: ShopBook): Ledger {
+  const stats = new Map<string, ProductStats>();
+  type Run = { qty: number; value: number; avg: number; owed: { vid: string; qty: number; guess: number }[] };
+  const runs = new Map<string, Run>();
+  for (const p of book.products) {
+    stats.set(p.id, { stock: 0, inQty: 0, soldQty: 0, onOrder: 0, avgCost: p.cost, estimated: true, value: 0, revenue: 0, lost: 0, lastIn: "", lastOut: "", lastPrice: 0, lastSupplierId: "", minPrice: 0, maxPrice: 0 });
+    runs.set(p.id, { qty: 0, value: 0, avg: p.cost, owed: [] });
+  }
+  const sales = new Map<string, SaleCost>();
+  const lines = new Map<string, InLine>();
+
   for (const v of book.vouchers) {
-    if (awaiting(v)) {
-      for (const l of v.lines) {
-        const s = map.get(l.productId);
-        if (s) s.onOrder += l.qty;
-      }
-    }
-    if (!counts(v)) continue;
-    const goods = goodsTotal(v);
+    if (!awaiting(v)) continue;
     for (const l of v.lines) {
-      const s = map.get(l.productId);
-      if (!s) continue;
+      const s = stats.get(l.productId);
+      if (s) s.onOrder += l.qty;
+    }
+  }
+
+  const list = book.vouchers.filter(counts).sort((a, b) => a.date.localeCompare(b.date) || DAY_ORDER[a.kind] - DAY_ORDER[b.kind] || a.createdAt.localeCompare(b.createdAt));
+  for (const v of list) {
+    const goods = goodsTotal(v);
+    const sale: SaleCost = { cost: 0, provisional: false };
+    if (v.kind === "out") sales.set(v.id, sale);
+    for (const l of v.lines) {
+      const s = stats.get(l.productId);
+      const r = runs.get(l.productId);
+      if (!s || !r) continue;
       if (v.kind === "in") {
+        const unit = goods > 0 ? l.price * (1 + v.fee / goods) : l.price;
+        let left = l.qty;
+        // First settle what was sold before these goods were written down.
+        for (const o of r.owed) {
+          if (!left) break;
+          const take = Math.min(left, o.qty);
+          sales.get(o.vid)!.cost += take * (unit - o.guess);
+          o.qty -= take;
+          left -= take;
+          r.qty += take;
+        }
+        r.owed = r.owed.filter((o) => o.qty > 0);
+        if (r.qty < 0) {
+          const fill = Math.min(left, -r.qty);
+          r.qty += fill;
+          left -= fill;
+        }
+        if (left > 0) {
+          r.value += left * unit;
+          r.qty += left;
+          r.avg = r.value / r.qty;
+        } else if (s.estimated) r.avg = unit;
+        s.estimated = false;
         s.stock += l.qty;
         s.inQty += l.qty;
-        s.costSum += l.qty * l.price;
-        if (v.date > s.lastIn) s.lastIn = v.date;
+        s.lastIn = v.date;
+        s.lastPrice = l.price;
+        s.lastSupplierId = v.supplierId;
+        s.minPrice = s.minPrice ? Math.min(s.minPrice, l.price) : l.price;
+        s.maxPrice = Math.max(s.maxPrice, l.price);
+        lines.set(lineKey(v.id, l.productId), { unit, avgAfter: r.avg });
       } else if (v.kind === "out") {
+        const covered = Math.max(0, Math.min(l.qty, r.qty));
+        const short = l.qty - covered;
+        sale.cost += l.qty * r.avg;
+        r.value -= covered * r.avg;
+        r.qty -= l.qty;
+        if (short > 0) r.owed.push({ vid: v.id, qty: short, guess: r.avg });
         s.stock -= l.qty;
         s.soldQty += l.qty;
         // Spread the order discount over its lines by value.
         s.revenue += goods ? l.qty * l.price * (1 - v.discount / goods) : 0;
-        if (v.date > s.lastOut) s.lastOut = v.date;
-      } else s.stock += l.qty;
+        s.lastOut = v.date;
+      } else if (l.qty < 0) {
+        const covered = Math.max(0, Math.min(-l.qty, r.qty));
+        r.value -= covered * r.avg;
+        s.lost += covered * r.avg;
+        r.qty += l.qty;
+        s.stock += l.qty;
+      } else {
+        // Found more than counted: the extra joins the stock at the current average.
+        const fill = r.qty < 0 ? Math.min(l.qty, -r.qty) : 0;
+        r.value += (l.qty - fill) * r.avg;
+        r.qty += l.qty;
+        s.stock += l.qty;
+      }
+      if (r.qty <= 0) r.value = 0;
     }
   }
-  for (const s of map.values()) if (s.inQty > 0) s.avgCost = s.costSum / s.inQty;
-  return map;
+  for (const [id, r] of runs) {
+    const s = stats.get(id)!;
+    s.avgCost = r.avg;
+    s.value = r.qty > 0 ? r.value : 0;
+    for (const o of r.owed) sales.get(o.vid)!.provisional = true;
+  }
+  return { stats, sales, lines };
 }
 
-/** Cost of the goods in a sale, at each product's average purchase cost. */
-export const saleCost = (v: Voucher, stats: Map<string, ProductStats>) => v.lines.reduce((s, l) => s + l.qty * (stats.get(l.productId)?.avgCost ?? 0), 0);
+export const productStats = (book: ShopBook) => bookLedger(book).stats;
+
+/** Cost of the goods in a sale: fixed at sale time once saved, estimated at today's average before that. */
+export const saleCost = (v: Voucher, ledger: Ledger) =>
+  ledger.sales.get(v.id)?.cost ?? v.lines.reduce((s, l) => s + l.qty * (ledger.stats.get(l.productId)?.avgCost ?? 0), 0);
+
+/**
+ * The latest price paid for a product, preferring the given supplier; falls back to the expected price.
+ * `except` leaves out the voucher being edited, so it can be compared with what came before it.
+ */
+export function lastBuyPrice(book: ShopBook, productId: string, supplierId = "", except = ""): number {
+  let any: { key: string; price: number } | null = null;
+  let same: { key: string; price: number } | null = null;
+  for (const v of book.vouchers) {
+    if (v.kind !== "in" || v.id === except) continue;
+    const l = v.lines.find((x) => x.productId === productId);
+    if (!l) continue;
+    const key = v.date + v.createdAt;
+    if (!any || key > any.key) any = { key, price: l.price };
+    if (supplierId && v.supplierId === supplierId && (!same || key > same.key)) same = { key, price: l.price };
+  }
+  return same?.price ?? any?.price ?? book.products.find((p) => p.id === productId)?.cost ?? 0;
+}
 
 export const KIND_LABEL: Record<VoucherKind, string> = { in: "Nhập hàng", out: "Bán hàng", adjust: "Điều chỉnh kho", order: "Đặt hàng" };
 export const STATUS_LABEL: Record<OrderStatus, string> = { pending: "Chờ giao", done: "Hoàn thành", cancelled: "Đã huỷ" };

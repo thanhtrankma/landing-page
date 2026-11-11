@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { goodsTotal, KIND_LABEL, LIMITS, productStats, sanitizeBook, statusLabel, today, voucherTotal } from "@/lib/shop/types";
+import { bookLedger, goodsTotal, KIND_LABEL, LIMITS, sanitizeBook, saleCost, saleRevenue, statusLabel, today, voucherTotal } from "@/lib/shop/types";
 import { csv, download, Field, Panel, useShop } from "./ui";
 
 // Shop name and pick lists, Excel exports, and JSON backup / restore.
@@ -31,20 +31,21 @@ export default function Settings({ onClose }: { onClose: () => void }) {
 
   const stamp = today();
   const exportProducts = () => {
-    const stats = productStats(book);
+    const { stats } = bookLedger(book);
     const supplier = (id: string) => book.suppliers.find((s) => s.id === id)?.name ?? "";
     download(
       csv([
-        ["Mã mẫu", "Tên mẫu", "Loại", "Màu", "Kích thước", "Đơn vị", "Giá nhập", "Giá vốn TB", "Giá bán", "Tồn kho", "Giá trị tồn", "Đã nhập", "Đã bán", "Nguồn hàng", "Ngừng bán", "Ghi chú"],
+        ["Mã mẫu", "Tên mẫu", "Loại", "Màu", "Kích thước", "Đơn vị", "Giá nhập lần cuối", "Giá vốn bình quân", "Giá bán", "Tồn kho", "Giá trị tồn", "Đã nhập", "Đã bán", "Nguồn hàng", "Ngừng bán", "Ghi chú"],
         ...book.products.map((p) => {
           const s = stats.get(p.id);
-          return [p.code, p.name, p.category, p.color, p.size, p.unit, p.cost, Math.round(s?.avgCost ?? p.cost), p.price, s?.stock ?? 0, Math.round(Math.max(0, s?.stock ?? 0) * (s?.avgCost ?? p.cost)), s?.inQty ?? 0, s?.soldQty ?? 0, supplier(p.supplierId), p.archived ? "x" : "", p.note];
+          return [p.code, p.name, p.category, p.color, p.size, p.unit, s?.lastPrice || p.cost, Math.round(s?.avgCost ?? p.cost), p.price, s?.stock ?? 0, Math.round(s?.value ?? 0), s?.inQty ?? 0, s?.soldQty ?? 0, supplier(p.supplierId), p.archived ? "x" : "", p.note];
         }),
       ]),
       `mau-hang-ton-kho-${stamp}.csv`,
     );
   };
   const exportVouchers = () => {
+    const ledger = bookLedger(book);
     const product = (id: string) => book.products.find((p) => p.id === id);
     const supplier = (id: string) => book.suppliers.find((s) => s.id === id)?.name ?? "";
     const rows = [...book.vouchers]
@@ -66,13 +67,15 @@ export default function Settings({ onClose }: { onClose: () => void }) {
           i === 0 ? v.discount : "",
           i === 0 ? v.fee : "",
           i === 0 && v.kind !== "adjust" ? voucherTotal(v) : "",
+          i === 0 && v.kind === "out" && v.status !== "cancelled" ? Math.round(saleCost(v, ledger)) : "",
+          i === 0 && v.kind === "out" && v.status !== "cancelled" ? Math.round(saleRevenue(v) - saleCost(v, ledger)) : "",
           v.kind === "out" || v.kind === "order" ? statusLabel(v) : "",
           v.kind === "out" || v.kind === "in" ? (v.paid ? "Rồi" : "Chưa") : "",
           v.note,
         ]),
       );
     download(
-      csv([["Ngày", "Loại phiếu", "Khách / Nguồn", "SĐT", "Địa chỉ", "Kênh", "Mã mẫu", "Tên mẫu", "Số lượng", "Đơn giá", "Thành tiền", "Giảm giá", "Phí ship", "Tổng phiếu", "Trạng thái", "Thanh toán", "Ghi chú"], ...rows]),
+      csv([["Ngày", "Loại phiếu", "Khách / Nguồn", "SĐT", "Địa chỉ", "Kênh", "Mã mẫu", "Tên mẫu", "Số lượng", "Đơn giá", "Thành tiền", "Giảm giá", "Phí ship", "Tổng phiếu", "Giá vốn đơn", "Lãi gộp", "Trạng thái", "Thanh toán", "Ghi chú"], ...rows]),
       `so-nhap-ban-${stamp}.csv`,
     );
   };
