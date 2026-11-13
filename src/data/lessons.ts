@@ -2302,4 +2302,431 @@ const book2Session6: Lesson = {
     },
   ],
 };
-export const LESSONS: Lesson[] = [...BOOK_1, book2Session1, book2Session2, book2Session3, book2Session4, book2Session5, book2Session6];
+
+const book2Session7: Lesson = {
+  book: 2,
+  session: 7,
+  slug: "quyen-2-buoi-7",
+  title: "Bạn đã đi cùng với ai?",
+  words: [
+    {
+      hanzi: "听说",
+      pinyin: "tīngshuō",
+      pos: "动",
+      meaning: "nghe nói",
+      hanViet: "THÍNH THUYẾT",
+      phrases: [
+        { hanzi: "听说今天没有课。", pinyin: "Tīngshuō míngtiān méiyǒu kè.", meaning: "Nghe nói ngày mai không có tiết học." },
+        { hanzi: "听说大卫去美国了。", pinyin: "Tīngshuō Dàwèi qù Měiguó le.", meaning: "Nghe nói David đi Mỹ rồi." },
+      ],
+      dialogues: [
+        [
+          { who: "A", zh: "你有小明的消息吗？", pinyin: "Nǐ yǒu Xiǎomíng de xiāoxi ma?", vi: "Bạn có tin tức gì của Tiểu Minh không?" },
+          { who: "B", zh: "听说他去日本留学了。", pinyin: "Tīngshuō tā qù Rìběn liúxué le.", vi: "Nghe nói anh ấy đi Nhật Bản du học rồi." },
+        ],
+      ],
+    },
+    {
+      hanzi: "告诉",
+      pinyin: "gàosu",
+      pos: "动",
+      meaning: "nói với",
+      hanViet: "CÁO TỐ",
+      phrases: [
+        { hanzi: "告诉我", pinyin: "gàosu wǒ", meaning: "nói với tôi" },
+        { hanzi: "告诉老师", pinyin: "gàosu lǎoshī", meaning: "nói với thầy/cô giáo" },
+        { hanzi: "他没有告诉我。", pinyin: "Tā méiyǒu gàosu wǒ.", meaning: "Anh ấy không nói với tôi." },
+      ],
+      dialogues: [
+        [
+          { who: "A", zh: "这件事谁告诉你的？", pinyin: "Zhè jiàn shì shéi gàosu nǐ de?", vi: "Chuyện này ai nói với bạn thế?" },
+          { who: "B", zh: "这件事是朋友告诉我的。", pinyin: "Zhè jiàn shì shì péngyou gàosu wǒ de.", vi: "Chuyện này là bạn bè nói với tôi." },
+        ],
+      ],
+    },
+    {
+      hanzi: "微信",
+      pinyin: "Wēixìn",
+      pos: "名",
+      meaning: "WeChat",
+      hanViet: "VI TÍN",
+      phrases: [
+        { hanzi: "用微信", pinyin: "yòng Wēixìn", meaning: "dùng WeChat" },
+        { hanzi: "你的微信号是多少？", pinyin: "Nǐ de Wēixìn hào shì duōshǎo?", meaning: "Tài khoản WeChat của bạn là gì?" },
+        { hanzi: "我可以加你的微信吗？", pinyin: "Wǒ kěyǐ jiā nǐ de Wēixìn ma?", meaning: "Tôi có thể kết bạn WeChat với bạn không?" },
+      ],
+      dialogues: [
+        [
+          { who: "A", zh: "你有微信吗？", pinyin: "Nǐ yǒu Wēixìn ma?", vi: "Bạn có WeChat không?" },
+          { who: "B", zh: "我没有微信。", pinyin: "Wǒ méiyǒu Wēixìn.", vi: "Tôi không có WeChat." },
+        ],
+      ],
+    },
+    {
+      hanzi: "玩儿",
+      pinyin: "wánr",
+      pos: "动",
+      meaning: "chơi",
+      hanViet: "NGOẠN NHI",
+      phrases: [
+        { hanzi: "一起玩儿", pinyin: "yīqǐ wánr", meaning: "chơi cùng nhau" },
+        { hanzi: "去公园玩儿", pinyin: "qù gōngyuán wánr", meaning: "đi công viên chơi" },
+        { hanzi: "小明想去公园玩儿。", pinyin: "Xiǎomíng xiǎng qù gōngyuán wánr.", meaning: "Tiểu Minh muốn đi công viên chơi." },
+      ],
+      dialogues: [
+        [
+          { who: "A", zh: "这个周末我们一起去公园玩儿，怎么样？", pinyin: "Zhège zhōumò wǒmen yīqǐ qù gōngyuán wánr, zěnme yàng?", vi: "Cuối tuần này chúng ta cùng đi công viên chơi nhé, thế nào?" },
+          { who: "B", zh: "好的。", pinyin: "Hǎo de.", vi: "Được thôi." },
+        ],
+      ],
+    },
+    {
+      hanzi: "哈哈",
+      pinyin: "hāhā",
+      pos: "象声词",
+      meaning: "haha",
+      hanViet: "CÁP CÁP",
+      phrases: [
+        { hanzi: "哈哈大笑", pinyin: "hāhā dà xiào", meaning: "cười lớn haha" },
+        { hanzi: "哈哈，这个游戏很好玩。", pinyin: "Hāhā, zhè gè yóuxì hěn hǎowán.", meaning: "Haha, trò chơi này rất vui." },
+      ],
+      dialogues: [
+        [
+          { who: "A", zh: "我什么时候说的？", pinyin: "Wǒ shénme shíhòu shuō de?", vi: "Tôi nói lúc nào thế?" },
+          { who: "B", zh: "哈哈，上次汉语课的时候说的。", pinyin: "Hāhā, shàng cì hànyǔ kè de shíhòu shuō de.", vi: "Haha, nói lúc tiết học tiếng Hán lần trước đấy." },
+        ],
+      ],
+    },
+    {
+      hanzi: "有意思",
+      pinyin: "yǒuyìsi",
+      pos: "形",
+      meaning: "thú vị, hay",
+      hanViet: "HỮU Ý TỨ",
+      phrases: [
+        { hanzi: "很有意思", pinyin: "hěn yǒuyìsi", meaning: "rất thú vị / rất hay" },
+        { hanzi: "没有意思", pinyin: "méiyǒu yìsi", meaning: "không thú vị / chán" },
+        { hanzi: "这个电影很有意思。", pinyin: "Zhè gè diànyǐng hěn yǒuyìsi.", meaning: "Bộ phim này rất hay." },
+        { hanzi: "他说的话很有意思。", pinyin: "Tā shuō de huà hěn yǒuyìsi.", meaning: "Lời anh ấy nói rất thú vị." },
+      ],
+      dialogues: [
+        [
+          { who: "A", zh: "今天的晚会怎么样？", pinyin: "Jīntiān de wǎnhuì zěnme yàng?", vi: "Buổi tiệc tối nay thế nào?" },
+          { who: "B", zh: "今天的晚会很有意思。", pinyin: "Jīntiān de wǎnhuì hěn yǒuyìsi.", vi: "Buổi tiệc tối nay rất thú vị." },
+        ],
+      ],
+    },
+    {
+      hanzi: "骑",
+      pinyin: "qí",
+      pos: "动",
+      meaning: "lái / đi (xe đạp, xe máy, ngựa)",
+      hanViet: "KỴ",
+      phrases: [
+        { hanzi: "不骑", pinyin: "bù qí", meaning: "không đi / không lái" },
+        { hanzi: "骑车", pinyin: "qí chē", meaning: "đi xe / đạp xe" },
+        { hanzi: "我骑车去。", pinyin: "Wǒ qí chē qù.", meaning: "Tôi đi xe đến đó." },
+      ],
+      dialogues: [
+        [
+          { who: "A", zh: "你今天是怎么来学校？", pinyin: "Nǐ jīntiān shì zěnme lái xuéxiào?", vi: "Hôm nay bạn đến trường bằng cách nào?" },
+          { who: "B", zh: "我是骑车来学校的。", pinyin: "Wǒ shì qí chē lái xuéxiào de.", vi: "Tôi đi xe đến trường." },
+        ],
+      ],
+    },
+    {
+      hanzi: "自行车",
+      pinyin: "zìxíngchē",
+      pos: "名",
+      meaning: "xe đạp",
+      hanViet: "TỰ HÀNH XA",
+      phrases: [
+        { hanzi: "骑自行车", pinyin: "qí zìxíngchē", meaning: "đạp xe đạp" },
+        { hanzi: "我喜欢骑自行车。", pinyin: "Wǒ xǐhuan qí zìxíngchē.", meaning: "Tôi thích đạp xe đạp." },
+      ],
+      dialogues: [
+        [
+          { who: "A", zh: "你今天是怎么来学校？", pinyin: "Nǐ jīntiān shì zěnme lái xuéxiào?", vi: "Hôm nay bạn đến trường bằng cách nào?" },
+          { who: "B", zh: "我是骑自行车来学校的。", pinyin: "Wǒ shì qí zìxíngchē lái xuéxiào de.", vi: "Tôi đạp xe đạp đến trường." },
+        ],
+      ],
+    },
+    {
+      hanzi: "忘",
+      pinyin: "wàng",
+      pos: "动",
+      meaning: "quên, quên mất",
+      hanViet: "VONG",
+      phrases: [
+        { hanzi: "忘了上课", pinyin: "wàngle shàngkè", meaning: "quên lên lớp / quên giờ học" },
+        { hanzi: "忘了名字", pinyin: "wàngle míngzi", meaning: "quên tên rồi" },
+        { hanzi: "我没有忘记明天的时间。", pinyin: "Wǒ méiyǒu wàngjì míngtiān de shíjiān.", meaning: "Tôi không quên thời gian ngày mai." },
+      ],
+      dialogues: [
+        [
+          { who: "A", zh: "你记得他的电话号码吗？", pinyin: "Nǐ jìdé tā de diànhuà hàomǎ ma?", vi: "Bạn có nhớ số điện thoại của anh ấy không?" },
+          { who: "B", zh: "我忘了。", pinyin: "Wǒ wàngle.", vi: "Tôi quên mất rồi." },
+        ],
+      ],
+    },
+    {
+      hanzi: "时间",
+      pinyin: "shíjiān",
+      pos: "名",
+      meaning: "thời gian",
+      hanViet: "THỜI GIAN",
+      parts: [
+        { hanzi: "多长", pinyin: "duō cháng", pos: "疑问词", meaning: "bao lâu" },
+      ],
+      phrases: [
+        { hanzi: "有时间", pinyin: "yǒu shíjiān", meaning: "có thời gian" },
+        { hanzi: "没有时间", pinyin: "méiyǒu shíjiān", meaning: "không có thời gian" },
+        { hanzi: "多长时间", pinyin: "duō cháng shíjiān", meaning: "bao lâu / thời gian bao lâu" },
+        { hanzi: "我很忙，没有时间跟你聊天。", pinyin: "Wǒ hěn máng, méiyǒu shíjiān gēn nǐ liáotiān.", meaning: "Tôi rất bận, không có thời gian nói chuyện với bạn." },
+      ],
+      dialogues: [
+        [
+          { who: "A", zh: "他们骑了多长时间？", pinyin: "Tāmen qíle duō cháng shíjiān?", vi: "Họ đã đạp xe bao lâu?" },
+          { who: "B", zh: "骑了两个小时左右。", pinyin: "Qíle liǎng gè xiǎoshí zuǒyòu.", vi: "Đạp khoảng hai tiếng đồng hồ." },
+        ],
+      ],
+    },
+    {
+      hanzi: "小时",
+      pinyin: "xiǎoshí",
+      pos: "名",
+      meaning: "giờ / tiếng (đồng hồ)",
+      hanViet: "TIỂU THỜI",
+      phrases: [
+        { hanzi: "几个小时", pinyin: "jǐ gè xiǎoshí", meaning: "mấy tiếng đồng hồ" },
+        { hanzi: "一个小时", pinyin: "yí gè xiǎoshí", meaning: "một tiếng đồng hồ" },
+        { hanzi: "两个小时", pinyin: "liǎng gè xiǎoshí", meaning: "hai tiếng đồng hồ" },
+      ],
+      dialogues: [
+        [
+          { who: "A", zh: "他们骑了多长时间？", pinyin: "Tāmen qíle duō cháng shíjiān?", vi: "Họ đã đạp xe bao lâu?" },
+          { who: "B", zh: "骑了两个小时左右。", pinyin: "Qíle liǎng gè xiǎoshí zuǒyòu.", vi: "Đạp khoảng hai tiếng đồng hồ." },
+        ],
+      ],
+    },
+    {
+      hanzi: "自己",
+      pinyin: "zìjǐ",
+      pos: "代",
+      meaning: "bản thân",
+      hanViet: "TỰ KỶ",
+      phrases: [
+        { hanzi: "自己做", pinyin: "zìjǐ zuò", meaning: "tự làm" },
+        { hanzi: "我自己", pinyin: "wǒ zìjǐ", meaning: "bản thân tôi / tự tôi" },
+        { hanzi: "你自己", pinyin: "nǐ zìjǐ", meaning: "bản thân bạn / tự bạn" },
+        { hanzi: "我自己做。", pinyin: "Wǒ zìjǐ zuò.", meaning: "Tôi tự làm." },
+        { hanzi: "我觉得自己错了。", pinyin: "Wǒ juéde zìjǐ cuò le.", meaning: "Tôi cảm thấy bản thân mình sai rồi." },
+      ],
+      dialogues: [
+        [
+          { who: "A", zh: "你记得你自己的电话号码吗？", pinyin: "Nǐ jìdé nǐ zìjǐ de diànhuà hàomǎ ma?", vi: "Bạn có nhớ số điện thoại của chính bạn không?" },
+          { who: "B", zh: "哈哈，我不记得。", pinyin: "Hāhā, wǒ bù jì dé.", vi: "Haha, tôi không nhớ." },
+        ],
+      ],
+    },
+    {
+      hanzi: "朋友",
+      pinyin: "péngyou",
+      pos: "名",
+      meaning: "bạn, bạn bè",
+      hanViet: "BẰNG HỮU",
+      phrases: [
+        { hanzi: "好朋友", pinyin: "hǎo péngyou", meaning: "bạn tốt / bạn thân" },
+        { hanzi: "这是我的好朋友。", pinyin: "Zhè shì wǒ de hǎo péngyou.", meaning: "Đây là bạn thân của tôi." },
+        { hanzi: "我自己有很多好朋友。", pinyin: "Wǒ zìjǐ yǒu hěn duō hǎo péngyou.", meaning: "Bản thân tôi có rất nhiều bạn tốt." },
+      ],
+      dialogues: [
+        [
+          { who: "A", zh: "你的好朋友叫什么名字？", pinyin: "Nǐ de hǎo péngyou jiào shénme míngzi?", vi: "Bạn thân của bạn tên là gì?" },
+          { who: "B", zh: "他叫海伦。", pinyin: "Tā jiào Hǎilún.", vi: "Cậu ấy tên là Helen." },
+        ],
+      ],
+    },
+    {
+      hanzi: "好看",
+      pinyin: "hǎokàn",
+      pos: "形",
+      meaning: "đẹp",
+      hanViet: "HẢO KHÁN",
+      phrases: [
+        { hanzi: "很好看", pinyin: "hěn hǎokàn", meaning: "rất đẹp" },
+        { hanzi: "不好看", pinyin: "bù hǎokàn", meaning: "không đẹp" },
+        { hanzi: "那里的风景很好看。", pinyin: "Nàli de fēngjǐng hěn hǎokàn.", meaning: "Phong cảnh ở đó rất đẹp." },
+        { hanzi: "这张照片真好看。", pinyin: "Zhè zhāng zhàopiàn zhēn hǎokàn.", meaning: "Bức ảnh này thật đẹp." },
+        { hanzi: "他的女孩又好看又可爱。", pinyin: "Tā de nǚhái yòu hǎokàn yòu kě'ài.", meaning: "Cô gái của anh ấy vừa đẹp vừa đáng yêu." },
+      ],
+      dialogues: [
+        [
+          { who: "A", zh: "这是我的女朋友。", pinyin: "Zhè shì wǒ de nǚ péngyou.", vi: "Đây là bạn gái của tôi." },
+          { who: "B", zh: "你的女朋友真好看。", pinyin: "Nǐ de nǚ péngyou zhēn hǎokàn.", vi: "Bạn gái của bạn thật xinh đẹp." },
+        ],
+      ],
+    },
+    {
+      hanzi: "法国",
+      pinyin: "Fǎguó",
+      pos: "名",
+      meaning: "nước Pháp",
+      hanViet: "PHÁP QUỐC",
+      phrases: [
+        { hanzi: "去法国", pinyin: "qù Fǎguó", meaning: "đi Pháp" },
+        { hanzi: "法国人", pinyin: "Fǎguórén", meaning: "người Pháp" },
+        { hanzi: "法国的风景真好看。", pinyin: "Fǎguó de fēngjǐng zhēn hǎokàn.", meaning: "Phong cảnh nước Pháp thật đẹp." },
+      ],
+      dialogues: [
+        [
+          { who: "A", zh: "你是美国人吗？", pinyin: "Nǐ shì Měiguórén ma?", vi: "Bạn là người Mỹ phải không?" },
+          { who: "B", zh: "不是，我是法国人。", pinyin: "Bú shì, wǒ shì Fǎguórén.", vi: "Không phải, tôi là người Pháp." },
+        ],
+      ],
+    },
+    {
+      hanzi: "对",
+      pinyin: "duì",
+      pos: "形",
+      meaning: "đúng, vâng",
+      hanViet: "ĐỐI",
+      phrases: [
+        { hanzi: "不对", pinyin: "bú duì", meaning: "không đúng / sai rồi" },
+        { hanzi: "对，我是小明。", pinyin: "Duì, wǒ shì Xiǎomíng.", meaning: "Đúng, tôi là Tiểu Minh." },
+        { hanzi: "不对，我是法国人。", pinyin: "Bú duì, wǒ shì Fǎguó rén.", meaning: "Không đúng, tôi là người Pháp." },
+      ],
+      dialogues: [
+        [
+          { who: "A", zh: "这张照片是你在法国拍的吗？", pinyin: "Zhè zhāng zhàopiàn shì nǐ zài fàguó pāi de ma?", vi: "Bức ảnh này là bạn chụp ở Pháp phải không?" },
+          { who: "B", zh: "对，是去年我在法国拍的。", pinyin: "Duì, shì qùnián wǒ zài fàguó pāi de.", vi: "Đúng vậy, là năm ngoái tôi chụp ở Pháp." },
+        ],
+      ],
+    },
+    {
+      hanzi: "行",
+      pinyin: "xíng",
+      pos: "形",
+      meaning: "được, tốt",
+      hanViet: "HÀNH",
+      phrases: [
+        { hanzi: "真行", pinyin: "zhēn xíng", meaning: "thật giỏi / thật được" },
+        { hanzi: "真不行", pinyin: "zhēn bù xíng", meaning: "thật không được / kém quá" },
+        { hanzi: "你真行。", pinyin: "Nǐ zhēn xíng.", meaning: "Bạn thật giỏi." },
+      ],
+      dialogues: [
+        [
+          { who: "A", zh: "你看他干这工作行吗？", pinyin: "Nǐ kàn tā gàn zhè gōngzuò xíng ma?", vi: "Bạn xem cậu ấy làm công việc này có được không?" },
+          { who: "B", zh: "行了。", pinyin: "Xíng le.", vi: "Được rồi." },
+        ],
+      ],
+    },
+    {
+      hanzi: "张",
+      pinyin: "zhāng",
+      pos: "量",
+      meaning: "tờ/tấm (lượng từ cho những đồ vật có mặt phẳng)",
+      hanViet: "TRƯƠNG",
+      phrases: [
+        { hanzi: "一张票", pinyin: "yì zhāng piào", meaning: "một tấm vé" },
+        { hanzi: "几张电影票", pinyin: "jǐ zhāng diànyǐngpiào", meaning: "mấy tấm vé xem phim" },
+        { hanzi: "两张电影票", pinyin: "liǎng zhāng diànyǐngpiào", meaning: "hai tấm vé xem phim" },
+        { hanzi: "这张照片真漂亮。", pinyin: "Zhè zhāng zhàopiàn zhēn piàoliang.", meaning: "Tấm ảnh này thật đẹp." },
+      ],
+      dialogues: [
+        [
+          { who: "A", zh: "这张照片是什么时候拍的？", pinyin: "Zhè zhāng zhàopiàn shì shénme shíhòu pāi de?", vi: "Tấm ảnh này được chụp khi nào thế?" },
+          { who: "B", zh: "是2019拍的。", pinyin: "Shì 2019 pāi de.", vi: "Là chụp năm 2019." },
+        ],
+      ],
+    },
+    {
+      hanzi: "当然",
+      pinyin: "dāngrán",
+      pos: "副",
+      meaning: "đương nhiên",
+      hanViet: "ĐƯƠNG NHIÊN",
+      phrases: [
+        { hanzi: "当然可以", pinyin: "dāngrán kěyǐ", meaning: "đương nhiên có thể" },
+        { hanzi: "当然不可以", pinyin: "dāngrán bù kěyǐ", meaning: "đương nhiên không thể" },
+        { hanzi: "当然喜欢", pinyin: "dāngrán xǐhuan", meaning: "đương nhiên thích" },
+        { hanzi: "当然不喜欢", pinyin: "dāngrán bù xǐhuan", meaning: "đương nhiên không thích" },
+        { hanzi: "这张照片当然是我拍的。", pinyin: "Zhè zhāng zhàopiàn dāngrán shì wǒ pāi de.", meaning: "Bức ảnh này đương nhiên là tôi chụp rồi." },
+      ],
+      dialogues: [
+        [
+          { who: "A", zh: "你是一个人去公园玩儿吗？", pinyin: "Nǐ shì yí gè rén qù gōngyuán wánr ma?", vi: "Bạn đi công viên chơi một mình à?" },
+          { who: "B", zh: "当然不是，我是跟中国朋友一起去。", pinyin: "Dāngrán bú shì, wǒ shì gēn Zhōngguó péngyou yīqǐ qù.", vi: "Đương nhiên không phải, tôi đi cùng bạn Trung Quốc." },
+        ],
+      ],
+    },
+  ],
+  grammar: [
+    {
+      id: "cau-truc-shi-de-tong-quat",
+      title: "“是……的” 句 (Tổng quát)",
+      name: "Cấu trúc nhấn mạnh “是……的”",
+      summary: "Cấu trúc “是……的” thường được dùng để nhấn mạnh thời gian, địa điểm, phương thức hoặc chủ thể của hành động đã xảy ra. Trong câu khẳng định, nghi vấn và khẩu ngữ thì “是” có thể lược bỏ. Trong dạng phủ định “不是 + ... + V + 的” thì “是” không được lược bỏ.",
+      structures: [
+        "是 + 时间 / 地点 / 方式 / 动作发出者 + V + 的",
+        "不是 + 时间 / 地点 / 方式 / 动作发出者 + V + 的",
+      ],
+      note: "Khi trả lời câu hỏi có “是……的” thì chủ ngữ của câu trả lời có thể lược bỏ.",
+      focus: ["是……的", "不是……的"],
+      examples: [],
+    },
+    {
+      id: "cau-truc-shi-de-thoi-gian",
+      title: "“是……的” (Nhấn mạnh thời gian)",
+      name: "Cấu trúc “是 + thời gian + V + 的”",
+      summary: "Dùng để nhấn mạnh thời điểm hành động đã diễn ra.",
+      structures: ["是 + thời gian + V + 的"],
+      note: "Từ “是” có thể lược bỏ trong câu khẳng định và câu hỏi.",
+      focus: ["是……的"],
+      examples: [
+        { zh: "你今天（是）几点来学校的？", pinyin: "Nǐ jīntiān (shì) jǐ diǎn lái xuéxiào de?", vi: "Hôm nay bạn đến trường lúc mấy giờ?" },
+        { zh: "（我）（是）早上八点十分来学校的。", pinyin: "(Wǒ) (shì) zǎoshang bā diǎn shí fēn lái xuéxiào de.", vi: "Tôi đến trường lúc 8 giờ 10 phút sáng." },
+      ],
+    },
+    {
+      id: "cau-truc-shi-de-phuong-thuc",
+      title: "“是……的” (Nhấn mạnh phương thức)",
+      name: "Cấu trúc “是 + phương thức + V + 的”",
+      summary: "Dùng để nhấn mạnh cách thức hoặc phương tiện thực hiện hành động[cite: 93].",
+      structures: ["是 + phương thức + V + 的[cite: 93]"],
+      note: "Thường đi kèm các từ hỏi như 怎么 (bằng cách nào) hoặc phương tiện đi lại[cite: 93].",
+      focus: ["是……的"],
+      examples: [
+        { zh: "你今天（是）怎么来学校的？", pinyin: "Nǐ jīntiān (shì) zěnme lái xuéxiào de?", vi: "Hôm nay bạn đến trường bằng cách nào?" },
+        { zh: "（我）（是）走路来学校的。", pinyin: "(Wǒ) (shì) zǒu lù lái xuéxiào de.", vi: "Tôi đi bộ đến trường." },
+      ],
+    },
+    {
+      id: "cau-truc-shi-de-chu-the",
+      title: "“是……的” (Nhấn mạnh chủ thể hành động)",
+      name: "Cấu trúc “是 + người thực hiện hành động + V + 的”",
+      summary: "Dùng để nhấn mạnh ai là người thực hiện hành động đã xảy ra[cite: 92].",
+      structures: ["是 + người thực hiện hành động + V + 的[cite: 92]"],
+      note: "Thường dùng để hỏi và trả lời về tác giả/người thực hiện sự việc[cite: 92].",
+      focus: ["是……的"],
+      examples: [
+        { zh: "这件事（是）谁告诉你的？", pinyin: "Zhè jiàn shì (shì) shéi gàosu nǐ de?", vi: "Chuyện này ai nói với bạn thế?" },
+        { zh: "（这件事）（是）朋友告诉我的。", pinyin: "(Zhè jiàn shì) (shì) péngyou gàosu wǒ de.", vi: "Chuyện này là bạn bè nói với tôi." },
+      ],
+    },
+    {
+      id: "cau-truc-shi-de-phu-dinh",
+      title: "“是……的” 句 (Dạng phủ định)",
+      name: "Dạng phủ định “不是 + ... + V + 的”",
+      summary: "Khi phủ định đối tượng được nhấn mạnh trong câu “是……的”, thêm 不 trước 是 thành “不是……的”[cite: 91].",
+      structures: ["不是 + thời gian / địa điểm / phương thức / chủ thể của hành động + V + 的[cite: 91]"],
+      note: "Trong dạng phủ định, từ “是” không được lược bỏ và thường dùng trong ngữ cảnh đối chiếu, so sánh[cite: 91].",
+      focus: ["不是……的"],
+      examples: [
+        { zh: "你是一个人来中国的吗？", pinyin: "Nǐ shì yí gè rén lái Zhōngguó de ma?", vi: "Bạn đến Trung Quốc một mình à?" },
+        { zh: "我不是一个人来的，是跟我哥哥一起来的。", pinyin: "Wǒ bú shì yí gè rén lái de, shì gēn wǒ gēge yìqǐ lái de.", vi: "Tôi không phải đến một mình, mà là đi cùng với anh trai tôi." },
+      ],
+    },
+  ],
+};
+export const LESSONS: Lesson[] = [...BOOK_1, book2Session1, book2Session2, book2Session3, book2Session4, book2Session5, book2Session6, book2Session7];
