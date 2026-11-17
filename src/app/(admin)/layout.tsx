@@ -1,9 +1,15 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
-import { Inter } from "next/font/google";
+import localFont from "next/font/local";
 import "./admin.css";
 
-const inter = Inter({ subsets: ["latin", "vietnamese"], variable: "--font-admin", display: "swap" });
+// Same self-hosted Inter file as the public site (see src/app/fonts).
+const inter = localFont({
+  src: "../fonts/inter/Inter-Variable.woff2",
+  variable: "--font-admin",
+  weight: "100 900",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: { default: "Quản trị | SuperLanding", template: "%s | Quản trị SuperLanding" },
