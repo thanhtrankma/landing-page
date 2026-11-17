@@ -15,8 +15,9 @@ import { SITE_URL } from "@/lib/seo";
 import "./globals.css";
 import "./theme.css";
 
-// Inter is a variable font: one file per subset covers every weight. Listing fixed weights made Google Fonts answer
-// with /l/font?kit=…&skey=… URLs, whose "&" breaks Turbopack's font loader (Next 16.3.5) on every page.
+// Inter, Outfit and Plus Jakarta Sans are variable fonts: one file per subset covers every weight. Listing fixed weights
+// made Google Fonts answer with /l/font?kit=…&skey=… URLs, whose "&" breaks Turbopack's font loader (Next 16.3.5) on
+// every page. Be Vietnam Pro has no variable version, so it keeps its weight list.
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin", "latin-ext", "vietnamese"],
@@ -26,11 +27,10 @@ const beVietnam = Be_Vietnam_Pro({
   subsets: ["latin", "latin-ext", "vietnamese"],
   weight: ["400", "500", "600", "700", "800"],
 });
-const outfit = Outfit({ variable: "--font-outfit", subsets: ["latin", "latin-ext"], weight: ["600", "700", "800"] });
+const outfit = Outfit({ variable: "--font-outfit", subsets: ["latin", "latin-ext"] });
 const plusJakarta = Plus_Jakarta_Sans({
   variable: "--font-plus-jakarta",
   subsets: ["latin", "latin-ext", "vietnamese"],
-  weight: ["600", "700", "800"],
 });
 
 const TITLE = "SuperLanding — Thiết Kế Website & Landing Page Theo Yêu Cầu";
