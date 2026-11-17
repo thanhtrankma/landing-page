@@ -2916,6 +2916,53 @@ const book2Session8: Lesson = {
       dialogues: [],
     },
   ],
-  grammar: [],
+  grammar: [
+    {
+      id: "dong-tu-nang-nguyen-hui-khang-dinh",
+      title: "能愿动词 “会” (Khẳng định)",
+      name: "Động từ năng nguyện “会”",
+      summary: "“会” (Biết) diễn đạt một kỹ năng nào đó thông qua quá trình học tập mà biết được[cite: 98]. Nếu trình độ của kỹ năng đó tương đối thấp thì có thể thêm “一点儿” sau động từ hoặc giữa động từ và tân ngữ[cite: 98].",
+      structures: [
+        "会 + V + (O)",
+        "会 + V + 一点儿 + (O)",
+      ],
+      note: "Dùng để nói về khả năng/kỹ năng đạt được qua học tập hoặc rèn luyện[cite: 98].",
+      focus: ["会", "一点儿"],
+      examples: [
+        { zh: "我会唱中文歌。", pinyin: "Wǒ huì chàng zhōngwéngē.", vi: "Tôi biết hát bài hát tiếng Trung." },
+        { zh: "欧文会说英语，还会说法语。", pinyin: "Ōuwén huì shuō Yīngyǔ, hái huì shuō Fǎyǔ.", vi: "Owen biết nói tiếng Anh, còn biết nói tiếng Pháp." },
+        { zh: "美京会说韩语，还会说一点儿英语和汉语。", pinyin: "Měijīng huì shuō Hányǔ, hái huì shuō yìdiǎnr Yīngyǔ hé Hànyǔ.", vi: "Mikyung biết nói tiếng Hàn, còn biết nói một chút tiếng Anh và tiếng Hán." },
+      ],
+    },
+    {
+      id: "dong-tu-nang-nguyen-hui-phu-dinh",
+      title: "能愿动词 “会” (Dạng phủ định)",
+      name: "Dạng phủ định của động từ năng nguyện “会”",
+      summary: "Để phủ định một kỹ năng không biết làm, thêm phó từ phủ định “不” vào trước “会” thành “不会” (đọc biến điệu thành bú huì)[cite: 97].",
+      structures: ["不会 + V (+ O)"],
+      note: "“不” đứng trước thanh 4 (“会” - huì) đọc biến điệu thành thanh 2 (bú huì)[cite: 97].",
+      focus: ["不会"],
+      examples: [
+        { zh: "他不会说汉语。", pinyin: "Tā bú huì shuō Hànyǔ.", vi: "Anh ấy không biết nói tiếng Hán." },
+        { zh: "我不会喝酒。", pinyin: "Wǒ bú huì hē jiǔ.", vi: "Tôi không biết uống rượu." },
+        { zh: "田中不会做饭。", pinyin: "Tiánzhōng bú huì zuò fàn.", vi: "Tanaka không biết nấu cơm." },
+      ],
+    },
+    {
+      id: "cau-truc-chule-yiwai-hai",
+      title: "除了……以外，……还……",
+      name: "Cấu trúc “Ngoài……ra, ……còn……”",
+      summary: "Biểu thị ngoài phạm vi được nhắc đến ở vế đầu ra thì còn bổ sung thêm các đối tượng, hành động hoặc tính chất khác ở vế sau[cite: 96].",
+      structures: ["除了 + A + 以外，……还 + B"],
+      note: "Nếu vế sau chỉ giới hạn duy nhất một đối tượng/hành động thì dùng “只” (chỉ) thay cho “还” (ví dụ: 除了篮球以外，我只喜欢打篮球)[cite: 95].",
+      focus: ["除了……以外", "还", "只"],
+      examples: [
+        { zh: "除了英语以外，我还会说一点儿汉语。", pinyin: "Chúle Yīngyǔ yǐwài, wǒ hái huì shuō yìdiǎnr Hànyǔ.", vi: "Ngoài tiếng Anh ra, tôi còn biết nói một chút tiếng Hán." },
+        { zh: "除了北京以外，他还想去上海。", pinyin: "Chúle Běijīng yǐwài, tā hái xiǎng qù Shànghǎi.", vi: "Ngoài Bắc Kinh ra, anh ấy còn muốn đi Thượng Hải." },
+        { zh: "除了唱歌以外，她还喜欢跳舞。", pinyin: "Chúle chàng gē yǐwài, tā hái xǐhuan tiào wǔ.", vi: "Ngoài hát ra, cô ấy còn thích nhảy múa." },
+        { zh: "除了篮球以外，你还喜欢打什么球？— 我只喜欢打篮球。", pinyin: "Chúle lánqiú yǐwài, nǐ hái xǐhuan dǎ shénme qiú? — Wǒ zhǐ xǐhuan dǎ lánqiú.", vi: "Ngoài bóng rổ ra, bạn còn thích chơi bóng gì? — Tôi chỉ thích chơi bóng rổ thôi." },
+      ],
+    },
+  ],
 };
 export const LESSONS: Lesson[] = [...BOOK_1, book2Session1, book2Session2, book2Session3, book2Session4, book2Session5, book2Session6, book2Session7, book2Session8];
