@@ -2729,4 +2729,193 @@ const book2Session7: Lesson = {
     },
   ],
 };
-export const LESSONS: Lesson[] = [...BOOK_1, book2Session1, book2Session2, book2Session3, book2Session4, book2Session5, book2Session6, book2Session7];
+const book2Session8: Lesson = {
+  book: 2,
+  session: 8,
+  slug: "quyen-2-buoi-8",
+  title: "Bạn biết nấu món gì?",
+  words: [
+    {
+      hanzi: "回",
+      pinyin: "huí",
+      pos: "动",
+      meaning: "về, quay (về)",
+      hanViet: "HỒI",
+      parts: [
+        { hanzi: "回来", pinyin: "huílái", pos: "动宾", meaning: "quay về" },
+      ],
+      phrases: [
+        { hanzi: "回国", pinyin: "huí guó", meaning: "về nước" },
+        { hanzi: "不回来", pinyin: "bù huílái", meaning: "không quay về" },
+      ],
+      dialogues: [],
+    },
+    {
+      hanzi: "会",
+      pinyin: "huì",
+      pos: "动",
+      meaning: "biết; có thể",
+      hanViet: "HỘI",
+      phrases: [
+        { hanzi: "会说汉语", pinyin: "huì shuō Hànyǔ", meaning: "biết nói tiếng Hán" },
+      ],
+      dialogues: [],
+    },
+    {
+      hanzi: "做菜",
+      pinyin: "zuò cài",
+      pos: "动宾",
+      meaning: "nấu ăn",
+      hanViet: "TỐ THÁI",
+      phrases: [
+        { hanzi: "不会做饭", pinyin: "bú huì zuò fàn", meaning: "không biết nấu cơm / nấu ăn" },
+      ],
+      dialogues: [],
+    },
+    {
+      hanzi: "水果",
+      pinyin: "shuǐguǒ",
+      pos: "名",
+      meaning: "hoa quả",
+      hanViet: "THỦY QUẢ",
+      phrases: [
+        { hanzi: "吃水果", pinyin: "chī shuǐguǒ", meaning: "ăn hoa quả" },
+      ],
+      dialogues: [],
+    },
+    {
+      hanzi: "沙拉",
+      pinyin: "shālā",
+      pos: "名",
+      meaning: "sa-lát",
+      hanViet: "SA LẠP",
+      phrases: [
+        { hanzi: "做沙拉", pinyin: "zuò shālā", meaning: "làm sa-lát" },
+      ],
+      dialogues: [],
+    },
+    {
+      hanzi: "酒",
+      pinyin: "jiǔ",
+      pos: "名",
+      meaning: "rượu",
+      hanViet: "TỬU",
+      phrases: [
+        { hanzi: "喝酒", pinyin: "hē jiǔ", meaning: "uống rượu" },
+      ],
+      dialogues: [],
+    },
+    {
+      hanzi: "瓶",
+      pinyin: "píng",
+      pos: "量",
+      meaning: "bình, chai",
+      hanViet: "BÌNH",
+      phrases: [
+        { hanzi: "一瓶酒", pinyin: "yì píng jiǔ", meaning: "một chai rượu" },
+      ],
+      dialogues: [],
+    },
+    {
+      hanzi: "哪里",
+      pinyin: "nǎlǐ",
+      pos: "代",
+      meaning: "đâu có, không dám",
+      hanViet: "NA LÝ",
+      phrases: [
+        { hanzi: "哪里哪里", pinyin: "nǎlǐ nǎlǐ", meaning: "đâu có đâu có (khiêm tốn)" },
+      ],
+      dialogues: [],
+    },
+    {
+      hanzi: "尝",
+      pinyin: "cháng",
+      pos: "动",
+      meaning: "nếm thử",
+      hanViet: "THƯỜNG",
+      phrases: [
+        { hanzi: "尝一下", pinyin: "cháng yíxià", meaning: "nếm thử một chút" },
+      ],
+      dialogues: [],
+    },
+    {
+      hanzi: "聪明",
+      pinyin: "cōngming",
+      pos: "形",
+      meaning: "thông minh",
+      hanViet: "THÔNG MINH",
+      phrases: [
+        { hanzi: "真聪明", pinyin: "zhēn cōngming", meaning: "thật thông minh" },
+      ],
+      dialogues: [],
+    },
+    {
+      hanzi: "外语",
+      pinyin: "wàiyǔ",
+      pos: "名",
+      meaning: "ngoại ngữ",
+      hanViet: "NGOẠI NGỮ",
+      phrases: [
+        { hanzi: "学外语", pinyin: "xué wàiyǔ", meaning: "học ngoại ngữ" },
+      ],
+      dialogues: [],
+    },
+    {
+      hanzi: "除了……以外",
+      pinyin: "chúle ... yǐwài",
+      pos: "介",
+      meaning: "ngoài……ra",
+      hanViet: "TRỪ LIỄU ... DĨ NGOẠI",
+      phrases: [
+        { hanzi: "除了英语以外，我还会汉语。", pinyin: "Chúle Yīngyǔ yǐwài, wǒ hái huì Hànyǔ.", meaning: "Ngoài tiếng Anh ra, tôi còn biết tiếng Hán." },
+      ],
+      dialogues: [],
+    },
+    {
+      hanzi: "日语",
+      pinyin: "Rìyǔ",
+      pos: "专名",
+      meaning: "tiếng Nhật",
+      hanViet: "NHẬT NGỮ",
+      phrases: [
+        { hanzi: "说日语", pinyin: "shuō Rìyǔ", meaning: "nói tiếng Nhật" },
+      ],
+      dialogues: [],
+    },
+    {
+      hanzi: "真的",
+      pinyin: "zhēn de",
+      pos: "形",
+      meaning: "thật",
+      hanViet: "CHÂN ĐÍCH",
+      phrases: [
+        { hanzi: "真的吗", pinyin: "zhēn de ma", meaning: "thật không / thật à" },
+      ],
+      dialogues: [],
+    },
+    {
+      hanzi: "好喝",
+      pinyin: "hǎohē",
+      pos: "形",
+      meaning: "ngon (đồ uống)",
+      hanViet: "HẢO HÁT",
+      phrases: [
+        { hanzi: "真好喝", pinyin: "zhēn hǎohē", meaning: "thật ngon (đồ uống)" },
+      ],
+      dialogues: [],
+    },
+    {
+      hanzi: "法语",
+      pinyin: "Fǎyǔ",
+      pos: "专名",
+      meaning: "tiếng Pháp",
+      hanViet: "PHÁP NGỮ",
+      phrases: [
+        { hanzi: "学法语", pinyin: "xué Fǎyǔ", meaning: "học tiếng Pháp" },
+      ],
+      dialogues: [],
+    },
+  ],
+  grammar: [],
+};
+export const LESSONS: Lesson[] = [...BOOK_1, book2Session1, book2Session2, book2Session3, book2Session4, book2Session5, book2Session6, book2Session7, book2Session8];
