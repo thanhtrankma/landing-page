@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Be_Vietnam_Pro, Inter, Outfit, Plus_Jakarta_Sans } from "next/font/google";
+import localFont from "next/font/local";
 import AnimatedBackground from "@/components/AnimatedBackground";
 import SkyCursor from "@/components/SkyCursor";
 import CookieBanner from "@/components/CookieBanner";
@@ -15,22 +15,32 @@ import { SITE_URL } from "@/lib/seo";
 import "./globals.css";
 import "./theme.css";
 
-// Inter is a variable font: one file per subset covers every weight. Listing fixed weights made Google Fonts answer
-// with /l/font?kit=…&skey=… URLs, whose "&" breaks Turbopack's font loader (Next 16.3.5) on every page.
-const inter = Inter({
+// Self-hosted fonts (src/app/fonts, SIL OFL 1.1). Each file already holds the latin, latin-ext and vietnamese glyphs,
+// so builds no longer depend on Google Fonts: its /l/font?kit=…&skey=… URLs broke Turbopack's Google font loader (Next 16.3.5).
+const inter = localFont({
+  src: "../fonts/inter/Inter-Variable.woff2",
   variable: "--font-inter",
-  subsets: ["latin", "latin-ext", "vietnamese"],
+  weight: "100 900",
 });
-const beVietnam = Be_Vietnam_Pro({
+const beVietnam = localFont({
+  src: [
+    { path: "../fonts/be-vietnam-pro/BeVietnamPro-Regular.woff2", weight: "400", style: "normal" },
+    { path: "../fonts/be-vietnam-pro/BeVietnamPro-Medium.woff2", weight: "500", style: "normal" },
+    { path: "../fonts/be-vietnam-pro/BeVietnamPro-SemiBold.woff2", weight: "600", style: "normal" },
+    { path: "../fonts/be-vietnam-pro/BeVietnamPro-Bold.woff2", weight: "700", style: "normal" },
+    { path: "../fonts/be-vietnam-pro/BeVietnamPro-ExtraBold.woff2", weight: "800", style: "normal" },
+  ],
   variable: "--font-be-vietnam",
-  subsets: ["latin", "latin-ext", "vietnamese"],
-  weight: ["400", "500", "600", "700", "800"],
 });
-const outfit = Outfit({ variable: "--font-outfit", subsets: ["latin", "latin-ext"], weight: ["600", "700", "800"] });
-const plusJakarta = Plus_Jakarta_Sans({
+const outfit = localFont({
+  src: "../fonts/outfit/Outfit-Variable.woff2",
+  variable: "--font-outfit",
+  weight: "100 900",
+});
+const plusJakarta = localFont({
+  src: "../fonts/plus-jakarta-sans/PlusJakartaSans-Variable.woff2",
   variable: "--font-plus-jakarta",
-  subsets: ["latin", "latin-ext", "vietnamese"],
-  weight: ["600", "700", "800"],
+  weight: "200 800",
 });
 
 const TITLE = "SuperLanding — Thiết Kế Website & Landing Page Theo Yêu Cầu";
