@@ -176,6 +176,7 @@ export const navLinks: [href: string, label: string][] = [
 // The Chinese-learning tools, gathered on the "Học HSK" page.
 export const hskTools = [
   "/cong-cu/bai-hoc-tieng-trung",
+  "/cong-cu/ngu-phap-tieng-trung",
   "/cong-cu/tu-dien-hsk",
   "/cong-cu/luyen-viet-chu-han",
   "/cong-cu/chu-han-roi",

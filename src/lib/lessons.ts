@@ -1,4 +1,4 @@
-import { LESSONS, type Lesson, type LessonWord } from "@/data/lessons";
+import { LESSONS, type GrammarPoint, type Lesson, type LessonWord } from "@/data/lessons";
 import { WORDS, wordHref } from "@/lib/hsk";
 import type { GameWord } from "@/components/hanzi/vocab-game";
 
@@ -39,4 +39,28 @@ export function lessonGameWords(l: Lesson): GameWord[] {
     const entry = dictByHanzi.get(hanzi);
     return [hanzi, pinyin, w.meaning, w.hanViet, l.book, entry?.slug ?? `${l.slug}-${i + 1}`, w.pos ? w.pos.split("/") : [], entry ? wordHref(entry.slug) : `${lessonHref(l)}#${wordAnchor(i)}`];
   });
+}
+
+export const GRAMMAR_PATH = "/cong-cu/ngu-phap-tieng-trung";
+
+/** Where a grammar point was taught. */
+export type GrammarSource = { book: number; label: string; href: string };
+export type GrammarEntry = { anchor: string; point: GrammarPoint; sources: GrammarSource[] };
+
+/**
+ * Every grammar point in lesson order. A point taught again in a later session (same title and name) is listed once,
+ * with every session it came up in.
+ */
+export function grammarIndex(): GrammarEntry[] {
+  const byKey = new Map<string, GrammarEntry>();
+  for (const [, lessons] of lessonBooks())
+    for (const l of lessons)
+      for (const point of l.grammar) {
+        const source = { book: l.book, label: lessonLabel(l), href: `${lessonHref(l)}#ngu-phap` };
+        const key = `${point.title}|${point.name}`;
+        const seen = byKey.get(key);
+        if (seen) seen.sources.push(source);
+        else byKey.set(key, { anchor: `${l.slug}-${point.id}`, point, sources: [source] });
+      }
+  return [...byKey.values()];
 }

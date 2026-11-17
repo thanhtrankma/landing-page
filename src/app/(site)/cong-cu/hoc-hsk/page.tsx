@@ -1,7 +1,7 @@
 import Link from "next/link";
 import JsonLd from "@/components/JsonLd";
 import { DICT_PATH, WORDS } from "@/lib/hsk";
-import { LESSONS, LESSONS_PATH } from "@/lib/lessons";
+import { GRAMMAR_PATH, LESSONS, LESSONS_PATH, grammarIndex } from "@/lib/lessons";
 import { SITE_URL, breadcrumbJsonLd, graph, pageMetadata } from "@/lib/seo";
 import "../cards.css";
 import "../luyen-viet-chu-han/hanzi.css";
@@ -23,6 +23,13 @@ const tools: { href: string; tag: string; title: string; text: string; stat: str
     title: "Bài học theo buổi",
     text: "Từ mới và ngữ pháp của từng buổi học trên lớp, kèm ví dụ, luyện viết và game riêng cho buổi.",
     stat: `${LESSONS.length} buổi · ${LESSONS.reduce((n, l) => n + l.words.length, 0)} từ mới`,
+  },
+  {
+    href: GRAMMAR_PATH,
+    tag: "Ngữ pháp",
+    title: "Tổng hợp điểm ngữ pháp",
+    text: "Mọi điểm ngữ pháp đã học trên một trang: cấu trúc, giải thích và câu ví dụ, tìm nhanh theo chữ Hán hoặc tiếng Việt.",
+    stat: `${grammarIndex().length} điểm ngữ pháp`,
   },
   {
     href: DICT_PATH,

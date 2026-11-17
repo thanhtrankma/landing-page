@@ -1,11 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useMemo, useState, type ReactNode } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { posTitle } from "@/lib/hsk-text";
-import type { GrammarPoint, Lesson, LessonLine, LessonWord } from "@/data/lessons";
+import type { Lesson, LessonWord } from "@/data/lessons";
 import HanziDrop from "./HanziDrop";
 import HanziWriterPractice from "./HanziWriterPractice";
+import { GrammarCard, Line, Marked } from "./LessonParts";
 import SpeakButton from "./SpeakButton";
 import VocabMeteor from "./VocabMeteor";
 import type { GameWord } from "./vocab-game";
@@ -22,50 +23,6 @@ const TABS: [Tab, string][] = [
   ["tro-choi", "Trò chơi"],
 ];
 type Game = "drop" | "meteor";
-
-/** Wraps each occurrence of `marks` in <mark>, longest first so 正在 wins over 正. */
-function Marked({ text, marks }: { text: string; marks: string[] }) {
-  const terms = marks.filter(Boolean).sort((a, b) => b.length - a.length);
-  if (!terms.length) return <>{text}</>;
-  const parts: ReactNode[] = [];
-  let rest = text;
-  while (rest) {
-    let at = -1;
-    let term = "";
-    for (const t of terms) {
-      const i = rest.indexOf(t);
-      if (i >= 0 && (at < 0 || i < at)) [at, term] = [i, t];
-    }
-    if (at < 0) {
-      parts.push(rest);
-      break;
-    }
-    if (at > 0) parts.push(rest.slice(0, at));
-    parts.push(<mark key={parts.length}>{term}</mark>);
-    rest = rest.slice(at + term.length);
-  }
-  return <>{parts}</>;
-}
-
-function Line({ line, marks }: { line: LessonLine; marks: string[] }) {
-  return (
-    <li className={line.who ? "lesson-line has-who" : "lesson-line"}>
-      {line.who && (
-        <span className={[...line.who].length > 1 ? "lesson-who name" : "lesson-who"} lang="zh">
-          {line.who}
-        </span>
-      )}
-      <div>
-        <p className="zh" lang="zh">
-          <Marked text={line.zh} marks={marks} />
-        </p>
-        <p className="py">{line.pinyin}</p>
-        <p className="vi">{line.vi}</p>
-      </div>
-      <SpeakButton text={line.zh} label="Nghe câu" small />
-    </li>
-  );
-}
 
 function WordCard({ word, index, keyHanzi, dict, onWrite }: { word: LessonWord; index: number; keyHanzi: string; dict?: string; onWrite: () => void }) {
   const marks = [keyHanzi];
@@ -142,34 +99,6 @@ function WordCard({ word, index, keyHanzi, dict, onWrite }: { word: LessonWord; 
           </Link>
         )}
       </div>
-    </article>
-  );
-}
-
-function GrammarCard({ point, index }: { point: GrammarPoint; index: number }) {
-  return (
-    <article className="lesson-grammar" id={point.id}>
-      <span className="lesson-num">{index + 1}</span>
-      <div className="lesson-grammar-head">
-        <h3 lang="zh">“{point.title}”</h3>
-        <p>{point.name}</p>
-      </div>
-      <p className="lesson-summary">{point.summary}</p>
-      <div className="lesson-structures">
-        <small>Cấu trúc</small>
-        {point.structures.map((s) => (
-          <p key={s} lang="zh">
-            <Marked text={s} marks={[...point.focus, "主语"]} />
-          </p>
-        ))}
-      </div>
-      {point.note && <p className="lesson-note">{point.note}</p>}
-      <small className="lesson-sub">Ví dụ</small>
-      <ul className="lesson-lines">
-        {point.examples.map((l) => (
-          <Line key={l.zh} line={l} marks={point.focus} />
-        ))}
-      </ul>
     </article>
   );
 }
