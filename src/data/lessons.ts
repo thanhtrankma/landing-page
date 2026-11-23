@@ -2965,4 +2965,393 @@ const book2Session8: Lesson = {
     },
   ],
 };
-export const LESSONS: Lesson[] = [...BOOK_1, book2Session1, book2Session2, book2Session3, book2Session4, book2Session5, book2Session6, book2Session7, book2Session8];
+const book2Session9: Lesson = {
+  book: 2,
+  session: 9,
+  slug: "quyen-2-buoi-9",
+  title: "Bạn đã từng đi sở thú ở ngoại thành chưa?",
+  words: [
+    {
+      hanzi: "打算",
+      pinyin: "dǎsuàn",
+      pos: "动/名",
+      meaning: "dự định",
+      hanViet: "ĐẢ TOÁN",
+      phrases: [
+        { hanzi: "有什么打算？", pinyin: "Yǒu shénme dǎsuàn?", meaning: "Có dự định gì?" },
+        { hanzi: "你周末打算做什么？", pinyin: "Nǐ zhōumò dǎsuàn zuò shénme?", meaning: "Cuối tuần bạn dự định làm gì?" },
+      ],
+      dialogues: [
+        [
+          { who: "A", zh: "你打算做什么？", pinyin: "Nǐ dǎsuàn zuò shénme?", vi: "Bạn dự định làm gì?" },
+          { who: "B", zh: "我打算回国。", pinyin: "Wǒ dǎsuàn huí guó.", vi: "Tôi dự định về nước." },
+        ],
+      ],
+    },
+    {
+      hanzi: "已经",
+      pinyin: "yǐjīng",
+      pos: "副",
+      meaning: "đã",
+      hanViet: "DĨ KINH",
+      phrases: [
+        { hanzi: "已经上课了。", pinyin: "Yǐjīng shàngkè le.", meaning: "Đã vào học rồi." },
+        { hanzi: "已经十点了。", pinyin: "Yǐjīng shí diǎn le.", meaning: "Đã 10 giờ rồi." },
+        { hanzi: "已经回去了。", pinyin: "Yǐjīng huíqù le.", meaning: "Đã quay về rồi." },
+      ],
+      dialogues: [
+        [
+          { who: "A", zh: "她去哪儿了？", pinyin: "Tā qù nǎr le?", vi: "Cô ấy đi đâu rồi?" },
+          { who: "B", zh: "她已经回去了。", pinyin: "Tā yǐjīng huíqù le.", vi: "Cô ấy đã quay về rồi." },
+        ],
+      ],
+    },
+    {
+      hanzi: "地方",
+      pinyin: "dìfang",
+      pos: "名",
+      meaning: "nơi, địa phương",
+      hanViet: "ĐỊA PHƯƠNG",
+      phrases: [
+        { hanzi: "很多地方", pinyin: "hěn duō dìfang", meaning: "rất nhiều nơi" },
+        { hanzi: "什么地方", pinyin: "shénme dìfang", meaning: "nơi nào / chỗ nào" },
+      ],
+      dialogues: [
+        [
+          { who: "A", zh: "为什么你喜欢北京？", pinyin: "Wèishénme nǐ xǐhuan Běijīng?", vi: "Tại sao bạn thích Bắc Kinh?" },
+          { who: "B", zh: "因为北京有很多好玩的地方。", pinyin: "Yīnwèi Běijīng yǒu hěn duō hǎowán de dìfang.", vi: "Bởi vì Bắc Kinh có rất nhiều nơi vui chơi." },
+        ],
+        [
+          { who: "A", zh: "我现在打算去一个地方，你跟我去吗？", pinyin: "Wǒ xiànzài dǎsuàn qù yí gè dìfang, nǐ gēn wǒ qù ma?", vi: "Bây giờ tôi dự định đi một nơi, bạn đi cùng tôi không?" },
+          { who: "B", zh: "去/不去。", pinyin: "Qù/Bú qù.", vi: "Đi / Không đi." },
+        ],
+      ],
+    },
+    {
+      hanzi: "建议",
+      pinyin: "jiànyì",
+      pos: "名/动",
+      meaning: "kiến nghị, đề nghị",
+      hanViet: "KIẾN NGHỊ",
+      phrases: [
+        { hanzi: "老师的建议", pinyin: "lǎoshī de jiànyì", meaning: "lời khuyên / đề nghị của thầy cô" },
+        { hanzi: "建议去上课", pinyin: "jiànyì qù shàngkè", meaning: "đề nghị đi học" },
+        { hanzi: "有建议", pinyin: "yǒu jiànyì", meaning: "có đề nghị / ý kiến" },
+        { hanzi: "没有建议", pinyin: "méiyǒu jiànyì", meaning: "không có ý kiến" },
+      ],
+      dialogues: [
+        [
+          { who: "A", zh: "你有什么建议？", pinyin: "Nǐ yǒu shénme jiànyì?", vi: "Bạn có đề nghị gì không?" },
+          { who: "B", zh: "我建议去上课。", pinyin: "Wǒ jiànyì qù shàngkè.", vi: "Tôi đề nghị đi lên lớp." },
+        ],
+      ],
+    },
+    {
+      hanzi: "过",
+      pinyin: "guo",
+      pos: "助",
+      meaning: "qua (từng, đã từng)",
+      hanViet: "QUÁ",
+      phrases: [
+        { hanzi: "去过", pinyin: "qùguo", meaning: "từng đi" },
+        { hanzi: "吃过", pinyin: "chīguo", meaning: "từng ăn" },
+      ],
+      dialogues: [
+        [
+          { who: "A", zh: "你去过长城吗？", pinyin: "Nǐ qùguo Chángchéng ma?", vi: "Bạn đã từng đi Vạn Lý Trường Thành chưa?" },
+          { who: "B", zh: "我没去过。", pinyin: "Wǒ méi qùguo.", vi: "Tôi chưa từng đi." },
+          { who: "A", zh: "那我建议你去一次，很美的。", pinyin: "Nà wǒ jiànyì nǐ qù yí cì, hěn měi de.", vi: "Vậy tôi khuyên bạn nên đi một lần, đẹp lắm đấy." },
+          { who: "B", zh: "好的，有空就去。", pinyin: "Hǎo de, yǒu kòng jiù qù.", vi: "Được thôi, có thời gian rảnh sẽ đi." },
+        ],
+      ],
+    },
+    {
+      hanzi: "熊猫",
+      pinyin: "xióngmāo",
+      pos: "名",
+      meaning: "gấu trúc",
+      hanViet: "HÙNG MIÊU",
+      phrases: [
+        { hanzi: "两只熊猫", pinyin: "liǎng zhī xióngmāo", meaning: "hai con gấu trúc" },
+        { hanzi: "《功夫熊猫》", pinyin: "Gōngfu Xióngmāo", meaning: "Kung Fu Panda" },
+        { hanzi: "我看过《功夫熊猫》。", pinyin: "Wǒ kànguo Gōngfu Xióngmāo.", meaning: "Tôi đã từng xem Kung Fu Panda." },
+      ],
+      dialogues: [
+        [
+          { who: "A", zh: "你看过《功夫熊猫》了吗？", pinyin: "Nǐ kànguo Gōngfu Xióngmāo le ma?", vi: "Bạn đã xem Kung Fu Panda chưa?" },
+          { who: "B", zh: "我看过《功夫熊猫》。", pinyin: "Wǒ kànguo Gōngfu Xióngmāo.", vi: "Tôi đã xem Kung Fu Panda rồi." },
+        ],
+      ],
+    },
+    {
+      hanzi: "动物",
+      pinyin: "dòngwù",
+      pos: "名",
+      meaning: "động vật",
+      hanViet: "ĐỘNG VẬT",
+      parts: [
+        { hanzi: "动物园", pinyin: "dòngwùyuán", pos: "名", meaning: "sở thú" },
+      ],
+      phrases: [
+        { hanzi: "很多动物", pinyin: "hěn duō dòngwù", meaning: "rất nhiều động vật" },
+        { hanzi: "去动物园", pinyin: "qù dòngwùyuán", meaning: "đi sở thú" },
+        { hanzi: "我想去动物园看动物。", pinyin: "Wǒ xiǎng qù dòngwùyuán kàn dòngwù.", meaning: "Tôi muốn đi sở thú xem động vật." },
+      ],
+      dialogues: [
+        [
+          { who: "A", zh: "你去过动物园吗？", pinyin: "Nǐ qùguo dòngwùyuán ma?", vi: "Bạn đã từng đi sở thú chưa?" },
+          { who: "B", zh: "我去过。", pinyin: "Wǒ qùguo.", vi: "Tôi từng đi rồi." },
+        ],
+      ],
+    },
+    {
+      hanzi: "郊区",
+      pinyin: "jiāoqū",
+      pos: "名",
+      meaning: "ngoại thành",
+      hanViet: "GIAO KHU",
+      phrases: [
+        { hanzi: "去郊区", pinyin: "qù jiāoqū", meaning: "đi ngoại thành" },
+        { hanzi: "去郊区玩儿", pinyin: "qù jiāoqū wánr", meaning: "đi ngoại thành chơi" },
+        { hanzi: "我去过郊区的动物园。", pinyin: "Wǒ qùguo jiāoqū de dòngwùyuán.", meaning: "Tôi đã từng đi sở thú ở ngoại thành." },
+      ],
+      dialogues: [
+        [
+          { who: "A", zh: "你去过郊区的动物园吗？", pinyin: "Nǐ qùguo jiāoqū de dòngwùyuán ma?", vi: "Bạn đã từng đi sở thú ở ngoại thành chưa?" },
+          { who: "B", zh: "我去过。", pinyin: "Wǒ qùguo.", vi: "Tôi từng đi rồi." },
+        ],
+      ],
+    },
+    {
+      hanzi: "对……感兴趣",
+      pinyin: "duì……gǎn xìngqù",
+      pos: "短语",
+      meaning: "hứng thú với",
+      hanViet: "ĐỐI ... CẢM HỨNG THÚ",
+      phrases: [
+        { hanzi: "对汉语感兴趣。", pinyin: "Duì Hànyǔ gǎn xìngqù.", meaning: "Hứng thú với tiếng Hán." },
+      ],
+      dialogues: [
+        [
+          { who: "A", zh: "你对什么感兴趣？", pinyin: "Nǐ duì shénme gǎn xìngqù?", vi: "Bạn hứng thú với cái gì?" },
+          { who: "B", zh: "我对汉语感兴趣。", pinyin: "Wǒ duì Hànyǔ gǎn xìngqù.", vi: "Tôi hứng thú với tiếng Hán." },
+        ],
+      ],
+    },
+    {
+      hanzi: "…的话",
+      pinyin: "dehuà",
+      pos: "助",
+      meaning: "nếu, nếu như",
+      hanViet: "ĐÍCH THOẠI",
+      phrases: [
+        { hanzi: "感兴趣的话", pinyin: "gǎn xìngqù dehuà", meaning: "nếu hứng thú" },
+        { hanzi: "你感兴趣的话，我可以教你。", pinyin: "Nǐ gǎn xìngqù dehuà, wǒ kěyǐ jiāo nǐ.", meaning: "Nếu bạn hứng thú, tôi có thể dạy bạn." },
+      ],
+      dialogues: [
+        [
+          { who: "A", zh: "你对动物感兴趣的话，可以去动物园。", pinyin: "Nǐ duì dòngwù gǎn xìngqù dehuà, kěyǐ qù dòngwùyuán.", vi: "Nếu bạn hứng thú với động vật thì có thể đi sở thú." },
+          { who: "B", zh: "好的。", pinyin: "Hǎo de.", vi: "Được thôi." },
+        ],
+      ],
+    },
+    {
+      hanzi: "市中心",
+      pinyin: "shìzhōngxīn",
+      pos: "专名",
+      meaning: "trung tâm thành phố",
+      hanViet: "THỊ TRUNG TÂM",
+      phrases: [
+        { hanzi: "去市中心", pinyin: "qù shìzhōngxīn", meaning: "đi trung tâm thành phố" },
+        { hanzi: "在市中心", pinyin: "zài shìzhōngxīn", meaning: "ở trung tâm thành phố" },
+      ],
+      dialogues: [
+        [
+          { who: "A", zh: "你想去哪儿？", pinyin: "Nǐ xiǎng qù nǎr?", vi: "Bạn muốn đi đâu?" },
+          { who: "B", zh: "我想去市中心的动物园。", pinyin: "Wǒ xiǎng qù shìzhōngxīn de dòngwùyuán.", vi: "Tôi muốn đi sở thú ở trung tâm thành phố." },
+          { who: "A", zh: "你想去的话，我跟你一起去吧。", pinyin: "Nǐ xiǎng qù dehuà, wǒ gēn nǐ yìqǐ qù ba.", vi: "Nếu bạn muốn đi thì tôi đi cùng bạn nhé." },
+          { who: "B", zh: "好的。", pinyin: "Hǎo de.", vi: "Được thôi." },
+        ],
+      ],
+    },
+    {
+      hanzi: "遗憾",
+      pinyin: "yíhàn",
+      pos: "形",
+      meaning: "tiếc, tiếc nuối",
+      hanViet: "DI HÁM",
+      phrases: [
+        { hanzi: "非常遗憾", pinyin: "fēicháng yíhàn", meaning: "vô cùng tiếc nuối" },
+        { hanzi: "真遗憾", pinyin: "zhēn yíhàn", meaning: "thật tiếc nuối" },
+      ],
+      dialogues: [
+        [
+          { who: "A", zh: "你对动物感兴趣吗？", pinyin: "Nǐ duì dòngwù gǎn xìngqù ma?", vi: "Bạn có hứng thú với động vật không?" },
+          { who: "B", zh: "我对动物不太感兴趣。", pinyin: "Wǒ duì dòngwù bú tài gǎn xìngqù.", vi: "Tôi không hứng thú với động vật lắm." },
+          { who: "A", zh: "真遗憾。我周末想去动物园，打算请你一起去。", pinyin: "Zhēn yíhàn. Wǒ zhōumò xiǎng qù dòngwùyuán, dǎsuàn qǐng nǐ yìqǐ qù.", vi: "Thật tiếc quá. Cuối tuần tôi muốn đi sở thú, định mời bạn đi cùng." },
+        ],
+      ],
+    },
+    {
+      hanzi: "约会",
+      pinyin: "yuēhuì",
+      pos: "动/名",
+      meaning: "hẹn, buổi hẹn",
+      hanViet: "ƯỚC HỘI",
+      phrases: [
+        { hanzi: "跟朋友约会", pinyin: "gēn péngyou yuēhuì", meaning: "hẹn hò với bạn bè" },
+        { hanzi: "有一个约会", pinyin: "yǒu yí gè yuēhuì", meaning: "có một buổi hẹn" },
+        { hanzi: "今天下午我有一个约会。", pinyin: "Jīntiān xiàwǔ wǒ yǒu yí gè yuēhuì.", meaning: "Chiều nay tôi có một buổi hẹn." },
+      ],
+      dialogues: [
+        [
+          { who: "A", zh: "你周末有空吗？", pinyin: "Nǐ zhōumò yǒu kòng ma?", vi: "Cuối tuần bạn có rảnh không?" },
+          { who: "B", zh: "我周末要跟男朋友约会。", pinyin: "Wǒ zhōumò yào gēn nánpéngyou yuēhuì.", vi: "Cuối tuần tôi phải hẹn hò với bạn trai." },
+          { who: "A", zh: "真遗憾。我周末想去动物园，打算请你一起去。", pinyin: "Zhēn yíhàn. Wǒ zhōumò xiǎng qù dòngwùyuán, dǎsuàn qǐng nǐ yìqǐ qù.", vi: "Thật tiếc quá. Cuối tuần tôi muốn đi sở thú, định mời bạn đi cùng." },
+        ],
+      ],
+    },
+    {
+      hanzi: "烤鸭",
+      pinyin: "kǎoyā",
+      pos: "名",
+      meaning: "vịt quay",
+      hanViet: "KHẢO ÁP",
+      phrases: [
+        { hanzi: "吃烤鸭", pinyin: "chī kǎoyā", meaning: "ăn vịt quay" },
+        { hanzi: "一只烤鸭", pinyin: "yì zhī kǎoyā", meaning: "một con vịt quay" },
+      ],
+      dialogues: [
+        [
+          { who: "A", zh: "你吃过烤鸭吗？", pinyin: "Nǐ chīguo kǎoyā ma?", vi: "Bạn đã từng ăn vịt quay chưa?" },
+          { who: "B", zh: "我跟男朋友约会时吃过。", pinyin: "Wǒ gēn nánpéngyou yuēhuì shí chīguo.", vi: "Lúc hẹn hò với bạn trai tôi đã từng ăn rồi." },
+        ],
+      ],
+    },
+    {
+      hanzi: "味道",
+      pinyin: "wèidao",
+      pos: "名",
+      meaning: "mùi vị",
+      hanViet: "VỊ ĐẠO",
+      phrases: [
+        { hanzi: "味道很好", pinyin: "wèidao hěn hǎo", meaning: "mùi vị rất ngon" },
+        { hanzi: "没有什么味道", pinyin: "méiyǒu shénme wèidao", meaning: "không có mùi vị gì" },
+        { hanzi: "味道怎么样？", pinyin: "Wèidao zěnme yàng?", meaning: "Mùi vị thế nào?" },
+      ],
+      dialogues: [
+        [
+          { who: "A", zh: "你吃过烤鸭吗？", pinyin: "Nǐ chīguo kǎoyā ma?", vi: "Bạn đã từng ăn vịt quay chưa?" },
+          { who: "B", zh: "我吃过，我不喜欢烤鸭的味道。", pinyin: "Wǒ chīguo, wǒ bù xǐhuan kǎoyā de wèidao.", vi: "Tôi từng ăn rồi, tôi không thích mùi vị của vịt quay." },
+        ],
+      ],
+    },
+    {
+      hanzi: "……极了",
+      pinyin: "....jíle",
+      pos: "副",
+      meaning: "rất..., vô cùng",
+      hanViet: "CỰC LIỄU",
+      phrases: [
+        { hanzi: "好极了！", pinyin: "Hǎo jíle!", meaning: "Tuyệt vời / Tốt vô cùng!" },
+        { hanzi: "累极了！", pinyin: "Lèi jíle!", meaning: "Mệt vô cùng!" },
+      ],
+      dialogues: [
+        [
+          { who: "A", zh: "你吃没吃过烤鸭？", pinyin: "Nǐ chī méi chīguo kǎoyā?", vi: "Bạn đã ăn vịt quay bao giờ chưa?" },
+          { who: "B", zh: "我吃过，味道好极了。", pinyin: "Wǒ chīguo, wèidao hǎo jíle.", vi: "Tôi ăn rồi, mùi vị ngon vô cùng." },
+        ],
+      ],
+    },
+    {
+      hanzi: "肚子",
+      pinyin: "dùzi",
+      pos: "名",
+      meaning: "bụng",
+      hanViet: "ĐỖ TỬ",
+      phrases: [
+        { hanzi: "我的肚子", pinyin: "wǒ de dùzi", meaning: "bụng của tôi" },
+        { hanzi: "肚子大", pinyin: "dùzi dà", meaning: "bụng to" },
+        { hanzi: "肚子好/不好。", pinyin: "Dùzi hǎo/bù hǎo.", meaning: "Bụng ổn / không ổn (đau bụng)." },
+      ],
+      dialogues: [
+        [
+          { who: "A", zh: "你跟我一起去吃烤鸭吗？", pinyin: "Nǐ gēn wǒ yīqǐ qù chī kǎoyā ma?", vi: "Bạn có đi ăn vịt quay cùng tôi không?" },
+          { who: "B", zh: "好的。我的肚子已经饿极了，现在就去吃吧。", pinyin: "Hǎo de. Wǒ de dùzi yǐjīng è jíle, xiànzài jiù qù chī ba.", vi: "Được thôi. Bụng tôi đã đói cồn cào rồi, bây giờ đi ăn luôn đi." },
+        ],
+      ],
+    },
+    {
+      hanzi: "感谢",
+      pinyin: "gǎnxiè",
+      pos: "动",
+      meaning: "cảm ơn",
+      hanViet: "CẢM TẠ",
+      phrases: [
+        { hanzi: "很感谢", pinyin: "hěn gǎnxiè", meaning: "rất cảm ơn" },
+        { hanzi: "感谢你", pinyin: "gǎnxiè nǐ", meaning: "cảm ơn bạn" },
+        { hanzi: "太感谢你了。", pinyin: "Tài gǎnxiè nǐ le.", meaning: "Cảm ơn bạn nhiều lắm." },
+      ],
+      dialogues: [
+        [
+          { who: "A", zh: "这个星期六你教我汉语，好吗？", pinyin: "Zhège xīngqīliù nǐ jiāo wǒ Hànyǔ, hǎo ma?", vi: "Thứ Bảy tuần này bạn dạy tôi tiếng Hán, được không?" },
+          { who: "B", zh: "好吧。你怎么感谢我？", pinyin: "Hǎo ba. Nǐ zěnme gǎnxiè wǒ?", vi: "Được thôi. Bạn cảm ơn tôi bằng cách nào đây?" },
+          { who: "A", zh: "星期六晚上我请你吃烤鸭。", pinyin: "Xīngqīliù wǎnshang wǒ qǐng nǐ chī kǎoyā.", vi: "Tối thứ Bảy tôi mời bạn ăn vịt quay." },
+        ],
+      ],
+    },
+  ],
+  grammar: [
+    {
+      id: "tro-tu-guo-khang-dinh",
+      title: "助词 “过” (Khẳng định)",
+      name: "Trợ từ động thái “过”",
+      summary: "“过” đứng sau động từ, biểu thị rằng đã từng trải qua một việc gì đó trong quá khứ, phía sau thường có thêm cảm nhận hoặc đánh giá[cite: 119].",
+      structures: ["V + 过 + (Object)"],
+      note: "“过” đặt ngay sau động từ chính và trước tân ngữ[cite: 119, 120].",
+      focus: ["过"],
+      examples: [
+        { zh: "我吃过中国菜，很好吃。", pinyin: "Wǒ chīguo zhōngguócài, hěn hǎochī.", vi: "Tôi đã từng ăn món Trung Quốc rồi, rất ngon[cite: 120]." },
+        { zh: "海伦唱过中国歌，很好听。", pinyin: "Hǎilún chàngguo zhōngguógē, hěn hǎotīng.", vi: "Helen đã từng hát bài hát tiếng Trung, rất hay[cite: 120]." },
+        { zh: "他看过中国电影，很喜欢。", pinyin: "Tā kànguo Zhōngguó diànyǐng, hěn xǐhuan.", vi: "Anh ấy đã từng xem phim Trung Quốc, rất thích[cite: 120]." },
+      ],
+    },
+    {
+      id: "tro-tu-guo-phu-dinh",
+      title: "助词 “过” (Dạng phủ định)",
+      name: "Dạng phủ định của trợ từ “过”",
+      summary: "Dùng phó từ phủ định “没” (hoặc “还没”) đặt trước động từ để diễn đạt chưa từng trải qua hành động đó; trợ từ “过” vẫn được giữ nguyên sau động từ[cite: 118].",
+      structures: [
+        "没 + V + 过 + (O)",
+        "还 + 没 + V + 过 + (O)",
+      ],
+      note: "Thêm “还” biểu thị hoạt động vẫn chưa thực hiện tính đến thời điểm hiện tại[cite: 118].",
+      focus: ["没……过", "还没……过"],
+      examples: [
+        { zh: "我没吃过中国菜。", pinyin: "Wǒ méi chīguo zhōngguócài.", vi: "Tôi chưa từng ăn món Trung Quốc[cite: 118]." },
+        { zh: "我还没吃过中国菜。", pinyin: "Wǒ hái méi chīguo zhōngguócài.", vi: "Tôi vẫn chưa từng ăn món Trung Quốc[cite: 118]." },
+        { zh: "我没听过中国歌。", pinyin: "Wǒ méi tīngguo zhōngguógē.", vi: "Tôi chưa từng nghe bài hát tiếng Trung[cite: 118]." },
+        { zh: "我还没听过中国歌。", pinyin: "Wǒ hái méi tīngguo zhōngguógē.", vi: "Tôi vẫn chưa từng nghe bài hát tiếng Trung[cite: 118]." },
+      ],
+    },
+    {
+      id: "tro-tu-guo-nghi-van",
+      title: "助词 “过” (Dạng nghi vấn)",
+      name: "Dạng nghi vấn của trợ từ “过”",
+      summary: "Có hai cách đặt câu hỏi với trợ từ “过”: thêm trợ từ nghi vấn “吗” ở cuối câu hoặc dùng câu hỏi chính phản “V 没 V 过”[cite: 117].",
+      structures: [
+        "V + 过 + (O) 吗？",
+        "V 没 + V + 过 + (O)？",
+      ],
+      note: "Trong dạng câu hỏi chính phản, “过” chỉ xuất hiện sau động từ thứ hai (V 没 V 过)[cite: 117].",
+      focus: ["……过……吗", "V没V过"],
+      examples: [
+        { zh: "你吃过中国菜吗？", pinyin: "Nǐ chīguo zhōngguócài ma?", vi: "Bạn đã từng ăn món Trung Quốc chưa[cite: 117]?" },
+        { zh: "你吃没吃过中国菜？", pinyin: "Nǐ chī méi chīguo zhōngguócài?", vi: "Bạn đã từng ăn món Trung Quốc chưa[cite: 117]?" },
+        { zh: "你听过中国歌吗？", pinyin: "Nǐ tīngguo zhōngguógē ma?", vi: "Bạn đã từng nghe bài hát tiếng Trung chưa[cite: 117]?" },
+        { zh: "你听没听过中国歌？", pinyin: "Nǐ tīng méi tīngguo zhōngguógē?", vi: "Bạn đã từng nghe bài hát tiếng Trung chưa[cite: 117]?" },
+      ],
+    },
+  ],
+};
+export const LESSONS: Lesson[] = [...BOOK_1, book2Session1, book2Session2, book2Session3, book2Session4, book2Session5, book2Session6, book2Session7, book2Session8, book2Session9];
