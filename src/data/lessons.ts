@@ -3354,4 +3354,316 @@ const book2Session9: Lesson = {
     },
   ],
 };
-export const LESSONS: Lesson[] = [...BOOK_1, book2Session1, book2Session2, book2Session3, book2Session4, book2Session5, book2Session6, book2Session7, book2Session8, book2Session9];
+const book2Session10: Lesson = {
+  book: 2,
+  session: 10,
+  slug: "quyen-2-buoi-10",
+  title: "Bạn có sợ cay không?",
+  words: [
+    {
+      hanzi: "敲门",
+      pinyin: "qiāo mén",
+      pos: "动",
+      meaning: "gõ cửa",
+      hanViet: "XAO MÔN",
+      phrases: [
+        { hanzi: "没敲门", pinyin: "méi qiāo mén", meaning: "không gõ cửa / chưa gõ cửa" },
+        { hanzi: "请敲门。", pinyin: "Qǐng qiāo mén.", meaning: "Xin mời gõ cửa." },
+      ],
+      dialogues: [
+        [
+          { who: "A", zh: "我听见有人敲门。", pinyin: "Wǒ tīng jiàn yǒu rén qiāo mén.", vi: "Tôi nghe thấy có người gõ cửa." },
+          { who: "B", zh: "我去看看是谁在敲门。", pinyin: "Wǒ qù kànkan shì shéi zài qiāo mén.", vi: "Tôi đi xem xem là ai đang gõ cửa." },
+        ],
+      ],
+    },
+    {
+      hanzi: "做客",
+      pinyin: "zuòkè",
+      pos: "动/宾",
+      meaning: "làm khách",
+      hanViet: "TỐ KHÁCH",
+      phrases: [
+        { hanzi: "去他家做客", pinyin: "qù tā jiā zuòkè", meaning: "đến nhà anh ấy chơi / làm khách" },
+        { hanzi: "去朋友家做客", pinyin: "qù péngyou jiā zuòkè", meaning: "đến nhà bạn chơi / làm khách" },
+      ],
+      dialogues: [
+        [
+          { who: "A", zh: "小明去哪了？", pinyin: "Xiǎomíng qù nǎ le?", vi: "Tiểu Minh đi đâu rồi?" },
+          { who: "B", zh: "小明去王老师家做客。", pinyin: "Xiǎomíng qù Wáng lǎoshī jiā zuòkè.", vi: "Tiểu Minh đến nhà thầy/cô Vương làm khách rồi." },
+        ],
+      ],
+    },
+    {
+      hanzi: "欢迎",
+      pinyin: "huānyíng",
+      pos: "动",
+      meaning: "chào mừng-hoan nghênh/nghinh",
+      hanViet: "HOAN NGHÊNH",
+      phrases: [
+        { hanzi: "欢迎你", pinyin: "huānyíng nǐ", meaning: "chào mừng bạn" },
+        { hanzi: "欢迎来中国！", pinyin: "Huānyíng lái Zhōngguó!", meaning: "Chào mừng đến với Trung Quốc!" },
+        { hanzi: "欢迎来我家做客。", pinyin: "Huānyíng lái wǒ jiā zuòkè.", meaning: "Hoan nghênh đến nhà tôi chơi / làm khách." },
+        { hanzi: "欢迎您到北京来。", pinyin: "Huānyíng nín dào Běijīng lái.", meaning: "Chào mừng ngài đến Bắc Kinh." },
+      ],
+      dialogues: [],
+    },
+    {
+      hanzi: "女儿",
+      pinyin: "nǚ'ér",
+      pos: "名",
+      meaning: "con gái",
+      hanViet: "NỮ NHI",
+      phrases: [
+        { hanzi: "两个女儿", pinyin: "liǎng gè nǚ'ér", meaning: "hai người con gái" },
+        { hanzi: "老师的女儿", pinyin: "lǎoshī de nǚ'ér", meaning: "con gái của thầy/cô giáo" },
+      ],
+      dialogues: [
+        [
+          { who: "A", zh: "她的女儿怎么样？", pinyin: "Tā de nǚ'ér zěnmeyàng?", vi: "Con gái của cô ấy thế nào?" },
+          { who: "B", zh: "她又可爱又漂亮。", pinyin: "Tā yòu kě'ài yòu piàoliang.", vi: "Cô bé vừa đáng yêu vừa xinh đẹp." },
+        ],
+      ],
+    },
+    {
+      hanzi: "儿子",
+      pinyin: "érzi",
+      pos: "名",
+      meaning: "con trai",
+      hanViet: "NHI TỬ",
+      phrases: [
+        { hanzi: "我的儿子", pinyin: "wǒ de érzi", meaning: "con trai của tôi" },
+        { hanzi: "我有一个儿子和一个女儿。", pinyin: "Wǒ yǒu yí gè érzi hé yí gè nǚ'ér.", meaning: "Tôi có một con trai và một con gái." },
+      ],
+      dialogues: [
+        [
+          { who: "A", zh: "你的儿子今年几岁了？", pinyin: "Nǐ de érzi jīnnián jǐ suì le?", vi: "Con trai của bạn năm nay mấy tuổi rồi?" },
+          { who: "B", zh: "他今年六岁了。", pinyin: "Tā jīnnián liù suì le.", vi: "Cậu bé năm nay sáu tuổi rồi." },
+        ],
+      ],
+    },
+    {
+      hanzi: "孩子",
+      pinyin: "háizi",
+      pos: "名",
+      meaning: "con cái",
+      hanViet: "HÀI TỬ",
+      parts: [
+        { hanzi: "儿女", pinyin: "érnǚ", pos: "名", meaning: "con cái (con trai và con gái)" },
+      ],
+      phrases: [
+        { hanzi: "小孩子", pinyin: "xiǎo háizi", meaning: "trẻ con / em bé" },
+        { hanzi: "男孩子", pinyin: "nán háizi", meaning: "bé trai / con trai" },
+        { hanzi: "女孩子", pinyin: "nǚ háizi", meaning: "bé gái / con gái" },
+      ],
+      dialogues: [
+        [
+          { who: "A", zh: "你有几个孩子？", pinyin: "Nǐ yǒu jǐ gè háizi?", vi: "Bạn có mấy người con?" },
+          { who: "B", zh: "我有两个孩子，一个女儿，一个儿子。", pinyin: "Wǒ yǒu liǎng gè háizi, yí gè nǚ'ér, yí gè érzi.", vi: "Tôi có hai người con, một con gái, một con trai." },
+        ],
+      ],
+    },
+    {
+      hanzi: "出去",
+      pinyin: "chū qù",
+      pos: "动",
+      meaning: "ra ngoài",
+      hanViet: "XUẤT KHỨ",
+      phrases: [
+        { hanzi: "请出去。", pinyin: "Qǐng chū qù.", meaning: "Mời ra ngoài." },
+        { hanzi: "我出去一下。", pinyin: "Wǒ chū qù yíxià.", meaning: "Tôi ra ngoài một chút." },
+      ],
+      dialogues: [
+        [
+          { who: "A", zh: "妈妈我可以出去一下吗？", pinyin: "Māma wǒ kěyǐ chū qù yíxià ma?", vi: "Mẹ ơi con có thể ra ngoài một chút được không?" },
+          { who: "B", zh: "好的，早点回来。", pinyin: "Hǎo de, zǎo diǎn huílai.", vi: "Được, về sớm một chút nhé." },
+        ],
+      ],
+    },
+    {
+      hanzi: "别",
+      pinyin: "bié",
+      pos: "副",
+      meaning: "đừng",
+      hanViet: "BIỆT",
+      phrases: [
+        { hanzi: "别说了", pinyin: "bié shuō le", meaning: "đừng nói nữa" },
+        { hanzi: "别吃了", pinyin: "bié chī le", meaning: "đừng ăn nữa" },
+        { hanzi: "别出去", pinyin: "bié chū qù", meaning: "đừng ra ngoài" },
+      ],
+      dialogues: [
+        [
+          { who: "A", zh: "我做的饭不太好吃。", pinyin: "Wǒ zuò de fàn bú tài hǎo chī.", vi: "Cơm tôi nấu không ngon lắm." },
+          { who: "B", zh: "别说这样，我觉得很好吃。", pinyin: "Bié shuō zhèyàng, wǒ juéde hěn hǎo chī.", vi: "Đừng nói vậy, tôi thấy rất ngon mà." },
+        ],
+      ],
+    },
+    {
+      hanzi: "添麻烦",
+      pinyin: "tiān máfan",
+      pos: "动宾",
+      meaning: "làm phiền/thêm phiền phức",
+      hanViet: "THIÊM MA PHIỀN",
+      parts: [
+        { hanzi: "添", pinyin: "tiān", pos: "动", meaning: "thêm" },
+        { hanzi: "麻烦", pinyin: "máfan", pos: "名", meaning: "phiền phức, làm phiền" },
+      ],
+      phrases: [
+        { hanzi: "给您添麻烦", pinyin: "gěi nín tiān máfan", meaning: "làm phiền ngài / thêm phiền phức cho ngài" },
+        { hanzi: "添水", pinyin: "tiān shuǐ", meaning: "châm thêm nước" },
+        { hanzi: "有麻烦", pinyin: "yǒu máfan", meaning: "có rắc rối / phiền phức" },
+        { hanzi: "很麻烦", pinyin: "hěn máfan", meaning: "rất phiền phức" },
+        { hanzi: "麻烦你", pinyin: "máfan nǐ", meaning: "làm phiền bạn" },
+        { hanzi: "对不起，给你们添麻烦了。", pinyin: "Duìbùqǐ, gěi nǐmen tiān máfan le.", meaning: "Xin lỗi, đã làm phiền các bạn rồi." },
+      ],
+      dialogues: [],
+    },
+    {
+      hanzi: "客气",
+      pinyin: "kèqi",
+      pos: "形",
+      meaning: "khách sáo/khách khí",
+      hanViet: "KHÁCH KHÍ",
+      phrases: [
+        { hanzi: "不客气", pinyin: "bú kèqi", meaning: "không khách sáo / đừng khách sáo" },
+        { hanzi: "别客气", pinyin: "bié kèqi", meaning: "đừng khách sáo" },
+      ],
+      dialogues: [
+        [
+          { who: "A", zh: "李老师，给您麻烦了。", pinyin: "Lǐ lǎoshī, gěi nín máfan le.", vi: "Thầy/Cô Lý, làm phiền thầy/cô rồi." },
+          { who: "B", zh: "别客气，不麻烦。", pinyin: "Bié kèqi, bù máfan.", vi: "Đừng khách sáo, không phiền đâu." },
+        ],
+      ],
+    },
+    {
+      hanzi: "辛苦",
+      pinyin: "xīnkǔ",
+      pos: "形",
+      meaning: "vất vả",
+      hanViet: "TÂN KHỔ",
+      phrases: [
+        { hanzi: "很辛苦", pinyin: "hěn xīnkǔ", meaning: "rất vất vả" },
+        { hanzi: "不辛苦", pinyin: "bù xīnkǔ", meaning: "không vất vả" },
+        { hanzi: "工作太辛苦了。", pinyin: "Gōngzuò tài xīnkǔ le.", meaning: "Công việc vất vả quá rồi." },
+      ],
+      dialogues: [
+        [
+          { who: "A", zh: "谢谢你们。你们两天辛苦了。", pinyin: "Xièxiè nǐmen. Nǐmen liǎng tiān xīnkǔ le.", vi: "Cảm ơn các bạn. Hai ngày qua các bạn vất vả rồi." },
+          { who: "B", zh: "别客气。", pinyin: "Bié kèqi.", vi: "Đừng khách sáo." },
+        ],
+      ],
+    },
+    {
+      hanzi: "麻婆豆腐",
+      pinyin: "mápódòufu",
+      pos: "名",
+      meaning: "đậu phụ Tứ Xuyên",
+      hanViet: "MA BÀ ĐẬU HỦ",
+      phrases: [],
+      dialogues: [
+        [
+          { who: "A", zh: "你吃过麻婆豆腐了吗？", pinyin: "Nǐ chīguo mápódòufu le ma?", vi: "Bạn đã từng ăn đậu phụ Tứ Xuyên chưa?" },
+          { who: "B", zh: "我没吃过麻婆豆腐。", pinyin: "Wǒ méi chīguo mápódòufu.", vi: "Tôi chưa từng ăn đậu phụ Tứ Xuyên." },
+        ],
+        [
+          { who: "A", zh: "你喜欢吃什么？", pinyin: "Nǐ xǐhuan chī shénme?", vi: "Bạn thích ăn gì?" },
+          { who: "B", zh: "我很喜欢吃麻婆豆腐。", pinyin: "Wǒ hěn xǐhuan chī mápódòufu.", vi: "Tôi rất thích ăn đậu phụ Tứ Xuyên." },
+        ],
+      ],
+    },
+    {
+      hanzi: "糖醋鱼",
+      pinyin: "tángcùyú",
+      pos: "名",
+      meaning: "cá sốt chua ngọt",
+      hanViet: "ĐƯỜNG THỐ NGƯ",
+      phrases: [
+        { hanzi: "吃过糖醋鱼", pinyin: "chīguo tángcùyú", meaning: "từng ăn cá sốt chua ngọt" },
+      ],
+      dialogues: [
+        [
+          { who: "A", zh: "你喜欢吃什么？", pinyin: "Nǐ xǐhuan chī shénme?", vi: "Bạn thích ăn gì?" },
+          { who: "B", zh: "我很喜欢吃糖醋鱼。", pinyin: "Wǒ hěn xǐhuan chī tángcùyú.", vi: "Tôi rất thích ăn cá sốt chua ngọt." },
+        ],
+      ],
+    },
+    {
+      hanzi: "辣",
+      pinyin: "là",
+      pos: "形",
+      meaning: "cay",
+      hanViet: "LẠT",
+      phrases: [
+        { hanzi: "非常辣", pinyin: "fēicháng là", meaning: "vô cùng cay" },
+        { hanzi: "很辣", pinyin: "hěn là", meaning: "rất cay" },
+        { hanzi: "不辣", pinyin: "bú là", meaning: "không cay" },
+        { hanzi: "你可以吃辣吗？", pinyin: "Nǐ kěyǐ chī là ma?", meaning: "Bạn có thể ăn cay không?" },
+      ],
+      dialogues: [
+        [
+          { who: "A", zh: "麻辣豆腐很辣，你怕不怕辣？", pinyin: "Málàdòufu hěn là, nǐ pà bú pà là?", vi: "Đậu phụ cay tê rất cay, bạn có sợ cay không?" },
+          { who: "B", zh: "不怕，我觉得麻辣豆腐很好吃。", pinyin: "Bú pà, wǒ juéde málàdòufu hěn hǎo chī.", vi: "Không sợ, tôi cảm thấy đậu phụ cay tê rất ngon." },
+        ],
+      ],
+    },
+    {
+      hanzi: "酸",
+      pinyin: "suān",
+      pos: "形",
+      meaning: "chua",
+      hanViet: "TOAN",
+      phrases: [
+        { hanzi: "很酸", pinyin: "hěn suān", meaning: "rất chua" },
+        { hanzi: "不酸", pinyin: "bù suān", meaning: "không chua" },
+      ],
+      dialogues: [
+        [
+          { who: "A", zh: "这杯牛奶酸了，别喝了。", pinyin: "Zhè bēi niúnǎi suān le, bié hē le.", vi: "Cốc sữa này chua rồi, đừng uống nữa." },
+          { who: "B", zh: "好。", pinyin: "Hǎo.", vi: "Được." },
+        ],
+        [
+          { who: "A", zh: "这个苹果酸吗？", pinyin: "Zhè gè píngguǒ suān ma?", vi: "Quả táo này có chua không?" },
+          { who: "B", zh: "这个苹果很酸。", pinyin: "Zhè gè píngguǒ hěn suān.", vi: "Quả táo này rất chua." },
+        ],
+      ],
+    },
+    {
+      hanzi: "甜",
+      pinyin: "tián",
+      pos: "形",
+      meaning: "ngọt",
+      hanViet: "ĐIỀM",
+      phrases: [
+        { hanzi: "不甜", pinyin: "bù tián", meaning: "không ngọt" },
+        { hanzi: "很甜", pinyin: "hěn tián", meaning: "rất ngọt" },
+      ],
+      dialogues: [
+        [
+          { who: "A", zh: "这个苹果酸吗？", pinyin: "Zhè gè píngguǒ suān ma?", vi: "Quả táo này có chua không?" },
+          { who: "B", zh: "不酸，这个苹果很甜。", pinyin: "Bù suān, zhè gè píngguǒ hěn tián.", vi: "Không chua, quả táo này rất ngọt." },
+        ],
+      ],
+    },
+    {
+      hanzi: "怕",
+      pinyin: "pà",
+      pos: "动",
+      meaning: "sợ",
+      hanViet: "PHẠ",
+      phrases: [
+        { hanzi: "很怕", pinyin: "hěn pà", meaning: "rất sợ" },
+        { hanzi: "不怕", pinyin: "bú pà", meaning: "không sợ" },
+        { hanzi: "怕辣", pinyin: "pà là", meaning: "sợ cay" },
+        { hanzi: "这孩子有点怕人。", pinyin: "Zhè háizi yǒudiǎn pà rén.", meaning: "Đứa bé này hơi sợ người lạ." },
+      ],
+      dialogues: [
+        [
+          { who: "A", zh: "你怕不怕辣？", pinyin: "Nǐ pà bú pà là?", vi: "Bạn có sợ cay không?" },
+          { who: "B", zh: "不怕辣。", pinyin: "Bú pà là.", vi: "Không sợ cay." },
+        ],
+      ],
+    },
+  ],
+  grammar: [],
+};
+export const LESSONS: Lesson[] = [...BOOK_1, book2Session1, book2Session2, book2Session3, book2Session4, book2Session5, book2Session6, book2Session7, book2Session8, book2Session9, book2Session10];
